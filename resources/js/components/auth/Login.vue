@@ -241,7 +241,7 @@ onMounted(() => {
 
 
 
-                                        <label for="exampleFormControlInput1" class="form-label">Email or Phonek</label>
+                                        <label for="exampleFormControlInput1" class="form-label">Email or Phone build</label>
                                         <div class="position-relative">
                                             <img class="position-absolute p-2"
                                                 src="../../../../public/theme/appimages/Admin.svg" height="40"
