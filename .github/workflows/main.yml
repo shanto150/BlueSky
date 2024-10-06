@@ -9,6 +9,7 @@ jobs:
     name: 🎉 Deploy website
     runs-on: ubuntu-latest
     steps:
+    - run: npm build
     # Checkout the repository
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
