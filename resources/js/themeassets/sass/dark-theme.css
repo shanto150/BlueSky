@@ -75,6 +75,9 @@ File: app.css
   /* chat process */
   /* email */
 }
+[data-bs-theme=dark] body .info-agency {
+    background-color: var(--bs-light-bg-subtle) !important;
+  }
 [data-bs-theme=dark] body .bg-light {
   background-color: var(--bs-light-bg-subtle) !important;
 }
