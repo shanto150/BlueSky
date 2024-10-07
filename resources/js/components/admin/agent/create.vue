@@ -20,8 +20,8 @@
 
     <div class="card" style="box-shadow: none !important;">
         <div class="card-body">
-            <div class="row background-color-left-side-row">
-                <div class="col-md-3 background-color-left-side">
+            <div class="row">
+                <div class="col-md-3 bg-light">
                     <div id="stepper3" class="bs-stepper gap-4 vertical linear">
                         <div class="left-side-pro-bar" role="tablist">
                             <div class="step" :class="{ active: classAgencyActive }" data-target="#test-vl-1">

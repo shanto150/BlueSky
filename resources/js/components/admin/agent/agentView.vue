@@ -89,7 +89,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="m-0 p-0" style="border-left: 5px solid #027de2;"> &nbsp; Agency Details</h5>
+                            <h5 class="m-0 p-0"> &nbsp; Agency Details</h5>
 
                         </div>
                         <div class="card-body">
@@ -188,7 +188,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="m-0 p-0" style="border-left: 5px solid #7239ea;"> &nbsp; Primary User Information</h5>
+                            <h5 class="m-0 p-0"> &nbsp; Primary User Information</h5>
 
                         </div>
                         <div class="card-body">
@@ -234,7 +234,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="m-0 p-0" style="border-left: 5px solid #39eadfcf;"> &nbsp; KAM Information & Remarks</h5>
+                            <h5 class="m-0 p-0"> &nbsp; KAM Information & Remarks</h5>
 
                         </div>
                         <div class="card-body">
@@ -260,7 +260,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="m-0 p-0" style="border-left: 5px solid #da22f2;"> &nbsp; Recommendeation</h5>
+                            <h5 class="m-0 p-0"> &nbsp; Recommendeation</h5>
 
                         </div>
                         <div class="card-body">
@@ -285,7 +285,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="m-0 p-0" style="border-left: 5px solid #02e22e;"> &nbsp; Approval</h5>
+                            <h5 class="m-0 p-0"> &nbsp; Approval</h5>
 
                         </div>
                         <div class="card-body">
