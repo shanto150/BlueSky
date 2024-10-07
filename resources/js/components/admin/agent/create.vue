@@ -39,7 +39,7 @@
                                     aria-selected="false" disabled="disabled">
                                     <div class="bs-stepper-circle"><i class="bx bx-file fs-4"></i></div>
                                     <div class="">
-                                        <h5 class="mb-0 steper-title">Upload Documentations</h5>
+                                        <h5 class="mb-0 steper-title">Upload Docs</h5>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                         <i class="bx bx-user fs-4"></i>
                                     </div>
                                     <div class="">
-                                        <h5 class="mb-0 steper-title">Primary User Info</h5>
+                                        <h5 class="mb-0 steper-title">Primary User</h5>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                     aria-selected="false" disabled="disabled">
                                     <div class="bs-stepper-circle"><i class="bx bx-briefcase fs-4"></i></div>
                                     <div class="">
-                                        <h5 class="mb-0 steper-title">Assign KAM & Remarks</h5>
+                                        <h5 class="mb-0 steper-title">KAM & Remarks</h5>
                                     </div>
                                 </div>
                             </div>
