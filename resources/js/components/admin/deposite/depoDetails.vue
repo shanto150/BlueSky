@@ -5,7 +5,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'Dashboard' }">Dashboard</router-link>
+                        <router-link :to="{ name: 'Home' }">Dashboard</router-link>
 
                     </li>
                     <li class="breadcrumb-item">
@@ -87,7 +87,7 @@
                                 Trade License
                             </h6>
                             <span class="text-secondary">
-                                <img height="40" width="40" src="assets/images/avatars/avatar-2.png" alt="">
+                                <img height="40" width="40" src="/public/theme/appimages/rqf.png" alt="">
                             </span>
                         </li>
 
