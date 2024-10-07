@@ -21,6 +21,9 @@ const agentRecomanded = () => import('./components/admin/agent/agentRecomanded.v
 const agentView = () => import('./components/admin/agent/agentView.vue')
 const CreateAgency = () => import('./components/admin/agent/create.vue')
 
+// deposit management
+const depositList = () => import('./components/admin/deposite/index.vue')
+const depoDetails = () => import('./components/admin/deposite/depoDetails.vue')
 
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
@@ -45,6 +48,12 @@ const routes = [
     { path: '/agent-recmoanded', component: agentRecomanded, name: 'agentRecomanded', meta: { auth: true } },
     { path: '/agent-view', component: agentView, name: 'agentView', meta: { auth: true } },
     { path: '/agent-create', component: CreateAgency, name: 'CreateAgency', meta: { auth: true } },
+
+    //deposit
+    { path: '/agent-deposit-list', component: depositList, name: 'depositList', meta: { auth: true } },
+    { path: '/agent-deposit-details', component: depoDetails, name: 'depoDetails', meta: { auth: true } },
+
+
 ]
 
 const router = createRouter({
