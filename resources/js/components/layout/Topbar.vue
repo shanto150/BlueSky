@@ -443,8 +443,8 @@ function darkMode() {
                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="../../themeassets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
                         <div class="user-info">
-                            <p class="user-name mb-0">Pauline Seitz</p>
-                            <p class="designattion mb-0">Web Designer</p>
+                            <p class="user-name mb-0">{{ authStore.name }}</p>
+                            <p class="designattion mb-0">{{ authStore.email }}</p>
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">

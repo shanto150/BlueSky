@@ -74,7 +74,7 @@
     </div>
 
     <div class="row mb-3">
-        <div class="col-md-12">
+        <div class="col-md-12 ">
             <div class="border rounded rounded-2 p-3">
 
                 <div class="row">
@@ -184,7 +184,7 @@
                         </thead>
                         <tbody>
 
-                            <tr role="row" class="odd">
+                            <tr role="row">
                                 <td class="text-left">01</td>
                                 <td class="text-left">ABC Travels Ltd.
                                     <br>
@@ -221,13 +221,7 @@
                                 </td>
                                 <td class="text-left">
                                     <button class="btn btn-outline-primary btn-sm radius-15">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-eye text-primary">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg>
+                                        <i class='bx bx-bullseye'></i>
                                         View</button>
                                 </td>
                                 <td class="text-left">
@@ -277,7 +271,7 @@
                                 </td>
                             </tr>
 
-                            <tr role="row" class="even">
+                            <tr role="row">
                                 <td class="text-left">02</td>
                                 <td class="text-left">ABC Travels Ltd.
                                     <br>
@@ -319,13 +313,7 @@
                                 </td>
                                 <td class="text-left">
                                     <button class="btn btn-outline-primary btn-sm radius-15">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-eye text-primary">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg>
+                                        <i class='bx bx-bullseye'></i>
                                         View</button>
                                 </td>
                                 <td class="text-left">
@@ -374,7 +362,7 @@
                                 </td>
                             </tr>
 
-                            <tr role="row" class="odd">
+                            <tr role="row">
                                 <td class="text-left">03</td>
                                 <td class="text-left">ABCD Travels Ltd.
                                     <br>
@@ -416,13 +404,7 @@
                                 </td>
                                 <td class="text-left">
                                     <button class="btn btn-outline-primary btn-sm radius-15">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-eye text-primary">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg>
+                                        <i class='bx bx-bullseye'></i>
                                         View</button>
                                 </td>
                                 <td class="text-left">
@@ -474,7 +456,7 @@
                                 </td>
                             </tr>
 
-                            <tr role="row" class="even">
+                            <tr role="row">
                                 <td class="text-left">04</td>
                                 <td class="text-left">ABCD Travels Ltd.
                                     <br>
@@ -517,13 +499,7 @@
                                 <td class="text-left">
 
                                     <button class="btn btn-outline-primary btn-sm radius-15">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-eye text-primary">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg>
+                                        <i class='bx bx-bullseye'></i>
                                         View</button>
                                 </td>
                                 <td class="text-left">
@@ -574,7 +550,7 @@
                                 </td>
                             </tr>
 
-                            <tr role="row" class="odd">
+                            <tr role="row">
                                 <td class="text-left">05</td>
                                 <td class="text-left">ABCD Travels Ltd.
                                     <br>
@@ -616,13 +592,7 @@
                                 </td>
                                 <td class="text-left">
                                     <button class="btn btn-outline-primary btn-sm radius-15">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-eye text-primary">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg>
+                                        <i class='bx bx-bullseye'></i>
                                         View</button>
                                 </td>
                                 <td class="text-left">
