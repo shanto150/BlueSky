@@ -11,7 +11,9 @@ a {
 .table-responsive {
 	white-space: nowrap;
 }
-
+.bg-secondary{
+    background: #f2f5f9 !important;
+}
 .form-check-input:checked {
 	background-color: #008cff;
 	border-color: #008cff

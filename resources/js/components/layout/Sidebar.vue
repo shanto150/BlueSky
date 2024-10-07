@@ -83,11 +83,11 @@ onMounted(() => {
                         <div class="menu-title">Pages</div>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
-                        <li> <router-link v-wave :to="{ name: 'User' }"><i
-                                    class='bx bx-paper-plane'></i>User</router-link>
+                        <li> <router-link v-wave :to="{ name: 'AgentList' }"><i
+                                    class='bx bx-paper-plane'></i>Agents</router-link>
                         </li>
                         <li> <router-link v-wave :to="{ name: 'Agent' }"><i
-                                    class='bx bx-paper-plane'></i>Agents</router-link>
+                                    class='bx bx-paper-plane'></i>Menu</router-link>
                         </li>
                     </ul>
                 </li>

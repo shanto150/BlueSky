@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 
 const Home = () => import('./components/pages/Home.vue')
-const User = () => import('./components/pages/User.vue')
 const Agent = () => import('./components/pages/Agent.vue')
 const Settings = () => import('./components/pages/Settings.vue')
 const Logout = () => import('./components/auth/Logout.vue')
@@ -14,6 +13,15 @@ const otp = () => import('./components/auth/otp.vue')
 const NF = () => import('./components/auth/NotFound.vue')
 const ForcePassChange = () => import('./components/auth/forcePasswordChange.vue')
 
+// agent
+const AgentList = () => import('./components/admin/agent/index.vue')
+const agentDetails = () => import('./components/admin/agent/agentDetails.vue')
+const agentApprove = () => import('./components/admin/agent/agentApprove.vue')
+const agentRecomanded = () => import('./components/admin/agent/agentRecomanded.vue')
+const agentView = () => import('./components/admin/agent/agentView.vue')
+const CreateAgency = () => import('./components/admin/agent/create.vue')
+
+
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
     { path: '/sendResetLinkEmail', component: sendResetLinkEmail, name: 'sendResetLinkEmail', meta: { guest: true } },
@@ -24,11 +32,19 @@ const routes = [
     { path: '/ForcePassChange', component: ForcePassChange, name: 'ForcePassChange', meta: { FPC: true } },
 
     { path: '/home', component: Home, name: 'Home', meta: { auth: true } },
-    { path: '/User', component: User, name: 'User', meta: { auth: true } },
     { path: '/Agent', component: Agent, name: 'Agent', meta: { auth: true } },
     { path: '/Settings', component: Settings, name: 'Settings', meta: { auth: true } },
     { path: '/Logout', component: Logout, name: 'Logout', meta: { auth: true } },
     { path: '/:any(.*)*', component: NF, name: 'NF', meta: { auth: true } },
+
+
+    // agent
+    { path: '/agent-list', component: AgentList, name: 'AgentList', meta: { auth: true } },
+    { path: '/agent-details', component: agentDetails, name: 'agentDetails', meta: { auth: true } },
+    { path: '/agent-approve', component: agentApprove, name: 'agentApprove', meta: { auth: true } },
+    { path: '/agent-recmoanded', component: agentRecomanded, name: 'agentRecomanded', meta: { auth: true } },
+    { path: '/agent-view', component: agentView, name: 'agentView', meta: { auth: true } },
+    { path: '/agent-view', component: CreateAgency, name: 'CreateAgency', meta: { auth: true } },
 ]
 
 const router = createRouter({
