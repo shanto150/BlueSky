@@ -103,7 +103,7 @@
         </div>
     </div>
 
-    <div class="table-responsive mt-2">
+    <div class="table-responsive mt-2 border rounded rounded-2 p-3">
         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap5">
             <div class="row">
                 <div class="col-sm-12 col-md-6">
