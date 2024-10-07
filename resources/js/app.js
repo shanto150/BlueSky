@@ -54,12 +54,6 @@ const authStore = useAuthStore();
 app.mount("#app");
 
 router.beforeEach(async (to, from) => {
-    console.log(to.name);
-    // if (to.name) {
-
-    // } else {
-
-    // }
 
     if (authStore.isDarkMode) {
         if (to.name=='Login') {
