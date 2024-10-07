@@ -20,8 +20,8 @@
 
     <div class="card" style="box-shadow: none !important;">
         <div class="card-body">
-            <div class="row background-color-left-side-row">
-                <div class="col-md-3 background-color-left-side">
+            <div class="row">
+                <div class="col-md-3 bg-light">
                     <div id="stepper3" class="bs-stepper gap-4 vertical linear">
                         <div class="left-side-pro-bar" role="tablist">
                             <div class="step" :class="{ active: classAgencyActive }" data-target="#test-vl-1">
@@ -39,7 +39,7 @@
                                     aria-selected="false" disabled="disabled">
                                     <div class="bs-stepper-circle"><i class="bx bx-file fs-4"></i></div>
                                     <div class="">
-                                        <h5 class="mb-0 steper-title">Upload Documentations</h5>
+                                        <h5 class="mb-0 steper-title">Upload Docs</h5>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                         <i class="bx bx-user fs-4"></i>
                                     </div>
                                     <div class="">
-                                        <h5 class="mb-0 steper-title">Primary User Info</h5>
+                                        <h5 class="mb-0 steper-title">Primary User</h5>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                     aria-selected="false" disabled="disabled">
                                     <div class="bs-stepper-circle"><i class="bx bx-briefcase fs-4"></i></div>
                                     <div class="">
-                                        <h5 class="mb-0 steper-title">Assign KAM & Remarks</h5>
+                                        <h5 class="mb-0 steper-title">KAM & Remarks</h5>
                                     </div>
                                 </div>
                             </div>

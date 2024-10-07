@@ -96,7 +96,7 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
         <Topbar />
 
         <div class="page-wrapper">
-            <div class="page-content bg-secondary">
+            <div class="page-content">
                 <router-view></router-view>
             </div>
         </div>
