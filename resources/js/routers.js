@@ -44,7 +44,7 @@ const routes = [
     { path: '/agent-approve', component: agentApprove, name: 'agentApprove', meta: { auth: true } },
     { path: '/agent-recmoanded', component: agentRecomanded, name: 'agentRecomanded', meta: { auth: true } },
     { path: '/agent-view', component: agentView, name: 'agentView', meta: { auth: true } },
-    { path: '/agent-view', component: CreateAgency, name: 'CreateAgency', meta: { auth: true } },
+    { path: '/agent-create', component: CreateAgency, name: 'CreateAgency', meta: { auth: true } },
 ]
 
 const router = createRouter({
