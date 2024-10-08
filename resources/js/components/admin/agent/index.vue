@@ -37,7 +37,7 @@
 
         <div class="col-12 col-sm-6 col-md-3">
             <div class="active-agency mb-3">
-                <span class="active-agency-icon bg-success elevation-1 text-white"><i
+                <span class="active-agency-icon bg-success elevation-1"><i
                         class="fa-solid fa-circle-check"></i></span>
                 <div class="active-agency-content">
                     <span class="active-agency-text">Active Agency</span>
@@ -239,11 +239,12 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
-                                    <router-link :to="{ name: 'agentDetails' }" style="size: 30px; width: 30px; height: 30px"
-                                                class="btn btn-outline-success rounded-circle" placement="top" title="KAM Assign">
-                                                <i class="fa fa-check"
-                                                    style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                            </router-link>
+                                    <router-link :to="{ name: 'agentDetails' }"
+                                        style="size: 30px; width: 30px; height: 30px"
+                                        class="btn btn-outline-success rounded-circle" placement="top"
+                                        title="KAM Assign">
+                                        <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                    </router-link>
 
                                     <button type="button"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
@@ -330,11 +331,12 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
-                                    <router-link :to="{ name: 'agentApprove' }" style="size: 30px; width: 30px; height: 30px"
-                                                class="btn btn-outline-success rounded-circle" placement="top" title="Recommendation">
-                                                <i class="fa fa-check"
-                                                    style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                            </router-link>
+                                    <router-link :to="{ name: 'agentApprove' }"
+                                        style="size: 30px; width: 30px; height: 30px"
+                                        class="btn btn-outline-success rounded-circle" placement="top"
+                                        title="Recommendation">
+                                        <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                    </router-link>
 
                                     <button type="button"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
@@ -422,12 +424,11 @@
                                 </td>
                                 <td class="text-left">
 
-                                    <router-link :to="{ name: 'agentRecomanded' }" style="size: 30px; width: 30px; height: 30px"
-                                                class="btn btn-outline-success rounded-circle"
-                                                placement="top" title="Aproval">
-                                                <i class="fa fa-check"
-                                                    style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                            </router-link>
+                                    <router-link :to="{ name: 'agentRecomanded' }"
+                                        style="size: 30px; width: 30px; height: 30px"
+                                        class="btn btn-outline-success rounded-circle" placement="top" title="Aproval">
+                                        <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                    </router-link>
 
 
                                     <button type="button"
@@ -517,11 +518,12 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
-                                    <router-link :to="{ name: 'agentView' }" style="size: 30px; width: 30px; height: 30px"
-                                                class="btn btn-outline-primary rounded-circle" placement="top" title="Recommendation">
-                                                <i class="fa fa-eye"
-                                                    style="margin: 2px 0px 10px -6px; font-size: 14px;"></i>
-                                            </router-link>
+                                    <router-link :to="{ name: 'agentView' }"
+                                        style="size: 30px; width: 30px; height: 30px"
+                                        class="btn btn-outline-primary rounded-circle" placement="top"
+                                        title="Recommendation">
+                                        <i class="fa fa-eye" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i>
+                                    </router-link>
 
 
                                     <button type="button"
@@ -612,11 +614,12 @@
                                 <td class="text-left">
 
 
-                                    <router-link :to="{ name: 'agentView' }" style="size: 30px; width: 30px; height: 30px"
-                                                class="btn btn-outline-primary rounded-circle" placement="top" title="Recommendation">
-                                                <i class="fa fa-eye"
-                                                    style="margin: 2px 0px 10px -6px; font-size: 14px;"></i>
-                                            </router-link>
+                                    <router-link :to="{ name: 'agentView' }"
+                                        style="size: 30px; width: 30px; height: 30px"
+                                        class="btn btn-outline-primary rounded-circle" placement="top"
+                                        title="Recommendation">
+                                        <i class="fa fa-eye" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i>
+                                    </router-link>
 
                                     <button type="button"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
@@ -685,12 +688,10 @@
     color: blue;
 }
 
-/* dashboard design */
-.info-agency {
+[data-bs-theme=light] body .info-agency {
     box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
     border-radius: .25rem;
     background-image: linear-gradient(to right top, #dae9f8, #dae9f8, #dae9f8, #dae9f8, #dae9f8, #cbdff4, #bcd6f1, #aecced, #8eb6e4, #6da1dc, #4a8bd2, #1576c9);
-    /* background-image: linear-gradient(to right top, #dae9f8, #dae9f8, #dae9f8, #dae9f8, #dae9f8, #d6e7f8, #d1e5f8, #cde3f8, #c2def8, #b8d9f8, #add5f8, #a1d0f8); */
     display: -ms-flexbox;
     display: flex;
     margin-bottom: 1rem;
@@ -698,9 +699,32 @@
     padding: .5rem;
     position: relative;
     width: 100%;
+
 }
 
-.info-agency .info-agency-icon {
+[data-bs-theme=dark] body .info-agency {
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    border-radius: .25rem;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 1rem;
+    min-height: 90px;
+    padding: .5rem;
+    position: relative;
+    width: 100%;
+
+}
+
+/* dashboard design */
+
+[data-bs-theme=dark] body .bg-info,.info-agency-icon,.bg-info>a {
+    background-color: #06365d !important;
+    color: #4f687c !important;
+}
+[data-bs-theme=light] body .bg-info,.info-agency-icon, .bg-info>a {
+    background-color: #0880e1 !important;
+    color: #fff !important;
+
     border-radius: .25rem;
     -ms-flex-align: center;
     align-items: center;
@@ -713,19 +737,6 @@
     width: 70px;
 }
 
-.bg-info,
-.bg-info>a {
-    color: #fff !important;
-}
-
-
-.elevation-1 {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24) !important;
-}
-
-.bg-info {
-    background-color: #0880e1 !important;
-}
 
 
 .info-agency .info-agency-content {
@@ -761,11 +772,10 @@
 
 /* active agency */
 
-.active-agency {
+[data-bs-theme=light] body .active-agency {
     box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
     border-radius: .25rem;
     background-image: linear-gradient(to right top, #d7f1e9, #d7f1e9, #d7f1e9, #d7f1e9, #d7f1e9, #c9f1e4, #baf1de, #acf0d7, #8cefc6, #6decb1, #4ce998, #24e57c);
-    /* background-image: linear-gradient(to right top, #dbf1eb, #dbf1eb, #dbf1eb, #dbf1eb, #dbf1eb, #d2f1e8, #c9f1e5, #c0f1e1, #acf1d7, #99f0cb, #87efbe, #76eeae); */
     display: -ms-flexbox;
     display: flex;
     margin-bottom: 1rem;
@@ -773,9 +783,32 @@
     padding: .5rem;
     position: relative;
     width: 100%;
+
 }
 
-.active-agency .active-agency-icon {
+[data-bs-theme=dark] body .active-agency {
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    background-color: #343a40;
+    border-radius: .25rem;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 1rem;
+    min-height: 90px;
+    padding: .5rem;
+    position: relative;
+    width: 100%;
+
+}
+
+
+[data-bs-theme=dark] body .bg-success, .active-agency-icon,.bg-success>a {
+    background-color: #5b9a59 !important;
+    color: #9fbe9e !important;
+}
+[data-bs-theme=light] body .bg-success, .active-agency-icon, .bg-success>a {
+    background-color: #0ea209 !important;
+    color: #fff !important;
+
     border-radius: .25rem;
     -ms-flex-align: center;
     align-items: center;
@@ -787,24 +820,6 @@
     text-align: center;
     width: 70px;
 }
-
-.bg-success,
-.bg-success>a {
-    color: #fff !important;
-}
-
-.bg-success {
-    background-color: #05cc61 !important;
-}
-
-.elevation-1 {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24) !important;
-}
-
-.bg-success {
-    background-color: #05cc61 !important;
-}
-
 
 .active-agency .active-agency-content {
     display: -ms-flexbox;
@@ -838,19 +853,6 @@
 }
 
 /* Pending */
-.pending-agnt {
-    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
-    border-radius: .25rem;
-    background-image: linear-gradient(to right top, #eee6e2, #eee6e2, #eee6e2, #eee6e2, #eee6e2, #f0ded6, #f1d7c9, #f2cfbd, #f3bea2, #f3ac88, #f29b6f, #ef8956);
-    /* background-image: linear-gradient(to right top, #eee6e2, #eee6e2, #eee6e2, #eee6e2, #eee6e2, #efe2db, #efddd5, #f0d9ce, #f1d0bf, #f2c6b1, #f2bda2, #f1b494); */
-    display: -ms-flexbox;
-    display: flex;
-    margin-bottom: 1rem;
-    min-height: 90px;
-    padding: .5rem;
-    position: relative;
-    width: 100%;
-}
 
 .pending-agnt .pending-agnt-icon {
     border-radius: .25rem;
@@ -865,23 +867,51 @@
     width: 70px;
 }
 
-.bg-warning,
-.bg-warning>a {
+[data-bs-theme=dark] body .bg-warning, .pending-agnt-icon,.bg-warning>a {
+    background-color: #562b03 !important;
+    color: #d0741d !important;
+}
+[data-bs-theme=light] body .bg-warning, .pending-agnt-icon, .bg-warning>a {
+    background-color: #fb8e28 !important;
     color: #fff !important;
+
+    border-radius: .25rem;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 1.875rem;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    width: 70px;
 }
 
-.bg-warning {
-    background-color: #fb8e28 !important;
+[data-bs-theme=light] body .pending-agnt {
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    border-radius: .25rem;
+    background-image: linear-gradient(to right top, #eee6e2, #eee6e2, #eee6e2, #eee6e2, #eee6e2, #f0ded6, #f1d7c9, #f2cfbd, #f3bea2, #f3ac88, #f29b6f, #ef8956);
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 1rem;
+    min-height: 90px;
+    padding: .5rem;
+    position: relative;
+    width: 100%;
 }
 
-.elevation-1 {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24) !important;
+[data-bs-theme=dark] body .pending-agnt {
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    background-color: #343a40;
+    border-radius: .25rem;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 1rem;
+    min-height: 90px;
+    padding: .5rem;
+    position: relative;
+    width: 100%;
 }
-
-.bg-warning {
-    background-color: #fb8e28 !important;
-}
-
 
 .pending-agnt .pending-agnt-content {
     display: -ms-flexbox;
@@ -916,7 +946,8 @@
 
 
 /* On Hold */
-.info-box {
+
+[data-bs-theme=light] body .info-box {
     box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
     border-radius: .25rem;
     background-image: linear-gradient(to right top, #eef1e2, #eef1e2, #eef1e2, #eef1e2, #eef1e2, #ebf0d6, #e9eeca, #e8ecbe, #e7e7a2, #e8e285, #ebdb66, #efd444);
@@ -929,7 +960,27 @@
     width: 100%;
 }
 
-.info-box .info-box-icon {
+[data-bs-theme=dark] body .info-box {
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    background-color: #343a40;
+    border-radius: .25rem;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 1rem;
+    min-height: 90px;
+    padding: .5rem;
+    position: relative;
+    width: 100%;
+}
+
+[data-bs-theme=dark] body .bg-danger, .info-box-icon,.bg-danger>a {
+    background-color: #707a03 !important;
+    color: #d0d68b !important;
+}
+[data-bs-theme=light] body .bg-danger, .info-box-icon, .bg-danger>a {
+    background-color: #99a705 !important;
+    color: #fff !important;
+
     border-radius: .25rem;
     -ms-flex-align: center;
     align-items: center;
@@ -940,23 +991,6 @@
     justify-content: center;
     text-align: center;
     width: 70px;
-}
-
-.bg-danger,
-.bg-danger>a {
-    color: #fff !important;
-}
-
-.bg-danger {
-    background-color: #efb51d !important;
-}
-
-.elevation-1 {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24) !important;
-}
-
-.bg-danger {
-    background-color: #efb51d !important;
 }
 
 
