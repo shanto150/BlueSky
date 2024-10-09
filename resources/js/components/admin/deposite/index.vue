@@ -73,7 +73,7 @@
 
     <div class="row">
         <div class="col-12">
-            <div class="border rounded rounded-2 p-3">
+            <div class="card rounded rounded-2 shadow-none p-3">
                 <div class="row">
                     <div class="col-md-2">
                         <select class="form-select form-select-sm" id="single-select-field"
@@ -562,6 +562,65 @@
     margin-top: .25rem;
     font-weight: 700;
     font-size: 22px;
+}
+
+[data-bs-theme=dark] body .active-agency {
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    background-color: #343a40;
+    border-radius: .25rem;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 1rem;
+    min-height: 90px;
+    padding: .5rem;
+    position: relative;
+    width: 100%;
+
+}
+
+
+[data-bs-theme=dark] body .bg-success, .active-agency-icon,.bg-success>a {
+    background-color: #5b9a59 !important;
+    color: #9fbe9e !important;
+}
+[data-bs-theme=light] body .bg-success, .active-agency-icon, .bg-success>a {
+    background-color: #0ea209 !important;
+    color: #fff !important;
+
+    border-radius: .25rem;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 1.875rem;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    width: 70px;
+}
+
+.active-agency .active-agency-content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    line-height: 1.5;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 0 30px;
+    overflow: hidden;
+}
+
+.active-agency .active-agency-text {
+    font-size: 19px;
+    letter-spacing: normal;
+    color: #838587;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* Pending */
