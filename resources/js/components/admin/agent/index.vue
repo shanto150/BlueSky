@@ -73,9 +73,9 @@
         </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-1 mt-2">
         <div class="col-md-12 ">
-            <div class="border rounded rounded-2 p-3">
+            <div class="card rounded rounded-2 shadow-none p-3">
 
                 <div class="row">
 
@@ -120,7 +120,7 @@
         </div>
     </div>
 
-    <div class="table-responsive border rounded rounded-2 p-3">
+    <div class="table-responsive card rounded rounded-2 shadow-none p-2">
         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap5">
             <div class="row">
                 <div class="col-sm-12 col-md-6">

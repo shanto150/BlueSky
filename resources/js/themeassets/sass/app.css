@@ -604,6 +604,19 @@ a {
   padding: 1.5rem;
 }
 
+.page-content{
+    background-color: #F2F5F9;
+}
+
+[data-bs-theme=light] body .page-content {
+    background-color: #F2F5F9;
+}
+
+[data-bs-theme=dark] body .page-content {
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    background-color: #212122;
+}
+
 /* footer */
 .page-footer {
   background-color: #fff;
