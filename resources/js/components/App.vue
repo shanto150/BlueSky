@@ -120,7 +120,7 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
     font-family: 'Inter';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .otp-input {
