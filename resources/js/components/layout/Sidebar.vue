@@ -70,17 +70,17 @@ onMounted(() => {
                 <!-- <li class="menu-label">UI Elements</li> -->
                 <li>
                     <router-link v-wave :to="{ name: 'AgentList' }">
-                        <div class="parent-icon"><i class="bx bx-buildings"></i>
+                        <div class="parent-icon"><i class="bx bx-unite"></i>
                         </div>
                         <div class="menu-title">B2B Agents</div>
                     </router-link>
                 </li>
                 <li>
                     <router-link v-wave :to="{ name: 'depositList' }">
-                        <div class="parent-icon"><i class="bx bx-money"></i>
+                        <div class="parent-icon"><i class="bx bx-cabinet"></i>
                         </div>
-                        <div class="menu-title font-14">Deposit
-                            Management</div>
+                        <div class="menu-title">Deposits
+                            </div>
                     </router-link>
                 </li>
 
@@ -88,8 +88,7 @@ onMounted(() => {
                     <router-link v-wave :to="{ name: 'UserList' }">
                         <div class="parent-icon"><i class="bx bx-user"></i>
                         </div>
-                        <div class="menu-title">User
-                            Management</div>
+                        <div class="menu-title">Users</div>
                     </router-link>
                 </li>
 
