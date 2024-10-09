@@ -159,16 +159,20 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
 }
 
 .tippy-box[data-theme~='tomato'] {
-    background-color: #013DC4;
-    color: #E2D3F3;
-    font-size: 12px;
+  background-color: tomato;
+  color: yellow;
 }
 
-.tippy-box[data-theme~='tomato'][data-placement^='top']>.tippy-arrow::before {
+.tippy-box {
+    background-color: #013DC4;
+    font-size: 10px;
+}
+
+.tippy-box[data-placement^='top']>.tippy-arrow::before {
     border-top-color: #013DC4;
 }
 
-.tippy-box[data-theme~='tomato'][data-placement^='bottom']>.tippy-arrow::before {
+.tippy-box[data-placement^='bottom']>.tippy-arrow::before {
     border-bottom-color: #013DC4;
 }
 

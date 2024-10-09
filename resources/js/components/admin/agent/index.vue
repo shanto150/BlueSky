@@ -241,8 +241,7 @@
                                 <td class="text-left">
                                     <router-link :to="{ name: 'agentDetails' }"
                                         style="size: 30px; width: 30px; height: 30px"
-                                        class="btn btn-outline-success rounded-circle" placement="top"
-                                        title="KAM Assign">
+                                        class="btn btn-outline-success rounded-circle"  v-tippy="'Hello!'">
                                         <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </router-link>
 
