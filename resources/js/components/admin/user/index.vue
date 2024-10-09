@@ -7,7 +7,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'Dashboard' }">Dashboard</router-link>
+                        <router-link :to="{ name: 'Home' }">Dashboard</router-link>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">User List</li>
                 </ol>
@@ -146,9 +146,7 @@
                                             aria-controls="example2" type="button"> <i class="fa-regular fa-file-excel"
                                                 style="font-size: 14px !important;"></i><span>Excel</span></button>
 
-                                        <button class="btn btn-sm btn-primary" style="margin-right: 3px;" tabindex="0"
-                                            aria-controls="example2" type="button"> <i class="fa-solid fa-file-csv"
-                                                style="font-size: 14px !important;"></i> <span>CSV</span></button>
+
                                     </div>
                                     <div class="col-sm-12 col-md-6">
                                         <div id="example2_filter" class="dataTables_filter"><label>Search:<input
@@ -558,9 +556,7 @@
                                             aria-controls="example2" type="button"> <i class="fa-regular fa-file-excel"
                                                 style="font-size: 14px !important;"></i><span>Excel</span></button>
 
-                                        <button class="btn btn-sm btn-primary" style="margin-right: 3px;" tabindex="0"
-                                            aria-controls="example2" type="button"> <i class="fa-solid fa-file-csv"
-                                                style="font-size: 14px !important;"></i> <span>CSV</span></button>
+
                                     </div>
                                     <div class="col-sm-12 col-md-6">
                                         <div id="example2_filter" class="dataTables_filter"><label>Search:<input
