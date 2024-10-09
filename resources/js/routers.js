@@ -25,6 +25,11 @@ const CreateAgency = () => import('./components/admin/agent/create.vue')
 const depositList = () => import('./components/admin/deposite/index.vue')
 const depoDetails = () => import('./components/admin/deposite/depoDetails.vue')
 
+
+// user management
+const UserList = () => import('./components/admin/user/index.vue')
+const CreateUser = () => import('./components/admin/user/create.vue')
+
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
     { path: '/sendResetLinkEmail', component: sendResetLinkEmail, name: 'sendResetLinkEmail', meta: { guest: true } },
@@ -53,7 +58,9 @@ const routes = [
     { path: '/agent-deposit-list', component: depositList, name: 'depositList', meta: { auth: true } },
     { path: '/agent-deposit-details', component: depoDetails, name: 'depoDetails', meta: { auth: true } },
 
-
+    //user
+    { path: '/all-user-list', component: UserList, name: 'UserList', meta: { auth: true } },
+    { path: '/create-user', component: CreateUser, name: 'CreateUser', meta: { auth: true } },
 ]
 
 const router = createRouter({

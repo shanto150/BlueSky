@@ -67,7 +67,31 @@ onMounted(() => {
                         </li>
                     </ul>
                 </li>
-                <li class="menu-label">UI Elements</li>
+                <!-- <li class="menu-label">UI Elements</li> -->
+                <li>
+                    <router-link v-wave :to="{ name: 'AgentList' }">
+                        <div class="parent-icon"><i class="bx bx-buildings"></i>
+                        </div>
+                        <div class="menu-title">B2B Agents</div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link v-wave :to="{ name: 'depositList' }">
+                        <div class="parent-icon"><i class="bx bx-money"></i>
+                        </div>
+                        <div class="menu-title font-14">Deposit
+                            Management</div>
+                    </router-link>
+                </li>
+
+                <li>
+                    <router-link v-wave :to="{ name: 'UserList' }">
+                        <div class="parent-icon"><i class="bx bx-user"></i>
+                        </div>
+                        <div class="menu-title">User
+                            Management</div>
+                    </router-link>
+                </li>
 
                 <li>
                     <a v-wave href="#">
@@ -83,11 +107,15 @@ onMounted(() => {
                         <div class="menu-title">Pages</div>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
-                        <li> <router-link v-wave :to="{ name: 'AgentList' }"><i
-                                    class='bx bx-paper-plane'></i>B2B Agents</router-link>
+                        <li>
+                            <li><a v-wave href="layouts-hori-boxed-width.html"><i
+                                            class='bx bx-paper-plane'></i>
+                                        Width</a></li>
                         </li>
-                        <li> <router-link v-wave :to="{ name: 'depositList' }"><i
-                                    class='bx bx-paper-plane'></i>Deposit Management</router-link>
+                        <li>
+                            <li><a v-wave href="layouts-hori-boxed-width.html"><i
+                                            class='bx bx-paper-plane'></i>
+                                        Height</a></li>
                         </li>
                     </ul>
                 </li>
@@ -122,5 +150,4 @@ onMounted(() => {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
 </style>
