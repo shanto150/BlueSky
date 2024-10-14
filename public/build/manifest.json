@@ -219,12 +219,12 @@
     "src": "public/theme/appimages/sh3.jpg"
   },
   "resources/css/app.css": {
-    "file": "assets/app-Byv7DvjY.css",
+    "file": "assets/app-Cyz08FvH.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-BnrQ_ail.js",
+    "file": "assets/app-DnYb-Y3a.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -248,7 +248,7 @@
       "resources/js/components/admin/agent/create.vue"
     ],
     "css": [
-      "assets/app-CRDrRIaY.css"
+      "assets/app-CRm5duvK.css"
     ],
     "assets": [
       "assets/slack-Dxso8dG6.png",
@@ -278,7 +278,7 @@
     ]
   },
   "resources/js/components/admin/agent/agentApprove.vue": {
-    "file": "assets/agentApprove-4kKi5O6e.js",
+    "file": "assets/agentApprove-CvsSUA3B.js",
     "name": "agentApprove",
     "src": "resources/js/components/admin/agent/agentApprove.vue",
     "isDynamicEntry": true,
@@ -288,7 +288,7 @@
     ]
   },
   "resources/js/components/admin/agent/agentDetails.vue": {
-    "file": "assets/agentDetails-fK6UeJSV.js",
+    "file": "assets/agentDetails-BayNkxH2.js",
     "name": "agentDetails",
     "src": "resources/js/components/admin/agent/agentDetails.vue",
     "isDynamicEntry": true,
@@ -298,7 +298,7 @@
     ]
   },
   "resources/js/components/admin/agent/agentRecomanded.vue": {
-    "file": "assets/agentRecomanded-CVFGVprP.js",
+    "file": "assets/agentRecomanded-DKSpqQ5k.js",
     "name": "agentRecomanded",
     "src": "resources/js/components/admin/agent/agentRecomanded.vue",
     "isDynamicEntry": true,
@@ -308,7 +308,7 @@
     ]
   },
   "resources/js/components/admin/agent/agentView.vue": {
-    "file": "assets/agentView-B0vLsbyB.js",
+    "file": "assets/agentView-RqfMqDfM.js",
     "name": "agentView",
     "src": "resources/js/components/admin/agent/agentView.vue",
     "isDynamicEntry": true,
@@ -318,7 +318,7 @@
     ]
   },
   "resources/js/components/admin/agent/create.vue": {
-    "file": "assets/create-tk8P9Swx.js",
+    "file": "assets/create-BOPam5u4.js",
     "name": "create",
     "src": "resources/js/components/admin/agent/create.vue",
     "isDynamicEntry": true,
@@ -331,7 +331,7 @@
     ]
   },
   "resources/js/components/admin/agent/index.vue": {
-    "file": "assets/index-C-5119wF.js",
+    "file": "assets/index-BA7Z-KpS.js",
     "name": "index",
     "src": "resources/js/components/admin/agent/index.vue",
     "isDynamicEntry": true,
@@ -343,7 +343,7 @@
     ]
   },
   "resources/js/components/auth/2faregister.vue": {
-    "file": "assets/2faregister-BUVAegYp.js",
+    "file": "assets/2faregister-DwdWexf4.js",
     "name": "2faregister",
     "src": "resources/js/components/auth/2faregister.vue",
     "isDynamicEntry": true,
@@ -362,7 +362,7 @@
     ]
   },
   "resources/js/components/auth/Login.vue": {
-    "file": "assets/Login-DxPbHGRk.js",
+    "file": "assets/Login-CtldQ2qG.js",
     "name": "Login",
     "src": "resources/js/components/auth/Login.vue",
     "isDynamicEntry": true,
@@ -390,7 +390,7 @@
     ]
   },
   "resources/js/components/auth/Logout.vue": {
-    "file": "assets/Logout-B_n5mn5v.js",
+    "file": "assets/Logout-Ctw0rHJb.js",
     "name": "Logout",
     "src": "resources/js/components/auth/Logout.vue",
     "isDynamicEntry": true,
@@ -402,7 +402,7 @@
     ]
   },
   "resources/js/components/auth/NotFound.vue": {
-    "file": "assets/NotFound-DYXc4TGM.js",
+    "file": "assets/NotFound-CNUqEFzP.js",
     "name": "NotFound",
     "src": "resources/js/components/auth/NotFound.vue",
     "isDynamicEntry": true,
@@ -414,7 +414,7 @@
     ]
   },
   "resources/js/components/auth/forcePasswordChange.vue": {
-    "file": "assets/forcePasswordChange-DnpOU176.js",
+    "file": "assets/forcePasswordChange-BLbFf2iv.js",
     "name": "forcePasswordChange",
     "src": "resources/js/components/auth/forcePasswordChange.vue",
     "isDynamicEntry": true,
@@ -436,7 +436,7 @@
     ]
   },
   "resources/js/components/auth/forgetPassMail.vue": {
-    "file": "assets/forgetPassMail-CphoSvyd.js",
+    "file": "assets/forgetPassMail-BWHs2WGe.js",
     "name": "forgetPassMail",
     "src": "resources/js/components/auth/forgetPassMail.vue",
     "isDynamicEntry": true,
@@ -455,7 +455,7 @@
     ]
   },
   "resources/js/components/auth/otp.vue": {
-    "file": "assets/otp-74fKjMI6.js",
+    "file": "assets/otp-DBlTDfLs.js",
     "name": "otp",
     "src": "resources/js/components/auth/otp.vue",
     "isDynamicEntry": true,
@@ -473,7 +473,7 @@
     ]
   },
   "resources/js/components/auth/reserPass.vue": {
-    "file": "assets/reserPass-CJr_L6bW.js",
+    "file": "assets/reserPass-Bq52A-qi.js",
     "name": "reserPass",
     "src": "resources/js/components/auth/reserPass.vue",
     "isDynamicEntry": true,
@@ -491,7 +491,7 @@
     ]
   },
   "resources/js/components/pages/Agent.vue": {
-    "file": "assets/Agent-OKfkSt1f.js",
+    "file": "assets/Agent-Pyfxy2Eq.js",
     "name": "Agent",
     "src": "resources/js/components/pages/Agent.vue",
     "isDynamicEntry": true,
@@ -503,7 +503,7 @@
     ]
   },
   "resources/js/components/pages/Home.vue": {
-    "file": "assets/Home-CCMwbMfm.js",
+    "file": "assets/Home-5C4ly3qr.js",
     "name": "Home",
     "src": "resources/js/components/pages/Home.vue",
     "isDynamicEntry": true,
@@ -515,7 +515,7 @@
     ]
   },
   "resources/js/components/pages/Settings.vue": {
-    "file": "assets/Settings-DGJWXmLc.js",
+    "file": "assets/Settings-B0TEP4Vt.js",
     "name": "Settings",
     "src": "resources/js/components/pages/Settings.vue",
     "isDynamicEntry": true,
