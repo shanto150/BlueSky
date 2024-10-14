@@ -6,11 +6,6 @@ function menuTaggle() {
     $(".wrapper").toggleClass("toggled");
 }
 
-// $(function () {
-//     for (var e = window.location, o = $(".metismenu li a").filter(function () {
-//         return this.href == e
-//     }).addClass("").parent().addClass("mm-active"); o.is("li");) o = o.parent("").addClass("mm-show").parent("").addClass("mm-active")
-// })
 
 onMounted(() => {
     new MetisMenu("#menu");
@@ -121,7 +116,7 @@ onMounted(() => {
                 <li class="menu-label">Exit</li>
                 <li>
                     <router-link v-wave :to="{ name: 'Logout' }">
-                        <div class="parent-icon"><i class="bx bx-log-out-circle"></i>
+                        <div class="parent-icon"><i class="bx bx-power-off link-danger"></i>
                         </div>
                         <div class="menu-title">Logout</div>
                     </router-link>

@@ -328,7 +328,9 @@ a {
 }
 .user-info .designattion {
   font-size: 10px;
-  color: #747474;
+  color: #56a4f8;
+  font-weight: bold;
+  text-transform: capitalize;
 }
 
 .user-box {

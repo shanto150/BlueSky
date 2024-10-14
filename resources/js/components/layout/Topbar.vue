@@ -16,10 +16,7 @@ function darkMode() {
         } else {
             $(".dark-mode-icon i").attr("class", "bx bx-sun");
         }
-
         authStore.isDarkMode = authStore.isDarkMode == false ? true : false;
-
-
         return v === 'dark' ? 'light' : 'dark';
     })
 }

@@ -22,101 +22,96 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-agency">
-                        <span class="info-agency-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
-                        <div class="info-agency-content">
-                            <span class="info-agency-text">Total User</span>
-                            <span class="info-agency-number">
-                                1200
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="active-agency mb-3">
-                        <span class="active-agency-icon bg-success elevation-1 text-white"><i
-                                class="fa-solid fa-circle-check"></i></span>
-                        <div class="active-agency-content">
-                            <span class="active-agency-text">Active User</span>
-                            <span class="active-agency-number">760</span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-pause"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">On Hold</span>
-                            <span class="info-box-number">5</span>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="pending-agnt mb-3">
-                        <span class="pending-agnt-icon bg-warning elevation-1"><i class="fa fa-clock"></i></span>
-                        <div class="pending-agnt-content">
-                            <span class="pending-agnt-text">Locked</span>
-                            <span class="pending-agnt-number">20</span>
-                        </div>
-
-                    </div>
-
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-agency">
+                <span class="info-agency-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
+                <div class="info-agency-content">
+                    <span class="info-agency-text">Total User</span>
+                    <span class="info-agency-number">
+                        1200
+                    </span>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <!-- <div class="col-md-4">
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="active-agency mb-3">
+                <span class="active-agency-icon bg-success elevation-1 text-white"><i
+                        class="fa-solid fa-circle-check"></i></span>
+                <div class="active-agency-content">
+                    <span class="active-agency-text">Active User</span>
+                    <span class="active-agency-number">760</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-pause"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">On Hold</span>
+                    <span class="info-box-number">5</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="pending-agnt mb-3">
+                <span class="pending-agnt-icon bg-warning elevation-1"><i class="fa fa-clock"></i></span>
+                <div class="pending-agnt-content">
+                    <span class="pending-agnt-text">Locked</span>
+                    <span class="pending-agnt-number">20</span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="row shadow-none rounded rounded-2 p-3">
+                    <!-- <div class="col-md-4">
 									<input type="text" class="form-control date-range" />
                                 </div> -->
-                                <div class="col-md-2">
-                                    <select class="form-select form-select-sm" id="single-select-field"
-                                        data-placeholder="Choose one thing">
-                                        <option>Select User Type</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="form-select form-select-sm" id="single-select-field"
-                                        data-placeholder="Choose one thing">
-                                        <option>Select Office Location</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <select class="form-select form-select-sm" id="single-select-field"
-                                        data-placeholder="Choose one thing">
-                                        <option>Select Status</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-1 mt-2">
-                                    <i class="fa fa-times text-danger"> </i> Clear
-                                </div>
-
-                            </div>
-                        </div>
+                    <div class="col-md-2">
+                        <select class="form-select form-select-sm" id="single-select-field"
+                            data-placeholder="Choose one thing">
+                            <option>Select User Type</option>
+                        </select>
                     </div>
+                    <div class="col-md-2">
+                        <select class="form-select form-select-sm" id="single-select-field"
+                            data-placeholder="Choose one thing">
+                            <option>Select Office Location</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <select class="form-select form-select-sm" id="single-select-field"
+                            data-placeholder="Choose one thing">
+                            <option>Select Status</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1 mt-2">
+                        <i class="fa fa-times text-danger"> </i> Clear
+                    </div>
+
                 </div>
             </div>
-
-            <div class="table-responsive">
+        </div>
+    </div>
+    <div class="table-responsive">
                 <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap5">
 
                     <div class="card-body">
                         <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab"
+                                <a v-wave class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab"
                                     aria-selected="true">
                                     <div class="d-flex align-items-center">
                                         <div class="tab-title"> Internal User </div>
@@ -124,7 +119,7 @@
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile" role="tab"
+                                <a v-wave class="nav-link" data-bs-toggle="tab" href="#primaryprofile" role="tab"
                                     aria-selected="false" tabindex="-1">
                                     <div class="d-flex align-items-center">
 
@@ -196,7 +191,7 @@
                                             </thead>
 
                                             <tbody>
-                                                <tr role="row" class="odd">
+                                                <tr role="row">
                                                     <td class="text-left">01</td>
                                                     <td class="text-left">Abu Syed
                                                         <br>
@@ -282,7 +277,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <tr role="row" class="odd">
+                                                <tr role="row">
                                                     <td class="text-left">02</td>
                                                     <td class="text-left">Atiqur Rahman
                                                         <br>
@@ -368,7 +363,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <tr role="row" class="odd">
+                                                <tr role="row">
                                                     <td class="text-left">03</td>
                                                     <td class="text-left">Mujahidul Islam
                                                         <br>
@@ -454,7 +449,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <tr role="row" class="odd">
+                                                <tr role="row">
                                                     <td class="text-left">04</td>
                                                     <td class="text-left">Eva Ahmed Tarana
                                                         <br>
@@ -618,7 +613,7 @@
                                             </thead>
 
                                             <tbody>
-                                                <tr role="row" class="odd">
+                                                <tr role="row">
                                                     <td class="text-left">01</td>
                                                     <td class="text-left">Abu Syed
 
@@ -708,7 +703,7 @@
                                                     </td>
                                                 </tr>
 
-                                                <tr role="row" class="odd">
+                                                <tr role="row">
                                                     <td class="text-left">02</td>
                                                     <td class="text-left">Imtiaz Ahmed
 
@@ -808,8 +803,6 @@
 
                 </div>
             </div>
-        </div>
-    </div>
 
 </template>
 <script>
@@ -1124,14 +1117,6 @@
     margin-top: .25rem;
     font-weight: 700;
     font-size: 22px;
-}
-
-.odd td {
-    background-color: #F5F8FA;
-}
-
-.even td {
-    background-color: #fff;
 }
 
 
