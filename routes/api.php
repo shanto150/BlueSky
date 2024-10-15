@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\Area\AreaController;
+
 
 Route::post('login', [AuthController::class,'login'])->name('login');
 Route::post('register', [AuthController::class,'register'])->name('register');
@@ -17,4 +19,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('me', [AuthController::class,'me'])->name('me');
     Route::post('registerOTP', [AuthController::class, 'registerOTP'])->name('registerOTP');
     Route::post('ForcePassReset', [AuthController::class,'ForcePassReset'])->name('ForcePassReset');
+
+
+    Route::get('districts', [AreaController::class, 'districtList']);
+    Route::get('divisions', [AreaController::class, 'divisionsList']);
+
 });

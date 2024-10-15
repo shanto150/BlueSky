@@ -4,8 +4,11 @@ import "./themeassets/js/bootstrap.bundle.min.js";
 import "./themeassets/js/jquery.min.js";
 import "./themeassets/plugins/bs-stepper/js/bs-stepper.min.js";
 import "./themeassets/plugins/bs-stepper/js/main.js";
+import "./themeassets/plugins/select2/js/select2-custom.js";
+
 import "./themeassets/js/app.js";
 import "https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js";
+import "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js";
 
 import { createApp, markRaw } from "vue";
 import { createPinia } from "pinia";

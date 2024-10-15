@@ -5,7 +5,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'Dashboard' }">Dashboard</router-link>
+                        <router-link :to="{ name: 'Home' }">Dashboard</router-link>
 
                     </li>
                     <li class="breadcrumb-item">

@@ -27,7 +27,7 @@ onMounted(() => {
 
         <Scrollbar height="100%">
             <ul class="metismenu" id="menu">
-                <li class="menu-label">Menu</li>
+                <!-- <li class="menu-label">Menu</li> -->
 
                 <li>
                     <a v-wave href="#" class="has-arrow">
@@ -75,7 +75,7 @@ onMounted(() => {
                         <div class="parent-icon"><i class="bx bx-cabinet"></i>
                         </div>
                         <div class="menu-title">Deposits
-                            </div>
+                        </div>
                     </router-link>
                 </li>
 
@@ -87,40 +87,46 @@ onMounted(() => {
                     </router-link>
                 </li>
 
+
                 <li>
+                    <a v-wave href="#" class="has-arrow">
+                        <div class="parent-icon"><i class="bx bx-cog"></i>
+                        </div>
+                        <div class="menu-title">Settings</div>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="true">
+                        <li>
+                        <li>
+                            <router-link v-wave :to="{ name: 'roleList' }">
+                                <i class='bx bx-paper-plane'></i> Roles Permission
+                            </router-link>
+                        </li>
+                </li>
+                <li>
+                <li>
+                    <router-link v-wave :to="{ name: 'zoneList' }">
+                                <i class='bx bx-paper-plane'></i> Area
+                            </router-link>
+                </li>
+                </li>
+            </ul>
+            </li>
+
+            <!-- <li>
                     <a v-wave href="#">
                         <div class="parent-icon"><i class="bx bx-layer"></i>
                         </div>
                         <div class="menu-title">Settings</div>
                     </a>
-                </li>
-                <li>
-                    <a v-wave href="#" class="has-arrow">
-                        <div class="parent-icon"><i class="bx bx-add-to-queue"></i>
-                        </div>
-                        <div class="menu-title">Pages</div>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li>
-                            <li><a v-wave href="layouts-hori-boxed-width.html"><i
-                                            class='bx bx-paper-plane'></i>
-                                        Width</a></li>
-                        </li>
-                        <li>
-                            <li><a v-wave href="layouts-hori-boxed-width.html"><i
-                                            class='bx bx-paper-plane'></i>
-                                        Height</a></li>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-label">Exit</li>
-                <li>
-                    <router-link v-wave :to="{ name: 'Logout' }">
-                        <div class="parent-icon"><i class="bx bx-power-off link-danger"></i>
-                        </div>
-                        <div class="menu-title">Logout</div>
-                    </router-link>
-                </li>
+                </li> -->
+            <!-- <li class="menu-label">Exit</li> -->
+            <li>
+                <router-link v-wave :to="{ name: 'Logout' }">
+                    <div class="parent-icon"><i class="bx bx-power-off link-danger"></i>
+                    </div>
+                    <div class="menu-title">Logout</div>
+                </router-link>
+            </li>
 
             </ul>
         </Scrollbar>

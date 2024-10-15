@@ -180,4 +180,5 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
     background-image: linear-gradient(blue, #00ffff, blue);
     opacity: 0.3;
 }
+
 </style>

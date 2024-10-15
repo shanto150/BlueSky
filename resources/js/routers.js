@@ -30,6 +30,14 @@ const depoDetails = () => import('./components/admin/deposite/depoDetails.vue')
 const UserList = () => import('./components/admin/user/index.vue')
 const CreateUser = () => import('./components/admin/user/create.vue')
 
+//Roles permissions managment
+const roleList = () => import('./components/admin/role/index.vue')
+const roleCreate = () => import('./components/admin/role/create.vue')
+const roleEdit = () => import('./components/admin/role/edit.vue')
+//Zone
+const zoneList = () => import('./components/admin/zone/index.vue')
+const zoneCreate = () => import('./components/admin/zone/create.vue')
+
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
     { path: '/sendResetLinkEmail', component: sendResetLinkEmail, name: 'sendResetLinkEmail', meta: { guest: true } },
@@ -61,6 +69,16 @@ const routes = [
     //user
     { path: '/all-user-list', component: UserList, name: 'UserList', meta: { auth: true } },
     { path: '/create-user', component: CreateUser, name: 'CreateUser', meta: { auth: true } },
+
+    //roles permission
+    { path: '/all-roles-list', component: roleList, name: 'roleList', meta: { auth: true } },
+    { path: '/create-role', component: roleCreate, name: 'roleCreate', meta: { auth: true } },
+    { path: '/edit-role', component: roleEdit, name: 'roleEdit', meta: { auth: true } },
+
+    //Zone
+    { path: '/all-zone-list', component: zoneList, name: 'zoneList', meta: { auth: true } },
+    { path: '/create-zone', component: zoneCreate, name: 'zoneCreate', meta: { auth: true } },
+
 ]
 
 const router = createRouter({
