@@ -1,12 +1,28 @@
 <script setup>
 import { useAuthStore } from "../../../stores/authStore";
-import { onMounted } from "vue";
+import { ref,onMounted } from "vue";
 const authStore = useAuthStore();
-// handleSubmit();
 
-// function handleSubmit() {
+const divisions=ref('');
+handleSubmit();
 
-// };
+function handleSubmit() {
+    const config = {
+        headers: { Authorization: 'Bearer ' + authStore.decryptWithAES(authStore.token), "Accept": "application/json", }
+    };
+    axios.get("/api/divisions", config)
+        .then((res) => {
+
+
+            // divisions = res.data.data;
+            console.log(res.data.data);
+
+
+        })
+        .catch((eEes) => {
+
+        });
+};
 
 onMounted(() => {
 
@@ -18,21 +34,6 @@ onMounted(() => {
         allowClear: true,
         height: '50'
     });
-
-    const config = {
-        headers: { Authorization: 'Bearer ' + authStore.decryptWithAES(authStore.token), "Accept": "application/json", }
-    };
-    axios.get("/api/divisions", config)
-        .then((res) => {
-
-
-        const divisions = res.data.data;
-        return divisions;
-
-        })
-        .catch((eEes) => {
-
-        });
 
 })
 </script>
@@ -73,7 +74,7 @@ onMounted(() => {
                             class="form-control form-control-sm single-select-field">
                             <option selected value="">Choose...</option>
                             <option :value="division.id" v-for="division in divisions" :key="division.id">{{
-                                division.name }}</option>
+                                division.name }}a</option>
                         </select>
                     </div>
                     <div class="col-md-6 mt-2">
