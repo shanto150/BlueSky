@@ -171,9 +171,9 @@
                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                     aria-label="Net Balance: activate to sort column ascending"
                                     style="width: 107.037px;">Net Balance</th>
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                                <!-- <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                     aria-label="Documennts: activate to sort column ascending"
-                                    style="width: 107.037px;">Documennts</th>
+                                    style="width: 107.037px;">Documennts</th> -->
                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                     aria-label="Status: activate to sort column ascending" style="width: 107.037px;">
                                     Status</th>
@@ -219,11 +219,7 @@
                                 <td class="text-left">
                                     <i class="fa-solid fa-bangladeshi-taka-sign"></i> 0.00
                                 </td>
-                                <td class="text-left">
-                                    <button class="btn btn-outline-primary btn-sm radius-15">
-                                        <i class='bx bx-bullseye'></i>
-                                        View</button>
-                                </td>
+
                                 <td class="text-left">
                                     <div class="d-flex align-items-center text-danger"> <i
                                             class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
@@ -239,13 +235,19 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
+                                    <button type="button" v-tippy="'Attachment'"
+                                        style="size:30px;width:30px;height:30px;"
+                                        class="btn btn-outline-info rounded-circle"><i
+                                            class="fa-solid fa-file"
+                                            style="margin:2px 0px 10px -4px;font-size:14px;"></i></button>
+
                                     <router-link :to="{ name: 'agentDetails' }"
-                                        style="size: 30px; width: 30px; height: 30px"
-                                        class="btn btn-outline-success rounded-circle"  v-tippy="'Hello!'">
+                                        style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                        class="btn btn-outline-success rounded-circle"  v-tippy="'KAM Assign'">
                                         <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </router-link>
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Profile Edit'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-user-edit rounded-circle">
 
@@ -253,7 +255,7 @@
                                             style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </button>
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Edit'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-only-edit rounded-circle">
 
@@ -261,7 +263,7 @@
                                             style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </button>
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Log'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-action-log rounded-circle">
 
@@ -311,11 +313,7 @@
                                 <td class="text-left">
                                     <i class="fa-solid fa-bangladeshi-taka-sign"></i> 0.00
                                 </td>
-                                <td class="text-left">
-                                    <button class="btn btn-outline-primary btn-sm radius-15">
-                                        <i class='bx bx-bullseye'></i>
-                                        View</button>
-                                </td>
+
                                 <td class="text-left">
                                     <div class="d-flex align-items-center text-danger"> <i
                                             class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
@@ -330,14 +328,20 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
-                                    <router-link :to="{ name: 'agentApprove' }"
-                                        style="size: 30px; width: 30px; height: 30px"
+                                    <button type="button" v-tippy="'Attachment'"
+                                        style="size:30px;width:30px;height:30px;"
+                                        class="btn btn-outline-info rounded-circle"><i
+                                            class="fa-solid fa-file"
+                                            style="margin:2px 0px 10px -4px;font-size:14px;"></i></button>
+
+                                    <router-link :to="{ name: 'agentApprove' }" v-tippy="'Recomandation'"
+                                        style="size: 30px; width: 30px; height: 30px;margin-left: 5px;"
                                         class="btn btn-outline-success rounded-circle" placement="top"
                                         title="Recommendation">
                                         <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </router-link>
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Profile Edit'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-user-edit rounded-circle">
 
@@ -345,7 +349,7 @@
                                             style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </button>
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Edit'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-only-edit rounded-circle">
 
@@ -353,7 +357,7 @@
                                             style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </button>
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Log'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-action-log rounded-circle">
 
@@ -403,11 +407,7 @@
                                 <td class="text-left">
                                     <i class="fa-solid fa-bangladeshi-taka-sign"></i> 0.00
                                 </td>
-                                <td class="text-left">
-                                    <button class="btn btn-outline-primary btn-sm radius-15">
-                                        <i class='bx bx-bullseye'></i>
-                                        View</button>
-                                </td>
+
                                 <td class="text-left">
                                     <div class="d-flex align-items-center text-primary"> <i
                                             class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
@@ -422,15 +422,20 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
+                                    <button type="button" v-tippy="'Attachment'"
+                                        style="size:30px;width:30px;height:30px;"
+                                        class="btn btn-outline-info rounded-circle"><i
+                                            class="fa-solid fa-file"
+                                            style="margin:2px 0px 10px -4px;font-size:14px;"></i></button>
 
-                                    <router-link :to="{ name: 'agentRecomanded' }"
-                                        style="size: 30px; width: 30px; height: 30px"
-                                        class="btn btn-outline-success rounded-circle" placement="top" title="Aproval">
+                                    <router-link :to="{ name: 'agentRecomanded' }" v-tippy="'Aproval'"
+                                        style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                        class="btn btn-outline-success rounded-circle" placement="top" >
                                         <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </router-link>
 
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Profile Edit'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-user-edit rounded-circle">
 
@@ -438,7 +443,7 @@
                                             style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </button>
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Edit'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-only-edit rounded-circle">
 
@@ -446,7 +451,7 @@
                                             style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </button>
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Log'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-action-log rounded-circle">
 
@@ -496,12 +501,7 @@
                                 <td class="text-left">
                                     <i class="fa-solid fa-bangladeshi-taka-sign"></i> 0.00
                                 </td>
-                                <td class="text-left">
 
-                                    <button class="btn btn-outline-primary btn-sm radius-15">
-                                        <i class='bx bx-bullseye'></i>
-                                        View</button>
-                                </td>
                                 <td class="text-left">
                                     <div class="d-flex align-items-center text-success"> <i
                                             class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
@@ -517,15 +517,21 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
-                                    <router-link :to="{ name: 'agentView' }"
-                                        style="size: 30px; width: 30px; height: 30px"
+                                    <button type="button" v-tippy="'Attachment'"
+                                        style="size:30px;width:30px;height:30px;"
+                                        class="btn btn-outline-info rounded-circle"><i
+                                            class="fa-solid fa-file"
+                                            style="margin:2px 0px 10px -4px;font-size:14px;"></i></button>
+
+                                    <router-link :to="{ name: 'agentView' }" v-tippy="'View Details'"
+                                        style="size: 30px; width: 30px; height: 30px;margin-left: 5px;"
                                         class="btn btn-outline-primary rounded-circle" placement="top"
-                                        title="Recommendation">
+                                        >
                                         <i class="fa fa-eye" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i>
                                     </router-link>
 
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Profile Edit'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-user-edit rounded-circle">
 
@@ -533,7 +539,7 @@
                                             style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </button>
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Edit'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-only-edit rounded-circle">
 
@@ -541,7 +547,7 @@
                                             style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </button>
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Log'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-action-log rounded-circle">
 
@@ -591,11 +597,7 @@
                                 <td class="text-left">
                                     <i class="fa-solid fa-bangladeshi-taka-sign"></i> 0.00
                                 </td>
-                                <td class="text-left">
-                                    <button class="btn btn-outline-primary btn-sm radius-15">
-                                        <i class='bx bx-bullseye'></i>
-                                        View</button>
-                                </td>
+
                                 <td class="text-left">
                                     <div class="d-flex align-items-center text-success"> <i
                                             class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
@@ -611,16 +613,21 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
+                                    <button type="button" v-tippy="'Attachment'"
+                                        style="size:30px;width:30px;height:30px;"
+                                        class="btn btn-outline-info rounded-circle"><i
+                                            class="fa-solid fa-file"
+                                            style="margin:2px 0px 10px -4px;font-size:14px;"></i></button>
 
-
-                                    <router-link :to="{ name: 'agentView' }"
-                                        style="size: 30px; width: 30px; height: 30px"
+                                    <router-link :to="{ name: 'agentView' }" v-tippy="'View Details'"
+                                        style="size: 30px; width: 30px; height: 30px;  margin-left: 5px;"
                                         class="btn btn-outline-primary rounded-circle" placement="top"
-                                        title="Recommendation">
+                                        >
                                         <i class="fa fa-eye" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i>
                                     </router-link>
 
-                                    <button type="button"
+
+                                    <button type="button" v-tippy="'Profile Edit'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-user-edit rounded-circle">
 
@@ -628,7 +635,7 @@
                                             style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </button>
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Edit'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-only-edit rounded-circle">
 
@@ -636,7 +643,7 @@
                                             style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </button>
 
-                                    <button type="button"
+                                    <button type="button" v-tippy="'Log'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                         class="btn btn-outline-action-log rounded-circle">
 

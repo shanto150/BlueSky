@@ -234,36 +234,35 @@
                                                 </small>
                                             </td>
                                             <td class="text-left">
-
-
                                                 <button type="button" style="size: 30px; width: 30px; height: 30px;"
-                                                    class="btn btn-outline-only-edit rounded-circle">
+                                                    class="btn btn-outline-only-edit rounded-circle"
+                                                    v-tippy="'Profile Edit'">
 
                                                     <i class="fa-solid fa-pencil"
                                                         style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Profile Delete'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-danger rounded-circle">
                                                     <i class="fa fa-trash"
                                                         style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Hold'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-purple rounded-circle">
                                                     <i class="fa fa-refresh"
                                                         style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                                 </button>
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Lock'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-lock rounded-circle">
                                                     <i class="fa fa-lock"
                                                         style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Lock'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-timer rounded-circle">
                                                     <i class="fa-solid fa-clock-rotate-left"
@@ -319,36 +318,35 @@
                                                 </small>
                                             </td>
                                             <td class="text-left">
-
-
                                                 <button type="button" style="size: 30px; width: 30px; height: 30px;"
-                                                    class="btn btn-outline-only-edit rounded-circle">
+                                                    class="btn btn-outline-only-edit rounded-circle"
+                                                    v-tippy="'Profile Edit'">
 
                                                     <i class="fa-solid fa-pencil"
                                                         style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Profile Delete'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-danger rounded-circle">
                                                     <i class="fa fa-trash"
                                                         style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Hold'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-purple rounded-circle">
                                                     <i class="fa fa-refresh"
                                                         style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                                 </button>
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Lock'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-lock rounded-circle">
                                                     <i class="fa fa-lock"
                                                         style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Lock'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-timer rounded-circle">
                                                     <i class="fa-solid fa-clock-rotate-left"
@@ -404,36 +402,35 @@
                                                 </small>
                                             </td>
                                             <td class="text-left">
-
-
                                                 <button type="button" style="size: 30px; width: 30px; height: 30px;"
-                                                    class="btn btn-outline-only-edit rounded-circle">
+                                                    class="btn btn-outline-only-edit rounded-circle"
+                                                    v-tippy="'Profile Edit'">
 
                                                     <i class="fa-solid fa-pencil"
                                                         style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Profile Delete'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-danger rounded-circle">
                                                     <i class="fa fa-trash"
                                                         style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Hold'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-purple rounded-circle">
                                                     <i class="fa fa-refresh"
                                                         style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                                 </button>
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Lock'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-lock rounded-circle">
                                                     <i class="fa fa-lock"
                                                         style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Lock'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-timer rounded-circle">
                                                     <i class="fa-solid fa-clock-rotate-left"
@@ -489,36 +486,35 @@
                                                 </small>
                                             </td>
                                             <td class="text-left">
-
-
                                                 <button type="button" style="size: 30px; width: 30px; height: 30px;"
-                                                    class="btn btn-outline-only-edit rounded-circle">
+                                                    class="btn btn-outline-only-edit rounded-circle"
+                                                    v-tippy="'Profile Edit'">
 
                                                     <i class="fa-solid fa-pencil"
                                                         style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Profile Delete'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-danger rounded-circle">
                                                     <i class="fa fa-trash"
                                                         style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Hold'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-purple rounded-circle">
                                                     <i class="fa fa-refresh"
                                                         style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                                 </button>
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Lock'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-lock rounded-circle">
                                                     <i class="fa fa-lock"
                                                         style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Lock'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-timer rounded-circle">
                                                     <i class="fa-solid fa-clock-rotate-left"
@@ -652,33 +648,34 @@
                                             </td>
                                             <td class="text-left">
                                                 <button type="button" style="size: 30px; width: 30px; height: 30px;"
-                                                    class="btn btn-outline-only-edit rounded-circle">
+                                                    class="btn btn-outline-only-edit rounded-circle"
+                                                    v-tippy="'Profile Edit'">
 
                                                     <i class="fa-solid fa-pencil"
                                                         style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Profile Delete'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-danger rounded-circle">
                                                     <i class="fa fa-trash"
                                                         style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Hold'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-purple rounded-circle">
                                                     <i class="fa fa-refresh"
                                                         style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                                 </button>
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Lock'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-lock rounded-circle">
                                                     <i class="fa fa-lock"
                                                         style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Lock'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-timer rounded-circle">
                                                     <i class="fa-solid fa-clock-rotate-left"
@@ -741,33 +738,34 @@
                                             </td>
                                             <td class="text-left">
                                                 <button type="button" style="size: 30px; width: 30px; height: 30px;"
-                                                    class="btn btn-outline-only-edit rounded-circle">
+                                                    class="btn btn-outline-only-edit rounded-circle"
+                                                    v-tippy="'Profile Edit'">
 
                                                     <i class="fa-solid fa-pencil"
                                                         style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Profile Delete'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-danger rounded-circle">
                                                     <i class="fa fa-trash"
                                                         style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Hold'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-purple rounded-circle">
                                                     <i class="fa fa-refresh"
                                                         style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                                 </button>
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Lock'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-lock rounded-circle">
                                                     <i class="fa fa-lock"
                                                         style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                                 </button>
 
-                                                <button type="button"
+                                                <button type="button" v-tippy="'Lock'"
                                                     style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                     class="btn btn-outline-timer rounded-circle">
                                                     <i class="fa-solid fa-clock-rotate-left"
