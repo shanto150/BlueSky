@@ -119,7 +119,7 @@
                 <div class="col-md-4"></div>
                 <div class="col-sm-2 col-md-2">
                     <div id="example2_filter" class="dataTables_filter"><input type="search"
-                        class="form-control form-control-sm" placeholder="" aria-controls="example2">
+                            class="form-control form-control-sm" placeholder="" aria-controls="example2">
                     </div>
                 </div>
             </div>
@@ -150,9 +150,7 @@
                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                     aria-label="Total Amount: activate to sort column ascending"
                                     style="width: 107.037px;">Total Amount</th>
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                                    aria-label="Attachments: activate to sort column ascending"
-                                    style="width: 107.037px;">Attachments</th>
+
 
                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                     aria-label="Remarks: activate to sort column ascending" style="width: 307.037px;">
@@ -202,16 +200,7 @@
                                         (-)<i class="fa-solid fa-bangladeshi-taka-sign"></i> 70000
                                     </small>
                                 </td>
-                                <td class="text-center">
-                                    <button class="btn btn-outline-primary btn-sm"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-eye text-primary">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg> </button>
-                                </td>
+
                                 <td class="text-left" id="pre-line">
                                     Air Ticket Reserve
                                 </td>
@@ -229,7 +218,12 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button type="button" title="Log"
+                                    <button type="button" v-tippy="'Attachment'"
+                                        style="size:30px;width:30px;height:30px;margin-left:5px;"
+                                        class="btn btn-outline-info rounded-circle"><i class="fa-solid fa-file"
+                                            style="margin:2px 0px 10px -4px;font-size:14px;"></i></button>
+
+                                    <button type="button" v-tippy="'Log'"
                                         style="size:30px;width:30px;height:30px;margin-left:5px;"
                                         class="btn btn-outline-action-log rounded-circle"><i
                                             class="fa-solid fa-arrow-trend-up"
@@ -265,16 +259,7 @@
                                     <i class="fa-solid fa-bangladeshi-taka-sign"></i> 109000
 
                                 </td>
-                                <td class="text-center">
-                                    <button class="btn btn-outline-primary btn-sm"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-eye text-primary">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg> </button>
-                                </td>
+
                                 <td class="text-left" id="pre-line">
                                     Air Ticket Booking
                                 </td>
@@ -292,14 +277,17 @@
                                     </div>
                                 </td>
                                 <td>
-
-                                    <router-link :to="{ name: 'depoDetails' }"
-                                        style="size: 30px; width: 30px; height: 30px"
-                                        class="btn btn-outline-success rounded-circle" placement="top" title="Aproval">
+                                    <button type="button" v-tippy="'Attachment'"
+                                        style="size:30px;width:30px;height:30px;"
+                                        class="btn btn-outline-info rounded-circle"><i class="fa-solid fa-file"
+                                            style="margin:2px 0px 10px -4px;font-size:14px;"></i></button>
+                                    <router-link :to="{ name: 'depoDetails' }" v-tippy="'Aproval'"
+                                        style="size: 30px; width: 30px; height: 30px; margin-left:5px;"
+                                        class="btn btn-outline-success rounded-circle" placement="top">
                                         <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                     </router-link>
 
-                                    <button type="button" title="Log"
+                                    <button type="button" v-tippy="'Log'"
                                         style="size:30px;width:30px;height:30px;margin-left:5px;"
                                         class="btn btn-outline-danger rounded-circle"><i class="fa fa-ban"
                                             style="margin:2px 0px 10px -5px;font-size:14px;"></i></button>
@@ -334,16 +322,7 @@
                                     <i class="fa-solid fa-bangladeshi-taka-sign"></i> 1119000
 
                                 </td>
-                                <td class="text-center">
-                                    <button class="btn btn-outline-primary btn-sm"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-eye text-primary">
-                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                        </svg> </button>
-                                </td>
+
                                 <td class="text-left" id="pre-line">
                                     Air Ticket Booking
                                 </td>
@@ -360,7 +339,13 @@
                                     </div>
                                 </td>
                                 <td>
+                                    <button type="button" v-tippy="'Attachment'"
+                                        style="size:30px;width:30px;height:30px;"
+                                        class="btn btn-outline-info rounded-circle"><i class="fa-solid fa-file"
+                                            style="margin:2px 0px 10px -4px;font-size:14px;"></i></button>
+
                                     <button type="button" title="Log" class="btn btn-outline-action-log rounded-circle"
+                                        v-tippy="'Log'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"><i
                                             class="fa-solid fa-arrow-trend-up"
                                             style="margin: 2px 0px 10px -6px; font-size: 14px;"></i></button>
@@ -579,11 +564,16 @@
 }
 
 
-[data-bs-theme=dark] body .bg-success, .active-agency-icon,.bg-success>a {
+[data-bs-theme=dark] body .bg-success,
+.active-agency-icon,
+.bg-success>a {
     background-color: #5b9a59 !important;
     color: #9fbe9e !important;
 }
-[data-bs-theme=light] body .bg-success, .active-agency-icon, .bg-success>a {
+
+[data-bs-theme=light] body .bg-success,
+.active-agency-icon,
+.bg-success>a {
     background-color: #0ea209 !important;
     color: #fff !important;
 
