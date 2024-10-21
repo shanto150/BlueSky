@@ -101,9 +101,6 @@
                                 aria-controls="example2" type="button"> <i class="fa-regular fa-file-excel"
                                     style="font-size: 14px !important;"></i><span>Excel</span></button>
 
-                            <button class="btn btn-sm btn-primary" style="margin-right: 3px;" tabindex="0"
-                                aria-controls="example2" type="button"> <i class="fa-solid fa-file-csv"
-                                    style="font-size: 14px !important;"></i> <span>CSV</span></button>
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <div id="example2_filter" class="dataTables_filter"><label>Search:<input type="search"
@@ -183,13 +180,13 @@
                                                 <i class="fa fa-check"
                                                     style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                             </router-link> -->
-                                            <router-link  style="size: 30px; width: 30px; height: 30px"
+                                            <router-link  style="size: 30px; width: 30px; height: 30px" v-tippy="'Edit'"
                                                 class="btn btn-outline-only-edit rounded-circle" placement="top" title="KAM Assign">
                                                 <i class="fa-solid fa-pencil"
                                                     style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
                                             </router-link>
 
-                                            <button type="button"
+                                            <button type="button" v-tippy="'Ban'"
                                                 style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                 class="btn btn-outline-ban rounded-circle">
 
@@ -197,7 +194,7 @@
                                                     style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
                                             </button>
 
-                                            <button type="button"
+                                            <button type="button" v-tippy="'Delete'"
                                                 style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
                                                 class="btn btn-outline-danger rounded-circle">
 
