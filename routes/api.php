@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\Area\AreaController;
+use App\Http\Controllers\Admin\Role\RolePermissionController;
 
 
 Route::post('login', [AuthController::class,'login'])->name('login');
@@ -24,4 +25,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('districts', [AreaController::class, 'districtList']);
     Route::get('divisions', [AreaController::class, 'divisionsList']);
 
+
+
 });
+Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
