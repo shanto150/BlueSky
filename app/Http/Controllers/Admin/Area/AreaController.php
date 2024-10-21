@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\Area;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
-
-use DB;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class AreaController extends BaseController
 {

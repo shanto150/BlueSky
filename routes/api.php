@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\Area\AreaController;
+use App\Http\Controllers\Admin\Role\RolePermissionController;
 
 
 Route::post('login', [AuthController::class,'login'])->name('login');
@@ -20,7 +21,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('registerOTP', [AuthController::class, 'registerOTP'])->name('registerOTP');
     Route::post('ForcePassReset', [AuthController::class,'ForcePassReset'])->name('ForcePassReset');
 
-    Route::get('divisions', [AreaController::class, 'divisionsList'])->name('divisions');
 });
-
-Route::get('districts', [AreaController::class, 'districtList'])->name('districts');
+Route::get('districts', [AreaController::class, 'districtList']);
+Route::get('divisions', [AreaController::class, 'divisionsList']);
+Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
