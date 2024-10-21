@@ -5,11 +5,11 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'Dashboard' }">Dashboard</router-link>
+                        <router-link :to="{ name: 'Home' }">Dashboard</router-link>
 
                     </li>
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'AgentList' }">User List</router-link>
+                        <router-link :to="{ name: 'UserList' }">User List</router-link>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Create New User</li>
                 </ol>
@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-lg-2">
                     <p class="text-center">Profile Image</p>
-                    <img height="180" width="180" src="assets/images/icons/dummy_img.png" alt="">
+                    <img height="180" width="180" src="/public/theme/appimages/rqf.png" alt="">
                     <p class="text-center mt-1"><a href="" style="text-decoration: underline;">Change Image</a></p>
                 </div>
                 <div class="col-lg-8" style="border-left: 2px solid #dfeffd;">

@@ -7,7 +7,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'Dashboard' }">Dashboard</router-link>
+                        <router-link :to="{ name: 'Home' }">Dashboard</router-link>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Role List</li>
                 </ol>
@@ -22,294 +22,277 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-agency">
-                        <span class="info-agency-icon bg-info elevation-1"><i class="fas fa-key"></i></span>
-                        <div class="info-agency-content">
-                            <span class="info-agency-text">Total Permission</span>
-                            <span class="info-agency-number">
-                                1200
-                            </span>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-agency">
+                <span class="info-agency-icon bg-info elevation-1"><i class="fas fa-key"></i></span>
+                <div class="info-agency-content">
+                    <span class="info-agency-text">Total Permission</span>
+                    <span class="info-agency-number">
+                        1200
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="active-agency mb-3">
+                <span class="active-agency-icon bg-success elevation-1 text-white"><i
+                        class="fa-solid fa-user-cog"></i></span>
+                <div class="active-agency-content">
+                    <span class="active-agency-text">Total Role</span>
+                    <span class="active-agency-number">760</span>
                 </div>
 
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="active-agency mb-3">
-                        <span class="active-agency-icon bg-success elevation-1 text-white"><i
-                                class="fa-solid fa-user-cog"></i></span>
-                        <div class="active-agency-content">
-                            <span class="active-agency-text">Total Role</span>
-                            <span class="active-agency-number">760</span>
-                        </div>
+            </div>
 
-                    </div>
+        </div>
 
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="pending-agnt mb-3">
+                <span class="pending-agnt-icon bg-warning elevation-1"><i class="fa fa-check"></i></span>
+                <div class="pending-agnt-content">
+                    <span class="pending-agnt-text">Active Role</span>
+                    <span class="pending-agnt-number">20</span>
                 </div>
 
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="pending-agnt mb-3">
-                        <span class="pending-agnt-icon bg-warning elevation-1"><i class="fa fa-check"></i></span>
-                        <div class="pending-agnt-content">
-                            <span class="pending-agnt-text">Active Role</span>
-                            <span class="pending-agnt-number">20</span>
-                        </div>
+            </div>
 
-                    </div>
+        </div>
 
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-pause"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Inactive Role</span>
+                    <span class="info-box-number">5</span>
                 </div>
 
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-pause"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Inactive Role</span>
-                            <span class="info-box-number">5</span>
-                        </div>
+            </div>
 
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card rounded rounded-2 shadow-none p-3">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <select class="form-select form-select-sm" id="single-select-field"
+                            data-placeholder="Choose one thing">
+                            <option>Select Role</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-select form-select-sm" id="single-select-field"
+                            data-placeholder="Choose one thing">
+                            <option>Select Status</option>
+                        </select>
                     </div>
 
                 </div>
             </div>
+        </div>
+    </div>
 
+    <div class="table-responsive mt-2 border rounded rounded-2 p-3">
+        <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap5">
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <select class="form-select form-select-sm" id="single-select-field"
-                                        data-placeholder="Choose one thing">
-                                        <option>Select Role</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <select class="form-select form-select-sm" id="single-select-field"
-                                        data-placeholder="Choose one thing">
-                                        <option>Select Status</option>
-                                    </select>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="table-responsive">
-                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap5">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <!-- <div class="dt-buttons btn-group">
+                <div class="col-sm-12 col-md-6">
+                    <!-- <div class="dt-buttons btn-group">
 
                             </div> -->
-                            <button class="btn btn-sm btn-danger" style="margin-right: 3px;" tabindex="0"
-                                aria-controls="example2" type="button"><i class="fa-solid fa-file-pdf"
-                                    style="font-size: 14px !important;"></i> <span>PDF</span></button>
+                    <button class="btn btn-sm btn-danger" style="margin-right: 3px;" tabindex="0"
+                        aria-controls="example2" type="button"><i class="fa-solid fa-file-pdf"
+                            style="font-size: 14px !important;"></i> <span>PDF</span></button>
 
-                            <button class="btn btn-sm btn-success" style="margin-right: 3px;" tabindex="0"
-                                aria-controls="example2" type="button"> <i class="fa-regular fa-file-excel"
-                                    style="font-size: 14px !important;"></i><span>Excel</span></button>
+                    <button class="btn btn-sm btn-success" style="margin-right: 3px;" tabindex="0"
+                        aria-controls="example2" type="button"> <i class="fa-regular fa-file-excel"
+                            style="font-size: 14px !important;"></i><span>Excel</span></button>
+                </div>
 
-                            <button class="btn btn-sm btn-primary" style="margin-right: 3px;" tabindex="0"
-                                aria-controls="example2" type="button"> <i class="fa-solid fa-file-csv"
-                                    style="font-size: 14px !important;"></i> <span>CSV</span></button>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div id="example2_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                        class="form-control form-control-sm" placeholder=""
-                                        aria-controls="example2"></label></div>
-                        </div>
+                <div class="col-md-4"></div>
+                <div class="col-sm-2 col-md-2">
+                    <div id="example2_filter" class="dataTables_filter"><input type="search"
+                        class="form-control form-control-sm" placeholder="" aria-controls="example2">
                     </div>
-
-                    <div class="row mt-2">
-                        <div class="col-sm-12">
-                            <table class="table table-sm table-striped table-bordered">
-                                <thead>
-                                    <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
-                                            colspan="1" aria-sort="ascending"
-                                            aria-label="SL: activate to sort column descending" style="width: 10.4px;">
-                                            SL.</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                            colspan="1" aria-label="Role Name: activate to sort column ascending"
-                                            style="width: 116.087px;">Role Name</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                            colspan="1" aria-label="Total Permission: activate to sort column ascending"
-                                            style="width: 140.688px;">Total Permission</th>
-
-                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                            colspan="1" aria-label="Created By: activate to sort column ascending"
-                                            style="width: 107.037px;">Created By</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                            colspan="1" aria-label="Updated By: activate to sort column ascending"
-                                            style="width: 107.037px;">Updated By</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                            colspan="1" aria-label="Status: activate to sort column ascending"
-                                            style="width: 107.037px;">Status</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                            colspan="1" aria-label="Action: activate to sort column ascending"
-                                            style="width: 107.037px;">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr role="row" class="odd">
-                                        <td class="text-left">01</td>
-
-                                        <td class="text-left">
-                                            System Admin
-
-                                        </td>
-                                        <td class="text-left">
-                                            100
-                                        </td>
-                                        <td class="text-center">System Admin</td>
-
-                                        <td class="text-left">
-                                            -
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="d-flex align-items-center text-success"> <i
-                                                    class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
-                                                <span>Active</span>
-                                            </div>
-                                            <!-- <br> -->
-                                            <small>
-                                                21-Aug-2024
-                                            </small>
-                                            <br>
-                                            <small class="text-blue">
-                                                Md. Abu Zafar Chowdhary
-                                            </small>
-                                        </td>
-                                        <td class="text-left">
-                                            <!-- <router-link :to="{ name: 'agentDetails' }" style="size: 30px; width: 30px; height: 30px"
-                                                class="btn btn-outline-success rounded-circle" placement="top" title="KAM Assign">
-                                                <i class="fa fa-check"
-                                                    style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                            </router-link> -->
-                                            <router-link :to="{ name: 'roleEdit' }" style="size: 30px; width: 30px; height: 30px"
-                                                class="btn btn-outline-only-edit rounded-circle" placement="top" title="KAM Assign">
-                                                <i class="fa-solid fa-pencil"
-                                                    style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                            </router-link>
-
-                                            <button type="button"
-                                                style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                class="btn btn-outline-ban rounded-circle">
-
-                                                <i class="fa-solid fa-ban"
-                                                    style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                            </button>
-
-                                            <button type="button"
-                                                style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                class="btn btn-outline-danger rounded-circle">
-
-                                                <i class="fa-solid fa-trash"
-                                                    style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-
-                                    <tr role="row" class="odd">
-                                        <td class="text-left">01</td>
-
-                                        <td class="text-left">
-                                            System Admin
-
-                                        </td>
-                                        <td class="text-left">
-                                            100
-                                        </td>
-                                        <td class="text-center">System Admin</td>
-
-                                        <td class="text-left">
-                                            -
-                                        </td>
-                                        <td class="text-left">
-                                            <div class="d-flex align-items-center text-warning"> <i
-                                                    class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
-                                                <span>Inactive</span>
-                                            </div>
-                                            <!-- <br> -->
-                                            <small>
-                                                21-Aug-2024
-                                            </small>
-                                            <br>
-                                            <small class="text-blue">
-                                                Md. Abu Zafar Chowdhary
-                                            </small>
-                                        </td>
-                                        <td class="text-left">
-                                            <!-- <router-link :to="{ name: 'agentDetails' }" style="size: 30px; width: 30px; height: 30px"
-                                                class="btn btn-outline-success rounded-circle" placement="top" title="KAM Assign">
-                                                <i class="fa fa-check"
-                                                    style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                            </router-link> -->
-
-                                            <button type="button"
-                                                style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                class="btn btn-outline-success rounded-circle">
-
-                                                <i class="fa fa-check"
-                                                    style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                            </button>
-
-                                            <button type="button"
-                                                style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                class="btn btn-outline-only-edit rounded-circle">
-
-                                                <i class="fa-solid fa-pencil"
-                                                    style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                            </button>
-
-                                            <button type="button"
-                                                style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                class="btn btn-outline-danger rounded-circle">
-
-                                                <i class="fa-solid fa-trash"
-                                                    style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1
-                                to 5 of 10 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-7">
-                            <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="example2_previous"><a
-                                            href="#" aria-controls="example2" data-dt-idx="0" tabindex="0"
-                                            class="page-link">Prev</a></li>
-                                    <li class="paginate_button page-item active"><a href="#" aria-controls="example2"
-                                            data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="example2"
-                                            data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-
-                                    <li class="paginate_button page-item next" id="example2_next"><a href="#"
-                                            aria-controls="example2" data-dt-idx="7" tabindex="0"
-                                            class="page-link">Next</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
+
+            <div class="row mt-2">
+                <div class="col-sm-12">
+                    <table class="table table-sm table-striped table-bordered">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                                    aria-sort="ascending" aria-label="SL: activate to sort column descending"
+                                    style="width: 10.4px;">
+                                    SL.</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                                    aria-label="Role Name: activate to sort column ascending" style="width: 116.087px;">
+                                    Role Name</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                                    aria-label="Total Permission: activate to sort column ascending"
+                                    style="width: 140.688px;">Total Permission</th>
+
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                                    aria-label="Created By: activate to sort column ascending"
+                                    style="width: 107.037px;">Created By</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                                    aria-label="Updated By: activate to sort column ascending"
+                                    style="width: 107.037px;">Updated By</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                                    aria-label="Status: activate to sort column ascending" style="width: 107.037px;">
+                                    Status</th>
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                                    aria-label="Action: activate to sort column ascending" style="width: 107.037px;">
+                                    Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr role="row" class="odd">
+                                <td class="text-left">01</td>
+
+                                <td class="text-left">
+                                    System Admin
+
+                                </td>
+                                <td class="text-left">
+                                    100
+                                </td>
+                                <td class="text-center">System Admin</td>
+
+                                <td class="text-left">
+                                    -
+                                </td>
+                                <td class="text-left">
+                                    <div class="d-flex align-items-center text-success"> <i
+                                            class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
+                                        <span>Active</span>
+                                    </div>
+                                    <!-- <br> -->
+                                    <small>
+                                        21-Aug-2024
+                                    </small>
+                                    <br>
+                                    <small class="text-blue">
+                                        Md. Abu Zafar Chowdhary
+                                    </small>
+                                </td>
+                                <td class="text-left">
+
+                                    <router-link :to="{ name: 'roleEdit' }"
+                                        style="size: 30px; width: 30px; height: 30px"
+                                        class="btn btn-outline-only-edit rounded-circle" placement="top"
+                                        title="KAM Assign">
+                                        <i class="fa-solid fa-pencil"
+                                            style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                    </router-link>
+
+                                    <button type="button"
+                                        style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                        class="btn btn-outline-ban rounded-circle">
+
+                                        <i class="fa-solid fa-ban"
+                                            style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                    </button>
+
+                                    <button type="button"
+                                        style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                        class="btn btn-outline-danger rounded-circle">
+
+                                        <i class="fa-solid fa-trash"
+                                            style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr role="row" class="odd">
+                                <td class="text-left">01</td>
+
+                                <td class="text-left">
+                                    System Admin
+
+                                </td>
+                                <td class="text-left">
+                                    100
+                                </td>
+                                <td class="text-center">System Admin</td>
+
+                                <td class="text-left">
+                                    -
+                                </td>
+                                <td class="text-left">
+                                    <div class="d-flex align-items-center text-warning"> <i
+                                            class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
+                                        <span>Inactive</span>
+                                    </div>
+                                    <!-- <br> -->
+                                    <small>
+                                        21-Aug-2024
+                                    </small>
+                                    <br>
+                                    <small class="text-blue">
+                                        Md. Abu Zafar Chowdhary
+                                    </small>
+                                </td>
+                                <td class="text-left">
+                                    <!-- <router-link :to="{ name: 'agentDetails' }" style="size: 30px; width: 30px; height: 30px"
+                                                class="btn btn-outline-success rounded-circle" placement="top" title="KAM Assign">
+                                                <i class="fa fa-check"
+                                                    style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                            </router-link> -->
+
+                                    <button type="button"
+                                        style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                        class="btn btn-outline-success rounded-circle">
+
+                                        <i class="fa fa-check" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                    </button>
+
+                                    <button type="button"
+                                        style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                        class="btn btn-outline-only-edit rounded-circle">
+
+                                        <i class="fa-solid fa-pencil"
+                                            style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                    </button>
+
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1
+                        to 5 of 10 entries</div>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                        <ul class="pagination">
+                            <li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#"
+                                    aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Prev</a>
+                            </li>
+                            <li class="paginate_button page-item active"><a href="#" aria-controls="example2"
+                                    data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                            <li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2"
+                                    tabindex="0" class="page-link">2</a></li>
+
+                            <li class="paginate_button page-item next" id="example2_next"><a href="#"
+                                    aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -687,5 +670,3 @@
     --bs-gradient: none;
 }
 </style>
-
-

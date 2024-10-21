@@ -27,7 +27,7 @@ onMounted(() => {
 
         <Scrollbar height="100%">
             <ul class="metismenu" id="menu">
-                <li class="menu-label">Menu</li>
+                <!-- <li class="menu-label">Menu</li> -->
 
                 <li>
                     <a v-wave href="#" class="has-arrow">
@@ -62,31 +62,43 @@ onMounted(() => {
                         </li>
                     </ul>
                 </li>
-                <li class="menu-label">UI Elements</li>
+                <!-- <li class="menu-label">UI Elements</li> -->
+                <li>
+                    <router-link v-wave :to="{ name: 'AgentList' }">
+                        <div class="parent-icon"><i class="bx bx-unite"></i>
+                        </div>
+                        <div class="menu-title">B2B Agents</div>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link v-wave :to="{ name: 'depositList' }">
+                        <div class="parent-icon"><i class="bx bx-cabinet"></i>
+                        </div>
+                        <div class="menu-title">Deposits
+                        </div>
+                    </router-link>
+                </li>
 
                 <li>
-                    <a v-wave href="#">
-                        <div class="parent-icon"><i class="bx bx-layer"></i>
+                    <router-link v-wave :to="{ name: 'UserList' }">
+                        <div class="parent-icon"><i class="bx bx-user"></i>
                         </div>
-                        <div class="menu-title">Settings</div>
-                    </a>
+                        <div class="menu-title">Users</div>
+                    </router-link>
                 </li>
+
                 <li>
-                    <a v-wave href="#" class="has-arrow">
-                        <div class="parent-icon"><i class="bx bx-add-to-queue"></i>
-                        </div>
-                        <div class="menu-title">Pages</div>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="true">
-                        <li> <router-link v-wave :to="{ name: 'AgentList' }"><i
-                                    class='bx bx-paper-plane'></i>Agents</router-link>
-                        </li>
-                        <li> <router-link v-wave :to="{ name: 'Agent' }"><i
-                                    class='bx bx-paper-plane'></i>Menu</router-link>
-                        </li>
-                    </ul>
+                    <router-link v-wave :to="{ name: 'roleList' }">
+                        <i class='bx bx-paper-plane'></i> Roles Permission
+                    </router-link>
                 </li>
-                <li class="menu-label">Exit</li>
+
+                <li>
+                    <router-link v-wave :to="{ name: 'zoneList' }">
+                        <i class='bx bx-paper-plane'></i> Area
+                    </router-link>
+                </li>
+
                 <li>
                     <router-link v-wave :to="{ name: 'Logout' }">
                         <div class="parent-icon"><i class="bx bx-power-off link-danger"></i>
@@ -117,5 +129,4 @@ onMounted(() => {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
 </style>

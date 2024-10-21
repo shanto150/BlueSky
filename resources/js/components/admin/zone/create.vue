@@ -1,3 +1,44 @@
+<script setup>
+import { useAuthStore } from "../../../stores/authStore";
+import { ref, onMounted } from "vue";
+const authStore = useAuthStore();
+
+handleSubmit();
+
+function handleSubmit() {
+
+    console.log('zx :',authStore.decryptWithAES(authStore.token));
+
+    const config = {
+            headers: { Authorization: 'Bearer ' + authStore.decryptWithAES(authStore.token), "Accept": "application/json", }
+        };
+
+    axios.get("/api/divisions",config)
+        .then((res) => {
+            var makes = [];
+            $.each(res.data, function (key, value) {
+                var obj = { id: value.id, text: value.name }
+                makes.push(obj);
+            });
+
+            let select = $("#division_id")
+            select.select2({
+                placeholder: 'Select',
+                theme: 'bootstrap-5',
+                width: '100%',
+                data: makes,
+                allowClear: true,
+                height: '50',
+            });
+
+        })
+        .catch((eEes) => {
+        });
+};
+
+
+
+</script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Setting</div>
@@ -5,7 +46,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'Dashboard' }">Dashboard</router-link>
+                        <router-link :to="{ name: 'Home' }">Dashboard</router-link>
 
                     </li>
                     <li class="breadcrumb-item">
@@ -21,34 +62,44 @@
             <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Create New Area</h5>
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="input1" class="form-label">Name</label>
-                    <input type="text" class="form-control form-control-sm" id="input1" placeholder="Enter Name">
-                </div>
+            <form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="input1" class="form-label">Area Name</label>
+                        <input type="text" class="form-control form-control-sm" id="area_name" name="area_name"
+                            placeholder="Enter Name">
+                    </div>
 
-                <div class="col-md-4">
-                    <label for="input1" class="form-label">Division</label>
-                    <select id="input7" class="form-control form-control-sm">
-                        <option>Choose...</option>
-                        <option>One</option>
-                        <option>Two</option>
-                        <option>Three</option>
-                    </select>
+                    <div class="col-md-6">
+                        <label for="input1" class="form-label">Division</label>
+                        <select id="division_id" name="division_id"
+                            class="form-control form-control-sm single-select-fields">
+
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mt-2">
+                        <label for="input1" class="form-label">District</label>
+                        <select id="district_id" name="district_id"
+                            class="form-control form-control-sm single-select-field">
+
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mt-2">
+                        <label for="input1" class="form-label">Status</label>
+                        <select id="status" name="status" class="form-control form-control-sm">
+                            <option selected value="">Choose...</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <label for="input1" class="form-label">Status</label>
-                    <select id="input7" class="form-control form-control-sm">
-                        <option value="">Choose...</option>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                    </select>
-                </div>
-            </div>
+            </form>
         </div>
         <div class="card-footer">
-            <button class="btn btn-primary px-4 ms-2 float-end">Save</button>
-            <button class="btn btn-danger px-4 ms-2  float-end">Back</button>
+            <button class="btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
+            <button class="btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
         </div>
     </div>
 </template>

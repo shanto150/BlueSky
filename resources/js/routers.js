@@ -21,6 +21,22 @@ const agentRecomanded = () => import('./components/admin/agent/agentRecomanded.v
 const agentView = () => import('./components/admin/agent/agentView.vue')
 const CreateAgency = () => import('./components/admin/agent/create.vue')
 
+// deposit management
+const depositList = () => import('./components/admin/deposite/index.vue')
+const depoDetails = () => import('./components/admin/deposite/depoDetails.vue')
+
+
+// user management
+const UserList = () => import('./components/admin/user/index.vue')
+const CreateUser = () => import('./components/admin/user/create.vue')
+
+//Roles permissions managment
+const roleList = () => import('./components/admin/role/index.vue')
+const roleCreate = () => import('./components/admin/role/create.vue')
+const roleEdit = () => import('./components/admin/role/edit.vue')
+//Zone
+const zoneList = () => import('./components/admin/zone/index.vue')
+const zoneCreate = () => import('./components/admin/zone/create.vue')
 
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
@@ -44,7 +60,25 @@ const routes = [
     { path: '/agent-approve', component: agentApprove, name: 'agentApprove', meta: { auth: true } },
     { path: '/agent-recmoanded', component: agentRecomanded, name: 'agentRecomanded', meta: { auth: true } },
     { path: '/agent-view', component: agentView, name: 'agentView', meta: { auth: true } },
-    { path: '/agent-view', component: CreateAgency, name: 'CreateAgency', meta: { auth: true } },
+    { path: '/agent-create', component: CreateAgency, name: 'CreateAgency', meta: { auth: true } },
+
+    //deposit
+    { path: '/agent-deposit-list', component: depositList, name: 'depositList', meta: { auth: true } },
+    { path: '/agent-deposit-details', component: depoDetails, name: 'depoDetails', meta: { auth: true } },
+
+    //user
+    { path: '/all-user-list', component: UserList, name: 'UserList', meta: { auth: true } },
+    { path: '/create-user', component: CreateUser, name: 'CreateUser', meta: { auth: true } },
+
+    //roles permission
+    { path: '/all-roles-list', component: roleList, name: 'roleList', meta: { auth: true } },
+    { path: '/create-role', component: roleCreate, name: 'roleCreate', meta: { auth: true } },
+    { path: '/edit-role', component: roleEdit, name: 'roleEdit', meta: { auth: true } },
+
+    //Zone
+    { path: '/all-zone-list', component: zoneList, name: 'zoneList', meta: { auth: true } },
+    { path: '/create-zone', component: zoneCreate, name: 'zoneCreate', meta: { auth: true } },
+
 ]
 
 const router = createRouter({
