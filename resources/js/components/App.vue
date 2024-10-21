@@ -71,13 +71,13 @@ watchEffect(() => {
 onMounted(() => {
 
     if (authStore.hasToken() && authStore.decryptWithAES(authStore.isLogged) == '1') {
+        console.log('br :',authStore.decryptWithAES(authStore.token));
         authStore.refreshToken()
+        console.log('ar :',authStore.decryptWithAES(authStore.token));
     } else {
         authStore.logout();
         return { name: 'Login' };
     }
-
-
 
 });
 
@@ -180,4 +180,5 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
     background-image: linear-gradient(blue, #00ffff, blue);
     opacity: 0.3;
 }
+
 </style>

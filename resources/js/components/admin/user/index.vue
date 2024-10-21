@@ -7,7 +7,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'Dashboard' }">Dashboard</router-link>
+                        <router-link :to="{ name: 'Home' }">Dashboard</router-link>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">User List</li>
                 </ol>
@@ -22,796 +22,768 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-agency">
-                        <span class="info-agency-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
-                        <div class="info-agency-content">
-                            <span class="info-agency-text">Total User</span>
-                            <span class="info-agency-number">
-                                1200
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="active-agency mb-3">
-                        <span class="active-agency-icon bg-success elevation-1 text-white"><i
-                                class="fa-solid fa-circle-check"></i></span>
-                        <div class="active-agency-content">
-                            <span class="active-agency-text">Active User</span>
-                            <span class="active-agency-number">760</span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box mb-3">
-                        <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-pause"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">On Hold</span>
-                            <span class="info-box-number">5</span>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-3">
-                    <div class="pending-agnt mb-3">
-                        <span class="pending-agnt-icon bg-warning elevation-1"><i class="fa fa-clock"></i></span>
-                        <div class="pending-agnt-content">
-                            <span class="pending-agnt-text">Locked</span>
-                            <span class="pending-agnt-number">20</span>
-                        </div>
-
-                    </div>
-
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-agency">
+                <span class="info-agency-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
+                <div class="info-agency-content">
+                    <span class="info-agency-text">Total User</span>
+                    <span class="info-agency-number">
+                        1200
+                    </span>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <!-- <div class="col-md-4">
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="active-agency mb-3">
+                <span class="active-agency-icon bg-success elevation-1 text-white"><i
+                        class="fa-solid fa-circle-check"></i></span>
+                <div class="active-agency-content">
+                    <span class="active-agency-text">Active User</span>
+                    <span class="active-agency-number">760</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-pause"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">On Hold</span>
+                    <span class="info-box-number">5</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="pending-agnt mb-3">
+                <span class="pending-agnt-icon bg-warning elevation-1"><i class="fa fa-clock"></i></span>
+                <div class="pending-agnt-content">
+                    <span class="pending-agnt-text">Locked</span>
+                    <span class="pending-agnt-number">20</span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="row shadow-none rounded rounded-2 p-3">
+                    <!-- <div class="col-md-4">
 									<input type="text" class="form-control date-range" />
                                 </div> -->
-                                <div class="col-md-2">
-                                    <select class="form-select form-select-sm" id="single-select-field"
-                                        data-placeholder="Choose one thing">
-                                        <option>Select User Type</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="form-select form-select-sm" id="single-select-field"
-                                        data-placeholder="Choose one thing">
-                                        <option>Select Office Location</option>
-                                    </select>
-                                </div>
+                    <div class="col-md-2">
+                        <select class="form-select form-select-sm" id="single-select-field"
+                            data-placeholder="Choose one thing">
+                            <option>Select User Type</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select form-select-sm" id="single-select-field"
+                            data-placeholder="Choose one thing">
+                            <option>Select Office Location</option>
+                        </select>
+                    </div>
 
-                                <div class="col-md-2">
-                                    <select class="form-select form-select-sm" id="single-select-field"
-                                        data-placeholder="Choose one thing">
-                                        <option>Select Status</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-1 mt-2">
-                                    <i class="fa fa-times text-danger"> </i> Clear
-                                </div>
+                    <div class="col-md-2">
+                        <select class="form-select form-select-sm" id="single-select-field"
+                            data-placeholder="Choose one thing">
+                            <option>Select Status</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1 mt-2">
+                        <i class="fa fa-times text-danger"> </i> Clear
+                    </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap5">
+
+            <div class="card-body">
+                <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a v-wave class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab"
+                            aria-selected="true">
+                            <div class="d-flex align-items-center">
+                                <div class="tab-title"> Internal User </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a v-wave class="nav-link" data-bs-toggle="tab" href="#primaryprofile" role="tab"
+                            aria-selected="false" tabindex="-1">
+                            <div class="d-flex align-items-center">
+
+                                <div class="tab-title">External User</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content pt-3">
+                    <div class="tab-pane fade show active" id="primaryhome" role="tabpanel">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+
+                                <button class="btn btn-sm btn-danger" style="margin-right: 3px;" tabindex="0"
+                                    aria-controls="example2" type="button"><i class="fa-solid fa-file-pdf"
+                                        style="font-size: 14px !important;"></i> <span>PDF</span></button>
+
+                                <button class="btn btn-sm btn-success" style="margin-right: 3px;" tabindex="0"
+                                    aria-controls="example2" type="button"> <i class="fa-regular fa-file-excel"
+                                        style="font-size: 14px !important;"></i><span>Excel</span></button>
+
+
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-sm-2 col-md-2">
+                                <div id="example2_filter" class="dataTables_filter"><input type="search"
+                                        class="form-control form-control-sm" placeholder="" aria-controls="example2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-sm-12">
+                                <table class="table table-sm table-striped table-bordered">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-sort="ascending"
+                                                aria-label="SL: activate to sort column descending"
+                                                style="width: 194.4px;">
+                                                SL.</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Staff Info: activate to sort column ascending"
+                                                style="width: 316.087px;">Staff Info</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Role & Office Location: activate to sort column ascending"
+                                                style="width: 140.688px;">Role & Office Location</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1"
+                                                aria-label="User Login Info: activate to sort column ascending"
+                                                style="width: 66.3875px;">User Login Info</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Created By: activate to sort column ascending"
+                                                style="width: 131.8px;">Created By</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Updated By: activate to sort column ascending"
+                                                style="width: 107.037px;">Updated By</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Status: activate to sort column ascending"
+                                                style="width: 107.037px;">Status</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Action: activate to sort column ascending"
+                                                style="width: 107.037px;">Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr role="row">
+                                            <td class="text-left">01</td>
+                                            <td class="text-left">Abu Syed
+                                                <br>
+                                                <small class="text-blue">GB:117</small>
+                                                <br>
+                                                <small>
+                                                    UI/UX Designer | Opertation
+                                                </small>
+                                            </td>
+                                            <td class="text-left">
+                                                System Admin
+                                                <br>
+                                                <small class="text-blue">Gulshan HQ</small>
+                                            </td>
+                                            <td class="text-left">
+                                                abu.syed@galxybd.com
+                                                <br>
+                                                <small class="text-blue">017xxxxxxx</small>
+
+                                            </td>
+                                            <td class="text-left">
+                                                Md. Abu Syed
+                                                <br>
+                                                <small class="text-blue">05-Sept-2024</small>
+                                            </td>
+
+                                            <td class="text-left">
+                                                Md. Abu Syed
+                                                <br>
+                                                <small class="text-blue">05-Sept-2024</small>
+                                            </td>
+                                            <td class="text-left">
+                                                <div
+                                                    class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
+                                                    <i class="bx bxs-circle me-1"></i>Active
+                                                </div>
+                                                <br>
+                                                <small>
+                                                    21-Aug-2024
+                                                </small>
+                                                <br>
+                                                <small class="text-blue">
+                                                    Md. Abu Zafar Chowdhary
+                                                </small>
+                                            </td>
+                                            <td class="text-left">
+
+
+                                                <button type="button" style="size: 30px; width: 30px; height: 30px;"
+                                                    class="btn btn-outline-only-edit rounded-circle">
+
+                                                    <i class="fa-solid fa-pencil"
+                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-danger rounded-circle">
+                                                    <i class="fa fa-trash"
+                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-purple rounded-circle">
+                                                    <i class="fa fa-refresh"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-lock rounded-circle">
+                                                    <i class="fa fa-lock"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-timer rounded-circle">
+                                                    <i class="fa-solid fa-clock-rotate-left"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <tr role="row">
+                                            <td class="text-left">02</td>
+                                            <td class="text-left">Atiqur Rahman
+                                                <br>
+                                                <small class="text-blue">GB:107</small>
+                                                <br>
+                                                <small>
+                                                    Senior Executive | Sales
+                                                </small>
+                                            </td>
+                                            <td class="text-left">
+                                                Reservation
+                                                <br>
+                                                <small class="text-blue">Khulna</small>
+                                            </td>
+                                            <td class="text-left">
+                                                atiq@gmail.com
+                                                <br>
+                                                <small class="text-blue">017xxxxxxx</small>
+
+                                            </td>
+                                            <td class="text-left">
+                                                Md. Abu Syed
+                                                <br>
+                                                <small class="text-blue">05-Sept-2024</small>
+                                            </td>
+
+                                            <td class="text-left">
+                                                Md. Abu Syed
+                                                <br>
+                                                <small class="text-blue">05-Sept-2024</small>
+                                            </td>
+                                            <td class="text-left">
+                                                <div
+                                                    class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3">
+                                                    <i class="bx bxs-circle me-1"></i>On Hold
+                                                </div>
+                                                <br>
+                                                <small>
+                                                    21-Aug-2024
+                                                </small>
+                                                <br>
+                                                <small class="text-blue">
+                                                    Md. Abu Zafar Chowdhary
+                                                </small>
+                                            </td>
+                                            <td class="text-left">
+
+
+                                                <button type="button" style="size: 30px; width: 30px; height: 30px;"
+                                                    class="btn btn-outline-only-edit rounded-circle">
+
+                                                    <i class="fa-solid fa-pencil"
+                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-danger rounded-circle">
+                                                    <i class="fa fa-trash"
+                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-purple rounded-circle">
+                                                    <i class="fa fa-refresh"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-lock rounded-circle">
+                                                    <i class="fa fa-lock"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-timer rounded-circle">
+                                                    <i class="fa-solid fa-clock-rotate-left"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <tr role="row">
+                                            <td class="text-left">03</td>
+                                            <td class="text-left">Mujahidul Islam
+                                                <br>
+                                                <small class="text-blue">GB-060</small>
+                                                <br>
+                                                <small>
+                                                    Executive | Reservation
+                                                </small>
+                                            </td>
+                                            <td class="text-left">
+                                                Reservation
+                                                <br>
+                                                <small class="text-blue">Khulna</small>
+                                            </td>
+                                            <td class="text-left">
+                                                mujahidul@gmail.com
+                                                <br>
+                                                <small class="text-blue">017xxxxxxx</small>
+
+                                            </td>
+                                            <td class="text-left">
+                                                Md. Abu Syed
+                                                <br>
+                                                <small class="text-blue">05-Sept-2024</small>
+                                            </td>
+
+                                            <td class="text-left">
+                                                Md. Abu Syed
+                                                <br>
+                                                <small class="text-blue">05-Sept-2024</small>
+                                            </td>
+                                            <td class="text-left">
+                                                <div
+                                                    class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3">
+                                                    <i class="bx bxs-circle me-1"></i>Deactivated
+                                                </div>
+                                                <br>
+                                                <small>
+                                                    21-Aug-2024
+                                                </small>
+                                                <br>
+                                                <small class="text-blue">
+                                                    Md. Abu Zafar Chowdhary
+                                                </small>
+                                            </td>
+                                            <td class="text-left">
+
+
+                                                <button type="button" style="size: 30px; width: 30px; height: 30px;"
+                                                    class="btn btn-outline-only-edit rounded-circle">
+
+                                                    <i class="fa-solid fa-pencil"
+                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-danger rounded-circle">
+                                                    <i class="fa fa-trash"
+                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-purple rounded-circle">
+                                                    <i class="fa fa-refresh"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-lock rounded-circle">
+                                                    <i class="fa fa-lock"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-timer rounded-circle">
+                                                    <i class="fa-solid fa-clock-rotate-left"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <tr role="row">
+                                            <td class="text-left">04</td>
+                                            <td class="text-left">Eva Ahmed Tarana
+                                                <br>
+                                                <small class="text-blue">GHR264</small>
+                                                <br>
+                                                <small>
+                                                    Executive | Reservation
+                                                </small>
+                                            </td>
+                                            <td class="text-left">
+                                                Reservation
+                                                <br>
+                                                <small class="text-blue">Khulna</small>
+                                            </td>
+                                            <td class="text-left">
+                                                trana@gmail.com
+                                                <br>
+                                                <small class="text-blue">017xxxxxxx</small>
+
+                                            </td>
+                                            <td class="text-left">
+                                                Md. Abu Syed
+                                                <br>
+                                                <small class="text-blue">05-Sept-2024</small>
+                                            </td>
+
+                                            <td class="text-left">
+                                                Md. Abu Syed
+                                                <br>
+                                                <small class="text-blue">05-Sept-2024</small>
+                                            </td>
+                                            <td class="text-left">
+                                                <div
+                                                    class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3">
+                                                    <i class="bx bxs-circle me-1"></i>Locked
+                                                </div>
+                                                <br>
+                                                <small>
+                                                    21-Aug-2024
+                                                </small>
+                                                <br>
+                                                <small class="text-blue">
+                                                    Md. Abu Zafar Chowdhary
+                                                </small>
+                                            </td>
+                                            <td class="text-left">
+
+
+                                                <button type="button" style="size: 30px; width: 30px; height: 30px;"
+                                                    class="btn btn-outline-only-edit rounded-circle">
+
+                                                    <i class="fa-solid fa-pencil"
+                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-danger rounded-circle">
+                                                    <i class="fa fa-trash"
+                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-purple rounded-circle">
+                                                    <i class="fa fa-refresh"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-lock rounded-circle">
+                                                    <i class="fa fa-lock"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-timer rounded-circle">
+                                                    <i class="fa-solid fa-clock-rotate-left"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+
+                                <button class="btn btn-sm btn-danger" style="margin-right: 3px;" tabindex="0"
+                                    aria-controls="example2" type="button"><i class="fa-solid fa-file-pdf"
+                                        style="font-size: 14px !important;"></i> <span>PDF</span></button>
+
+                                <button class="btn btn-sm btn-success" style="margin-right: 3px;" tabindex="0"
+                                    aria-controls="example2" type="button"> <i class="fa-regular fa-file-excel"
+                                        style="font-size: 14px !important;"></i><span>Excel</span></button>
+
+
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-sm-2 col-md-2">
+                                <div id="example2_filter" class="dataTables_filter"><input type="search"
+                                        class="form-control form-control-sm" placeholder="" aria-controls="example2">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- table -->
+
+                        <div class="row mt-2">
+                            <div class="col-sm-12">
+                                <table class="table table-sm table-striped table-bordered">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-sort="ascending"
+                                                aria-label="SL: activate to sort column descending"
+                                                style="width: 194.4px;">
+                                                SL.</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Staff Info: activate to sort column ascending"
+                                                style="width: 316.087px;">Staff Info</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Agency Info: activate to sort column ascending"
+                                                style="width: 140.688px;">Agency Info</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Area: activate to sort column ascending"
+                                                style="width: 66.3875px;">Area</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Role: activate to sort column ascending"
+                                                style="width: 66.3875px;">Role</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1"
+                                                aria-label="User Login Info: activate to sort column ascending"
+                                                style="width: 66.3875px;">User Login Info</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Created By: activate to sort column ascending"
+                                                style="width: 131.8px;">Created By</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Updated By: activate to sort column ascending"
+                                                style="width: 107.037px;">Updated By</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Status: activate to sort column ascending"
+                                                style="width: 107.037px;">Status</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Action: activate to sort column ascending"
+                                                style="width: 107.037px;">Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr role="row">
+                                            <td class="text-left">01</td>
+                                            <td class="text-left">Abu Syed
+
+                                                <br>
+                                                <small class="text-blue">
+                                                    Managing Director
+                                                </small>
+                                            </td>
+                                            <td class="text-left">
+                                                ABC Travels Ltd
+                                                <br>
+                                                <small class="text-blue">12345</small> | IATA
+                                            </td>
+
+                                            <td>
+                                                Motijheel
+                                                <br>
+                                                <small class="text-blue">Dhaka-North</small>
+                                            </td>
+
+                                            <td>Agency Admin</td>
+                                            <td class="text-left">
+                                                abu.syed@galxybd.com
+                                                <br>
+                                                <small class="text-blue">017xxxxxxx</small>
+                                            </td>
+
+                                            <td class="text-left">
+                                                Md. Abu Syed
+                                                <br>
+                                                <small class="text-blue">05-Sept-2024</small>
+                                            </td>
+                                            <td class="text-left">
+                                                Md. Abu Syed
+                                                <br>
+                                                <small class="text-blue">05-Sept-2024</small>
+                                            </td>
+                                            <td class="text-left">
+                                                <div
+                                                    class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
+                                                    <i class="bx bxs-circle me-1"></i>Active
+                                                </div>
+                                                <br>
+                                                <small>
+                                                    21-Aug-2024
+                                                </small>
+                                                <br>
+                                                <small class="text-blue">
+                                                    Md. Abu Zafar Chowdhary
+                                                </small>
+                                            </td>
+                                            <td class="text-left">
+                                                <button type="button" style="size: 30px; width: 30px; height: 30px;"
+                                                    class="btn btn-outline-only-edit rounded-circle">
+
+                                                    <i class="fa-solid fa-pencil"
+                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-danger rounded-circle">
+                                                    <i class="fa fa-trash"
+                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-purple rounded-circle">
+                                                    <i class="fa fa-refresh"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-lock rounded-circle">
+                                                    <i class="fa fa-lock"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-timer rounded-circle">
+                                                    <i class="fa-solid fa-clock-rotate-left"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <tr role="row">
+                                            <td class="text-left">02</td>
+                                            <td class="text-left">Imtiaz Ahmed
+
+                                                <br>
+                                                <small class="text-blue">
+                                                    Supervisor
+                                                </small>
+                                            </td>
+                                            <td class="text-left">
+                                                ABC Travels Ltd
+                                                <br>
+                                                <small class="text-blue">12345</small> | IATA
+                                            </td>
+
+
+                                            <td>
+                                                Motijheel
+                                                <br>
+                                                <small class="text-blue">Dhaka-North</small>
+                                            </td>
+                                            <td>Supervisor</td>
+                                            <td class="text-left">
+                                                test@galxybd.com
+                                                <br>
+                                                <small class="text-blue">017xxxxxxx</small>
+
+                                            </td>
+                                            <td class="text-left">
+                                                Md. Abu Syed
+                                                <br>
+                                                <small class="text-blue">05-Sept-2024</small>
+                                            </td>
+                                            <td class="text-left">
+                                                Md. Abu Syed
+                                                <br>
+                                                <small class="text-blue">05-Sept-2024</small>
+                                            </td>
+                                            <td class="text-left">
+                                                <div
+                                                    class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
+                                                    <i class="bx bxs-circle me-1"></i>Active
+                                                </div>
+                                                <br>
+                                                <small>
+                                                    21-Aug-2024
+                                                </small>
+                                                <br>
+                                                <small class="text-blue">
+                                                    Md. Abu Zafar Chowdhary
+                                                </small>
+                                            </td>
+                                            <td class="text-left">
+                                                <button type="button" style="size: 30px; width: 30px; height: 30px;"
+                                                    class="btn btn-outline-only-edit rounded-circle">
+
+                                                    <i class="fa-solid fa-pencil"
+                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-danger rounded-circle">
+                                                    <i class="fa fa-trash"
+                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-purple rounded-circle">
+                                                    <i class="fa fa-refresh"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-lock rounded-circle">
+                                                    <i class="fa fa-lock"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                                    class="btn btn-outline-timer rounded-circle">
+                                                    <i class="fa-solid fa-clock-rotate-left"
+                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="table-responsive">
-                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap5">
 
-                    <div class="card-body">
-                        <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab"
-                                    aria-selected="true">
-                                    <div class="d-flex align-items-center">
-                                        <div class="tab-title"> Internal User </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile" role="tab"
-                                    aria-selected="false" tabindex="-1">
-                                    <div class="d-flex align-items-center">
-
-                                        <div class="tab-title">External User</div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content pt-3">
-                            <div class="tab-pane fade show active" id="primaryhome" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-6">
-
-                                        <button class="btn btn-sm btn-danger" style="margin-right: 3px;" tabindex="0"
-                                            aria-controls="example2" type="button"><i class="fa-solid fa-file-pdf"
-                                                style="font-size: 14px !important;"></i> <span>PDF</span></button>
-
-                                        <button class="btn btn-sm btn-success" style="margin-right: 3px;" tabindex="0"
-                                            aria-controls="example2" type="button"> <i class="fa-regular fa-file-excel"
-                                                style="font-size: 14px !important;"></i><span>Excel</span></button>
-
-                                        <button class="btn btn-sm btn-primary" style="margin-right: 3px;" tabindex="0"
-                                            aria-controls="example2" type="button"> <i class="fa-solid fa-file-csv"
-                                                style="font-size: 14px !important;"></i> <span>CSV</span></button>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
-                                        <div id="example2_filter" class="dataTables_filter"><label>Search:<input
-                                                    type="search" class="form-control form-control-sm" placeholder=""
-                                                    aria-controls="example2"></label></div>
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col-sm-12">
-                                        <table class="table table-sm table-striped table-bordered">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="SL: activate to sort column descending"
-                                                        style="width: 194.4px;">
-                                                        SL.</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Staff Info: activate to sort column ascending"
-                                                        style="width: 316.087px;">Staff Info</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Role & Office Location: activate to sort column ascending"
-                                                        style="width: 140.688px;">Role & Office Location</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="User Login Info: activate to sort column ascending"
-                                                        style="width: 66.3875px;">User Login Info</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Created By: activate to sort column ascending"
-                                                        style="width: 131.8px;">Created By</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Updated By: activate to sort column ascending"
-                                                        style="width: 107.037px;">Updated By</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Status: activate to sort column ascending"
-                                                        style="width: 107.037px;">Status</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Action: activate to sort column ascending"
-                                                        style="width: 107.037px;">Action</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <tr role="row" class="odd">
-                                                    <td class="text-left">01</td>
-                                                    <td class="text-left">Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">GB:117</small>
-                                                        <br>
-                                                        <small>
-                                                            UI/UX Designer | Opertation
-                                                        </small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        System Admin
-                                                        <br>
-                                                        <small class="text-blue">Gulshan HQ</small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        abu.syed@galxybd.com
-                                                        <br>
-                                                        <small class="text-blue">017xxxxxxx</small>
-
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Md. Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">05-Sept-2024</small>
-                                                    </td>
-
-                                                    <td class="text-left">
-                                                        Md. Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">05-Sept-2024</small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <div
-                                                            class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
-                                                            <i class="bx bxs-circle me-1"></i>Active
-                                                        </div>
-                                                        <br>
-                                                        <small>
-                                                            21-Aug-2024
-                                                        </small>
-                                                        <br>
-                                                        <small class="text-blue">
-                                                            Md. Abu Zafar Chowdhary
-                                                        </small>
-                                                    </td>
-                                                    <td class="text-left">
-
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px;"
-                                                            class="btn btn-outline-only-edit rounded-circle">
-
-                                                            <i class="fa-solid fa-pencil"
-                                                                style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-danger rounded-circle">
-                                                            <i class="fa fa-trash"
-                                                                style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-purple rounded-circle">
-                                                            <i class="fa fa-refresh"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-lock rounded-circle">
-                                                            <i class="fa fa-lock"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-timer rounded-circle">
-                                                            <i class="fa-solid fa-clock-rotate-left"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-
-                                                <tr role="row" class="odd">
-                                                    <td class="text-left">02</td>
-                                                    <td class="text-left">Atiqur Rahman
-                                                        <br>
-                                                        <small class="text-blue">GB:107</small>
-                                                        <br>
-                                                        <small>
-                                                            Senior Executive | Sales
-                                                        </small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Reservation
-                                                        <br>
-                                                        <small class="text-blue">Khulna</small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        atiq@gmail.com
-                                                        <br>
-                                                        <small class="text-blue">017xxxxxxx</small>
-
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Md. Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">05-Sept-2024</small>
-                                                    </td>
-
-                                                    <td class="text-left">
-                                                        Md. Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">05-Sept-2024</small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <div
-                                                            class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3">
-                                                            <i class="bx bxs-circle me-1"></i>On Hold
-                                                        </div>
-                                                        <br>
-                                                        <small>
-                                                            21-Aug-2024
-                                                        </small>
-                                                        <br>
-                                                        <small class="text-blue">
-                                                            Md. Abu Zafar Chowdhary
-                                                        </small>
-                                                    </td>
-                                                    <td class="text-left">
-
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px;"
-                                                            class="btn btn-outline-only-edit rounded-circle">
-
-                                                            <i class="fa-solid fa-pencil"
-                                                                style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-danger rounded-circle">
-                                                            <i class="fa fa-trash"
-                                                                style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-purple rounded-circle">
-                                                            <i class="fa fa-refresh"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-lock rounded-circle">
-                                                            <i class="fa fa-lock"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-timer rounded-circle">
-                                                            <i class="fa-solid fa-clock-rotate-left"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-
-                                                <tr role="row" class="odd">
-                                                    <td class="text-left">03</td>
-                                                    <td class="text-left">Mujahidul Islam
-                                                        <br>
-                                                        <small class="text-blue">GB-060</small>
-                                                        <br>
-                                                        <small>
-                                                            Executive | Reservation
-                                                        </small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Reservation
-                                                        <br>
-                                                        <small class="text-blue">Khulna</small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        mujahidul@gmail.com
-                                                        <br>
-                                                        <small class="text-blue">017xxxxxxx</small>
-
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Md. Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">05-Sept-2024</small>
-                                                    </td>
-
-                                                    <td class="text-left">
-                                                        Md. Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">05-Sept-2024</small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <div
-                                                            class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3">
-                                                            <i class="bx bxs-circle me-1"></i>Deactivated
-                                                        </div>
-                                                        <br>
-                                                        <small>
-                                                            21-Aug-2024
-                                                        </small>
-                                                        <br>
-                                                        <small class="text-blue">
-                                                            Md. Abu Zafar Chowdhary
-                                                        </small>
-                                                    </td>
-                                                    <td class="text-left">
-
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px;"
-                                                            class="btn btn-outline-only-edit rounded-circle">
-
-                                                            <i class="fa-solid fa-pencil"
-                                                                style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-danger rounded-circle">
-                                                            <i class="fa fa-trash"
-                                                                style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-purple rounded-circle">
-                                                            <i class="fa fa-refresh"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-lock rounded-circle">
-                                                            <i class="fa fa-lock"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-timer rounded-circle">
-                                                            <i class="fa-solid fa-clock-rotate-left"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-
-                                                <tr role="row" class="odd">
-                                                    <td class="text-left">04</td>
-                                                    <td class="text-left">Eva Ahmed Tarana
-                                                        <br>
-                                                        <small class="text-blue">GHR264</small>
-                                                        <br>
-                                                        <small>
-                                                            Executive | Reservation
-                                                        </small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Reservation
-                                                        <br>
-                                                        <small class="text-blue">Khulna</small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        trana@gmail.com
-                                                        <br>
-                                                        <small class="text-blue">017xxxxxxx</small>
-
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Md. Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">05-Sept-2024</small>
-                                                    </td>
-
-                                                    <td class="text-left">
-                                                        Md. Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">05-Sept-2024</small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <div
-                                                            class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3">
-                                                            <i class="bx bxs-circle me-1"></i>Locked
-                                                        </div>
-                                                        <br>
-                                                        <small>
-                                                            21-Aug-2024
-                                                        </small>
-                                                        <br>
-                                                        <small class="text-blue">
-                                                            Md. Abu Zafar Chowdhary
-                                                        </small>
-                                                    </td>
-                                                    <td class="text-left">
-
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px;"
-                                                            class="btn btn-outline-only-edit rounded-circle">
-
-                                                            <i class="fa-solid fa-pencil"
-                                                                style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-danger rounded-circle">
-                                                            <i class="fa fa-trash"
-                                                                style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-purple rounded-circle">
-                                                            <i class="fa fa-refresh"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-lock rounded-circle">
-                                                            <i class="fa fa-lock"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-timer rounded-circle">
-                                                            <i class="fa-solid fa-clock-rotate-left"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-6">
-
-                                        <button class="btn btn-sm btn-danger" style="margin-right: 3px;" tabindex="0"
-                                            aria-controls="example2" type="button"><i class="fa-solid fa-file-pdf"
-                                                style="font-size: 14px !important;"></i> <span>PDF</span></button>
-
-                                        <button class="btn btn-sm btn-success" style="margin-right: 3px;" tabindex="0"
-                                            aria-controls="example2" type="button"> <i class="fa-regular fa-file-excel"
-                                                style="font-size: 14px !important;"></i><span>Excel</span></button>
-
-                                        <button class="btn btn-sm btn-primary" style="margin-right: 3px;" tabindex="0"
-                                            aria-controls="example2" type="button"> <i class="fa-solid fa-file-csv"
-                                                style="font-size: 14px !important;"></i> <span>CSV</span></button>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
-                                        <div id="example2_filter" class="dataTables_filter"><label>Search:<input
-                                                    type="search" class="form-control form-control-sm" placeholder=""
-                                                    aria-controls="example2"></label></div>
-                                    </div>
-                                </div>
-
-
-                                <!-- table -->
-
-                                <div class="row mt-2">
-                                    <div class="col-sm-12">
-                                        <table class="table table-sm table-striped table-bordered">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th class="sorting_asc" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1" aria-sort="ascending"
-                                                        aria-label="SL: activate to sort column descending"
-                                                        style="width: 194.4px;">
-                                                        SL.</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Staff Info: activate to sort column ascending"
-                                                        style="width: 316.087px;">Staff Info</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Agency Info: activate to sort column ascending"
-                                                        style="width: 140.688px;">Agency Info</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Area: activate to sort column ascending"
-                                                        style="width: 66.3875px;">Area</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Role: activate to sort column ascending"
-                                                        style="width: 66.3875px;">Role</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="User Login Info: activate to sort column ascending"
-                                                        style="width: 66.3875px;">User Login Info</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Created By: activate to sort column ascending"
-                                                        style="width: 131.8px;">Created By</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Updated By: activate to sort column ascending"
-                                                        style="width: 107.037px;">Updated By</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Status: activate to sort column ascending"
-                                                        style="width: 107.037px;">Status</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example2"
-                                                        rowspan="1" colspan="1"
-                                                        aria-label="Action: activate to sort column ascending"
-                                                        style="width: 107.037px;">Action</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <tr role="row" class="odd">
-                                                    <td class="text-left">01</td>
-                                                    <td class="text-left">Abu Syed
-
-                                                        <br>
-                                                        <small class="text-blue">
-                                                            Managing Director
-                                                        </small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        ABC Travels Ltd
-                                                        <br>
-                                                        <small class="text-blue">12345</small> | IATA
-                                                    </td>
-
-                                                    <td>
-                                                        Motijheel
-                                                        <br>
-                                                        <small class="text-blue">Dhaka-North</small>
-                                                    </td>
-
-                                                    <td>Agency Admin</td>
-                                                    <td class="text-left">
-                                                        abu.syed@galxybd.com
-                                                        <br>
-                                                        <small class="text-blue">017xxxxxxx</small>
-                                                    </td>
-
-                                                    <td class="text-left">
-                                                        Md. Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">05-Sept-2024</small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Md. Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">05-Sept-2024</small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <div
-                                                            class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
-                                                            <i class="bx bxs-circle me-1"></i>Active
-                                                        </div>
-                                                        <br>
-                                                        <small>
-                                                            21-Aug-2024
-                                                        </small>
-                                                        <br>
-                                                        <small class="text-blue">
-                                                            Md. Abu Zafar Chowdhary
-                                                        </small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px;"
-                                                            class="btn btn-outline-only-edit rounded-circle">
-
-                                                            <i class="fa-solid fa-pencil"
-                                                                style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-danger rounded-circle">
-                                                            <i class="fa fa-trash"
-                                                                style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-purple rounded-circle">
-                                                            <i class="fa fa-refresh"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-lock rounded-circle">
-                                                            <i class="fa fa-lock"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-timer rounded-circle">
-                                                            <i class="fa-solid fa-clock-rotate-left"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-
-                                                <tr role="row" class="odd">
-                                                    <td class="text-left">02</td>
-                                                    <td class="text-left">Imtiaz Ahmed
-
-                                                        <br>
-                                                        <small class="text-blue">
-                                                            Supervisor
-                                                        </small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        ABC Travels Ltd
-                                                        <br>
-                                                        <small class="text-blue">12345</small> | IATA
-                                                    </td>
-
-
-                                                    <td>
-                                                        Motijheel
-                                                        <br>
-                                                        <small class="text-blue">Dhaka-North</small>
-                                                    </td>
-                                                    <td>Supervisor</td>
-                                                    <td class="text-left">
-                                                        test@galxybd.com
-                                                        <br>
-                                                        <small class="text-blue">017xxxxxxx</small>
-
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Md. Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">05-Sept-2024</small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        Md. Abu Syed
-                                                        <br>
-                                                        <small class="text-blue">05-Sept-2024</small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <div
-                                                            class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
-                                                            <i class="bx bxs-circle me-1"></i>Active
-                                                        </div>
-                                                        <br>
-                                                        <small>
-                                                            21-Aug-2024
-                                                        </small>
-                                                        <br>
-                                                        <small class="text-blue">
-                                                            Md. Abu Zafar Chowdhary
-                                                        </small>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px;"
-                                                            class="btn btn-outline-only-edit rounded-circle">
-
-                                                            <i class="fa-solid fa-pencil"
-                                                                style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-danger rounded-circle">
-                                                            <i class="fa fa-trash"
-                                                                style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-purple rounded-circle">
-                                                            <i class="fa fa-refresh"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-lock rounded-circle">
-                                                            <i class="fa fa-lock"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-
-                                                        <button type="button"
-                                                            style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                            class="btn btn-outline-timer rounded-circle">
-                                                            <i class="fa-solid fa-clock-rotate-left"
-                                                                style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
         </div>
     </div>
 
@@ -1128,14 +1100,6 @@
     margin-top: .25rem;
     font-weight: 700;
     font-size: 22px;
-}
-
-.odd td {
-    background-color: #F5F8FA;
-}
-
-.even td {
-    background-color: #fff;
 }
 
 

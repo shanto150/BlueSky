@@ -129,6 +129,7 @@ export const useAuthStore = defineStore('piniaUserAuth', () => {
                     ExpireInSec.value = res.data.data.expires_in_sec;
                     isLogged.value=encryptWithAES('1');
                     runTaskWithTimer(res.data.data.expires_in_sec);
+                    console.log(res.data.data.access_token);
                 }
             )
             .catch(eEes => {
