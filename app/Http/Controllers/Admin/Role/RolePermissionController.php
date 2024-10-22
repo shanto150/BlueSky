@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Role;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Role\Role;
 use App\Models\Role\RolePermission;
 use Illuminate\Support\Facades\DB;
@@ -37,6 +38,7 @@ class RolePermissionController extends Controller
 
     public function roleSave(Request $request)
     {
+        $auth = User::where('email',$request->useEmail)->first();
 
         $validator = validator($request->all(),
             ['roleName' => 'required'],
@@ -54,14 +56,14 @@ class RolePermissionController extends Controller
         $role->name =  $request->roleName;
         $role->display_name =  $request->roleName;
         $role->status =  1;
-        $role->created_by =  Auth::id();
+        $role->created_by =  $auth->id;
         $role->save();
 
         foreach($request->checkedNames as $perm){
             $perms = new RolePermission;
             $perms->role_id = $role->id;
             $perms->feature_name = $perm;
-            $perms->created_by =  Auth::id();
+            $perms->created_by =  $auth->id;
 
             $perms->save();
         }
