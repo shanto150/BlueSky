@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useAuthStore } from "../../../stores/authStore";
 const authStore = useAuthStore();
 
-const form = ref({ roleName: "", checkedNames: [], error: "" });
+const form = ref({ roleName: "", checkedNames: [],useEmail:authStore.email, error: "" });
 function dataSave() {
 
     createRole(form);
