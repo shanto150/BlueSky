@@ -20,7 +20,7 @@ async function getDivision() {
 
         let select = $("#division_id")
         select.select2({
-            placeholder: 'Select',
+            placeholder: '=Select=',
             theme: 'bootstrap-5',
             width: '100%',
             data: makes,
