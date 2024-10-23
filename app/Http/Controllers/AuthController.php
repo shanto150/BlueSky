@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\BaseController;
-use App\Models\Password_history;
-use App\Models\User;
 use Exception;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
+use App\Models\Password_history;
+use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password as Pass;
-use PragmaRX\Google2FA\Google2FA;
 
 class AuthController extends BaseController
 {
@@ -123,7 +124,7 @@ class AuthController extends BaseController
 
             }
 
-            }
+
 
         } catch (Exception $e) {
             return $this->ErrorResponse($e->getMessage());
