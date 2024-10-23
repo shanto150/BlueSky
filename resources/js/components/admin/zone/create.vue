@@ -1,41 +1,38 @@
 <script setup>
 import { useAuthStore } from "../../../stores/authStore";
+import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted } from "vue";
 const authStore = useAuthStore();
 
-handleSubmit();
+// it will load everytime page open
+getDivision();
 
-function handleSubmit() {
+async function getDivision() {
+    try {
+        const response = await axiosInstance.get('divisions');
+        console.log(response.data);
 
-    console.log('zx :',authStore.decryptWithAES(authStore.token));
-
-    const config = {
-            headers: { Authorization: 'Bearer ' + authStore.decryptWithAES(authStore.token), "Accept": "application/json", }
-        };
-
-    axios.get("/api/divisions",config)
-        .then((res) => {
-            var makes = [];
-            $.each(res.data, function (key, value) {
-                var obj = { id: value.id, text: value.name }
-                makes.push(obj);
-            });
-
-            let select = $("#division_id")
-            select.select2({
-                placeholder: 'Select',
-                theme: 'bootstrap-5',
-                width: '100%',
-                data: makes,
-                allowClear: true,
-                height: '50',
-            });
-
-        })
-        .catch((eEes) => {
+        var makes = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name }
+            makes.push(obj);
         });
-};
 
+        let select = $("#division_id")
+        select.select2({
+            placeholder: 'Select',
+            theme: 'bootstrap-5',
+            width: '100%',
+            data: makes,
+            allowClear: true,
+            height: '50',
+        });
+
+    } catch (error) {
+        console.log(error);
+
+    }
+}
 
 
 </script>
