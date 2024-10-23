@@ -2,30 +2,21 @@
 import Topbar from './layout/Topbar.vue'
 import Sidebar from './layout/Sidebar.vue'
 import Footer from './layout/Footer.vue'
+import axiosInstance from "../axiosInstance"
+
 import { useAuthStore } from '../stores/authStore';
-import { onMounted, watchEffect, watch, computed, ref } from 'vue';
+import { onMounted, watchEffect, watch, computed, ref, onBeforeMount } from 'vue';
 const authStore = useAuthStore();
 import { useRouter } from 'vue-router';
 const router = useRouter();
+
 
 import { useOnline } from '@vueuse/core'
 const online = useOnline()
 
 
-// watch(
-//     () => authStore.isLogged,
-//     () => {
-//         if (authStore.isLogged == '0') {
-//             authStore.logout();
-//             router.push({ name: 'Login' })
-//         }
 
-//     },
-// )
-
-
-
-watchEffect(() => {
+watchEffect(async () => {
     if (authStore.showExpireWarrning) {
         iziToast.question({
             timeout: 10000,
@@ -44,11 +35,15 @@ watchEffect(() => {
 
                 }, true]
             ],
-            onClosed: function (instance, toast, closedBy) {
+            onClosed: async function (instance, toast, closedBy) {
 
                 if (closedBy == 'btn1') {
                     if (authStore.hasToken()) {
-                        authStore.refreshToken()
+                        let res = await refresh_token();
+                        authStore.token = authStore.encryptWithAES(
+                            res.data.data.access_token
+                        );
+                        authStore.refreshToken(res.data.data.expires_in_sec);
                     } else {
                         authStore.logout();
                         router.push({ name: 'Login' })
@@ -68,18 +63,36 @@ watchEffect(() => {
 })
 
 
-onMounted(() => {
+onBeforeMount(async () => {
 
     if (authStore.hasToken() && authStore.decryptWithAES(authStore.isLogged) == '1') {
-        console.log('br :',authStore.decryptWithAES(authStore.token));
-        authStore.refreshToken()
-        console.log('ar :',authStore.decryptWithAES(authStore.token));
+        authStore.after30sRun = 0;
+        if (authStore.after30sRun == 0) {
+            const authStore = useAuthStore();
+            const accessToken = authStore.decryptWithAES(authStore.token);
+            const sToken = accessToken.split(".")[1];
+            const ReminTime = Math.round((JSON.parse(window.atob(sToken)).exp * 1000 - Date.now()) / 1000);
+            authStore.refreshToken1(ReminTime)
+        }
+
     } else {
         authStore.logout();
         return { name: 'Login' };
     }
 
 });
+
+function refresh_token() {
+    const authStore = useAuthStore();
+    const accessToken = authStore.decryptWithAES(authStore.token);
+    const config = {
+        headers: {
+            Authorization: "Bearer " + accessToken,
+            Accept: "application/json",
+        },
+    };
+    return axios.get("/api/refresh", config);
+}
 
 const text = computed(() => online.value ? 'Online' : 'Offline')
 
@@ -159,8 +172,8 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
 }
 
 .tippy-box[data-theme~='tomato'] {
-  background-color: tomato;
-  color: yellow;
+    background-color: tomato;
+    color: yellow;
 }
 
 .tippy-box {
@@ -180,5 +193,4 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
     background-image: linear-gradient(blue, #00ffff, blue);
     opacity: 0.3;
 }
-
 </style>

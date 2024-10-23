@@ -21,7 +21,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('registerOTP', [AuthController::class, 'registerOTP'])->name('registerOTP');
     Route::post('ForcePassReset', [AuthController::class,'ForcePassReset'])->name('ForcePassReset');
 
+    Route::get('divisions', [AreaController::class, 'divisionsList']);
 });
 Route::get('districts', [AreaController::class, 'districtList']);
-Route::get('divisions', [AreaController::class, 'divisionsList']);
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
