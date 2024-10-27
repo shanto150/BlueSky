@@ -15,7 +15,7 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-                <router-link :to="{ name: 'zoneCreate' }" class="btn btn-primary btn-sm">
+                <router-link :to="{name: 'zoneCreate'}" class="btn btn-primary btn-sm">
                     <i class="fa fa-circle-plus"></i>Add New Area
                 </router-link>
 
@@ -173,17 +173,14 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
-                                    <!-- <router-link :to="{ name: 'agentDetails' }" style="size: 30px; width: 30px; height: 30px"
-                                                class="btn btn-outline-success rounded-circle" placement="top" title="KAM Assign">
-                                                <i class="fa fa-check"
-                                                    style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                            </router-link> -->
-                                    <router-link style="size: 30px; width: 30px; height: 30px" v-tippy="'Edit'"
-                                        class="btn btn-outline-only-edit rounded-circle" placement="top"
-                                        title="KAM Assign">
+
+                                    <button type="button" v-tippy="'Edit'"
+                                        style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
+                                        class="btn btn-outline-only-edit rounded-circle">
+
                                         <i class="fa-solid fa-pencil"
                                             style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                    </router-link>
+                                    </button>
 
                                     <button type="button" v-tippy="'Ban'"
                                         style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"

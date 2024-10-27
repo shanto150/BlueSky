@@ -1,41 +1,90 @@
 <script setup>
 import { useAuthStore } from "../../../stores/authStore";
+import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted } from "vue";
 const authStore = useAuthStore();
 
-handleSubmit();
+//**** create function start
+const form = ref({ area_name: "", division_name: "", district_name: "", status_val: "", error: "" });
 
-function handleSubmit() {
+function dataSave() {
+    console.log(form.value);
 
-    console.log('zx :',authStore.decryptWithAES(authStore.token));
+    createZone(form);
+}
 
-    const config = {
-            headers: { Authorization: 'Bearer ' + authStore.decryptWithAES(authStore.token), "Accept": "application/json", }
-        };
+const createZone = async (formData) => {
 
-    axios.get("/api/divisions",config)
-        .then((res) => {
-            var makes = [];
-            $.each(res.data, function (key, value) {
-                var obj = { id: value.id, text: value.name }
-                makes.push(obj);
-            });
+    try {
+        const url = "http://127.0.0.1:8000/api/zone/save";
 
-            let select = $("#division_id")
-            select.select2({
-                placeholder: 'Select',
-                theme: 'bootstrap-5',
-                width: '100%',
-                data: makes,
-                allowClear: true,
-                height: '50',
-            });
+        const config = {
+            method: 'post',
+            url: url,
+            headers: {
+                'Content-Type': 'application/json'
+                // headers: { Authorization: 'Bearer ' + authStore.decryptWithAES(authStore.token), "Accept": "application/json", }
+            },
+            data: JSON.stringify(formData.value)
+        }
 
-        })
-        .catch((eEes) => {
+        const res = await axios(config);
+        if (res.data.types == 's') {
+            document.getElementById("AddZoneForm").reset();
+            Notification.showToast(res.data.types, res.data.message);
+
+        } else if (res.data.types == "e") {
+            Notification.showToast(res.data.types, res.data.message);
+
+        }
+
+
+    } catch (err) {
+        Notification.showToast("e", err);
+
+    }
+}
+//***create function end *****
+
+
+// it will load everytime page open
+getDivision();
+
+async function getDivision() {
+    try {
+        const response = await axiosInstance.get('divisions');
+        // console.log(response.data);
+
+        var makes = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name }
+            makes.push(obj);
         });
-};
 
+        let select = $("#division_id")
+        select.select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            data: makes,
+            allowClear: true,
+            height: '50',
+        });
+        // let select2 = $("#district_id")
+        // select2.select2({
+        //     placeholder: '=Select=',
+        //     theme: 'bootstrap-5',
+        //     width: '100%',
+        //     data: makes,
+        //     allowClear: true,
+        //     height: '50',
+        // });
+
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
 
 
 </script>
@@ -57,22 +106,24 @@ function handleSubmit() {
             </nav>
         </div>
     </div>
-    <div class="card">
-        <div class="card-header">
-            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Create New Area</h5>
-        </div>
-        <div class="card-body">
-            <form>
+
+    <form @submit.prevent="dataSave" id="AddZoneForm">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Create New Area</h5>
+            </div>
+
+            <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Area Name</label>
-                        <input type="text" class="form-control form-control-sm" id="area_name" name="area_name"
-                            placeholder="Enter Name">
+                        <input type="text" v-model="form.area_name" class="form-control form-control-sm" id="area_name"
+                            name="area_name" placeholder="Enter Name">
                     </div>
 
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Division</label>
-                        <select id="division_id" name="division_id"
+                        <select id="division_id" v-model="form.division_name" name="division_name"
                             class="form-control form-control-sm single-select-fields">
 
                         </select>
@@ -80,26 +131,27 @@ function handleSubmit() {
 
                     <div class="col-md-6 mt-2">
                         <label for="input1" class="form-label">District</label>
-                        <select id="district_id" name="district_id"
+                        <select id="district_id" v-model="form.district_name" name="district_name"
                             class="form-control form-control-sm single-select-field">
-
+                            <option value="t">Test</option>
                         </select>
                     </div>
 
                     <div class="col-md-6 mt-2">
                         <label for="input1" class="form-label">Status</label>
-                        <select id="status" name="status" class="form-control form-control-sm">
+                        <select id="status" v-model="form.status_val" name="status"
+                            class="form-control form-control-sm">
                             <option selected value="">Choose...</option>
                             <option value="Active">Active</option>
                             <option value="Inactive">Inactive</option>
                         </select>
                     </div>
                 </div>
-            </form>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
+                <button class="btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
+            </div>
         </div>
-        <div class="card-footer">
-            <button class="btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
-            <button class="btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
-        </div>
-    </div>
+    </form>
 </template>
