@@ -87,16 +87,65 @@ onMounted(() => {
                     </router-link>
                 </li>
 
-                <li>
-                    <router-link v-wave :to="{ name: 'roleList' }">
-                        <i class='bx bx-paper-plane'></i> Roles Permission
-                    </router-link>
-                </li>
 
                 <li>
-                    <router-link v-wave :to="{ name: 'zoneList' }">
-                        <i class='bx bx-paper-plane'></i> Area
-                    </router-link>
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><i class="bx bx-cog"></i>
+                        </div>
+                        <div class="menu-title">Settings</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <router-link v-wave :to="{ name: 'roleList' }">
+                                <i class='bx bx-paper-plane'></i> Roles Permission
+                            </router-link>
+                        </li>
+
+                        <li>
+                            <router-link v-wave :to="{ name: 'zoneList' }">
+                                <i class='bx bx-paper-plane'></i> Area
+                            </router-link>
+                        </li>
+
+                        <li>
+                            <router-link v-wave :to="{ name: 'zoneList' }">
+                                <i class='bx bx-paper-plane'></i> Department
+                            </router-link>
+                        </li>
+
+                        <li>
+                            <router-link v-wave :to="{ name: 'zoneList' }">
+                                <i class='bx bx-paper-plane'></i> Office Location
+                            </router-link>
+                        </li>
+
+                        <li> <a class="has-arrow" href="javascript:;"><i class='bx bx-paper-plane'></i>Deposit</a>
+                            <ul>
+                                <router-link v-wave :to="{ name: 'zoneList' }">
+                                    <i class='bx bx-paper-plane'></i> Payment Account
+                                </router-link>
+
+                                <router-link v-wave :to="{ name: 'zoneList' }">
+                                    <i class='bx bx-paper-plane'></i> Issused Bank & MFS
+                                </router-link>
+                            </ul>
+                        </li>
+
+                        <!-- <li><a class="has-arrow" href="javascript:;"><i class='bx bx-radio-circle'></i>Deposit</a>
+                            <ul>
+                                <li>
+                                    <router-link v-wave :to="{ name: 'zoneList' }">
+                                        <i class='bx bx-paper-plane'></i> Payment Account
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link v-wave :to="{ name: 'zoneList' }">
+                                        <i class='bx bx-paper-plane'></i> Issused Bank & Bank
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </li> -->
+                    </ul>
                 </li>
 
                 <li>

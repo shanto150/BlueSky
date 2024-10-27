@@ -2,8 +2,8 @@ import "./bootstrap";
 
 import "./themeassets/js/bootstrap.bundle.min.js";
 import "./themeassets/js/jquery.min.js";
-import "./themeassets/plugins/bs-stepper/js/bs-stepper.min.js";
-import "./themeassets/plugins/bs-stepper/js/main.js";
+// import "./themeassets/plugins/bs-stepper/js/bs-stepper.min.js";
+// import "./themeassets/plugins/bs-stepper/js/main.js";
 import "./themeassets/plugins/select2/js/select2-custom.js";
 
 import "./themeassets/js/app.js";
@@ -12,8 +12,8 @@ import "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js";
 
 import { createApp, markRaw } from "vue";
 import { createPinia } from "pinia";
-import router from "./routers.js";
 import App from "./components/App.vue";
+import router from "./routers.js";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import { useAuthStore } from "./stores/authStore.js";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
@@ -21,6 +21,7 @@ import VOtpInput from "vue3-otp-input";
 import VueTippy from "vue-tippy";
 import VueDeviceDetect from "@tenrok/vue-device-detect";
 import VWave from "v-wave";
+
 
 import Scrollbar from "vue3-perfect-scrollbar-z";
 import "vue3-perfect-scrollbar-z/dist/styles.css";
@@ -36,11 +37,12 @@ window.ErrorCatch = ErrorCatch;
 // if expose with window means we can access it direct with this name in any vue
 
 const pinia = createPinia();
+const app = createApp(App);
 pinia.use(piniaPluginPersistedstate);
 pinia.use(({ store }) => {
     store.router = markRaw(router);
 });
-const app = createApp(App);
+
 app.use(pinia);
 app.use(VWave);
 app.use(Scrollbar);
@@ -56,6 +58,7 @@ app.use(VueTippy, {
 const authStore = useAuthStore();
 
 app.mount("#app");
+
 
 router.beforeEach(async (to, from) => {
     if (authStore.isDarkMode) {
@@ -95,10 +98,7 @@ router.beforeEach(async (to, from) => {
             } else if (authStore.getotpChecked == 0) {
                 return { name: "otp" };
             }
-            // else if (authStore.decryptWithAES(authStore.isLogged)=='0') {
-            //     authStore.logout();
-            //     return { name: 'Login' };
-            // }
+
         }
     }
 
