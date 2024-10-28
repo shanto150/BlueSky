@@ -3,11 +3,22 @@ import { useAuthStore } from "../../../stores/authStore";
 import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted } from "vue";
 const authStore = useAuthStore();
-
 //**** create function start
-const form = ref({ area_name: "", division_name: "", district_name: "", status_val: "", error: "" });
+const form = ref({ area_name: "", division_name: "", district_name: "",division_id:"", status_val: "", error: "" });
+
+onMounted(() => {
+    $('.division_name').on("change", function () {
+
+        // this.division_value = $(this).val();
+        $("#div_vl").val($(this).val());
+    });
+});
+
+
 
 function dataSave() {
+
+
     console.log(form.value);
 
     createZone(form);
@@ -55,10 +66,11 @@ async function getDivision() {
         const response = await axiosInstance.get('divisions');
         // console.log(response.data);
 
-        var makes = [];
+        var options = [];
         $.each(response.data, function (key, value) {
             var obj = { id: value.id, text: value.name }
-            makes.push(obj);
+            options.push(obj);
+
         });
 
         let select = $("#division_id")
@@ -66,19 +78,11 @@ async function getDivision() {
             placeholder: '=Select=',
             theme: 'bootstrap-5',
             width: '100%',
-            data: makes,
             allowClear: true,
             height: '50',
+            data: options,
         });
-        // let select2 = $("#district_id")
-        // select2.select2({
-        //     placeholder: '=Select=',
-        //     theme: 'bootstrap-5',
-        //     width: '100%',
-        //     data: makes,
-        //     allowClear: true,
-        //     height: '50',
-        // });
+
 
     } catch (error) {
         // console.log(error);
@@ -124,10 +128,10 @@ async function getDivision() {
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Division</label>
                         <select id="division_id" v-model="form.division_name" name="division_name"
-                            class="form-control form-control-sm single-select-fields">
-
+                            class="form-control form-control-sm single-select-fields division_name">
                         </select>
                     </div>
+                    <input type="text" id="div_vl" v-model="form.division_id">
 
                     <div class="col-md-6 mt-2">
                         <label for="input1" class="form-label">District</label>
