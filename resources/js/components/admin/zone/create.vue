@@ -4,11 +4,10 @@ import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted } from "vue";
 const authStore = useAuthStore();
 //**** create function start
-const form = ref({ area_name: "", division_name: "", district_name: "",division_id:"", status_val: "", error: "" });
+const form = ref({ area_name: "", district_name: "",division_id:"", status_val: "", error: "" });
 
 onMounted(() => {
     $('.division_name').on("change", function () {
-
         // this.division_value = $(this).val();
         $("#div_vl").val($(this).val());
     });
@@ -17,10 +16,7 @@ onMounted(() => {
 
 
 function dataSave() {
-
-
     console.log(form.value);
-
     createZone(form);
 }
 
@@ -127,7 +123,7 @@ async function getDivision() {
 
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Division</label>
-                        <select id="division_id" v-model="form.division_name" name="division_name"
+                        <select id="division_id" name="division_name"
                             class="form-control form-control-sm single-select-fields division_name">
                         </select>
                     </div>
