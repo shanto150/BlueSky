@@ -62,7 +62,7 @@ onMounted(() => {
                         </li>
                     </ul>
                 </li>
-                <!-- <li class="menu-label">UI Elements</li> -->
+
                 <li>
                     <router-link v-wave :to="{ name: 'AgentList' }">
                         <div class="parent-icon"><i class="bx bx-unite"></i>
