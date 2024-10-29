@@ -5,12 +5,12 @@ import { onMounted } from "vue";
 function menuTaggle() {
   $(".wrapper").toggleClass("toggled");
 }
-
 onMounted(() => {
   new MetisMenu("#menu");
 });
 </script>
 <template>
+    <!-- main script -->
   <div class="sidebar-wrapper">
         <div class="sidebar-header">
             <div>
