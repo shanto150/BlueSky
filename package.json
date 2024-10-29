@@ -41,6 +41,6 @@
         "vue-waves-effect": "^1.0.0",
         "vue3-otp-input": "^0.5.21",
         "vue3-perfect-scrollbar-z": "^1.0.0",
-        "vue3-select2-component": "^0.1.7"
+        "vue3-select2-component": "github:xignp/vue3-select2-component#v1.0.0"
     }
 }
