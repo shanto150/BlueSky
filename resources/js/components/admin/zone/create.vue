@@ -1,56 +1,32 @@
 <script setup>
 import { useAuthStore } from "../../../stores/authStore";
 import axiosInstance from "../../../axiosInstance"
-import { ref, onMounted } from "vue";
+import { ref, onMounted,reactive } from "vue";
 const authStore = useAuthStore();
 //**** create function start
-const form = ref({ area_name: "", district_name: "",division_id:"", status_val: "", error: "" });
+const form = reactive({ area_name: "",division_id:"", district_name: "", status_val: ""});
 
 onMounted(() => {
     $('.division_name').on("change", function () {
-        // this.division_value = $(this).val();
-        $("#div_vl").val($(this).val());
+
+        form.division_id=$(this).val();
     });
 });
 
 
 
-function dataSave() {
-    console.log(form.value);
-    createZone(form);
+async function save() {
+  try {
+
+    const response = await axiosInstance.post("/role/save",form);
+    // console.log(response);
+
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-const createZone = async (formData) => {
 
-    try {
-        const url = "http://127.0.0.1:8000/api/zone/save";
-
-        const config = {
-            method: 'post',
-            url: url,
-            headers: {
-                'Content-Type': 'application/json'
-                // headers: { Authorization: 'Bearer ' + authStore.decryptWithAES(authStore.token), "Accept": "application/json", }
-            },
-            data: JSON.stringify(formData.value)
-        }
-
-        const res = await axios(config);
-        if (res.data.types == 's') {
-            document.getElementById("AddZoneForm").reset();
-            Notification.showToast(res.data.types, res.data.message);
-
-        } else if (res.data.types == "e") {
-            Notification.showToast(res.data.types, res.data.message);
-
-        }
-
-
-    } catch (err) {
-        Notification.showToast("e", err);
-
-    }
-}
 //***create function end *****
 
 
@@ -107,7 +83,6 @@ async function getDivision() {
         </div>
     </div>
 
-    <form @submit.prevent="dataSave" id="AddZoneForm">
         <div class="card">
             <div class="card-header">
                 <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Create New Area</h5>
@@ -127,7 +102,6 @@ async function getDivision() {
                             class="form-control form-control-sm single-select-fields division_name">
                         </select>
                     </div>
-                    <input type="text" id="div_vl" v-model="form.division_id">
 
                     <div class="col-md-6 mt-2">
                         <label for="input1" class="form-label">District</label>
@@ -149,9 +123,8 @@ async function getDivision() {
                 </div>
             </div>
             <div class="card-footer">
-                <button class="btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
+                <button type="button" @click="save" class="btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
                 <button class="btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
             </div>
         </div>
-    </form>
 </template>

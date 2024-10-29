@@ -21,7 +21,6 @@ class RolePermissionController extends Controller
         $data= DB::table('roles as r')
         ->join('role_permissions as rp','r.id','rp.role_id')
         ->selectRaw('r.name, count(rp.id) total_perms,r.created_at,r.status,r.updated_at,f_username(r.updated_by) updated_by,f_username(r.created_by) created_by')->groupBy('r.name','r.created_at','r.status','r.updated_at','r.updated_by','r.created_by')->get();
-
         return DataTables::of($data)->addIndexColumn()->make(true);
 
     }
@@ -44,6 +43,9 @@ class RolePermissionController extends Controller
 
     public function roleSave(Request $request)
     {
+
+        dd($request->all());
+
         $auth = User::where('email',$request->useEmail)->first();
 
         $validator = validator($request->all(),
