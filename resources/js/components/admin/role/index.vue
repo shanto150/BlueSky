@@ -12,7 +12,7 @@ const rData = ref([]);
 getListValues();
 
 const options = {
-  processing: false,
+  processing: true,
   serverSide: false,
   responsive: true,
   pageLength: 3,
@@ -22,6 +22,7 @@ const options = {
   language: {
     search: "",
     searchPlaceholder: "Search by anything",
+    processing: '<i class="fa fa-spinner fa-spin"></i> Data Loading...'
   },
   columns: [
     { data: "DT_RowIndex", title: "SL" },
@@ -164,7 +165,6 @@ async function getListValues() {
 
   <div class="row">
     <div id="RoleList" class="table">
-      <!-- <DataTable :columns="columns" :data="rData" class="display"> </DataTable> -->
       <DataTable :options="options" :data="rData" class="display"> </DataTable>
     </div>
   </div>
