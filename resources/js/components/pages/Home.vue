@@ -13,7 +13,7 @@ const authStore = useAuthStore();
             <!-- Home -->
         </div>
         <div>
-            <button v-wave type="button" class="btn btn-outline-success btn-lg">Home tes</button>
+            <button v-wave type="button" class="btn btn-outline-success btn-lg">Home</button>
         </div>
     </div>
 </template>
