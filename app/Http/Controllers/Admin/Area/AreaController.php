@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin\Area;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\BaseController;
+use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\BaseController;
+
 use Auth;
 
 class AreaController extends BaseController
@@ -15,7 +17,11 @@ class AreaController extends BaseController
      */
     public function index()
     {
-        //
+        $data= DB::table('areas as ar')
+        ->join('districts as d','ar.district_id','d.id')
+        ->selectRaw('ar.name,d.name as district,ar.created_at,ar.status,ar.updated_at,f_username(ar.updated_by) updated_by,f_username(ar.created_by) created_by')->get();
+
+        return DataTables::of($data)->addIndexColumn()->make(true);
     }
 
     /**
