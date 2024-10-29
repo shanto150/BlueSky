@@ -22,6 +22,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('ForcePassReset', [AuthController::class,'ForcePassReset'])->name('ForcePassReset');
 
     Route::get('divisions', [AreaController::class, 'divisionsList']);
+    Route::get('getroles', [RolePermissionController::class, 'index'])->name('roles.index');
 });
 Route::get('districts', [AreaController::class, 'districtList']);
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
