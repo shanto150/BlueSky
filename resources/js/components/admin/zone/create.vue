@@ -38,9 +38,6 @@ async function save() {
 }
 
 
-//***create function end *****
-
-
 // it will load everytime page open
 getDivision();
 
@@ -73,8 +70,10 @@ async function getDivision() {
 }
 
 async function getDistrict(id) {
+    console.log(id);
+
     try {
-        const response = await axiosInstance.get('districts');
+        const response = await axiosInstance.post('districts',{'id':id});
         // console.log(response.data);
 
         var getDatas = [];
