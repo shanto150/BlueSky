@@ -1,3 +1,108 @@
+<script setup>
+import DataTable from "datatables.net-vue3";
+import DataBS5 from "datatables.net-bs5";
+import axiosInstance from "../../../axiosInstance";
+import { ref } from "vue";
+import { data } from "jquery";
+
+DataTable.use(DataBS5);
+
+const rData = ref([]);
+
+getListValues();
+
+const options = {
+    processing: false,
+    serverSide: false,
+    responsive: true,
+    pageLength: 30,
+    lengthMenu: [3, 10, 20, 30, 50, 100, 200, 500],
+    bDestroy: true,
+    ordering: false,
+    language: {
+        search: "",
+        searchPlaceholder: "Search by anything",
+    },
+    columns: [
+        { data: "DT_RowIndex", title: "SL" },
+        {
+
+            title: "Area",
+            render: function (data, type, row) {
+                var html = "";
+                html += row.name;
+                html += "<br>";
+
+                html += '<span class="text-primary">';
+                html += row.district + "</span>";
+                return html;
+            },
+        },
+        {
+            title: "Created By",
+            render: function (data, type, row) {
+                var html = "";
+                html += row.created_by;
+                html += "<br>";
+
+                html += '<span class="text-primary">';
+                html += row.created_at + "</span>";
+                return html;
+            },
+        },
+        {
+            title: "Updated By",
+            render: function (data, type, row) {
+                var html = "";
+                html += row.updated_by || "-";
+                html += "<br>";
+                if (row.updated_at) {
+                    html += '<span class="text-primary">';
+                    html += row.updated_at + "</span>";
+                }
+                return html;
+            },
+        },
+        {
+            title: "Status",
+            render: function (data, type, row) {
+                var html = "";
+
+                if(row.status==1){
+                    html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Active </div>';
+                }else{
+                    html += '<div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Deactivated </div>';
+                }
+
+                return html;
+            },
+        },{
+            title:"Action",
+            render: function (data, type, row) {
+                var html = "";
+
+                html +='<router-link  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle" placement="top" title="KAM Assign"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;"></i> </router-link>';
+
+                html +=' <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle"> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+
+                html +='<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
+
+                return html;
+            },
+        }
+    ],
+};
+
+async function getListValues() {
+    try {
+        const response = await axiosInstance.get("getarea");
+        rData.value = response.data.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+</script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
 
@@ -15,7 +120,7 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-                <router-link :to="{name: 'zoneCreate'}" class="btn btn-primary btn-sm">
+                <router-link :to="{ name: 'zoneCreate' }" class="btn btn-primary btn-sm">
                     <i class="fa fa-circle-plus"></i>Add New Area
                 </router-link>
 
@@ -83,160 +188,14 @@
         </div>
     </div>
 
-    <div class="table-responsive border rounded rounded-2 p-3">
-        <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap5">
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <button class="btn btn-sm btn-danger" style="margin-right: 3px;" tabindex="0"
-                        aria-controls="example2" type="button"><i class="fa-solid fa-file-pdf"
-                            style="font-size: 14px !important;"></i> <span>PDF</span></button>
-
-                    <button class="btn btn-sm btn-success" style="margin-right: 3px;" tabindex="0"
-                        aria-controls="example2" type="button"> <i class="fa-regular fa-file-excel"
-                            style="font-size: 14px !important;"></i><span>Excel</span></button>
-
-
-                </div>
-                <div class="col-md-4"></div>
-                <div class="col-md-2">
-                    <div id="search_i" class="dataTables_filter">
-
-                        <input type="search" class="form-control form-control-sm" placeholder=""
-                            aria-controls="example2">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-2">
-                <div class="col-sm-12">
-                    <table class="table table-sm table-striped table-bordered">
-                        <thead>
-                            <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                                    aria-sort="ascending" aria-label="SL: activate to sort column descending"
-                                    style="width: 10px;">
-                                    SL.</th>
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                                    aria-label="Area: activate to sort column ascending" style="width: 116.087px;">Area
-                                </th>
-
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                                    aria-label="Created By: activate to sort column ascending"
-                                    style="width: 107.037px;">Created By</th>
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                                    aria-label="Updated By: activate to sort column ascending"
-                                    style="width: 107.037px;">Updated By</th>
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                                    aria-label="Status: activate to sort column ascending" style="width: 107.037px;">
-                                    Status</th>
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                                    aria-label="Action: activate to sort column ascending" style="width: 107.037px;">
-                                    Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <tr role="row" class="odd">
-                                <td class="text-left">01</td>
-
-                                <td class="text-left">
-                                    Motijhel
-                                    <br>
-                                    <small class="text-blue">
-                                        Dhaka-North
-                                    </small>
-                                </td>
-
-                                <td class="text-left">
-                                    Md. Abu Syed
-                                    <br>
-                                    <small class="text-blue">
-                                        21-Aug-2024
-                                    </small>
-                                </td>
-
-                                <td class="text-left">
-                                    -
-                                </td>
-                                <td class="text-left">
-                                    <div class="d-flex align-items-center text-success"> <i
-                                            class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
-                                        <span>Active</span>
-                                    </div>
-                                    <!-- <br> -->
-                                    <small>
-                                        21-Aug-2024
-                                    </small>
-                                    <br>
-                                    <small class="text-blue">
-                                        Md. Abu Zafar Chowdhary
-                                    </small>
-                                </td>
-                                <td class="text-left">
-
-                                    <button type="button" v-tippy="'Edit'"
-                                        style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                        class="btn btn-outline-only-edit rounded-circle">
-
-                                        <i class="fa-solid fa-pencil"
-                                            style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                    </button>
-
-                                    <button type="button" v-tippy="'Ban'"
-                                        style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                        class="btn btn-outline-ban rounded-circle">
-
-                                        <i class="fa-solid fa-ban"
-                                            style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                    </button>
-
-                                    <button type="button" v-tippy="'Delete'"
-                                        style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                        class="btn btn-outline-danger rounded-circle">
-
-                                        <i class="fa-solid fa-trash"
-                                            style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                    </button>
-                                </td>
-                            </tr>
-
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12 col-md-5">
-                    <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1
-                        to 5 of 10 entries</div>
-                </div>
-                <div class="col-sm-12 col-md-7">
-                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                        <ul class="pagination">
-                            <li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#"
-                                    aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Prev</a>
-                            </li>
-                            <li class="paginate_button page-item active"><a href="#" aria-controls="example2"
-                                    data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2"
-                                    tabindex="0" class="page-link">2</a></li>
-
-                            <li class="paginate_button page-item next" id="example2_next"><a href="#"
-                                    aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
+    <div class="row">
+        <div id="RoleList" class="table">
+            <DataTable :options="options" :data="rData" class="display"> </DataTable>
         </div>
     </div>
 
 </template>
-<script>
 
-</script>
 <style>
 .text-blue {
     color: blue;

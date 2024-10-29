@@ -23,7 +23,9 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::get('divisions', [AreaController::class, 'divisionsList']);
     Route::get('getroles', [RolePermissionController::class, 'index'])->name('roles.index');
+
+    Route::get('getarea', [AreaController::class, 'index'])->name('area.index');
 });
-Route::get('districts', [AreaController::class, 'districtList']);
+Route::get('districts/{id}', [AreaController::class, 'districtList']);
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
 Route::post('/zone/save', [AreaController::class, 'store']);
