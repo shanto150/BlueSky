@@ -4,7 +4,7 @@ import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted, reactive } from "vue";
 const authStore = useAuthStore();
 //**** create function start
-const form = reactive({ area_name: "", division_id: "", district_name: "", status_val: "", useEmail: authStore.email });
+const form = reactive({ area_name: "", division_id: "", district_id: "", status_val: "", useEmail: authStore.email });
 
 onMounted(() => {
     $('.division_name').on("change", function () {
@@ -12,6 +12,10 @@ onMounted(() => {
         form.division_id = $(this).val();
 
         getDistrict($(this).val());
+    });
+
+    $('.district_name').on("change", function () {
+        form.district_id = $(this).val();
     });
 });
 
@@ -23,11 +27,11 @@ async function save() {
 
         const response = await axiosInstance.post("/zone/save", form);
 
-        if (response.data.types=='s') {
+        if (response.data.types == 's') {
 
             Notification.showToast(response.data.types, response.data.message);
 
-        }else if(response.data.types=="e"){
+        } else if (response.data.types == "e") {
             Notification.showToast(response.data.types, response.data.message);
 
         }
@@ -143,9 +147,9 @@ async function getDistrict(id) {
                 </div>
 
                 <div class="col-md-6 mt-2">
-                    <label for="input1" class="form-label">District</label>
+                    <label for="input1" class="form-label ">District</label>
                     <select id="district_id" v-model="form.district_name" name="district_name"
-                        class="form-control form-control-sm single-select-field">
+                        class="form-control form-control-sm single-select-field district_name">
 
                     </select>
                 </div>
@@ -161,7 +165,8 @@ async function getDistrict(id) {
             </div>
         </div>
         <div class="card-footer">
-            <button type="button" @click="save()" class="btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
+            <button type="button" @click="save()"
+                class="btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
             <button class="btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
         </div>
     </div>

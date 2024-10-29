@@ -39,7 +39,7 @@ class AreaController extends BaseController
      */
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $auth = User::where('email',$request->useEmail)->first();
 
         $validator = validator($request->all(),
@@ -54,7 +54,7 @@ class AreaController extends BaseController
         $area =  new Area;
         $area->name =  $request->area_name;
         $area->division_id = $request->division_id;
-        $area->district_id = $request->district_name;
+        $area->district_id = $request->district_id;
         $area->status =  $request->status_val;
         $area->created_by =  $auth->id;
         $area->save();
@@ -106,7 +106,7 @@ class AreaController extends BaseController
 
     public function districtList(Request $request)
     {
-        dd($request->id);
+        // dd($request->id);
         $dist = DB::table('districts')->get();
         return response()->json($dist);
     }
