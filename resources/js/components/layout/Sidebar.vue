@@ -85,7 +85,7 @@ onMounted(() => {
             </li>
           </ul>
         </li>
-        <!-- <li class="menu-label">UI Elements</li> -->
+
         <li>
           <router-link v-wave :to="{ name: 'AgentList' }">
             <div class="parent-icon"><i class="bx bx-unite"></i></div>
@@ -107,17 +107,50 @@ onMounted(() => {
         </li>
 
         <li>
-          <router-link v-wave :to="{ name: 'roleList' }">
-            <div class="parent-icon"><i class="bx bx-user"></i></div>
-            <div class="menu-title">Roles Permission</div>
-          </router-link>
-        </li>
+          <a class="has-arrow" href="javascript:;">
+            <div class="parent-icon"><i class="bx bx-cog"></i></div>
+            <div class="menu-title">Settings</div>
+          </a>
+          <ul>
+            <li>
+              <router-link v-wave :to="{ name: 'roleList' }">
+                <i class="bx bx-paper-plane"></i> Roles Permission
+              </router-link>
+            </li>
 
-        <li>
-          <router-link v-wave :to="{ name: 'zoneList' }">
-            <div class="parent-icon"><i class="bx bx-user"></i></div>
-            <div class="menu-title">Zone</div>
-          </router-link>
+            <li>
+              <router-link v-wave :to="{ name: 'zoneList' }">
+                <i class="bx bx-paper-plane"></i> Area
+              </router-link>
+            </li>
+
+            <li>
+              <router-link v-wave :to="{ name: 'zoneList' }">
+                <i class="bx bx-paper-plane"></i> Department
+              </router-link>
+            </li>
+
+            <li>
+              <router-link v-wave :to="{ name: 'zoneList' }">
+                <i class="bx bx-paper-plane"></i> Office Location
+              </router-link>
+            </li>
+
+            <li>
+              <a class="has-arrow" href="javascript:;"
+                ><i class="bx bx-paper-plane"></i>Deposit</a
+              >
+              <ul>
+                <router-link v-wave :to="{ name: 'zoneList' }">
+                  <i class="bx bx-paper-plane"></i> Payment Account
+                </router-link>
+
+                <router-link v-wave :to="{ name: 'zoneList' }">
+                  <i class="bx bx-paper-plane"></i> Issused Bank & MFS
+                </router-link>
+              </ul>
+            </li>
+          </ul>
         </li>
 
         <li>
@@ -129,6 +162,7 @@ onMounted(() => {
       </ul>
     </Scrollbar>
   </div>
+  <!--navigation-->
 </template>
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Pirata+One|Rubik:900");
