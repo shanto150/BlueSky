@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\BaseController;
+use App\Models\Area\Area;
+use App\Models\User;
 
 use Auth;
 
@@ -37,7 +39,27 @@ class AreaController extends BaseController
      */
     public function store(Request $request)
     {
-        dd($request->all());
+
+        $auth = User::where('email',$request->useEmail)->first();
+
+        $validator = validator($request->all(),
+            ['area_name' => 'required'],
+            ['division_id' => 'required'],
+            ['district_name' => 'required'],
+        );
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->all(), 'types' => 'e']);
+        }
+
+        $area =  new Area;
+        $area->name =  $request->area_name;
+        $area->division_id = $request->division_id;
+        $area->district_id = $request->district_name;
+        $area->status =  $request->status_val;
+        $area->created_by =  $auth->id;
+        $area->save();
+
+        return response()->json(['message' => 'Successfully Zone Saved.', 'types' => 's']);
 
     }
 
@@ -77,15 +99,15 @@ class AreaController extends BaseController
     public function divisionsList()
     {
 
-        $user =DB::table('divisions')->get();
-        return response()->json($user);
+        $div =DB::table('divisions')->get();
+        return response()->json($div);
 
     }
 
-    public function districtList()
+    public function districtList(Request $request)
     {
-
-        $user = DB::table('districts')->get();
-        return response()->json($user);
+        dd($request->id);
+        $dist = DB::table('districts')->get();
+        return response()->json($dist);
     }
 }

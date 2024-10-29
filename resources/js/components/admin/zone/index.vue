@@ -15,7 +15,7 @@ const options = {
     processing: false,
     serverSide: false,
     responsive: true,
-    pageLength: 3,
+    pageLength: 30,
     lengthMenu: [3, 10, 20, 30, 50, 100, 200, 500],
     bDestroy: true,
     ordering: false,
