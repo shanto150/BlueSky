@@ -44,8 +44,6 @@ class RolePermissionController extends Controller
     public function roleSave(Request $request)
     {
 
-        dd($request->all());
-
         $auth = User::where('email',$request->useEmail)->first();
 
         $validator = validator($request->all(),
