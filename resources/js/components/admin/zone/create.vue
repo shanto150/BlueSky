@@ -1,29 +1,40 @@
 <script setup>
 import { useAuthStore } from "../../../stores/authStore";
 import axiosInstance from "../../../axiosInstance"
-import { ref, onMounted,reactive } from "vue";
+import { ref, onMounted, reactive } from "vue";
 const authStore = useAuthStore();
 //**** create function start
-const form = reactive({ area_name: "",division_id:"", district_name: "", status_val: ""});
+const form = reactive({ area_name: "", division_id: "", district_name: "", status_val: "", useEmail: authStore.email });
 
 onMounted(() => {
     $('.division_name').on("change", function () {
 
-        form.division_id=$(this).val();
+        form.division_id = $(this).val();
+
+        getDistrict($(this).val());
     });
 });
 
 
 
 async function save() {
-  try {
 
-    const response = await axiosInstance.post("/role/save",form);
-    // console.log(response);
+    try {
 
-  } catch (error) {
-    console.log(error);
-  }
+        const response = await axiosInstance.post("/zone/save", form);
+
+        if (response.data.types=='s') {
+
+            Notification.showToast(response.data.types, response.data.message);
+
+        }else if(response.data.types=="e"){
+            Notification.showToast(response.data.types, response.data.message);
+
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 
@@ -36,7 +47,6 @@ getDivision();
 async function getDivision() {
     try {
         const response = await axiosInstance.get('divisions');
-        // console.log(response.data);
 
         var options = [];
         $.each(response.data, function (key, value) {
@@ -53,6 +63,35 @@ async function getDivision() {
             allowClear: true,
             height: '50',
             data: options,
+        });
+
+
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
+
+async function getDistrict(id) {
+    try {
+        const response = await axiosInstance.get('districts');
+        // console.log(response.data);
+
+        var getDatas = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name }
+            getDatas.push(obj);
+
+        });
+
+        let select = $("#district_id")
+        select.select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            allowClear: true,
+            height: '50',
+            data: getDatas,
         });
 
 
@@ -83,48 +122,47 @@ async function getDivision() {
         </div>
     </div>
 
-        <div class="card">
-            <div class="card-header">
-                <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Create New Area</h5>
-            </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Create New Area</h5>
+        </div>
 
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="input1" class="form-label">Area Name</label>
-                        <input type="text" v-model="form.area_name" class="form-control form-control-sm" id="area_name"
-                            name="area_name" placeholder="Enter Name">
-                    </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="input1" class="form-label">Area Name</label>
+                    <input type="text" v-model="form.area_name" class="form-control form-control-sm" id="area_name"
+                        name="area_name" placeholder="Enter Name">
+                </div>
 
-                    <div class="col-md-6">
-                        <label for="input1" class="form-label">Division</label>
-                        <select id="division_id" name="division_name"
-                            class="form-control form-control-sm single-select-fields division_name">
-                        </select>
-                    </div>
+                <div class="col-md-6">
+                    <label for="input1" class="form-label">Division</label>
+                    <select id="division_id" name="division_name"
+                        class="form-control form-control-sm single-select-fields division_name">
+                    </select>
+                </div>
 
-                    <div class="col-md-6 mt-2">
-                        <label for="input1" class="form-label">District</label>
-                        <select id="district_id" v-model="form.district_name" name="district_name"
-                            class="form-control form-control-sm single-select-field">
-                            <option value="t">Test</option>
-                        </select>
-                    </div>
+                <div class="col-md-6 mt-2">
+                    <label for="input1" class="form-label">District</label>
+                    <select id="district_id" v-model="form.district_name" name="district_name"
+                        class="form-control form-control-sm single-select-field">
 
-                    <div class="col-md-6 mt-2">
-                        <label for="input1" class="form-label">Status</label>
-                        <select id="status" v-model="form.status_val" name="status"
-                            class="form-control form-control-sm">
-                            <option selected value="">Choose...</option>
-                            <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
-                        </select>
-                    </div>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mt-2">
+                    <label for="input1" class="form-label">Status</label>
+                    <select id="status" v-model="form.status_val" name="status" class="form-control form-control-sm">
+                        <option selected value="">Choose...</option>
+                        <option value="1">Active</option>
+                        <option value="2">Inactive</option>
+                    </select>
                 </div>
             </div>
-            <div class="card-footer">
-                <button type="button" @click="save" class="btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
-                <button class="btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
-            </div>
         </div>
+        <div class="card-footer">
+            <button type="button" @click="save()" class="btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
+            <button class="btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
+        </div>
+    </div>
 </template>
