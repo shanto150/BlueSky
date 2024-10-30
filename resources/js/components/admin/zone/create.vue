@@ -10,6 +10,7 @@ onMounted(() => {
     $('.division_name').on("change", function () {
 
         form.division_id = $(this).val();
+        $('.district_name').empty(); // empty previous data
 
         getDistrict($(this).val());
     });
@@ -28,6 +29,14 @@ async function save() {
         const response = await axiosInstance.post("/zone/save", form);
 
         if (response.data.types == 's') {
+            document.getElementById("addZoneform").reset();
+
+            $('#division_id option:first').prop('selected', true).trigger(
+                "change"); // reset dropdown value
+            $('#district_id option:first').prop('selected', true).trigger(
+                "change"); // reset dropdown value
+            $('#status option:first').prop('selected', true).trigger(
+                "change"); // reset dropdown value
 
             Notification.showToast(response.data.types, response.data.message);
 
@@ -76,7 +85,7 @@ async function getDivision() {
 async function getDistrict(id) {
 
     try {
-        const response = await axiosInstance.post('districts',{'id':id});
+        const response = await axiosInstance.post('districts', { 'id': id });
         // console.log(response.data);
 
         var getDatas = [];
@@ -129,43 +138,46 @@ async function getDistrict(id) {
             <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Create New Area</h5>
         </div>
 
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="input1" class="form-label">Area Name</label>
-                    <input type="text" v-model="form.area_name" class="form-control form-control-sm" id="area_name"
-                        name="area_name" placeholder="Enter Name">
-                </div>
+        <form id="addZoneform">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="input1" class="form-label">Area Name</label>
+                        <input type="text" v-model="form.area_name" class="form-control form-control-sm" id="area_name"
+                            name="area_name" placeholder="Enter Name">
+                    </div>
 
-                <div class="col-md-6">
-                    <label for="input1" class="form-label">Division</label>
-                    <select id="division_id" name="division_name"
-                        class="form-control form-control-sm single-select-fields division_name">
-                    </select>
-                </div>
+                    <div class="col-md-6">
+                        <label for="input1" class="form-label">Division</label>
+                        <select id="division_id" name="division_name"
+                            class="form-control form-control-sm single-select-fields division_name">
+                        </select>
+                    </div>
 
-                <div class="col-md-6 mt-2">
-                    <label for="input1" class="form-label ">District</label>
-                    <select id="district_id" v-model="form.district_name" name="district_name"
-                        class="form-control form-control-sm single-select-field district_name">
+                    <div class="col-md-6 mt-2">
+                        <label for="input1" class="form-label ">District</label>
+                        <select id="district_id" v-model="form.district_name" name="district_name"
+                            class="form-control form-control-sm single-select-field district_name">
 
-                    </select>
-                </div>
+                        </select>
+                    </div>
 
-                <div class="col-md-6 mt-2">
-                    <label for="input1" class="form-label">Status</label>
-                    <select id="status" v-model="form.status_val" name="status" class="form-control form-control-sm">
-                        <option selected value="">Choose...</option>
-                        <option value="1">Active</option>
-                        <option value="2">Inactive</option>
-                    </select>
+                    <div class="col-md-6 mt-2">
+                        <label for="input1" class="form-label">Status</label>
+                        <select id="status" v-model="form.status_val" name="status"
+                            class="form-control form-control-sm">
+                            <option selected value="">Choose...</option>
+                            <option value="1">Active</option>
+                            <option value="2">Inactive</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card-footer">
-            <button type="button" @click="save()"
-                class="btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
-            <button class="btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
-        </div>
+            <div class="card-footer">
+                <button type="button" @click="save()"
+                    class="btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
+                <button class="btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
+            </div>
+        </form>
     </div>
 </template>
