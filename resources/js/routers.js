@@ -37,6 +37,7 @@ const roleEdit = () => import('./components/admin/role/edit.vue')
 //Zone
 const zoneList = () => import('./components/admin/zone/index.vue')
 const zoneCreate = () => import('./components/admin/zone/create.vue')
+const zoneEdit = () => import('./components/admin/zone/edit.vue')
 
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
@@ -78,6 +79,7 @@ const routes = [
     //Zone
     { path: '/all-zone-list', component: zoneList, name: 'zoneList', meta: { auth: true } },
     { path: '/create-zone', component: zoneCreate, name: 'zoneCreate', meta: { auth: true } },
+    { path: '/edit-zone', component: zoneEdit, name: 'zoneEdit', meta: { auth: true } },
 
 ]
 

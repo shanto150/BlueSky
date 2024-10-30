@@ -2,13 +2,14 @@
 import DataTable from "datatables.net-vue3";
 import DataBS5 from "datatables.net-bs5";
 import axiosInstance from "../../../axiosInstance";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { data } from "jquery";
+import { icons } from "lucide-vue-next";
 
 DataTable.use(DataBS5);
 
 const rData = ref([]);
-
+var regExSearch = ref();
 getListValues();
 
 const options = {
@@ -26,7 +27,6 @@ const options = {
     columns: [
         { data: "DT_RowIndex", title: "SL" },
         {
-
             title: "Area",
             render: function (data, type, row) {
                 var html = "";
@@ -68,30 +68,31 @@ const options = {
             render: function (data, type, row) {
                 var html = "";
 
-                if(row.status==1){
+                if (row.status == 1) {
                     html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Active </div>';
-                }else{
+                } else {
                     html += '<div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Deactivated </div>';
                 }
 
                 return html;
             },
-        },{
-            title:"Action",
+        }, {
+            title: "Action",
             render: function (data, type, row) {
                 var html = "";
 
-                html +='<router-link :to="{name:"zoneCreate"}" style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle" placement="top" title="KAM Assign"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;"></i> </router-link>';
+                html += '<router-link :to="{name:"zoneEdit"}" style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle" placement="top" id="edit_tool"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;"></i> </router-link>';
 
-                html +=' <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle"> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                html += ' <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle"> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
 
-                html +='<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
+                html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
 
                 return html;
             },
         }
     ],
 };
+
 
 async function getListValues() {
     try {
@@ -171,14 +172,13 @@ async function getListValues() {
                 <div class="row">
 
                     <div class="col-md-6">
-                        <select class="form-select form-select-sm" id="single-select-field"
-                            data-placeholder="Choose one thing">
-                            <option>Select Area</option>
+                        <select class="form-select form-select-sm" id="s_area" data-placeholder="Choose one thing">
+                            <option value="">Select Area</option>
+                            <option value="atiq">At</option>
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <select class="form-select form-select-sm" id="single-select-field"
-                            data-placeholder="Choose one thing">
+                        <select class="form-select form-select-sm" id="s_status" data-placeholder="Choose one thing">
                             <option>Select Status</option>
                         </select>
                     </div>
@@ -190,7 +190,8 @@ async function getListValues() {
 
     <div class="row">
         <div id="RoleList" class="table">
-            <DataTable :options="options" :data="rData" class="display table table-sm  border table-bordered table-striped table-hover"> </DataTable>
+            <DataTable :options="options" :data="rData"
+                class="display table table-sm  border table-bordered table-striped table-hover"> </DataTable>
         </div>
     </div>
 

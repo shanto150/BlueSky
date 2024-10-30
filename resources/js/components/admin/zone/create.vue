@@ -21,7 +21,6 @@ onMounted(() => {
 });
 
 
-
 async function save() {
 
     try {
@@ -156,7 +155,7 @@ async function getDistrict(id) {
 
                     <div class="col-md-6 mt-2">
                         <label for="input1" class="form-label ">District</label>
-                        <select id="district_id" v-model="form.district_name" name="district_name"
+                        <select id="district_id" name="district_name"
                             class="form-control form-control-sm single-select-field district_name">
 
                         </select>
