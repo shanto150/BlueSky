@@ -81,7 +81,7 @@ const options = {
             render: function (data, type, row) {
                 var html = "";
 
-                html +='<router-link  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle" placement="top" title="KAM Assign"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;"></i> </router-link>';
+                html +='<router-link :to="{name:"zoneCreate"}" style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle" placement="top" title="KAM Assign"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;"></i> </router-link>';
 
                 html +=' <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle"> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
 
@@ -190,7 +190,7 @@ async function getListValues() {
 
     <div class="row">
         <div id="RoleList" class="table">
-            <DataTable :options="options" :data="rData" class="display"> </DataTable>
+            <DataTable :options="options" :data="rData" class="display table table-sm  border table-bordered table-striped table-hover"> </DataTable>
         </div>
     </div>
 

@@ -21,11 +21,12 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('registerOTP', [AuthController::class, 'registerOTP'])->name('registerOTP');
     Route::post('ForcePassReset', [AuthController::class,'ForcePassReset'])->name('ForcePassReset');
 
+    Route::get('getarea', [AreaController::class, 'index'])->name('area.index');
     Route::get('divisions', [AreaController::class, 'divisionsList']);
+    Route::post('districts', [AreaController::class, 'districtList']);
+
     Route::get('getroles', [RolePermissionController::class, 'index'])->name('roles.index');
 
-    Route::get('getarea', [AreaController::class, 'index'])->name('area.index');
 });
-Route::post('districts', [AreaController::class, 'districtList']);
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
 Route::post('/zone/save', [AreaController::class, 'store']);
