@@ -161,21 +161,20 @@ async function getDistrict(id) {
                         </select>
                     </div>
 
-                    <div class="col-md-6 mt-2">
+                    <!-- <div class="col-md-6 mt-2">
                         <label for="input1" class="form-label">Status</label>
                         <select id="status" v-model="form.status_val" name="status"
                             class="form-control form-control-sm">
-                            <option selected value="">Choose...</option>
-                            <option value="1">Active</option>
+                            <option value="1" selected>Active</option>
                             <option value="2">Inactive</option>
                         </select>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="card-footer">
                 <button type="button" @click="save()"
-                    class="btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
-                <button class="btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
+                    class="m-2 btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
+                <button class="m-2 btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
             </div>
         </form>
     </div>

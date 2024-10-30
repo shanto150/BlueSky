@@ -55,7 +55,7 @@ class AreaController extends BaseController
         $area->name =  $request->area_name;
         $area->division_id = $request->division_id;
         $area->district_id = $request->district_id;
-        $area->status =  $request->status_val;
+        $area->status =  1;
         $area->created_by =  $auth->id;
         $area->save();
 
