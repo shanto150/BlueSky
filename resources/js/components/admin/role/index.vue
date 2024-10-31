@@ -216,9 +216,7 @@ async function getListValues() {
     src: url('../../fonts/BeVietnamPro/BeVietnamPro-Regular.ttf');
 }
 
-@import 'bootstrap';
-@import 'datatables.net-bs5';
-@import 'datatables.net-responsive-bs5';
+
 
 
 .center-body {
