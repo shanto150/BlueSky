@@ -106,7 +106,7 @@ class AreaController extends BaseController
 
     public function districtList(Request $request)
     {
-        $dist = DB::table('districts')->where('division_id',$request->id)->get();
+        $dist = DB::table('districts')->where('division_id',$request->id)->orderBy('name','asc')->get();
         return response()->json($dist);
     }
 }
