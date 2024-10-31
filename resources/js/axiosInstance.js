@@ -53,4 +53,13 @@ axiosInstance.interceptors.request.use(
     }
 );
 
+axios.interceptors.response.use(
+    function (response) {
+        return response;
+    },
+    function (error) {
+        return Promise.reject(error);
+    }
+);
+
 export default axiosInstance;
