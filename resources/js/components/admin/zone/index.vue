@@ -3,7 +3,8 @@ import DataTable from "datatables.net-vue3";
 import DataBS5 from "datatables.net-bs5";
 import axiosInstance from "../../../axiosInstance";
 import { ref } from "vue";
-import { data } from "jquery";
+import { useAuthStore } from '../../../stores/authStore';
+const authStore = useAuthStore();
 
 DataTable.use(DataBS5);
 
@@ -12,17 +13,22 @@ const rData = ref([]);
 getListValues();
 
 const options = {
-    processing: false,
-    serverSide: false,
     responsive: true,
-    pageLength: 30,
-    lengthMenu: [3, 10, 20, 30, 50, 100, 200, 500],
+    pageLength: 3,
+    lengthMenu: [3, 10, 20, 30],
     bDestroy: true,
     ordering: false,
+    dom: "<'row'<'col-sm-4'B><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'f>>" + "<'row'<'col-sm-12'tr>>" +
+        "<'row justify-content-between Reduct_table_gap'<'d-md-flex justify-content-between align-items-center dt-layout-start col-md-auto me-auto'i><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'p>>",
+    buttons: ['copy', 'csv', 'pdf', 'excel', 'print'],
     language: {
         search: "",
         searchPlaceholder: "Search by anything",
     },
+    columnDefs: [{
+        defaultContent: "0",
+        targets: "_all",
+    }],
     columns: [
         { data: "DT_RowIndex", title: "SL" },
         {
@@ -68,24 +74,24 @@ const options = {
             render: function (data, type, row) {
                 var html = "";
 
-                if(row.status==1){
+                if (row.status == 1) {
                     html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Active </div>';
-                }else{
+                } else {
                     html += '<div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Deactivated </div>';
                 }
 
                 return html;
             },
-        },{
-            title:"Action",
+        }, {
+            title: "Action",
             render: function (data, type, row) {
                 var html = "";
 
-                html +='<router-link  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle" placement="top" title="KAM Assign"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;"></i> </router-link>';
+                html += '<router-link  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle" placement="top" title="KAM Assign"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;"></i> </router-link>';
 
-                html +=' <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle"> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                html += ' <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle"> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
 
-                html +='<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
+                html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
 
                 return html;
             },
@@ -95,10 +101,13 @@ const options = {
 
 async function getListValues() {
     try {
+        authStore.GlobalLoading=true;
         const response = await axiosInstance.get("getarea");
         rData.value = response.data.data;
+        authStore.GlobalLoading=false;
     } catch (error) {
         console.log(error);
+        authStore.GlobalLoading=false;
     }
 }
 
@@ -188,15 +197,93 @@ async function getListValues() {
         </div>
     </div>
 
-    <div class="row">
-        <div id="RoleList" class="table">
-            <DataTable :options="options" :data="rData" class="display"> </DataTable>
+    <div class="row position-relative">
+        <div id="RoleList">
+
+            <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
+                <div class="loader-circle-57">
+                    <img class="position-absolute" src="../../../../../public/theme/appimages/blueskywings.png"
+                        height="22" width="22" alt="">
+                </div>
+            </div>
+            <DataTable :options="options" :data="rData" class="table table-sm table-striped table-bordered">
+            </DataTable>
+
         </div>
     </div>
 
 </template>
 
 <style>
+.center-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    width: 100px;
+    height: 100px;
+}
+
+.loader-circle-57 {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-circle-57:before {
+    content: "";
+    color: red;
+    height: 50px;
+    width: 50px;
+    background: #0000;
+    border-radius: 50%;
+    border: 5px solid #027de2d5;
+    animation: loader-circle-57-spin 1s infinite
+}
+
+@keyframes loader-circle-57-spin {
+    50% {
+        transform: rotatez(180deg);
+        border-style: dashed;
+        border-color: #9c54f0 #02b9af #4e86f4;
+    }
+
+    100% {
+        transform: rotatez(360deg);
+    }
+}
+
+
+.dt-search {
+    margin-bottom: -15px;
+    width: 190px;
+}
+
+.Reduct_table_gap {
+    margin-top: -10px;
+}
+
+.dt-search input[type=search] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #E4EAEF;
+    border-radius: 9px;
+    background-color: white;
+    background-image: url('../../../../../public/theme/appimages/Search.svg');
+    background-position: 7px 6px;
+    /*left,top*/
+    background-repeat: no-repeat;
+    padding-left: 35px;
+    padding-top: 8px;
+    color: #A1ABB7;
+    padding-bottom: 8px;
+    font-size: 13px;
+    font-family: 'inter';
+}
+
 .text-blue {
     color: blue;
 }
