@@ -39,6 +39,10 @@ const options = {
             },
         },
         {
+            data: 'division',
+            title: "Division"
+        },
+        {
             title: "Created By",
             render: function (data, type, row) {
                 var html = "";
@@ -56,7 +60,7 @@ const options = {
                 var html = "";
                 html += row.updated_by || "-";
                 html += "<br>";
-                if (row.updated_at) {
+                if (row.updated_by) {
                     html += '<span class="text-primary">';
                     html += row.updated_at + "</span>";
                 }
@@ -76,16 +80,18 @@ const options = {
 
                 return html;
             },
-        }, {
+        },
+        {
             title: "Action",
             render: function (data, type, row) {
                 var html = "";
+                var idd = row.idd;
 
                 html += '<router-link :to="{name:"zoneEdit"}" style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle" placement="top" id="edit_tool"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;"></i> </router-link>';
 
                 html += ' <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle"> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
 
-                html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
+                html += '<button onclick="deleteZone('+idd+')" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
 
                 return html;
             },
@@ -102,6 +108,11 @@ async function getListValues() {
         console.log(error);
     }
 }
+
+onMounted(() => {
+
+});
+
 
 </script>
 <template>
