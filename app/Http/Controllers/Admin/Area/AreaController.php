@@ -91,9 +91,21 @@ class AreaController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+
+        if($request->id){
+
+            $area = Area::where('id',$request->id)->first();
+            $area->delete();
+
+            return response()->json(['message' => 'Successfully Zone Saved.', 'types' => 's']);
+
+        }else{
+            return response()->json(['message' => 'Error', 'types' => 'e']);
+
+        }
+
     }
 
 

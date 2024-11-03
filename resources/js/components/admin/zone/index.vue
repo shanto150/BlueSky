@@ -91,12 +91,29 @@ const options = {
 
                 html += ' <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle"> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
 
-                html += '<button onclick="deleteZone('+idd+')" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
+                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
 
                 return html;
             },
         }
     ],
+    "drawCallback": function (settings) {
+        $(".delete-item").on('click', function (e) {
+            var idd = e.target.dataset.itemId;
+
+            const response = axiosInstance.post("deletearea", { 'id': idd });
+            if(idd){
+                Notification.showToast('s', 'Successfully Zone Deleted.');
+
+            }else{
+                Notification.showToast('e', 'Wrong Opertaion.');
+            }
+
+            //after delete reload table
+            getListValues();
+
+        });
+    }
 };
 
 
@@ -111,7 +128,12 @@ async function getListValues() {
 
 onMounted(() => {
 
+    // function deleteZone(id) {
+    //     console.log(id);
+
+    // }
 });
+
 
 
 </script>
@@ -185,7 +207,7 @@ onMounted(() => {
                     <div class="col-md-6">
                         <select class="form-select form-select-sm" id="s_area" data-placeholder="Choose one thing">
                             <option value="">Select Area</option>
-                            <option value="atiq">At</option>
+                            <option value="at">At</option>
                         </select>
                     </div>
                     <div class="col-md-6">
