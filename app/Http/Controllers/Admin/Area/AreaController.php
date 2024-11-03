@@ -21,7 +21,8 @@ class AreaController extends BaseController
     {
         $data= DB::table('areas as ar')
         ->join('districts as d','ar.district_id','d.id')
-        ->selectRaw('ar.name,d.name as district,ar.created_at,ar.status,ar.updated_at,f_username(ar.updated_by) updated_by,f_username(ar.created_by) created_by')->get();
+        ->join('divisions as div','ar.division_id','div.id')
+        ->selectRaw('ar.id as idd,ar.name,d.name as district,div.name as division,ar.created_at,ar.status,ar.updated_at,f_username(ar.updated_by) updated_by,f_username(ar.created_by) created_by')->get();
 
         return DataTables::of($data)->addIndexColumn()->make(true);
     }

@@ -54,7 +54,7 @@ const createRole = async (formData) => {
 
                     </li>
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'AgentList' }">Role List</router-link>
+                        <router-link :to="{ name: 'AgentList' }">Role-permission List</router-link>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Create New Role</li>
                 </ol>
