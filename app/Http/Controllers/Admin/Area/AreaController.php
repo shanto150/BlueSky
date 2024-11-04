@@ -77,7 +77,6 @@ class AreaController extends BaseController
      */
     public function edit(Request $request)
     {
-        // dd($request->id);
         $area = Area::find($request->id);
         return response()->json($area);
 

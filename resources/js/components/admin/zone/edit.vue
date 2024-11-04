@@ -14,14 +14,89 @@ async function getAreaData(props) {
         const response = await axiosInstance.post('editArea', { 'id': props });
 
         const name = response.data[0].name;
+        $("#area_name").val(name);
+
         const division_id = response.data[0].division_id;
         const district_id = response.data[0].district_id;
         const status = response.data[0].status;
+        getDivision(division_id);
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
+
+onMounted(() => {
+    $('.division_name').on("change", function () {
+
+        // form.division_id = $(this).val();
+        $('.district_name').empty(); // empty previous data
+
+        getDistrict($(this).val());
+    });
+
+    $('.district_name').on("change", function () {
+        form.district_id = $(this).val();
+    });
+});
+
+
+async function getDivision(division_id) {
+    try {
+        const response = await axiosInstance.get('divisions');
+
+        var options = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name }
+            options.push(obj);
+
+        });
+
+        let select = $("#division_id")
+        select.select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            allowClear: true,
+            height: '50',
+            data: options,
+        });
+
 
     } catch (error) {
         // console.log(error);
 
     }
+}
+
+async function getDistrict(id) {
+
+try {
+    const response = await axiosInstance.post('districts', { 'id': id });
+    // console.log(response.data);
+
+    var getDatas = [];
+    $.each(response.data, function (key, value) {
+        var obj = { id: value.id, text: value.name }
+        getDatas.push(obj);
+
+    });
+
+    let select = $("#district_id")
+    select.select2({
+        placeholder: '=Select=',
+        theme: 'bootstrap-5',
+        width: '100%',
+        allowClear: true,
+        height: '50',
+        data: getDatas,
+    });
+
+
+} catch (error) {
+    // console.log(error);
+
+}
 }
 
 </script>
@@ -54,7 +129,7 @@ async function getAreaData(props) {
                 <div class="row">
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Area Name</label>
-                        <input type="text" v-model="name" class="form-control form-control-sm" id="area_name" name="area_name"
+                        <input type="text" class="form-control form-control-sm" id="area_name" name="area_name"
                             placeholder="Enter Name">
                     </div>
 
