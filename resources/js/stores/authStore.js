@@ -18,6 +18,7 @@ export const useAuthStore = defineStore(
         const getgoogle2fa_qr = ref("");
         const email = ref("");
         const name = ref("");
+        const GlobalLoading = ref(false);
 
         const showExpireWarrning = ref(false);
         const isDarkMode = ref(false);
@@ -152,6 +153,7 @@ export const useAuthStore = defineStore(
             forcePassChange,
             sInfo,
             isDarkMode,
+            GlobalLoading
         };
     },
     { persist: true }

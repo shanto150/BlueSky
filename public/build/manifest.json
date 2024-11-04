@@ -22,8 +22,8 @@
       "assets/bottomfullimage-CGyUIYZy.svg"
     ]
   },
-  "_dataTables.bootstrap5-Dmil3QnA.js": {
-    "file": "assets/dataTables.bootstrap5-Dmil3QnA.js",
+  "_dataTables.bootstrap5-Chqw1nzV.js": {
+    "file": "assets/dataTables.bootstrap5-Chqw1nzV.js",
     "name": "dataTables.bootstrap5",
     "imports": [
       "resources/js/app.js"
@@ -50,9 +50,9 @@
       "assets/rqf-DWaxDDdi.png"
     ]
   },
-  "_sh3-BFFVKawt.js": {
-    "file": "assets/sh3-BFFVKawt.js",
-    "name": "sh3",
+  "_world-wDAfuU0e.js": {
+    "file": "assets/world-wDAfuU0e.js",
+    "name": "world",
     "assets": [
       "assets/Admin-Cu7GDvKI.svg",
       "assets/BottomrImage-DgKPG1G8.svg",
@@ -61,9 +61,11 @@
       "assets/Key-Pass-BgleDm-C.svg",
       "assets/Overlay-QadfeTTc.svg",
       "assets/Password-x1lF_rPm.svg",
+      "assets/Search-CNStZ5cE.svg",
       "assets/Subtract-BFwsbQcn.svg",
       "assets/Viewpass-DozA6sT4.svg",
       "assets/bil-WBZR8aoK.svg",
+      "assets/bird-unscreen-LJWUfBz6.gif",
       "assets/bird-CF6VR07W.gif",
       "assets/bird-zbEBppbJ.jpg",
       "assets/bird-B0eYdarP.png",
@@ -86,7 +88,9 @@
       "assets/pp-Dhf2TUE6.gif",
       "assets/qr-QrKMlg5C.svg",
       "assets/rqf-DWaxDDdi.png",
-      "assets/sh3-L5wL44qk.jpg"
+      "assets/sh3-L5wL44qk.jpg",
+      "assets/w200-DiqwmBER.gif",
+      "assets/world-gNDpOkyl.gif"
     ]
   },
   "public/fonts/cartagestenciljnl.ttf": {
@@ -121,6 +125,10 @@
     "file": "assets/Password-x1lF_rPm.svg",
     "src": "public/theme/appimages/Password.svg"
   },
+  "public/theme/appimages/Search.svg": {
+    "file": "assets/Search-CNStZ5cE.svg",
+    "src": "public/theme/appimages/Search.svg"
+  },
   "public/theme/appimages/Subtract.svg": {
     "file": "assets/Subtract-BFwsbQcn.svg",
     "src": "public/theme/appimages/Subtract.svg"
@@ -132,6 +140,10 @@
   "public/theme/appimages/bil.svg": {
     "file": "assets/bil-WBZR8aoK.svg",
     "src": "public/theme/appimages/bil.svg"
+  },
+  "public/theme/appimages/bird-unscreen.gif": {
+    "file": "assets/bird-unscreen-LJWUfBz6.gif",
+    "src": "public/theme/appimages/bird-unscreen.gif"
   },
   "public/theme/appimages/bird.gif": {
     "file": "assets/bird-CF6VR07W.gif",
@@ -225,13 +237,21 @@
     "file": "assets/sh3-L5wL44qk.jpg",
     "src": "public/theme/appimages/sh3.jpg"
   },
+  "public/theme/appimages/w200.gif": {
+    "file": "assets/w200-DiqwmBER.gif",
+    "src": "public/theme/appimages/w200.gif"
+  },
+  "public/theme/appimages/world.gif": {
+    "file": "assets/world-gNDpOkyl.gif",
+    "src": "public/theme/appimages/world.gif"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-D0mGW4TQ.css",
+    "file": "assets/app-D8BHq79l.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-C6QxwfQ3.js",
+    "file": "assets/app-D2tLO9Oc.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -265,37 +285,21 @@
       "resources/js/components/admin/zone/edit.vue"
     ],
     "css": [
-      "assets/app-CRdlxBFJ.css"
+      "assets/app-C9yVgXfg.css"
     ],
     "assets": [
-      "assets/slack-Dxso8dG6.png",
-      "assets/behance-DQooEVkH.png",
-      "assets/google-drive-BKFPLOJH.png",
-      "assets/outlook-Bey2lF9K.png",
-      "assets/github-DO6xZ_gw.png",
-      "assets/stack-overflow-BAaa2wV8.png",
-      "assets/figma-CCcFopil.png",
-      "assets/twitter-DT4_rhA5.png",
-      "assets/google-calendar-B4qPiOcv.png",
-      "assets/spotify-CdLYxjBw.png",
-      "assets/google-photos-DbZjaBkw.png",
-      "assets/pinterest-kp6vSrmn.png",
-      "assets/linkedin-DgLzhU7_.png",
-      "assets/dribble-kwaSyflj.png",
-      "assets/youtube-BFbAs8YB.png",
-      "assets/google-4vIR4AIq.png",
-      "assets/envato-D55H4djZ.png",
-      "assets/safari-BNCrrQpR.png",
+      "assets/blueskywings-BhyKZPRa.png",
       "assets/avatar-1-x-o273Db.png",
       "assets/avatar-2-BjHJVy24.png",
+      "assets/outlook-Bey2lF9K.png",
       "assets/avatar-4-BX7n9lnX.png",
+      "assets/github-DO6xZ_gw.png",
       "assets/avatar-8-DM9XkbwB.png",
-      "assets/blueskywings-BhyKZPRa.png",
       "assets/cartagestenciljnl-g_UJii75.ttf"
     ]
   },
   "resources/js/components/admin/agent/agentApprove.vue": {
-    "file": "assets/agentApprove-ChcKDRXe.js",
+    "file": "assets/agentApprove-D84W04oA.js",
     "name": "agentApprove",
     "src": "resources/js/components/admin/agent/agentApprove.vue",
     "isDynamicEntry": true,
@@ -305,7 +309,7 @@
     ]
   },
   "resources/js/components/admin/agent/agentDetails.vue": {
-    "file": "assets/agentDetails-D1uIiEvP.js",
+    "file": "assets/agentDetails-CayYB3Vf.js",
     "name": "agentDetails",
     "src": "resources/js/components/admin/agent/agentDetails.vue",
     "isDynamicEntry": true,
@@ -315,7 +319,7 @@
     ]
   },
   "resources/js/components/admin/agent/agentRecomanded.vue": {
-    "file": "assets/agentRecomanded-CmzSRHGk.js",
+    "file": "assets/agentRecomanded-Bm6mLDki.js",
     "name": "agentRecomanded",
     "src": "resources/js/components/admin/agent/agentRecomanded.vue",
     "isDynamicEntry": true,
@@ -325,7 +329,7 @@
     ]
   },
   "resources/js/components/admin/agent/agentView.vue": {
-    "file": "assets/agentView-DjZKAJjz.js",
+    "file": "assets/agentView-B_0SfNwb.js",
     "name": "agentView",
     "src": "resources/js/components/admin/agent/agentView.vue",
     "isDynamicEntry": true,
@@ -335,7 +339,7 @@
     ]
   },
   "resources/js/components/admin/agent/create.vue": {
-    "file": "assets/create-Ce5rl1Pe.js",
+    "file": "assets/create-wLkWiuth.js",
     "name": "create",
     "src": "resources/js/components/admin/agent/create.vue",
     "isDynamicEntry": true,
@@ -348,7 +352,7 @@
     ]
   },
   "resources/js/components/admin/agent/index.vue": {
-    "file": "assets/index-C8frLLA2.js",
+    "file": "assets/index-DdNB-gR8.js",
     "name": "index",
     "src": "resources/js/components/admin/agent/index.vue",
     "isDynamicEntry": true,
@@ -360,7 +364,7 @@
     ]
   },
   "resources/js/components/admin/deposite/depoDetails.vue": {
-    "file": "assets/depoDetails-be2wZaIN.js",
+    "file": "assets/depoDetails-B1FWB49g.js",
     "name": "depoDetails",
     "src": "resources/js/components/admin/deposite/depoDetails.vue",
     "isDynamicEntry": true,
@@ -373,7 +377,7 @@
     ]
   },
   "resources/js/components/admin/deposite/index.vue": {
-    "file": "assets/index-B29ufLaV.js",
+    "file": "assets/index-DP1wFStz.js",
     "name": "index",
     "src": "resources/js/components/admin/deposite/index.vue",
     "isDynamicEntry": true,
@@ -385,7 +389,7 @@
     ]
   },
   "resources/js/components/admin/role/create.vue": {
-    "file": "assets/create-Bvktq70Q.js",
+    "file": "assets/create-C0SFQ1bd.js",
     "name": "create",
     "src": "resources/js/components/admin/role/create.vue",
     "isDynamicEntry": true,
@@ -394,7 +398,7 @@
     ]
   },
   "resources/js/components/admin/role/edit.vue": {
-    "file": "assets/edit-BIvDgcG3.js",
+    "file": "assets/edit-DmOnAI8p.js",
     "name": "edit",
     "src": "resources/js/components/admin/role/edit.vue",
     "isDynamicEntry": true,
@@ -403,20 +407,23 @@
     ]
   },
   "resources/js/components/admin/role/index.vue": {
-    "file": "assets/index-CjAQ7prP.js",
+    "file": "assets/index-CtqaGZnZ.js",
     "name": "index",
     "src": "resources/js/components/admin/role/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_dataTables.bootstrap5-Dmil3QnA.js"
+      "_dataTables.bootstrap5-Chqw1nzV.js"
     ],
     "css": [
-      "assets/index-DNrmQPsM.css"
+      "assets/index-BXOfzIKy.css"
+    ],
+    "assets": [
+      "assets/Search-CNStZ5cE.svg"
     ]
   },
   "resources/js/components/admin/user/create.vue": {
-    "file": "assets/create-bZ6w9ouH.js",
+    "file": "assets/create-BTYOpFWU.js",
     "name": "create",
     "src": "resources/js/components/admin/user/create.vue",
     "isDynamicEntry": true,
@@ -426,7 +433,7 @@
     ]
   },
   "resources/js/components/admin/user/index.vue": {
-    "file": "assets/index-CcV5AdVV.js",
+    "file": "assets/index-CYXTx7Hb.js",
     "name": "index",
     "src": "resources/js/components/admin/user/index.vue",
     "isDynamicEntry": true,
@@ -438,7 +445,7 @@
     ]
   },
   "resources/js/components/admin/zone/create.vue": {
-    "file": "assets/create-DNfEkKk8.js",
+    "file": "assets/create-Dopg0CrD.js",
     "name": "create",
     "src": "resources/js/components/admin/zone/create.vue",
     "isDynamicEntry": true,
@@ -447,7 +454,7 @@
     ]
   },
   "resources/js/components/admin/zone/edit.vue": {
-    "file": "assets/edit-BOhZp1Wz.js",
+    "file": "assets/edit-B_PPBmCE.js",
     "name": "edit",
     "src": "resources/js/components/admin/zone/edit.vue",
     "isDynamicEntry": true,
@@ -456,20 +463,23 @@
     ]
   },
   "resources/js/components/admin/zone/index.vue": {
-    "file": "assets/index-DwGT9TOD.js",
+    "file": "assets/index-BRTzHCle.js",
     "name": "index",
     "src": "resources/js/components/admin/zone/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_dataTables.bootstrap5-Dmil3QnA.js"
+      "_dataTables.bootstrap5-Chqw1nzV.js"
     ],
     "css": [
-      "assets/index-DNrmQPsM.css"
+      "assets/index-DsxO4noB.css"
+    ],
+    "assets": [
+      "assets/Search-CNStZ5cE.svg"
     ]
   },
   "resources/js/components/auth/2faregister.vue": {
-    "file": "assets/2faregister-DYfkf0L6.js",
+    "file": "assets/2faregister-nsLKcl0S.js",
     "name": "2faregister",
     "src": "resources/js/components/auth/2faregister.vue",
     "isDynamicEntry": true,
@@ -488,12 +498,12 @@
     ]
   },
   "resources/js/components/auth/Login.vue": {
-    "file": "assets/Login-DGBP4W-t.js",
+    "file": "assets/Login-D4pL2o0y.js",
     "name": "Login",
     "src": "resources/js/components/auth/Login.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_sh3-BFFVKawt.js",
+      "_world-wDAfuU0e.js",
       "resources/js/app.js",
       "_blueskymainlogo-DOJdMQmh.js",
       "_pp-BjwrYq3-.js"
@@ -516,7 +526,7 @@
     ]
   },
   "resources/js/components/auth/Logout.vue": {
-    "file": "assets/Logout-B1hX-1Ls.js",
+    "file": "assets/Logout-GzYEIIIL.js",
     "name": "Logout",
     "src": "resources/js/components/auth/Logout.vue",
     "isDynamicEntry": true,
@@ -528,7 +538,7 @@
     ]
   },
   "resources/js/components/auth/NotFound.vue": {
-    "file": "assets/NotFound-Dnzgm1Zt.js",
+    "file": "assets/NotFound-CM7i5OiZ.js",
     "name": "NotFound",
     "src": "resources/js/components/auth/NotFound.vue",
     "isDynamicEntry": true,
@@ -540,12 +550,12 @@
     ]
   },
   "resources/js/components/auth/forcePasswordChange.vue": {
-    "file": "assets/forcePasswordChange-Dx5d8FFf.js",
+    "file": "assets/forcePasswordChange-DhPXJ1YH.js",
     "name": "forcePasswordChange",
     "src": "resources/js/components/auth/forcePasswordChange.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_sh3-BFFVKawt.js",
+      "_world-wDAfuU0e.js",
       "resources/js/app.js",
       "_blueskymainlogo-DOJdMQmh.js",
       "_Key-Pass-BcV-q5mU.js",
@@ -562,7 +572,7 @@
     ]
   },
   "resources/js/components/auth/forgetPassMail.vue": {
-    "file": "assets/forgetPassMail-Dxu-B_mt.js",
+    "file": "assets/forgetPassMail-BedfpAlg.js",
     "name": "forgetPassMail",
     "src": "resources/js/components/auth/forgetPassMail.vue",
     "isDynamicEntry": true,
@@ -581,7 +591,7 @@
     ]
   },
   "resources/js/components/auth/otp.vue": {
-    "file": "assets/otp--af14b9m.js",
+    "file": "assets/otp-DJYO9Jsb.js",
     "name": "otp",
     "src": "resources/js/components/auth/otp.vue",
     "isDynamicEntry": true,
@@ -599,12 +609,12 @@
     ]
   },
   "resources/js/components/auth/reserPass.vue": {
-    "file": "assets/reserPass-BY2a-1mY.js",
+    "file": "assets/reserPass-DSImKD7_.js",
     "name": "reserPass",
     "src": "resources/js/components/auth/reserPass.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_sh3-BFFVKawt.js",
+      "_world-wDAfuU0e.js",
       "resources/js/app.js",
       "_blueskymainlogo-DOJdMQmh.js",
       "_passwordreset-D-gaEwL9.js",
@@ -617,7 +627,7 @@
     ]
   },
   "resources/js/components/pages/Agent.vue": {
-    "file": "assets/Agent-C1I5PNOI.js",
+    "file": "assets/Agent-88UxgNyH.js",
     "name": "Agent",
     "src": "resources/js/components/pages/Agent.vue",
     "isDynamicEntry": true,
@@ -629,7 +639,7 @@
     ]
   },
   "resources/js/components/pages/Home.vue": {
-    "file": "assets/Home-D6OOkZ_B.js",
+    "file": "assets/Home-Dlr1sQ3j.js",
     "name": "Home",
     "src": "resources/js/components/pages/Home.vue",
     "isDynamicEntry": true,
@@ -641,7 +651,7 @@
     ]
   },
   "resources/js/components/pages/Settings.vue": {
-    "file": "assets/Settings-fL8i5Pyb.js",
+    "file": "assets/Settings-DgcNQJla.js",
     "name": "Settings",
     "src": "resources/js/components/pages/Settings.vue",
     "isDynamicEntry": true,
@@ -2744,77 +2754,13 @@
     "file": "assets/boxicons-D-9kh4JX.woff2",
     "src": "resources/js/themeassets/fonts/boxicons.woff2"
   },
-  "resources/js/themeassets/images/app/behance.png": {
-    "file": "assets/behance-DQooEVkH.png",
-    "src": "resources/js/themeassets/images/app/behance.png"
-  },
-  "resources/js/themeassets/images/app/dribble.png": {
-    "file": "assets/dribble-kwaSyflj.png",
-    "src": "resources/js/themeassets/images/app/dribble.png"
-  },
-  "resources/js/themeassets/images/app/envato.png": {
-    "file": "assets/envato-D55H4djZ.png",
-    "src": "resources/js/themeassets/images/app/envato.png"
-  },
-  "resources/js/themeassets/images/app/figma.png": {
-    "file": "assets/figma-CCcFopil.png",
-    "src": "resources/js/themeassets/images/app/figma.png"
-  },
   "resources/js/themeassets/images/app/github.png": {
     "file": "assets/github-DO6xZ_gw.png",
     "src": "resources/js/themeassets/images/app/github.png"
   },
-  "resources/js/themeassets/images/app/google-calendar.png": {
-    "file": "assets/google-calendar-B4qPiOcv.png",
-    "src": "resources/js/themeassets/images/app/google-calendar.png"
-  },
-  "resources/js/themeassets/images/app/google-drive.png": {
-    "file": "assets/google-drive-BKFPLOJH.png",
-    "src": "resources/js/themeassets/images/app/google-drive.png"
-  },
-  "resources/js/themeassets/images/app/google-photos.png": {
-    "file": "assets/google-photos-DbZjaBkw.png",
-    "src": "resources/js/themeassets/images/app/google-photos.png"
-  },
-  "resources/js/themeassets/images/app/google.png": {
-    "file": "assets/google-4vIR4AIq.png",
-    "src": "resources/js/themeassets/images/app/google.png"
-  },
-  "resources/js/themeassets/images/app/linkedin.png": {
-    "file": "assets/linkedin-DgLzhU7_.png",
-    "src": "resources/js/themeassets/images/app/linkedin.png"
-  },
   "resources/js/themeassets/images/app/outlook.png": {
     "file": "assets/outlook-Bey2lF9K.png",
     "src": "resources/js/themeassets/images/app/outlook.png"
-  },
-  "resources/js/themeassets/images/app/pinterest.png": {
-    "file": "assets/pinterest-kp6vSrmn.png",
-    "src": "resources/js/themeassets/images/app/pinterest.png"
-  },
-  "resources/js/themeassets/images/app/safari.png": {
-    "file": "assets/safari-BNCrrQpR.png",
-    "src": "resources/js/themeassets/images/app/safari.png"
-  },
-  "resources/js/themeassets/images/app/slack.png": {
-    "file": "assets/slack-Dxso8dG6.png",
-    "src": "resources/js/themeassets/images/app/slack.png"
-  },
-  "resources/js/themeassets/images/app/spotify.png": {
-    "file": "assets/spotify-CdLYxjBw.png",
-    "src": "resources/js/themeassets/images/app/spotify.png"
-  },
-  "resources/js/themeassets/images/app/stack-overflow.png": {
-    "file": "assets/stack-overflow-BAaa2wV8.png",
-    "src": "resources/js/themeassets/images/app/stack-overflow.png"
-  },
-  "resources/js/themeassets/images/app/twitter.png": {
-    "file": "assets/twitter-DT4_rhA5.png",
-    "src": "resources/js/themeassets/images/app/twitter.png"
-  },
-  "resources/js/themeassets/images/app/youtube.png": {
-    "file": "assets/youtube-BFbAs8YB.png",
-    "src": "resources/js/themeassets/images/app/youtube.png"
   },
   "resources/js/themeassets/images/avatars/avatar-1.png": {
     "file": "assets/avatar-1-x-o273Db.png",

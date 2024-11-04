@@ -7,6 +7,9 @@ import { data } from "jquery";
 import { icons } from "lucide-vue-next";
 import { useRouter } from 'vue-router';
 const router = useRouter();
+import { useAuthStore } from '../../../stores/authStore';
+const authStore = useAuthStore();
+
 DataTable.use(DataBS5);
 
 const rData = ref([]);
@@ -14,17 +17,22 @@ var regExSearch = ref();
 getListValues();
 
 const options = {
-    processing: false,
-    serverSide: false,
     responsive: true,
-    pageLength: 30,
-    lengthMenu: [3, 10, 20, 30, 50, 100, 200, 500],
+    pageLength: 3,
+    lengthMenu: [3, 10, 20, 30],
     bDestroy: true,
     ordering: false,
+    dom: "<'row'<'col-sm-4'B><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'f>>" + "<'row'<'col-sm-12'tr>>" +
+        "<'row justify-content-between Reduct_table_gap'<'d-md-flex justify-content-between align-items-center dt-layout-start col-md-auto me-auto'i><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'p>>",
+    buttons: ['copy', 'csv', 'pdf', 'excel', 'print'],
     language: {
         search: "",
         searchPlaceholder: "Search by anything",
     },
+    columnDefs: [{
+        defaultContent: "0",
+        targets: "_all",
+    }],
     columns: [
         { data: "DT_RowIndex", title: "SL" },
         {
@@ -128,10 +136,13 @@ const options = {
 
 async function getListValues() {
     try {
+        authStore.GlobalLoading=true;
         const response = await axiosInstance.get("getarea");
         rData.value = response.data.data;
+        authStore.GlobalLoading=false;
     } catch (error) {
         console.log(error);
+        authStore.GlobalLoading=false;
     }
 }
 
@@ -240,6 +251,75 @@ onMounted(() => {
 </template>
 
 <style>
+.center-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    width: 100px;
+    height: 100px;
+}
+
+.loader-circle-57 {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-circle-57:before {
+    content: "";
+    color: red;
+    height: 50px;
+    width: 50px;
+    background: #0000;
+    border-radius: 50%;
+    border: 5px solid #027de2d5;
+    animation: loader-circle-57-spin 1s infinite
+}
+
+@keyframes loader-circle-57-spin {
+    50% {
+        transform: rotatez(180deg);
+        border-style: dashed;
+        border-color: #9c54f0 #02b9af #4e86f4;
+    }
+
+    100% {
+        transform: rotatez(360deg);
+    }
+}
+
+
+.dt-search {
+    margin-bottom: -15px;
+    width: 190px;
+}
+
+.Reduct_table_gap {
+    margin-top: -10px;
+}
+
+.dt-search input[type=search] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #E4EAEF;
+    border-radius: 9px;
+    background-color: white;
+    background-image: url('../../../../../public/theme/appimages/Search.svg');
+    background-position: 7px 6px;
+    /*left,top*/
+    background-repeat: no-repeat;
+    padding-left: 35px;
+    padding-top: 8px;
+    color: #A1ABB7;
+    padding-bottom: 8px;
+    font-size: 13px;
+    font-family: 'inter';
+}
+
 .text-blue {
     color: blue;
 }
