@@ -75,9 +75,12 @@ class AreaController extends BaseController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+        // dd($request->id);
+        $area = Area::find($request->id);
+        return response()->json($area);
+
     }
 
     /**

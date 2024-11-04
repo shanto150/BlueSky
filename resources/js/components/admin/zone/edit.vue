@@ -1,6 +1,28 @@
 <script setup>
+import { useAuthStore } from "../../../stores/authStore";
+import axiosInstance from "../../../axiosInstance"
+import { ref, onMounted, reactive } from "vue";
 
+const authStore = useAuthStore();
+const props = defineProps(['id'])
 
+getAreaData(props);
+
+async function getAreaData(props) {
+
+    try {
+        const response = await axiosInstance.post('editArea', { 'id': props });
+
+        const name = response.data[0].name;
+        const division_id = response.data[0].division_id;
+        const district_id = response.data[0].district_id;
+        const status = response.data[0].status;
+
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
 
 </script>
 <template>
@@ -32,7 +54,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Area Name</label>
-                        <input type="text" class="form-control form-control-sm" id="area_name" name="area_name"
+                        <input type="text" v-model="name" class="form-control form-control-sm" id="area_name" name="area_name"
                             placeholder="Enter Name">
                     </div>
 
@@ -53,8 +75,7 @@
 
                     <div class="col-md-6 mt-2">
                         <label for="input1" class="form-label">Status</label>
-                        <select id="status" name="status"
-                            class="form-control form-control-sm">
+                        <select id="status" name="status" class="form-control form-control-sm">
                             <option selected value="">Choose...</option>
                             <option value="1">Active</option>
                             <option value="2">Inactive</option>
