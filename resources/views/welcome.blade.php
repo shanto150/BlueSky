@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BlueSky | NDC</title>
-
+    <meta name="api-base-url" content="{{ url('') }}" />
     <link rel="icon" href="{{ url('/theme/appimages/blueskywings.png') }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])

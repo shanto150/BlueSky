@@ -22,7 +22,7 @@ getListValues();
 const options = {
     responsive: true,
     destroy: true,
-    pageLength: 3,
+    pageLength: 30,
     lengthMenu: [3, 10, 20, 30],
     ordering: false,
     columnDefs: [{

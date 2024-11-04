@@ -36,7 +36,7 @@ onMounted(() => {
     });
 
     $('.district_name').on("change", function () {
-        form.district_id = $(this).val();
+        // form.district_id = $(this).val();
     });
 });
 
