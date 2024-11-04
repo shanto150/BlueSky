@@ -54,7 +54,7 @@ async function getAreaData(props) {
                 <div class="row">
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Area Name</label>
-                        <input type="text" v-model="name" class="form-control form-control-sm" id="area_name" name="area_name"
+                        <input type="text"  class="form-control form-control-sm" id="area_name" name="area_name"
                             placeholder="Enter Name">
                     </div>
 
