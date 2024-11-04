@@ -18,7 +18,7 @@ getListValues();
 
 const options = {
     responsive: true,
-    pageLength: 3,
+    pageLength: 30,
     lengthMenu: [3, 10, 20, 30],
     bDestroy: true,
     ordering: false,
