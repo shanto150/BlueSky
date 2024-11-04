@@ -3,7 +3,7 @@ import { useAuthStore } from "./stores/authStore";
 
 //creating an axios instance
 const urls = document.head.querySelector('meta[name="api-base-url"]').content;
-
+// alert(urls);
 const axiosInstance = axios.create({
 
     baseURL: urls+"/api/",
