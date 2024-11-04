@@ -25,6 +25,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('divisions', [AreaController::class, 'divisionsList']);
     Route::post('districts', [AreaController::class, 'districtList']);
     Route::post('deletearea', [AreaController::class, 'destroy']);
+    Route::post('editArea', [AreaController::class, 'edit']);
+
 
     Route::get('getroles', [RolePermissionController::class, 'index'])->name('roles.index');
 

@@ -5,7 +5,8 @@ import axiosInstance from "../../../axiosInstance";
 import { ref, onMounted } from "vue";
 import { data } from "jquery";
 import { icons } from "lucide-vue-next";
-
+import { useRouter } from 'vue-router';
+const router = useRouter();
 DataTable.use(DataBS5);
 
 const rData = ref([]);
@@ -87,7 +88,7 @@ const options = {
                 var html = "";
                 var idd = row.idd;
 
-                html += '<router-link :to="{name:"zoneEdit"}" style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle" placement="top" id="edit_tool"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;"></i> </router-link>';
+                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
 
                 html += ' <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle"> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
 
@@ -98,14 +99,22 @@ const options = {
         }
     ],
     "drawCallback": function (settings) {
+        // edit function
+        $(".edit-item").on('click', function (e) {
+            var itemIdd = e.target.dataset.itemId;
+
+            router.push({ name: 'zoneEdit', params: { id: itemIdd } });
+        });
+
+        // delete function
         $(".delete-item").on('click', function (e) {
             var idd = e.target.dataset.itemId;
 
             const response = axiosInstance.post("deletearea", { 'id': idd });
-            if(idd){
+            if (idd) {
                 Notification.showToast('s', 'Successfully Zone Deleted.');
 
-            }else{
+            } else {
                 Notification.showToast('e', 'Wrong Opertaion.');
             }
 

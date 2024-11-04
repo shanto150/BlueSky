@@ -79,7 +79,7 @@ const routes = [
     //Zone
     { path: '/all-zone-list', component: zoneList, name: 'zoneList', meta: { auth: true } },
     { path: '/create-zone', component: zoneCreate, name: 'zoneCreate', meta: { auth: true } },
-    { path: '/edit-zone', component: zoneEdit, name: 'zoneEdit', meta: { auth: true } },
+    { path: '/edit-zone/:id', component: zoneEdit, name: 'zoneEdit', meta: { auth: true },props:true },
 
 ]
 
