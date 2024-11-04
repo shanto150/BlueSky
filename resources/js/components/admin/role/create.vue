@@ -8,11 +8,11 @@ function dataSave() {
 
     createRole(form);
 }
-
+const urlss = document.head.querySelector('meta[name="api-base-url"]').content;
 const createRole = async (formData) => {
 
     try {
-        const url="http://127.0.0.1:8000/api/role/save";
+        const url=urlss+"/api/role/save";
 
         const config = {
             method: 'post',
