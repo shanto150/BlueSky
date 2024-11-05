@@ -11,6 +11,7 @@ getAreaData(props);
 async function getAreaData(props) {
 
     try {
+
         const response = await axiosInstance.post('editArea', { 'id': props });
 
         const name = response.data[0].name;
