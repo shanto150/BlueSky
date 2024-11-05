@@ -21,7 +21,7 @@ async function getAreaData(props) {
         const status = response.data[0].status;
         getDivision(division_id);
     } catch (error) {
-        // console.log(error);
+        console.log(error);
 
     }
 }
