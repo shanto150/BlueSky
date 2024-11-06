@@ -202,6 +202,7 @@ async function getListValues() {
                             height="22" width="22" alt="">
                     </div>
                 </div>
+
                 <DataTable :options="options" :data="rData" class="table table-sm table-striped table-bordered">
                 </DataTable>
             </div>

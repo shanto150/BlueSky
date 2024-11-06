@@ -40,7 +40,6 @@ class AreaController extends BaseController
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $auth = User::where('email',$request->useEmail)->first();
 
         $validator = validator($request->all(),
