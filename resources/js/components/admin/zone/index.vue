@@ -136,13 +136,13 @@ const options = {
 
 async function getListValues() {
     try {
-        authStore.GlobalLoading=true;
+        authStore.GlobalLoading = true;
         const response = await axiosInstance.get("getarea");
         rData.value = response.data.data;
-        authStore.GlobalLoading=false;
+        authStore.GlobalLoading = false;
     } catch (error) {
         console.log(error);
-        authStore.GlobalLoading=false;
+        authStore.GlobalLoading = false;
     }
 }
 
@@ -243,6 +243,12 @@ onMounted(() => {
 
     <div class="row">
         <div id="RoleList" class="table">
+            <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
+                <div class="loader-circle-57">
+                    <img class="position-absolute" src="../../../../../public/theme/appimages/blueskywings.png"
+                        height="22" width="22" alt="">
+                </div>
+            </div>
             <DataTable :options="options" :data="rData"
                 class="display table table-sm  border table-bordered table-striped table-hover"> </DataTable>
         </div>
