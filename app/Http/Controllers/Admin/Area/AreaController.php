@@ -88,24 +88,44 @@ class AreaController extends BaseController
     {
         $auth = User::where('email',$request->useEmail)->first();
 
-        $validator = validator($request->all(),
-            ['area_name' => 'required'],
-            ['division_id' => 'required'],
-            ['district_name' => 'required'],
-        );
-        if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()->all(), 'types' => 'e']);
-        }
+        // $validator = validator($request->all(),
+        //     ['area_name' => 'required'],
+        //     ['division_id' => 'required'],
+        //     ['district_name' => 'required'],
+        // );
+        // if ($validator->fails()) {
+        //     return response()->json(['message' => $validator->errors()->all(), 'types' => 'e']);
+        // }
 
         $area = Area::where('id',$request->area_id)->first();
-        $area->name =  $request->area_name ?? $area->area_name ;
-        $area->division_id = $request->division_id ?? $area->division_id;
-        $area->district_id = $request->district_id ?? $area->district_id;
-        $area->status =  $request->status_val ?? $area->status;
+        $area->name =  $request->area_name!=null ? $request->area_name : $area->name ;
+        $area->division_id = $request->division_id!=null ? $request->division_id : $area->division_id;
+        $area->district_id = $request->district_id !=null? $request->district_id : $area->district_id;
+        $area->status =  $request->status_val!=null ? $request->status_val : $area->status;
         $area->updated_by =  $auth->id;
         $area->save();
 
         return response()->json(['message' => 'Successfully Zone Updated.', 'types' => 's']);
+    }
+
+    public function changeAreaStatus(Request $request)
+    {
+        if($request->id){
+
+            $area = Area::where('id',$request->id)->first();
+            if($area->status == 1 ){
+
+                $area->status = 2;
+            }else if($area->status ==2 ){
+                $area->status = 1;
+            }
+            $area->save();
+            return response()->json(['message' => 'Successfully Zone Saved.', 'types' => 's']);
+
+        }else{
+            return response()->json(['message' => 'Error', 'types' => 'e']);
+
+        }
     }
 
     /**

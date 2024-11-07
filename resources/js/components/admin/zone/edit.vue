@@ -9,9 +9,7 @@ const props = defineProps(['id'])
 const form = reactive({ area_name: "",area_id:'', division_id: "", district_id: "", status_val: "", useEmail: authStore.email });
 
 async function update(props) {
-    $("#status").on('change',function(){
-        form.status_val = $(this).val();
-    })
+
     form.area_id = props.id;
 
 try {
@@ -71,6 +69,10 @@ onMounted(() => {
 
     $('.district_name').on("change", function () {
         form.district_id = $(this).val();
+    });
+
+    $("#status").on('change',function(){
+        form.status_val = $(this).val();
     });
 });
 
