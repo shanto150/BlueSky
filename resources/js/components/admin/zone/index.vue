@@ -168,16 +168,6 @@ async function getListValues() {
     }
 }
 
-onMounted(() => {
-
-    // function deleteZone(id) {
-    //     console.log(id);
-
-    // }
-});
-
-
-
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">

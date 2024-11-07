@@ -6,37 +6,37 @@ import { ref, onMounted, reactive } from "vue";
 const authStore = useAuthStore();
 const props = defineProps(['id'])
 
-const form = reactive({ area_name: "",area_id:'', division_id: "", district_id: "", status_val: "", useEmail: authStore.email });
+const form = reactive({ area_name: "", area_id: '', division_id: "", district_id: "", status_val: "", useEmail: authStore.email });
 
 async function update(props) {
 
     form.area_id = props.id;
 
-try {
+    try {
 
-    const response = await axiosInstance.post("/zone/update", form);
+        const response = await axiosInstance.post("/zone/update", form);
 
-    if (response.data.types == 's') {
-        document.getElementById("addZoneform").reset();
+        if (response.data.types == 's') {
+            document.getElementById("addZoneform").reset();
 
-        $('#division_id option:first').prop('selected', true).trigger(
-            "change"); // reset dropdown value
-        $('#district_id option:first').prop('selected', true).trigger(
-            "change"); // reset dropdown value
-        $('#status option:first').prop('selected', true).trigger(
-            "change"); // reset dropdown value
+            $('#division_id option:first').prop('selected', true).trigger(
+                "change"); // reset dropdown value
+            $('#district_id option:first').prop('selected', true).trigger(
+                "change"); // reset dropdown value
+            $('#status option:first').prop('selected', true).trigger(
+                "change"); // reset dropdown value
 
-        Notification.showToast(response.data.types, response.data.message);
+            Notification.showToast(response.data.types, response.data.message);
 
-    } else if (response.data.types == "e") {
-        Notification.showToast(response.data.types, response.data.message);
+        } else if (response.data.types == "e") {
+            Notification.showToast(response.data.types, response.data.message);
+        }
 
+    } catch (error) {
+        console.log(error);
     }
+}
 
-} catch (error) {
-    console.log(error);
-}
-}
 getAreaData(props);
 
 async function getAreaData(props) {
@@ -71,7 +71,7 @@ onMounted(() => {
         form.district_id = $(this).val();
     });
 
-    $("#status").on('change',function(){
+    $("#status").on('change', function () {
         form.status_val = $(this).val();
     });
 });
@@ -107,32 +107,32 @@ async function getDivision(division_id) {
 
 async function getDistrict(id) {
 
-try {
-    const response = await axiosInstance.post('districts', { 'id': id });
-    // console.log(response.data);
+    try {
+        const response = await axiosInstance.post('districts', { 'id': id });
+        // console.log(response.data);
 
-    var getDatas = [];
-    $.each(response.data, function (key, value) {
-        var obj = { id: value.id, text: value.name }
-        getDatas.push(obj);
+        var getDatas = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name }
+            getDatas.push(obj);
 
-    });
+        });
 
-    let select = $("#district_id")
-    select.select2({
-        placeholder: '=Select=',
-        theme: 'bootstrap-5',
-        width: '100%',
-        allowClear: true,
-        height: '50',
-        data: getDatas,
-    });
+        let select = $("#district_id")
+        select.select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            allowClear: true,
+            height: '50',
+            data: getDatas,
+        });
 
 
-} catch (error) {
-    // console.log(error);
+    } catch (error) {
+        // console.log(error);
 
-}
+    }
 }
 
 </script>
@@ -165,7 +165,7 @@ try {
                 <div class="row">
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Area Name</label>
-                        <input type="text"  class="form-control form-control-sm" id="area_name" name="area_name"
+                        <input type="text" class="form-control form-control-sm" id="area_name" name="area_name"
                             placeholder="Enter Name" v-model="form.area_name">
                     </div>
 
@@ -195,7 +195,8 @@ try {
                 </div>
             </div>
             <div class="card-footer">
-                <button type="button"  @click="update(props)" class="m-2 btn btn-sm btn-info px-4 ms-2 float-end text-white">Update</button>
+                <button type="button" @click="update(props)"
+                    class="m-2 btn btn-sm btn-info px-4 ms-2 float-end text-white">Update</button>
                 <button class="m-2 btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
             </div>
         </form>
