@@ -95,10 +95,16 @@ const options = {
             render: function (data, type, row) {
                 var html = "";
                 var idd = row.idd;
+                var status = row.status;
+                console.log(status);
 
                 html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
+                if (status==1) {
 
-                html += ' <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle"> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change"> <i class="fa-solid fa-ban" data-item-id=' + idd + ' style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                }else{
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change"> <i class="fa-solid fa-check" data-item-id=' + idd + ' style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                }
 
                 html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
 
@@ -121,6 +127,22 @@ const options = {
             const response = axiosInstance.post("deletearea", { 'id': idd });
             if (idd) {
                 Notification.showToast('s', 'Successfully Zone Deleted.');
+
+            } else {
+                Notification.showToast('e', 'Wrong Opertaion.');
+            }
+
+            //after delete reload table
+            getListValues();
+
+        });
+        // change status
+        $(".status-change").on('click', function (e) {
+            var idd = e.target.dataset.itemId;
+
+            const response = axiosInstance.post("changeAreaStatus", { 'id': idd });
+            if (idd) {
+                Notification.showToast('s', 'Successfully Zone status Changed.');
 
             } else {
                 Notification.showToast('e', 'Wrong Opertaion.');
