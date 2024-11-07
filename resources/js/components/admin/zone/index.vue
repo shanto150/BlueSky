@@ -96,13 +96,12 @@ const options = {
                 var html = "";
                 var idd = row.idd;
                 var status = row.status;
-                console.log(status);
 
                 html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
-                if (status==1) {
+                if (status == 1) {
 
                     html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change"> <i class="fa-solid fa-ban" data-item-id=' + idd + ' style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
-                }else{
+                } else {
                     html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change"> <i class="fa-solid fa-check" data-item-id=' + idd + ' style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
                 }
 
@@ -122,35 +121,90 @@ const options = {
 
         // delete function
         $(".delete-item").on('click', function (e) {
+
             var idd = e.target.dataset.itemId;
 
-            const response = axiosInstance.post("deletearea", { 'id': idd });
-            if (idd) {
-                Notification.showToast('s', 'Successfully Zone Deleted.');
+            // delete pop up message
 
-            } else {
-                Notification.showToast('e', 'Wrong Opertaion.');
-            }
+            iziToast.question({
+                timeout: 100000,
+                pauseOnHover: false,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                message: 'Want to delete this area?',
+                position: 'center',
+                buttons: [
+                    ['<button><b>No</b></button>', function (instance, toast) {
 
-            //after delete reload table
-            getListValues();
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
+
+                    }, true],
+                    ['<button><b>Yes</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
+
+                    }, true]
+                ],
+                onClosed: async function (instance, toast, closedBy) {
+                    console.log(closedBy);
+
+                    if (closedBy == 'yes') {
+                        const response = axiosInstance.post("deletearea", { 'id': idd });
+                        getListValues();
+                        Notification.showToast('s', 'Successfully Zone Deleted.');
+                    } else {
+
+                    }
+
+                }
+            });
+            // delete pop up message end
+
 
         });
+
         // change status
         $(".status-change").on('click', function (e) {
             var idd = e.target.dataset.itemId;
 
-            const response = axiosInstance.post("changeAreaStatus", { 'id': idd });
-            if (idd) {
-                Notification.showToast('s', 'Successfully Zone status Changed.');
+            iziToast.question({
+                timeout: 100000,
+                pauseOnHover: false,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                message: 'Want to change status this area?',
+                position: 'center',
+                buttons: [
+                    ['<button><b>No</b></button>', function (instance, toast) {
 
-            } else {
-                // Notification.showToast('e', 'Wrong Opertaion.');
-                ErrorCatch.CatchError(error);
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
 
-            }
-            //after delete reload table
-            getListValues();
+                    }, true],
+                    ['<button><b>Yes</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
+
+                    }, true]
+                ],
+                onClosed: async function (instance, toast, closedBy) {
+                    console.log(closedBy);
+
+                    if (closedBy == 'yes') {
+                        const response = axiosInstance.post("changeAreaStatus", { 'id': idd });
+                        getListValues();
+                        Notification.showToast('s', 'Successfully Zone status Changed.');
+                    } else {
+
+                    }
+
+                }
+            });
 
         });
     }
