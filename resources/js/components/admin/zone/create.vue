@@ -28,25 +28,24 @@ async function save() {
 
         const response = await axiosInstance.post("/zone/save", form);
 
-        if (response.data.types == 's') {
-            document.getElementById("addZoneform").reset();
 
-            $('#division_id option:first').prop('selected', true).trigger(
-                "change"); // reset dropdown value
-            $('#district_id option:first').prop('selected', true).trigger(
-                "change"); // reset dropdown value
-            $('#status option:first').prop('selected', true).trigger(
-                "change"); // reset dropdown value
+        document.getElementById("addZoneform").reset();
 
-            Notification.showToast(response.data.types, response.data.message);
+        $('#division_id option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
+        $('#district_id option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
+        $('#status option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
 
-        } else if (response.data.types == "e") {
-            Notification.showToast(response.data.types, response.data.message);
+        Notification.showToast('s', response.data.message);
 
-        }
+
 
     } catch (error) {
-        console.log(error);
+        ErrorCatch.CatchError(error);
+
+
     }
 }
 
