@@ -34,3 +34,4 @@ Route::middleware(['auth:api'])->group(function () {
 });
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
 Route::post('/zone/save', [AreaController::class, 'store']);
+Route::post('/zone/update', [AreaController::class, 'update']);
