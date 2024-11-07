@@ -145,9 +145,10 @@ const options = {
                 Notification.showToast('s', 'Successfully Zone status Changed.');
 
             } else {
-                Notification.showToast('e', 'Wrong Opertaion.');
-            }
+                // Notification.showToast('e', 'Wrong Opertaion.');
+                ErrorCatch.CatchError(error);
 
+            }
             //after delete reload table
             getListValues();
 

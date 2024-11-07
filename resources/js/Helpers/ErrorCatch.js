@@ -11,6 +11,10 @@ class ErrorCatch {
             Notification.showToast('e', eEes.response.data.message);
             return;
         }
+        else if (eEes.response.status == 404) {
+            Notification.showToast('e', eEes.response.data.message);
+            return;
+        }
         Notification.showToast('e', eEes.response.data.data.error);
     }
 

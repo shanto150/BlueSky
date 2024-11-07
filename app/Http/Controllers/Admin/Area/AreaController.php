@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Area;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\BaseController;
 use App\Models\Area\Area;
 use App\Models\User;
-
-use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
 
 class AreaController extends BaseController
 {
@@ -19,10 +16,10 @@ class AreaController extends BaseController
      */
     public function index()
     {
-        $data= DB::table('areas as ar')
-        ->join('districts as d','ar.district_id','d.id')
-        ->join('divisions as div','ar.division_id','div.id')
-        ->selectRaw('ar.id as idd,ar.name,d.name as district,div.name as division,ar.created_at,ar.status,ar.updated_at,f_username(ar.updated_by) updated_by,f_username(ar.created_by) created_by')->get();
+        $data = DB::table('areas as ar')
+            ->join('districts as d', 'ar.district_id', 'd.id')
+            ->join('divisions as div', 'ar.division_id', 'div.id')
+            ->selectRaw('ar.id as idd,ar.name,d.name as district,div.name as division,ar.created_at,ar.status,ar.updated_at,f_username(ar.updated_by) updated_by,f_username(ar.created_by) created_by')->get();
 
         return DataTables::of($data)->addIndexColumn()->make(true);
     }
@@ -40,7 +37,7 @@ class AreaController extends BaseController
      */
     public function store(Request $request)
     {
-        $auth = User::where('email',$request->useEmail)->first();
+        $auth = User::where('email', $request->useEmail)->first();
 
         $validator = validator($request->all(),
             ['area_name' => 'required'],
@@ -48,18 +45,20 @@ class AreaController extends BaseController
             ['district_name' => 'required'],
         );
         if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()->all(), 'types' => 'e']);
+            return $this->ErrorResponse($validator->errors()->all());
         }
 
-        $area =  new Area;
-        $area->name =  $request->area_name;
+        $area = new Area;
+        $area->name = $request->area_name;
         $area->division_id = $request->division_id;
         $area->district_id = $request->district_id;
-        $area->status =  1;
-        $area->created_by =  $auth->id;
+        $area->status = 1;
+        $area->created_by = $auth->id;
         $area->save();
 
-        return response()->json(['message' => 'Successfully Zone Saved.', 'types' => 's']);
+        $success = '';
+
+        return $this->SuccessResponse($success, 'Successfully Zone Saved.');
 
     }
 
@@ -86,7 +85,7 @@ class AreaController extends BaseController
      */
     public function update(Request $request)
     {
-        $auth = User::where('email',$request->useEmail)->first();
+        $auth = User::where('email', $request->useEmail)->first();
 
         // $validator = validator($request->all(),
         //     ['area_name' => 'required'],
@@ -94,36 +93,40 @@ class AreaController extends BaseController
         //     ['district_name' => 'required'],
         // );
         // if ($validator->fails()) {
-        //     return response()->json(['message' => $validator->errors()->all(), 'types' => 'e']);
+        //     return $this->ErrorResponse($validator->errors()->all());
         // }
 
-        $area = Area::where('id',$request->area_id)->first();
-        $area->name =  $request->area_name!=null ? $request->area_name : $area->name ;
-        $area->division_id = $request->division_id!=null ? $request->division_id : $area->division_id;
-        $area->district_id = $request->district_id !=null? $request->district_id : $area->district_id;
-        $area->status =  $request->status_val!=null ? $request->status_val : $area->status;
-        $area->updated_by =  $auth->id;
+        $area = Area::where('id', $request->area_id)->first();
+        $area->name = $request->area_name != null ? $request->area_name : $area->name;
+        $area->division_id = $request->division_id != null ? $request->division_id : $area->division_id;
+        $area->district_id = $request->district_id != null ? $request->district_id : $area->district_id;
+        $area->status = $request->status_val != null ? $request->status_val : $area->status;
+        $area->updated_by = $auth->id;
         $area->save();
 
-        return response()->json(['message' => 'Successfully Zone Updated.', 'types' => 's']);
+        $success = '';
+        return $this->SuccessResponse($success, 'Successfully Zone Updated.');
+
     }
 
     public function changeAreaStatus(Request $request)
     {
-        if($request->id){
+        if ($request->id) {
 
-            $area = Area::where('id',$request->id)->first();
-            if($area->status == 1 ){
+            $area = Area::where('id', $request->id)->first();
+            if ($area->status == 1) {
 
                 $area->status = 2;
-            }else if($area->status ==2 ){
+            } else if ($area->status == 2) {
                 $area->status = 1;
             }
             $area->save();
-            return response()->json(['message' => 'Successfully Zone Saved.', 'types' => 's']);
+            $success = '';
+            return $this->SuccessResponse($success, 'Successfully Zone status updated.');
 
-        }else{
-            return response()->json(['message' => 'Error', 'types' => 'e']);
+        } else {
+            $error = 'Id can not be null.';
+            return $this->ErrorResponse($error);
 
         }
     }
@@ -134,32 +137,33 @@ class AreaController extends BaseController
     public function destroy(Request $request)
     {
 
-        if($request->id){
+        if ($request->id) {
 
-            $area = Area::where('id',$request->id)->first();
+            $area = Area::where('id', $request->id)->first();
             $area->delete();
+            $success= '';
+            return $this->SuccessResponse($success, 'Successfully Zone deleted.');
 
-            return response()->json(['message' => 'Successfully Zone Saved.', 'types' => 's']);
 
-        }else{
-            return response()->json(['message' => 'Error', 'types' => 'e']);
+        } else {
+            $error = 'Id can not be null.';
+            return $this->ErrorResponse($error);
 
         }
 
     }
 
-
     public function divisionsList()
     {
 
-        $div =DB::table('divisions')->get();
+        $div = DB::table('divisions')->get();
         return response()->json($div);
 
     }
 
     public function districtList(Request $request)
     {
-        $dist = DB::table('districts')->where('division_id',$request->id)->orderBy('name','asc')->get();
+        $dist = DB::table('districts')->where('division_id', $request->id)->orderBy('name', 'asc')->get();
         return response()->json($dist);
     }
 }

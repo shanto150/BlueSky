@@ -13,27 +13,12 @@ async function update(props) {
     form.area_id = props.id;
 
     try {
-
         const response = await axiosInstance.post("/zone/update", form);
 
-        if (response.data.types == 's') {
-            document.getElementById("addZoneform").reset();
-
-            $('#division_id option:first').prop('selected', true).trigger(
-                "change"); // reset dropdown value
-            $('#district_id option:first').prop('selected', true).trigger(
-                "change"); // reset dropdown value
-            $('#status option:first').prop('selected', true).trigger(
-                "change"); // reset dropdown value
-
-            Notification.showToast(response.data.types, response.data.message);
-
-        } else if (response.data.types == "e") {
-            Notification.showToast(response.data.types, response.data.message);
-        }
+            Notification.showToast('s', response.data.message);
 
     } catch (error) {
-        console.log(error);
+        ErrorCatch.CatchError(error);
     }
 }
 
@@ -101,7 +86,8 @@ async function getDivision(division_id) {
 
 
     } catch (error) {
-        // console.log(error);
+        ErrorCatch.CatchError(error);
+
 
     }
 }
@@ -131,7 +117,8 @@ async function getDistrict(id) {
 
 
     } catch (error) {
-        // console.log(error);
+        ErrorCatch.CatchError(error);
+
 
     }
 }
