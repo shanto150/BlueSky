@@ -6,6 +6,39 @@ import { ref, onMounted, reactive } from "vue";
 const authStore = useAuthStore();
 const props = defineProps(['id'])
 
+const form = reactive({ area_name: "",area_id:'', division_id: "", district_id: "", status_val: "", useEmail: authStore.email });
+
+async function update(props) {
+    $("#status").on('change',function(){
+        form.status_val = $(this).val();
+    })
+    form.area_id = props.id;
+
+try {
+
+    const response = await axiosInstance.post("/zone/update", form);
+
+    if (response.data.types == 's') {
+        document.getElementById("addZoneform").reset();
+
+        $('#division_id option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
+        $('#district_id option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
+        $('#status option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
+
+        Notification.showToast(response.data.types, response.data.message);
+
+    } else if (response.data.types == "e") {
+        Notification.showToast(response.data.types, response.data.message);
+
+    }
+
+} catch (error) {
+    console.log(error);
+}
+}
 getAreaData(props);
 
 async function getAreaData(props) {
@@ -20,23 +53,24 @@ async function getAreaData(props) {
         const district_id = response.data[0].district_id;
         const status = response.data[0].status;
         getDivision(division_id);
+
+        getDistrict(district_id);
     } catch (error) {
         console.log(error);
-
     }
 }
 
 onMounted(() => {
     $('.division_name').on("change", function () {
 
-        // form.division_id = $(this).val();
+        form.division_id = $(this).val();
         $('.district_name').empty(); // empty previous data
 
         getDistrict($(this).val());
     });
 
     $('.district_name').on("change", function () {
-        // form.district_id = $(this).val();
+        form.district_id = $(this).val();
     });
 });
 
@@ -130,7 +164,7 @@ try {
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Area Name</label>
                         <input type="text"  class="form-control form-control-sm" id="area_name" name="area_name"
-                            placeholder="Enter Name">
+                            placeholder="Enter Name" v-model="form.area_name">
                     </div>
 
                     <div class="col-md-6">
@@ -159,7 +193,7 @@ try {
                 </div>
             </div>
             <div class="card-footer">
-                <button type="button" class="m-2 btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
+                <button type="button"  @click="update(props)" class="m-2 btn btn-sm btn-info px-4 ms-2 float-end text-white">Update</button>
                 <button class="m-2 btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
             </div>
         </form>

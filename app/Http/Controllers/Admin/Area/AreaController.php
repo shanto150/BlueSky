@@ -40,7 +40,6 @@ class AreaController extends BaseController
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $auth = User::where('email',$request->useEmail)->first();
 
         $validator = validator($request->all(),
@@ -85,9 +84,28 @@ class AreaController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $auth = User::where('email',$request->useEmail)->first();
+
+        $validator = validator($request->all(),
+            ['area_name' => 'required'],
+            ['division_id' => 'required'],
+            ['district_name' => 'required'],
+        );
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->all(), 'types' => 'e']);
+        }
+
+        $area = Area::where('id',$request->area_id)->first();
+        $area->name =  $request->area_name ?? $area->area_name ;
+        $area->division_id = $request->division_id ?? $area->division_id;
+        $area->district_id = $request->district_id ?? $area->district_id;
+        $area->status =  $request->status_val ?? $area->status;
+        $area->updated_by =  $auth->id;
+        $area->save();
+
+        return response()->json(['message' => 'Successfully Zone Updated.', 'types' => 's']);
     }
 
     /**
