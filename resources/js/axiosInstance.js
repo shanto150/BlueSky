@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
     },
 });
 
-function refresh_token() {
+async function refresh_token() {
     const authStore = useAuthStore();
     const accessToken = authStore.decryptWithAES(authStore.token);
     const config = {
