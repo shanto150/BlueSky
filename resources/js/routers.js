@@ -37,6 +37,16 @@ const roleEdit = () => import('./components/admin/role/edit.vue')
 //Zone
 const zoneList = () => import('./components/admin/zone/index.vue')
 const zoneCreate = () => import('./components/admin/zone/create.vue')
+const zoneEdit = () => import('./components/admin/zone/edit.vue')
+
+//department
+const departmentList = () => import('./components/admin/department/index.vue')
+const deptCreate = () => import('./components/admin/department/create.vue')
+const deptEdit = () => import('./components/admin/department/edit.vue')
+//office location
+const offLoc = () => import('./components/admin/officeLocation/index.vue')
+const addoffLoc = () => import('./components/admin/officeLocation/create.vue')
+const offEdit = () => import('./components/admin/officeLocation/edit.vue')
 
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
@@ -78,7 +88,15 @@ const routes = [
     //Zone
     { path: '/all-zone-list', component: zoneList, name: 'zoneList', meta: { auth: true } },
     { path: '/create-zone', component: zoneCreate, name: 'zoneCreate', meta: { auth: true } },
-
+    { path: '/edit-zone/:id', component: zoneEdit, name: 'zoneEdit', meta: { auth: true },props:true },
+    // department
+    { path: '/all-department-list', component: departmentList, name: 'departmentList', meta: { auth: true } },
+    { path: '/create-department', component: deptCreate, name: 'deptCreate', meta: { auth: true } },
+    { path: '/edit-department/:id', component: deptEdit, name: 'deptEdit', meta: { auth: true },props:true  },
+    // office location
+    { path: '/all-office-location', component: offLoc, name: 'offLoc', meta: { auth: true } },
+    { path: '/create-location', component: addoffLoc, name: 'addoffLoc', meta: { auth: true } },
+    { path: '/office-location/:id', component: offEdit, name: 'offEdit', meta: { auth: true },props:true  },
 ]
 
 const router = createRouter({

@@ -106,13 +106,13 @@ onMounted(() => {
                         </li>
 
                         <li>
-                            <router-link v-wave :to="{ name: 'zoneList' }">
+                            <router-link v-wave :to="{ name: 'departmentList' }">
                                 <i class='bx bx-paper-plane'></i> Department
                             </router-link>
                         </li>
 
                         <li>
-                            <router-link v-wave :to="{ name: 'zoneList' }">
+                            <router-link v-wave :to="{ name: 'offLoc' }">
                                 <i class='bx bx-paper-plane'></i> Office Location
                             </router-link>
                         </li>
