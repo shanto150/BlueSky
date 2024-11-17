@@ -124,7 +124,7 @@ onMounted(() => {
                                     <i class='bx bx-paper-plane'></i> Payment Account
                                 </router-link>
 
-                                <router-link v-wave :to="{ name: 'zoneList' }">
+                                <router-link v-wave :to="{ name: 'issuedBankMFS' }">
                                     <i class='bx bx-paper-plane'></i> Issused Bank & MFS
                                 </router-link>
                             </ul>

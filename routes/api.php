@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Area\AreaController;
 use App\Http\Controllers\Admin\Department\DepartmentController;
 use App\Http\Controllers\Admin\Role\RolePermissionController;
+use App\Http\Controllers\Admin\IssuedBankMFS\IssuedBankMFSController;
 use App\Http\Controllers\Admin\OfficeLocation\LocationController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,14 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/office/location/update', [LocationController::class, 'update']);
     Route::post('changeOffLocStatus', [LocationController::class, 'changeOffLocStatus']);
     Route::post('deleteOfficeLocation', [LocationController::class, 'destroy']);
+
+    //IssuedBankMFSController
+    Route::get('getBankMFS', [IssuedBankMFSController::class, 'index'])->name('settings.deposit.BankMFS');
+    Route::post('/bankMfs/save', [IssuedBankMFSController::class, 'save'])->name('settings.deposit.bankMfsSave');
+    Route::post('/editBankMfs', [IssuedBankMFSController::class, 'edit'])->name('settings.deposit.bankMfsEdit');
+    Route::post('/bankormfs/update', [IssuedBankMFSController::class, 'update'])->name('settings.deposit.bankMfsUpdate');
+    Route::post('changeIssuedBankStatus', [IssuedBankMFSController::class, 'changeIssuedBankStatus']);
+    Route::post('deleteBankMFS', [IssuedBankMFSController::class, 'deleteBankMFS']);
 
 
 });
