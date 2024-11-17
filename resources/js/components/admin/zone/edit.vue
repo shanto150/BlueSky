@@ -22,6 +22,8 @@ async function update(props) {
     }
 }
 
+
+getDivision();
 getAreaData(props);
 
 async function getAreaData(props) {
@@ -30,13 +32,22 @@ async function getAreaData(props) {
 
         const response = await axiosInstance.post('editArea', { 'id': props });
 
+
+
         const name = response.data[0].name;
         $("#area_name").val(name);
 
         const division_id = response.data[0].division_id;
         const district_id = response.data[0].district_id;
         const status = response.data[0].status;
-        getDivision(division_id);
+
+        console.log(division_id);
+
+        $('#division_id').val(division_id);
+        $('#division_id').trigger('change');
+        $('#status').val(status);
+        $('#status').trigger('change');
+
 
         getDistrict(district_id);
     } catch (error) {
@@ -63,7 +74,7 @@ onMounted(() => {
 });
 
 
-async function getDivision(division_id) {
+async function getDivision() {
     try {
         const response = await axiosInstance.get('divisions');
 
@@ -158,7 +169,7 @@ async function getDistrict(id) {
                     </div>
 
                     <div class="col-md-6">
-                        <label for="input1" class="form-label">Division</label>
+                        <label for="input1" class="form-label">Divisionxx</label>
                         <select id="division_id" name="division_name"
                             class="form-control form-control-sm single-select-fields division_name">
                         </select>
