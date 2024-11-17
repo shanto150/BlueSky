@@ -8,11 +8,11 @@ function dataSave() {
 
     createRole(form);
 }
-
+const urlss = document.head.querySelector('meta[name="api-base-url"]').content;
 const createRole = async (formData) => {
 
     try {
-        const url="http://127.0.0.1:8000/api/role/save";
+        const url=urlss+"/api/role/save";
 
         const config = {
             method: 'post',
@@ -54,7 +54,7 @@ const createRole = async (formData) => {
 
                     </li>
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'AgentList' }">Role List</router-link>
+                        <router-link :to="{ name: 'AgentList' }">Role-permission List</router-link>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">Create New Role</li>
                 </ol>

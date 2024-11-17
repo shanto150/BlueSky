@@ -1,76 +1,61 @@
 <script setup>
 import DataTable from "datatables.net-vue3";
 import DataBS5 from "datatables.net-bs5";
-import jszip from 'jszip';
-import 'datatables.net-buttons-bs5';
-import 'datatables.net-buttons/js/buttons.html5.mjs';
-import 'datatables.net-responsive-bs5';
-
-
+import axiosInstance from "../../../axiosInstance";
+import { ref, onMounted } from "vue";
+import { data } from "jquery";
+import { icons } from "lucide-vue-next";
+import { useRouter } from 'vue-router';
+const router = useRouter();
 import { useAuthStore } from '../../../stores/authStore';
 const authStore = useAuthStore();
-import axiosInstance from "../../../axiosInstance";
-import { ref } from "vue";
 
 DataTable.use(DataBS5);
-DataBS5.Buttons.jszip(jszip);
 
 const rData = ref([]);
-
-
-
+var regExSearch = ref();
 getListValues();
 
 const options = {
     responsive: true,
-    destroy: true,
     pageLength: 30,
     lengthMenu: [3, 10, 20, 30],
+    bDestroy: true,
     ordering: false,
+    dom: "<'row'<'col-sm-4'B><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'f>>" + "<'row'<'col-sm-12'tr>>" +
+        "<'row justify-content-between Reduct_table_gap'<'d-md-flex justify-content-between align-items-center dt-layout-start col-md-auto me-auto'i><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'p>>",
+    buttons: ['copy', 'csv', 'pdf', 'excel', 'print'],
+    language: {
+        search: "",
+        searchPlaceholder: "Search by anything",
+    },
     columnDefs: [{
         defaultContent: "0",
         targets: "_all",
-    }
-    ],
-    dom: "<'row'<'col-sm-4'B><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'f>>" + "<'row'<'col-sm-12'tr>>" +
-        "<'row justify-content-between Reduct_table_gap'<'d-md-flex justify-content-between align-items-center dt-layout-start col-md-auto me-auto'i><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'p>>",
-    buttons: [
-        {
-            extend: 'excel',
-            text: '<i class="fa fa-file-excel"></i> Excel',
-            title: 'Your Title',
-            messageTop: function () {
-                return 'Fun';
-            },
-            className: 'btn btn-danger btn-sm text-white',
-            exportOptions: {
-                columns: [1, 2, 3, 5]
-            }
-        },
-        {
-            extend: 'csv',
-            text: '<i class="fa fa-file-csv"></i> CSV',
-            title: 'Your Title',
-            messageTop: function () {
-
-                return 'Fun';
-            },
-            className: 'btn btn-info btn-sm text-white',
-            exportOptions: {
-                columns: [1, 2, 3, 5]
-            }
-        }
-    ],
-    language: {
-        search: "",
-        searchPlaceholder: "Search by anything..",
-    },
+    }],
     columns: [
         { data: "DT_RowIndex", title: "SL" },
-        { data: "name", title: "Role" },
-        { data: "total_perms", title: "Permissions" },
         {
-            title: "Created",
+            title: "Name",
+            render: function (data, type, row) {
+                var html = "";
+                html += row.name;
+
+                return html;
+            },
+        },
+        {
+            title: "Total User",
+            render: function (data, type, row) {
+                var html = "";
+                html += '0';
+
+                return html;
+            },
+        },
+
+        {
+            title: "Created By",
             render: function (data, type, row) {
                 var html = "";
                 html += row.created_by;
@@ -82,38 +67,167 @@ const options = {
             },
         },
         {
-            title: "Updated",
+            title: "Updated By",
             render: function (data, type, row) {
                 var html = "";
-                html += row.updated_by || "";
+                html += row.updated_by || "-";
                 html += "<br>";
-
-                html += '<span class="text-primary">';
-                html += row.updated_at + "</span>";
+                if (row.updated_by) {
+                    html += '<span class="text-primary">';
+                    html += row.updated_at + "</span>";
+                }
                 return html;
             },
         },
-        { data: "status", title: "Status" },
+        {
+            title: "Status",
+            render: function (data, type, row) {
+                var html = "";
+
+                if (row.status == 1) {
+                    html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Active </div>';
+                } else {
+                    html += '<div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Deactivated </div>';
+                }
+
+                return html;
+            },
+        },
+        {
+            title: "Action",
+            render: function (data, type, row) {
+                var html = "";
+                var idd = row.idd;
+                var status = row.status;
+
+                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
+                if (status == 1) {
+
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change"> <i class="fa-solid fa-ban" data-item-id=' + idd + ' style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                } else {
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change"> <i class="fa-solid fa-check" data-item-id=' + idd + ' style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                }
+
+                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
+
+                return html;
+            },
+        }
     ],
+    "drawCallback": function (settings) {
+        // edit function
+        $(".edit-item").on('click', function (e) {
+            var itemIdd = e.target.dataset.itemId;
+            router.push({ name: 'deptEdit', params: { id: itemIdd } });
+        });
+
+        // delete function
+        $(".delete-item").on('click', function (e) {
+
+            var idd = e.target.dataset.itemId;
+
+            // delete pop up message
+
+            iziToast.question({
+                timeout: 100000,
+                pauseOnHover: false,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                message: 'Want to delete this department?',
+                position: 'center',
+                buttons: [
+                    ['<button><b>No</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
+
+                    }, true],
+                    ['<button><b>Yes</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
+
+                    }, true]
+                ],
+                onClosed: async function (instance, toast, closedBy) {
+
+                    if (closedBy == 'yes') {
+                        const response = axiosInstance.post("deleteDept", { 'id': idd });
+                        getListValues();
+                        Notification.showToast('s', 'Successfully Department Deleted.');
+                    } else {
+
+                    }
+
+                }
+            });
+            // delete pop up message end
+
+
+        });
+
+        // change status
+        $(".status-change").on('click', function (e) {
+            var idd = e.target.dataset.itemId;
+
+            iziToast.question({
+                timeout: 100000,
+                pauseOnHover: false,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                message: 'Want to change status this department?',
+                position: 'center',
+                buttons: [
+                    ['<button><b>No</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
+
+                    }, true],
+                    ['<button><b>Yes</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
+
+                    }, true]
+                ],
+                onClosed: async function (instance, toast, closedBy) {
+
+                    if (closedBy == 'yes') {
+                        const response = axiosInstance.post("changeDepartmentStatus", { 'id': idd });
+                        getListValues();
+                        Notification.showToast('s', 'Successfully Zone status Changed.');
+                    } else {
+
+                    }
+
+                }
+            });
+
+        });
+    }
 };
+
 
 async function getListValues() {
     try {
         authStore.GlobalLoading = true;
-        const response = await axiosInstance.get("getroles");
+        const response = await axiosInstance.get("getdept");
         rData.value = response.data.data;
         authStore.GlobalLoading = false;
     } catch (error) {
+        // console.log(error);
         authStore.GlobalLoading = false;
-        console.log(error);
     }
 }
 
-
 </script>
 <template>
-
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+
+
         <div class="breadcrumb-title pe-3">Settings</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
@@ -121,110 +235,98 @@ async function getListValues() {
                     <li class="breadcrumb-item">
                         <router-link :to="{ name: 'Home' }">Dashboard</router-link>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Role List</li>
+                    <li class="breadcrumb-item">
+                        <router-link :to="{ name: 'departmentList' }">Setings</router-link>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Department List</li>
                 </ol>
             </nav>
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-                <router-link :to="{ name: 'roleCreate' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i>Add New Role
+                <router-link :to="{ name: 'deptCreate' }" class="btn btn-primary btn-sm">
+                    <i class="fa fa-circle-plus"></i>Add New Department
                 </router-link>
+
             </div>
         </div>
     </div>
+
+
     <div class="row">
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-agency">
-                <span class="info-agency-icon bg-info elevation-1"><i class="fas fa-key"></i></span>
+                <span class="info-agency-icon bg-info elevation-1"><i class="fa-solid fa-location-dot"></i></span>
                 <div class="info-agency-content">
-                    <span class="info-agency-text">Total Permission</span>
-                    <span class="info-agency-number"> 1200 </span>
+                    <span class="info-agency-text">Total</span>
+                    <span class="info-agency-number">
+                        1200
+                    </span>
                 </div>
             </div>
         </div>
 
         <div class="col-12 col-sm-6 col-md-3">
             <div class="active-agency mb-3">
-                <span class="active-agency-icon bg-success elevation-1 text-white"><i
-                        class="fa-solid fa-user-cog"></i></span>
+                <span class="active-agency-icon bg-success elevation-1 text-white"><i class="fa fa-check"></i></span>
                 <div class="active-agency-content">
-                    <span class="active-agency-text">Total Role</span>
+                    <span class="active-agency-text">Active</span>
                     <span class="active-agency-number">760</span>
                 </div>
+
             </div>
+
         </div>
 
         <div class="col-12 col-sm-6 col-md-3">
             <div class="pending-agnt mb-3">
-                <span class="pending-agnt-icon bg-warning elevation-1"><i class="fa fa-check"></i></span>
+                <span class="pending-agnt-icon bg-warning elevation-1"><i class="fa-solid fa-circle-pause"></i></span>
                 <div class="pending-agnt-content">
-                    <span class="pending-agnt-text">Active Role</span>
+                    <span class="pending-agnt-text">Inactive</span>
                     <span class="pending-agnt-number">20</span>
                 </div>
             </div>
         </div>
-
-        <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-pause"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Inactive Role</span>
-                    <span class="info-box-number">5</span>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-12">
             <div class="card rounded rounded-2 shadow-none p-3">
                 <div class="row">
+
                     <div class="col-md-6">
-                        <select class="form-select form-select-sm" id="single-select-field"
-                            data-placeholder="Choose one thing">
-                            <option>Select Role</option>
+                        <select class="form-select form-select-sm" id="s_area" data-placeholder="Choose one thing">
+                            <option value="">Select Area</option>
+                            <option value="at">At</option>
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <select class="form-select form-select-sm" id="single-select-field"
-                            data-placeholder="Choose one thing">
+                        <select class="form-select form-select-sm" id="s_status" data-placeholder="Choose one thing">
                             <option>Select Status</option>
                         </select>
                     </div>
+
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <div class="row position-relative">
-        <div class="col-12">
-            <div id="RoleList" class="card rounded rounded-2 shadow-none p-3">
-
-                <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
-                    <div class="loader-circle-57">
-                        <img class="position-absolute" src="../../../../../public/theme/appimages/blueskywings.png"
-                            height="22" width="22" alt="">
-                    </div>
+    <div class="row">
+        <div id="RoleList" class="table">
+            <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
+                <div class="loader-circle-57">
+                    <img class="position-absolute" src="../../../../../public/theme/appimages/blueskywings.png"
+                        height="22" width="22" alt="">
                 </div>
-
-                <DataTable :options="options" :data="rData" class="table table-sm table-striped table-bordered">
-                </DataTable>
             </div>
+            <DataTable :options="options" :data="rData"
+                class="display table table-sm  border table-bordered table-striped table-hover"> </DataTable>
         </div>
-
     </div>
+
 </template>
 
 <style>
-@font-face {
-    font-family: "Inter";
-    src: url('../../fonts/BeVietnamPro/BeVietnamPro-Regular.ttf');
-}
-
-
-
-
 .center-body {
     display: flex;
     justify-content: center;
@@ -267,11 +369,6 @@ async function getListValues() {
 }
 
 
-.dt-buttons {
-    padding: 4px;
-    background-color: #3B79F21A;
-}
-
 .dt-search {
     margin-bottom: -15px;
     width: 190px;
@@ -305,33 +402,21 @@ async function getListValues() {
 
 /* dashboard design */
 .info-agency {
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
-    border-radius: 0.25rem;
-    background-image: linear-gradient(to right top,
-            #dae9f8,
-            #dae9f8,
-            #dae9f8,
-            #dae9f8,
-            #dae9f8,
-            #cbdff4,
-            #bcd6f1,
-            #aecced,
-            #8eb6e4,
-            #6da1dc,
-            #4a8bd2,
-            #1576c9);
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    border-radius: .25rem;
+    background-image: linear-gradient(to right top, #dae9f8, #dae9f8, #dae9f8, #dae9f8, #dae9f8, #cbdff4, #bcd6f1, #aecced, #8eb6e4, #6da1dc, #4a8bd2, #1576c9);
     /* background-image: linear-gradient(to right top, #dae9f8, #dae9f8, #dae9f8, #dae9f8, #dae9f8, #d6e7f8, #d1e5f8, #cde3f8, #c2def8, #b8d9f8, #add5f8, #a1d0f8); */
     display: -ms-flexbox;
     display: flex;
     margin-bottom: 1rem;
     min-height: 90px;
-    padding: 0.5rem;
+    padding: .5rem;
     position: relative;
     width: 100%;
 }
 
 .info-agency .info-agency-icon {
-    border-radius: 0.25rem;
+    border-radius: .25rem;
     -ms-flex-align: center;
     align-items: center;
     display: -ms-flexbox;
@@ -348,13 +433,15 @@ async function getListValues() {
     color: #fff !important;
 }
 
+
 .elevation-1 {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24) !important;
 }
 
 .bg-info {
     background-color: #0880e1 !important;
 }
+
 
 .info-agency .info-agency-content {
     display: -ms-flexbox;
@@ -382,7 +469,7 @@ async function getListValues() {
 
 .info-agency .info-agency-number {
     display: block;
-    margin-top: 0.25rem;
+    margin-top: .25rem;
     font-weight: 700;
     font-size: 22px;
 }
@@ -390,33 +477,21 @@ async function getListValues() {
 /* active agency */
 
 .active-agency {
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
-    border-radius: 0.25rem;
-    background-image: linear-gradient(to right top,
-            #d7f1e9,
-            #d7f1e9,
-            #d7f1e9,
-            #d7f1e9,
-            #d7f1e9,
-            #c9f1e4,
-            #baf1de,
-            #acf0d7,
-            #8cefc6,
-            #6decb1,
-            #4ce998,
-            #24e57c);
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    border-radius: .25rem;
+    background-image: linear-gradient(to right top, #d7f1e9, #d7f1e9, #d7f1e9, #d7f1e9, #d7f1e9, #c9f1e4, #baf1de, #acf0d7, #8cefc6, #6decb1, #4ce998, #24e57c);
     /* background-image: linear-gradient(to right top, #dbf1eb, #dbf1eb, #dbf1eb, #dbf1eb, #dbf1eb, #d2f1e8, #c9f1e5, #c0f1e1, #acf1d7, #99f0cb, #87efbe, #76eeae); */
     display: -ms-flexbox;
     display: flex;
     margin-bottom: 1rem;
     min-height: 90px;
-    padding: 0.5rem;
+    padding: .5rem;
     position: relative;
     width: 100%;
 }
 
 .active-agency .active-agency-icon {
-    border-radius: 0.25rem;
+    border-radius: .25rem;
     -ms-flex-align: center;
     align-items: center;
     display: -ms-flexbox;
@@ -438,12 +513,13 @@ async function getListValues() {
 }
 
 .elevation-1 {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24) !important;
 }
 
 .bg-success {
     background-color: #05cc61 !important;
 }
+
 
 .active-agency .active-agency-content {
     display: -ms-flexbox;
@@ -471,40 +547,28 @@ async function getListValues() {
 
 .active-agency .active-agency-number {
     display: block;
-    margin-top: 0.25rem;
+    margin-top: .25rem;
     font-weight: 700;
     font-size: 22px;
 }
 
 /* Pending */
 .pending-agnt {
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
-    border-radius: 0.25rem;
-    background-image: linear-gradient(to right top,
-            #eee6e2,
-            #eee6e2,
-            #eee6e2,
-            #eee6e2,
-            #eee6e2,
-            #f0ded6,
-            #f1d7c9,
-            #f2cfbd,
-            #f3bea2,
-            #f3ac88,
-            #f29b6f,
-            #ef8956);
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    border-radius: .25rem;
+    background-image: linear-gradient(to right top, #eee6e2, #eee6e2, #eee6e2, #eee6e2, #eee6e2, #f0ded6, #f1d7c9, #f2cfbd, #f3bea2, #f3ac88, #f29b6f, #ef8956);
     /* background-image: linear-gradient(to right top, #eee6e2, #eee6e2, #eee6e2, #eee6e2, #eee6e2, #efe2db, #efddd5, #f0d9ce, #f1d0bf, #f2c6b1, #f2bda2, #f1b494); */
     display: -ms-flexbox;
     display: flex;
     margin-bottom: 1rem;
     min-height: 90px;
-    padding: 0.5rem;
+    padding: .5rem;
     position: relative;
     width: 100%;
 }
 
 .pending-agnt .pending-agnt-icon {
-    border-radius: 0.25rem;
+    border-radius: .25rem;
     -ms-flex-align: center;
     align-items: center;
     display: -ms-flexbox;
@@ -526,12 +590,13 @@ async function getListValues() {
 }
 
 .elevation-1 {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24) !important;
 }
 
 .bg-warning {
     background-color: #fb8e28 !important;
 }
+
 
 .pending-agnt .pending-agnt-content {
     display: -ms-flexbox;
@@ -559,39 +624,28 @@ async function getListValues() {
 
 .pending-agnt .pending-agnt-number {
     display: block;
-    margin-top: 0.25rem;
+    margin-top: .25rem;
     font-weight: 700;
     font-size: 22px;
 }
 
+
 /* On Hold */
 .info-box {
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
-    border-radius: 0.25rem;
-    background-image: linear-gradient(to right top,
-            #eef1e2,
-            #eef1e2,
-            #eef1e2,
-            #eef1e2,
-            #eef1e2,
-            #ebf0d6,
-            #e9eeca,
-            #e8ecbe,
-            #e7e7a2,
-            #e8e285,
-            #ebdb66,
-            #efd444);
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+    border-radius: .25rem;
+    background-image: linear-gradient(to right top, #eef1e2, #eef1e2, #eef1e2, #eef1e2, #eef1e2, #ebf0d6, #e9eeca, #e8ecbe, #e7e7a2, #e8e285, #ebdb66, #efd444);
     display: -ms-flexbox;
     display: flex;
     margin-bottom: 1rem;
     min-height: 90px;
-    padding: 0.5rem;
+    padding: .5rem;
     position: relative;
     width: 100%;
 }
 
 .info-box .info-box-icon {
-    border-radius: 0.25rem;
+    border-radius: .25rem;
     -ms-flex-align: center;
     align-items: center;
     display: -ms-flexbox;
@@ -613,12 +667,13 @@ async function getListValues() {
 }
 
 .elevation-1 {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24) !important;
 }
 
 .bg-danger {
     background-color: #efb51d !important;
 }
+
 
 .info-box .info-box-content {
     display: -ms-flexbox;
@@ -646,13 +701,13 @@ async function getListValues() {
 
 .info-box .info-box-number {
     display: block;
-    margin-top: 0.25rem;
+    margin-top: .25rem;
     font-weight: 700;
     font-size: 22px;
 }
 
 .odd td {
-    background-color: #f5f8fa;
+    background-color: #F5F8FA;
 }
 
 .even td {

@@ -4,8 +4,45 @@ import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted, reactive } from "vue";
 
 const authStore = useAuthStore();
-//**** create function start
-const form = reactive({ area_name: "", division_id: "", district_id: "", status_val: "", useEmail: authStore.email });
+const props = defineProps(['id'])
+
+const form = reactive({ area_name: "", area_id: '', division_id: "", district_id: "", status_val: "", useEmail: authStore.email });
+
+async function update(props) {
+
+    form.area_id = props.id;
+
+    try {
+        const response = await axiosInstance.post("/zone/update", form);
+
+            Notification.showToast('s', response.data.message);
+
+    } catch (error) {
+        ErrorCatch.CatchError(error);
+    }
+}
+
+getAreaData(props);
+
+async function getAreaData(props) {
+
+    try {
+
+        const response = await axiosInstance.post('editArea', { 'id': props });
+
+        const name = response.data[0].name;
+        $("#area_name").val(name);
+
+        const division_id = response.data[0].division_id;
+        const district_id = response.data[0].district_id;
+        const status = response.data[0].status;
+        getDivision(division_id);
+
+        getDistrict(district_id);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 onMounted(() => {
     $('.division_name').on("change", function () {
@@ -19,41 +56,14 @@ onMounted(() => {
     $('.district_name').on("change", function () {
         form.district_id = $(this).val();
     });
+
+    $("#status").on('change', function () {
+        form.status_val = $(this).val();
+    });
 });
 
 
-async function save() {
-
-    try {
-
-        const response = await axiosInstance.post("/zone/save", form);
-
-
-        document.getElementById("addZoneform").reset();
-
-        $('#division_id option:first').prop('selected', true).trigger(
-            "change"); // reset dropdown value
-        $('#district_id option:first').prop('selected', true).trigger(
-            "change"); // reset dropdown value
-        $('#status option:first').prop('selected', true).trigger(
-            "change"); // reset dropdown value
-
-        Notification.showToast('s', response.data.message);
-
-
-
-    } catch (error) {
-        ErrorCatch.CatchError(error);
-
-
-    }
-}
-
-
-// it will load everytime page open
-getDivision();
-
-async function getDivision() {
+async function getDivision(division_id) {
     try {
         const response = await axiosInstance.get('divisions');
 
@@ -76,7 +86,8 @@ async function getDivision() {
 
 
     } catch (error) {
-        // console.log(error);
+        ErrorCatch.CatchError(error);
+
 
     }
 }
@@ -106,11 +117,11 @@ async function getDistrict(id) {
 
 
     } catch (error) {
-        // console.log(error);
+        ErrorCatch.CatchError(error);
+
 
     }
 }
-
 
 </script>
 <template>
@@ -126,7 +137,7 @@ async function getDistrict(id) {
                     <li class="breadcrumb-item">
                         <router-link :to="{ name: 'zoneList' }">Area List</router-link>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Create New Area</li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Area</li>
                 </ol>
             </nav>
         </div>
@@ -134,7 +145,7 @@ async function getDistrict(id) {
 
     <div class="card">
         <div class="card-header">
-            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Create New Area</h5>
+            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Edit Area</h5>
         </div>
 
         <form id="addZoneform">
@@ -142,8 +153,8 @@ async function getDistrict(id) {
                 <div class="row">
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Area Name</label>
-                        <input type="text" v-model="form.area_name" class="form-control form-control-sm" id="area_name"
-                            name="area_name" placeholder="Enter Name">
+                        <input type="text" class="form-control form-control-sm" id="area_name" name="area_name"
+                            placeholder="Enter Name" v-model="form.area_name">
                     </div>
 
                     <div class="col-md-6">
@@ -161,19 +172,19 @@ async function getDistrict(id) {
                         </select>
                     </div>
 
-                    <!-- <div class="col-md-6 mt-2">
+                    <div class="col-md-6 mt-2">
                         <label for="input1" class="form-label">Status</label>
-                        <select id="status" v-model="form.status_val" name="status"
-                            class="form-control form-control-sm">
-                            <option value="1" selected>Active</option>
+                        <select id="status" name="status" class="form-control form-control-sm">
+                            <option selected value="">Choose...</option>
+                            <option value="1">Active</option>
                             <option value="2">Inactive</option>
                         </select>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="card-footer">
-                <button type="button" @click="save()"
-                    class="m-2 btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
+                <button type="button" @click="update(props)"
+                    class="m-2 btn btn-sm btn-info px-4 ms-2 float-end text-white">Update</button>
                 <button class="m-2 btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
             </div>
         </form>

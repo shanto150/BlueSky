@@ -2,19 +2,23 @@
 import DataTable from "datatables.net-vue3";
 import DataBS5 from "datatables.net-bs5";
 import axiosInstance from "../../../axiosInstance";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { data } from "jquery";
+import { icons } from "lucide-vue-next";
+import { useRouter } from 'vue-router';
+const router = useRouter();
 import { useAuthStore } from '../../../stores/authStore';
 const authStore = useAuthStore();
 
 DataTable.use(DataBS5);
 
 const rData = ref([]);
-
+var regExSearch = ref();
 getListValues();
 
 const options = {
     responsive: true,
-    pageLength: 3,
+    pageLength: 30,
     lengthMenu: [3, 10, 20, 30],
     bDestroy: true,
     ordering: false,
@@ -32,7 +36,6 @@ const options = {
     columns: [
         { data: "DT_RowIndex", title: "SL" },
         {
-
             title: "Area",
             render: function (data, type, row) {
                 var html = "";
@@ -43,6 +46,10 @@ const options = {
                 html += row.district + "</span>";
                 return html;
             },
+        },
+        {
+            data: 'division',
+            title: "Division"
         },
         {
             title: "Created By",
@@ -62,7 +69,7 @@ const options = {
                 var html = "";
                 html += row.updated_by || "-";
                 html += "<br>";
-                if (row.updated_at) {
+                if (row.updated_by) {
                     html += '<span class="text-primary">';
                     html += row.updated_at + "</span>";
                 }
@@ -82,32 +89,137 @@ const options = {
 
                 return html;
             },
-        }, {
+        },
+        {
             title: "Action",
             render: function (data, type, row) {
                 var html = "";
+                var idd = row.idd;
+                var status = row.status;
 
-                html += '<router-link  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle" placement="top" title="KAM Assign"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;"></i> </router-link>';
+                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
+                if (status == 1) {
 
-                html += ' <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle"> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change"> <i class="fa-solid fa-ban" data-item-id=' + idd + ' style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                } else {
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change"> <i class="fa-solid fa-check" data-item-id=' + idd + ' style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                }
 
-                html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
+                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
 
                 return html;
             },
         }
     ],
+    "drawCallback": function (settings) {
+        // edit function
+        $(".edit-item").on('click', function (e) {
+            var itemIdd = e.target.dataset.itemId;
+
+            router.push({ name: 'zoneEdit', params: { id: itemIdd } });
+        });
+
+        // delete function
+        $(".delete-item").on('click', function (e) {
+
+            var idd = e.target.dataset.itemId;
+
+            // delete pop up message
+
+            iziToast.question({
+                timeout: 100000,
+                pauseOnHover: false,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                message: 'Want to delete this area?',
+                position: 'center',
+                buttons: [
+                    ['<button><b>No</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
+
+                    }, true],
+                    ['<button><b>Yes</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
+
+                    }, true]
+                ],
+                onClosed: async function (instance, toast, closedBy) {
+                    console.log(closedBy);
+
+                    if (closedBy == 'yes') {
+                        const response = axiosInstance.post("deletearea", { 'id': idd });
+                        getListValues();
+                        Notification.showToast('s', 'Successfully Zone Deleted.');
+                    } else {
+
+                    }
+
+                }
+            });
+            // delete pop up message end
+
+
+        });
+
+        // change status
+        $(".status-change").on('click', function (e) {
+            var idd = e.target.dataset.itemId;
+
+            iziToast.question({
+                timeout: 100000,
+                pauseOnHover: false,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                message: 'Want to change status this area?',
+                position: 'center',
+                buttons: [
+                    ['<button><b>No</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
+
+                    }, true],
+                    ['<button><b>Yes</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
+
+                    }, true]
+                ],
+                onClosed: async function (instance, toast, closedBy) {
+                    console.log(closedBy);
+
+                    if (closedBy == 'yes') {
+                        const response = axiosInstance.post("changeAreaStatus", { 'id': idd });
+                        getListValues();
+                        Notification.showToast('s', 'Successfully Zone status Changed.');
+                    } else {
+
+                    }
+
+                }
+            });
+
+        });
+    }
 };
+
 
 async function getListValues() {
     try {
-        authStore.GlobalLoading=true;
+        authStore.GlobalLoading = true;
         const response = await axiosInstance.get("getarea");
         rData.value = response.data.data;
-        authStore.GlobalLoading=false;
+        authStore.GlobalLoading = false;
     } catch (error) {
         console.log(error);
-        authStore.GlobalLoading=false;
+        authStore.GlobalLoading = false;
     }
 }
 
@@ -180,14 +292,13 @@ async function getListValues() {
                 <div class="row">
 
                     <div class="col-md-6">
-                        <select class="form-select form-select-sm" id="single-select-field"
-                            data-placeholder="Choose one thing">
-                            <option>Select Area</option>
+                        <select class="form-select form-select-sm" id="s_area" data-placeholder="Choose one thing">
+                            <option value="">Select Area</option>
+                            <option value="at">At</option>
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <select class="form-select form-select-sm" id="single-select-field"
-                            data-placeholder="Choose one thing">
+                        <select class="form-select form-select-sm" id="s_status" data-placeholder="Choose one thing">
                             <option>Select Status</option>
                         </select>
                     </div>
@@ -197,18 +308,16 @@ async function getListValues() {
         </div>
     </div>
 
-    <div class="row position-relative">
-        <div id="RoleList">
-
+    <div class="row">
+        <div id="RoleList" class="table">
             <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
                 <div class="loader-circle-57">
                     <img class="position-absolute" src="../../../../../public/theme/appimages/blueskywings.png"
                         height="22" width="22" alt="">
                 </div>
             </div>
-            <DataTable :options="options" :data="rData" class="table table-sm table-striped table-bordered">
-            </DataTable>
-
+            <DataTable :options="options" :data="rData"
+                class="display table table-sm  border table-bordered table-striped table-hover"> </DataTable>
         </div>
     </div>
 
