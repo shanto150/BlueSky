@@ -308,17 +308,22 @@ async function getListValues() {
         </div>
     </div>
 
-    <div class="row">
-        <div id="RoleList" class="table">
-            <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
-                <div class="loader-circle-57">
-                    <img class="position-absolute" src="../../../../../public/theme/appimages/blueskywings.png"
-                        height="22" width="22" alt="">
+    <div class="row position-relative">
+        <div class="col-12">
+            <div id="RoleList" class="card rounded rounded-2 shadow-none p-3">
+
+                <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
+                    <div class="loader-circle-57">
+                        <img class="position-absolute" src="../../../../../public/theme/appimages/blueskywings.png"
+                            height="22" width="22" alt="">
+                    </div>
                 </div>
+
+                <DataTable :options="options" :data="rData" class="table table-sm table-striped table-bordered">
+                </DataTable>
             </div>
-            <DataTable :options="options" :data="rData"
-                class="display table table-sm  border table-bordered table-striped table-hover"> </DataTable>
         </div>
+
     </div>
 
 </template>
@@ -761,4 +766,5 @@ async function getListValues() {
     --bs-btn-disabled-border-color: #f1892a;
     --bs-gradient: none;
 }
+
 </style>

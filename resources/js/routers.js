@@ -47,6 +47,10 @@ const deptEdit = () => import('./components/admin/department/edit.vue')
 const offLoc = () => import('./components/admin/officeLocation/index.vue')
 const addoffLoc = () => import('./components/admin/officeLocation/create.vue')
 const offEdit = () => import('./components/admin/officeLocation/edit.vue')
+//setting deposit
+const issuedBankMFS = () => import('./components/admin/settings/deposit/issuedBankMFS/index.vue')
+const bankMfsCreate = () => import('./components/admin/settings/deposit/issuedBankMFS/create.vue')
+const bankMfsEdit = () => import('./components/admin/settings/deposit/issuedBankMFS/edit.vue')
 
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
@@ -97,6 +101,11 @@ const routes = [
     { path: '/all-office-location', component: offLoc, name: 'offLoc', meta: { auth: true } },
     { path: '/create-location', component: addoffLoc, name: 'addoffLoc', meta: { auth: true } },
     { path: '/office-location/:id', component: offEdit, name: 'offEdit', meta: { auth: true },props:true  },
+
+    // sttings deposit bank and mfs
+    { path: '/all-bank-&-mfs', component: issuedBankMFS, name: 'issuedBankMFS', meta: { auth: true } },
+    { path: '/create-bank-mfs', component: bankMfsCreate, name: 'bankMfsCreate', meta: { auth: true } },
+    { path: '/edit-bank-mfs/:id', component: bankMfsEdit, name: 'bankMfsEdit', meta: { auth: true },props:true  },
 ]
 
 const router = createRouter({
