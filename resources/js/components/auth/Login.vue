@@ -59,7 +59,7 @@ function handleSubmit() {
             if (res.data.data.require_2fa == 0) {
                 authStore.getotp_regisered = 1;
                 authStore.getotpChecked = 1;
-                authStore.isLogged=authStore.encryptWithAES('1');
+                authStore.isLogged = authStore.encryptWithAES('1');
             }
 
             if (res.data.message == 'Your password must be change.') {
@@ -130,9 +130,9 @@ function getIPinfo() {
         .then((resp) => resp.text())
         .then(function (data) {
             const xVal = JSON.parse(data);
-            xVal[ 'devicetype' ] = MF.initCap(deviceType());
-            xVal[ 'os' ] = osName()+' '+osVersion();
-            authStore.sInfo=xVal;
+            xVal['devicetype'] = MF.initCap(deviceType());
+            xVal['os'] = osName() + ' ' + osVersion();
+            authStore.sInfo = xVal;
         });
 }
 
@@ -279,18 +279,23 @@ onMounted(() => {
                                     </div>
 
                                     <div class="mt-3 mb-1 w-100">
-                                        <button :disabled="loading" type="submit"
-                                            class="btn btn-primary w-100 rounded-2 ">
-                                            <img v-if="loading" src="../../../../public/theme/appimages/pp.gif"
-                                                height="20" width="20" alt="" />
+                                        <button :disabled="loading" type="submit" class="btn btn-primary w-100 rounded-2 position-relative">
+                                            <div v-if="loading" class="center-body position-absolute" style="margin-top: -40px;">
+                                                <div class="loader-circle-57">
+                                                    <img class="position-absolute"
+                                                        src="../../../../public/theme/appimages/blueskywings.png"
+                                                        height="16" width="16" alt="">
+                                                </div>
+                                            </div>
 
                                             <span role="status">{{ ButtonName }}</span>
                                         </button>
                                     </div>
 
                                     <p class="clientDetails">IP : <b>{{ authStore.sInfo.IPv4 }} </b> City : <b>{{
-                                        authStore.sInfo.city }}</b> Contry : <b>{{ authStore.sInfo.country_code }}</b> Device : <b>{{
-                                            authStore.sInfo.devicetype  }} </b> OS : <b>{{ authStore.sInfo.os }}</b>
+                                        authStore.sInfo.city }}</b> Contry : <b>{{ authStore.sInfo.country_code
+                                            }}</b> Device : <b>{{
+                                                authStore.sInfo.devicetype }} </b> OS : <b>{{ authStore.sInfo.os }}</b>
                                     </p>
 
                                     <div class="mt-5 text-center w-100">
@@ -315,6 +320,50 @@ onMounted(() => {
 @font-face {
     font-family: "Inter";
     src: url('../../fonts/BeVietnamPro/BeVietnamPro-Regular.ttf');
+}
+
+
+
+
+.center-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    width: 100px;
+    height: 100px;
+}
+
+.loader-circle-57 {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-circle-57:before {
+    content: "";
+    color: red;
+    height: 30px;
+    width: 30px;
+    background: #0000;
+    border-radius: 50%;
+    border: 5px solid #027de2d5;
+    animation: loader-circle-57-spin 1s infinite
+}
+
+@keyframes loader-circle-57-spin {
+    50% {
+        transform: rotatez(180deg);
+        border-style: dashed;
+        border-color: #ffffff #e23708 #ffffff;
+    }
+
+    100% {
+        transform: rotatez(360deg);
+    }
 }
 
 .clientDetails {

@@ -17,6 +17,8 @@ DataBS5.Buttons.jszip(jszip);
 
 const rData = ref([]);
 
+
+
 getListValues();
 
 const options = {
@@ -106,8 +108,11 @@ async function getListValues() {
         console.log(error);
     }
 }
+
+
 </script>
 <template>
+
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Settings</div>
         <div class="ps-3">
