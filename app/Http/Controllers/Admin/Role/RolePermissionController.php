@@ -10,8 +10,9 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Models\Role\RolePermission;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
-class RolePermissionController extends Controller
+class RolePermissionController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -38,7 +39,7 @@ class RolePermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     public function roleSave(Request $request)
