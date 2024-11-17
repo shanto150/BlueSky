@@ -30,6 +30,8 @@ async function getOfficeLocationData(props) {
         const name = response.data[0].name;
         $("#loc_name").val(name);
         const status = response.data[0].status;
+        $('#status').val(status);
+        $('#status').trigger('change');
     } catch (error) {
         console.log(error);
     }

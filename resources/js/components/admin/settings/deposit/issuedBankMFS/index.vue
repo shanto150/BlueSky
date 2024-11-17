@@ -184,12 +184,11 @@ const options = {
                     }, true]
                 ],
                 onClosed: async function (instance, toast, closedBy) {
-                    console.log(closedBy);
 
                     if (closedBy == 'yes') {
                         const response = axiosInstance.post("changeIssuedBankStatus", { 'id': idd });
                         getListValues();
-                        Notification.showToast('s', 'Successfully Issued Bank/MFS status Changed.');
+                        Notification.showToast('s', 'Successfully issued Bank/MFS status Changed.');
                     } else {
 
                     }

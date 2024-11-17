@@ -100,15 +100,15 @@ const options = {
                 var idd = row.idd;
                 var status = row.status;
 
-                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
+                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" ></i> </button>';
                 if (status == 1) {
 
-                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change"> <i class="fa-solid fa-ban" data-item-id=' + idd + ' style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
                 } else {
-                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change"> <i class="fa-solid fa-check" data-item-id=' + idd + ' style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-check" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
                 }
 
-                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
+                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
 
                 return html;
             },
@@ -117,14 +117,16 @@ const options = {
     "drawCallback": function (settings) {
         // edit function
         $(".edit-item").on('click', function (e) {
-            var itemIdd = e.target.dataset.itemId;
+
+            var itemIdd = $(this).attr('data-item-id');
+
             router.push({ name: 'offEdit', params: { id: itemIdd } });
         });
 
         // delete function
         $(".delete-item").on('click', function (e) {
 
-            var idd = e.target.dataset.itemId;
+            var idd = $(this).attr('data-item-id');
 
             // delete pop up message
 
@@ -169,7 +171,8 @@ const options = {
 
         // change status
         $(".status-change").on('click', function (e) {
-            var idd = e.target.dataset.itemId;
+
+            var idd = $(this).attr('data-item-id');
 
             iziToast.question({
                 timeout: 100000,
