@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Department\DepartmentController;
 use App\Http\Controllers\Admin\Role\RolePermissionController;
 use App\Http\Controllers\Admin\IssuedBankMFS\IssuedBankMFSController;
 use App\Http\Controllers\Admin\OfficeLocation\LocationController;
+use App\Http\Controllers\Admin\PaymentAccount\PaymentAccountSController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,13 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('changeIssuedBankStatus', [IssuedBankMFSController::class, 'changeIssuedBankStatus']);
     Route::post('deleteBankMFS', [IssuedBankMFSController::class, 'deleteBankMFS']);
 
+    //payment account
+    Route::get('getPaymentAcct', [PaymentAccountSController::class, 'index'])->name('settings.deposit.getPaymentAcct');
+    Route::post('/paymentAcct/save', [PaymentAccountSController::class, 'store'])->name('settings.deposit.paymentAcctStore');
+    Route::post('/changePaymentAcctStatus', [PaymentAccountSController::class, 'changePaymentAcctStatus'])->name('settings.deposit.changePaymentAcctStatus');
+    Route::post('/deletePaymentAcct', [PaymentAccountSController::class, 'destroy'])->name('settings.deposit.destroy');
+    Route::post('/editPaymentAcct', [PaymentAccountSController::class, 'edit'])->name('settings.deposit.editPaymentAcct');
+    Route::post('//payment-acct/update', [PaymentAccountSController::class, 'update'])->name('settings.deposit.updatePaymentAcct');
 
 });
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
