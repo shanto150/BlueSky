@@ -51,6 +51,10 @@ const offEdit = () => import('./components/admin/officeLocation/edit.vue')
 const issuedBankMFS = () => import('./components/admin/settings/deposit/issuedBankMFS/index.vue')
 const bankMfsCreate = () => import('./components/admin/settings/deposit/issuedBankMFS/create.vue')
 const bankMfsEdit = () => import('./components/admin/settings/deposit/issuedBankMFS/edit.vue')
+//paymentAccount
+const paymentacct = () => import('./components/admin/settings/deposit/paymentAccount/index.vue')
+const paymentAcctCreate = () => import('./components/admin/settings/deposit/paymentAccount/create.vue')
+const payAcctEdit = () => import('./components/admin/settings/deposit/paymentAccount/edit.vue')
 
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
@@ -106,6 +110,10 @@ const routes = [
     { path: '/all-bank-&-mfs', component: issuedBankMFS, name: 'issuedBankMFS', meta: { auth: true } },
     { path: '/create-bank-mfs', component: bankMfsCreate, name: 'bankMfsCreate', meta: { auth: true } },
     { path: '/edit-bank-mfs/:id', component: bankMfsEdit, name: 'bankMfsEdit', meta: { auth: true },props:true  },
+    //paymentacct
+    { path: '/all-payment-accounts', component: paymentacct, name: 'paymentacct', meta: { auth: true } },
+    { path: '/create-payment-account', component: paymentAcctCreate, name: 'paymentAcctCreate', meta: { auth: true } },
+    { path: '/edit-payment-account/:id', component: payAcctEdit, name: 'payAcctEdit', meta: { auth: true },props:true  },
 ]
 
 const router = createRouter({

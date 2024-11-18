@@ -120,7 +120,7 @@ onMounted(() => {
                         <li> <a v-wave class="has-arrow" href="javascript:;"><i
                                     class='bx bx-paper-plane'></i>Deposit</a>
                             <ul>
-                                <router-link v-wave :to="{ name: 'zoneList' }">
+                                <router-link v-wave :to="{ name: 'paymentacct' }">
                                     <i class='bx bx-paper-plane'></i> Payment Account
                                 </router-link>
 
