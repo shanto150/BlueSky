@@ -113,7 +113,7 @@ class PaymentAccountSController extends BaseController
      */
     public function update(Request $request)
     {
-        // dd($request->all());
+
         $auth = User::where('email', $request->useEmail)->first();
         $pay_acc = PaymentAccount::where('id', $request->pay_acct_id)->first();
 
