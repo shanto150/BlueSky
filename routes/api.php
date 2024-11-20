@@ -36,6 +36,10 @@ Route::middleware(['auth:api'])->group(function () {
 
     //role-permission
     Route::get('getroles', [RolePermissionController::class, 'index'])->name('roles.index');
+    Route::post('editRole', [RolePermissionController::class, 'edit'])->name('roles.edit');
+    Route::post('getPermissionList', [RolePermissionController::class, 'getPermissionList'])->name('roles.getPermissionList');
+    Route::post('/changeRoleStatus', [RolePermissionController::class, 'changeRoleStatus'])->name('roles.changeRoleStatus');
+    Route::post('/deleteRole', [RolePermissionController::class, 'destroy'])->name('roles.deleteRole');
 
 
     // department
@@ -68,7 +72,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/changePaymentAcctStatus', [PaymentAccountSController::class, 'changePaymentAcctStatus'])->name('settings.deposit.changePaymentAcctStatus');
     Route::post('/deletePaymentAcct', [PaymentAccountSController::class, 'destroy'])->name('settings.deposit.destroy');
     Route::post('/editPaymentAcct', [PaymentAccountSController::class, 'edit'])->name('settings.deposit.editPaymentAcct');
-    Route::post('//payment-acct/update', [PaymentAccountSController::class, 'update'])->name('settings.deposit.updatePaymentAcct');
+    Route::post('/payment-acct/update', [PaymentAccountSController::class, 'update'])->name('settings.deposit.updatePaymentAcct');
 
 });
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
+Route::post('/role/update', [RolePermissionController::class, 'update']);

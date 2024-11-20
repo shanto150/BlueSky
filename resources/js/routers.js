@@ -91,7 +91,7 @@ const routes = [
     //roles permission
     { path: '/all-roles-list', component: roleList, name: 'roleList', meta: { auth: true } },
     { path: '/create-role', component: roleCreate, name: 'roleCreate', meta: { auth: true } },
-    { path: '/edit-role', component: roleEdit, name: 'roleEdit', meta: { auth: true } },
+    { path: '/edit-role/:id', component: roleEdit, name: 'roleEdit', meta: { auth: true },props:true },
 
     //Zone
     { path: '/all-zone-list', component: zoneList, name: 'zoneList', meta: { auth: true } },
