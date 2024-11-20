@@ -5,7 +5,6 @@ const authStore = useAuthStore();
 
 const form = ref({ roleName: "", checkedNames: [],useEmail:authStore.email, error: "" });
 function dataSave() {
-
     createRole(form);
 }
 const urlss = document.head.querySelector('meta[name="api-base-url"]').content;
