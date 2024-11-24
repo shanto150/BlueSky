@@ -19,8 +19,9 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3">
-                            <input type="text" list="from_countries" class="form-control form-control-sm" name="from" placeholder="From">
+                        <div class="col-md-2">
+                            <label for="">From</label>
+                            <input type="text" list="from_countries" class="form-control mt-1 form-control-sm" name="from" placeholder="From">
                             <datalist id="from_countries">
                                 <option>Russia</option>
                                 <option>Germany</option>
@@ -28,18 +29,32 @@
                             </datalist>
 
                         </div>
-                        <div class="col-md-3">
-                            <input type="text" list="to_countries" class="form-control form-control-sm" name="to" placeholder="To">
+                        <div class="col-md-2">
+                            <label for="">To</label>
+                            <input type="text" list="to_countries" class="form-control mt-1 form-control-sm" name="to" placeholder="To">
                             <datalist id="to_countries">
                                 <option>Bangladesh</option>
                                 <option>Indio</option>
                                 <option>USA</option>
                             </datalist>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
+                            <label for="">Date</label>
+
                             <input type="date" class="form-control form-control-sm" name="date" placeholder="Date">
                         </div>
+
                         <div class="col-md-2">
+                            <label for="">Adult</label>
+
+                            <input type="text" class="form-control form-control-sm" name="adult" placeholder="Adult">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="">Child</label>
+
+                            <input type="text" class="form-control form-control-sm" name="child" placeholder="Child">
+                        </div>
+                        <div class="col-md-2 mt-3">
                             <button class="btn btn-sm btn-danger"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
