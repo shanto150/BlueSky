@@ -13,6 +13,7 @@ const otp = () => import('./components/auth/otp.vue')
 const NF = () => import('./components/auth/NotFound.vue')
 const ForcePassChange = () => import('./components/auth/forcePasswordChange.vue')
 
+const flightSearch = () => import('./components/search/flightSearch.vue')
 // agent
 const AgentList = () => import('./components/admin/agent/index.vue')
 const agentDetails = () => import('./components/admin/agent/agentDetails.vue')
@@ -43,6 +44,12 @@ const zoneEdit = () => import('./components/admin/zone/edit.vue')
 const departmentList = () => import('./components/admin/department/index.vue')
 const deptCreate = () => import('./components/admin/department/create.vue')
 const deptEdit = () => import('./components/admin/department/edit.vue')
+
+//designation
+const designationList = () => import('./components/admin/designation/index.vue')
+const designationCreate = () => import('./components/admin/designation/create.vue')
+const designationEdit = () => import('./components/admin/designation/edit.vue')
+
 //office location
 const offLoc = () => import('./components/admin/officeLocation/index.vue')
 const addoffLoc = () => import('./components/admin/officeLocation/create.vue')
@@ -70,6 +77,9 @@ const routes = [
     { path: '/Settings', component: Settings, name: 'Settings', meta: { auth: true } },
     { path: '/Logout', component: Logout, name: 'Logout', meta: { auth: true } },
     { path: '/:any(.*)*', component: NF, name: 'NF', meta: { auth: true } },
+
+    //flight search
+    { path: '/flight-search', component: flightSearch, name: 'flightSearch', meta: { auth: true } },
 
 
     // agent
@@ -101,6 +111,12 @@ const routes = [
     { path: '/all-department-list', component: departmentList, name: 'departmentList', meta: { auth: true } },
     { path: '/create-department', component: deptCreate, name: 'deptCreate', meta: { auth: true } },
     { path: '/edit-department/:id', component: deptEdit, name: 'deptEdit', meta: { auth: true },props:true  },
+
+    // designation
+    { path: '/all-designation-list', component: designationList, name: 'designationList', meta: { auth: true } },
+    { path: '/create-designation', component: designationCreate, name: 'designationCreate', meta: { auth: true } },
+    { path: '/edit-designation/:id', component: designationEdit, name: 'designationEdit', meta: { auth: true },props:true  },
+
     // office location
     { path: '/all-office-location', component: offLoc, name: 'offLoc', meta: { auth: true } },
     { path: '/create-location', component: addoffLoc, name: 'addoffLoc', meta: { auth: true } },

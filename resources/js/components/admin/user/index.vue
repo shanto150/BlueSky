@@ -1,7 +1,297 @@
+<script setup>
+import DataTable from "datatables.net-vue3";
+import DataBS5 from "datatables.net-bs5";
+import jszip from 'jszip';
+import 'datatables.net-buttons-bs5';
+import 'datatables.net-buttons/js/buttons.html5.mjs';
+import 'datatables.net-responsive-bs5';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+import { useAuthStore } from '../../../stores/authStore';
+const authStore = useAuthStore();
+import axiosInstance from "../../../axiosInstance";
+import { ref, render } from "vue";
+
+DataTable.use(DataBS5);
+DataBS5.Buttons.jszip(jszip);
+
+const rData = ref([]);
+
+getListValues();
+
+const options = {
+    responsive: true,
+    destroy: true,
+    pageLength: 30,
+    lengthMenu: [3, 10, 20, 30],
+    ordering: false,
+    columnDefs: [{
+        defaultContent: "0",
+        targets: "_all",
+    }
+    ],
+    dom: "<'row'<'col-sm-4'B><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'f>>" + "<'row'<'col-sm-12'tr>>" +
+        "<'row justify-content-between Reduct_table_gap'<'d-md-flex justify-content-between align-items-center dt-layout-start col-md-auto me-auto'i><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'p>>",
+    buttons: [
+        {
+            extend: 'excel',
+            text: '<i class="fa fa-file-excel"></i> Excel',
+            title: 'Your Title',
+            messageTop: function () {
+                return 'Fun';
+            },
+            className: 'btn btn-danger btn-sm text-white',
+            exportOptions: {
+                columns: [1, 2, 3, 5]
+            }
+        },
+        {
+            extend: 'csv',
+            text: '<i class="fa fa-file-csv"></i> CSV',
+            title: 'Your Title',
+            messageTop: function () {
+
+                return 'Fun';
+            },
+            className: 'btn btn-info btn-sm text-white',
+            exportOptions: {
+                columns: [1, 2, 3, 5]
+            }
+        }
+    ],
+    language: {
+        search: "",
+        searchPlaceholder: "Search by anything..",
+    },
+    columns: [
+        { data: "DT_RowIndex", title: "SL" },
+        {
+            title: "Staff Info",
+            render: function (data, type, row) {
+                var html = "";
+                // row
+                html += '<div class="row">';
+                html += '<div class="col-md-4">';
+                html += "<img src='"+row.img+"' height='70' width='100%'>";
+                html += '</div>';
+                html += "<div class='col-md-8'>"
+
+                html += row.name;
+                html += "<br>";
+                html += row.emp_id;
+                html += "<br>";
+                html += row.desg;
+                html += " | ";
+                html += row.dept;
+                html += "</div>";
+
+                html += '</div>';
+                return html;
+            },
+            width: '60%'
+
+
+        },
+        {
+            title: "Role & Office Location",
+            render: function (data, type, row) {
+                var html = "";
+                html += row.r_name;
+                html += "<br>";
+                html += row.off_loc;
+
+                return html;
+            }
+
+        },
+        {
+            title: "User Login Info",
+            render: function (data, type, row) {
+                var html = "";
+                html += row.email;
+                html += "<br>";
+                html += row.phone;
+
+                return html;
+            }
+        },
+        {
+            title: "Created",
+            render: function (data, type, row) {
+                var html = "";
+                html += row.created_by;
+                html += "<br>";
+
+                html += '<span class="text-primary">';
+                html += row.created_at + "</span>";
+                return html;
+            },
+        },
+        {
+            title: "Updated",
+            render: function (data, type, row) {
+                var html = "";
+                html += row.updated_by || "";
+                html += "<br>";
+
+                html += '<span class="text-primary">';
+                html += row.updated_at + "</span>";
+                return html;
+            },
+        },
+
+        {
+            title: "Status",
+            render: function (data, type, row) {
+                var html = "";
+
+                if (row.status == 1) {
+                    html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Active </div>';
+                } else {
+                    html += '<div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Deactivated </div>';
+                }
+
+                return html;
+            },
+        },
+
+        {
+            title: "Action",
+            render: function (data, type, row) {
+                var html = "";
+                var idd = row.idd;
+                var status = row.status;
+
+                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" ></i> </button>';
+                if (status == 1) {
+
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                } else {
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-check" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                }
+
+                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
+
+                // html+='<button type="button" v-tippy="Hold" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-purple rounded-circle"> <i class="fa fa-refresh" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button> <button type="button" v-tippy="Lock" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-lock rounded-circle"> <i class="fa fa-lock" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button> <button type="button" v-tippy="Lock" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-timer rounded-circle"> <i class="fa-solid fa-clock-rotate-left" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+
+                return html;
+            },
+        }
+    ],
+    "drawCallback": function (settings) {
+        // edit function
+        $(".edit-item").on('click', function (e) {
+
+            var itemIdd = $(this).attr('data-item-id');
+            console.log(itemIdd);
+
+            router.push({ name: 'roleEdit', params: { id: itemIdd } });
+        });
+
+        // delete function
+        $(".delete-item").on('click', function (e) {
+
+            var idd = $(this).attr('data-item-id');
+
+            // delete pop up message
+
+            iziToast.question({
+                timeout: 100000,
+                pauseOnHover: false,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                message: 'Want to delete this office location?',
+                position: 'center',
+                buttons: [
+                    ['<button><b>No</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
+
+                    }, true],
+                    ['<button><b>Yes</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
+
+                    }, true]
+                ],
+                onClosed: async function (instance, toast, closedBy) {
+
+                    if (closedBy == 'yes') {
+                        const response = axiosInstance.post("deleteRole", { 'id': idd });
+                        getListValues();
+                        Notification.showToast('s', 'Successfully Role Deleted.');
+                    } else {
+
+                    }
+
+                }
+            });
+            // delete pop up message end
+
+
+        });
+
+        // change status
+        $(".status-change").on('click', function (e) {
+
+            var idd = $(this).attr('data-item-id');
+
+            iziToast.question({
+                timeout: 100000,
+                pauseOnHover: false,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                message: 'Want to change status this role?',
+                position: 'center',
+                buttons: [
+                    ['<button><b>No</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
+
+                    }, true],
+                    ['<button><b>Yes</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
+
+                    }, true]
+                ],
+                onClosed: async function (instance, toast, closedBy) {
+
+                    if (closedBy == 'yes') {
+                        const response = axiosInstance.post("changeRoleStatus", { 'id': idd });
+                        getListValues();
+                        Notification.showToast('s', 'Successfully Role status Changed.');
+                    } else {
+
+                    }
+
+                }
+            });
+
+        });
+    }
+};
+
+async function getListValues() {
+    try {
+        authStore.GlobalLoading = true;
+        const response = await axiosInstance.get("getInternalUsers");
+        rData.value = response.data.data;
+        authStore.GlobalLoading = false;
+    } catch (error) {
+        authStore.GlobalLoading = false;
+        console.log(error);
+    }
+}
+</script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-
-
         <div class="breadcrumb-title pe-3"> User Management</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
@@ -22,6 +312,7 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-agency">
@@ -75,9 +366,6 @@
         <div class="col-12">
             <div class="card">
                 <div class="row shadow-none rounded rounded-2 p-3">
-                    <!-- <div class="col-md-4">
-									<input type="text" class="form-control date-range" />
-                                </div> -->
                     <div class="col-md-2">
                         <select class="form-select form-select-sm" id="single-select-field"
                             data-placeholder="Choose one thing">
@@ -130,7 +418,7 @@
                 </ul>
                 <div class="tab-content pt-3">
                     <div class="tab-pane fade show active" id="primaryhome" role="tabpanel">
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-sm-12 col-md-6">
 
                                 <button class="btn btn-sm btn-danger" style="margin-right: 3px;" tabindex="0"
@@ -525,6 +813,27 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </div> -->
+
+                        <div class="row position-relative">
+                            <div class="col-12">
+                                <div id="RoleList" class="card rounded rounded-2 shadow-none p-3">
+
+                                    <div v-if="authStore.GlobalLoading"
+                                        class="center-body position-absolute top-50 start-50">
+                                        <div class="loader-circle-57">
+                                            <img class="position-absolute"
+                                                src="../../../../../public/theme/appimages/blueskywings.png" height="22"
+                                                width="22" alt="">
+                                        </div>
+                                    </div>
+
+                                    <DataTable :options="options" :data="rData"
+                                        class="table table-sm table-striped table-bordered">
+                                    </DataTable>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
@@ -786,9 +1095,7 @@
     </div>
 
 </template>
-<script>
 
-</script>
 <style>
 .text-blue {
     color: blue;
