@@ -163,6 +163,7 @@ onMounted(() => {
     src: url("../../../../public/fonts/cartagestenciljnl.ttf");
 }
 
+
 .tx {
     text-transform: Uppercase;
     font-family: "cart", sans-serif;
