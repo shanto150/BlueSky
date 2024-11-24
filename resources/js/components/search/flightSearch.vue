@@ -19,9 +19,26 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
+                        <div class="col-md-4 border border-1 border-primary m-2 pt-1">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" checked type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                    value="option1">
+                                <label class="form-check-label" for="inlineRadio1">One Way</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                    value="option2">
+                                <label class="form-check-label" for="inlineRadio2">Round</label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+
                         <div class="col-md-2">
                             <label for="">From</label>
-                            <input type="text" list="from_countries" class="form-control mt-1 form-control-sm" name="from" placeholder="From">
+                            <input type="text" list="from_countries" class="form-control mt-1 form-control-sm"
+                                name="from" placeholder="From">
                             <datalist id="from_countries">
                                 <option>Russia</option>
                                 <option>Germany</option>
@@ -31,7 +48,8 @@
                         </div>
                         <div class="col-md-2">
                             <label for="">To</label>
-                            <input type="text" list="to_countries" class="form-control mt-1 form-control-sm" name="to" placeholder="To">
+                            <input type="text" list="to_countries" class="form-control mt-1 form-control-sm" name="to"
+                                placeholder="To">
                             <datalist id="to_countries">
                                 <option>Bangladesh</option>
                                 <option>Indio</option>
