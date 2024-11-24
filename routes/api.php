@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Admin\Area\AreaController;
 use App\Http\Controllers\Admin\Department\DepartmentController;
+use App\Http\Controllers\Admin\Designation\DesignationController;
 use App\Http\Controllers\Admin\Role\RolePermissionController;
 use App\Http\Controllers\Admin\IssuedBankMFS\IssuedBankMFSController;
 use App\Http\Controllers\Admin\OfficeLocation\LocationController;
 use App\Http\Controllers\Admin\PaymentAccount\PaymentAccountSController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +52,15 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('changeDepartmentStatus', [DepartmentController::class, 'changeDepartmentStatus']);
     Route::post('deleteDept', [DepartmentController::class, 'destroy']);
 
+    //designtaion
+    Route::get('getDesignation', [DesignationController::class, 'index'])->name('deg.getDesignation');
+    Route::post('/Designation/save', [DesignationController::class, 'store']);
+
+    Route::post('editDesignation', [DesignationController::class, 'edit']);
+    Route::post('/Designation/update', [DesignationController::class, 'update']);
+    Route::post('changeDesgStatus', [DesignationController::class, 'changeDesignationStatus']);
+    Route::post('deleteDesignation', [DesignationController::class, 'destroy']);
+
     // office location
     Route::get('getOfficeLocation', [LocationController::class, 'index'])->name('officeLocation.officelocations');
     Route::post('/loc/save', [LocationController::class, 'store']);
@@ -73,6 +84,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/deletePaymentAcct', [PaymentAccountSController::class, 'destroy'])->name('settings.deposit.destroy');
     Route::post('/editPaymentAcct', [PaymentAccountSController::class, 'edit'])->name('settings.deposit.editPaymentAcct');
     Route::post('/payment-acct/update', [PaymentAccountSController::class, 'update'])->name('settings.deposit.updatePaymentAcct');
+
+    //users managemnt
+    Route::get('getInternalUsers', [UserController::class, 'index'])->name('user.getInternalUsers');
 
 });
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);

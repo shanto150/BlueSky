@@ -14,6 +14,15 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name',50);
+            $table->string('phone',20);
+            $table->string('name',50);
+            $table->string('img_path',255)->nullable();
+            $table->string('type',3)->comment('1=internal 0=external');
+            $table->integer('emp_id');
+            $table->integer('designation_id');
+            $table->integer('dept_id');
+            $table->integer('office_loc_id');
+            $table->integer('report_to');
             $table->string('email',50)->unique();
             $table->string('user_role',15)->nullable();
             $table->tinyInteger('login_attamp')->default(0);
@@ -27,6 +36,7 @@ return new class extends Migration
             $table->tinyInteger('password_max_expired')->default(90);
             $table->string('password');
             $table->rememberToken();
+            $table->boolean('status')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
             $table->index('email');
