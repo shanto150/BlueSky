@@ -16,7 +16,7 @@ class UserController extends BaseController
     {
         $data= DB::table('users as u')->where('type',1)
         ->join('roles as r','r.id','u.user_role')
-        ->selectRaw('u.name,u.email,u.img_path as img,u.phone,u.status,r.name as r_name,u.img_path,u.id as idd,u.created_at,u.updated_at,department(u.dept_id) as dept,designation(u.designation_id) as desg,u.emp_id,off_loc(u.office_loc_id) as off_loc,f_username(1) as updated_by,f_username(1) as created_by')->get();
+        ->selectRaw('u.name,u.email,u.img_path as img,u.phone,u.status,r.name as r_name,u.img_path,u.id as idd,u.created_at,u.updated_at,f_department(u.dept_id) as dept,f_designation(u.designation_id) as desg,u.emp_id,f_off_loc(u.office_loc_id) as off_loc,f_username(u.report_to) as updated_by,f_username(u.report_to) as created_by')->get();
 
         // rep_user(u.report_to) as rep_to,
 
