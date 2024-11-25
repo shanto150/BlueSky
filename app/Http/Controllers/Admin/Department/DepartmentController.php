@@ -79,8 +79,8 @@ class DepartmentController extends BaseController
 
     public function getAllDept()
     {
-        $div = DB::table('departments')->get();
-        return response()->json($div);
+        $dept = DB::table('departments')->get();
+        return response()->json($dept);
     }
 
     /**
