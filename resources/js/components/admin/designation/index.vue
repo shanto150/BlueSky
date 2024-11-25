@@ -100,12 +100,12 @@ const options = {
                 var idd = row.idd;
                 var status = row.status;
 
-                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" ></i> </button>';
+                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" data-item-id=' + idd + '> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;"></i> </button>';
                 if (status == 1) {
 
                     html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
                 } else {
-                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-check" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change" data-item-id=' + idd + ' > <i class="fa-solid fa-check" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
                 }
 
                 html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
@@ -120,12 +120,11 @@ const options = {
 
             var itemIdd = $(this).attr('data-item-id');
 
-            router.push({ name: 'offEdit', params: { id: itemIdd } });
+            router.push({ name: 'designationEdit', params: { id: itemIdd } });
         });
 
         // delete function
         $(".delete-item").on('click', function (e) {
-
             var idd = $(this).attr('data-item-id');
 
             // delete pop up message
@@ -138,7 +137,7 @@ const options = {
                 displayMode: 'once',
                 id: 'question',
                 zindex: 999,
-                message: 'Want to delete this office location?',
+                message: 'Want to delete this designation?',
                 position: 'center',
                 buttons: [
                     ['<button><b>No</b></button>', function (instance, toast) {
@@ -155,9 +154,9 @@ const options = {
                 onClosed: async function (instance, toast, closedBy) {
 
                     if (closedBy == 'yes') {
-                        const response = axiosInstance.post("deleteOfficeLocation", { 'id': idd });
+                        const response = axiosInstance.post("deleteDesignation", { 'id': idd });
                         getListValues();
-                        Notification.showToast('s', 'Successfully Office Location Deleted.');
+                        Notification.showToast('s', 'Successfully Designation Deleted.');
                     } else {
 
                     }
@@ -171,7 +170,7 @@ const options = {
 
         // change status
         $(".status-change").on('click', function (e) {
-
+            // var idd = e.target.dataset.itemId;
             var idd = $(this).attr('data-item-id');
 
             iziToast.question({
@@ -182,7 +181,7 @@ const options = {
                 displayMode: 'once',
                 id: 'question',
                 zindex: 999,
-                message: 'Want to change status this office location?',
+                message: 'Want to change status this department?',
                 position: 'center',
                 buttons: [
                     ['<button><b>No</b></button>', function (instance, toast) {
@@ -199,9 +198,9 @@ const options = {
                 onClosed: async function (instance, toast, closedBy) {
 
                     if (closedBy == 'yes') {
-                        const response = axiosInstance.post("changeOffLocStatus", { 'id': idd });
+                        const response = axiosInstance.post("changeDesgStatus", { 'id': idd });
                         getListValues();
-                        Notification.showToast('s', 'Successfully office location status Changed.');
+                        Notification.showToast('s', 'Successfully Designation status Changed.');
                     } else {
 
                     }
@@ -217,7 +216,7 @@ const options = {
 async function getListValues() {
     try {
         authStore.GlobalLoading = true;
-        const response = await axiosInstance.get("getOfficeLocation");
+        const response = await axiosInstance.get("getDesignation");
         rData.value = response.data.data;
         authStore.GlobalLoading = false;
     } catch (error) {
@@ -230,7 +229,6 @@ async function getListValues() {
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
 
-
         <div class="breadcrumb-title pe-3">Settings</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
@@ -239,16 +237,16 @@ async function getListValues() {
                         <router-link :to="{ name: 'Home' }">Dashboard</router-link>
                     </li>
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'offLoc' }">Setings</router-link>
+                        <router-link :to="{ name: 'designationList' }">Setings</router-link>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Office Location List</li>
+                    <li class="breadcrumb-item active" aria-current="page">Designation List</li>
                 </ol>
             </nav>
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-                <router-link :to="{ name: 'addoffLoc' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i>Add New Office Location
+                <router-link :to="{ name: 'designationCreate' }" class="btn btn-primary btn-sm">
+                    <i class="fa fa-circle-plus"></i>Add New Designation
                 </router-link>
 
             </div>
@@ -316,7 +314,7 @@ async function getListValues() {
 
     <div class="row position-relative">
         <div class="col-12">
-            <div id="RoleList" class="card rounded rounded-2 shadow-none p-3">
+            <div id="desgList" class="card rounded rounded-2 shadow-none p-3">
 
                 <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
                     <div class="loader-circle-57">

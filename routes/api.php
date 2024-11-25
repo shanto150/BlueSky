@@ -2,8 +2,12 @@
 
 use App\Http\Controllers\Admin\Area\AreaController;
 use App\Http\Controllers\Admin\Department\DepartmentController;
+use App\Http\Controllers\Admin\Designation\DesignationController;
 use App\Http\Controllers\Admin\Role\RolePermissionController;
+use App\Http\Controllers\Admin\IssuedBankMFS\IssuedBankMFSController;
 use App\Http\Controllers\Admin\OfficeLocation\LocationController;
+use App\Http\Controllers\Admin\PaymentAccount\PaymentAccountSController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +38,10 @@ Route::middleware(['auth:api'])->group(function () {
 
     //role-permission
     Route::get('getroles', [RolePermissionController::class, 'index'])->name('roles.index');
+    Route::post('editRole', [RolePermissionController::class, 'edit'])->name('roles.edit');
+    Route::post('getPermissionList', [RolePermissionController::class, 'getPermissionList'])->name('roles.getPermissionList');
+    Route::post('/changeRoleStatus', [RolePermissionController::class, 'changeRoleStatus'])->name('roles.changeRoleStatus');
+    Route::post('/deleteRole', [RolePermissionController::class, 'destroy'])->name('roles.deleteRole');
 
 
     // department
@@ -44,6 +52,15 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('changeDepartmentStatus', [DepartmentController::class, 'changeDepartmentStatus']);
     Route::post('deleteDept', [DepartmentController::class, 'destroy']);
 
+    //designtaion
+    Route::get('getDesignation', [DesignationController::class, 'index'])->name('deg.getDesignation');
+    Route::post('/Designation/save', [DesignationController::class, 'store']);
+
+    Route::post('editDesignation', [DesignationController::class, 'edit']);
+    Route::post('/Designation/update', [DesignationController::class, 'update']);
+    Route::post('changeDesgStatus', [DesignationController::class, 'changeDesignationStatus']);
+    Route::post('deleteDesignation', [DesignationController::class, 'destroy']);
+
     // office location
     Route::get('getOfficeLocation', [LocationController::class, 'index'])->name('officeLocation.officelocations');
     Route::post('/loc/save', [LocationController::class, 'store']);
@@ -52,6 +69,25 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('changeOffLocStatus', [LocationController::class, 'changeOffLocStatus']);
     Route::post('deleteOfficeLocation', [LocationController::class, 'destroy']);
 
+    //IssuedBankMFSController
+    Route::get('getBankMFS', [IssuedBankMFSController::class, 'index'])->name('settings.deposit.BankMFS');
+    Route::post('/bankMfs/save', [IssuedBankMFSController::class, 'save'])->name('settings.deposit.bankMfsSave');
+    Route::post('/editBankMfs', [IssuedBankMFSController::class, 'edit'])->name('settings.deposit.bankMfsEdit');
+    Route::post('/bankormfs/update', [IssuedBankMFSController::class, 'update'])->name('settings.deposit.bankMfsUpdate');
+    Route::post('changeIssuedBankStatus', [IssuedBankMFSController::class, 'changeIssuedBankStatus']);
+    Route::post('deleteBankMFS', [IssuedBankMFSController::class, 'deleteBankMFS']);
+
+    //payment account
+    Route::get('getPaymentAcct', [PaymentAccountSController::class, 'index'])->name('settings.deposit.getPaymentAcct');
+    Route::post('/paymentAcct/save', [PaymentAccountSController::class, 'store'])->name('settings.deposit.paymentAcctStore');
+    Route::post('/changePaymentAcctStatus', [PaymentAccountSController::class, 'changePaymentAcctStatus'])->name('settings.deposit.changePaymentAcctStatus');
+    Route::post('/deletePaymentAcct', [PaymentAccountSController::class, 'destroy'])->name('settings.deposit.destroy');
+    Route::post('/editPaymentAcct', [PaymentAccountSController::class, 'edit'])->name('settings.deposit.editPaymentAcct');
+    Route::post('/payment-acct/update', [PaymentAccountSController::class, 'update'])->name('settings.deposit.updatePaymentAcct');
+
+    //users managemnt
+    Route::get('getInternalUsers', [UserController::class, 'index'])->name('user.getInternalUsers');
 
 });
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
+Route::post('/role/update', [RolePermissionController::class, 'update']);
