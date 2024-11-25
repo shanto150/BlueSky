@@ -6,14 +6,14 @@ import { ref, onMounted, reactive } from "vue";
 const authStore = useAuthStore();
 const props = defineProps(['id'])
 
-const form = reactive({ dept_name: "", dept_id: '', status_val: "", useEmail: authStore.email });
+const form = reactive({ des_name: "", dept_id: '', status_val: "", useEmail: authStore.email });
 
 async function update(props) {
 
     form.dept_id = props.id;
 
     try {
-        const response = await axiosInstance.post("/dept/update", form);
+        const response = await axiosInstance.post("/Designation/update", form);
 
             Notification.showToast('s', response.data.message);
 
@@ -26,9 +26,9 @@ getDeptData(props);
 
 async function getDeptData(props) {
     try {
-        const response = await axiosInstance.post('editDept', { 'id': props });
+        const response = await axiosInstance.post('editDesignation', { 'id': props });
         const name = response.data[0].name;
-        $("#dept_name").val(name);
+        $("#des_name").val(name);
         const status = response.data[0].status;
         $('#status').val(status);
         $('#status').trigger('change');
@@ -57,12 +57,12 @@ onMounted(() => {
 
                     </li>
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'departmentList' }">Setings</router-link>
+                        <router-link :to="{ name: 'designationList' }">Setings</router-link>
                     </li>
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'departmentList' }">Department List</router-link>
+                        <router-link :to="{ name: 'designationList' }">Designation List</router-link>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Edit Department</li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Designation</li>
                 </ol>
             </nav>
         </div>
@@ -70,7 +70,7 @@ onMounted(() => {
 
     <div class="card">
         <div class="card-header">
-            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Edit Department</h5>
+            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Edit Designation</h5>
         </div>
 
         <form id="addZoneform">
@@ -78,8 +78,8 @@ onMounted(() => {
                 <div class="row">
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Name</label>
-                        <input type="text" class="form-control form-control-sm" id="dept_name" name="dept_name"
-                            placeholder="Enter Name" v-model="form.dept_name">
+                        <input type="text" class="form-control form-control-sm" id="des_name" name="des_name"
+                            placeholder="Enter Name" v-model="form.des_name">
                     </div>
 
                     <div class="col-md-6">

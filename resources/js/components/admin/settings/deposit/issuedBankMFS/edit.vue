@@ -1,19 +1,19 @@
 <script setup>
-import { useAuthStore } from "../../../stores/authStore";
-import axiosInstance from "../../../axiosInstance"
+import { useAuthStore } from "../../../../../stores/authStore";
+import axiosInstance from "../../../../../axiosInstance"
 import { ref, onMounted, reactive } from "vue";
 
 const authStore = useAuthStore();
-const props = defineProps(['id'])
+const props = defineProps(['id']);
 
-const form = reactive({ dept_name: "", dept_id: '', status_val: "", useEmail: authStore.email });
+const form = reactive({ bank_mfs_name: "", bank_mfs_id: '', status_val: "", useEmail: authStore.email });
 
 async function update(props) {
 
-    form.dept_id = props.id;
+    form.bank_mfs_id = props.id;
 
     try {
-        const response = await axiosInstance.post("/dept/update", form);
+        const response = await axiosInstance.post("/bankormfs/update", form);
 
             Notification.showToast('s', response.data.message);
 
@@ -26,13 +26,13 @@ getDeptData(props);
 
 async function getDeptData(props) {
     try {
-        const response = await axiosInstance.post('editDept', { 'id': props });
+        const response = await axiosInstance.post('editBankMfs', { 'id': props });
         const name = response.data[0].name;
-        $("#dept_name").val(name);
+        $("#bank_mfs_name").val(name);
         const status = response.data[0].status;
+
         $('#status').val(status);
         $('#status').trigger('change');
-
     } catch (error) {
         console.log(error);
     }
@@ -57,12 +57,12 @@ onMounted(() => {
 
                     </li>
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'departmentList' }">Setings</router-link>
+                        <router-link :to="{ name: 'issuedBankMFS' }">Setings</router-link>
                     </li>
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'departmentList' }">Department List</router-link>
+                        <router-link :to="{ name: 'issuedBankMFS' }">Deposit</router-link>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Edit Department</li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Issued Bank MFS</li>
                 </ol>
             </nav>
         </div>
@@ -70,7 +70,7 @@ onMounted(() => {
 
     <div class="card">
         <div class="card-header">
-            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Edit Department</h5>
+            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Edit Issued Bank MFS</h5>
         </div>
 
         <form id="addZoneform">
@@ -78,8 +78,8 @@ onMounted(() => {
                 <div class="row">
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Name</label>
-                        <input type="text" class="form-control form-control-sm" id="dept_name" name="dept_name"
-                            placeholder="Enter Name" v-model="form.dept_name">
+                        <input type="text" class="form-control form-control-sm" id="bank_mfs_name" name="bank_mfs_name"
+                            placeholder="Enter Name" v-model="form.bank_mfs_name">
                     </div>
 
                     <div class="col-md-6">

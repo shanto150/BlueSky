@@ -97,15 +97,15 @@ const options = {
                 var idd = row.idd;
                 var status = row.status;
 
-                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
+                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" data-item-id=' + idd + '> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" ></i> </button>';
                 if (status == 1) {
 
-                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change"> <i class="fa-solid fa-ban" data-item-id=' + idd + ' style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
                 } else {
-                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change"> <i class="fa-solid fa-check" data-item-id=' + idd + ' style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-check" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
                 }
 
-                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item"> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;" data-item-id=' + idd + '></i> </button>';
+                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
 
                 return html;
             },
@@ -114,7 +114,8 @@ const options = {
     "drawCallback": function (settings) {
         // edit function
         $(".edit-item").on('click', function (e) {
-            var itemIdd = e.target.dataset.itemId;
+
+            var itemIdd = $(this).attr('data-item-id');
 
             router.push({ name: 'zoneEdit', params: { id: itemIdd } });
         });
@@ -122,7 +123,8 @@ const options = {
         // delete function
         $(".delete-item").on('click', function (e) {
 
-            var idd = e.target.dataset.itemId;
+            // var idd = e.target.dataset.itemId;
+            var idd = $(this).attr('data-item-id');
 
             // delete pop up message
 
@@ -168,7 +170,8 @@ const options = {
 
         // change status
         $(".status-change").on('click', function (e) {
-            var idd = e.target.dataset.itemId;
+
+            var idd = $(this).attr('data-item-id');
 
             iziToast.question({
                 timeout: 100000,
@@ -193,7 +196,6 @@ const options = {
                     }, true]
                 ],
                 onClosed: async function (instance, toast, closedBy) {
-                    console.log(closedBy);
 
                     if (closedBy == 'yes') {
                         const response = axiosInstance.post("changeAreaStatus", { 'id': idd });
@@ -308,17 +310,22 @@ async function getListValues() {
         </div>
     </div>
 
-    <div class="row">
-        <div id="RoleList" class="table">
-            <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
-                <div class="loader-circle-57">
-                    <img class="position-absolute" src="../../../../../public/theme/appimages/blueskywings.png"
-                        height="22" width="22" alt="">
+    <div class="row position-relative">
+        <div class="col-12">
+            <div id="RoleList" class="card rounded rounded-2 shadow-none p-3">
+
+                <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
+                    <div class="loader-circle-57">
+                        <img class="position-absolute" src="../../../../../public/theme/appimages/blueskywings.png"
+                            height="22" width="22" alt="">
+                    </div>
                 </div>
+
+                <DataTable :options="options" :data="rData" class="table table-sm table-striped table-bordered">
+                </DataTable>
             </div>
-            <DataTable :options="options" :data="rData"
-                class="display table table-sm  border table-bordered table-striped table-hover"> </DataTable>
         </div>
+
     </div>
 
 </template>
@@ -761,4 +768,5 @@ async function getListValues() {
     --bs-btn-disabled-border-color: #f1892a;
     --bs-gradient: none;
 }
+
 </style>

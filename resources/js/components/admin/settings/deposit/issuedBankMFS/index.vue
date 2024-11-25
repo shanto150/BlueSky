@@ -1,13 +1,13 @@
 <script setup>
 import DataTable from "datatables.net-vue3";
 import DataBS5 from "datatables.net-bs5";
-import axiosInstance from "../../../axiosInstance";
+import axiosInstance from "../../../../../axiosInstance";
 import { ref, onMounted } from "vue";
 import { data } from "jquery";
 import { icons } from "lucide-vue-next";
 import { useRouter } from 'vue-router';
 const router = useRouter();
-import { useAuthStore } from '../../../stores/authStore';
+import { useAuthStore } from '../../../../../stores/authStore';
 const authStore = useAuthStore();
 
 DataTable.use(DataBS5);
@@ -36,24 +36,13 @@ const options = {
     columns: [
         { data: "DT_RowIndex", title: "SL" },
         {
-            title: "Name",
+            title: "Issued Bank",
             render: function (data, type, row) {
                 var html = "";
                 html += row.name;
-
                 return html;
             },
         },
-        {
-            title: "Total User",
-            render: function (data, type, row) {
-                var html = "";
-                html += '0';
-
-                return html;
-            },
-        },
-
         {
             title: "Created By",
             render: function (data, type, row) {
@@ -100,7 +89,7 @@ const options = {
                 var idd = row.idd;
                 var status = row.status;
 
-                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" ></i> </button>';
+                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" data-item-id=' + idd + ' placement="top"> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;"></i> </button>';
                 if (status == 1) {
 
                     html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
@@ -108,7 +97,7 @@ const options = {
                     html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-check" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
                 }
 
-                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
+                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;" ></i> </button>';
 
                 return html;
             },
@@ -117,10 +106,8 @@ const options = {
     "drawCallback": function (settings) {
         // edit function
         $(".edit-item").on('click', function (e) {
-
             var itemIdd = $(this).attr('data-item-id');
-
-            router.push({ name: 'offEdit', params: { id: itemIdd } });
+            router.push({ name: 'bankMfsEdit', params: { id: itemIdd } });
         });
 
         // delete function
@@ -138,7 +125,7 @@ const options = {
                 displayMode: 'once',
                 id: 'question',
                 zindex: 999,
-                message: 'Want to delete this office location?',
+                message: 'Want to delete this issued Bank/MFS?',
                 position: 'center',
                 buttons: [
                     ['<button><b>No</b></button>', function (instance, toast) {
@@ -153,11 +140,12 @@ const options = {
                     }, true]
                 ],
                 onClosed: async function (instance, toast, closedBy) {
+                    console.log(closedBy);
 
                     if (closedBy == 'yes') {
-                        const response = axiosInstance.post("deleteOfficeLocation", { 'id': idd });
+                        const response = axiosInstance.post("deleteBankMFS", { 'id': idd });
                         getListValues();
-                        Notification.showToast('s', 'Successfully Office Location Deleted.');
+                        Notification.showToast('s', 'Successfully issued Bank/MFS Deleted.');
                     } else {
 
                     }
@@ -171,7 +159,6 @@ const options = {
 
         // change status
         $(".status-change").on('click', function (e) {
-
             var idd = $(this).attr('data-item-id');
 
             iziToast.question({
@@ -182,7 +169,7 @@ const options = {
                 displayMode: 'once',
                 id: 'question',
                 zindex: 999,
-                message: 'Want to change status this office location?',
+                message: 'Want to change status this issued Bank/MFS?',
                 position: 'center',
                 buttons: [
                     ['<button><b>No</b></button>', function (instance, toast) {
@@ -199,9 +186,9 @@ const options = {
                 onClosed: async function (instance, toast, closedBy) {
 
                     if (closedBy == 'yes') {
-                        const response = axiosInstance.post("changeOffLocStatus", { 'id': idd });
+                        const response = axiosInstance.post("changeIssuedBankStatus", { 'id': idd });
                         getListValues();
-                        Notification.showToast('s', 'Successfully office location status Changed.');
+                        Notification.showToast('s', 'Successfully issued Bank/MFS status Changed.');
                     } else {
 
                     }
@@ -217,11 +204,11 @@ const options = {
 async function getListValues() {
     try {
         authStore.GlobalLoading = true;
-        const response = await axiosInstance.get("getOfficeLocation");
+        const response = await axiosInstance.get("getBankMFS");
         rData.value = response.data.data;
         authStore.GlobalLoading = false;
     } catch (error) {
-        // console.log(error);
+        console.log(error);
         authStore.GlobalLoading = false;
     }
 }
@@ -239,16 +226,19 @@ async function getListValues() {
                         <router-link :to="{ name: 'Home' }">Dashboard</router-link>
                     </li>
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'offLoc' }">Setings</router-link>
+                        <router-link :to="{ name: 'issuedBankMFS' }">Settings</router-link>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Office Location List</li>
+                    <li class="breadcrumb-item">
+                        <router-link :to="{ name: 'issuedBankMFS' }">Deposit</router-link>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Issued Bank & MFS</li>
                 </ol>
             </nav>
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-                <router-link :to="{ name: 'addoffLoc' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i>Add New Office Location
+                <router-link :to="{ name: 'bankMfsCreate' }" class="btn btn-primary btn-sm">
+                    <i class="fa fa-circle-plus"></i>Add New Issued Bank & MFS
                 </router-link>
 
             </div>
@@ -261,7 +251,7 @@ async function getListValues() {
             <div class="info-agency">
                 <span class="info-agency-icon bg-info elevation-1"><i class="fa-solid fa-location-dot"></i></span>
                 <div class="info-agency-content">
-                    <span class="info-agency-text">Total</span>
+                    <span class="info-agency-text">Total Area</span>
                     <span class="info-agency-number">
                         1200
                     </span>
@@ -273,7 +263,7 @@ async function getListValues() {
             <div class="active-agency mb-3">
                 <span class="active-agency-icon bg-success elevation-1 text-white"><i class="fa fa-check"></i></span>
                 <div class="active-agency-content">
-                    <span class="active-agency-text">Active</span>
+                    <span class="active-agency-text">Active Area</span>
                     <span class="active-agency-number">760</span>
                 </div>
 
@@ -285,7 +275,7 @@ async function getListValues() {
             <div class="pending-agnt mb-3">
                 <span class="pending-agnt-icon bg-warning elevation-1"><i class="fa-solid fa-circle-pause"></i></span>
                 <div class="pending-agnt-content">
-                    <span class="pending-agnt-text">Inactive</span>
+                    <span class="pending-agnt-text">Inactive Area</span>
                     <span class="pending-agnt-number">20</span>
                 </div>
             </div>
@@ -316,11 +306,11 @@ async function getListValues() {
 
     <div class="row position-relative">
         <div class="col-12">
-            <div id="RoleList" class="card rounded rounded-2 shadow-none p-3">
+            <div id="issuedBankList" class="card rounded rounded-2 shadow-none p-3">
 
                 <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
                     <div class="loader-circle-57">
-                        <img class="position-absolute" src="../../../../../public/theme/appimages/blueskywings.png"
+                        <img class="position-absolute" src="../../../../../../../public/theme/appimages/blueskywings.png"
                             height="22" width="22" alt="">
                     </div>
                 </div>
@@ -392,7 +382,7 @@ async function getListValues() {
     border: 1px solid #E4EAEF;
     border-radius: 9px;
     background-color: white;
-    background-image: url('../../../../../public/theme/appimages/Search.svg');
+    background-image: url('../../../../../../../public/theme/appimages/Search.svg');
     background-position: 7px 6px;
     /*left,top*/
     background-repeat: no-repeat;

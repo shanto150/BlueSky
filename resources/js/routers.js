@@ -13,6 +13,7 @@ const otp = () => import('./components/auth/otp.vue')
 const NF = () => import('./components/auth/NotFound.vue')
 const ForcePassChange = () => import('./components/auth/forcePasswordChange.vue')
 
+const flightSearch = () => import('./components/search/flightSearch.vue')
 // agent
 const AgentList = () => import('./components/admin/agent/index.vue')
 const agentDetails = () => import('./components/admin/agent/agentDetails.vue')
@@ -43,10 +44,24 @@ const zoneEdit = () => import('./components/admin/zone/edit.vue')
 const departmentList = () => import('./components/admin/department/index.vue')
 const deptCreate = () => import('./components/admin/department/create.vue')
 const deptEdit = () => import('./components/admin/department/edit.vue')
+
+//designation
+const designationList = () => import('./components/admin/designation/index.vue')
+const designationCreate = () => import('./components/admin/designation/create.vue')
+const designationEdit = () => import('./components/admin/designation/edit.vue')
+
 //office location
 const offLoc = () => import('./components/admin/officeLocation/index.vue')
 const addoffLoc = () => import('./components/admin/officeLocation/create.vue')
 const offEdit = () => import('./components/admin/officeLocation/edit.vue')
+//setting deposit
+const issuedBankMFS = () => import('./components/admin/settings/deposit/issuedBankMFS/index.vue')
+const bankMfsCreate = () => import('./components/admin/settings/deposit/issuedBankMFS/create.vue')
+const bankMfsEdit = () => import('./components/admin/settings/deposit/issuedBankMFS/edit.vue')
+//paymentAccount
+const paymentacct = () => import('./components/admin/settings/deposit/paymentAccount/index.vue')
+const paymentAcctCreate = () => import('./components/admin/settings/deposit/paymentAccount/create.vue')
+const payAcctEdit = () => import('./components/admin/settings/deposit/paymentAccount/edit.vue')
 
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
@@ -62,6 +77,9 @@ const routes = [
     { path: '/Settings', component: Settings, name: 'Settings', meta: { auth: true } },
     { path: '/Logout', component: Logout, name: 'Logout', meta: { auth: true } },
     { path: '/:any(.*)*', component: NF, name: 'NF', meta: { auth: true } },
+
+    //flight search
+    { path: '/flight-search', component: flightSearch, name: 'flightSearch', meta: { auth: true } },
 
 
     // agent
@@ -83,7 +101,7 @@ const routes = [
     //roles permission
     { path: '/all-roles-list', component: roleList, name: 'roleList', meta: { auth: true } },
     { path: '/create-role', component: roleCreate, name: 'roleCreate', meta: { auth: true } },
-    { path: '/edit-role', component: roleEdit, name: 'roleEdit', meta: { auth: true } },
+    { path: '/edit-role/:id', component: roleEdit, name: 'roleEdit', meta: { auth: true },props:true },
 
     //Zone
     { path: '/all-zone-list', component: zoneList, name: 'zoneList', meta: { auth: true } },
@@ -93,10 +111,25 @@ const routes = [
     { path: '/all-department-list', component: departmentList, name: 'departmentList', meta: { auth: true } },
     { path: '/create-department', component: deptCreate, name: 'deptCreate', meta: { auth: true } },
     { path: '/edit-department/:id', component: deptEdit, name: 'deptEdit', meta: { auth: true },props:true  },
+
+    // designation
+    { path: '/all-designation-list', component: designationList, name: 'designationList', meta: { auth: true } },
+    { path: '/create-designation', component: designationCreate, name: 'designationCreate', meta: { auth: true } },
+    { path: '/edit-designation/:id', component: designationEdit, name: 'designationEdit', meta: { auth: true },props:true  },
+
     // office location
     { path: '/all-office-location', component: offLoc, name: 'offLoc', meta: { auth: true } },
     { path: '/create-location', component: addoffLoc, name: 'addoffLoc', meta: { auth: true } },
     { path: '/office-location/:id', component: offEdit, name: 'offEdit', meta: { auth: true },props:true  },
+
+    // sttings deposit bank and mfs
+    { path: '/all-bank-&-mfs', component: issuedBankMFS, name: 'issuedBankMFS', meta: { auth: true } },
+    { path: '/create-bank-mfs', component: bankMfsCreate, name: 'bankMfsCreate', meta: { auth: true } },
+    { path: '/edit-bank-mfs/:id', component: bankMfsEdit, name: 'bankMfsEdit', meta: { auth: true },props:true  },
+    //paymentacct
+    { path: '/all-payment-accounts', component: paymentacct, name: 'paymentacct', meta: { auth: true } },
+    { path: '/create-payment-account', component: paymentAcctCreate, name: 'paymentAcctCreate', meta: { auth: true } },
+    { path: '/edit-payment-account/:id', component: payAcctEdit, name: 'payAcctEdit', meta: { auth: true },props:true  },
 ]
 
 const router = createRouter({

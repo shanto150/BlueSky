@@ -62,6 +62,13 @@ onMounted(() => {
                 </li>
 
                 <li>
+                    <router-link v-wave :to="{ name: 'flightSearch' }">
+                        <div class="parent-icon"><i class="bx bx-unite"></i>
+                        </div>
+                        <div class="menu-title">Flight Search</div>
+                    </router-link>
+                </li>
+                <li>
                     <router-link v-wave :to="{ name: 'AgentList' }">
                         <div class="parent-icon"><i class="bx bx-unite"></i>
                         </div>
@@ -104,7 +111,11 @@ onMounted(() => {
                                 <i class='bx bx-paper-plane'></i> Area
                             </router-link>
                         </li>
-
+                        <li>
+                            <router-link v-wave :to="{ name: 'designationList' }">
+                                <i class='bx bx-paper-plane'></i> Designation
+                            </router-link>
+                        </li>
                         <li>
                             <router-link v-wave :to="{ name: 'departmentList' }">
                                 <i class='bx bx-paper-plane'></i> Department
@@ -120,11 +131,11 @@ onMounted(() => {
                         <li> <a v-wave class="has-arrow" href="javascript:;"><i
                                     class='bx bx-paper-plane'></i>Deposit</a>
                             <ul>
-                                <router-link v-wave :to="{ name: 'zoneList' }">
+                                <router-link v-wave :to="{ name: 'paymentacct' }">
                                     <i class='bx bx-paper-plane'></i> Payment Account
                                 </router-link>
 
-                                <router-link v-wave :to="{ name: 'zoneList' }">
+                                <router-link v-wave :to="{ name: 'issuedBankMFS' }">
                                     <i class='bx bx-paper-plane'></i> Issused Bank & MFS
                                 </router-link>
                             </ul>
@@ -151,6 +162,7 @@ onMounted(() => {
     font-family: "cart";
     src: url("../../../../public/fonts/cartagestenciljnl.ttf");
 }
+
 
 .tx {
     text-transform: Uppercase;

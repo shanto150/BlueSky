@@ -5,8 +5,8 @@ import jszip from 'jszip';
 import 'datatables.net-buttons-bs5';
 import 'datatables.net-buttons/js/buttons.html5.mjs';
 import 'datatables.net-responsive-bs5';
-
-
+import { useRouter } from 'vue-router';
+const router = useRouter();
 import { useAuthStore } from '../../../stores/authStore';
 const authStore = useAuthStore();
 import axiosInstance from "../../../axiosInstance";
@@ -93,8 +93,141 @@ const options = {
                 return html;
             },
         },
-        { data: "status", title: "Status" },
+
+        {
+            title: "Status",
+            render: function (data, type, row) {
+                var html = "";
+
+                if (row.status == 1) {
+                    html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Active </div>';
+                } else {
+                    html += '<div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Deactivated </div>';
+                }
+
+                return html;
+            },
+        },
+
+        {
+            title: "Action",
+            render: function (data, type, row) {
+                var html = "";
+                var idd = row.idd;
+                var status = row.status;
+
+                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" ></i> </button>';
+                if (status == 1) {
+
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                } else {
+                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-check" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                }
+
+                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
+
+                return html;
+            },
+        }
     ],
+    "drawCallback": function (settings) {
+        // edit function
+        $(".edit-item").on('click', function (e) {
+
+            var itemIdd = $(this).attr('data-item-id');
+            console.log(itemIdd);
+
+            router.push({ name: 'roleEdit', params: { id: itemIdd } });
+        });
+
+        // delete function
+        $(".delete-item").on('click', function (e) {
+
+            var idd = $(this).attr('data-item-id');
+
+            // delete pop up message
+
+            iziToast.question({
+                timeout: 100000,
+                pauseOnHover: false,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                message: 'Want to delete this office location?',
+                position: 'center',
+                buttons: [
+                    ['<button><b>No</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
+
+                    }, true],
+                    ['<button><b>Yes</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
+
+                    }, true]
+                ],
+                onClosed: async function (instance, toast, closedBy) {
+
+                    if (closedBy == 'yes') {
+                        const response = axiosInstance.post("deleteRole", { 'id': idd });
+                        getListValues();
+                        Notification.showToast('s', 'Successfully Role Deleted.');
+                    } else {
+
+                    }
+
+                }
+            });
+            // delete pop up message end
+
+
+        });
+
+        // change status
+        $(".status-change").on('click', function (e) {
+
+            var idd = $(this).attr('data-item-id');
+
+            iziToast.question({
+                timeout: 100000,
+                pauseOnHover: false,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                message: 'Want to change status this role?',
+                position: 'center',
+                buttons: [
+                    ['<button><b>No</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
+
+                    }, true],
+                    ['<button><b>Yes</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
+
+                    }, true]
+                ],
+                onClosed: async function (instance, toast, closedBy) {
+
+                    if (closedBy == 'yes') {
+                        const response = axiosInstance.post("changeRoleStatus", { 'id': idd });
+                        getListValues();
+                        Notification.showToast('s', 'Successfully Role status Changed.');
+                    } else {
+
+                    }
+
+                }
+            });
+
+        });
+    }
 };
 
 async function getListValues() {
