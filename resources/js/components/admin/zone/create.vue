@@ -157,7 +157,7 @@ async function getDistrict(id) {
                         <label for="input1" class="form-label ">District</label>
                         <select id="district_id" name="district_name"
                             class="form-control form-control-sm single-select-field district_name">
-
+                            <option value="">==Select==</option>
                         </select>
                     </div>
 

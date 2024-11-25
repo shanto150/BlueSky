@@ -1,3 +1,38 @@
+<script setup>
+import { useAuthStore } from "../../../stores/authStore";
+import axiosInstance from "../../../axiosInstance"
+import { ref, onMounted, reactive } from "vue";
+
+getDepartment();
+
+async function getDepartment() {
+    try {
+        const response = await axiosInstance.get('getAllDept');
+
+        var options = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name }
+            options.push(obj);
+
+        });
+
+        let select = $("#deptment_id")
+        select.select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            allowClear: true,
+            height: '50',
+            data: options,
+        });
+
+
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
+</script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">User Managemnet</div>
@@ -6,7 +41,6 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item">
                         <router-link :to="{ name: 'Home' }">Dashboard</router-link>
-
                     </li>
                     <li class="breadcrumb-item">
                         <router-link :to="{ name: 'UserList' }">User List</router-link>
@@ -40,12 +74,10 @@
                                     <label for="input4" class="form-label">Email</label><input type="email"
                                         class="form-control form-control-sm" id="input4" placeholder="Email">
                                 </div>
-                                <div class="col-md-12 mt-2"><label for="input7" class="form-label">Department</label>
-                                    <select id="input7" class="form-control form-control-sm">
-                                        <option>Choose...</option>
-                                        <option>One</option>
-                                        <option>Two</option>
-                                        <option>Three</option>
+                                <div class="col-md-12 mt-2">
+                                    <label for="input7" class="form-label">Department</label>
+                                    <select id="deptment_id" class="form-control form-control-sm">
+
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-2">

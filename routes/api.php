@@ -51,11 +51,13 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/dept/update', [DepartmentController::class, 'update']);
     Route::post('changeDepartmentStatus', [DepartmentController::class, 'changeDepartmentStatus']);
     Route::post('deleteDept', [DepartmentController::class, 'destroy']);
+    //dropdown
+    Route::get('getAllDept', [DepartmentController::class, 'getAllDept']);
+
 
     //designtaion
     Route::get('getDesignation', [DesignationController::class, 'index'])->name('deg.getDesignation');
     Route::post('/Designation/save', [DesignationController::class, 'store']);
-
     Route::post('editDesignation', [DesignationController::class, 'edit']);
     Route::post('/Designation/update', [DesignationController::class, 'update']);
     Route::post('changeDesgStatus', [DesignationController::class, 'changeDesignationStatus']);
