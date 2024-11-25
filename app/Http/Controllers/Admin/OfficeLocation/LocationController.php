@@ -75,6 +75,11 @@ class LocationController extends BaseController
         return response()->json($loc);
     }
 
+    public function getAllOffLoc()
+    {
+        $off_loc = DB::table('officelocations')->get();
+        return response()->json($off_loc);
+    }
     /**
      * Update the specified resource in storage.
      */

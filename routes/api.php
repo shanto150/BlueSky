@@ -3,12 +3,12 @@
 use App\Http\Controllers\Admin\Area\AreaController;
 use App\Http\Controllers\Admin\Department\DepartmentController;
 use App\Http\Controllers\Admin\Designation\DesignationController;
-use App\Http\Controllers\Admin\Role\RolePermissionController;
 use App\Http\Controllers\Admin\IssuedBankMFS\IssuedBankMFSController;
 use App\Http\Controllers\Admin\OfficeLocation\LocationController;
 use App\Http\Controllers\Admin\PaymentAccount\PaymentAccountSController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\Role\RolePermissionController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
@@ -42,7 +42,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('getPermissionList', [RolePermissionController::class, 'getPermissionList'])->name('roles.getPermissionList');
     Route::post('/changeRoleStatus', [RolePermissionController::class, 'changeRoleStatus'])->name('roles.changeRoleStatus');
     Route::post('/deleteRole', [RolePermissionController::class, 'destroy'])->name('roles.deleteRole');
-
+    //dropdown
+    Route::get('getAllRoles', [RolePermissionController::class, 'getAllRoles']);
+    Route::get('getAllUsers', [UserController::class, 'getAllUsers']);
 
     // department
     Route::get('getdept', [DepartmentController::class, 'index'])->name('dept.getdept');
@@ -54,7 +56,6 @@ Route::middleware(['auth:api'])->group(function () {
     //dropdown
     Route::get('getAllDept', [DepartmentController::class, 'getAllDept']);
 
-
     //designtaion
     Route::get('getDesignation', [DesignationController::class, 'index'])->name('deg.getDesignation');
     Route::post('/Designation/save', [DesignationController::class, 'store']);
@@ -62,6 +63,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/Designation/update', [DesignationController::class, 'update']);
     Route::post('changeDesgStatus', [DesignationController::class, 'changeDesignationStatus']);
     Route::post('deleteDesignation', [DesignationController::class, 'destroy']);
+    //dropdown
+    Route::get('getAllDesign', [DesignationController::class, 'getAllDesign']);
 
     // office location
     Route::get('getOfficeLocation', [LocationController::class, 'index'])->name('officeLocation.officelocations');
@@ -70,6 +73,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/office/location/update', [LocationController::class, 'update']);
     Route::post('changeOffLocStatus', [LocationController::class, 'changeOffLocStatus']);
     Route::post('deleteOfficeLocation', [LocationController::class, 'destroy']);
+    //dropdown
+    Route::get('getAllOffLoc', [LocationController::class, 'getAllOffLoc']);
 
     //IssuedBankMFSController
     Route::get('getBankMFS', [IssuedBankMFSController::class, 'index'])->name('settings.deposit.BankMFS');
