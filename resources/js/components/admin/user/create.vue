@@ -132,7 +132,6 @@ async function getAllUsers() {
         $.each(response.data, function (key, value) {
             var obj = { id: value.id, text: value.name }
             options.push(obj);
-
         });
 
         let select = $("#report_to")
@@ -153,6 +152,7 @@ async function getAllUsers() {
 }
 
 </script>
+
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">User Managemnet</div>
