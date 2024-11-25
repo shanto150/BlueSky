@@ -74,6 +74,11 @@ class DesignationController extends BaseController
 
     }
 
+    public function getAllDesign()
+    {
+        $desg = DB::table('designations')->get();
+        return response()->json($desg);
+    }
     /**
      * Update the specified resource in storage.
      */

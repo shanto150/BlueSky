@@ -39,6 +39,8 @@ return new class extends Migration
             $table->boolean('status')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->index('email');
             $table->index('is_active');
         });
