@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\BaseController;
-use App\Models\Officelocation\Officelocation;
 use App\Models\User;
+use App\Models\OfficeLocation\Officelocation;
 
 class LocationController extends BaseController
 {
