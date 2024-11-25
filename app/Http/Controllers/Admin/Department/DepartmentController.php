@@ -77,6 +77,12 @@ class DepartmentController extends BaseController
 
     }
 
+    public function getAllDept()
+    {
+        $div = DB::table('departments')->get();
+        return response()->json($div);
+    }
+
     /**
      * Update the specified resource in storage.
      */
