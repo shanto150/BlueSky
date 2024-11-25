@@ -32,6 +32,126 @@ async function getDepartment() {
 
     }
 }
+
+getDesignation();
+
+async function getDesignation() {
+    try {
+        const response = await axiosInstance.get('getAllDesign');
+
+        var options = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name }
+            options.push(obj);
+
+        });
+
+        let select = $("#desg_id")
+        select.select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            allowClear: true,
+            height: '50',
+            data: options,
+        });
+
+
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
+
+getOffLoc();
+
+async function getOffLoc() {
+    try {
+        const response = await axiosInstance.get('getAllOffLoc');
+
+        var options = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name }
+            options.push(obj);
+
+        });
+
+        let select = $("#off_loc")
+        select.select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            allowClear: true,
+            height: '50',
+            data: options,
+        });
+
+
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
+getRoles();
+
+async function getRoles() {
+    try {
+        const response = await axiosInstance.get('getAllRoles');
+
+        var options = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name }
+            options.push(obj);
+
+        });
+
+        let select = $("#role_id")
+        select.select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            allowClear: true,
+            height: '50',
+            data: options,
+        });
+
+
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
+
+getAllUsers();
+
+async function getAllUsers() {
+    try {
+        const response = await axiosInstance.get('getAllUsers');
+
+        var options = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name }
+            options.push(obj);
+
+        });
+
+        let select = $("#report_to")
+        select.select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            allowClear: true,
+            height: '50',
+            data: options,
+        });
+
+
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
+
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -77,26 +197,22 @@ async function getDepartment() {
                                 <div class="col-md-12 mt-2">
                                     <label for="input7" class="form-label">Department</label>
                                     <select id="deptment_id" class="form-control form-control-sm">
+                                        <option>Choose...</option>
 
                                     </select>
                                 </div>
                                 <div class="col-md-12 mt-2">
                                     <label for="input11" class="form-label">Office Location</label>
-                                    <select id="input7" class="form-control form-control-sm">
+                                    <select id="off_loc" class="form-control form-control-sm">
                                         <option>Choose...</option>
-                                        <option>One</option>
-                                        <option>Two</option>
-                                        <option>Three</option>
+
                                     </select>
                                 </div>
 
                                 <div class="col-md-12 mt-2">
                                     <label for="input11" class="form-label">Role</label>
-                                    <select id="input7" class="form-control form-control-sm">
+                                    <select id="role_id" class="form-control form-control-sm">
                                         <option>Choose...</option>
-                                        <option>One</option>
-                                        <option>Two</option>
-                                        <option>Three</option>
                                     </select>
                                 </div>
                             </div>
@@ -116,13 +232,19 @@ async function getDepartment() {
                                 </div>
 
                                 <div class="col-md-12 mt-2">
-                                    <label for="input4" class="form-label">Designation</label><input type="email"
-                                        class="form-control form-control-sm" id="input4" placeholder="Email">
+                                    <label for="input4" class="form-label">Designation</label>
+                                    <select id="desg_id" class="form-control form-control-sm">
+                                        <option>Choose...</option>
+
+                                    </select>
                                 </div>
 
                                 <div class="col-md-12 mt-2">
-                                    <label for="input4" class="form-label">Report To</label><input type="email"
-                                        class="form-control form-control-sm" id="input4" placeholder="Email">
+                                    <label for="input4" class="form-label">Report To</label>
+                                    <select id="report_to" class="form-control form-control-sm">
+                                        <option>Choose...</option>
+
+                                    </select>
                                 </div>
                             </div>
                         </div>

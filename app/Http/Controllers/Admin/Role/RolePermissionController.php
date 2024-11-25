@@ -26,6 +26,11 @@ class RolePermissionController extends BaseController
 
     }
 
+    public function getAllRoles()
+    {
+        $roles = DB::table('roles')->get();
+        return response()->json($roles);
+    }
     /**
      * Show the form for creating a new resource.
      */
