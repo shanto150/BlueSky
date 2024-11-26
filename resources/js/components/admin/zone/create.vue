@@ -2,7 +2,7 @@
 import { useAuthStore } from "../../../stores/authStore";
 import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted, reactive } from "vue";
-
+import select2 from 'select2';
 
 const authStore = useAuthStore();
 //**** create function start

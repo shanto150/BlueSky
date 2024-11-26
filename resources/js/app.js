@@ -22,8 +22,6 @@ import VOtpInput from "vue3-otp-input";
 import VueTippy from "vue-tippy";
 import VueDeviceDetect from "@tenrok/vue-device-detect";
 import VWave from "v-wave";
-import select2 from 'select2';
-select2();
 
 
 import Scrollbar from "vue3-perfect-scrollbar-z";
