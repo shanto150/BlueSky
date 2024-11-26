@@ -21,7 +21,6 @@ onMounted(() => {
     });
 });
 
-
 async function save() {
 
     try {
@@ -48,7 +47,6 @@ async function save() {
 
     }
 }
-
 
 // it will load everytime page open
 getDivision();
@@ -110,7 +108,6 @@ async function getDistrict(id) {
 
     }
 }
-
 
 </script>
 <template>
