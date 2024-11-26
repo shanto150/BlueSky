@@ -8,6 +8,8 @@ const authStore = useAuthStore();
 //**** create function start
 const form = reactive({ area_name: "", division_id: "", district_id: "", status_val: "", useEmail: authStore.email });
 
+const options = [];
+
 onMounted(() => {
 
     getDivision();
@@ -58,13 +60,11 @@ async function save() {
 
 
 // it will load everytime page open
-
-
 async function getDivision() {
     try {
 
         const response = await axiosInstance.get('divisions');
-        var options = [];
+
         $.each(response.data, function (key, value) {
             var obj = { id: value.id, text: value.name }
             options.push(obj);
@@ -73,14 +73,13 @@ async function getDivision() {
         // response.map(x => {return {id:x.id, text: x.name}})
         console.log(options);
 
-        let select = $("#division_id")
-        select.select2({
+        $("#division_id").select2({
             placeholder: '=Select=',
             theme: 'bootstrap-5',
             width: '100%',
             allowClear: true,
             height: '50',
-            data: options,
+            // data: options,
         });
         $('#division_id').prepend('<option selected=""></option>');
 
@@ -158,8 +157,8 @@ async function getDistrict(id) {
 
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Division</label>
-                        <select id="division_id" name="division_name"
-                            class="form-control form-control-sm division_name">
+                        <select id="division_id" name="division_name" class="form-control form-control-sm division_name">
+                            <option :value="option.key" v-for="option in options">{{ option.value }}</option>
                         </select>
                     </div>
 
