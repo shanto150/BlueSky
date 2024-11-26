@@ -3,6 +3,7 @@ import { useAuthStore } from "../../../stores/authStore";
 import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted, reactive } from "vue";
 
+
 const authStore = useAuthStore();
 //**** create function start
 const form = reactive({ area_name: "", division_id: "", district_id: "", status_val: "", useEmail: authStore.email });
@@ -10,7 +11,6 @@ const form = reactive({ area_name: "", division_id: "", district_id: "", status_
 onMounted(() => {
 
     getDivision();
-
 
     $('.division_name').on("change", function () {
 
