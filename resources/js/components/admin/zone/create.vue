@@ -12,6 +12,8 @@ const options = [];
 
 onMounted(() => {
 
+    select2();
+
     getDivision();
 
     $('.division_name').on("change", function () {
