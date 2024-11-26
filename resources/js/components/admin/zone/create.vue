@@ -2,7 +2,7 @@
 import { useAuthStore } from "../../../stores/authStore";
 import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted, reactive } from "vue";
-import select2 from 'select2';
+import "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js";
 
 const authStore = useAuthStore();
 //**** create function start
