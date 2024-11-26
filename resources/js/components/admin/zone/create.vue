@@ -8,6 +8,10 @@ const authStore = useAuthStore();
 const form = reactive({ area_name: "", division_id: "", district_id: "", status_val: "", useEmail: authStore.email });
 
 onMounted(() => {
+
+    getDivision();
+
+
     $('.division_name').on("change", function () {
 
         form.division_id = $(this).val();
@@ -19,6 +23,8 @@ onMounted(() => {
 
     $('.district_name').on("change", function () {
         form.district_id = $(this).val();
+        let disVal = $('.district_name').val();
+        console.log(disVal);
     });
 });
 
@@ -32,12 +38,12 @@ async function save() {
 
         document.getElementById("addZoneform").reset();
 
-        $('#division_id option:first').prop('selected', true).trigger(
-            "change"); // reset dropdown value
-        $('#district_id option:first').prop('selected', true).trigger(
-            "change"); // reset dropdown value
-        $('#status option:first').prop('selected', true).trigger(
-            "change"); // reset dropdown value
+        // $('#division_id option:first').prop('selected', true).trigger(
+        //     "change"); // reset dropdown value
+        // $('#district_id option:first').prop('selected', true).trigger(
+        //     "change"); // reset dropdown value
+        // $('#status option:first').prop('selected', true).trigger(
+        //     "change"); // reset dropdown value
 
         Notification.showToast('s', response.data.message);
 
@@ -52,7 +58,7 @@ async function save() {
 
 
 // it will load everytime page open
-getDivision();
+
 
 async function getDivision() {
     try {
@@ -64,6 +70,7 @@ async function getDivision() {
             options.push(obj);
 
         });
+        // response.map(x => {return {id:x.id, text: x.name}})
         console.log(options);
 
         let select = $("#division_id")
@@ -152,14 +159,14 @@ async function getDistrict(id) {
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Division</label>
                         <select id="division_id" name="division_name"
-                            class="form-control form-control-sm single-select-fields division_name">
+                            class="form-control form-control-sm division_name">
                         </select>
                     </div>
 
                     <div class="col-md-6 mt-2">
                         <label for="input1" class="form-label ">District</label>
                         <select id="district_id" name="district_name"
-                            class="form-control form-control-sm single-select-field district_name">
+                            class="form-control form-control-sm district_name">
                             <option value="">=Select=</option>
                         </select>
                     </div>
