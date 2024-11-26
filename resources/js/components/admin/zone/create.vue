@@ -14,10 +14,13 @@ onMounted(() => {
         $('.district_name').empty(); // empty previous data
 
         getDistrict($(this).val());
+        $('#district_id').prepend('<option selected=""></option>');
     });
 
     $('.district_name').on("change", function () {
         form.district_id = $(this).val();
+        let disVal = $('.district_name').val();
+        console.log(disVal);
     });
 });
 
@@ -55,8 +58,8 @@ getDivision();
 
 async function getDivision() {
     try {
-        const response = await axiosInstance.get('divisions');
 
+        const response = await axiosInstance.get('divisions');
         var options = [];
         $.each(response.data, function (key, value) {
             var obj = { id: value.id, text: value.name }
@@ -74,6 +77,7 @@ async function getDivision() {
             height: '50',
             data: options,
         });
+        $('#division_id').prepend('<option selected=""></option>');
 
 
     } catch (error) {
@@ -158,7 +162,7 @@ async function getDistrict(id) {
                         <label for="input1" class="form-label ">District</label>
                         <select id="district_id" name="district_name"
                             class="form-control form-control-sm single-select-field district_name">
-                            <option value="">==Select==</option>
+                            <option value="">=Select=</option>
                         </select>
                     </div>
 
