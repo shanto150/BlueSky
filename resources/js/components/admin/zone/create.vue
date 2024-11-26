@@ -19,8 +19,6 @@ onMounted(() => {
 
     $('.district_name').on("change", function () {
         form.district_id = $(this).val();
-        let disVal = $('.district_name').val();
-        console.log(disVal);
     });
 });
 
