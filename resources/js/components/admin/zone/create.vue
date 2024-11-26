@@ -28,6 +28,24 @@ onMounted(() => {
         let disVal = $('.district_name').val();
         console.log(disVal);
     });
+
+
+    $("#district_id").select2({
+        placeholder: '=Select=',
+        theme: 'bootstrap-5',
+        width: '100%',
+        allowClear: true,
+        height: '50'
+    });
+
+    $("#division_id").select2({
+        placeholder: '=Select=',
+        theme: 'bootstrap-5',
+        width: '100%',
+        allowClear: true,
+        height: '50'
+    });
+
 });
 
 
@@ -157,8 +175,9 @@ async function getDistrict(id) {
 
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Division</label>
-                        <select id="division_id" name="division_name" class="form-control form-control-sm division_name">
-                            <option :value="option.key" v-for="option in options">{{ option.value }}</option>
+                        <select id="division_id" name="division_name"
+                            class="form-control form-control-sm division_name">
+                            <option value="">=Select=</option>
                         </select>
                     </div>
 
