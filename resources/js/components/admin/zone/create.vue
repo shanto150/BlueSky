@@ -1,4 +1,4 @@
-<script setup>
+<script setup type='module'>
 import { useAuthStore } from "../../../stores/authStore";
 import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted, reactive } from "vue";
