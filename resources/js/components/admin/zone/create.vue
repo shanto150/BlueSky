@@ -3,6 +3,7 @@ import { useAuthStore } from "../../../stores/authStore";
 import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted, reactive } from "vue";
 import select2 from 'select2';
+select2();
 
 const authStore = useAuthStore();
 //**** create function start
@@ -11,8 +12,6 @@ const form = reactive({ area_name: "", division_id: "", district_id: "", status_
 const options = [];
 
 onMounted(() => {
-
-    select2();
 
     getDivision();
 
