@@ -15,7 +15,6 @@ return new class extends Migration
             $table->increments('id')->unsigned();
             $table->string('name',50);
             $table->string('phone',20);
-            $table->string('name',50);
             $table->string('img_path',255)->nullable();
             $table->string('type',3)->comment('1=internal 0=external');
             $table->integer('emp_id');
