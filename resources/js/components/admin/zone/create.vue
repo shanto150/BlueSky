@@ -64,7 +64,7 @@ async function getDivision() {
             options.push(obj);
 
         });
-        // console.log(options);
+        console.log(options);
 
         let select = $("#division_id")
         select.select2({
