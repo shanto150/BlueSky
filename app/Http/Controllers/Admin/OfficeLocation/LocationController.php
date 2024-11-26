@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin\OfficeLocation;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\DataTables;
-use App\Http\Controllers\BaseController;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
+use App\Models\OfficeLocation\Officelocation;
 
 class LocationController extends BaseController
 {
