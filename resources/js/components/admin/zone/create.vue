@@ -2,8 +2,7 @@
 import { useAuthStore } from "../../../stores/authStore";
 import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted, reactive } from "vue";
-import select2 from 'select2';
-select2();
+
 
 const authStore = useAuthStore();
 //**** create function start
@@ -29,7 +28,6 @@ onMounted(() => {
         let disVal = $('.district_name').val();
         console.log(disVal);
     });
-
 
     $("#district_id").select2({
         placeholder: '=Select=',
