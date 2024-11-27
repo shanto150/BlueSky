@@ -27,7 +27,6 @@ async function save() {
 
         const response = await axiosInstance.post("/zone/save", form);
 
-
         document.getElementById("addZoneform").reset();
 
         $('#division_id option:first').prop('selected', true).trigger(
@@ -62,8 +61,7 @@ async function getDivision() {
 
         });
 
-        let select = $("#division_id")
-        select.select2({
+        $("#division_id").select2({
             placeholder: '=Select=',
             theme: 'bootstrap-5',
             width: '100%',
@@ -92,8 +90,7 @@ async function getDistrict(id) {
 
         });
 
-        let select = $("#district_id")
-        select.select2({
+        $("#district_id").select2({
             placeholder: '=Select=',
             theme: 'bootstrap-5',
             width: '100%',
