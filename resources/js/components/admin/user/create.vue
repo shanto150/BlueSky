@@ -1,12 +1,14 @@
 <script setup>
 import { useAuthStore } from "../../../stores/authStore";
-import axiosInstance from "../../../axiosInstance"
+import axiosInstance from "../../../axiosInstance";
+
 import { ref, onMounted, reactive } from "vue";
 const authStore = useAuthStore();
 //**** create function start
 const form = reactive({
     useEmail: authStore.email, name: '', email: "", staff_id: '',
-    phone: '', dept_name: '', desg: '', off_loct: '', report_to: '', role_id: ''
+    profile_picture: '',
+    phone: '', dept_name: '', desg: '', off_loct: '', report_to: '', role_id: '',
 });
 
 getDepartment();
@@ -183,8 +185,17 @@ async function save() {
     // console.log(form);
     try {
 
-        const response = await axiosInstance.post("/external-user/save", form);
+        // const response = await axiosInstance.post("/external-user/save", form);
+        const authStore = useAuthStore();
+        const accessToken = authStore.decryptWithAES(authStore.token);
+        const response = await axios.post('/api/external-user/save', form, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: "Bearer " + accessToken,
+                Accept: "application/json",
 
+            },
+        });
 
         document.getElementById("addUserform").reset();
 
@@ -208,7 +219,19 @@ async function save() {
 
     }
 }
+const previewImage = ref('');
 
+
+const handleFileChange = (event) => {
+    form.profile_picture = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(form.profile_picture);
+    // console.log(reader.readAsDataURL(form.profile_picture));
+
+    reader.onload = (e) => {
+        previewImage.value = e.target.result;
+    };
+}
 </script>
 
 <template>
@@ -238,8 +261,14 @@ async function save() {
                 <div class="row">
                     <div class="col-lg-2">
                         <p class="text-center">Profile Image</p>
-                        <img height="180" width="180" src="/public/theme/appimages/rqf.png" alt="">
-                        <p class="text-center mt-1"><a href="" style="text-decoration: underline;">Change Image</a></p>
+
+                        <div class="mb-3 pt-0 text-center mx-auto">
+                            <img v-if="previewImage" :src="previewImage" height="180" width="180"
+                                class="w-1/4 h-2/4 mx-auto" alt="Profile Picture">
+                        </div>
+                        <input type="file" id="profile-picture" ref="profilePicture" class="w-1/2"
+                            @change="handleFileChange" accept="image/*">
+
                     </div>
                     <div class="col-lg-8" style="border-left: 2px solid #dfeffd;">
                         <div class="row">
