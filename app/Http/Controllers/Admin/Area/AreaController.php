@@ -157,6 +157,7 @@ class AreaController extends BaseController
     {
 
         $div = DB::table('divisions')->get();
+        // dd($div);
         return response()->json($div);
 
     }

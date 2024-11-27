@@ -14,10 +14,19 @@ onMounted(() => {
         $('.district_name').empty(); // empty previous data
 
         getDistrict($(this).val());
+        $('#district_id').prepend('<option selected=""></option>');
     });
 
     $('.district_name').on("change", function () {
         form.district_id = $(this).val();
+    });
+
+    $("#district_id").select2({
+        placeholder: '=Select=',
+        theme: 'bootstrap-5',
+        width: '100%',
+        allowClear: true,
+        height: '50',
     });
 });
 
@@ -40,6 +49,15 @@ async function save() {
     }
 }
 
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 // it will load everytime page open
 getDivision();
 
@@ -49,21 +67,29 @@ async function getDivision() {
 
         var options = [];
         $.each(response.data, function (key, value) {
-            var obj = { id: value.id, text: value.name }
+            var obj = { id: value.id, text: value.name, bn: value.bn_name, clr: getRandomColor() }
             options.push(obj);
 
         });
 
-        let select = $("#division_id")
-        select.select2({
+        $("#division_id").select2({
             placeholder: '=Select=',
             theme: 'bootstrap-5',
             width: '100%',
             allowClear: true,
             height: '50',
             data: options,
-        });
+            tags: true,
+            templateResult: function (state) {
+                if (!state.id) {
+                    return state.text;
+                }
 
+                var $state = $('<div class="clearfix"><div class="float-start"><i class="fa-solid fa-circle" style="color: ' + state.clr + '"></i> ' + state.text + '</div><div class="float-end">' + state.bn + '</div></div>');
+                return $state;
+            }
+        });
+        $('#division_id').prepend('<option selected=""></option>');
 
     } catch (error) {
         // console.log(error);
@@ -79,19 +105,27 @@ async function getDistrict(id) {
 
         var getDatas = [];
         $.each(response.data, function (key, value) {
-            var obj = { id: value.id, text: value.name }
+            var obj = { id: value.id, text: value.name, bn: value.bn_name, clr: getRandomColor() }
             getDatas.push(obj);
 
         });
 
-        let select = $("#district_id")
-        select.select2({
+        $("#district_id").select2({
             placeholder: '=Select=',
             theme: 'bootstrap-5',
             width: '100%',
             allowClear: true,
+            tags: true,
             height: '50',
             data: getDatas,
+            templateResult: function (state) {
+                if (!state.id) {
+                    return state.text;
+                }
+
+                var $state = $('<div class="clearfix"><div class="float-start"><i class="fa-solid fa-circle m-1" style="color: ' + state.clr + '"></i> ' + state.text + '</div><div class="float-end">' + state.bn + '</div></div>');
+                return $state;
+            }
         });
 
 
@@ -131,22 +165,19 @@ async function getDistrict(id) {
                 <div class="row">
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Area Name</label>
-                        <input type="text" v-model="form.area_name" class="form-control form-control-sm" id="area_name"
-                            name="area_name" placeholder="Enter Name">
+                        <input type="text" v-model="form.area_name" class="form-control" id="area_name" name="area_name"
+                            placeholder="Enter Name">
                     </div>
 
                     <div class="col-md-6">
-                        <label for="input1" class="form-label">Division</label>
-                        <select id="division_id" name="division_name"
-                            class="form-control form-control-sm single-select-fields division_name">
+                        <label for="division_id" class="form-label">Division</label>
+                        <select id="division_id" name="division_name" class="form-control form-control division_name">
                         </select>
                     </div>
 
                     <div class="col-md-6 mt-2">
-                        <label for="input1" class="form-label ">District</label>
-                        <select id="district_id" name="district_name"
-                            class="form-control form-control-sm single-select-field district_name">
-                            <option value="">==Select==</option>
+                        <label for="district_id" class="form-label ">District</label>
+                        <select id="district_id" name="district_name" class="form-control form-control district_name">
                         </select>
                     </div>
 
