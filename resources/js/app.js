@@ -1,8 +1,8 @@
 import "./bootstrap";
 
 
+import "https://code.jquery.com/jquery-3.7.1.min.js";
 import "./themeassets/js/bootstrap.bundle.min.js";
-import "./themeassets/js/jquery.min.js";
 import "./themeassets/plugins/bs-stepper/js/bs-stepper.min.js";
 import "./themeassets/plugins/bs-stepper/js/main.js";
 
@@ -10,6 +10,7 @@ import "./themeassets/plugins/bs-stepper/js/main.js";
 import "./themeassets/js/app.js";
 import "https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js";
 import "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js";
+
 
 import { createApp, markRaw } from "vue";
 import { createPinia } from "pinia";
@@ -22,12 +23,9 @@ import VOtpInput from "vue3-otp-input";
 import VueTippy from "vue-tippy";
 import VueDeviceDetect from "@tenrok/vue-device-detect";
 import VWave from "v-wave";
-import select2 from 'select2';
-select2();
 
 import Scrollbar from "vue3-perfect-scrollbar-z";
 import "vue3-perfect-scrollbar-z/dist/styles.css";
-
 
 // if expose with window means we can access it direct with this name in any vue
 import Notification from "./Helpers/Notification.js";
