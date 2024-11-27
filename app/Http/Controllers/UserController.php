@@ -127,8 +127,20 @@ class UserController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->id) {
+
+            $user = User::where('id', $request->id)->first();
+
+            $user->delete();
+            $success = '';
+            return $this->SuccessResponse($success, 'Successfully Department deleted.');
+
+        } else {
+            $error = 'Id can not be null.';
+            return $this->ErrorResponse($error);
+
+        }
     }
 }

@@ -209,6 +209,7 @@ async function save() {
             "change"); // reset dropdown value
         $('.role option:first').prop('selected', true).trigger(
             "change"); // reset dropdown value
+        previewImage.value = '';
 
         Notification.showToast('s', response.data.message);
 
