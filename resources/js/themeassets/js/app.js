@@ -1,34 +1,6 @@
 $(function () {
 	"use strict";
 
-	    // new PerfectScrollbar(".app-container"),
-		// new PerfectScrollbar(".header-message-list"),
-		// new PerfectScrollbar(".header-notifications-list"),
-
-
-	// 	$(".mobile-toggle-icon").on("click", function () {
-	// 		$(".wrapper").toggleClass("toggled")
-	// 	}),
-
-	// 	/* dark mode button */
-
-	// 	$(".dark-mode").click(function () {
-	// 		$("html").attr("data-bs-theme", function (i, v) {
-	// 			return v === 'dark' ? 'light' : 'dark';
-	// 		})
-	// 	})
-
-	// $(".dark-mode").on("click", function () {
-
-	// 	if ($(".dark-mode-icon i").attr("class") == 'bx bx-sun') {
-	// 		$(".dark-mode-icon i").attr("class", "bx bx-moon");
-	// 	} else {
-	// 		$(".dark-mode-icon i").attr("class", "bx bx-sun");
-	// 	}
-	// }),
-
-
-
 		$(".mobile-toggle-menu").click(function () {
 			$(".wrapper").hasClass("toggled") ? ($(".wrapper").removeClass("toggled"), $(".sidebar-wrapper").unbind("hover")) : ($(".wrapper").addClass("toggled"), $(".sidebar-wrapper").hover(function () {
 				$(".wrapper").addClass("sidebar-hovered")

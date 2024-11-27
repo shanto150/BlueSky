@@ -62,6 +62,7 @@ onMounted(() => {
         $('.district_name').empty(); // empty previous data
 
         getDistrict($(this).val());
+        $('#district_id').prepend('<option selected=""></option>');
     });
 
     $('.district_name').on("change", function () {
