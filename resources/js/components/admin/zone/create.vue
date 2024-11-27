@@ -1,53 +1,25 @@
-<script setup type='module'>
+<script setup>
 import { useAuthStore } from "../../../stores/authStore";
 import axiosInstance from "../../../axiosInstance"
 import { ref, onMounted, reactive } from "vue";
-import select2 from 'select2';
-
 
 const authStore = useAuthStore();
 //**** create function start
 const form = reactive({ area_name: "", division_id: "", district_id: "", status_val: "", useEmail: authStore.email });
 
-const options = [];
-
 onMounted(() => {
-    select2();
-    getDivision();
-
     $('.division_name').on("change", function () {
 
         form.division_id = $(this).val();
         $('.district_name').empty(); // empty previous data
 
         getDistrict($(this).val());
-        $('#district_id').prepend('<option selected=""></option>');
     });
 
     $('.district_name').on("change", function () {
         form.district_id = $(this).val();
-        let disVal = $('.district_name').val();
-        console.log(disVal);
     });
-
-    $("#district_id").select2({
-        placeholder: '=Select=',
-        theme: 'bootstrap-5',
-        width: '100%',
-        allowClear: true,
-        height: '50'
-    });
-
-    $("#division_id").select2({
-        placeholder: '=Select=',
-        theme: 'bootstrap-5',
-        width: '100%',
-        allowClear: true,
-        height: '50'
-    });
-
 });
-
 
 async function save() {
 
@@ -58,12 +30,12 @@ async function save() {
 
         document.getElementById("addZoneform").reset();
 
-        // $('#division_id option:first').prop('selected', true).trigger(
-        //     "change"); // reset dropdown value
-        // $('#district_id option:first').prop('selected', true).trigger(
-        //     "change"); // reset dropdown value
-        // $('#status option:first').prop('selected', true).trigger(
-        //     "change"); // reset dropdown value
+        $('#division_id option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
+        $('#district_id option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
+        $('#status option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
 
         Notification.showToast('s', response.data.message);
 
@@ -76,30 +48,29 @@ async function save() {
     }
 }
 
-
 // it will load everytime page open
+getDivision();
+
 async function getDivision() {
     try {
-
         const response = await axiosInstance.get('divisions');
 
+        var options = [];
         $.each(response.data, function (key, value) {
             var obj = { id: value.id, text: value.name }
             options.push(obj);
 
         });
-        // response.map(x => {return {id:x.id, text: x.name}})
-        console.log(options);
 
-        $("#division_id").select2({
+        let select = $("#division_id")
+        select.select2({
             placeholder: '=Select=',
             theme: 'bootstrap-5',
             width: '100%',
             allowClear: true,
             height: '50',
-            // data: options,
+            data: options,
         });
-        $('#division_id').prepend('<option selected=""></option>');
 
 
     } catch (error) {
@@ -138,7 +109,6 @@ async function getDistrict(id) {
     }
 }
 
-
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -176,16 +146,15 @@ async function getDistrict(id) {
                     <div class="col-md-6">
                         <label for="input1" class="form-label">Division</label>
                         <select id="division_id" name="division_name"
-                            class="form-control form-control-sm division_name">
-                            <option value="">=Select=</option>
+                            class="form-control form-control-sm single-select-fields division_name">
                         </select>
                     </div>
 
                     <div class="col-md-6 mt-2">
                         <label for="input1" class="form-label ">District</label>
                         <select id="district_id" name="district_name"
-                            class="form-control form-control-sm district_name">
-                            <option value="">=Select=</option>
+                            class="form-control form-control-sm single-select-field district_name">
+                            <option value="">==Select==</option>
                         </select>
                     </div>
 
