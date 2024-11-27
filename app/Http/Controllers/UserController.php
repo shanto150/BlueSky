@@ -6,8 +6,9 @@ use App\Http\Controllers\BaseController;
 use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\File;
 
 class UserController extends BaseController
 {
@@ -43,6 +44,8 @@ class UserController extends BaseController
      */
     public function store(Request $request)
     {
+        // dd($request->all());
+
         $auth = User::where('email', $request->useEmail)->first();
         $validator = validator($request->all(),
             ['name' => 'required'],
@@ -69,7 +72,23 @@ class UserController extends BaseController
         $user->report_to = $request->report_to;
         $user->user_role = $request->role_id;
 
-        // $user->img_path = $request->role_id;
+        if ($request->hasFile('profile_picture')) {
+
+            $request_image = $request->file('profile_picture');
+            $image_name = str_replace(' ', '', (now()->format('dmY-') . time())) . '.' . $request_image->extension();
+
+            $image_path = public_path('/uploads/profile_image/');
+            if (!File::exists($image_path)) {
+                File::makeDirectory($image_path, 0777, true);
+            }
+
+            $request_image->move($image_path, $image_name);
+            $user->img_path = '/uploads/profile_image/'.$image_name;
+
+        } else {
+            $profilePicturePath = null;
+        }
+
         $user->type = 1;
         $user->is_active = 1;
         $user->status = 1;

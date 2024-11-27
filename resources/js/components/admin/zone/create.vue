@@ -26,25 +26,17 @@ async function save() {
     try {
 
         const response = await axiosInstance.post("/zone/save", form);
-
-
         document.getElementById("addZoneform").reset();
-
         $('#division_id option:first').prop('selected', true).trigger(
             "change"); // reset dropdown value
         $('#district_id option:first').prop('selected', true).trigger(
             "change"); // reset dropdown value
         $('#status option:first').prop('selected', true).trigger(
             "change"); // reset dropdown value
-
         Notification.showToast('s', response.data.message);
-
-
 
     } catch (error) {
         ErrorCatch.CatchError(error);
-
-
     }
 }
 
