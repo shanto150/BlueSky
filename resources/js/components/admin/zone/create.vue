@@ -56,31 +56,21 @@ async function save() {
     }
 }
 
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 // it will load everytime page open
 getDivision();
-
-
-function formatState(state) {
-    if (!state.id) {
-        return state.text;
-    }
-
-    var $state = $('<span> ' + state.text + state.bn_name + '</span>');
-    return $state;
-};
 
 async function getDivision() {
     try {
         const response = await axiosInstance.get('divisions');
-
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
 
         var options = [];
         $.each(response.data, function (key, value) {
@@ -102,7 +92,7 @@ async function getDivision() {
                     return state.text;
                 }
 
-                var $state = $('<div class="clearfix"><div class="float-start">' + state.text + '</div><div class="float-end">' + state.bn + '</div></div>');
+                var $state = $('<div class="clearfix"><div class="float-start"><i class="fa-solid fa-circle" style="color: ' + state.clr + '"></i> ' + state.text + '</div><div class="float-end">' + state.bn + '</div></div>');
                 return $state;
             }
         });
@@ -122,7 +112,7 @@ async function getDistrict(id) {
 
         var getDatas = [];
         $.each(response.data, function (key, value) {
-            var obj = { id: value.id, text: value.name, bn: value.bn_name }
+            var obj = { id: value.id, text: value.name, bn: value.bn_name, clr: getRandomColor() }
             getDatas.push(obj);
 
         });
@@ -140,7 +130,7 @@ async function getDistrict(id) {
                     return state.text;
                 }
 
-                var $state = $('<div class="clearfix"><div class="float-start">' + state.text + '</div><div class="float-end">' + state.bn + '</div></div>');
+                var $state = $('<div class="clearfix"><div class="float-start"><i class="fa-solid fa-circle m-1" style="color: ' + state.clr + '"></i> ' + state.text + '</div><div class="float-end">' + state.bn + '</div></div>');
                 return $state;
             }
         });
