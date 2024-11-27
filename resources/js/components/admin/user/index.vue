@@ -203,7 +203,7 @@ const options = {
                 displayMode: 'once',
                 id: 'question',
                 zindex: 999,
-                message: 'Want to delete this office location?',
+                message: 'Want to delete this user?',
                 position: 'center',
                 buttons: [
                     ['<button><b>No</b></button>', function (instance, toast) {
@@ -220,9 +220,9 @@ const options = {
                 onClosed: async function (instance, toast, closedBy) {
 
                     if (closedBy == 'yes') {
-                        const response = axiosInstance.post("deleteRole", { 'id': idd });
+                        const response = axiosInstance.post("deleteUser", { 'id': idd });
                         getListValues();
-                        Notification.showToast('s', 'Successfully Role Deleted.');
+                        Notification.showToast('s', 'Successfully User Deleted.');
                     } else {
 
                     }
