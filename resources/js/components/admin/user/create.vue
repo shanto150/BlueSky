@@ -264,11 +264,17 @@ const handleFileChange = (event) => {
                         <p class="text-center">Profile Image</p>
 
                         <div class="mb-3 pt-0 text-center mx-auto">
-                            <img v-if="previewImage" :src="previewImage" height="180" width="180"
-                                class="w-1/4 h-2/4 mx-auto" alt="Profile Picture">
+                            <img v-if="!previewImage" src="../../../../../public/build/assets/profile-default-img.jpg" height="150" width="150"
+                                class="border border-1 rounded rounded-2" alt="Profile Picture">
+
+                            <img v-if="previewImage" :src="previewImage" height="150" width="150"
+                                class="border border-1 rounded rounded-2" alt="Profile Picture">
                         </div>
+
                         <input type="file" id="profile-picture" ref="profilePicture" class="w-1/2"
                             @change="handleFileChange" accept="image/*">
+
+
 
                     </div>
                     <div class="col-lg-8" style="border-left: 2px solid #dfeffd;">

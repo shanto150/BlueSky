@@ -248,7 +248,7 @@ async function getListValues() {
         <div class="ms-auto">
             <div class="btn-group">
                 <router-link :to="{ name: 'addoffLoc' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i>Add New Office Location
+                    <i class="fa fa-circle-plus"></i>Office Location
                 </router-link>
 
             </div>

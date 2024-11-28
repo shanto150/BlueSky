@@ -306,7 +306,7 @@ async function getListValues() {
         <div class="ms-auto">
             <div class="btn-group">
                 <router-link :to="{ name: 'CreateUser' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i>Add New User
+                    <i class="fa fa-circle-plus"></i> User
                 </router-link>
 
             </div>

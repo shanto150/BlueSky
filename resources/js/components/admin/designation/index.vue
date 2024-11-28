@@ -246,7 +246,7 @@ async function getListValues() {
         <div class="ms-auto">
             <div class="btn-group">
                 <router-link :to="{ name: 'designationCreate' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i>Add New Designation
+                    <i class="fa fa-circle-plus"></i>Designation
                 </router-link>
 
             </div>
