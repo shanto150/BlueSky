@@ -1,7 +1,15 @@
 <script setup>
 import { useAuthStore } from "../../../stores/authStore";
-import axiosInstance from "../../../axiosInstance"
+import axiosInstance from "../../../axiosInstance";
+
 import { ref, onMounted, reactive } from "vue";
+const authStore = useAuthStore();
+//**** create function start
+const form = reactive({
+    useEmail: authStore.email, name: '', email: "", staff_id: '',
+    profile_picture: '',
+    phone: '', dept_name: '', desg: '', off_loct: '', report_to: '', role_id: '',
+});
 
 getDepartment();
 
@@ -151,6 +159,80 @@ async function getAllUsers() {
     }
 }
 
+
+onMounted(() => {
+    $('.dept_name').on("change", function () {
+
+        form.dept_name = $(this).val();
+
+    });
+
+    $('.desg').on("change", function () {
+        form.desg = $(this).val();
+    });
+    $('.off_loc').on("change", function () {
+        form.off_loct = $(this).val();
+    });
+    $('.report_to').on("change", function () {
+        form.report_to = $(this).val();
+    });
+    $('.role').on("change", function () {
+        form.role_id = $(this).val();
+    });
+});
+
+async function save() {
+    // console.log(form);
+    try {
+
+        // const response = await axiosInstance.post("/external-user/save", form);
+        const authStore = useAuthStore();
+        const accessToken = authStore.decryptWithAES(authStore.token);
+        const response = await axios.post('/api/external-user/save', form, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: "Bearer " + accessToken,
+                Accept: "application/json",
+
+            },
+        });
+
+        document.getElementById("addUserform").reset();
+
+        $('.dept_name option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
+        $('.desg option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
+        $('.off_loc option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
+        $('.report_to option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
+        $('.role option:first').prop('selected', true).trigger(
+            "change"); // reset dropdown value
+        previewImage.value = '';
+
+        Notification.showToast('s', response.data.message);
+
+
+
+    } catch (error) {
+        ErrorCatch.CatchError(error);
+
+    }
+}
+const previewImage = ref('');
+
+
+const handleFileChange = (event) => {
+    form.profile_picture = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(form.profile_picture);
+    // console.log(reader.readAsDataURL(form.profile_picture));
+
+    reader.onload = (e) => {
+        previewImage.value = e.target.result;
+    };
+}
 </script>
 
 <template>
@@ -174,88 +256,100 @@ async function getAllUsers() {
         <div class="card-header">
             <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Create New User</h5>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-lg-2">
-                    <p class="text-center">Profile Image</p>
-                    <img height="180" width="180" src="/public/theme/appimages/rqf.png" alt="">
-                    <p class="text-center mt-1"><a href="" style="text-decoration: underline;">Change Image</a></p>
-                </div>
-                <div class="col-lg-8" style="border-left: 2px solid #dfeffd;">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label for="input1" class="form-label">Name</label>
-                                    <input type="text" class="form-control form-control-sm" id="input1"
-                                        placeholder="Enter Name">
-                                </div>
-                                <div class="col-md-12 mt-2">
-                                    <label for="input4" class="form-label">Email</label><input type="email"
-                                        class="form-control form-control-sm" id="input4" placeholder="Email">
-                                </div>
-                                <div class="col-md-12 mt-2">
-                                    <label for="input7" class="form-label">Department</label>
-                                    <select id="deptment_id" class="form-control form-control-sm">
-                                        <option>Choose...</option>
+        <form id="addUserform">
 
-                                    </select>
-                                </div>
-                                <div class="col-md-12 mt-2">
-                                    <label for="input11" class="form-label">Office Location</label>
-                                    <select id="off_loc" class="form-control form-control-sm">
-                                        <option>Choose...</option>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <p class="text-center">Profile Image</p>
 
-                                    </select>
-                                </div>
-
-                                <div class="col-md-12 mt-2">
-                                    <label for="input11" class="form-label">Role</label>
-                                    <select id="role_id" class="form-control form-control-sm">
-                                        <option>Choose...</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
+                        <div class="mb-3 pt-0 text-center mx-auto">
+                            <img v-if="previewImage" :src="previewImage" height="180" width="180"
+                                class="w-1/4 h-2/4 mx-auto" alt="Profile Picture">
                         </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label for="input1" class="form-label">Staff ID</label>
-                                    <input type="text" class="form-control form-control-sm" id="input1"
-                                        placeholder="Enter Name">
-                                </div>
-                                <div class="col-md-12 mt-2">
-                                    <label for="input4" class="form-label">Phone</label><input type="email"
-                                        class="form-control form-control-sm" id="input4" placeholder="Email">
-                                </div>
+                        <input type="file" id="profile-picture" ref="profilePicture" class="w-1/2"
+                            @change="handleFileChange" accept="image/*">
 
-                                <div class="col-md-12 mt-2">
-                                    <label for="input4" class="form-label">Designation</label>
-                                    <select id="desg_id" class="form-control form-control-sm">
-                                        <option>Choose...</option>
-
-                                    </select>
-                                </div>
-
-                                <div class="col-md-12 mt-2">
-                                    <label for="input4" class="form-label">Report To</label>
-                                    <select id="report_to" class="form-control form-control-sm">
-                                        <option>Choose...</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <div class="mt-4">
+                    <div class="col-lg-8" style="border-left: 2px solid #dfeffd;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="input1" class="form-label">Name</label>
+                                        <input type="text" class="form-control form-control-sm" id="name"
+                                            placeholder="Enter Name" v-model="form.name">
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="input4" class="form-label">Email</label><input type="email"
+                                            class="form-control form-control-sm" id="input4" placeholder="Email"
+                                            v-model="form.email">
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="input7" class="form-label">Department</label>
+                                        <select id="deptment_id" class="form-control form-control-sm dept_name">
+                                            <option>Choose...</option>
 
-                        <button class="btn btn-danger px-4 ms-2  float-start">Back</button>
-                        <button class="btn btn-primary px-4 ms-2 float-end">Save</button>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="input11" class="form-label">Office Location</label>
+                                        <select id="off_loc" class="form-control form-control-sm off_loc">
+                                            <option>Choose...</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-12 mt-2">
+                                        <label for="input11" class="form-label">Role</label>
+                                        <select id="role_id" class="form-control form-control-sm role">
+                                            <option>Choose...</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="input1" class="form-label">Staff ID</label>
+                                        <input type="text" class="form-control form-control-sm" id="input1"
+                                            placeholder="Enter Name" v-model="form.staff_id">
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <label for="input4" class="form-label">Phone</label><input type="number"
+                                            class="form-control form-control-sm" id="input4" placeholder="Phone"
+                                            v-model="form.phone">
+                                    </div>
+
+                                    <div class="col-md-12 mt-2">
+                                        <label for="input4" class="form-label">Designation</label>
+                                        <select id="desg_id" class="form-control form-control-sm desg">
+                                            <option>Choose...</option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-12 mt-2">
+                                        <label for="input4" class="form-label">Report To</label>
+                                        <select id="report_to" class="form-control form-control-sm report_to">
+                                            <option>Choose...</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="card-footer">
+                <button type="button" @click="save()"
+                    class="m-2 btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
+                <button class="m-2 btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
+            </div>
+        </form>
     </div>
 </template>
