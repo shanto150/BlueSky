@@ -113,7 +113,7 @@ class RolePermissionController extends BaseController
      */
     public function update(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
 
         $role = Role::find($request->role_id);
         $role->name     = $request->roleName ? $request->roleName : $role->name;

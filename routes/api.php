@@ -44,7 +44,6 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/deleteRole', [RolePermissionController::class, 'destroy'])->name('roles.deleteRole');
     //dropdown
     Route::get('getAllRoles', [RolePermissionController::class, 'getAllRoles']);
-    Route::get('getAllUsers', [UserController::class, 'getAllUsers']);
 
     // department
     Route::get('getdept', [DepartmentController::class, 'index'])->name('dept.getdept');
@@ -94,7 +93,9 @@ Route::middleware(['auth:api'])->group(function () {
 
     //users managemnt
     Route::get('getInternalUsers', [UserController::class, 'index'])->name('user.getInternalUsers');
-
+    Route::get('getAllUsers', [UserController::class, 'getAllUsers'])->name('user.getAllUsers');
+    Route::post('/external-user/save', [UserController::class, 'store'])->name('user.store');
+    Route::post('/deleteUser', [UserController::class, 'destroy'])->name('user.deleteUser');
 });
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
 Route::post('/role/update', [RolePermissionController::class, 'update']);
