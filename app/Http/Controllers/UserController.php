@@ -111,17 +111,18 @@ class UserController extends BaseController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+        $data = User::find($request->id);
+        return response()->json($data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
