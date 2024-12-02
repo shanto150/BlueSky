@@ -10,13 +10,19 @@ const router = useRouter();
 import { useAuthStore } from '../../../stores/authStore';
 const authStore = useAuthStore();
 import axiosInstance from "../../../axiosInstance";
-import { ref, render } from "vue";
+import { ref, reactive, onMounted, render } from "vue";
 
 DataTable.use(DataBS5);
 DataBS5.Buttons.jszip(jszip);
 
 const rData = ref([]);
+const form = reactive({ status: '', useridStatus: '' });
+onMounted(() => {
 
+    $('#status').on("change", function () {
+        form.status = $(this).val();
+    });
+});
 getListValues();
 
 const options = {
@@ -72,7 +78,7 @@ const options = {
                 // row
                 html += '<div class="row">';
                 html += '<div class="col-md-4">';
-                html += "<img src='"+row.img+"' height='70' width='100%'>";
+                html += "<img src='" + row.img + "' height='70' width='100%'>";
                 html += '</div>';
                 html += "<div class='col-md-8'>"
 
@@ -147,7 +153,13 @@ const options = {
 
                 if (row.status == 1) {
                     html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Active </div>';
-                } else {
+                }else if (row.status == 2) {
+                    html += '<div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>On Hold </div>';
+                }
+                else if (row.status == 3) {
+                    html += '<div class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Locked </div>';
+                }
+                else {
                     html += '<div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Deactivated </div>';
                 }
 
@@ -163,12 +175,8 @@ const options = {
                 var status = row.status;
 
                 html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" ></i> </button>';
-                if (status == 1) {
 
-                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
-                } else {
-                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-check" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
-                }
+                html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-purple rounded-circle status-change" data-item-id=' + idd + ' data-status=' + status + '> <i class="fa fa-refresh" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
 
                 html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
 
@@ -238,42 +246,13 @@ const options = {
         $(".status-change").on('click', function (e) {
 
             var idd = $(this).attr('data-item-id');
+            var sta = $(this).attr('data-status');
 
-            iziToast.question({
-                timeout: 100000,
-                pauseOnHover: false,
-                close: false,
-                overlay: true,
-                displayMode: 'once',
-                id: 'question',
-                zindex: 999,
-                message: 'Want to change status this role?',
-                position: 'center',
-                buttons: [
-                    ['<button><b>No</b></button>', function (instance, toast) {
-
-                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
-
-                    }, true],
-                    ['<button><b>Yes</b></button>', function (instance, toast) {
-
-                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
-
-                    }, true]
-                ],
-                onClosed: async function (instance, toast, closedBy) {
-
-                    if (closedBy == 'yes') {
-                        const response = axiosInstance.post("changeRoleStatus", { 'id': idd });
-                        getListValues();
-                        Notification.showToast('s', 'Successfully Role status Changed.');
-                    } else {
-
-                    }
-
-                }
-            });
-
+            $('#status_change_modal').modal('show');
+            $("#status").val(sta);
+            $("#status").trigger('change');
+            form.useridStatus = idd;
+            $('#useridStatus').val(idd);
         });
     }
 };
@@ -288,6 +267,21 @@ async function getListValues() {
         authStore.GlobalLoading = false;
         console.log(error);
     }
+}
+
+async function update() {
+    try {
+        const response = await axiosInstance.post("/user-status/update", form);
+        getListValues();
+
+        $('#status_change_modal').modal('hide');
+
+        Notification.showToast('s', response.data.message);
+
+    } catch (error) {
+        ErrorCatch.CatchError(error);
+    }
+
 }
 </script>
 <template>
@@ -693,7 +687,36 @@ async function getListValues() {
                     </div>
                 </div>
             </div>
+            <!-- modal start -->
+            <div class="modal fade" id="status_change_modal" tabindex="-1" aria-modal="true" role="dialog">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
 
+                            <h5 class="m-0 p-0 modal-title fs-6" style="border-left: 5px solid rgb(114, 57, 234);">
+                                &nbsp;Change Status</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="input4" class="form-label">Status</label>
+
+                            <select id="status" name="status" class="form-control form-control-sm status">
+                                <option value="">== Select ==</option>
+                                <option value="1">Active</option>
+                                <option value="2">On Hold</option>
+                                <option value="3">Locked</option>
+                                <option value="4">Deactivated</option>
+                            </select>
+                            <input type="hidden" id="useridStatus" name="useridStatus">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="button" @click="update()" class="btn btn-sm btn-success">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>

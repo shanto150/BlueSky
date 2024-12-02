@@ -401,8 +401,6 @@ const handleFileChange = (event) => {
                                     <div class="col-md-12 mt-2">
                                         <label for="input4" class="form-label">Report To</label>
                                         <select id="report_to" class="form-control form-control-sm report_to">
-
-
                                         </select>
                                     </div>
                                 </div>

@@ -6,9 +6,9 @@ use App\Http\Controllers\BaseController;
 use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\File;
 
 class UserController extends BaseController
 {
@@ -83,7 +83,7 @@ class UserController extends BaseController
             }
 
             $request_image->move($image_path, $image_name);
-            $user->img_path = '/uploads/profile_image/'.$image_name;
+            $user->img_path = '/uploads/profile_image/' . $image_name;
 
         } else {
             $profilePicturePath = null;
@@ -122,7 +122,61 @@ class UserController extends BaseController
      */
     public function update(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+        $auth = User::where('email', $request->useEmail)->first();
+
+        $user = User::where('id', $request->user_id)->first();
+        $user->name = $request->name ? $request->name : $user->name;
+        $user->phone = $request->phone ? $request->phone : $user->phone;
+        $user->email = $request->email ? $request->email : $user->email;
+        $user->emp_id = $request->staff_id ? $request->staff_id : $user->emp_id;
+        $user->dept_id = $request->dept_name ? $request->dept_name : $user->dept_id;
+        $user->designation_id = $request->desg ? $request->desg : $user->designation_id;
+        $user->office_loc_id = $request->off_loct ? $request->off_loct : $user->office_loc_id;
+        $user->report_to = $request->report_to ? $request->report_to : $user->report_to;
+        $user->user_role = $request->role_id ? $request->role_id : $user->user_role;
+
+        if ($request->hasFile('profile_picture')) {
+
+            $request_image = $request->file('profile_picture');
+            $image_name = str_replace(' ', '', (now()->format('dmY-') . time())) . '.' . $request_image->extension();
+
+            $image_path = public_path('/uploads/profile_image/');
+            if (!File::exists($image_path)) {
+                File::makeDirectory($image_path, 0777, true);
+            }
+
+            $request_image->move($image_path, $image_name);
+            $user->img_path = '/uploads/profile_image/' . $image_name;
+
+        } else {
+            $profilePicturePath = null;
+        }
+
+        // $user->type = 1;
+        // $user->is_active = 1;
+        // $user->status = 1;
+        $user->updated_by = $auth->id;
+
+        $user->save();
+        return response()->json(['message' => 'Successfully User Upadete.', 'types' => 's']);
+
+    }
+
+    public function statusUpdate(Request $request)
+    {
+        if ($id = $request->useridStatus) {
+            $user = User::where('id', $id)->first();
+            $user->status = $request->status;
+            $user->save();
+            $success='';
+            return $this->SuccessResponse($success, 'Successfully User status updated.');
+
+        } else {
+            $error = 'Id can not be null.';
+            return $this->ErrorResponse($error);
+        }
+
     }
 
     /**

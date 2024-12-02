@@ -98,6 +98,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/editUser', [UserController::class, 'edit'])->name('user.editUser');
     Route::post('/user-details/update', [UserController::class, 'update'])->name('user.update');
     Route::post('/deleteUser', [UserController::class, 'destroy'])->name('user.deleteUser');
+    Route::post('/user-status/update', [UserController::class, 'statusUpdate'])->name('user.statusUpdate');
 });
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
 Route::post('/role/update', [RolePermissionController::class, 'update']);
