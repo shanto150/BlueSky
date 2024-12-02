@@ -74,8 +74,7 @@ const options = {
                 html += '<div class="col-md-4">';
                 html += "<img src='"+row.img+"' height='70' width='100%'>";
                 html += '</div>';
-                html += "<div class='col-md-8'>"
-
+                html += "<div class='col-md-8'>";
                 html += row.name;
                 html += "<br>";
                 html += row.emp_id;
