@@ -95,7 +95,10 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('getInternalUsers', [UserController::class, 'index'])->name('user.getInternalUsers');
     Route::get('getAllUsers', [UserController::class, 'getAllUsers'])->name('user.getAllUsers');
     Route::post('/external-user/save', [UserController::class, 'store'])->name('user.store');
+    Route::post('/editUser', [UserController::class, 'edit'])->name('user.editUser');
+    Route::post('/user-details/update', [UserController::class, 'update'])->name('user.update');
     Route::post('/deleteUser', [UserController::class, 'destroy'])->name('user.deleteUser');
+    Route::post('/user-status/update', [UserController::class, 'statusUpdate'])->name('user.statusUpdate');
 });
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
 Route::post('/role/update', [RolePermissionController::class, 'update']);

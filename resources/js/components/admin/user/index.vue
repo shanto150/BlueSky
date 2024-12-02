@@ -10,13 +10,19 @@ const router = useRouter();
 import { useAuthStore } from '../../../stores/authStore';
 const authStore = useAuthStore();
 import axiosInstance from "../../../axiosInstance";
-import { ref, render } from "vue";
+import { ref, reactive, onMounted, render } from "vue";
 
 DataTable.use(DataBS5);
 DataBS5.Buttons.jszip(jszip);
 
 const rData = ref([]);
+const form = reactive({ status: '', useridStatus: '' });
+onMounted(() => {
 
+    $('#status').on("change", function () {
+        form.status = $(this).val();
+    });
+});
 getListValues();
 
 const options = {
@@ -72,7 +78,7 @@ const options = {
                 // row
                 html += '<div class="row">';
                 html += '<div class="col-md-4">';
-                html += "<img src='"+row.img+"' height='70' width='100%'>";
+                html += "<img src='" + row.img + "' height='70' width='100%'>";
                 html += '</div>';
                 html += "<div class='col-md-8'>";
                 html += row.name;
@@ -146,7 +152,13 @@ const options = {
 
                 if (row.status == 1) {
                     html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Active </div>';
-                } else {
+                }else if (row.status == 2) {
+                    html += '<div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>On Hold </div>';
+                }
+                else if (row.status == 3) {
+                    html += '<div class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Locked </div>';
+                }
+                else {
                     html += '<div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Deactivated </div>';
                 }
 
@@ -162,12 +174,8 @@ const options = {
                 var status = row.status;
 
                 html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" ></i> </button>';
-                if (status == 1) {
 
-                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
-                } else {
-                    html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-check" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
-                }
+                html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-purple rounded-circle status-change" data-item-id=' + idd + ' data-status=' + status + '> <i class="fa fa-refresh" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
 
                 html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
 
@@ -184,7 +192,7 @@ const options = {
             var itemIdd = $(this).attr('data-item-id');
             console.log(itemIdd);
 
-            router.push({ name: 'roleEdit', params: { id: itemIdd } });
+            router.push({ name: 'EditUser', params: { id: itemIdd } });
         });
 
         // delete function
@@ -237,42 +245,13 @@ const options = {
         $(".status-change").on('click', function (e) {
 
             var idd = $(this).attr('data-item-id');
+            var sta = $(this).attr('data-status');
 
-            iziToast.question({
-                timeout: 100000,
-                pauseOnHover: false,
-                close: false,
-                overlay: true,
-                displayMode: 'once',
-                id: 'question',
-                zindex: 999,
-                message: 'Want to change status this role?',
-                position: 'center',
-                buttons: [
-                    ['<button><b>No</b></button>', function (instance, toast) {
-
-                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
-
-                    }, true],
-                    ['<button><b>Yes</b></button>', function (instance, toast) {
-
-                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
-
-                    }, true]
-                ],
-                onClosed: async function (instance, toast, closedBy) {
-
-                    if (closedBy == 'yes') {
-                        const response = axiosInstance.post("changeRoleStatus", { 'id': idd });
-                        getListValues();
-                        Notification.showToast('s', 'Successfully Role status Changed.');
-                    } else {
-
-                    }
-
-                }
-            });
-
+            $('#status_change_modal').modal('show');
+            $("#status").val(sta);
+            $("#status").trigger('change');
+            form.useridStatus = idd;
+            $('#useridStatus').val(idd);
         });
     }
 };
@@ -287,6 +266,21 @@ async function getListValues() {
         authStore.GlobalLoading = false;
         console.log(error);
     }
+}
+
+async function update() {
+    try {
+        const response = await axiosInstance.post("/user-status/update", form);
+        getListValues();
+
+        $('#status_change_modal').modal('hide');
+
+        Notification.showToast('s', response.data.message);
+
+    } catch (error) {
+        ErrorCatch.CatchError(error);
+    }
+
 }
 </script>
 <template>
@@ -305,7 +299,7 @@ async function getListValues() {
         <div class="ms-auto">
             <div class="btn-group">
                 <router-link :to="{ name: 'CreateUser' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i>Add New User
+                    <i class="fa fa-circle-plus"></i> User
                 </router-link>
 
             </div>
@@ -417,406 +411,10 @@ async function getListValues() {
                 </ul>
                 <div class="tab-content pt-3">
                     <div class="tab-pane fade show active" id="primaryhome" role="tabpanel">
-                        <!-- <div class="row">
-                            <div class="col-sm-12 col-md-6">
-
-                                <button class="btn btn-sm btn-danger" style="margin-right: 3px;" tabindex="0"
-                                    aria-controls="example2" type="button"><i class="fa-solid fa-file-pdf"
-                                        style="font-size: 14px !important;"></i> <span>PDF</span></button>
-
-                                <button class="btn btn-sm btn-success" style="margin-right: 3px;" tabindex="0"
-                                    aria-controls="example2" type="button"> <i class="fa-regular fa-file-excel"
-                                        style="font-size: 14px !important;"></i><span>Excel</span></button>
-
-
-                            </div>
-                            <div class="col-md-4"></div>
-                            <div class="col-sm-2 col-md-2">
-                                <div id="example2_filter" class="dataTables_filter"><input type="search"
-                                        class="form-control form-control-sm" placeholder="" aria-controls="example2">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-sm-12">
-                                <table class="table table-sm table-striped table-bordered">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-sort="ascending"
-                                                aria-label="SL: activate to sort column descending"
-                                                style="width: 194.4px;">
-                                                SL.</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Staff Info: activate to sort column ascending"
-                                                style="width: 316.087px;">Staff Info</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1"
-                                                aria-label="Role & Office Location: activate to sort column ascending"
-                                                style="width: 140.688px;">Role & Office Location</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1"
-                                                aria-label="User Login Info: activate to sort column ascending"
-                                                style="width: 66.3875px;">User Login Info</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Created By: activate to sort column ascending"
-                                                style="width: 131.8px;">Created By</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Updated By: activate to sort column ascending"
-                                                style="width: 107.037px;">Updated By</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Status: activate to sort column ascending"
-                                                style="width: 107.037px;">Status</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Action: activate to sort column ascending"
-                                                style="width: 107.037px;">Action</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr role="row">
-                                            <td class="text-left">01</td>
-                                            <td class="text-left">Abu Syed
-                                                <br>
-                                                <small class="text-blue">GB:117</small>
-                                                <br>
-                                                <small>
-                                                    UI/UX Designer | Opertation
-                                                </small>
-                                            </td>
-                                            <td class="text-left">
-                                                System Admin
-                                                <br>
-                                                <small class="text-blue">Gulshan HQ</small>
-                                            </td>
-                                            <td class="text-left">
-                                                abu.syed@galxybd.com
-                                                <br>
-                                                <small class="text-blue">017xxxxxxx</small>
-
-                                            </td>
-                                            <td class="text-left">
-                                                Md. Abu Syed
-                                                <br>
-                                                <small class="text-blue">05-Sept-2024</small>
-                                            </td>
-
-                                            <td class="text-left">
-                                                Md. Abu Syed
-                                                <br>
-                                                <small class="text-blue">05-Sept-2024</small>
-                                            </td>
-                                            <td class="text-left">
-                                                <div
-                                                    class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
-                                                    <i class="bx bxs-circle me-1"></i>Active
-                                                </div>
-                                                <br>
-                                                <small>
-                                                    21-Aug-2024
-                                                </small>
-                                                <br>
-                                                <small class="text-blue">
-                                                    Md. Abu Zafar Chowdhary
-                                                </small>
-                                            </td>
-                                            <td class="text-left">
-                                                <button type="button" style="size: 30px; width: 30px; height: 30px;"
-                                                    class="btn btn-outline-only-edit rounded-circle"
-                                                    v-tippy="'Profile Edit'">
-
-                                                    <i class="fa-solid fa-pencil"
-                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                </button>
-
-                                                <button type="button" v-tippy="'Profile Delete'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-danger rounded-circle">
-                                                    <i class="fa fa-trash"
-                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                </button>
-
-                                                <button type="button" v-tippy="'Hold'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-purple rounded-circle">
-                                                    <i class="fa fa-refresh"
-                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                </button>
-                                                <button type="button" v-tippy="'Lock'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-lock rounded-circle">
-                                                    <i class="fa fa-lock"
-                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                </button>
-
-                                                <button type="button" v-tippy="'Lock'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-timer rounded-circle">
-                                                    <i class="fa-solid fa-clock-rotate-left"
-                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-
-                                        <tr role="row">
-                                            <td class="text-left">02</td>
-                                            <td class="text-left">Atiqur Rahman
-                                                <br>
-                                                <small class="text-blue">GB:107</small>
-                                                <br>
-                                                <small>
-                                                    Senior Executive | Sales
-                                                </small>
-                                            </td>
-                                            <td class="text-left">
-                                                Reservation
-                                                <br>
-                                                <small class="text-blue">Khulna</small>
-                                            </td>
-                                            <td class="text-left">
-                                                atiq@gmail.com
-                                                <br>
-                                                <small class="text-blue">017xxxxxxx</small>
-
-                                            </td>
-                                            <td class="text-left">
-                                                Md. Abu Syed
-                                                <br>
-                                                <small class="text-blue">05-Sept-2024</small>
-                                            </td>
-
-                                            <td class="text-left">
-                                                Md. Abu Syed
-                                                <br>
-                                                <small class="text-blue">05-Sept-2024</small>
-                                            </td>
-                                            <td class="text-left">
-                                                <div
-                                                    class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3">
-                                                    <i class="bx bxs-circle me-1"></i>On Hold
-                                                </div>
-                                                <br>
-                                                <small>
-                                                    21-Aug-2024
-                                                </small>
-                                                <br>
-                                                <small class="text-blue">
-                                                    Md. Abu Zafar Chowdhary
-                                                </small>
-                                            </td>
-                                            <td class="text-left">
-                                                <button type="button" style="size: 30px; width: 30px; height: 30px;"
-                                                    class="btn btn-outline-only-edit rounded-circle"
-                                                    v-tippy="'Profile Edit'">
-
-                                                    <i class="fa-solid fa-pencil"
-                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                </button>
-
-                                                <button type="button" v-tippy="'Profile Delete'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-danger rounded-circle">
-                                                    <i class="fa fa-trash"
-                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                </button>
-
-                                                <button type="button" v-tippy="'Hold'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-purple rounded-circle">
-                                                    <i class="fa fa-refresh"
-                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                </button>
-                                                <button type="button" v-tippy="'Lock'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-lock rounded-circle">
-                                                    <i class="fa fa-lock"
-                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                </button>
-
-                                                <button type="button" v-tippy="'Lock'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-timer rounded-circle">
-                                                    <i class="fa-solid fa-clock-rotate-left"
-                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-
-                                        <tr role="row">
-                                            <td class="text-left">03</td>
-                                            <td class="text-left">Mujahidul Islam
-                                                <br>
-                                                <small class="text-blue">GB-060</small>
-                                                <br>
-                                                <small>
-                                                    Executive | Reservation
-                                                </small>
-                                            </td>
-                                            <td class="text-left">
-                                                Reservation
-                                                <br>
-                                                <small class="text-blue">Khulna</small>
-                                            </td>
-                                            <td class="text-left">
-                                                mujahidul@gmail.com
-                                                <br>
-                                                <small class="text-blue">017xxxxxxx</small>
-
-                                            </td>
-                                            <td class="text-left">
-                                                Md. Abu Syed
-                                                <br>
-                                                <small class="text-blue">05-Sept-2024</small>
-                                            </td>
-
-                                            <td class="text-left">
-                                                Md. Abu Syed
-                                                <br>
-                                                <small class="text-blue">05-Sept-2024</small>
-                                            </td>
-                                            <td class="text-left">
-                                                <div
-                                                    class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3">
-                                                    <i class="bx bxs-circle me-1"></i>Deactivated
-                                                </div>
-                                                <br>
-                                                <small>
-                                                    21-Aug-2024
-                                                </small>
-                                                <br>
-                                                <small class="text-blue">
-                                                    Md. Abu Zafar Chowdhary
-                                                </small>
-                                            </td>
-                                            <td class="text-left">
-                                                <button type="button" style="size: 30px; width: 30px; height: 30px;"
-                                                    class="btn btn-outline-only-edit rounded-circle"
-                                                    v-tippy="'Profile Edit'">
-
-                                                    <i class="fa-solid fa-pencil"
-                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                </button>
-
-                                                <button type="button" v-tippy="'Profile Delete'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-danger rounded-circle">
-                                                    <i class="fa fa-trash"
-                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                </button>
-
-                                                <button type="button" v-tippy="'Hold'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-purple rounded-circle">
-                                                    <i class="fa fa-refresh"
-                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                </button>
-                                                <button type="button" v-tippy="'Lock'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-lock rounded-circle">
-                                                    <i class="fa fa-lock"
-                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                </button>
-
-                                                <button type="button" v-tippy="'Lock'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-timer rounded-circle">
-                                                    <i class="fa-solid fa-clock-rotate-left"
-                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-
-                                        <tr role="row">
-                                            <td class="text-left">04</td>
-                                            <td class="text-left">Eva Ahmed Tarana
-                                                <br>
-                                                <small class="text-blue">GHR264</small>
-                                                <br>
-                                                <small>
-                                                    Executive | Reservation
-                                                </small>
-                                            </td>
-                                            <td class="text-left">
-                                                Reservation
-                                                <br>
-                                                <small class="text-blue">Khulna</small>
-                                            </td>
-                                            <td class="text-left">
-                                                trana@gmail.com
-                                                <br>
-                                                <small class="text-blue">017xxxxxxx</small>
-
-                                            </td>
-                                            <td class="text-left">
-                                                Md. Abu Syed
-                                                <br>
-                                                <small class="text-blue">05-Sept-2024</small>
-                                            </td>
-
-                                            <td class="text-left">
-                                                Md. Abu Syed
-                                                <br>
-                                                <small class="text-blue">05-Sept-2024</small>
-                                            </td>
-                                            <td class="text-left">
-                                                <div
-                                                    class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3">
-                                                    <i class="bx bxs-circle me-1"></i>Locked
-                                                </div>
-                                                <br>
-                                                <small>
-                                                    21-Aug-2024
-                                                </small>
-                                                <br>
-                                                <small class="text-blue">
-                                                    Md. Abu Zafar Chowdhary
-                                                </small>
-                                            </td>
-                                            <td class="text-left">
-                                                <button type="button" style="size: 30px; width: 30px; height: 30px;"
-                                                    class="btn btn-outline-only-edit rounded-circle"
-                                                    v-tippy="'Profile Edit'">
-
-                                                    <i class="fa-solid fa-pencil"
-                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                </button>
-
-                                                <button type="button" v-tippy="'Profile Delete'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-danger rounded-circle">
-                                                    <i class="fa fa-trash"
-                                                        style="margin: 2px 0px 10px -4px; font-size: 14px;"></i>
-                                                </button>
-
-                                                <button type="button" v-tippy="'Hold'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-purple rounded-circle">
-                                                    <i class="fa fa-refresh"
-                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                </button>
-                                                <button type="button" v-tippy="'Lock'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-lock rounded-circle">
-                                                    <i class="fa fa-lock"
-                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                </button>
-
-                                                <button type="button" v-tippy="'Lock'"
-                                                    style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"
-                                                    class="btn btn-outline-timer rounded-circle">
-                                                    <i class="fa-solid fa-clock-rotate-left"
-                                                        style="margin: 2px 0px 10px -5px; font-size: 14px;"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div> -->
 
                         <div class="row position-relative">
                             <div class="col-12">
-                                <div id="RoleList" class="card rounded rounded-2 shadow-none p-3">
+                                <div id="userList" class="card rounded rounded-2 shadow-none p-3">
 
                                     <div v-if="authStore.GlobalLoading"
                                         class="center-body position-absolute top-50 start-50">
@@ -1088,7 +686,36 @@ async function getListValues() {
                     </div>
                 </div>
             </div>
+            <!-- modal start -->
+            <div class="modal fade" id="status_change_modal" tabindex="-1" aria-modal="true" role="dialog">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
 
+                            <h5 class="m-0 p-0 modal-title fs-6" style="border-left: 5px solid rgb(114, 57, 234);">
+                                &nbsp;Change Status</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="input4" class="form-label">Status</label>
+
+                            <select id="status" name="status" class="form-control form-control-sm status">
+                                <option value="">== Select ==</option>
+                                <option value="1">Active</option>
+                                <option value="2">On Hold</option>
+                                <option value="3">Locked</option>
+                                <option value="4">Deactivated</option>
+                            </select>
+                            <input type="hidden" id="useridStatus" name="useridStatus">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="button" @click="update()" class="btn btn-sm btn-success">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
