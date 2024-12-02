@@ -30,6 +30,7 @@ const depoDetails = () => import('./components/admin/deposite/depoDetails.vue')
 // user management
 const UserList = () => import('./components/admin/user/index.vue')
 const CreateUser = () => import('./components/admin/user/create.vue')
+const EditUser = () => import('./components/admin/user/edit.vue')
 
 //Roles permissions managment
 const roleList = () => import('./components/admin/role/index.vue')
@@ -97,6 +98,7 @@ const routes = [
     //user
     { path: '/all-user-list', component: UserList, name: 'UserList', meta: { auth: true } },
     { path: '/create-user', component: CreateUser, name: 'CreateUser', meta: { auth: true } },
+    { path: '/edit-user/:id', component: EditUser, name: 'EditUser', meta: { auth: true },props:true },
 
     //roles permission
     { path: '/all-roles-list', component: roleList, name: 'roleList', meta: { auth: true } },

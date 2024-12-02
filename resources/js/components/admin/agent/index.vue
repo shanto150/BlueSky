@@ -15,7 +15,7 @@
         <div class="ms-auto">
             <div class="btn-group">
                 <router-link :to="{ name: 'CreateAgency' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i>Add New Agency
+                    <i class="fa fa-circle-plus"></i> Agency
                 </router-link>
 
             </div>

@@ -1,15 +1,82 @@
 <script setup>
 import { useAuthStore } from "../../../stores/authStore";
 import axiosInstance from "../../../axiosInstance";
-
 import { ref, onMounted, reactive } from "vue";
+const props = defineProps(['id']);
 const authStore = useAuthStore();
+const previewImage = ref('');
+
 //**** create function start
 const form = reactive({
     useEmail: authStore.email, name: '', email: "", staff_id: '',
     profile_picture: '',
-    phone: '', dept_name: '', desg: '', off_loct: '', report_to: '', role_id: '',
+    phone: '', dept_name: '', desg: '', off_loct: '', report_to: '', role_id: '', user_id: ''
 });
+
+async function update(props) {
+
+    form.user_id = props.id;
+
+    try {
+        // const response = await axiosInstance.post("/user-details/update", form);
+        const authStore = useAuthStore();
+        const accessToken = authStore.decryptWithAES(authStore.token);
+        const response = await axios.post('/api/user-details/update', form, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: "Bearer " + accessToken,
+                Accept: "application/json",
+
+            },
+        });
+        Notification.showToast('s', response.data.message);
+
+    } catch (error) {
+        ErrorCatch.CatchError(error);
+    }
+}
+
+getUserData(props);
+
+async function getUserData(props) {
+    try {
+        const response = await axiosInstance.post('editUser', { 'id': props });
+        // previewImage.value =  response.data[0].img_path;
+
+        const designation_id = response.data[0].designation_id;
+        $('#desg_id').val(designation_id);
+        $('#desg_id').trigger('change');
+
+        const dept_id = response.data[0].dept_id;
+        $('#deptment_id').val(dept_id);
+        $('#deptment_id').trigger('change');
+
+        const office_loc_id = response.data[0].office_loc_id;
+        $('#off_loc').val(office_loc_id);
+        $('#off_loc').trigger('change');
+
+        const report_to = response.data[0].report_to;
+        $('#report_to').val(report_to);
+        $('#report_to').trigger('change');
+
+        const user_role = response.data[0].user_role;
+        $('#user_role').val(user_role);
+
+        const name = response.data[0].name;
+        $("#name").val(name);
+        const emp_id = response.data[0].emp_id;
+        $("#staff_id").val(emp_id);
+
+        const email = response.data[0].email;
+        $("#email").val(email);
+
+        const phone = response.data[0].phone;
+        $('#phone').val(phone);
+
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 getDepartment();
 
@@ -220,8 +287,6 @@ async function save() {
 
     }
 }
-const previewImage = ref('');
-
 
 const handleFileChange = (event) => {
     form.profile_picture = event.target.files[0];
@@ -264,8 +329,9 @@ const handleFileChange = (event) => {
                         <p class="text-center">Profile Image</p>
 
                         <div class="mb-3 pt-0 text-center mx-auto">
-                            <img v-if="!previewImage" src="../../../../../public/build/assets/profile-default-img.jpg" height="150" width="150"
-                                class="border border-1 rounded rounded-2" alt="Profile Picture">
+                            <img v-if="!previewImage" src="../../../../../public/build/assets/profile-default-img.jpg"
+                                height="150" width="150" class="border border-1 rounded rounded-2"
+                                alt="Profile Picture">
 
                             <img v-if="previewImage" :src="previewImage" height="150" width="150"
                                 class="border border-1 rounded rounded-2" alt="Profile Picture">
@@ -285,20 +351,20 @@ const handleFileChange = (event) => {
                                     </div>
                                     <div class="col-md-12 mt-2">
                                         <label for="input4" class="form-label">Email</label><input type="email"
-                                            class="form-control form-control-sm" id="input4" placeholder="Email"
+                                            class="form-control form-control-sm" id="email" placeholder="Email"
                                             v-model="form.email">
                                     </div>
                                     <div class="col-md-12 mt-2">
                                         <label for="input7" class="form-label">Department</label>
                                         <select id="deptment_id" class="form-control form-control-sm dept_name">
-                                            <option>Choose...</option>
+                                            <!-- <option>Choose...</option> -->
 
                                         </select>
                                     </div>
                                     <div class="col-md-12 mt-2">
                                         <label for="input11" class="form-label">Office Location</label>
                                         <select id="off_loc" class="form-control form-control-sm off_loc">
-                                            <option>Choose...</option>
+                                            <!-- <option>Choose...</option> -->
 
                                         </select>
                                     </div>
@@ -306,7 +372,7 @@ const handleFileChange = (event) => {
                                     <div class="col-md-12 mt-2">
                                         <label for="input11" class="form-label">Role</label>
                                         <select id="role_id" class="form-control form-control-sm role">
-                                            <option>Choose...</option>
+                                            <!-- <option>Choose...</option> -->
                                         </select>
                                     </div>
                                 </div>
@@ -317,28 +383,24 @@ const handleFileChange = (event) => {
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label for="input1" class="form-label">Staff ID</label>
-                                        <input type="text" class="form-control form-control-sm" id="input1"
-                                            placeholder="Enter Name" v-model="form.staff_id">
+                                        <input type="text" class="form-control form-control-sm" placeholder="Enter Name"
+                                            id="staff_id" v-model="form.staff_id">
                                     </div>
                                     <div class="col-md-12 mt-2">
-                                        <label for="input4" class="form-label">Phone</label><input type="number"
-                                            class="form-control form-control-sm" id="input4" placeholder="Phone"
+                                        <label for="input4" class="form-label">Phone</label><input type="phone"
+                                            class="form-control form-control-sm" id="phone" placeholder="Phone"
                                             v-model="form.phone">
                                     </div>
 
                                     <div class="col-md-12 mt-2">
                                         <label for="input4" class="form-label">Designation</label>
                                         <select id="desg_id" class="form-control form-control-sm desg">
-                                            <option>Choose...</option>
-
                                         </select>
                                     </div>
 
                                     <div class="col-md-12 mt-2">
                                         <label for="input4" class="form-label">Report To</label>
                                         <select id="report_to" class="form-control form-control-sm report_to">
-                                            <option>Choose...</option>
-
                                         </select>
                                     </div>
                                 </div>
@@ -349,7 +411,7 @@ const handleFileChange = (event) => {
                 </div>
             </div>
             <div class="card-footer">
-                <button type="button" @click="save()"
+                <button type="button" @click="update(props)"
                     class="m-2 btn btn-sm btn-info px-4 ms-2 float-end text-white">Save</button>
                 <button class="m-2 btn btn-sm btn-danger px-4 ms-2  float-end">Back</button>
             </div>

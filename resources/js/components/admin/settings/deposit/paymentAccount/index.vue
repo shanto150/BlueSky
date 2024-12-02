@@ -266,7 +266,7 @@ async function getListValues() {
         <div class="ms-auto">
             <div class="btn-group">
                 <router-link :to="{ name: 'paymentAcctCreate' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i>Add New Payment Account
+                    <i class="fa fa-circle-plus"></i>Payment Account
                 </router-link>
 
             </div>
