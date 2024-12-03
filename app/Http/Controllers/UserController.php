@@ -187,7 +187,13 @@ class UserController extends BaseController
         if ($request->id) {
 
             $user = User::where('id', $request->id)->first();
+            if($user->img_path){
+                if ($user->img_path) {
 
+                    $filePath = public_path().$user->img_path;
+                    File::delete($filePath);
+                }
+            }
             $user->delete();
             $success = '';
             return $this->SuccessResponse($success, 'Successfully Department deleted.');
