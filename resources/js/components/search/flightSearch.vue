@@ -65,13 +65,20 @@ async function GenerateXML() {
 
 async function SendAPIRequest() {
 
-    const reqxml = await GenerateXML();
+    // 'Access-Control-Allow-Origin': 'http://127.0.0.1:8000',
+    //'Access-Control-Allow-Methods': '*',
+    //'Access-Control-Allow-Credentials': 'true',
+    //'Access-Control-Allow-Headers': '*',
+    //'Access-Control-Expose-Headers': '*',
 
+    const reqxml = await GenerateXML();
+    axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
     axios.post('http://apac.universal-api.pp.travelport.com/B2BGateway/connect/uAPI/AirService',
         reqxml,
         {
-            headers:
-                { 'Content-Type': 'text/xml' },
+            headers: {
+                'Content-Type': 'text/xml',
+            },
             auth: {
                 'username': "Universal API/uAPI1974892322-0c5d2a63",
                 'password': "Pi2-3$fB+j"
