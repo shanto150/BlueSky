@@ -78,9 +78,9 @@ const options = {
                 // row
                 html += '<div class="row">';
                 html += '<div class="col-md-4">';
-                html += "<img src='" + row.img + "' height='70' width='100%'>";
+                html += '<img src="'+ row.img +'" height="60"  class="w-100">';
                 html += '</div>';
-                html += "<div class='col-md-8'>"
+                html += '<div class="col-md-8">'
 
                 html += row.name;
                 html += "<br>";
@@ -94,7 +94,7 @@ const options = {
                 html += '</div>';
                 return html;
             },
-            width: '60%'
+            width: '100%',
 
 
         },
@@ -107,7 +107,8 @@ const options = {
                 html += row.off_loc;
 
                 return html;
-            }
+            },
+            width: '20%',
 
         },
         {
@@ -178,12 +179,13 @@ const options = {
 
                 html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-purple rounded-circle status-change" data-item-id=' + idd + ' data-status=' + status + '> <i class="fa fa-refresh" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
 
-                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
+                html+='<button type="button" v-tippy="Lock" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-timer rounded-circle history-data" data-item-id=' + idd + '> <i class="fa-solid fa-clock-rotate-left" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
 
-                // html+='<button type="button" v-tippy="Hold" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-purple rounded-circle"> <i class="fa fa-refresh" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button> <button type="button" v-tippy="Lock" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-lock rounded-circle"> <i class="fa fa-lock" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button> <button type="button" v-tippy="Lock" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-timer rounded-circle"> <i class="fa-solid fa-clock-rotate-left" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
 
                 return html;
             },
+            width:'90%'
         }
     ],
     "drawCallback": function (settings) {
@@ -191,7 +193,6 @@ const options = {
         $(".edit-item").on('click', function (e) {
 
             var itemIdd = $(this).attr('data-item-id');
-            console.log(itemIdd);
 
             router.push({ name: 'EditUser', params: { id: itemIdd } });
         });
@@ -254,6 +255,16 @@ const options = {
             form.useridStatus = idd;
             $('#useridStatus').val(idd);
         });
+
+        // history
+        $(".history-data").on('click',function(e){
+            var itemId = $(this).attr('data-item-id');
+            console.log(itemId);
+
+            router.push({ name: 'UserLog', params: { id: itemId } });
+
+
+        })
     }
 };
 
