@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PaymentAccount\PaymentAccountSController;
 use App\Http\Controllers\Admin\Role\RolePermissionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\Agent\AgentController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
@@ -24,6 +25,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('me', [AuthController::class, 'me'])->name('me');
     Route::post('registerOTP', [AuthController::class, 'registerOTP'])->name('registerOTP');
     Route::post('ForcePassReset', [AuthController::class, 'ForcePassReset'])->name('ForcePassReset');
+
+    //agent section
+    Route::get('getAgent', [AgentController::class, 'index'])->name('agent.index');
 
     // area
     Route::get('getarea', [AreaController::class, 'index'])->name('area.index');
