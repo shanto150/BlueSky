@@ -1,3 +1,284 @@
+<script setup>
+import DataTable from "datatables.net-vue3";
+import DataBS5 from "datatables.net-bs5";
+import axiosInstance from "../../../axiosInstance";
+import { ref, onMounted } from "vue";
+import { data } from "jquery";
+import { icons } from "lucide-vue-next";
+import { useRouter } from 'vue-router';
+const router = useRouter();
+import { useAuthStore } from '../../../stores/authStore';
+const authStore = useAuthStore();
+
+DataTable.use(DataBS5);
+
+const rData = ref([]);
+var regExSearch = ref();
+getListValues();
+
+const options = {
+    responsive: true,
+    pageLength: 30,
+    lengthMenu: [3, 10, 20, 30],
+    bDestroy: true,
+    ordering: false,
+    dom: "<'row'<'col-sm-4'B><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'f>>" + "<'row'<'col-sm-12'tr>>" +
+        "<'row justify-content-between Reduct_table_gap'<'d-md-flex justify-content-between align-items-center dt-layout-start col-md-auto me-auto'i><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'p>>",
+    buttons: ['copy', 'csv', 'pdf', 'excel', 'print'],
+    language: {
+        search: "",
+        searchPlaceholder: "Search by anything",
+    },
+    columnDefs: [{
+        defaultContent: "0",
+        targets: "_all",
+    }],
+    columns: [
+        { data: "DT_RowIndex", title: "SL" },
+        {
+            title: "Agent Details",
+            render: function (data, type, row) {
+                var html = "";
+                html += row.name;
+                html += "<br>";
+
+                html += '<span class="text-primary">';
+                html += row.agent_code + "</span>";
+                html += "<br>";
+
+                html += '<span class="text-primary">';
+                html += row.email + "</span>";
+                return html;
+            },
+        },
+        {
+            title: "Category",
+            // data: 'phone',
+            render: function (data, type, row) {
+                var html = "";
+                if (row.iata_number) {
+                    html += 'IATA';
+                } else {
+                    html += 'Non-IATA';
+                }
+                html += "<br>";
+                if (row.hajj_agency_number) {
+                    html += '<span class="text-primary">';
+
+                    html += 'Hajj'+ "</span>";
+
+                } else {
+                    html += '<span class="text-primary">';
+
+                    html += 'Non-Hajj' + "</span>";
+
+                }
+
+                return html;
+            },
+        },
+        {
+            title: "Zone",
+            data: 'zone',
+        },
+        {
+            title: "Owner Details",
+            data: 'phone',
+        },
+        {
+            title: "Contact ",
+            data: 'phone',
+        },
+        {
+            title: "KAM",
+            data: 'phone',
+        },
+        {
+            title: "Net Balance",
+            data: 'phone',
+        },
+        {
+            title: "Status",
+            data: 'phone',
+        },
+
+        {
+            title: "Created By",
+            render: function (data, type, row) {
+                var html = "";
+                html += row.created_by;
+                html += "<br>";
+                html += '<span class="text-primary">';
+                html += row.created_at + "</span>";
+                return html;
+            },
+        },
+        {
+
+            title: "Updated By",
+            render: function (data, type, row) {
+                var html = "";
+                html += row.updated_by || "-";
+                html += "<br>";
+                if (row.updated_by) {
+                    html += '<span class="text-primary">';
+                    html += row.updated_at + "</span>";
+                }
+                return html;
+            },
+        },
+        {
+            title: "Status",
+            render: function (data, type, row) {
+                var html = "";
+
+                if (row.status == 1) {
+                    html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Active </div>';
+                } else {
+                    html += '<div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Deactivated </div>';
+                }
+
+                return html;
+            },
+        },
+        {
+            width: '150px',
+            title: "Action",
+            render: function (data, type, row) {
+                var html = "";
+                var idd = row.idd;
+                var status = row.status;
+
+                // html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" data-item-id=' + idd + '> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" ></i> </button>';
+                // if (status == 1) {
+
+                //     html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                // } else {
+                //     html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-check" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+                // }
+
+                // html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
+                //if approved
+                html += '<button type="button"  style="size:30px;width:30px;height:30px; margin-left: 5px;" class="btn btn-outline-info rounded-circle"><i class="fa-solid fa-file" style="margin:2px 0px 10px -4px;font-size:14px;"></i></button> <router-link style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle"> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </router-link> <router-link  style="size: 30px; width: 30px; height: 30px;  margin-left: 5px;" class="btn btn-outline-primary rounded-circle" placement="top" > <i class="fa fa-eye" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i> </router-link> <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"  class="btn btn-outline-user-edit rounded-circle mt-2"><i class="fa-solid fa-user-pen"  style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button> <button type="button"  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="mt-2 btn btn-outline-only-edit rounded-circle"> <i class="fa-solid fa-pencil" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>  <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"  class="mt-2 btn btn-outline-action-log rounded-circle">  <i class="fa-solid fa-arrow-trend-up" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i> </button>';
+                return html;
+            },
+        }
+    ],
+    "drawCallback": function (settings) {
+        // edit function
+        $(".edit-item").on('click', function (e) {
+
+            var itemIdd = $(this).attr('data-item-id');
+
+            router.push({ name: 'zoneEdit', params: { id: itemIdd } });
+        });
+
+        // delete function
+        $(".delete-item").on('click', function (e) {
+
+            // var idd = e.target.dataset.itemId;
+            var idd = $(this).attr('data-item-id');
+
+            // delete pop up message
+
+            iziToast.question({
+                timeout: 100000,
+                pauseOnHover: false,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                message: 'Want to delete this area?',
+                position: 'center',
+                buttons: [
+                    ['<button><b>No</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
+
+                    }, true],
+                    ['<button><b>Yes</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
+
+                    }, true]
+                ],
+                onClosed: async function (instance, toast, closedBy) {
+                    console.log(closedBy);
+
+                    if (closedBy == 'yes') {
+                        const response = axiosInstance.post("deletearea", { 'id': idd });
+                        getListValues();
+                        Notification.showToast('s', 'Successfully Zone Deleted.');
+                    } else {
+
+                    }
+
+                }
+            });
+            // delete pop up message end
+
+
+        });
+
+        // change status
+        $(".status-change").on('click', function (e) {
+
+            var idd = $(this).attr('data-item-id');
+
+            iziToast.question({
+                timeout: 100000,
+                pauseOnHover: false,
+                close: false,
+                overlay: true,
+                displayMode: 'once',
+                id: 'question',
+                zindex: 999,
+                message: 'Want to change status this area?',
+                position: 'center',
+                buttons: [
+                    ['<button><b>No</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'no');
+
+                    }, true],
+                    ['<button><b>Yes</b></button>', function (instance, toast) {
+
+                        instance.hide({ transitionOut: 'fadeOut' }, toast, 'yes');
+
+                    }, true]
+                ],
+                onClosed: async function (instance, toast, closedBy) {
+
+                    if (closedBy == 'yes') {
+                        const response = axiosInstance.post("changeAreaStatus", { 'id': idd });
+                        getListValues();
+                        Notification.showToast('s', 'Successfully Zone status Changed.');
+                    } else {
+
+                    }
+
+                }
+            });
+
+        });
+    }
+};
+
+
+async function getListValues() {
+    try {
+        authStore.GlobalLoading = true;
+        const response = await axiosInstance.get("getAgent");
+        rData.value = response.data.data;
+        authStore.GlobalLoading = false;
+    } catch (error) {
+        console.log(error);
+        authStore.GlobalLoading = false;
+    }
+}
+
+</script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
 
@@ -37,8 +318,7 @@
 
         <div class="col-12 col-sm-6 col-md-3">
             <div class="active-agency mb-3">
-                <span class="active-agency-icon bg-success elevation-1"><i
-                        class="fa-solid fa-circle-check"></i></span>
+                <span class="active-agency-icon bg-success elevation-1"><i class="fa-solid fa-circle-check"></i></span>
                 <div class="active-agency-content">
                     <span class="active-agency-text">Active Agency</span>
                     <span class="active-agency-number">760</span>
@@ -120,7 +400,25 @@
         </div>
     </div>
 
-    <div class="table-responsive border rounded rounded-2 p-3">
+    <div class="row position-relative">
+        <div class="col-12">
+            <div id="RoleList" class="card rounded rounded-2 shadow-none p-3">
+
+                <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
+                    <div class="loader-circle-57">
+                        <img class="position-absolute" src="../../../../../public/theme/appimages/blueskywings.png"
+                            height="22" width="22" alt="">
+                    </div>
+                </div>
+
+                <DataTable :options="options" :data="rData" class="table table-sm table-striped table-bordered">
+                </DataTable>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- <div class="table-responsive border rounded rounded-2 p-3">
         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap5">
             <div class="row">
                 <div class="col-sm-12 col-md-6">
@@ -171,9 +469,7 @@
                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                     aria-label="Net Balance: activate to sort column ascending"
                                     style="width: 107.037px;">Net Balance</th>
-                                <!-- <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                                    aria-label="Documennts: activate to sort column ascending"
-                                    style="width: 107.037px;">Documennts</th> -->
+
                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                                     aria-label="Status: activate to sort column ascending" style="width: 107.037px;">
                                     Status</th>
@@ -235,7 +531,7 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
-                                    <button type="button" v-tippy="'Attachment'"
+                                    <button type="button"
                                         style="size:30px;width:30px;height:30px;"
                                         class="btn btn-outline-info rounded-circle"><i
                                             class="fa-solid fa-file"
@@ -328,7 +624,7 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
-                                    <button type="button" v-tippy="'Attachment'"
+                                    <button type="button"
                                         style="size:30px;width:30px;height:30px;"
                                         class="btn btn-outline-info rounded-circle"><i
                                             class="fa-solid fa-file"
@@ -422,7 +718,7 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
-                                    <button type="button" v-tippy="'Attachment'"
+                                    <button type="button"
                                         style="size:30px;width:30px;height:30px;"
                                         class="btn btn-outline-info rounded-circle"><i
                                             class="fa-solid fa-file"
@@ -517,7 +813,7 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
-                                    <button type="button" v-tippy="'Attachment'"
+                                    <button type="button"
                                         style="size:30px;width:30px;height:30px;"
                                         class="btn btn-outline-info rounded-circle"><i
                                             class="fa-solid fa-file"
@@ -613,7 +909,7 @@
                                     </small>
                                 </td>
                                 <td class="text-left">
-                                    <button type="button" v-tippy="'Attachment'"
+                                    <button type="button"
                                         style="size:30px;width:30px;height:30px;"
                                         class="btn btn-outline-info rounded-circle"><i
                                             class="fa-solid fa-file"
@@ -658,32 +954,8 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-12 col-md-5">
-                    <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1
-                        to 5 of 10 entries</div>
-                </div>
-                <div class="col-sm-12 col-md-7">
-                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-                        <ul class="pagination">
-                            <li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#"
-                                    aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Prev</a>
-                            </li>
-                            <li class="paginate_button page-item active"><a href="#" aria-controls="example2"
-                                    data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                            <li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2"
-                                    tabindex="0" class="page-link">2</a></li>
-
-                            <li class="paginate_button page-item next" id="example2_next"><a href="#"
-                                    aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </div>
+    </div> -->
 
 </template>
 <script>
@@ -723,11 +995,16 @@
 
 /* dashboard design */
 
-[data-bs-theme=dark] body .bg-info,.info-agency-icon,.bg-info>a {
+[data-bs-theme=dark] body .bg-info,
+.info-agency-icon,
+.bg-info>a {
     background-color: #06365d !important;
     color: #4f687c !important;
 }
-[data-bs-theme=light] body .bg-info,.info-agency-icon, .bg-info>a {
+
+[data-bs-theme=light] body .bg-info,
+.info-agency-icon,
+.bg-info>a {
     background-color: #0880e1 !important;
     color: #fff !important;
 
@@ -807,11 +1084,16 @@
 }
 
 
-[data-bs-theme=dark] body .bg-success, .active-agency-icon,.bg-success>a {
+[data-bs-theme=dark] body .bg-success,
+.active-agency-icon,
+.bg-success>a {
     background-color: #5b9a59 !important;
     color: #9fbe9e !important;
 }
-[data-bs-theme=light] body .bg-success, .active-agency-icon, .bg-success>a {
+
+[data-bs-theme=light] body .bg-success,
+.active-agency-icon,
+.bg-success>a {
     background-color: #0ea209 !important;
     color: #fff !important;
 
@@ -873,11 +1155,16 @@
     width: 70px;
 }
 
-[data-bs-theme=dark] body .bg-warning, .pending-agnt-icon,.bg-warning>a {
+[data-bs-theme=dark] body .bg-warning,
+.pending-agnt-icon,
+.bg-warning>a {
     background-color: #562b03 !important;
     color: #d0741d !important;
 }
-[data-bs-theme=light] body .bg-warning, .pending-agnt-icon, .bg-warning>a {
+
+[data-bs-theme=light] body .bg-warning,
+.pending-agnt-icon,
+.bg-warning>a {
     background-color: #fb8e28 !important;
     color: #fff !important;
 
@@ -979,11 +1266,16 @@
     width: 100%;
 }
 
-[data-bs-theme=dark] body .bg-danger, .info-box-icon,.bg-danger>a {
+[data-bs-theme=dark] body .bg-danger,
+.info-box-icon,
+.bg-danger>a {
     background-color: #707a03 !important;
     color: #d0d68b !important;
 }
-[data-bs-theme=light] body .bg-danger, .info-box-icon, .bg-danger>a {
+
+[data-bs-theme=light] body .bg-danger,
+.info-box-icon,
+.bg-danger>a {
     background-color: #99a705 !important;
     color: #fff !important;
 
