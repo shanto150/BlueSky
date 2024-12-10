@@ -49,14 +49,7 @@ async function save() {
     }
 }
 
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
+
 
 // it will load everytime page open
 getDivision();
@@ -67,7 +60,7 @@ async function getDivision() {
 
         var options = [];
         $.each(response.data, function (key, value) {
-            var obj = { id: value.id, text: value.name, bn: value.bn_name, clr: getRandomColor() }
+            var obj = { id: value.id, text: value.name, bn: value.bn_name, clr: MF.getRandomColor() }
             options.push(obj);
 
         });
@@ -105,7 +98,7 @@ async function getDistrict(id) {
 
         var getDatas = [];
         $.each(response.data, function (key, value) {
-            var obj = { id: value.id, text: value.name, bn: value.bn_name, clr: getRandomColor() }
+            var obj = { id: value.id, text: value.name, bn: value.bn_name, clr: MF.getRandomColor() }
             getDatas.push(obj);
 
         });
@@ -157,7 +150,7 @@ async function getDistrict(id) {
 
     <div class="card">
         <div class="card-header">
-            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Create New Area</h5>
+            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea; border-radius: 10px;"> &nbsp; Create New Area</h5>
         </div>
 
         <form id="addZoneform">
