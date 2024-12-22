@@ -28,6 +28,7 @@ Route::middleware(['auth:api'])->group(function () {
 
     //agent section
     Route::get('getAgent', [AgentController::class, 'index'])->name('agent.index');
+    Route::get('airports', [AreaController::class, 'airports']);
 
     // area
     Route::get('getarea', [AreaController::class, 'index'])->name('area.index');

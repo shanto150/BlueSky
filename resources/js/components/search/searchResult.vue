@@ -3,7 +3,12 @@ import { ref, onMounted, reactive } from "vue";
 import axiosInstance from "../../axiosInstance"
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import CustomMinMaxSlider from "../../components/search/CustomMinMaxSlider.vue";
+
 const fdate = ref();
+const sliderMin = ref(50);
+const sliderMax = ref(80);
+
 const format = (fdate) => {
     const day = fdate.getDate();
     const month = fdate.getMonth() + 1;
@@ -247,7 +252,7 @@ function offHover() {
                         <router-link :to="{ name: 'Home' }">Dashboard</router-link>
                     </li>
 
-                    <li class="breadcrumb-item active" aria-current="page">Flight Search</li>
+                    <li class="breadcrumb-item active" aria-current="page">Flight Search Result</li>
                 </ol>
             </nav>
         </div>
@@ -521,7 +526,8 @@ function offHover() {
                         </div>
                         <div class="col-md-1">
                             <router-link :to="{ name: 'searchResult' }">
-                                <img src="../../../../public/build/assets/s_With_Icon.jpg" alt="" style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img">
+                                <img src="../../../../public/build/assets/s_With_Icon.jpg" alt="" style="width: 53px;"
+                                    @mouseover="onHover();" @mouseout="offHover();" id="img">
                             </router-link>
                             <!-- <img src="../../../../public/build/assets/s_Hover_State.jpg" alt="" style="width: 53px;"> -->
                         </div>
@@ -529,6 +535,404 @@ function offHover() {
                 </div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-clock text-primary">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                &nbsp;&nbsp;
+                                <span class="pt-1" style="font-size: 13px;">Book Flight within</span>
+                                &nbsp; &nbsp;
+                                <div class="dash-lable bg-light-primary text-primary rounded-1">
+                                    <p class="text-black mb-0">30</p>
+                                </div>
+                                &nbsp;
+                                <div class="ml-1 mr-1">:</div>
+                                &nbsp;
+                                <div class="dash-lable bg-light-primary text-primary rounded-1">
+                                    <p class="text-black mb-0">00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <!-- price-range -->
+                    <div class="accordion" id="price-range">
+                        <div class="accordion-item">
+                            <h5 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Price Range
+                                </button>
+                            </h5>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#price-range">
+                                <div class="accordion-body">
+                                    <div class="slider-cont">
+                                        <CustomMinMaxSlider :min="65" :max="368" v-model:min-value="sliderMin"
+                                            v-model:max-value="sliderMax" />
+                                        <p class="text-center mb-0"> <i class="fa fa-bangladeshi-taka-sign"></i> {{
+                                            sliderMin }} - <i class="fa fa-bangladeshi-taka-sign"></i> {{ sliderMax }}
+                                        </p>
+                                        <div class="text-center p-0">
+                                            <span class="text-danger">*</span> Price may change based on policy
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- stop -->
+                    <div class="accordion" id="stop">
+                        <div class="accordion-item mt-3">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Stop
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Non-Stop
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            1 Stop
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            2 Stop
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Refund availability -->
+                    <div class="accordion" id="refund">
+                        <div class="accordion-item mt-3">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Refund Availability
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse show"
+                                aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Refundable
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Partially Refundable
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Non Refundable
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- airlines -->
+                    <div class="accordion" id="arilines">
+                        <div class="accordion-item mt-3">
+                            <h2 class="accordion-header" id="headingfour">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Airlines
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse show"
+                                aria-labelledby="headingfour" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Emirates
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Qatar Airways
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Us-Bangla Airlines
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Biman Bangladesh
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Class -->
+                    <div class="accordion" id="class-type">
+                        <div class="accordion-item mt-3">
+                            <h2 class="accordion-header" id="headingFive">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Class
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse show"
+                                aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            First Class
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Business Class
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Premium Economy
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Economy
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flight Schedule -->
+                    <div class="accordion" id="class-type">
+                        <div class="accordion-item mt-3">
+                            <h2 class="accordion-header" id="headingSix">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                    Flight Schedule
+                                </button>
+                            </h2>
+                            <div id="collapseSix" class="accordion-collapse collapse show" aria-labelledby="headingSix"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="d-flex gap-2">
+                                                <button type="button"
+                                                    class="btn btn-outline-primary w-100">Departure</button>
+                                                <button type="button"
+                                                    class="btn btn-outline-secondary w-100">Arrival</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-2">
+                                            <div class="d-flex gap-2">
+                                                <div class="card text-center">
+                                                    <div class="card-body"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="feather feather-sunrise text-primary">
+                                                            <path d="M17 18a5 5 0 0 0-10 0"></path>
+                                                            <line x1="12" y1="2" x2="12" y2="9"></line>
+                                                            <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+                                                            <line x1="1" y1="18" x2="3" y2="18"></line>
+                                                            <line x1="21" y1="18" x2="23" y2="18"></line>
+                                                            <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+                                                            <line x1="23" y1="22" x2="1" y2="22"></line>
+                                                            <polyline points="8 6 12 2 16 6"></polyline>
+                                                        </svg>
+                                                        <p class="mb-0 mt-3">00-06 AM</p>
+                                                    </div>
+                                                </div>
+                                                <div class="card text-center">
+                                                    <div class="card-body"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="feather feather-sun text-primary">
+                                                            <circle cx="12" cy="12" r="5"></circle>
+                                                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                                                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                                                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                                                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                                                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                                        </svg>
+                                                        <p class="mb-0 mt-3">06-12 PM</p>
+                                                    </div>
+                                                </div>
+                                                <div class="card text-center">
+                                                    <div class="card-body"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="feather feather-sunset text-primary">
+                                                            <path d="M17 18a5 5 0 0 0-10 0"></path>
+                                                            <line x1="12" y1="9" x2="12" y2="2"></line>
+                                                            <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+                                                            <line x1="1" y1="18" x2="3" y2="18"></line>
+                                                            <line x1="21" y1="18" x2="23" y2="18"></line>
+                                                            <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+                                                            <line x1="23" y1="22" x2="1" y2="22"></line>
+                                                            <polyline points="16 5 12 9 8 5"></polyline>
+                                                        </svg>
+                                                        <p class="mb-0 mt-3">12-06 PM</p>
+                                                    </div>
+                                                </div>
+                                                <div class="card text-center">
+                                                    <div class="card-body"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="feather feather-moon text-primary">
+                                                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z">
+                                                            </path>
+                                                        </svg>
+                                                        <p class="mb-0 mt-3">06-12 AM</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Baggage -->
+                    <div class="accordion" id="class-type">
+                        <div class="accordion-item mt-3">
+                            <h2 class="accordion-header" id="headingSeven">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                    Baggage
+                                </button>
+                            </h2>
+                            <div id="collapseSeven" class="accordion-collapse collapse show"
+                                aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            10 kg
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            20 kg
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            30 kg
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            02 Piece
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layover -->
+                    <div class="accordion" id="class-type">
+                        <div class="accordion-item mt-3">
+                            <h2 class="accordion-header" id="headingSeven">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                    Layover
+                                </button>
+                            </h2>
+                            <div id="collapseSeven" class="accordion-collapse collapse show"
+                                aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Netaki Subhas Chandra Bose..
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Kuwait International Airport
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Kunming Changshui Interna..
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Kiala lumpur International Ai..
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8"></div>
     </div>
 </template>
 
@@ -583,10 +987,4 @@ function offHover() {
     margin-bottom: 4px;
     text-transform: uppercase;
 } */
-
-.input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
-    margin-left: calc(var(--bs-border-width)* -1);
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
 </style>
