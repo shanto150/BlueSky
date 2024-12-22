@@ -53,7 +53,6 @@ const options = {
         },
         {
             title: "Category",
-            // data: 'phone',
             render: function (data, type, row) {
                 var html = "";
                 if (row.iata_number) {
@@ -83,7 +82,15 @@ const options = {
         },
         {
             title: "Owner Details",
-            data: 'phone',
+            render: function (data, type, row) {
+                var html = "";
+                html += row.owner;
+                html += "<br>";
+
+                html += '<span class="text-primary">';
+                html += row.designation + "</span>";
+                return html;
+            },
         },
         {
             title: "Contact ",
@@ -91,15 +98,15 @@ const options = {
         },
         {
             title: "KAM",
-            data: 'phone',
+            data: 'kam',
         },
         {
             title: "Net Balance",
-            data: 'phone',
+            data: 'net_balance',
         },
         {
             title: "Status",
-            data: 'phone',
+            data: 'status',
         },
 
         {
@@ -132,10 +139,12 @@ const options = {
             render: function (data, type, row) {
                 var html = "";
 
-                if (row.status == 1) {
+                if (row.status == 'Approved') {
                     html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Active </div>';
-                } else {
-                    html += '<div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Deactivated </div>';
+                } else if (row.status == 'Pending') {
+                    html += '<div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Pending </div>';
+                }else if (row.status == 'Recommended') {
+                    html += '<div class="badge rounded-pill text-primary bg-light-primary p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Recommended </div>';
                 }
 
                 return html;

@@ -14,6 +14,7 @@ const NF = () => import('./components/auth/NotFound.vue')
 const ForcePassChange = () => import('./components/auth/forcePasswordChange.vue')
 
 const flightSearch = () => import('./components/search/flightSearch.vue')
+const searchResult = () => import('./components/search/searchResult.vue')
 // agent
 const AgentList = () => import('./components/admin/agent/index.vue')
 const agentDetails = () => import('./components/admin/agent/agentDetails.vue')
@@ -82,6 +83,7 @@ const routes = [
 
     //flight search
     { path: '/flight-search', component: flightSearch, name: 'flightSearch', meta: { auth: true } },
+    { path: '/flight-search-way', component: searchResult, name: 'searchResult', meta: { auth: true } },
 
 
     // agent

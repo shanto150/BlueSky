@@ -141,9 +141,8 @@ class AreaController extends BaseController
 
             $area = Area::where('id', $request->id)->first();
             $area->delete();
-            $success= '';
+            $success = '';
             return $this->SuccessResponse($success, 'Successfully Zone deleted.');
-
 
         } else {
             $error = 'Id can not be null.';
@@ -155,11 +154,21 @@ class AreaController extends BaseController
 
     public function divisionsList()
     {
-
         $div = DB::table('divisions')->get();
-        // dd($div);
         return response()->json($div);
+    }
 
+    public function airports(Request $request)
+    {
+        $airp = DB::table('airports')
+            // ->orWhere('Country_name', 'like', '%' . $request->q . '%')
+            // ->orWhere('City_name', 'like', '%' . $request->q . '%')
+            // ->orWhere('code', 'like', '%' . $request->q . '%')
+            // ->orWhere('Airport_Name', 'like', '%' . $request->q . '%')
+            ->select(['City_name', 'code', 'Airport_Name', 'Country_name'])
+            // ->take(30)
+            ->get();
+        return response()->json($airp);
     }
 
     public function districtList(Request $request)

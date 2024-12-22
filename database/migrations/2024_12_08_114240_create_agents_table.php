@@ -31,6 +31,8 @@ return new class extends Migration
             $table->string('fax', 50)->nullable()->unique();
             $table->string('iata_number', 50)->nullable()->unique();
             $table->string('hajj_agency_number', 50)->nullable()->unique();
+            $table->double('net_balance')->nullable();
+            $table->integer('user_id')->nullable();
             $table->integer('kam')->nullable();
             $table->string('remarks')->nullable();
             $table->string('status')->default('Pending')->comment('Approved,Reject,Hold,Pending');
