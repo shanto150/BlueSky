@@ -149,7 +149,6 @@ onMounted(() => {
         theme: 'bootstrap-5',
         width: '100%',
         height: '50',
-        width: 'element'
     });
 });
 getAirports();
@@ -193,9 +192,7 @@ async function getAirports() {
             templateSelection: formatState,
 
 
-        }).on('change', function (e) {
-
-        });;
+        });
 
         $('#origin_id').prepend('<option selected=""></option>');
 
@@ -515,7 +512,7 @@ function offHover() {
                             <VueDatePicker v-model="fdate" placeholder="Select Date" :enable-time-picker="false"
                                 :format="format"></VueDatePicker>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 hide-me">
                             <VueDatePicker v-model="tdate" placeholder="Select Date" :enable-time-picker="false"
                                 :format="tformat"></VueDatePicker>
                         </div>
