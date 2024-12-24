@@ -234,11 +234,11 @@ async function getAirports() {
 
 function onHover() {
 
-    $("#img").attr('src', 'http://[::1]:5173/public/build/assets/s_Hover_State.jpg');
+    $("#img").attr('src', '');
 }
 
 function offHover() {
-    $("#img").attr('src', 'http://[::1]:5173/public/build/assets/s_With_Icon.jpg');
+    $("#img").attr('src', '');
 }
 </script>
 <template>
@@ -526,7 +526,7 @@ function offHover() {
                         </div>
                         <div class="col-md-1">
                             <router-link :to="{ name: 'searchResult' }">
-                                <img src="../../../../public/build/assets/s_With_Icon.jpg" alt="" style="width: 53px;"
+                                <img src="" alt="" style="width: 53px;"
                                     @mouseover="onHover();" @mouseout="offHover();" id="img">
                             </router-link>
                             <!-- <img src="../../../../public/build/assets/s_Hover_State.jpg" alt="" style="width: 53px;"> -->
