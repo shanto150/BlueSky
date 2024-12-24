@@ -526,8 +526,10 @@ function offHover() {
                         </div>
                         <div class="col-md-1">
                             <router-link :to="{ name: 'searchResult' }">
-                                <img src="" alt="" style="width: 53px;"
-                                    @mouseover="onHover();" @mouseout="offHover();" id="img">
+                                <button class="btn btn-sm btn-block btn-outline-primary text-center">
+                                    <i class="fa fa-search px-3"></i>
+                                </button>
+                                <!-- <img src="" alt="" style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img"> -->
                             </router-link>
                             <!-- <img src="../../../../public/build/assets/s_Hover_State.jpg" alt="" style="width: 53px;"> -->
                         </div>
