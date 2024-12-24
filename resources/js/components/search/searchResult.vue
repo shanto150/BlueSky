@@ -6,8 +6,8 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import CustomMinMaxSlider from "../../components/search/CustomMinMaxSlider.vue";
 
 const fdate = ref();
-const sliderMin = ref(50);
-const sliderMax = ref(80);
+const sliderMin = ref(150);
+const sliderMax = ref(180);
 
 const format = (fdate) => {
     const day = fdate.getDate();
@@ -368,7 +368,7 @@ function offHover() {
                                             <table class="table table-sm">
                                                 <tbody>
                                                     <tr>
-                                                        <td><small> Adult <br> <span style="font-size: 9px;">Above 12
+                                                        <td><small> Adult <br> <span style="font-size: 8px;">Above 12
                                                                     Years</span></small></td>
                                                         <td style="width: 150px;">
                                                             <div class="input-group product-qty">
@@ -405,7 +405,7 @@ function offHover() {
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><small>Children <br><span style="font-size: 9px;">02 to
+                                                        <td><small>Children <br><span style="font-size: 8px;">02 to
                                                                     Under 12 Years
                                                                 </span></small></td>
                                                         <td style="width: 150px;">
@@ -442,7 +442,7 @@ function offHover() {
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><small>Infant <br><span style="font-size: 9px;">Under 02
+                                                        <td><small>Infant <br><span style="font-size: 8px;">Under 02
                                                                     Years</span></small></td>
                                                         <td style="width: 150px;">
                                                             <div class="input-group product-qty">
@@ -541,7 +541,6 @@ function offHover() {
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex">
-
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-clock text-primary">
@@ -569,12 +568,13 @@ function offHover() {
                     <!-- price-range -->
                     <div class="accordion" id="price-range">
                         <div class="accordion-item">
-                            <h5 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <p class="accordion-header" id="headingOne">
+                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                                    aria-controls="collapseOne">
                                     Price Range
                                 </button>
-                            </h5>
+                            </p>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                                 data-bs-parent="#price-range">
                                 <div class="accordion-body">
@@ -597,8 +597,9 @@ function offHover() {
                     <div class="accordion" id="stop">
                         <div class="accordion-item mt-3">
                             <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                                    aria-controls="collapseTwo">
                                     Stop
                                 </button>
                             </h2>
@@ -632,8 +633,9 @@ function offHover() {
                     <div class="accordion" id="refund">
                         <div class="accordion-item mt-3">
                             <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                                    aria-controls="collapseThree">
                                     Refund Availability
                                 </button>
                             </h2>
@@ -666,12 +668,13 @@ function offHover() {
                     <!-- airlines -->
                     <div class="accordion" id="arilines">
                         <div class="accordion-item mt-3">
-                            <h2 class="accordion-header" id="headingfour">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <h6 class="accordion-header" id="headingfour">
+                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
+                                    aria-controls="collapseFour">
                                     Airlines
                                 </button>
-                            </h2>
+                            </h6>
                             <div id="collapseFour" class="accordion-collapse collapse show"
                                 aria-labelledby="headingfour" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
@@ -708,12 +711,13 @@ function offHover() {
                     <!-- Class -->
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
-                            <h2 class="accordion-header" id="headingFive">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <h6 class="accordion-header" id="headingFive">
+                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
+                                    aria-controls="collapseFive">
                                     Class
                                 </button>
-                            </h2>
+                            </h6>
                             <div id="collapseFive" class="accordion-collapse collapse show"
                                 aria-labelledby="headingFive" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
@@ -750,12 +754,13 @@ function offHover() {
                     <!-- Flight Schedule -->
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
-                            <h2 class="accordion-header" id="headingSix">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            <h6 class="accordion-header" id="headingSix">
+                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
+                                    aria-controls="collapseSix">
                                     Flight Schedule
                                 </button>
-                            </h2>
+                            </h6>
                             <div id="collapseSix" class="accordion-collapse collapse show" aria-labelledby="headingSix"
                                 data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
@@ -770,75 +775,75 @@ function offHover() {
                                         </div>
                                         <div class="col-md-12 mt-2">
                                             <div class="d-flex gap-2">
-                                                <div class="card text-center">
-                                                    <div class="card-body"> <svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-sunrise text-primary">
-                                                            <path d="M17 18a5 5 0 0 0-10 0"></path>
-                                                            <line x1="12" y1="2" x2="12" y2="9"></line>
-                                                            <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
-                                                            <line x1="1" y1="18" x2="3" y2="18"></line>
-                                                            <line x1="21" y1="18" x2="23" y2="18"></line>
-                                                            <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
-                                                            <line x1="23" y1="22" x2="1" y2="22"></line>
-                                                            <polyline points="8 6 12 2 16 6"></polyline>
-                                                        </svg>
-                                                        <p class="mb-0 mt-3">00-06 AM</p>
-                                                    </div>
+                                                <div
+                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-sunrise text-primary">
+                                                        <path d="M17 18a5 5 0 0 0-10 0"></path>
+                                                        <line x1="12" y1="2" x2="12" y2="9"></line>
+                                                        <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+                                                        <line x1="1" y1="18" x2="3" y2="18"></line>
+                                                        <line x1="21" y1="18" x2="23" y2="18"></line>
+                                                        <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+                                                        <line x1="23" y1="22" x2="1" y2="22"></line>
+                                                        <polyline points="8 6 12 2 16 6"></polyline>
+                                                    </svg>
+                                                    <br>
+                                                    <span style="font-size: 8px; font-weight: bold;">00-06 AM</span>
                                                 </div>
-                                                <div class="card text-center">
-                                                    <div class="card-body"> <svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-sun text-primary">
-                                                            <circle cx="12" cy="12" r="5"></circle>
-                                                            <line x1="12" y1="1" x2="12" y2="3"></line>
-                                                            <line x1="12" y1="21" x2="12" y2="23"></line>
-                                                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                                            <line x1="1" y1="12" x2="3" y2="12"></line>
-                                                            <line x1="21" y1="12" x2="23" y2="12"></line>
-                                                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                                                        </svg>
-                                                        <p class="mb-0 mt-3">06-12 PM</p>
-                                                    </div>
+                                                <div
+                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-sun text-primary">
+                                                        <circle cx="12" cy="12" r="5"></circle>
+                                                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                                                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                                                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                                    </svg>
+                                                    <br>
+                                                    <span style="font-size: 8px; font-weight: bold;">06-12 PM</span>
                                                 </div>
-                                                <div class="card text-center">
-                                                    <div class="card-body"> <svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-sunset text-primary">
-                                                            <path d="M17 18a5 5 0 0 0-10 0"></path>
-                                                            <line x1="12" y1="9" x2="12" y2="2"></line>
-                                                            <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
-                                                            <line x1="1" y1="18" x2="3" y2="18"></line>
-                                                            <line x1="21" y1="18" x2="23" y2="18"></line>
-                                                            <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
-                                                            <line x1="23" y1="22" x2="1" y2="22"></line>
-                                                            <polyline points="16 5 12 9 8 5"></polyline>
-                                                        </svg>
-                                                        <p class="mb-0 mt-3">12-06 PM</p>
-                                                    </div>
+
+                                                <div
+                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-sunset text-primary">
+                                                        <path d="M17 18a5 5 0 0 0-10 0"></path>
+                                                        <line x1="12" y1="9" x2="12" y2="2"></line>
+                                                        <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+                                                        <line x1="1" y1="18" x2="3" y2="18"></line>
+                                                        <line x1="21" y1="18" x2="23" y2="18"></line>
+                                                        <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+                                                        <line x1="23" y1="22" x2="1" y2="22"></line>
+                                                        <polyline points="16 5 12 9 8 5"></polyline>
+                                                    </svg>
+                                                    <br>
+                                                    <span style="font-size: 8px; font-weight: bold;">12-06 PM</span>
                                                 </div>
-                                                <div class="card text-center">
-                                                    <div class="card-body"> <svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-moon text-primary">
-                                                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z">
-                                                            </path>
-                                                        </svg>
-                                                        <p class="mb-0 mt-3">06-12 AM</p>
-                                                    </div>
+                                                <div
+                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-moon text-primary">
+                                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z">
+                                                        </path>
+                                                    </svg>
+                                                    <br>
+                                                    <span style="font-size: 8px; font-weight: bold;">06-12 AM</span>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -850,8 +855,9 @@ function offHover() {
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
                             <h2 class="accordion-header" id="headingSeven">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false"
+                                    aria-controls="collapseSeven">
                                     Baggage
                                 </button>
                             </h2>
@@ -891,14 +897,15 @@ function offHover() {
                     <!-- Layover -->
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
-                            <h2 class="accordion-header" id="headingSeven">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            <h6 class="accordion-header" id="headingEight">
+                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false"
+                                    aria-controls="collapseEight">
                                     Layover
                                 </button>
-                            </h2>
-                            <div id="collapseSeven" class="accordion-collapse collapse show"
-                                aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                            </h6>
+                            <div id="collapseEight" class="accordion-collapse collapse show"
+                                aria-labelledby="headingEight" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -930,9 +937,92 @@ function offHover() {
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12 mt-4">
+                    <button class="btn btn-block btn-sm btn-outline-primary w-100">
+                        Clear All Filters
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="col-md-8"></div>
+        <div class="col-md-8">
+            <div class="row">
+                <p>Showing 10 of 20 Total Flights</p>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 m-0 p-0">
+                                    <div class="d-flex">
+                                        <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
+                                            height="70">
+                                        <div class="text-center mt-2">
+                                            <p class="p-0 m-0"><b>DAC-DXB</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">Qatar Airways</small>
+                                            <br>
+                                            <small style="font-size: 12px; color: #5e6878;">Boeing 707</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 border-start">
+                                    <div class="d-flex gap-2">
+                                        <div class="mt-2">
+                                            <p class="p-0 m-0"><b>10:50 AM</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">03 Jan, Fri</small>
+                                            <br>
+                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
+                                        </div>
+
+                                        <div class="text-center mt-2">
+                                            <small style="font-size: 12px; color: #5e6878;">04 hr 15 Min</small>
+                                            <br>
+                                            <div class="d-flex">
+                                                <div>
+                                                    ....
+                                                </div>
+                                                <div><i class="fa fa-plane"
+                                                        style="font-size: 28px;color: #1882ffb3;"></i></div>
+                                                <div>
+                                                    ....
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-2">
+                                            <p class="p-0 m-0"><b>02:50 PM</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">03 Jan, Fri</small>
+                                            <br>
+                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 border-start">
+                                    <div class="d-flex gap-2">
+                                        <div class="mt-2">
+                                            <p class="p-0 m-0"><b>01 Stop</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">CCU</small><br>
+                                            <small style="font-size: 12px; color: #5e6878;">1 hr 15 min</small>
+                                        </div>
+                                        <div class="d-flex gap-3 border-start">
+                                            <div class="mt-2">
+                                                <div class="text-right" style="padding-left: 10px;">
+                                                    <p class="p-0 m-0"><b><i class="fa fa-bangladeshi-taka-sign"></i>
+                                                            65000</b></p>
+                                                    <small style="font-size: 12px; color: #5e6878;"><i
+                                                            class="fa fa-bangladeshi-taka-sign"></i> 67000</small><br>
+                                                    <small style="font-size: 12px; color: #5e6878;">Economy Calss</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
