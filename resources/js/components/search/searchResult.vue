@@ -1010,14 +1010,189 @@ function offHover() {
                                                 <div class="text-right" style="padding-left: 10px;">
                                                     <p class="p-0 m-0"><b><i class="fa fa-bangladeshi-taka-sign"></i>
                                                             65000</b></p>
-                                                    <small style="font-size: 12px; color: #5e6878;"><i
-                                                            class="fa fa-bangladeshi-taka-sign"></i> 67000</small><br>
-                                                    <small style="font-size: 12px; color: #5e6878;">Economy Calss</small>
+                                                    <small style="font-size: 12px; color: #5e6878;"><del><i
+                                                                class="fa fa-bangladeshi-taka-sign"></i>
+                                                            77000</del></small><br>
+                                                    <small style="font-size: 12px; color: #5e6878;">Economy
+                                                        Calss</small>
+                                                    <button class="btn btn-sm btn-block btn-primary mt-2">Book
+                                                        Now</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="float-start">
+                                <div class="d-flex gap-2">
+
+                                    <div class="border border-1 text-center p-1"
+                                        style="background-color: #def1ec; color: #12ce69;">
+                                        <i class="fa fa-refresh"></i> Refundable
+                                    </div>
+                                    <div class="border border-1 text-center p-1"
+                                        style="background-color: #d6dffa; color: #027de2;">
+                                        <i class="fa fa-rug"></i> BS1234FG
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="float-end">
+                                <div class="d-flex gap-2">
+
+                                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="flush-headingOne">
+                                                <button class="accordion-button collapsed m-0 p-0 px-2 py-1"
+                                                    type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#flight-details" aria-expanded="false"
+                                                    aria-controls="flight-details" style="color: #1184e3;">
+                                                    Flight Details
+                                                </button>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="flight-details" class="accordion-collapse collapse m-0" aria-labelledby="flush-headingOne"
+                        data-bs-parent="#accordionFlushExample" style="">
+                        <div class="accordion-body">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome"
+                                                        role="tab" aria-selected="true">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tab-icon"><i
+                                                                    class="bx bx-comment-detail font-18 me-1"></i>
+                                                            </div>
+                                                            <div class="tab-title"> Flight Details </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile"
+                                                        role="tab" aria-selected="false" tabindex="-1">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tab-icon"><i
+                                                                    class="bx bx-bookmark-alt font-18 me-1"></i>
+                                                            </div>
+                                                            <div class="tab-title">Fare Rules</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#primarycontact"
+                                                        role="tab" aria-selected="false" tabindex="-1">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tab-icon"><i
+                                                                    class="bx bx-star font-18 me-1"></i>
+                                                            </div>
+                                                            <div class="tab-title">Refund Policy</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content pt-3">
+                                                <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
+                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
+                                                        Nesciunt
+                                                        tofu stumptown aliqua, retro synth master cleanse. Mustache
+                                                        cliche
+                                                        tempor, williamsburg carles vegan helvetica. Reprehenderit
+                                                        butcher retro
+                                                        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
+                                                        terry
+                                                        richardson ex squid. Aliquip placeat salvia cillum iphone.
+                                                        Seitan
+                                                        aliquip quis cardigan american apparel, butcher voluptate nisi.
+                                                    </p>
+                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
+                                                        Nesciunt
+                                                        tofu stumptown aliqua, retro synth master cleanse. Mustache
+                                                        cliche
+                                                        tempor, williamsburg carles vegan helvetica. Reprehenderit
+                                                        butcher retro
+                                                        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
+                                                        terry
+                                                        richardson ex squid. Aliquip placeat salvia cillum iphone.
+                                                        Seitan
+                                                        aliquip quis cardigan american apparel, butcher voluptate nisi.
+                                                    </p>
+                                                </div>
+                                                <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
+                                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla
+                                                        single-origin coffee squid. Exercitation +1 labore velit, blog
+                                                        sartorial
+                                                        PBR leggings next level wes anderson artisan four loko
+                                                        farm-to-table
+                                                        craft beer twee. Qui photo booth letterpress, commodo enim craft
+                                                        beer
+                                                        mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo
+                                                        nostrud
+                                                        organic, assumenda labore aesthetic magna delectus mollit.
+                                                        Keytar
+                                                        helvetica VHS salvia yr, vero magna velit sapiente labore
+                                                        stumptown.
+                                                        Vegan fanny pack odio cillum wes anderson 8-bit, sustainable
+                                                        jean shorts
+                                                        beard ut DIY ethical culpa terry richardson biodiesel. Art party
+                                                        scenester stumptown, tumblr butcher vero sint qui sapiente
+                                                        accusamus
+                                                        tattooed echo park.</p>
+                                                </div>
+                                                <div class="tab-pane fade" id="primarycontact" role="tabpanel">
+                                                    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they
+                                                        sold out
+                                                        mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table
+                                                        readymade.
+                                                        Messenger bag gentrify pitchfork tattooed craft beer, iphone
+                                                        skateboard
+                                                        locavore carles etsy salvia banksy hoodie helvetica. DIY synth
+                                                        PBR
+                                                        banksy irony. Leggings gentrify squid 8-bit cred pitchfork.
+                                                        Williamsburg
+                                                        banh mi whatever gluten-free, carles pitchfork biodiesel fixie
+                                                        etsy
+                                                        retro mlkshk vice blog. Scenester cred you probably haven't
+                                                        heard of
+                                                        them, vinyl craft beer blog stumptown. Pitchfork sustainable
+                                                        tofu synth
+                                                        chambray yr.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <div class="btn-group" role="group"
+                                                            aria-label="Basic outlined example">
+                                                            <button type="button"
+                                                                class="btn btn-block btn-sm w-100 btn-outline-primary">
+                                                                Baggade
+                                                            </button>
+
+                                                            <button type="button"
+                                                                class="btn btn-block btn-sm w-100 btn-outline-primary">
+                                                                Fare Summary
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1028,7 +1203,8 @@ function offHover() {
                             <div class="row">
                                 <div class="col-md-4 m-0 p-0">
                                     <div class="d-flex">
-                                        <img  style="margin: 0 40px 0 28px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
+                                        <img style="margin: 0 40px 0 28px;"
+                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
                                             height="70">
                                         <div class="text-center mt-2">
                                             <p class="p-0 m-0"><b>DAC-DXB</b></p>
@@ -1083,14 +1259,193 @@ function offHover() {
                                                 <div class="text-right" style="padding-left: 10px;">
                                                     <p class="p-0 m-0"><b><i class="fa fa-bangladeshi-taka-sign"></i>
                                                             65000</b></p>
-                                                    <small style="font-size: 12px; color: #5e6878;"><i
-                                                            class="fa fa-bangladeshi-taka-sign"></i> 67000</small><br>
-                                                    <small style="font-size: 12px; color: #5e6878;">Economy Calss</small>
+                                                    <small style="font-size: 12px; color: #5e6878;">
+                                                        <del><i class="fa fa-bangladeshi-taka-sign"></i> 67000</del>
+                                                    </small><br>
+                                                    <small style="font-size: 12px; color: #5e6878;">Economy
+                                                        Calss</small>
+                                                    <button class="btn btn-sm btn-block btn-primary mt-2">Book
+                                                        Now</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="float-start">
+                                <div class="d-flex gap-2">
+
+                                    <div class="border border-1 text-center p-1"
+                                        style="background-color: #def1ec; color: #12ce69;">
+                                        <i class="fa fa-refresh"></i> Refundable
+                                    </div>
+                                    <div class="border border-1 text-center p-1"
+                                        style="background-color: #d6dffa; color: #027de2;">
+                                        <i class="fa fa-rug"></i> BS1234FG
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="float-end">
+                                <div class="d-flex gap-2">
+
+                                    <div class="accordion accordion-flush" id="accordionFlushExample2">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="flush-headingTwo">
+                                                <button class="accordion-button collapsed m-0 p-0 px-2 py-1"
+                                                    type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#flight-details-2" aria-expanded="false"
+                                                    aria-controls="flight-details-2" style="color: #1184e3;">
+                                                    Flight Details
+                                                </button>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="flight-details-2" class="accordion-collapse collapse m-0"
+                        aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample2" style="">
+                        <div class="accordion-body">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome"
+                                                        role="tab" aria-selected="true">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tab-icon"><i
+                                                                    class="bx bx-comment-detail font-18 me-1"></i>
+                                                            </div>
+                                                            <div class="tab-title"> Flight Details </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile"
+                                                        role="tab" aria-selected="false" tabindex="-1">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tab-icon"><i
+                                                                    class="bx bx-bookmark-alt font-18 me-1"></i>
+                                                            </div>
+                                                            <div class="tab-title">Fare Rules</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#primarycontact"
+                                                        role="tab" aria-selected="false" tabindex="-1">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tab-icon"><i
+                                                                    class="bx bx-star font-18 me-1"></i>
+                                                            </div>
+                                                            <div class="tab-title">Refund Policy</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content pt-3">
+                                                <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
+                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
+                                                        Nesciunt
+                                                        tofu stumptown aliqua, retro synth master cleanse. Mustache
+                                                        cliche
+                                                        tempor, williamsburg carles vegan helvetica. Reprehenderit
+                                                        butcher retro
+                                                        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
+                                                        terry
+                                                        richardson ex squid. Aliquip placeat salvia cillum iphone.
+                                                        Seitan
+                                                        aliquip quis cardigan american apparel, butcher voluptate nisi.
+                                                    </p>
+                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
+                                                        Nesciunt
+                                                        tofu stumptown aliqua, retro synth master cleanse. Mustache
+                                                        cliche
+                                                        tempor, williamsburg carles vegan helvetica. Reprehenderit
+                                                        butcher retro
+                                                        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
+                                                        terry
+                                                        richardson ex squid. Aliquip placeat salvia cillum iphone.
+                                                        Seitan
+                                                        aliquip quis cardigan american apparel, butcher voluptate nisi.
+                                                    </p>
+                                                </div>
+                                                <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
+                                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla
+                                                        single-origin coffee squid. Exercitation +1 labore velit, blog
+                                                        sartorial
+                                                        PBR leggings next level wes anderson artisan four loko
+                                                        farm-to-table
+                                                        craft beer twee. Qui photo booth letterpress, commodo enim craft
+                                                        beer
+                                                        mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo
+                                                        nostrud
+                                                        organic, assumenda labore aesthetic magna delectus mollit.
+                                                        Keytar
+                                                        helvetica VHS salvia yr, vero magna velit sapiente labore
+                                                        stumptown.
+                                                        Vegan fanny pack odio cillum wes anderson 8-bit, sustainable
+                                                        jean shorts
+                                                        beard ut DIY ethical culpa terry richardson biodiesel. Art party
+                                                        scenester stumptown, tumblr butcher vero sint qui sapiente
+                                                        accusamus
+                                                        tattooed echo park.</p>
+                                                </div>
+                                                <div class="tab-pane fade" id="primarycontact" role="tabpanel">
+                                                    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they
+                                                        sold out
+                                                        mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table
+                                                        readymade.
+                                                        Messenger bag gentrify pitchfork tattooed craft beer, iphone
+                                                        skateboard
+                                                        locavore carles etsy salvia banksy hoodie helvetica. DIY synth
+                                                        PBR
+                                                        banksy irony. Leggings gentrify squid 8-bit cred pitchfork.
+                                                        Williamsburg
+                                                        banh mi whatever gluten-free, carles pitchfork biodiesel fixie
+                                                        etsy
+                                                        retro mlkshk vice blog. Scenester cred you probably haven't
+                                                        heard of
+                                                        them, vinyl craft beer blog stumptown. Pitchfork sustainable
+                                                        tofu synth
+                                                        chambray yr.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="text-center">
+                                                        <!-- <div class="btn-group" role="group"
+                                                            aria-label="Basic outlined example">
+                                                            <button type="button"
+                                                                class="btn btn-block btn-sm w-100 btn-outline-primary px-5">
+                                                                Baggade
+                                                            </button>
+
+                                                            <button type="button"
+                                                                class="btn btn-block btn-sm w-100 btn-outline-primary px-5">
+                                                                Fare Summary
+                                                            </button>
+                                                        </div> -->
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-primary">Baggade</button>
+                                                            <button type="button"
+                                                                class="btn btn-primary">Fare Summary</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
