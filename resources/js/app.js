@@ -6,10 +6,11 @@ import "./themeassets/js/bootstrap.bundle.min.js";
 import "./themeassets/plugins/bs-stepper/js/bs-stepper.min.js";
 import "./themeassets/plugins/bs-stepper/js/main.js";
 
-
 import "./themeassets/js/app.js";
 import "https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js";
 import "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js";
+
+
 
 
 import { createApp, markRaw } from "vue";
@@ -23,6 +24,7 @@ import VOtpInput from "vue3-otp-input";
 import VueTippy from "vue-tippy";
 import VueDeviceDetect from "@tenrok/vue-device-detect";
 import VWave from "v-wave";
+import moment from "moment";
 
 import Scrollbar from "vue3-perfect-scrollbar-z";
 import "vue3-perfect-scrollbar-z/dist/styles.css";
@@ -47,6 +49,7 @@ app.use(pinia);
 app.use(VWave);
 app.use(Scrollbar);
 app.use(router);
+app.provide("moment", moment);
 app.component(VueQrcode.name, VueQrcode);
 app.component("v-otp-input", VOtpInput);
 app.use(VueDeviceDetect);

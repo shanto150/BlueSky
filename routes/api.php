@@ -1,20 +1,22 @@
 <?php
 
-use App\Http\Controllers\Admin\Area\AreaController;
-use App\Http\Controllers\Admin\Department\DepartmentController;
-use App\Http\Controllers\Admin\Designation\DesignationController;
-use App\Http\Controllers\Admin\IssuedBankMFS\IssuedBankMFSController;
-use App\Http\Controllers\Admin\OfficeLocation\LocationController;
-use App\Http\Controllers\Admin\PaymentAccount\PaymentAccountSController;
-use App\Http\Controllers\Admin\Role\RolePermissionController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\API\APIController;
+use App\Http\Controllers\Admin\Area\AreaController;
+use App\Http\Controllers\Admin\Role\RolePermissionController;
+use App\Http\Controllers\Admin\Department\DepartmentController;
+use App\Http\Controllers\Admin\Designation\DesignationController;
+use App\Http\Controllers\Admin\OfficeLocation\LocationController;
+use App\Http\Controllers\Admin\IssuedBankMFS\IssuedBankMFSController;
+use App\Http\Controllers\Admin\PaymentAccount\PaymentAccountSController;
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('sendResetLinkEmail', [AuthController::class, 'sendResetLinkEmail'])->name('sendResetLinkEmail');
 Route::post('PassReset', [AuthController::class, 'resetPassword'])->name('password.reset');
+
 
 Route::get('/migrate', function () {Artisan::call('migrate:refresh');return Artisan::output();})->name('migrate');
 
@@ -57,6 +59,7 @@ Route::middleware(['auth:api'])->group(function () {
 
     //designtaion
     Route::get('getDesignation', [DesignationController::class, 'index'])->name('deg.getDesignation');
+    Route::get('designationlog', [DesignationController::class, 'designationlog'])->name('designationlog');
     Route::post('/Designation/save', [DesignationController::class, 'store']);
     Route::post('editDesignation', [DesignationController::class, 'edit']);
     Route::post('/Designation/update', [DesignationController::class, 'update']);
@@ -99,6 +102,10 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/user-details/update', [UserController::class, 'update'])->name('user.update');
     Route::post('/deleteUser', [UserController::class, 'destroy'])->name('user.deleteUser');
     Route::post('/user-status/update', [UserController::class, 'statusUpdate'])->name('user.statusUpdate');
+
+    //Internal API
+    Route::post('/Lowfaresearch', [APIController::class, 'Lowfaresearch']);
+
 });
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
 Route::post('/role/update', [RolePermissionController::class, 'update']);
