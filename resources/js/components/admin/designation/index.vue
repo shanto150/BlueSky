@@ -1,16 +1,16 @@
 <script setup>
 import DataTable from "datatables.net-vue3";
 import DataBS5 from "datatables.net-bs5";
+import Buttons from 'datatables.net-buttons';
 import axiosInstance from "../../../axiosInstance";
 import { ref, onMounted } from "vue";
-import { data } from "jquery";
-import { icons } from "lucide-vue-next";
 import { useRouter } from 'vue-router';
 const router = useRouter();
 import { useAuthStore } from '../../../stores/authStore';
 const authStore = useAuthStore();
 
 DataTable.use(DataBS5);
+DataTable.use(Buttons);
 
 const rData = ref([]);
 var regExSearch = ref();
@@ -22,6 +22,22 @@ const options = {
     lengthMenu: [3, 10, 20, 30],
     bDestroy: true,
     ordering: false,
+    layout: {
+        topStart: {
+            buttons: [
+                {
+                    text: 'Create new record',
+                    action: function () {
+                        // Create new record
+                        editor.create({
+                            title: 'Create new record',
+                            buttons: 'Add'
+                        });
+                    }
+                }
+            ]
+        }
+    },
     dom: "<'row'<'col-sm-4'B><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'f>>" + "<'row'<'col-sm-12'tr>>" +
         "<'row justify-content-between Reduct_table_gap'<'d-md-flex justify-content-between align-items-center dt-layout-start col-md-auto me-auto'i><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'p>>",
     buttons: ['copy', 'csv', 'pdf', 'excel', 'print'],
@@ -225,6 +241,34 @@ async function getListValues() {
     }
 }
 
+async function getLog() {
+
+    $('#log tbody').empty();
+
+    try {
+        authStore.GlobalLoading = true;
+        const response = await axiosInstance.get("designationlog");
+        authStore.GlobalLoading = false;
+        $.each(response.data.data, function (key, value) {
+            console.log("Date: " + value.description);
+
+            var row = "";
+                row += "<tr>";
+                row += "<td>"+MF.initCap(value.description)+"</td>";
+                row += "<td>"+MF.datetime_format(value.created_at)+"</td>";
+                row += "<td>"+JSON.stringify(value.properties)+"</td>";
+                row += "</td>";
+
+
+            $('#log').append(row);
+        });
+
+    } catch (error) {
+        console.log(error);
+        authStore.GlobalLoading = false;
+    }
+}
+
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -290,32 +334,33 @@ async function getListValues() {
         </div>
     </div>
 
-    <!-- <div class="row">
-        <div class="col-12">
-            <div class="card rounded rounded-2 shadow-none p-3">
-                <div class="row">
-
-                    <div class="col-md-6">
-                        <select class="form-select form-select-sm" id="s_area" data-placeholder="Choose one thing">
-                            <option value="">Select Area</option>
-                            <option value="at">At</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <select class="form-select form-select-sm" id="s_status" data-placeholder="Choose one thing">
-                            <option>Select Status</option>
-                        </select>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div> -->
-
     <div class="row position-relative">
         <div class="col-12">
             <div id="desgList" class="card rounded rounded-2 shadow-none p-3">
+                <button type="button" @click="getLog()" class="btn btn-sm rounded btn-primary w-25"
+                    data-bs-toggle="modal" data-bs-target="#exampleScrollableModal">Show Logs</button>
 
+                <div class="modal fade" id="exampleScrollableModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <table id="log" width="100%" class="table table-sm table-dark" style="color: red;--bs-table-color:lime">
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th style="width: 25%">Created at</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
                 <div v-if="authStore.GlobalLoading" class="center-body position-absolute top-50 start-50">
                     <div class="loader-circle-57">
                         <img class="position-absolute" src="../../../../../public/theme/appimages/blueskywings.png"
@@ -333,6 +378,7 @@ async function getListValues() {
 </template>
 
 <style>
+
 .center-body {
     display: flex;
     justify-content: center;

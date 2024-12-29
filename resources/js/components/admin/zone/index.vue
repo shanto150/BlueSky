@@ -1,9 +1,9 @@
 <script setup>
 import DataTable from "datatables.net-vue3";
 import DataBS5 from "datatables.net-bs5";
+import Buttons from 'datatables.net-buttons';
 import axiosInstance from "../../../axiosInstance";
 import { ref, onMounted } from "vue";
-import { data } from "jquery";
 import { icons } from "lucide-vue-next";
 import { useRouter } from 'vue-router';
 const router = useRouter();
@@ -11,7 +11,7 @@ import { useAuthStore } from '../../../stores/authStore';
 const authStore = useAuthStore();
 
 DataTable.use(DataBS5);
-
+DataTable.use(Buttons);
 const rData = ref([]);
 var regExSearch = ref();
 getListValues();
