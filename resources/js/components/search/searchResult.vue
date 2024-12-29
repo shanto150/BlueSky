@@ -1007,7 +1007,7 @@ function flight_det_card(type_id){
                                                     ....
                                                 </div>
                                                 <div><i class="fa fa-plane"
-                                                        style="font-size: 28px;color: #1882ffb3;"></i></div>
+                                                        style="color: #1882ffb3; margin-top: 4px; font-size: 20px;"></i></div>
                                                 <div>
                                                     ....
                                                 </div>
@@ -1326,7 +1326,7 @@ function flight_det_card(type_id){
                                                     ....
                                                 </div>
                                                 <div><i class="fa fa-plane"
-                                                        style="font-size: 28px;color: #1882ffb3;"></i></div>
+                                                        style="color: #1882ffb3; margin-top: 4px; font-size: 20px;"></i></div>
                                                 <div>
                                                     ....
                                                 </div>
