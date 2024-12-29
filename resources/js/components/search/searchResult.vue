@@ -240,6 +240,31 @@ function onHover() {
 function offHover() {
     $("#img").attr('src', '');
 }
+
+function flight_det_card(type_id){
+    if(type_id==1){
+        $('.baggade').addClass('btn-primary');
+        $('.baggade').removeClass('btn-outline-primary');
+        $('.fare_summary').addClass('btn-outline-primary');
+        $('.fare_summary').removeClass('btn-primary');
+        // $("#baggade").show();
+        $("#fare_summary_details").addClass('d-none');
+        $("#baggade").removeClass('d-none');
+
+
+    }else{
+        $('.baggade').removeClass('btn-primary');
+        $('.baggade').addClass('btn-outline-primary');
+        $('.fare_summary').addClass('btn-primary');
+        $('.fare_summary').removeClass('btn-outline-primary');
+        // $("#baggade").hide();
+        // $("#fare_summary_details").show();
+        $("#baggade").addClass('d-none');
+        $("#fare_summary_details").removeClass('d-none');
+
+    }
+
+}
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -1172,22 +1197,92 @@ function offHover() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="text-center">
-                                                        <div class="btn-group" role="group"
-                                                            aria-label="Basic outlined example">
-                                                            <button type="button"
-                                                                class="btn btn-block btn-sm w-100 btn-outline-primary">
-                                                                Baggade
-                                                            </button>
+                                        <div class="col-md-4" style="background-color: #f4f4ff;">
+                                            <div class="d-flex justify-content-center mt-2">
 
-                                                            <button type="button"
-                                                                class="btn btn-block btn-sm w-100 btn-outline-primary">
-                                                                Fare Summary
-                                                            </button>
-                                                        </div>
+                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                    <button type="button"
+                                                        class="btn btn-primary btn-circle btn-sm waves-effect waves-light baggade" @click="flight_det_card(1)">
+                                                        <span style="font-size: 13px;">Baggade</span>
+                                                    </button>
+
+                                                    <button type="button"
+                                                        class="btn btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary" @click="flight_det_card(2)">
+                                                        <span style="font-size: 13px;">Fare Summary</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="card text-center mt-2" id="baggade">
+                                                <div class="card-body mb-0 pb-0">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm ">
+                                                            <tbody class="text-start">
+                                                                <tr>
+                                                                    <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
+                                                                        <small>Economy</small></td>
+
+                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
+                                                                        <small>10 Kg</small></td>
+                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
+                                                                        <small>2 Pieces</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
+                                                                        <small>Economy</small></td>
+
+                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
+                                                                        <small>10 Kg</small></td>
+                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
+                                                                        <small>2 Pieces</small></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card text-start mt-2 d-none" id="fare_summary_details">
+                                                <div class="card-body mb-0 pb-0">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm ">
+                                                            <tbody class="text-start">
+                                                                <thead>
+                                                                    <th style="font-size: 10px;">Passenger</th>
+                                                                    <th style="font-size: 10px;">Tax+Fees</th>
+                                                                    <th style="font-size: 10px;">Total Fare</th>
+                                                                </thead>
+                                                                <tbody style="font-size: 10px;;">
+                                                                    <tr>
+                                                                        <td>4 Adults</td>
+                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 980</td>
+                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 120980</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>4 Child</td>
+                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 500</td>
+                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 15670</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>4 Infants</td>
+                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 500</td>
+                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 15670</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Discount</td>
+                                                                        <td></td>
+                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> -670</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>Total Payable</b></td>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            <b><i class="fa fa-bangladeshi-taka-sign"></i> 151650</b>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1419,28 +1514,75 @@ function offHover() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="text-center">
-                                                        <!-- <div class="btn-group" role="group"
-                                                            aria-label="Basic outlined example">
-                                                            <button type="button"
-                                                                class="btn btn-block btn-sm w-100 btn-outline-primary px-5">
-                                                                Baggade
-                                                            </button>
+                                        <div class="col-md-4" style="background-color: #f4f4ff;">
+                                            <div class="d-flex justify-content-center mt-2">
 
-                                                            <button type="button"
-                                                                class="btn btn-block btn-sm w-100 btn-outline-primary px-5">
-                                                                Fare Summary
-                                                            </button>
-                                                        </div> -->
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-primary">Baggade</button>
-                                                            <button type="button"
-                                                                class="btn btn-primary">Fare Summary</button>
+                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                    <button type="button"
+                                                        class="btn btn-primary btn-circle btn-sm waves-effect waves-light baggade" @click="flight_det_card(1)">
+                                                        <span style="font-size: 13px;">Baggade</span>
+                                                    </button>
 
-                                                        </div>
+                                                    <button type="button"
+                                                        class="btn btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary" @click="flight_det_card(2)">
+                                                        <span style="font-size: 13px;">Fare Summary</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div class="card text-center mt-2" id="baggade">
+                                                <div class="card-body mb-0 pb-0">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm ">
+                                                            <tbody class="text-start">
+                                                                <tr>
+                                                                    <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
+                                                                        <small>Economy</small></td>
+
+                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
+                                                                        <small>10 Kg</small></td>
+                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
+                                                                        <small>2 Pieces</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
+                                                                        <small>Economy</small></td>
+
+                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
+                                                                        <small>10 Kg</small></td>
+                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
+                                                                        <small>2 Pieces</small></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card text-center mt-2 d-none" id="fare_summary_details">
+                                                <div class="card-body mb-0 pb-0">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-sm ">
+                                                            <tbody class="text-start">
+                                                                <tr>
+                                                                    <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
+                                                                        <small>Economy</small></td>
+
+                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
+                                                                        <small>10 Kg</small></td>
+                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
+                                                                        <small>2 Pieces</small></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
+                                                                        <small>Economy</small></td>
+
+                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
+                                                                        <small>10 Kg</small></td>
+                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
+                                                                        <small>2 Pieces</small></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
