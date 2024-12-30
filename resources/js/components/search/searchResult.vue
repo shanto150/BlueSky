@@ -1129,8 +1129,7 @@ function flight_det_card(type_id) {
                                             <div class="tab-content pt-3">
                                                 <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
                                                     <div class="card">
-                                                        <div class="card-header m-0 p-0 px-2 py-1">
-
+                                                        <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
                                                             <div class="d-flex">
                                                                 <div class="p-2 flex-grow-1">
                                                                     <b>
@@ -1165,21 +1164,38 @@ function flight_det_card(type_id) {
                                                                             <small
                                                                                 style="font-size: 12px; color: #5e6878;">Class:Economy</small>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-7">
-                                                                    <div class="d-flex border-right">
-                                                                        <div class="text-start mt-2">
-                                                                            <p class="p-0 m-0"><b>CCU</b></p>
-                                                                            <small
-                                                                                style="font-size: 13px; color: #5e6878;"><b>11:55
-                                                                                    AM | 19 Jan, Thursday</b></small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 12px; color: #5e6878;">Terminal:3</small>
-                                                                            <br>
+                                                                    <div class="row">
+                                                                        <div class="col-md-7">
+                                                                            <div class="d-flex border-right">
+                                                                                <div class="text-start mt-2">
+                                                                                    <p class="p-0 m-0"><b>CCU</b></p>
+                                                                                    <small
+                                                                                        style="font-size: 13px; color: #5e6878;"><b>11:55
+                                                                                            AM | 19 Jan,
+                                                                                            Thursday</b></small>
+                                                                                    <br>
+                                                                                    <small
+                                                                                        style="font-size: 11px; color: #5e6878;">Terminal:3</small>
+                                                                                    <br>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-5 text-center">
+                                                                            <img  height="60" width="100"
+                                                                                src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
+                                                                                alt="">
+                                                                                <p class="mb-0 pb-0">Qatar Airways</p>
+                                                                                <p class="mb-0 pb-0">Boeing 707</p>
+                                                                        </div>
+                                                                        <div class="col-md-9 mt-1">
                                                                             <div class="chip chip-sm"
-                                                                                style="font-size: 10px !important;">
+                                                                                style="font-size: 8px !important;">
                                                                                 <i
                                                                                     class="fa fa-map-marker text-primary"></i>
                                                                                 Layover:Netaji Subha.. | 02 hr 30 min
@@ -1190,27 +1206,80 @@ function flight_det_card(type_id) {
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <div class="card ">
+                                                        <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <b>
+                                                                        <img src="../../../../public/theme/appimages/Plane_des.svg"
+                                                                            alt="">
+                                                                        Destination
+                                                                    </b>
+                                                                </div>
+                                                                <div class="p-2">Dubai Internation Airport
+                                                                </div>
+                                                                <div class="p-2">Duration: 03 hr 25 min</div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-5 border-end">
+                                                                    <div class="d-flex border-right">
+                                                                        <div class="text-start mt-2">
+                                                                            <p class="p-0 m-0"><b>CCU</b></p>
+                                                                            <small
+                                                                                style="font-size: 11px; color: #5e6878;"><b>10:50
+                                                                                    AM | 19 Jan, Thursday</b></small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 11px; color: #5e6878;">Terminal:2</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 11px; color: #5e6878;">Flight
+                                                                                No:78ER457</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 11px; color: #5e6878;">Class:Economy</small>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <div class="row">
+                                                                        <div class="col-md-7">
+                                                                            <div class="d-flex border-right">
+                                                                                <div class="text-start mt-2">
+                                                                                    <p class="p-0 m-0"><b>DXB</b></p>
+                                                                                    <small
+                                                                                        style="font-size: 11px; color: #5e6878;"><b>02:55
+                                                                                            PM | 19 Jan,
+                                                                                            Thursday</b></small>
+                                                                                    <br>
+                                                                                    <small
+                                                                                        style="font-size: 11px; color: #5e6878;">Terminal:3</small>
+                                                                                    <br>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-5 text-center">
+                                                                            <img  height="60" width="100"
+                                                                                src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
+                                                                                alt="">
+                                                                                <p class="mb-0 pb-0">Qatar Airways</p>
+                                                                                <p class="mb-0 pb-0">Boeing 707</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-                                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla
-                                                        single-origin coffee squid. Exercitation +1 labore velit, blog
-                                                        sartorial
-                                                        PBR leggings next level wes anderson artisan four loko
-                                                        farm-to-table
-                                                        craft beer twee. Qui photo booth letterpress, commodo enim craft
-                                                        beer
-                                                        mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo
-                                                        nostrud
-                                                        organic, assumenda labore aesthetic magna delectus mollit.
-                                                        Keytar
-                                                        helvetica VHS salvia yr, vero magna velit sapiente labore
-                                                        stumptown.
-                                                        Vegan fanny pack odio cillum wes anderson 8-bit, sustainable
-                                                        jean shorts
-                                                        beard ut DIY ethical culpa terry richardson biodiesel. Art party
-                                                        scenester stumptown, tumblr butcher vero sint qui sapiente
-                                                        accusamus
-                                                        tattooed echo park.</p>
+                                                    <p>Part 1</p>
                                                 </div>
                                                 <div class="tab-pane fade" id="primarycontact" role="tabpanel">
                                                     <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they
@@ -1456,6 +1525,7 @@ function flight_det_card(type_id) {
                             </div>
                         </div>
                     </div>
+
                     <div id="flight-details-2" class="accordion-collapse collapse m-0"
                         aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample2" style="">
                         <div class="accordion-body">
@@ -1500,51 +1570,158 @@ function flight_det_card(type_id) {
                                             </ul>
                                             <div class="tab-content pt-3">
                                                 <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
-                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
-                                                        Nesciunt
-                                                        tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                        cliche
-                                                        tempor, williamsburg carles vegan helvetica. Reprehenderit
-                                                        butcher retro
-                                                        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-                                                        terry
-                                                        richardson ex squid. Aliquip placeat salvia cillum iphone.
-                                                        Seitan
-                                                        aliquip quis cardigan american apparel, butcher voluptate nisi.
-                                                    </p>
-                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
-                                                        Nesciunt
-                                                        tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                        cliche
-                                                        tempor, williamsburg carles vegan helvetica. Reprehenderit
-                                                        butcher retro
-                                                        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-                                                        terry
-                                                        richardson ex squid. Aliquip placeat salvia cillum iphone.
-                                                        Seitan
-                                                        aliquip quis cardigan american apparel, butcher voluptate nisi.
-                                                    </p>
+                                                    <div class="card">
+                                                        <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <b>
+                                                                        <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                            alt="">
+                                                                        Departure
+                                                                    </b>
+                                                                </div>
+                                                                <div class="p-2">Hazrat Shahjalal International Airport
+                                                                </div>
+                                                                <div class="p-2">Duration: 01 hr 45 min</div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-5 border-end">
+                                                                    <div class="d-flex border-right">
+                                                                        <div class="text-start mt-2">
+                                                                            <p class="p-0 m-0"><b>DAC</b></p>
+                                                                            <small
+                                                                                style="font-size: 13px; color: #5e6878;"><b>10:50
+                                                                                    AM | 19 Jan, Thursday</b></small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Terminal:2</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Flight
+                                                                                No:78ER457</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Class:Economy</small>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <div class="row">
+                                                                        <div class="col-md-7">
+                                                                            <div class="d-flex border-right">
+                                                                                <div class="text-start mt-2">
+                                                                                    <p class="p-0 m-0"><b>CCU</b></p>
+                                                                                    <small
+                                                                                        style="font-size: 13px; color: #5e6878;"><b>11:55
+                                                                                            AM | 19 Jan,
+                                                                                            Thursday</b></small>
+                                                                                    <br>
+                                                                                    <small
+                                                                                        style="font-size: 11px; color: #5e6878;">Terminal:3</small>
+                                                                                    <br>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-5 text-center">
+                                                                            <img  height="50" width="50"
+                                                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
+                                                                                alt="">
+                                                                                <p class="mb-0 pb-0">Emirates Airline</p>
+                                                                                <p class="mb-0 pb-0">Boeing 707</p>
+                                                                        </div>
+                                                                        <div class="col-md-9 mt-1">
+                                                                            <div class="chip chip-sm"
+                                                                                style="font-size: 8px !important;">
+                                                                                <i
+                                                                                    class="fa fa-map-marker text-primary"></i>
+                                                                                Layover:Netaji Subha.. | 02 hr 30 min
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="card ">
+                                                        <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <b>
+                                                                        <img src="../../../../public/theme/appimages/Plane_des.svg"
+                                                                            alt="">
+                                                                        Destination
+                                                                    </b>
+                                                                </div>
+                                                                <div class="p-2">Dubai Internation Airport
+                                                                </div>
+                                                                <div class="p-2">Duration: 03 hr 25 min</div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-5 border-end">
+                                                                    <div class="d-flex border-right">
+                                                                        <div class="text-start mt-2">
+                                                                            <p class="p-0 m-0"><b>CCU</b></p>
+                                                                            <small
+                                                                                style="font-size: 11px; color: #5e6878;"><b>10:50
+                                                                                    AM | 19 Jan, Thursday</b></small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 11px; color: #5e6878;">Terminal:2</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 11px; color: #5e6878;">Flight
+                                                                                No:78ER457</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 11px; color: #5e6878;">Class:Economy</small>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <div class="row">
+                                                                        <div class="col-md-7">
+                                                                            <div class="d-flex border-right">
+                                                                                <div class="text-start mt-2">
+                                                                                    <p class="p-0 m-0"><b>DXB</b></p>
+                                                                                    <small
+                                                                                        style="font-size: 11px; color: #5e6878;"><b>02:55
+                                                                                            PM | 19 Jan,
+                                                                                            Thursday</b></small>
+                                                                                    <br>
+                                                                                    <small
+                                                                                        style="font-size: 11px; color: #5e6878;">Terminal:3</small>
+                                                                                    <br>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-5 text-center">
+                                                                            <img  height="50" width="50"
+                                                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
+                                                                                alt="">
+                                                                                <p class="mb-0 pb-0">Emirates Airline</p>
+                                                                                <p class="mb-0 pb-0">Boeing 777</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-                                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla
-                                                        single-origin coffee squid. Exercitation +1 labore velit, blog
-                                                        sartorial
-                                                        PBR leggings next level wes anderson artisan four loko
-                                                        farm-to-table
-                                                        craft beer twee. Qui photo booth letterpress, commodo enim craft
-                                                        beer
-                                                        mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo
-                                                        nostrud
-                                                        organic, assumenda labore aesthetic magna delectus mollit.
-                                                        Keytar
-                                                        helvetica VHS salvia yr, vero magna velit sapiente labore
-                                                        stumptown.
-                                                        Vegan fanny pack odio cillum wes anderson 8-bit, sustainable
-                                                        jean shorts
-                                                        beard ut DIY ethical culpa terry richardson biodiesel. Art party
-                                                        scenester stumptown, tumblr butcher vero sint qui sapiente
-                                                        accusamus
-                                                        tattooed echo park.</p>
+                                                    <p>part2</p>
                                                 </div>
                                                 <div class="tab-pane fade" id="primarycontact" role="tabpanel">
                                                     <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they
@@ -1619,35 +1796,54 @@ function flight_det_card(type_id) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card text-center mt-2 d-none" id="fare_summary_details">
+
+                                            <div class="card text-start mt-2 d-none" id="fare_summary_details">
                                                 <div class="card-body mb-0 pb-0">
                                                     <div class="table-responsive">
                                                         <table class="table table-sm ">
                                                             <tbody class="text-start">
+                                                                <thead>
+                                                                    <th style="font-size: 10px;">Passenger</th>
+                                                                    <th style="font-size: 10px;">Tax+Fees</th>
+                                                                    <th style="font-size: 10px;">Total Fare</th>
+                                                                </thead>
+                                                            <tbody style="font-size: 10px;;">
                                                                 <tr>
-                                                                    <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
-                                                                        <small>Economy</small>
+                                                                    <td>4 Adults</td>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 980
                                                                     </td>
-
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
+                                                                        120980</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>4 Child</td>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 500
                                                                     </td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
+                                                                        15670</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>4 Infants</td>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 500
+                                                                    </td>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
+                                                                        15670</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Discount</td>
+                                                                    <td></td>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> -670
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
-                                                                        <small>Economy</small>
-                                                                    </td>
-
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small>
-                                                                    </td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small>
+                                                                    <td><b>Total Payable</b></td>
+                                                                    <td></td>
+                                                                    <td>
+                                                                        <b><i class="fa fa-bangladeshi-taka-sign"></i>
+                                                                            151650</b>
                                                                     </td>
                                                                 </tr>
+                                                            </tbody>
                                                             </tbody>
                                                         </table>
                                                     </div>
