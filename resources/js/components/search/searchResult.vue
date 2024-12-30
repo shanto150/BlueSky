@@ -234,15 +234,15 @@ async function getAirports() {
 
 function onHover() {
 
-    $("#img").attr('src', '');
+    $("#img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_Hover_State.jpg');
 }
 
 function offHover() {
-    $("#img").attr('src', '');
+    $("#img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_With_Icon.jpg');
 }
 
-function flight_det_card(type_id){
-    if(type_id==1){
+function flight_det_card(type_id) {
+    if (type_id == 1) {
         $('.baggade').addClass('btn-primary');
         $('.baggade').removeClass('btn-outline-primary');
         $('.fare_summary').addClass('btn-outline-primary');
@@ -252,7 +252,7 @@ function flight_det_card(type_id){
         $("#baggade").removeClass('d-none');
 
 
-    }else{
+    } else {
         $('.baggade').removeClass('btn-primary');
         $('.baggade').addClass('btn-outline-primary');
         $('.fare_summary').addClass('btn-primary');
@@ -551,12 +551,9 @@ function flight_det_card(type_id){
                         </div>
                         <div class="col-md-1">
                             <router-link :to="{ name: 'searchResult' }">
-                                <button class="btn btn-sm btn-block btn-outline-primary text-center">
-                                    <i class="fa fa-search px-3"></i>
-                                </button>
-                                <!-- <img src="" alt="" style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img"> -->
+                                <img src="../../../../public/theme/appimages/s_With_Icon.jpg" alt=""
+                                    style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img">
                             </router-link>
-                            <!-- <img src="../../../../public/build/assets/s_Hover_State.jpg" alt="" style="width: 53px;"> -->
                         </div>
                     </div>
                 </div>
@@ -1007,7 +1004,8 @@ function flight_det_card(type_id){
                                                     ....
                                                 </div>
                                                 <div><i class="fa fa-plane"
-                                                        style="color: #1882ffb3; margin-top: 4px; font-size: 20px;"></i></div>
+                                                        style="color: #1882ffb3; margin-top: 4px; font-size: 20px;"></i>
+                                                </div>
                                                 <div>
                                                     ....
                                                 </div>
@@ -1130,30 +1128,68 @@ function flight_det_card(type_id){
                                             </ul>
                                             <div class="tab-content pt-3">
                                                 <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
-                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
-                                                        Nesciunt
-                                                        tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                        cliche
-                                                        tempor, williamsburg carles vegan helvetica. Reprehenderit
-                                                        butcher retro
-                                                        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-                                                        terry
-                                                        richardson ex squid. Aliquip placeat salvia cillum iphone.
-                                                        Seitan
-                                                        aliquip quis cardigan american apparel, butcher voluptate nisi.
-                                                    </p>
-                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
-                                                        Nesciunt
-                                                        tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                        cliche
-                                                        tempor, williamsburg carles vegan helvetica. Reprehenderit
-                                                        butcher retro
-                                                        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-                                                        terry
-                                                        richardson ex squid. Aliquip placeat salvia cillum iphone.
-                                                        Seitan
-                                                        aliquip quis cardigan american apparel, butcher voluptate nisi.
-                                                    </p>
+                                                    <div class="card">
+                                                        <div class="card-header m-0 p-0 px-2 py-1">
+
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <b>
+                                                                        <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                            alt="">
+                                                                        Departure
+                                                                    </b>
+                                                                </div>
+                                                                <div class="p-2">Hazrat Shahjalal International Airport
+                                                                </div>
+                                                                <div class="p-2">Duration: 01 hr 45 min</div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-5 border-end">
+                                                                    <div class="d-flex border-right">
+                                                                        <div class="text-start mt-2">
+                                                                            <p class="p-0 m-0"><b>DAC</b></p>
+                                                                            <small
+                                                                                style="font-size: 13px; color: #5e6878;"><b>10:50
+                                                                                    AM | 19 Jan, Thursday</b></small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Terminal:2</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Flight
+                                                                                No:78ER457</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Class:Economy</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <div class="d-flex border-right">
+                                                                        <div class="text-start mt-2">
+                                                                            <p class="p-0 m-0"><b>CCU</b></p>
+                                                                            <small
+                                                                                style="font-size: 13px; color: #5e6878;"><b>11:55
+                                                                                    AM | 19 Jan, Thursday</b></small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Terminal:3</small>
+                                                                            <br>
+                                                                            <div class="chip chip-sm"
+                                                                                style="font-size: 10px !important;">
+                                                                                <i
+                                                                                    class="fa fa-map-marker text-primary"></i>
+                                                                                Layover:Netaji Subha.. | 02 hr 30 min
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
                                                     <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla
@@ -1202,12 +1238,14 @@ function flight_det_card(type_id){
 
                                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                     <button type="button"
-                                                        class="btn btn-primary btn-circle btn-sm waves-effect waves-light baggade" @click="flight_det_card(1)">
+                                                        class="btn btn-primary btn-circle btn-sm waves-effect waves-light baggade"
+                                                        @click="flight_det_card(1)">
                                                         <span style="font-size: 13px;">Baggade</span>
                                                     </button>
 
                                                     <button type="button"
-                                                        class="btn btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary" @click="flight_det_card(2)">
+                                                        class="btn btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary"
+                                                        @click="flight_det_card(2)">
                                                         <span style="font-size: 13px;">Fare Summary</span>
                                                     </button>
                                                 </div>
@@ -1220,21 +1258,27 @@ function flight_det_card(type_id){
                                                             <tbody class="text-start">
                                                                 <tr>
                                                                     <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
-                                                                        <small>Economy</small></td>
+                                                                        <small>Economy</small>
+                                                                    </td>
 
                                                                     <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small></td>
+                                                                        <small>10 Kg</small>
+                                                                    </td>
                                                                     <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small></td>
+                                                                        <small>2 Pieces</small>
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
-                                                                        <small>Economy</small></td>
+                                                                        <small>Economy</small>
+                                                                    </td>
 
                                                                     <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small></td>
+                                                                        <small>10 Kg</small>
+                                                                    </td>
                                                                     <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small></td>
+                                                                        <small>2 Pieces</small>
+                                                                    </td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -1252,35 +1296,43 @@ function flight_det_card(type_id){
                                                                     <th style="font-size: 10px;">Tax+Fees</th>
                                                                     <th style="font-size: 10px;">Total Fare</th>
                                                                 </thead>
-                                                                <tbody style="font-size: 10px;;">
-                                                                    <tr>
-                                                                        <td>4 Adults</td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 980</td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 120980</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>4 Child</td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 500</td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 15670</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>4 Infants</td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 500</td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 15670</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Discount</td>
-                                                                        <td></td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> -670</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><b>Total Payable</b></td>
-                                                                        <td></td>
-                                                                        <td>
-                                                                            <b><i class="fa fa-bangladeshi-taka-sign"></i> 151650</b>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
+                                                            <tbody style="font-size: 10px;;">
+                                                                <tr>
+                                                                    <td>4 Adults</td>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 980
+                                                                    </td>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
+                                                                        120980</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>4 Child</td>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 500
+                                                                    </td>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
+                                                                        15670</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>4 Infants</td>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 500
+                                                                    </td>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
+                                                                        15670</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Discount</td>
+                                                                    <td></td>
+                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> -670
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><b>Total Payable</b></td>
+                                                                    <td></td>
+                                                                    <td>
+                                                                        <b><i class="fa fa-bangladeshi-taka-sign"></i>
+                                                                            151650</b>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -1326,7 +1378,8 @@ function flight_det_card(type_id){
                                                     ....
                                                 </div>
                                                 <div><i class="fa fa-plane"
-                                                        style="color: #1882ffb3; margin-top: 4px; font-size: 20px;"></i></div>
+                                                        style="color: #1882ffb3; margin-top: 4px; font-size: 20px;"></i>
+                                                </div>
                                                 <div>
                                                     ....
                                                 </div>
@@ -1519,12 +1572,14 @@ function flight_det_card(type_id){
 
                                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                     <button type="button"
-                                                        class="btn btn-primary btn-circle btn-sm waves-effect waves-light baggade" @click="flight_det_card(1)">
+                                                        class="btn btn-primary btn-circle btn-sm waves-effect waves-light baggade"
+                                                        @click="flight_det_card(1)">
                                                         <span style="font-size: 13px;">Baggade</span>
                                                     </button>
 
                                                     <button type="button"
-                                                        class="btn btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary" @click="flight_det_card(2)">
+                                                        class="btn btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary"
+                                                        @click="flight_det_card(2)">
                                                         <span style="font-size: 13px;">Fare Summary</span>
                                                     </button>
                                                 </div>
@@ -1537,21 +1592,27 @@ function flight_det_card(type_id){
                                                             <tbody class="text-start">
                                                                 <tr>
                                                                     <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
-                                                                        <small>Economy</small></td>
+                                                                        <small>Economy</small>
+                                                                    </td>
 
                                                                     <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small></td>
+                                                                        <small>10 Kg</small>
+                                                                    </td>
                                                                     <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small></td>
+                                                                        <small>2 Pieces</small>
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
-                                                                        <small>Economy</small></td>
+                                                                        <small>Economy</small>
+                                                                    </td>
 
                                                                     <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small></td>
+                                                                        <small>10 Kg</small>
+                                                                    </td>
                                                                     <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small></td>
+                                                                        <small>2 Pieces</small>
+                                                                    </td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -1565,21 +1626,27 @@ function flight_det_card(type_id){
                                                             <tbody class="text-start">
                                                                 <tr>
                                                                     <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
-                                                                        <small>Economy</small></td>
+                                                                        <small>Economy</small>
+                                                                    </td>
 
                                                                     <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small></td>
+                                                                        <small>10 Kg</small>
+                                                                    </td>
                                                                     <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small></td>
+                                                                        <small>2 Pieces</small>
+                                                                    </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
-                                                                        <small>Economy</small></td>
+                                                                        <small>Economy</small>
+                                                                    </td>
 
                                                                     <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small></td>
+                                                                        <small>10 Kg</small>
+                                                                    </td>
                                                                     <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small></td>
+                                                                        <small>2 Pieces</small>
+                                                                    </td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
