@@ -1279,7 +1279,16 @@ function flight_det_card(type_id) {
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-                                                    <p>Part 1</p>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <p class="text-start fw-bold">Eligibility Category - 1</p>
+                                                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste itaque quidem nam doloremque accusantium minima excepturi architecto illo quo dolorem nulla, ab earum? Neque quis repellendus, deserunt amet ducimus doloribus!</span>
+                                                        </div>
+                                                        <div class="col-md-12 mt-2">
+                                                            <p class="text-start fw-bold pt-0 mt-0">Day/Time Application Category - 1</p>
+                                                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste itaque quidem nam doloremque accusantium minima excepturi architecto illo quo dolorem nulla, ab earum? Neque quis repellendus, deserunt amet ducimus doloribus!</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="primarycontact" role="tabpanel">
                                                     <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they
