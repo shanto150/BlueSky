@@ -359,7 +359,7 @@ function flight_det_card(type_id) {
             <div class="card border border-1 border-primary">
 
                 <div class="card-body">
-                    <div class="d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center gap-1">
                         <div class="bg-checkbox-active one-way rounded rounded-1 p-2">
                             <input @click="changeType(1)" class="form-check-input" type="radio" name="flexRadioDefault"
                                 id="flexRadioDefault1">
@@ -385,8 +385,8 @@ function flight_det_card(type_id) {
 
                         <div class="ms-auto">
                             <div class="row">
-                                <div class="col-md-4 pr-0">
-                                    <div class="input-group mb-3">
+                                <div class="col-md-4 pt-1 pr-0">
+                                    <div class="input-group input-group-sm mb-3">
                                         <button class="btn btn-outline-primary dropdown-toggle" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
                                         <ul class="dropdown-menu p-1" style="width: 300px;">
@@ -410,7 +410,7 @@ function flight_det_card(type_id) {
                                                                     </svg>
                                                                 </button>
                                                                 <input type="text" name="quantity"
-                                                                    class="form-control input-number quantity"
+                                                                    class="form-control form-control-sm input-number quantity"
                                                                     value="1">
                                                                 <button type="button"
                                                                     class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
@@ -509,8 +509,8 @@ function flight_det_card(type_id) {
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 pr-0">
-                                    <select name="" id="class_type" class="form-control select2C">
+                                <div class="col-md-4 p-1">
+                                    <select name="" id="class_type" class="form-control form-control-sm select2C">
                                         <option value="" selected>Economy</option>
                                         <option value="">Premium Economy</option>
                                         <option value="">Business Class</option>
@@ -518,8 +518,8 @@ function flight_det_card(type_id) {
                                     </select>
                                 </div>
 
-                                <div class="col-md-4 pr-0">
-                                    <select name="" id="pre_airline" class="form-control select2C">
+                                <div class="col-md-4 p-1">
+                                    <select name="" id="pre_airline" class="form-control form-control-sm select2C">
                                         <option value="" selected>Prefered Airlines</option>
                                         <option value="">Qatar </option>
                                         <option value="">Saudia</option>
@@ -1187,11 +1187,11 @@ function flight_det_card(type_id) {
                                                                         </div>
 
                                                                         <div class="col-md-5 text-center">
-                                                                            <img  height="60" width="100"
+                                                                            <img height="60" width="100"
                                                                                 src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
                                                                                 alt="">
-                                                                                <p class="mb-0 pb-0">Qatar Airways</p>
-                                                                                <p class="mb-0 pb-0">Boeing 707</p>
+                                                                            <p class="mb-0 pb-0">Qatar Airways</p>
+                                                                            <p class="mb-0 pb-0">Boeing 707</p>
                                                                         </div>
                                                                         <div class="col-md-9 mt-1">
                                                                             <div class="chip chip-sm"
@@ -1266,11 +1266,11 @@ function flight_det_card(type_id) {
                                                                         </div>
 
                                                                         <div class="col-md-5 text-center">
-                                                                            <img  height="60" width="100"
+                                                                            <img height="60" width="100"
                                                                                 src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
                                                                                 alt="">
-                                                                                <p class="mb-0 pb-0">Qatar Airways</p>
-                                                                                <p class="mb-0 pb-0">Boeing 707</p>
+                                                                            <p class="mb-0 pb-0">Qatar Airways</p>
+                                                                            <p class="mb-0 pb-0">Boeing 707</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1282,11 +1282,20 @@ function flight_det_card(type_id) {
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <p class="text-start fw-bold">Eligibility Category - 1</p>
-                                                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste itaque quidem nam doloremque accusantium minima excepturi architecto illo quo dolorem nulla, ab earum? Neque quis repellendus, deserunt amet ducimus doloribus!</span>
+                                                            <span>Lorem ipsum dolor sit amet consectetur adipisicing
+                                                                elit. Iste itaque quidem nam doloremque accusantium
+                                                                minima excepturi architecto illo quo dolorem nulla, ab
+                                                                earum? Neque quis repellendus, deserunt amet ducimus
+                                                                doloribus!</span>
                                                         </div>
                                                         <div class="col-md-12 mt-2">
-                                                            <p class="text-start fw-bold pt-0 mt-0">Day/Time Application Category - 1</p>
-                                                            <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste itaque quidem nam doloremque accusantium minima excepturi architecto illo quo dolorem nulla, ab earum? Neque quis repellendus, deserunt amet ducimus doloribus!</span>
+                                                            <p class="text-start fw-bold pt-0 mt-0">Day/Time Application
+                                                                Category - 1</p>
+                                                            <span>Lorem ipsum dolor sit amet consectetur adipisicing
+                                                                elit. Iste itaque quidem nam doloremque accusantium
+                                                                minima excepturi architecto illo quo dolorem nulla, ab
+                                                                earum? Neque quis repellendus, deserunt amet ducimus
+                                                                doloribus!</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1638,11 +1647,11 @@ function flight_det_card(type_id) {
                                                                         </div>
 
                                                                         <div class="col-md-5 text-center">
-                                                                            <img  height="50" width="50"
+                                                                            <img height="50" width="50"
                                                                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
                                                                                 alt="">
-                                                                                <p class="mb-0 pb-0">Emirates Airline</p>
-                                                                                <p class="mb-0 pb-0">Boeing 707</p>
+                                                                            <p class="mb-0 pb-0">Emirates Airline</p>
+                                                                            <p class="mb-0 pb-0">Boeing 707</p>
                                                                         </div>
                                                                         <div class="col-md-9 mt-1">
                                                                             <div class="chip chip-sm"
@@ -1717,11 +1726,11 @@ function flight_det_card(type_id) {
                                                                         </div>
 
                                                                         <div class="col-md-5 text-center">
-                                                                            <img  height="50" width="50"
+                                                                            <img height="50" width="50"
                                                                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
                                                                                 alt="">
-                                                                                <p class="mb-0 pb-0">Emirates Airline</p>
-                                                                                <p class="mb-0 pb-0">Boeing 777</p>
+                                                                            <p class="mb-0 pb-0">Emirates Airline</p>
+                                                                            <p class="mb-0 pb-0">Boeing 777</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>

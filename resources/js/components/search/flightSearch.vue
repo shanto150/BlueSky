@@ -2,7 +2,7 @@
 import { ref, onMounted, reactive } from "vue";
 import axiosInstance from "../../axiosInstance"
 import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import '@vuepic/vue-datepicker/dist/main.css';
 const fdate = ref();
 const format = (fdate) => {
     const day = fdate.getDate();
@@ -326,7 +326,7 @@ function offHover() {
             <div class="card border border-1 border-primary">
 
                 <div class="card-body">
-                    <div class="d-flex align-items-center gap-3">
+                    <div class="d-flex align-items-center gap-1">
                         <div class="bg-checkbox-active one-way rounded rounded-1 p-2">
                             <input @click="changeType(1)" class="form-check-input" type="radio" name="flexRadioDefault"
                                 id="flexRadioDefault1">
@@ -509,11 +509,11 @@ function offHover() {
 
                         <div class="col-md-2">
                             <VueDatePicker v-model="fdate" placeholder="Select Date" :enable-time-picker="false"
-                                :format="format"></VueDatePicker>
+                                :format="format" auto-apply></VueDatePicker>
                         </div>
                         <div class="col-md-2 hide-me">
                             <VueDatePicker v-model="tdate" placeholder="Select Date" :enable-time-picker="false"
-                                :format="tformat"></VueDatePicker>
+                                :format="tformat" auto-apply range></VueDatePicker>
                         </div>
                         <div class="col-md-1">
                             <router-link :to="{ name: 'searchResult' }">
