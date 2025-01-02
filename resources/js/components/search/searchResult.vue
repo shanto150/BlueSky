@@ -484,7 +484,7 @@ function flight_det_card(type_id) {
                                                                     </svg>
                                                                 </button>
                                                                 <input type="text" name="quantity"
-                                                                    class="form-control input-number quantity"
+                                                                    class="form-control form-control-sm input-number quantity"
                                                                     value="1">
                                                                 <button type="button"
                                                                     class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
