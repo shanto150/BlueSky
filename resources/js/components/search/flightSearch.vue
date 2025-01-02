@@ -145,10 +145,11 @@ onMounted(() => {
         height: '50',
     });
 
-    $(".select2C").select2({
+    $("#class_type").select2({
         theme: 'bootstrap-5',
-        width: '100%',
-        height: '50',
+    });
+    $("#pre_airline").select2({
+        theme: 'bootstrap-5',
     });
 });
 getAirports();
@@ -352,8 +353,8 @@ function offHover() {
 
                         <div class="ms-auto">
                             <div class="row">
-                                <div class="col-md-4 pr-0">
-                                    <div class="input-group mb-3">
+                                <div class="col-md-4 pt-1 pr-0">
+                                    <div class="input-group input-group-sm mb-3">
                                         <button class="btn btn-outline-primary dropdown-toggle" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
                                         <ul class="dropdown-menu p-1" style="width: 300px;">
@@ -475,8 +476,8 @@ function offHover() {
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 pr-0">
-                                    <select name="" id="class_type" class="form-control select2C">
+                                <div class="col-md-4 p-1">
+                                    <select name="" id="class_type" class="form-control select2">
                                         <option value="" selected>Economy</option>
                                         <option value="">Premium Economy</option>
                                         <option value="">Business Class</option>
@@ -484,8 +485,8 @@ function offHover() {
                                     </select>
                                 </div>
 
-                                <div class="col-md-4 pr-0">
-                                    <select name="" id="pre_airline" class="form-control select2C">
+                                <div class="col-md-4 p-1">
+                                    <select name="" id="pre_airline" class="form-control select2">
                                         <option value="" selected>Prefered Airlines</option>
                                         <option value="">Qatar </option>
                                         <option value="">Saudia</option>
@@ -585,4 +586,18 @@ function offHover() {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
+
+.select2-selection__rendered {
+    line-height: 22px !important;
+}
+
+.select2-container .select2-selection--single {
+    height: 22px !important;
+}
+
+.select2-selection__arrow {
+    height: 22px !important;
+    top: 0px !important;
+}
+
 </style>
