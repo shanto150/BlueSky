@@ -515,7 +515,7 @@ function flight_det_card(type_id) {
                         <div class="col-md-1 mt-2 mt-md-0">
                             <router-link :to="{ name: 'searchResult' }">
                                 <img src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt="" class="d-sm-block d-md-none"
-                                    style="width: 100%;" @mouseover="onHover();" @mouseout="offHover();" id="img">
+                                    style="width: 100%;" id="img">
                                 <img src="../../../../public/theme/appimages/s_With_Icon.jpg" alt=""
                                     style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img" class="d-none d-md-block">
                             </router-link>
