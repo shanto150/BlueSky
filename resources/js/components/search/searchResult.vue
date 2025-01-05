@@ -27,91 +27,6 @@ const tdate = ref();
 
 const form = reactive({ Way: '', from: '', to: "", dep_date: '', ADT: '', CNN: '', INF: '' });
 
-form.Way = 1;
-
-async function GenerateXML() {
-
-    var html = "";
-    html += '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">';
-    html += '<s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
-    html += '<LowFareSearchReq xmlns="http://www.travelport.com/schema/air_v52_0" TraceId="c8f38268-3b70-4141-869d-010611bc23e5" TargetBranch="P7186658" SolutionResult="true" ReturnUpsellFare="true">';
-    html += '<BillingPointOfSaleInfo xmlns="http://www.travelport.com/schema/common_v52_0" OriginApplication="UAPI"/>';
-    if (form.Way == 1) {
-        html += '<SearchAirLeg>';
-        html += '<SearchOrigin>';
-        html += '<CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="' + form.from + '" PreferCity="true"/>';
-        html += '</SearchOrigin>';
-        html += '<SearchDestination>';
-        html += '<CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="' + form.to + '" PreferCity="true"/>';
-        html += '</SearchDestination>';
-        html += '<SearchDepTime PreferredTime="' + form.dep_date + '"/>';
-        html += '</SearchAirLeg>';
-    } else {
-        html += '<SearchAirLeg>';
-        html += '<SearchOrigin>';
-        html += '<CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="DAC" PreferCity="true"/>';
-        html += '</SearchOrigin>';
-        html += '<SearchDestination>';
-        html += '<CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="DAC" PreferCity="true"/>';
-        html += '</SearchDestination>';
-        html += '<SearchDepTime PreferredTime="2023-08-08"/>';
-        html += '</SearchAirLeg>';
-
-        html += '<SearchAirLeg>';
-        html += '<SearchOrigin>';
-        html += '<CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="DAC" PreferCity="true"/>';
-        html += '</SearchOrigin>';
-        html += '<SearchDestination>';
-        html += '<CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="DAC" PreferCity="true"/>';
-        html += '</SearchDestination>';
-        html += '<SearchDepTime PreferredTime="2023-08-08"/>';
-        html += '</SearchAirLeg>';
-    }
-
-    html += '<AirSearchModifiers>';
-    html += '<PreferredProviders>';
-    html += '<Provider xmlns="http://www.travelport.com/schema/common_v52_0" Code="1G"/>';
-    html += '</PreferredProviders>';
-
-    html += '<PreferredCabins>';
-    html += '<CabinClass xmlns="http://www.travelport.com/schema/common_v52_0" Type="Economy"/>';
-    html += '</PreferredCabins>';
-    html += '</AirSearchModifiers>';
-
-    html += '<SearchPassenger xmlns="http://www.travelport.com/schema/common_v52_0" Code="ADT" BookingTravelerRef="ADT_0"/>';
-    html += '<AirPricingModifiers FaresIndicator="PublicAndPrivateFares"/>';
-
-    html += '</LowFareSearchReq>';
-    html += '</s:Body>';
-    html += '</s:Envelope>';
-
-    return html;
-}
-
-async function SendAPIRequest() {
-
-    // 'Access-Control-Allow-Origin': 'http://127.0.0.1:8000',
-    //'Access-Control-Allow-Methods': '*',
-    //'Access-Control-Allow-Credentials': 'true',
-    //'Access-Control-Allow-Headers': '*',
-    //'Access-Control-Expose-Headers': '*',
-
-    const reqxml = await GenerateXML();
-    axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-    axios.post('http://apac.universal-api.pp.travelport.com/B2BGateway/connect/uAPI/AirService',
-        reqxml,
-        {
-            headers: {
-                'Content-Type': 'text/xml',
-            },
-            auth: {
-                'username': "Universal API/uAPI1974892322-0c5d2a63",
-                'password': "Pi2-3$fB+j"
-            }
-        }).then(res => {
-            console.log(res.data);
-        }).catch(err => { console.log(err) });
-}
 
 function changeType(type) {
 
@@ -137,7 +52,6 @@ function changeType(type) {
         $('.one-way').addClass('bg-checkbox');
         $('.round-way').addClass('bg-checkbox');
     }
-
 
 }
 
@@ -242,27 +156,11 @@ function offHover() {
 }
 
 function flight_det_card(type_id) {
-    if (type_id == 1) {
-        $('.baggade').addClass('btn-primary');
-        $('.baggade').removeClass('btn-outline-primary');
-        $('.fare_summary').addClass('btn-outline-primary');
-        $('.fare_summary').removeClass('btn-primary');
-        // $("#baggade").show();
-        $("#fare_summary_details").addClass('d-none');
-        $("#baggade").removeClass('d-none');
-
-
-    } else {
-        $('.baggade').removeClass('btn-primary');
-        $('.baggade').addClass('btn-outline-primary');
-        $('.fare_summary').addClass('btn-primary');
-        $('.fare_summary').removeClass('btn-outline-primary');
-        // $("#baggade").hide();
-        // $("#fare_summary_details").show();
-        $("#baggade").addClass('d-none');
-        $("#fare_summary_details").removeClass('d-none');
-
-    }
+    const isType1 = type_id == 1;
+    $('.baggade').toggleClass('btn-primary', isType1).toggleClass('btn-outline-primary', !isType1);
+    $('.fare_summary').toggleClass('btn-primary', !isType1).toggleClass('btn-outline-primary', isType1);
+    $('#fare_summary_details').toggleClass('d-none', isType1);
+    $('#baggade').toggleClass('d-none', !isType1);
 
 }
 </script>
@@ -276,91 +174,20 @@ function flight_det_card(type_id) {
                     <li class="breadcrumb-item">
                         <router-link :to="{ name: 'Home' }">Dashboard</router-link>
                     </li>
-
                     <li class="breadcrumb-item active" aria-current="page">Flight Search Result</li>
                 </ol>
             </nav>
         </div>
     </div>
-    <!-- <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4 border border-1 border-primary m-2 pt-1">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" v-model="form.Way" checked type="radio"
-                                    name="inlineRadioOptions" id="inlineRadio1" value="1">
-                                <label class="form-check-label" for="inlineRadio1">One Way</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" v-model="form.Way" type="radio"
-                                    name="inlineRadioOptions" id="inlineRadio2" value="2">
-                                <label class="form-check-label" for="inlineRadio2">Round</label>
-                            </div>
 
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-md-2">
-                            <label for="">From</label>
-                            <input type="text" v-model="form.from" list="from_countries"
-                                class="form-control mt-1 form-control-sm" name="from" placeholder="From">
-                            <datalist id="from_countries">
-                                <option>Russia</option>
-                                <option>Germany</option>
-                                <option>United Kingdom</option>
-                            </datalist>
-
-                        </div>
-                        <div class="col-md-2">
-                            <label for="">To</label>
-                            <input type="text" list="to_countries" v-model="form.to"
-                                class="form-control mt-1 form-control-sm" name="to" placeholder="To">
-                            <datalist id="to_countries">
-                                <option>Bangladesh-BD</option>
-                                <option>Indio</option>
-                                <option>USA</option>
-                            </datalist>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="">Date</label>
-                            <input type="date" v-model="form.dep_date" class="form-control form-control-sm" name="date"
-                                placeholder="Date">
-                        </div>
-
-                        <div class="col-md-1">
-                            <label for="">Adult</label>
-                            <input type="text" v-model="form.ADT" class="form-control form-control-sm" name="adult"
-                                placeholder="Adult">
-                        </div>
-                        <div class="col-md-1">
-                            <label for="">Child</label>
-                            <input type="text" v-model="form.CNN" class="form-control form-control-sm" name="child"
-                                placeholder="Child">
-                        </div>
-                        <div class="col-md-1">
-                            <label for="">infent</label>
-                            <input type="text" v-model="form.INF" class="form-control form-control-sm" name="infent"
-                                placeholder="infent">
-                        </div>
-                        <div class="col-md-2 mt-3">
-                            <button @click="SendAPIRequest()" class="btn btn-sm btn-danger w-100"><i
-                                    class="fa fa-search"></i>Search</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="row">
         <div class="col-md-12">
             <div class="card border border-1 border-primary">
 
                 <div class="card-body">
-                    <div class="d-flex align-items-center gap-1">
-                        <div class="bg-checkbox-active one-way rounded rounded-1 p-2">
+                    <div class="d-flex align-items-center gap-2">
+
+                        <div class="bg-checkbox-active one-way rounded rounded-1 p-1">
                             <input @click="changeType(1)" class="form-check-input" type="radio" name="flexRadioDefault"
                                 id="flexRadioDefault1">
 
@@ -368,14 +195,14 @@ function flight_det_card(type_id) {
                                 &nbsp;One Way
                             </label>
                         </div>
-                        <div class="bg-checkbox round-way rounded rounded-1 p-2">
+                        <div class="bg-checkbox round-way rounded rounded-1 p-1">
                             <input @click="changeType(2)" class="form-check-input" type="radio" name="flexRadioDefault"
                                 id="flexRadioDefault2">
                             <label class="form-check-label-box" for="flexRadioDefault2">
                                 &nbsp;Round Trip
                             </label>
                         </div>
-                        <div class="bg-checkbox rounded multi-city rounded-1 p-2">
+                        <div class="bg-checkbox rounded multi-city rounded-1 p-1">
                             <input @click="changeType(3)" class="form-check-input" type="radio" name="flexRadioDefault"
                                 id="flexRadioDefault3">
                             <label class="form-check-label-box" for="flexRadioDefault3">
@@ -383,7 +210,9 @@ function flight_det_card(type_id) {
                             </label>
                         </div>
 
-                        <div class="ms-auto">
+
+                        <!-- in medium screen -->
+                        <div class="ms-auto d-none d-md-block">
                             <div class="row">
                                 <div class="col-md-4 pt-1 pr-0">
                                     <div class="input-group input-group-sm mb-3">
@@ -393,7 +222,7 @@ function flight_det_card(type_id) {
                                             <table class="table table-sm">
                                                 <tbody>
                                                     <tr>
-                                                        <td><small> Adult <br> <span style="font-size: 8px;">Above 12
+                                                        <td><small> Adult <br> <span style="font-size: 9px;">Above 12
                                                                     Years</span></small></td>
                                                         <td style="width: 150px;">
                                                             <div class="input-group product-qty">
@@ -410,7 +239,7 @@ function flight_det_card(type_id) {
                                                                     </svg>
                                                                 </button>
                                                                 <input type="text" name="quantity"
-                                                                    class="form-control form-control-sm input-number quantity"
+                                                                    class="form-control input-number quantity"
                                                                     value="1">
                                                                 <button type="button"
                                                                     class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
@@ -426,11 +255,10 @@ function flight_det_card(type_id) {
                                                                     </svg>
                                                                 </button>
                                                             </div>
-
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><small>Children <br><span style="font-size: 8px;">02 to
+                                                        <td><small>Children <br><span style="font-size: 9px;">02 to
                                                                     Under 12 Years
                                                                 </span></small></td>
                                                         <td style="width: 150px;">
@@ -467,7 +295,7 @@ function flight_det_card(type_id) {
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><small>Infant <br><span style="font-size: 8px;">Under 02
+                                                        <td><small>Infant <br><span style="font-size: 9px;">Under 02
                                                                     Years</span></small></td>
                                                         <td style="width: 150px;">
                                                             <div class="input-group product-qty">
@@ -484,7 +312,7 @@ function flight_det_card(type_id) {
                                                                     </svg>
                                                                 </button>
                                                                 <input type="text" name="quantity"
-                                                                    class="form-control form-control-sm input-number quantity"
+                                                                    class="form-control input-number quantity"
                                                                     value="1">
                                                                 <button type="button"
                                                                     class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
@@ -510,7 +338,7 @@ function flight_det_card(type_id) {
                                 </div>
 
                                 <div class="col-md-4 p-1">
-                                    <select name="" id="class_type" class="form-control form-control-sm select2C">
+                                    <select name="" id="class_type" class="form-control select2">
                                         <option value="" selected>Economy</option>
                                         <option value="">Premium Economy</option>
                                         <option value="">Business Class</option>
@@ -519,7 +347,7 @@ function flight_det_card(type_id) {
                                 </div>
 
                                 <div class="col-md-4 p-1">
-                                    <select name="" id="pre_airline" class="form-control form-control-sm select2C">
+                                    <select name="" id="pre_airline" class="form-control select2">
                                         <option value="" selected>Prefered Airlines</option>
                                         <option value="">Qatar </option>
                                         <option value="">Saudia</option>
@@ -528,31 +356,168 @@ function flight_det_card(type_id) {
                                 </div>
                             </div>
                         </div>
+                        <!-- end in medium  screen -->
                     </div>
 
-                    <div class="row mt-4">
-                        <div class="col-md-3">
+                    <!-- in small screen -->
+                    <div class="row d-sm-block d-md-none mt-2">
+
+                        <button class="col-md-12 btn btn-outline-primary dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
+                        <ul class="dropdown-menu p-1" style="width: 300px;">
+                            <table class="table table-sm">
+                                <tbody>
+                                    <tr>
+                                        <td><small> Adult <br> <span style="font-size: 9px;">Above 12
+                                                    Years</span></small></td>
+                                        <td style="width: 150px;">
+                                            <div class="input-group product-qty">
+                                                <button type="button"
+                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                    data-type="minus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-minus-circle text-primary">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" name="quantity"
+                                                    class="form-control input-number quantity" value="1">
+                                                <button type="button"
+                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                    data-type="plus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-plus-circle text-primary">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><small>Children <br><span style="font-size: 9px;">02 to
+                                                    Under 12 Years
+                                                </span></small></td>
+                                        <td style="width: 150px;">
+                                            <div class="input-group product-qty">
+                                                <button type="button"
+                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                    data-type="minus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-minus-circle text-primary">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" name="quantity"
+                                                    class="form-control input-number quantity" value="1">
+                                                <button type="button"
+                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                    data-type="plus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-plus-circle text-primary">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><small>Infant <br><span style="font-size: 9px;">Under 02
+                                                    Years</span></small></td>
+                                        <td style="width: 150px;">
+                                            <div class="input-group product-qty">
+                                                <button type="button"
+                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                    data-type="minus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-minus-circle text-primary">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" name="quantity"
+                                                    class="form-control input-number quantity" value="1">
+                                                <button type="button"
+                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                    data-type="plus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-plus-circle text-primary">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ul>
+
+                        <div class="col-md-12 p-1 mt-2">
+                            <select name="" id="class_type" class="form-control select2C">
+                                <option value="" selected>Economy</option>
+                                <option value="">Premium Economy</option>
+                                <option value="">Business Class</option>
+                                <option value="">First Class</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12 p-1 mt-2">
+                            <select name="" id="pre_airline" class="form-control select2C">
+                                <option value="" selected>Prefered Airlines</option>
+                                <option value="">Qatar </option>
+                                <option value="">Saudia</option>
+                                <option value="">Emirates</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- end in small screen -->
+
+                    <div class="row mt-2">
+                        <div class="col-md-3 mt-0 mt-md-0">
                             <select id="origin_id" name="origin_name" class="form-control form-control-lg origin_name">
                             </select>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 mt-2 mt-md-0">
                             <select id="destination_id" name="destination_name"
                                 class="form-control form-control destination_name">
                             </select>
                         </div>
 
-                        <div class="col-md-2">
-                            <VueDatePicker v-model="fdate" placeholder="Select Date" :enable-time-picker="false"
-                                :format="format"></VueDatePicker>
+                        <div class="col-md-2 mt-2 mt-md-0">
+                            <VueDatePicker class="dateChange" v-model="fdate" placeholder="Select Date" :enable-time-picker="false"
+                                :format="format" auto-apply range multi-calendars></VueDatePicker>
                         </div>
-                        <div class="col-md-2">
+
+                        <div class="col-md-2 d-none mt-2 mt-md-0" id="toDateChange">
                             <VueDatePicker v-model="tdate" placeholder="Select Date" :enable-time-picker="false"
                                 :format="tformat"></VueDatePicker>
                         </div>
-                        <div class="col-md-1">
+
+                        <div class="col-md-1 mt-2 mt-md-0">
                             <router-link :to="{ name: 'searchResult' }">
+                                <img src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt="" class="d-sm-block d-md-none"
+                                    style="width: 100%;" @mouseover="onHover();" @mouseout="offHover();" id="img">
                                 <img src="../../../../public/theme/appimages/s_With_Icon.jpg" alt=""
-                                    style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img">
+                                    style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img" class="d-none d-md-block">
                             </router-link>
                         </div>
                     </div>
