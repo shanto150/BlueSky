@@ -9,17 +9,35 @@ const fdate = ref();
 const sliderMin = ref(150);
 const sliderMax = ref(180);
 
+const isAutoApply = ref(true);
+const isMultiCalendar = ref(false);
+const isRanges = ref();
+
+const isRounded = 'oneway';
+
 const format = (fdate) => {
+
     const day = fdate.getDate();
     const month = fdate.getMonth() + 1;
     const year = fdate.getFullYear();
 
     return `${day}/${month}/${year}`;
 }
-const tformat = (tdate) => {
-    const day = tdate.getDate();
-    const month = tdate.getMonth() + 1;
-    const year = tdate.getFullYear();
+
+const formats = (fdates) => {
+
+    const day = fdates[0].getDate();
+    const month = fdates[0].getMonth() + 1;
+    const year = fdates[0].getFullYear();
+    $("#fromdateVal input").val(`${day}/${month}/${year}`);
+
+    if (fdates[1]) {
+
+        const day2 = fdates[1].getDate();
+        const month2 = fdates[1].getMonth() + 1;
+        const year2 = fdates[1].getFullYear();
+        $("#todateVal input").val(`${day2}/${month2}/${year2}`);
+    }
 
     return `${day}/${month}/${year}`;
 }
@@ -28,7 +46,7 @@ const tdate = ref();
 const form = reactive({ Way: '', from: '', to: "", dep_date: '', ADT: '', CNN: '', INF: '' });
 
 
-function changeType(type) {
+function tourTypeChange(type) {
 
     if (type == 1) {
         $('.one-way').addClass('bg-checkbox-active');
@@ -37,6 +55,14 @@ function changeType(type) {
         $('.one-way').removeClass('bg-checkbox');
         $('.round-way').addClass('bg-checkbox');
         $('.multi-city').addClass('bg-checkbox');
+
+        $('#toDateChange').addClass('d-none');
+        this.isAutoApply = !this.isAutoApply;
+        this.isMultiCalendar = !this.isMultiCalendar;
+        this.isRanges = !this.isRanges;
+        this.isRounded = 'oneway';
+
+
     } else if (type == 2) {
         $('.one-way').removeClass('bg-checkbox-active');
         $('.round-way').addClass('bg-checkbox-active');
@@ -44,6 +70,14 @@ function changeType(type) {
         $('.round-way').removeClass('bg-checkbox');
         $('.one-way').addClass('bg-checkbox');
         $('.multi-city').addClass('bg-checkbox');
+
+        $('#toDateChange').removeClass('d-none');
+        this.isAutoApply = !this.isAutoApply;
+        this.isMultiCalendar = !this.isMultiCalendar;
+        this.isRanges = !this.isRanges;
+        this.isRounded = 'round';
+
+
     } else {
         $('.one-way').removeClass('bg-checkbox-active');
         $('.round-way').removeClass('bg-checkbox-active');
@@ -64,12 +98,19 @@ onMounted(() => {
         height: '50',
     });
 
-    $(".select2C").select2({
-        theme: 'bootstrap-5',
-        width: '100%',
-        height: '50',
-        width: 'element'
-    });
+    // $(".select2C").select2({
+    //     theme: 'bootstrap-5',
+    //     width: '100%',
+    //     height: '50',
+    //     // width: 'element'
+    // });
+
+    // $("#class_type").select2({
+    //     theme: 'bootstrap-5',
+    // });
+    // $("#pre_airline").select2({
+    //     theme: 'bootstrap-5',
+    // });
 });
 getAirports();
 
@@ -188,23 +229,23 @@ function flight_det_card(type_id) {
                     <div class="d-flex align-items-center gap-2">
 
                         <div class="bg-checkbox-active one-way rounded rounded-1 p-1">
-                            <input @click="changeType(1)" class="form-check-input" type="radio" name="flexRadioDefault"
-                                id="flexRadioDefault1">
+                            <input @click="tourTypeChange(1)" class="form-check-input" type="radio"
+                                name="flexRadioDefault" id="flexRadioDefault1">
 
                             <label class="form-check-label-box" for="flexRadioDefault1">
                                 &nbsp;One Way
                             </label>
                         </div>
                         <div class="bg-checkbox round-way rounded rounded-1 p-1">
-                            <input @click="changeType(2)" class="form-check-input" type="radio" name="flexRadioDefault"
-                                id="flexRadioDefault2">
+                            <input @click="tourTypeChange(2)" class="form-check-input" type="radio"
+                                name="flexRadioDefault" id="flexRadioDefault2">
                             <label class="form-check-label-box" for="flexRadioDefault2">
                                 &nbsp;Round Trip
                             </label>
                         </div>
                         <div class="bg-checkbox rounded multi-city rounded-1 p-1">
-                            <input @click="changeType(3)" class="form-check-input" type="radio" name="flexRadioDefault"
-                                id="flexRadioDefault3">
+                            <input @click="tourTypeChange(3)" class="form-check-input" type="radio"
+                                name="flexRadioDefault" id="flexRadioDefault3">
                             <label class="form-check-label-box" for="flexRadioDefault3">
                                 &nbsp; Multi City
                             </label>
@@ -338,7 +379,7 @@ function flight_det_card(type_id) {
                                 </div>
 
                                 <div class="col-md-4 p-1">
-                                    <select name="" id="class_type" class="form-control select2">
+                                    <select name="" id="class_type" class="form-control form-control-sm select2">
                                         <option value="" selected>Economy</option>
                                         <option value="">Premium Economy</option>
                                         <option value="">Business Class</option>
@@ -347,7 +388,7 @@ function flight_det_card(type_id) {
                                 </div>
 
                                 <div class="col-md-4 p-1">
-                                    <select name="" id="pre_airline" class="form-control select2">
+                                    <select name="" id="pre_airline" class="form-control form-control-sm select2">
                                         <option value="" selected>Prefered Airlines</option>
                                         <option value="">Qatar </option>
                                         <option value="">Saudia</option>
@@ -472,7 +513,7 @@ function flight_det_card(type_id) {
                         </ul>
 
                         <div class="col-md-12 p-1 mt-2">
-                            <select name="" id="class_type" class="form-control select2C">
+                            <select name="" id="class_type" class="form-control form-control-sm">
                                 <option value="" selected>Economy</option>
                                 <option value="">Premium Economy</option>
                                 <option value="">Business Class</option>
@@ -481,7 +522,7 @@ function flight_det_card(type_id) {
                         </div>
 
                         <div class="col-md-12 p-1 mt-2">
-                            <select name="" id="pre_airline" class="form-control select2C">
+                            <select name="" id="pre_airline" class="form-control form-control-sm">
                                 <option value="" selected>Prefered Airlines</option>
                                 <option value="">Qatar </option>
                                 <option value="">Saudia</option>
@@ -491,33 +532,55 @@ function flight_det_card(type_id) {
                     </div>
                     <!-- end in small screen -->
 
+
                     <div class="row mt-2">
-                        <div class="col-md-3 mt-0 mt-md-0">
-                            <select id="origin_id" name="origin_name" class="form-control form-control-lg origin_name">
-                            </select>
-                        </div>
-                        <div class="col-md-3 mt-2 mt-md-0">
-                            <select id="destination_id" name="destination_name"
-                                class="form-control form-control destination_name">
-                            </select>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="w-50">
+                                    <select id="origin_id" name="origin_name"
+                                        class="form-control form-control-lg origin_name">
+                                    </select>
+                                </div>
+                                <div class="py-1" style="margin: 0 5px 0 5px;">
+                                    <img
+                                        src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.png"
+                                        alt="">
+                                </div>
+                                <div class="w-50">
+                                    <select id="destination_id" name="destination_name"
+                                        class="form-control form-control destination_name">
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="col-md-2 mt-2 mt-md-0">
-                            <VueDatePicker class="dateChange" v-model="fdate" placeholder="Select Date" :enable-time-picker="false"
-                                :format="format" auto-apply range multi-calendars></VueDatePicker>
+                        <div class="col-md-2 mt-2 mt-md-0" v-if="isRounded == 'oneway'">
+                            <VueDatePicker class="dateChange" id="fromdateVal" v-model="fdate" placeholder="Select Date"
+                                :enable-time-picker="false" :format="format" :auto-apply="isAutoApply"
+                                :multi-calendars="isMultiCalendar" :range="isRanges"></VueDatePicker>
+
                         </div>
+                        <div class="col-md-2 mt-2 mt-md-0" v-if="isRounded == 'round'">
+                            <VueDatePicker class="dateChange" id="fromdateVal" v-model="fdate" placeholder="Select Date"
+                                :enable-time-picker="false" :format="formats" :auto-apply="isAutoApply"
+                                :multi-calendars="isMultiCalendar" :range="isRanges"></VueDatePicker>
+
+                        </div>
+
 
                         <div class="col-md-2 d-none mt-2 mt-md-0" id="toDateChange">
-                            <VueDatePicker v-model="tdate" placeholder="Select Date" :enable-time-picker="false"
-                                :format="tformat"></VueDatePicker>
+                            <VueDatePicker v-model="tdate" id="todateVal" placeholder="Select Date"
+                                :enable-time-picker="false">
+                            </VueDatePicker>
                         </div>
 
                         <div class="col-md-1 mt-2 mt-md-0">
                             <router-link :to="{ name: 'searchResult' }">
-                                <img src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt="" class="d-sm-block d-md-none"
-                                    style="width: 100%;" id="img">
+                                <img src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt=""
+                                    class="d-sm-block d-md-none" style="width: 100%;" id="img">
                                 <img src="../../../../public/theme/appimages/s_With_Icon.jpg" alt=""
-                                    style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img" class="d-none d-md-block">
+                                    style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img"
+                                    class="d-none d-md-block">
                             </router-link>
                         </div>
                     </div>

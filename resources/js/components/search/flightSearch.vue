@@ -199,7 +199,7 @@ function formatState(state) {
     if (!state.id) {
         return state.text;
     }
-    var $state = $('<div class="row"> <div class="col-md-2" style="border-right:1px solid #9e56ef"><b style="font-size:12px">' + state.id + '</b></div> <div class="col-md-8" style="font-size:13px; padding-top:3px">' + state.text + ',' + state.city + '</div></div>');
+    var $state = $('<div class="row"> <div class="col-md-2" style="border-right:1px solid #9e56ef"><b style="font-size:10px">' + state.id + '</b></div> <div class="col-md-8" style="font-size:13px; padding-top:3px">' + state.text + ',' + state.city + '</div></div>');
 
     return $state;
 };
@@ -674,18 +674,26 @@ function offHover() {
                     </div>
                     <!-- end in small screen -->
 
+
                     <div class="row mt-2">
-                        <div class="col-md-3 mt-0 mt-md-0" style="position: relative;">
-                            <select id="origin_id" name="origin_name" class="form-control form-control-lg origin_name">
-                            </select>
-                        </div>
-                        <div style="position: absolute; margin-left: 282px;margin-top: 8px;">
-                            <img src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.png" alt="">
-                        </div>
-                        <div class="col-md-3 mt-2 mt-md-0 ml-0">
-                            <select id="destination_id" name="destination_name"
-                                class="form-control form-control destination_name">
-                            </select>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <div class="w-50">
+                                    <select id="origin_id" name="origin_name"
+                                        class="form-control form-control-lg origin_name">
+                                    </select>
+                                </div>
+                                <div class="py-1" style="margin: 0 5px 0 5px;">
+                                    <img
+                                        src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.png"
+                                        alt="">
+                                </div>
+                                <div class="w-50">
+                                    <select id="destination_id" name="destination_name"
+                                        class="form-control form-control destination_name">
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-md-2 mt-2 mt-md-0" v-if="isRounded == 'oneway'">
