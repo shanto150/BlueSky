@@ -675,11 +675,14 @@ function offHover() {
                     <!-- end in small screen -->
 
                     <div class="row mt-2">
-                        <div class="col-md-3 mt-0 mt-md-0">
+                        <div class="col-md-3 mt-0 mt-md-0" style="position: relative;">
                             <select id="origin_id" name="origin_name" class="form-control form-control-lg origin_name">
                             </select>
                         </div>
-                        <div class="col-md-3 mt-2 mt-md-0">
+                        <div style="position: absolute; margin-left: 282px;margin-top: 8px;">
+                            <img src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.png" alt="">
+                        </div>
+                        <div class="col-md-3 mt-2 mt-md-0 ml-0">
                             <select id="destination_id" name="destination_name"
                                 class="form-control form-control destination_name">
                             </select>
