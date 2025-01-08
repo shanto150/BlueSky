@@ -277,7 +277,6 @@ function offHover() {
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-
         <div class="breadcrumb-title pe-3">Settings</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
@@ -285,7 +284,6 @@ function offHover() {
                     <li class="breadcrumb-item">
                         <router-link :to="{ name: 'Home' }">Dashboard</router-link>
                     </li>
-
                     <li class="breadcrumb-item active" aria-current="page">Flight Search</li>
                 </ol>
             </nav>
@@ -366,14 +364,11 @@ function offHover() {
     <div class="row">
         <div class="col-md-12">
             <div class="card border border-1 border-primary">
-
                 <div class="card-body">
                     <div class="d-flex align-items-center gap-2">
-
                         <div class="bg-checkbox-active one-way rounded rounded-1 p-1">
                             <input @click="tourTypeChange(1)" class="form-check-input" type="radio"
                                 name="flexRadioDefault" id="flexRadioDefault1">
-
                             <label class="form-check-label-box" for="flexRadioDefault1">
                                 &nbsp;One Way
                             </label>
@@ -401,7 +396,7 @@ function offHover() {
                                     <div class="input-group input-group-sm mb-3">
                                         <button class="btn btn-outline-primary dropdown-toggle" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
-                                        <ul class="dropdown-menu p-1" style="width: 300px;">
+                                        <ul class="dropdown-menu p-1 " style="width: 300px;">
                                             <table class="table table-sm">
                                                 <tbody>
                                                     <tr>
@@ -674,7 +669,6 @@ function offHover() {
                     </div>
                     <!-- end in small screen -->
 
-
                     <div class="row mt-2">
                         <div class="col-md-6">
                             <div class="d-flex">
@@ -683,9 +677,9 @@ function offHover() {
                                         class="form-control form-control-lg origin_name">
                                     </select>
                                 </div>
-                                <div class="py-1" style="margin: 0 5px 0 5px;">
+                                <div class="py-2" style="margin: 0 5px 0 5px;">
                                     <img
-                                        src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.png"
+                                        src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.svg"
                                         alt="">
                                 </div>
                                 <div class="w-50">

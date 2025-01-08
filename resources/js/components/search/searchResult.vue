@@ -541,9 +541,9 @@ function flight_det_card(type_id) {
                                         class="form-control form-control-lg origin_name">
                                     </select>
                                 </div>
-                                <div class="py-1" style="margin: 0 5px 0 5px;">
+                                <div class="py-2" style="margin: 0 5px 0 5px;">
                                     <img
-                                        src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.png"
+                                        src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.svg"
                                         alt="">
                                 </div>
                                 <div class="w-50">
