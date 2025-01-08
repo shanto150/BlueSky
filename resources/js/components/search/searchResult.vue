@@ -542,8 +542,7 @@ function flight_det_card(type_id) {
                                     </select>
                                 </div>
                                 <div class="py-2" style="margin: 0 5px 0 5px;">
-                                    <img
-                                        src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.svg"
+                                    <img src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.svg"
                                         alt="">
                                 </div>
                                 <div class="w-50">
@@ -638,6 +637,107 @@ function flight_det_card(type_id) {
                                         </p>
                                         <div class="text-center p-0">
                                             <span class="text-danger">*</span> Price may change based on policy
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Flight Schedule -->
+                    <div class="accordion" id="class-type">
+                        <div class="accordion-item mt-3">
+                            <h6 class="accordion-header" id="headingSix">
+                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
+                                    aria-controls="collapseSix">
+                                    Flight Schedule
+                                </button>
+                            </h6>
+                            <div id="collapseSix" class="accordion-collapse collapse show" aria-labelledby="headingSix"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="d-flex gap-2">
+                                                <button type="button"
+                                                    class="btn btn-outline-primary w-100">Departure</button>
+                                                <button type="button"
+                                                    class="btn btn-outline-secondary w-100">Arrival</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-2">
+                                            <div class="d-flex gap-2">
+                                                <div
+                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-sunrise text-primary">
+                                                        <path d="M17 18a5 5 0 0 0-10 0"></path>
+                                                        <line x1="12" y1="2" x2="12" y2="9"></line>
+                                                        <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+                                                        <line x1="1" y1="18" x2="3" y2="18"></line>
+                                                        <line x1="21" y1="18" x2="23" y2="18"></line>
+                                                        <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+                                                        <line x1="23" y1="22" x2="1" y2="22"></line>
+                                                        <polyline points="8 6 12 2 16 6"></polyline>
+                                                    </svg>
+                                                    <br>
+                                                    <span style="font-size: 8px; font-weight: bold;">00-06 AM</span>
+                                                </div>
+                                                <div
+                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-sun text-primary">
+                                                        <circle cx="12" cy="12" r="5"></circle>
+                                                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                                                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                                                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                                    </svg>
+                                                    <br>
+                                                    <span style="font-size: 8px; font-weight: bold;">06-12 PM</span>
+                                                </div>
+
+                                                <div
+                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-sunset text-primary">
+                                                        <path d="M17 18a5 5 0 0 0-10 0"></path>
+                                                        <line x1="12" y1="9" x2="12" y2="2"></line>
+                                                        <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+                                                        <line x1="1" y1="18" x2="3" y2="18"></line>
+                                                        <line x1="21" y1="18" x2="23" y2="18"></line>
+                                                        <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+                                                        <line x1="23" y1="22" x2="1" y2="22"></line>
+                                                        <polyline points="16 5 12 9 8 5"></polyline>
+                                                    </svg>
+                                                    <br>
+                                                    <span style="font-size: 8px; font-weight: bold;">12-06 PM</span>
+                                                </div>
+                                                <div
+                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-moon text-primary">
+                                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z">
+                                                        </path>
+                                                    </svg>
+                                                    <br>
+                                                    <span style="font-size: 8px; font-weight: bold;">06-12 AM</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -803,106 +903,6 @@ function flight_det_card(type_id) {
                         </div>
                     </div>
 
-                    <!-- Flight Schedule -->
-                    <div class="accordion" id="class-type">
-                        <div class="accordion-item mt-3">
-                            <h6 class="accordion-header" id="headingSix">
-                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
-                                    aria-controls="collapseSix">
-                                    Flight Schedule
-                                </button>
-                            </h6>
-                            <div id="collapseSix" class="accordion-collapse collapse show" aria-labelledby="headingSix"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="d-flex gap-2">
-                                                <button type="button"
-                                                    class="btn btn-outline-primary w-100">Departure</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary w-100">Arrival</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 mt-2">
-                                            <div class="d-flex gap-2">
-                                                <div
-                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-sunrise text-primary">
-                                                        <path d="M17 18a5 5 0 0 0-10 0"></path>
-                                                        <line x1="12" y1="2" x2="12" y2="9"></line>
-                                                        <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
-                                                        <line x1="1" y1="18" x2="3" y2="18"></line>
-                                                        <line x1="21" y1="18" x2="23" y2="18"></line>
-                                                        <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
-                                                        <line x1="23" y1="22" x2="1" y2="22"></line>
-                                                        <polyline points="8 6 12 2 16 6"></polyline>
-                                                    </svg>
-                                                    <br>
-                                                    <span style="font-size: 8px; font-weight: bold;">00-06 AM</span>
-                                                </div>
-                                                <div
-                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-sun text-primary">
-                                                        <circle cx="12" cy="12" r="5"></circle>
-                                                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                                                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                                                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                                                    </svg>
-                                                    <br>
-                                                    <span style="font-size: 8px; font-weight: bold;">06-12 PM</span>
-                                                </div>
-
-                                                <div
-                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-sunset text-primary">
-                                                        <path d="M17 18a5 5 0 0 0-10 0"></path>
-                                                        <line x1="12" y1="9" x2="12" y2="2"></line>
-                                                        <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
-                                                        <line x1="1" y1="18" x2="3" y2="18"></line>
-                                                        <line x1="21" y1="18" x2="23" y2="18"></line>
-                                                        <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
-                                                        <line x1="23" y1="22" x2="1" y2="22"></line>
-                                                        <polyline points="16 5 12 9 8 5"></polyline>
-                                                    </svg>
-                                                    <br>
-                                                    <span style="font-size: 8px; font-weight: bold;">12-06 PM</span>
-                                                </div>
-                                                <div
-                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-moon text-primary">
-                                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z">
-                                                        </path>
-                                                    </svg>
-                                                    <br>
-                                                    <span style="font-size: 8px; font-weight: bold;">06-12 AM</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Baggage -->
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
@@ -1058,21 +1058,27 @@ function flight_det_card(type_id) {
                                         </div>
                                         <div class="d-flex gap-3 border-start">
                                             <div class="mt-2">
-                                                <div class="text-right" style="padding-left: 10px;">
-                                                    <p class="p-0 m-0"><b><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                            65000</b></p>
-                                                    <small style="font-size: 12px; color: #5e6878;"><del><i
-                                                                class="fa fa-bangladeshi-taka-sign"></i>
-                                                            77000</del></small><br>
-                                                    <small style="font-size: 12px; color: #5e6878;">Economy
-                                                        Calss</small>
-                                                    <button class="btn btn-sm btn-block btn-primary mt-2">Book
-                                                        Now</button>
-                                                </div>
+                                                <button class="btn btn-sm btn-block btn-primary"
+                                                    style="margin-left: 30px;" data-bs-toggle="collapse"
+                                                    data-bs-target="#flight-package" aria-controls="flight-package">
+
+                                                    <div class="text-right" style="padding-left: 10px;">
+                                                        <p class="p-0 m-0"><b><i
+                                                                    class="fa fa-bangladeshi-taka-sign"></i>
+                                                                65000</b></p>
+                                                        <small style="font-size: 8px; color: #5e6878;"><del><i
+                                                                    class="fa fa-bangladeshi-taka-sign"></i>
+                                                                77000</del></small>
+                                                        <br>
+                                                        <small style="font-size: 12px;">Economy
+                                                            Calss</small>
+                                                        <!-- <button class="btn btn-sm btn-block btn-primary mt-2">Book
+                                                            Now</button> -->
+                                                    </div>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -1450,6 +1456,121 @@ function flight_det_card(type_id) {
                                                             </tbody>
                                                             </tbody>
                                                         </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="flight-package" class="accordion-collapse collapse m-0"
+                        aria-labelledby="flush-headingpackage" data-bs-parent="#accordionFlushExample" style="">
+                        <div class="accordion-body">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card bg-primary">
+                                                <div class="card-header text-white border-bottom-1">
+                                                    <h5 class="card-title text-center">Economy</h5>
+                                                    <h6 class="text-center text-white"><i
+                                                            class="fa fa-bangladeshi-taka-sign"></i> 65000</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul style="list-style-type:none;" class="text-white">
+                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                    </ul>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <button class="btn btn-block w-100 btn-sm btn-primary text-white"><i class="fa fa-check"></i> Selected</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-header text-black border-bottom-1">
+                                                    <h5 class="card-title text-center">Premium Economy</h5>
+                                                    <h6 class="text-center text-black"><i
+                                                            class="fa fa-bangladeshi-taka-sign"></i> 70500</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul style="list-style-type:none;">
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                    </ul>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <button class="btn btn-block w-100 btn-sm btn-primary text-white"> Choose Class</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-header text-black border-bottom-1">
+                                                    <h5 class="card-title text-center">Fast Class</h5>
+                                                    <h6 class="text-center text-black"><i
+                                                            class="fa fa-bangladeshi-taka-sign"></i> 90500</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul style="list-style-type:none;">
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
+                                                            ipsum dolor sit amet consectetur.</li>
+                                                    </ul>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <button class="btn btn-block w-100 btn-sm btn-primary text-white"> Choose Class</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1958,4 +2079,10 @@ function flight_det_card(type_id) {
     margin-bottom: 4px;
     text-transform: uppercase;
 } */
+li.menu-item {
+    margin: 0px 0px 10px -25px
+}
+.icon-color{
+   color: #0ab4b6;
+}
 </style>
