@@ -1544,9 +1544,8 @@ function flight_det_card(type_id) {
                                         <div class="col-md-4">
                                             <div class="card">
                                                 <div class="card-header text-black border-bottom-1">
-                                                    <h5 class="card-title text-center">Fast Class</h5>
-                                                    <h6 class="text-center text-black"><i
-                                                            class="fa fa-bangladeshi-taka-sign"></i> 90500</h6>
+                                                    <h5 class="card-title text-center">First Class</h5>
+                                                    <h6 class="text-center text-black"><i class="fa fa-bangladeshi-taka-sign"></i> 90500</h6>
                                                 </div>
                                                 <div class="card-body">
                                                     <ul style="list-style-type:none;">
