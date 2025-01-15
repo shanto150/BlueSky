@@ -1003,11 +1003,11 @@ function flight_det_card(type_id) {
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-4 m-0 p-0">
+                                <div class="col-md-3 m-0 p-0">
                                     <div class="d-flex">
                                         <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
                                             height="70">
-                                        <div class="text-center mt-2">
+                                        <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>DAC-DXB</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">Qatar Airways</small>
                                             <br>
@@ -1015,8 +1015,8 @@ function flight_det_card(type_id) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 border-start">
-                                    <div class="d-flex gap-2">
+                                <div class="col-md-5 border-start">
+                                    <div class="d-flex gap-5">
                                         <div class="mt-2">
                                             <p class="p-0 m-0"><b>10:50 AM</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">03 Jan, Fri</small>
@@ -1031,8 +1031,9 @@ function flight_det_card(type_id) {
                                                 <div>
                                                     ....
                                                 </div>
-                                                <div><i class="fa fa-plane"
-                                                        style="color: #1882ffb3; margin-top: 4px; font-size: 20px;"></i>
+                                                <div>
+                                                    <img src="../../../../public/theme/appimages/Plane_origin.svg"
+                                                        alt="">
                                                 </div>
                                                 <div>
                                                     ....
@@ -1057,7 +1058,7 @@ function flight_det_card(type_id) {
                                             <small style="font-size: 12px; color: #5e6878;">1 hr 15 min</small>
                                         </div>
                                         <div class="d-flex gap-3 border-start">
-                                            <div class="mt-2">
+                                            <div class="mt-2 ms-md-4">
                                                 <button class="btn btn-sm btn-block btn-primary"
                                                     style="margin-left: 30px;" data-bs-toggle="collapse"
                                                     data-bs-target="#flight-package" aria-controls="flight-package">
@@ -1066,14 +1067,10 @@ function flight_det_card(type_id) {
                                                         <p class="p-0 m-0"><b><i
                                                                     class="fa fa-bangladeshi-taka-sign"></i>
                                                                 65000</b></p>
-                                                        <small style="font-size: 8px; color: #5e6878;"><del><i
-                                                                    class="fa fa-bangladeshi-taka-sign"></i>
-                                                                77000</del></small>
+                                                        <small style="color: #dbdbdb"><del>
+                                                                ৳ 77000</del></small>
                                                         <br>
-                                                        <small style="font-size: 12px;">Economy
-                                                            Calss</small>
-                                                        <!-- <button class="btn btn-sm btn-block btn-primary mt-2">Book
-                                                            Now</button> -->
+                                                        <small style="font-size: 12px;">Economy Class</small>
                                                     </div>
                                                 </button>
                                             </div>
@@ -1083,33 +1080,34 @@ function flight_det_card(type_id) {
                             </div>
                         </div>
 
-                        <div class="card-footer">
+                        <div class="card-footer" style="background-color:#f1f4f7;">
                             <div class="float-start">
                                 <div class="d-flex gap-2">
-
                                     <div class="border border-1 text-center p-1"
                                         style="background-color: #def1ec; color: #12ce69;">
                                         <i class="fa fa-refresh"></i> Refundable
                                     </div>
                                     <div class="border border-1 text-center p-1"
                                         style="background-color: #d6dffa; color: #027de2;">
-                                        <i class="fa fa-rug"></i> BS1234FG
+                                        <i class="fa fa-rug"></i> Fare Basis:AHGC001
+                                    </div>
+                                    <div class="border border-1 text-center p-1"
+                                        style="background-color: #e4e3f6; color: #7944eb;">
+                                        <i class="fa-regular fa-seat-airline"></i> Available Seats: 20
                                     </div>
                                 </div>
-
                             </div>
-                            <div class="float-end">
+                            <div class="float-end me-2">
                                 <div class="d-flex gap-2">
-
                                     <div class="accordion accordion-flush" id="accordionFlushExample">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="flush-headingOne">
-                                                <button class="accordion-button collapsed m-0 p-0 px-2 py-1"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#flight-details" aria-expanded="false"
-                                                    aria-controls="flight-details" style="color: #1184e3;">
-                                                    Flight Details
-                                                </button>
+                                                <a class="accordion-button collapsed m-0 p-0 px-2 py-1"
+                                                    data-bs-toggle="collapse" data-bs-target="#flight-details"
+                                                    aria-expanded="false" aria-controls="flight-details"
+                                                    style="color: #1184e3; font-size: 14px; background: #f1f4f7 !important;">
+                                                    <b>Flight Details</b>
+                                                </a>
                                             </h2>
                                         </div>
                                     </div>
@@ -1133,7 +1131,7 @@ function flight_det_card(type_id) {
                                                             <div class="tab-icon"><i
                                                                     class="bx bx-comment-detail font-18 me-1"></i>
                                                             </div>
-                                                            <div class="tab-title"> Flight Details </div>
+                                                            <div class="tab-title"> Flight Details</div>
                                                         </div>
                                                     </a>
                                                 </li>
@@ -1241,76 +1239,6 @@ function flight_det_card(type_id) {
                                                         </div>
                                                     </div>
 
-                                                    <div class="card ">
-                                                        <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
-                                                            <div class="d-flex">
-                                                                <div class="p-2 flex-grow-1">
-                                                                    <b>
-                                                                        <img src="../../../../public/theme/appimages/Plane_des.svg"
-                                                                            alt="">
-                                                                        Destination
-                                                                    </b>
-                                                                </div>
-                                                                <div class="p-2">Dubai Internation Airport
-                                                                </div>
-                                                                <div class="p-2">Duration: 03 hr 25 min</div>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <div class="col-md-5 border-end">
-                                                                    <div class="d-flex border-right">
-                                                                        <div class="text-start mt-2">
-                                                                            <p class="p-0 m-0"><b>CCU</b></p>
-                                                                            <small
-                                                                                style="font-size: 11px; color: #5e6878;"><b>10:50
-                                                                                    AM | 19 Jan, Thursday</b></small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 11px; color: #5e6878;">Terminal:2</small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 11px; color: #5e6878;">Flight
-                                                                                No:78ER457</small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 11px; color: #5e6878;">Class:Economy</small>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-7">
-                                                                    <div class="row">
-                                                                        <div class="col-md-7">
-                                                                            <div class="d-flex border-right">
-                                                                                <div class="text-start mt-2">
-                                                                                    <p class="p-0 m-0"><b>DXB</b></p>
-                                                                                    <small
-                                                                                        style="font-size: 11px; color: #5e6878;"><b>02:55
-                                                                                            PM | 19 Jan,
-                                                                                            Thursday</b></small>
-                                                                                    <br>
-                                                                                    <small
-                                                                                        style="font-size: 11px; color: #5e6878;">Terminal:3</small>
-                                                                                    <br>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-5 text-center">
-                                                                            <img height="60" width="100"
-                                                                                src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
-                                                                                alt="">
-                                                                            <p class="mb-0 pb-0">Qatar Airways</p>
-                                                                            <p class="mb-0 pb-0">Boeing 707</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
                                                     <div class="row">
@@ -1473,104 +1401,122 @@ function flight_det_card(type_id) {
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <div class="card bg-primary">
-                                                <div class="card-header text-white border-bottom-1">
+                                            <div class="card card-hober">
+                                                <div class="card-header border-bottom-1">
                                                     <h5 class="card-title text-center">Economy</h5>
-                                                    <h6 class="text-center text-white"><i
-                                                            class="fa fa-bangladeshi-taka-sign"></i> 65000</h6>
+                                                    <h6 class="text-center"><i class="fa fa-bangladeshi-taka-sign"></i>
+                                                        65000</h6>
                                                 </div>
                                                 <div class="card-body">
-                                                    <ul style="list-style-type:none;" class="text-white">
-                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle "></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
+                                                    <ul style="list-style-type:none;" class="">
+                                                        <li class="menu-item"> <i class="fa fa-refresh icon-color"></i>
+                                                            Flexible to make 2 changes</li>
+                                                        <li class="menu-item"> <i
+                                                                class="fa-regular fa-circle-xmark icon-color"></i>
+                                                            Cancellation within 24hrs of booking without fees</li>
+
+                                                        <li class="menu-item">
+                                                            <i class="fa-solid fa-suitcase-rolling icon-color"></i> Checked Baggage: 2 pieces, 23 kg each
+                                                        </li>
+                                                        <li class="menu-item"> <i
+                                                                class="fa-solid fa-suitcase-rolling icon-color"></i> Checked
+                                                            Baggage: 2 pieces, 7 kg</li>
+                                                        <li class="menu-item">
+                                                            <i class="fa-regular fa-seat-airline icon-color"></i>
+                                                            Standard Seat selection included
+                                                        </li>
+                                                        <li class="menu-item"> <i class="fa-regular fa-seat-airline icon-color"></i> Preferred
+                                                            Seat selection without fees</li>
+                                                        <li class="menu-item"> <i
+                                                                class="fa fa-utensils icon-color"></i> Free meal
+                                                        </li>
+                                                        <li class="menu-item"> <i
+                                                                class="fa-brands fa-youtube icon-color"></i> Multimedia
+                                                            Support</li>
+                                                        <li class="menu-item"> <i class="fa-solid fa-wifi icon-color"></i> Free Wi-Fi
+                                                        </li>
                                                     </ul>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <button class="btn btn-block w-100 btn-sm btn-primary text-white"><i class="fa fa-check"></i> Selected</button>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
-                                            <div class="card">
+                                            <div class="card card-hober">
                                                 <div class="card-header text-black border-bottom-1">
                                                     <h5 class="card-title text-center">Premium Economy</h5>
                                                     <h6 class="text-center text-black"><i
                                                             class="fa fa-bangladeshi-taka-sign"></i> 70500</h6>
                                                 </div>
                                                 <div class="card-body">
-                                                    <ul style="list-style-type:none;">
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
+                                                    <ul style="list-style-type:none;" class="">
+                                                        <li class="menu-item"> <i class="fa fa-refresh icon-color"></i>
+                                                            Flexible to make 4 changes</li>
+                                                        <li class="menu-item"> <i
+                                                                class="fa-regular fa-circle-xmark icon-color"></i>
+                                                            Cancellation within 24hrs of booking without fees</li>
+
+                                                        <li class="menu-item">
+                                                            <i class="fa-solid fa-suitcase-rolling icon-color"></i> Checked Baggage: 2 pieces, 23 kg each
+                                                        </li>
+                                                        <li class="menu-item"> <i
+                                                                class="fa-solid fa-suitcase-rolling icon-color"></i> Checked
+                                                            Baggage: 2 pieces, 7 kg</li>
+                                                        <li class="menu-item">
+                                                            <i class="fa-regular fa-seat-airline icon-color"></i>
+                                                            Standard Seat selection included
+                                                        </li>
+                                                        <li class="menu-item"> <i class="fa-regular fa-seat-airline icon-color"></i> Preferred
+                                                            Seat selection without fees</li>
+                                                        <li class="menu-item"> <i
+                                                                class="fa fa-utensils icon-color"></i> Free meal
+                                                        </li>
+                                                        <li class="menu-item"> <i
+                                                                class="fa-brands fa-youtube icon-color"></i> Multimedia
+                                                            Support</li>
+                                                        <li class="menu-item"> <i class="fa-solid fa-wifi icon-color"></i> Free Wi-Fi
+                                                        </li>
                                                     </ul>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <button class="btn btn-block w-100 btn-sm btn-primary text-white"> Choose Class</button>
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <div class="card">
+                                            <div class="card card-hober">
                                                 <div class="card-header text-black border-bottom-1">
                                                     <h5 class="card-title text-center">First Class</h5>
-                                                    <h6 class="text-center text-black"><i class="fa fa-bangladeshi-taka-sign"></i> 90500</h6>
+                                                    <h6 class="text-center text-black"><i
+                                                            class="fa fa-bangladeshi-taka-sign"></i> 90500</h6>
                                                 </div>
                                                 <div class="card-body">
-                                                    <ul style="list-style-type:none;">
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
-                                                        <li class="menu-item"> <i class="fa fa-check-circle icon-color"></i> Lorem
-                                                            ipsum dolor sit amet consectetur.</li>
+                                                    <ul style="list-style-type:none;" class="">
+                                                        <li class="menu-item"> <i class="fa fa-refresh icon-color"></i>
+                                                            Flexible to make 4 changes</li>
+                                                        <li class="menu-item"> <i
+                                                                class="fa-regular fa-circle-xmark icon-color"></i>
+                                                            Cancellation within 24hrs of booking without fees</li>
+
+                                                        <li class="menu-item">
+                                                            <i class="fa-solid fa-suitcase-rolling icon-color"></i> Checked Baggage: 2 pieces, 23 kg each
+                                                        </li>
+                                                        <li class="menu-item"> <i
+                                                                class="fa-solid fa-suitcase-rolling icon-color"></i> Checked
+                                                            Baggage: 2 pieces, 7 kg</li>
+                                                        <li class="menu-item">
+                                                            <i class="fa-regular fa-seat-airline icon-color"></i>
+                                                            Standard Seat selection included
+                                                        </li>
+                                                        <li class="menu-item"> <i class="fa-regular fa-seat-airline icon-color"></i> Preferred
+                                                            Seat selection without fees</li>
+                                                        <li class="menu-item"> <i
+                                                                class="fa fa-utensils icon-color"></i> Free meal
+                                                        </li>
+                                                        <li class="menu-item"> <i
+                                                                class="fa-brands fa-youtube icon-color"></i> Multimedia
+                                                            Support</li>
+                                                        <li class="menu-item"> <i class="fa-solid fa-wifi icon-color"></i> Free Wi-Fi
+                                                        </li>
                                                     </ul>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <button class="btn btn-block w-100 btn-sm btn-primary text-white"> Choose Class</button>
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -1583,21 +1529,22 @@ function flight_det_card(type_id) {
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-4 m-0 p-0">
+                                <div class="col-md-3 m-0 p-0">
                                     <div class="d-flex">
                                         <img style="margin: 0 40px 0 28px;"
                                             src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
                                             height="70">
-                                        <div class="text-center mt-2">
+                                        <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>DAC-DXB</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">Qatar Airways</small>
+                                            <small style="font-size: 12px; color: #5e6878;">Emirates</small>
                                             <br>
                                             <small style="font-size: 12px; color: #5e6878;">Boeing 707</small>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 border-start">
-                                    <div class="d-flex gap-2">
+
+                                <div class="col-md-5 border-start">
+                                    <div class="d-flex gap-5">
                                         <div class="mt-2">
                                             <p class="p-0 m-0"><b>10:50 AM</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">03 Jan, Fri</small>
@@ -1612,8 +1559,9 @@ function flight_det_card(type_id) {
                                                 <div>
                                                     ....
                                                 </div>
-                                                <div><i class="fa fa-plane"
-                                                        style="color: #1882ffb3; margin-top: 4px; font-size: 20px;"></i>
+                                                <div>
+                                                    <img src="../../../../public/theme/appimages/Plane_origin.svg"
+                                                        alt="">
                                                 </div>
                                                 <div>
                                                     ....
@@ -1630,6 +1578,7 @@ function flight_det_card(type_id) {
 
                                     </div>
                                 </div>
+
                                 <div class="col-md-4 border-start">
                                     <div class="d-flex gap-2">
                                         <div class="mt-2">
@@ -1638,52 +1587,111 @@ function flight_det_card(type_id) {
                                             <small style="font-size: 12px; color: #5e6878;">1 hr 15 min</small>
                                         </div>
                                         <div class="d-flex gap-3 border-start">
-                                            <div class="mt-2">
-                                                <div class="text-right" style="padding-left: 10px;">
-                                                    <p class="p-0 m-0"><b><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                            65000</b></p>
-                                                    <small style="font-size: 12px; color: #5e6878;">
-                                                        <del><i class="fa fa-bangladeshi-taka-sign"></i> 67000</del>
-                                                    </small><br>
-                                                    <small style="font-size: 12px; color: #5e6878;">Economy
-                                                        Calss</small>
-                                                    <button class="btn btn-sm btn-block btn-primary mt-2">Book
-                                                        Now</button>
-                                                </div>
+                                            <div class="mt-2 ms-md-4">
+                                                <button class="btn btn-sm btn-block btn-primary"
+                                                    style="margin-left: 30px;" data-bs-toggle="collapse"
+                                                    data-bs-target="#flight-package-2" aria-controls="flight-package-2">
+
+                                                    <div class="text-right" style="padding-left: 10px;">
+                                                        <p class="p-0 m-0"><b><i
+                                                                    class="fa fa-bangladeshi-taka-sign"></i>
+                                                                65000</b></p>
+                                                        <small style="color: #dbdbdb"><del>
+                                                                ৳ 77000</del></small>
+                                                        <br>
+                                                        <small style="font-size: 12px;">Economy Class</small>
+                                                    </div>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
+
+                                <!-- return -->
+                                <div class="col-md-3 m-0 p-0">
+                                    <div class="d-flex">
+                                        <img style="margin: 0 40px 0 28px;"
+                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
+                                            height="70">
+                                        <div class="text-left mt-2">
+                                            <p class="p-0 m-0"><b>DXB-DAC</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">Emirates</small>
+                                            <br>
+                                            <small style="font-size: 12px; color: #5e6878;">Boeing 777</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5 border-start">
+                                    <div class="d-flex gap-5">
+                                        <div class="mt-2">
+                                            <p class="p-0 m-0"><b>01:00 AM
+                                                </b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">18 Feb, Tue</small>
+                                            <br>
+                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
+                                        </div>
+
+                                        <div class="text-center mt-2">
+                                            <small style="font-size: 12px; color: #5e6878;">05 hr 25 Min</small>
+                                            <br>
+                                            <div class="d-flex">
+                                                <div>
+                                                    ....
+                                                </div>
+                                                <div>
+                                                    <img src="../../../../public/theme/appimages/Plane-return.svg"
+                                                        alt="">
+                                                </div>
+                                                <div>
+                                                    ....
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-2">
+                                            <p class="p-0 m-0"><b>04:25 AM</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">28 Feb, Fri</small>
+                                            <br>
+                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- ./return end -->
                             </div>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer" style="background-color:#f1f4f7;">
                             <div class="float-start">
                                 <div class="d-flex gap-2">
-
                                     <div class="border border-1 text-center p-1"
                                         style="background-color: #def1ec; color: #12ce69;">
                                         <i class="fa fa-refresh"></i> Refundable
                                     </div>
                                     <div class="border border-1 text-center p-1"
                                         style="background-color: #d6dffa; color: #027de2;">
-                                        <i class="fa fa-rug"></i> BS1234FG
+                                        <i class="fa fa-rug"></i> Fare Basis:AHGC001
+                                    </div>
+                                    <div class="border border-1 text-center p-1"
+                                        style="background-color: #e4e3f6; color: #7944eb;">
+                                        <i class="fa-regular fa-seat-airline"></i> Available Seats: 20
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="float-end">
+                            <div class="float-end me-2">
                                 <div class="d-flex gap-2">
 
-                                    <div class="accordion accordion-flush" id="accordionFlushExample2">
+                                    <div class="accordion accordion-flush" id="accordionFlushExample">
                                         <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-headingTwo">
-                                                <button class="accordion-button collapsed m-0 p-0 px-2 py-1"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#flight-details-2" aria-expanded="false"
-                                                    aria-controls="flight-details-2" style="color: #1184e3;">
-                                                    Flight Details
-                                                </button>
+                                            <h2 class="accordion-header" id="flush-headingOne">
+                                                <a class="accordion-button collapsed m-0 p-0 px-2 py-1"
+                                                    data-bs-toggle="collapse" data-bs-target="#flight-details-2"
+                                                    aria-expanded="false" aria-controls="flight-details-2"
+                                                    style="color: #1184e3; font-size: 14px; background: #f1f4f7 !important;">
+                                                    <b>Flight Details</b>
+                                                </a>
                                             </h2>
                                         </div>
                                     </div>
@@ -1707,7 +1715,7 @@ function flight_det_card(type_id) {
                                                             <div class="tab-icon"><i
                                                                     class="bx bx-comment-detail font-18 me-1"></i>
                                                             </div>
-                                                            <div class="tab-title"> Flight Details </div>
+                                                            <div class="tab-title"> Flight Details</div>
                                                         </div>
                                                     </a>
                                                 </li>
@@ -1736,8 +1744,18 @@ function flight_det_card(type_id) {
                                             </ul>
                                             <div class="tab-content pt-3">
                                                 <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-12">
+                                                            <div class="d-flex gap-1">
+                                                                <button class="btn btn-sm btn-primary">DAC-DXB</button>
+                                                                <button
+                                                                    class="btn btn-sm btn-outline-primary">DXB-DAC</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="card">
                                                         <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
+
                                                             <div class="d-flex">
                                                                 <div class="p-2 flex-grow-1">
                                                                     <b>
@@ -2081,7 +2099,14 @@ function flight_det_card(type_id) {
 li.menu-item {
     margin: 0px 0px 10px -25px
 }
-.icon-color{
-   color: #0ab4b6;
+
+.icon-color {
+    color: #31a0fc;
 }
+
+.accordion-button:after {
+    margin-left: 3px !important;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23027de2'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
 </style>
