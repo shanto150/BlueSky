@@ -4,7 +4,8 @@ import axiosInstance from "../../../axiosInstance"
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
-const form = reactive({ name: "", email: "", country: "", address: "", established_date: "" });
+const form = reactive({ name: "", email: "", country: "", address: "", established_date: "", postal_code: "", ca_number: "" });
+const previewImage = ref('');
 
 const isAgencyDetails = ref(true);
 const isAgencyDocument = ref(false);
@@ -14,7 +15,8 @@ const classAgencyActive = ref(true);
 const classDocActive = ref(false);
 const classDocupActive = ref(false);
 const classKAMActive = ref(false);
-const state_iata =ref(false);
+const state_iata = ref(false);
+const state_hajj = ref(false);
 function nextPhase(id) {
     if (id == 1) {
         this.isAgencyDetails = false;
@@ -69,12 +71,32 @@ function nextPhase(id) {
 
 }
 
-function iata_non_iata(value_stage){
-    if(value_stage == 1){
-       return this.state_iata = true;
-    }else{
+function iata_non_iata(value_stage) {
+    if (value_stage == 1) {
+        return this.state_iata = true;
+    } else {
         return this.state_iata = false;
     }
+}
+
+function hajjNonHajj(value_stage){
+    if (value_stage == 1) {
+        return this.state_hajj = true;
+    } else {
+        return this.state_hajj = false;
+    }
+}
+
+
+const handleFileChange = (event) => {
+    form.profile_picture = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(form.profile_picture);
+    // console.log(reader.readAsDataURL(form.profile_picture));
+
+    reader.onload = (e) => {
+        previewImage.value = e.target.result;
+    };
 }
 
 </script>
@@ -218,14 +240,16 @@ function iata_non_iata(value_stage){
                                                 <div class="col-12 col-lg-12 d-flex align-items-center gap-3 mt-2">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio"
-                                                            name="iata_non_iata" @change="iata_non_iata(1)" value="1" id="flexRadioDefault1">
+                                                            name="iata_non_iata" @change="iata_non_iata(1)" value="1"
+                                                            id="flexRadioDefault1">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             IATA
                                                         </label>
                                                     </div>
                                                     <div class="form-check form-check-success">
                                                         <input class="form-check-input" type="radio"
-                                                            name="iata_non_iata"  @change="iata_non_iata(2)" value="2" id="flexRadioSuccess">
+                                                            name="iata_non_iata" @change="iata_non_iata(2)" value="2"
+                                                            id="flexRadioSuccess">
                                                         <label class="form-check-label" for="flexRadioSuccess">
                                                             Non-IATA
                                                         </label>
@@ -233,7 +257,8 @@ function iata_non_iata(value_stage){
 
                                                     <div class="form-check form-check-info">
                                                         <input class="form-check-input" type="radio"
-                                                            name="iata_non_iata"  @change="iata_non_iata(3)" value="3" id="flexRadioInfo">
+                                                            name="iata_non_iata" @change="iata_non_iata(3)" value="3"
+                                                            id="flexRadioInfo">
                                                         <label class="form-check-label" for="flexRadioInfo">
                                                             Corporate
                                                         </label>
@@ -241,7 +266,8 @@ function iata_non_iata(value_stage){
                                                 </div>
 
                                                 <div class="col-12 col-md-12 mt-2" v-if="state_iata">
-                                                    <input type="text" v-model="form.iata_number" class="form-control form-control-sm" id="iata_number"
+                                                    <input type="text" v-model="form.iata_number"
+                                                        class="form-control form-control-sm" id="iata_number"
                                                         placeholder="Enter IATA License Number">
                                                 </div>
 
@@ -250,7 +276,7 @@ function iata_non_iata(value_stage){
                                                         2Mb)</label>
 
                                                     <div class="input-group mb-3">
-                                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                                        <input type="file" @change="handleFileChange" class="form-control" id="inputGroupFile02">
                                                         <label class="input-group-text"
                                                             for="inputGroupFile02">Upload</label>
                                                     </div>
@@ -262,19 +288,19 @@ function iata_non_iata(value_stage){
                                             <div class="row">
                                                 <div class="col-12 col-lg-12">
                                                     <label for="agent_code" class="form-label">Agency Code</label>
-                                                    <input type="text" class="form-control form-control-sm" id="acode"
+                                                    <input type="text" v-model="form.agent_code" class="form-control form-control-sm" name="agent_code" id="agent_code"
                                                         placeholder="Enter Agency Code">
                                                 </div>
 
                                                 <div class="col-12 col-md-12 mt-2">
                                                     <label for="date" class="form-label">Phone</label>
-                                                    <input type="text" class="form-control form-control-sm" id="pcode"
+                                                    <input type="text" v-model="form.phone"  class="form-control form-control-sm" id="phone" name="phone"
                                                         placeholder="Enter Phone Number">
                                                 </div>
 
                                                 <div class="col-12 col-lg-12 mt-2">
                                                     <label for="city" class="form-label">City</label>
-                                                    <select class="form-select form-select-sm" id="city"
+                                                    <select class="form-select form-select-sm" name="city" v-model="form.city" id="city"
                                                         aria-label="Default select example">
                                                         <option>Select City</option>
                                                     </select>
@@ -282,7 +308,8 @@ function iata_non_iata(value_stage){
 
                                                 <div class="col-12 col-lg-12 mt-2">
                                                     <label for="zone" class="form-label">Zone</label>
-                                                    <select class="form-select form-select-sm" id="zone"
+                                                    <select class="form-select form-select-sm" name="zone"
+                                                    v-model="form.zone" id="zone"
                                                         aria-label="Default select example">
                                                         <option>Select Zone</option>
                                                     </select>
@@ -291,48 +318,49 @@ function iata_non_iata(value_stage){
                                                 <div class="col-12 col-md-12 mt-2">
                                                     <label for="registration" class="form-label">Registration
                                                         Number</label>
-                                                    <input type="text" class="form-control form-control-sm" id="rnumber"
+                                                    <input type="text" class="form-control form-control-sm" id="reg_number" name="reg_number" v-model="form.reg_number"
                                                         placeholder="Enter Registration Number">
                                                 </div>
 
                                                 <div class="col-12 col-md-12 mt-2">
                                                     <label for="fax" class="form-label">Fax</label>
-                                                    <input type="text" class="form-control form-control-sm" id="rnumber"
+                                                    <input type="text" name="fax" v-model="form.fax" class="form-control form-control-sm" id="fax"
                                                         placeholder="Enter Fax">
                                                 </div>
 
                                                 <div class="col-12 col-md-12 mt-2">
-                                                    <label for="tl" class="form-label">Trade Licence</label>
-                                                    <input type="text" class="form-control form-control-sm" id="tl"
+                                                    <label for="trade_licence" class="form-label">Trade Licence</label>
+                                                    <input type="text" name="trade_licence" v-model="form.trade_licence" class="form-control form-control-sm" id="trade_licence"
                                                         placeholder="Enter Trade Licence">
                                                 </div>
 
                                                 <div class="col-12 col-lg-12 d-flex align-items-center gap-3 mt-2">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio"
-                                                            name="flexRadioDefault" id="flexRadioDefault1">
+                                                            name="hajjNonHajj" @change="hajjNonHajj(1)" id="flexRadioDefault1">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             Hajj
                                                         </label>
                                                     </div>
                                                     <div class="form-check form-check-success">
                                                         <input class="form-check-input" type="radio"
-                                                            name="flexRadioDefault" id="flexRadioSuccess">
+                                                            name="hajjNonHajj" @change="hajjNonHajj(2)" id="flexRadioSuccess">
                                                         <label class="form-check-label" for="flexRadioSuccess">
                                                             Non-Hajj
                                                         </label>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12 col-md-12 mt-2">
+                                                <div class="col-12 col-md-12 mt-2" v-show="state_hajj">
                                                     <input type="text" class="form-control form-control-sm" id="hajn"
                                                         placeholder="Enter Number">
                                                 </div>
 
-                                                <div class="d-flex align-items-center mt-4">
-                                                    <img src="/public/theme/appimages/rqf.png"
-                                                        class="rounded-circle p-1 border" width="60" height="60"
-                                                        alt="...">
+                                                <div v-if="previewImage" class="d-flex align-items-center mt-4">
+                                                    <img  :src="previewImage" height="60"
+                                                        width="60" class="border border-1 rounded rounded-2"
+                                                        alt="Profile Picture">
+
                                                     <div class="flex-grow-1 ms-3">
                                                         <p class="mb-0"><i
                                                                 class="btn-outline-success rounded-circle fa fa-circle-check"></i>
@@ -357,16 +385,11 @@ function iata_non_iata(value_stage){
                                 </div>
 
                                 <div class="row" v-if="isAgencyDocument">
-                                    <p>Upload Your Documents <br> <span style="font-size: 12px;">Supported Formats :
-                                            Jpeg,
-                                            Png or
-                                            Pdf | Max File Size : 2MB</span></p>
+                                    <p>Upload Your Documents <br> <span style="font-size: 12px;">Supported Formats :Jpeg,Png or Pdf | Max File Size : 2MB</span></p>
                                     <div class="col-md-3 d-flex justify-content-center m-1 flex-column"
                                         style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: black; height: 100px; background-color: transparent; border-radius: 3px; border: 2px dotted #7785f4">
                                         <div class="d-inline text-center">
-                                            <img id="doc_output" class="rounded" src="/public/theme/appimages/rqf.png"
-                                                height="40" width="40" alt="">
-
+                                            <img id="doc_output" class="rounded" src="/public/theme/appimages/rqf.png" height="40" width="40" alt="">
                                         </div>
 
                                         <div class="d-inline text-center">Trade License</div>
