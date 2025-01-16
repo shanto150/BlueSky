@@ -4,7 +4,7 @@ import axiosInstance from "../../axiosInstance"
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 const fdate = ref();
-const isAutoApply = ref(true);
+const isAutoApplys = ref(true);
 const isMultiCalendar = ref(false);
 const isRanges = ref();
 
@@ -138,7 +138,7 @@ function tourTypeChange(type) {
         $('.multi-city').addClass('bg-checkbox');
 
         $('#toDateChange').addClass('d-none');
-        this.isAutoApply = !this.isAutoApply;
+        this.isAutoApplys = !this.isAutoApplys;
         this.isMultiCalendar = !this.isMultiCalendar;
         this.isRanges = !this.isRanges;
         this.isRounded = 'oneway';
@@ -153,7 +153,7 @@ function tourTypeChange(type) {
         $('.multi-city').addClass('bg-checkbox');
 
         $('#toDateChange').removeClass('d-none');
-        this.isAutoApply = !this.isAutoApply;
+        this.isAutoApplys = !this.isAutoApplys;
         this.isMultiCalendar = !this.isMultiCalendar;
         this.isRanges = !this.isRanges;
         this.isRounded = 'round';
@@ -695,13 +695,13 @@ function offHover() {
 
                         <div class="col-md-2 mt-2 mt-md-0" v-if="isRounded == 'oneway'">
                             <VueDatePicker class="dateChange" id="fromdateVal" v-model="fdate" placeholder="Select Date"
-                                :enable-time-picker="false" :format="format" :auto-apply="isAutoApply"
+                                :enable-time-picker="false" :format="format" :auto-apply="isAutoApplys"
                                 :multi-calendars="isMultiCalendar" :range="isRanges"></VueDatePicker>
 
                         </div>
                         <div class="col-md-2 mt-2 mt-md-0" v-if="isRounded == 'round'">
                             <VueDatePicker class="dateChange" id="fromdateVal" v-model="fdate" placeholder="Select Date"
-                                :enable-time-picker="false" :format="formats" :auto-apply="isAutoApply"
+                                :enable-time-picker="false" :format="formats" :auto-apply="isAutoApplys"
                                 :multi-calendars="isMultiCalendar" :range="isRanges"></VueDatePicker>
 
                         </div>
