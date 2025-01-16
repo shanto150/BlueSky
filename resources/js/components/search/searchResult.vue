@@ -1052,9 +1052,8 @@ function flight_det_card(type_id) {
                                 <div class="col-md-4 border-start">
                                     <div class="d-flex gap-2">
                                         <div class="mt-2">
-                                            <p class="p-0 m-0"><b>01 Stop</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">CCU</small><br>
-                                            <small style="font-size: 12px; color: #5e6878;">1 hr 15 min</small>
+                                            <p class="p-0 m-0"><b> Non-Stop</b></p>
+
                                         </div>
                                         <div class="d-flex gap-3 border-start">
                                             <div class="mt-2 ms-md-4">
@@ -1203,7 +1202,7 @@ function flight_det_card(type_id) {
                                                                         <div class="col-md-7">
                                                                             <div class="d-flex border-right">
                                                                                 <div class="text-start mt-2">
-                                                                                    <p class="p-0 m-0"><b>CCU</b></p>
+                                                                                    <p class="p-0 m-0"><b>DXB</b></p>
                                                                                     <small
                                                                                         style="font-size: 13px; color: #5e6878;"><b>11:55
                                                                                             AM | 19 Jan,
@@ -1224,15 +1223,16 @@ function flight_det_card(type_id) {
                                                                             <p class="mb-0 pb-0">Qatar Airways</p>
                                                                             <p class="mb-0 pb-0">Boeing 707</p>
                                                                         </div>
-                                                                        <div class="col-md-9 mt-1">
-                                                                            <div class="chip chip-sm"
-                                                                                style="font-size: 8px !important;">
-                                                                                <i
-                                                                                    class="fa fa-map-marker custom-text-purple"></i>
-                                                                                Layover:Netaji Subha.. | 02 hr 30 min
-                                                                            </div>
-                                                                        </div>
+
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-2 p-2 pb-0">
+                                                                <!-- 8px -->
+                                                                <div class="chip chip-sm"
+                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6;">
+                                                                    <i class="fa fa-map-marker custom-text-purple"></i>
+                                                                    Destination : Dubai Internation Airport
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1415,24 +1415,29 @@ function flight_det_card(type_id) {
                                                             Cancellation within 24hrs of booking without fees</li>
 
                                                         <li class="menu-item">
-                                                            <i class="fa-solid fa-suitcase-rolling icon-color"></i> Checked Baggage: 2 pieces, 23 kg each
+                                                            <i class="fa-solid fa-suitcase-rolling icon-color"></i>
+                                                            Checked Baggage: 2 pieces, 23 kg each
                                                         </li>
                                                         <li class="menu-item"> <i
-                                                                class="fa-solid fa-suitcase-rolling icon-color"></i> Checked
+                                                                class="fa-solid fa-suitcase-rolling icon-color"></i>
+                                                            Checked
                                                             Baggage: 2 pieces, 7 kg</li>
                                                         <li class="menu-item">
                                                             <i class="fa-regular fa-seat-airline icon-color"></i>
                                                             Standard Seat selection included
                                                         </li>
-                                                        <li class="menu-item"> <i class="fa-regular fa-seat-airline icon-color"></i> Preferred
-                                                            Seat selection without fees</li>
                                                         <li class="menu-item"> <i
-                                                                class="fa fa-utensils icon-color"></i> Free meal
+                                                                class="fa-regular fa-seat-airline icon-color"></i>
+                                                            Preferred
+                                                            Seat selection without fees</li>
+                                                        <li class="menu-item"> <i class="fa fa-utensils icon-color"></i>
+                                                            Free meal
                                                         </li>
                                                         <li class="menu-item"> <i
                                                                 class="fa-brands fa-youtube icon-color"></i> Multimedia
                                                             Support</li>
-                                                        <li class="menu-item"> <i class="fa-solid fa-wifi icon-color"></i> Free Wi-Fi
+                                                        <li class="menu-item"> <i
+                                                                class="fa-solid fa-wifi icon-color"></i> Free Wi-Fi
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -1455,24 +1460,29 @@ function flight_det_card(type_id) {
                                                             Cancellation within 24hrs of booking without fees</li>
 
                                                         <li class="menu-item">
-                                                            <i class="fa-solid fa-suitcase-rolling icon-color"></i> Checked Baggage: 2 pieces, 23 kg each
+                                                            <i class="fa-solid fa-suitcase-rolling icon-color"></i>
+                                                            Checked Baggage: 2 pieces, 23 kg each
                                                         </li>
                                                         <li class="menu-item"> <i
-                                                                class="fa-solid fa-suitcase-rolling icon-color"></i> Checked
+                                                                class="fa-solid fa-suitcase-rolling icon-color"></i>
+                                                            Checked
                                                             Baggage: 2 pieces, 7 kg</li>
                                                         <li class="menu-item">
                                                             <i class="fa-regular fa-seat-airline icon-color"></i>
                                                             Standard Seat selection included
                                                         </li>
-                                                        <li class="menu-item"> <i class="fa-regular fa-seat-airline icon-color"></i> Preferred
-                                                            Seat selection without fees</li>
                                                         <li class="menu-item"> <i
-                                                                class="fa fa-utensils icon-color"></i> Free meal
+                                                                class="fa-regular fa-seat-airline icon-color"></i>
+                                                            Preferred
+                                                            Seat selection without fees</li>
+                                                        <li class="menu-item"> <i class="fa fa-utensils icon-color"></i>
+                                                            Free meal
                                                         </li>
                                                         <li class="menu-item"> <i
                                                                 class="fa-brands fa-youtube icon-color"></i> Multimedia
                                                             Support</li>
-                                                        <li class="menu-item"> <i class="fa-solid fa-wifi icon-color"></i> Free Wi-Fi
+                                                        <li class="menu-item"> <i
+                                                                class="fa-solid fa-wifi icon-color"></i> Free Wi-Fi
                                                         </li>
                                                     </ul>
 
@@ -1497,24 +1507,29 @@ function flight_det_card(type_id) {
                                                         </li>
 
                                                         <li class="menu-item">
-                                                            <i class="fa-solid fa-suitcase-rolling icon-color"></i> Checked Baggage: 2 pieces, 23 kg each
+                                                            <i class="fa-solid fa-suitcase-rolling icon-color"></i>
+                                                            Checked Baggage: 2 pieces, 23 kg each
                                                         </li>
                                                         <li class="menu-item"> <i
-                                                                class="fa-solid fa-suitcase-rolling icon-color"></i> Checked
+                                                                class="fa-solid fa-suitcase-rolling icon-color"></i>
+                                                            Checked
                                                             Baggage: 2 pieces, 7 kg</li>
                                                         <li class="menu-item">
                                                             <i class="fa-regular fa-seat-airline icon-color"></i>
                                                             Standard Seat selection included
                                                         </li>
-                                                        <li class="menu-item"> <i class="fa-regular fa-seat-airline icon-color"></i> Preferred
-                                                            Seat selection without fees</li>
                                                         <li class="menu-item"> <i
-                                                                class="fa fa-utensils icon-color"></i> Free meal
+                                                                class="fa-regular fa-seat-airline icon-color"></i>
+                                                            Preferred
+                                                            Seat selection without fees</li>
+                                                        <li class="menu-item"> <i class="fa fa-utensils icon-color"></i>
+                                                            Free meal
                                                         </li>
                                                         <li class="menu-item"> <i
                                                                 class="fa-brands fa-youtube icon-color"></i> Multimedia
                                                             Support</li>
-                                                        <li class="menu-item"> <i class="fa-solid fa-wifi icon-color"></i> Free Wi-Fi
+                                                        <li class="menu-item"> <i
+                                                                class="fa-solid fa-wifi icon-color"></i> Free Wi-Fi
                                                         </li>
                                                     </ul>
 
@@ -1746,7 +1761,8 @@ function flight_det_card(type_id) {
                                                     <div class="row mb-2">
                                                         <div class="col-md-12">
                                                             <div class="d-flex gap-1">
-                                                                <button class="btn btn-sm bluesky-btn-primary">DAC-DXB</button>
+                                                                <button
+                                                                    class="btn btn-sm bluesky-btn-primary">DAC-DXB</button>
                                                                 <button
                                                                     class="btn btn-sm bluesky-btn-outline-primary">DXB-DAC</button>
                                                             </div>
@@ -1818,15 +1834,15 @@ function flight_det_card(type_id) {
                                                                             <p class="mb-0 pb-0">Emirates Airline</p>
                                                                             <p class="mb-0 pb-0">Boeing 707</p>
                                                                         </div>
-                                                                        <div class="col-md-9 mt-1">
-                                                                            <div class="chip chip-sm"
-                                                                                style="font-size: 8px !important;">
-                                                                                <i
-                                                                                    class="fa fa-map-marker custom-text-purple"></i>
-                                                                                Layover:Netaji Subha.. | 02 hr 30 min
-                                                                            </div>
-                                                                        </div>
+
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-2 p-2 pb-0">
+                                                                <div class="chip chip-sm"
+                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6;">
+                                                                    <i class="fa fa-map-marker custom-text-purple"></i>
+                                                                    Layover:Netaji Subhash Chandra Bose... | 02 hr 30 min
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2107,6 +2123,4 @@ li.menu-item {
     margin-left: 3px !important;
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237944eb'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
 }
-
-
 </style>
