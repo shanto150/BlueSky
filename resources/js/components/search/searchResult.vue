@@ -1493,7 +1493,9 @@ function flight_det_card(type_id) {
                                                             Flexible to make 4 changes</li>
                                                         <li class="menu-item"> <i
                                                                 class="fa-regular fa-circle-xmark icon-color"></i>
-                                                            Cancellation within 24hrs of booking without fees</li>
+
+                                                            Cancellation within 24hrs of booking without fees
+                                                        </li>
 
                                                         <li class="menu-item">
                                                             <i class="fa-solid fa-suitcase-rolling icon-color"></i> Checked Baggage: 2 pieces, 23 kg each
