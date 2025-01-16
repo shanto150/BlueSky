@@ -799,7 +799,6 @@ function offHover() {
     height: 22px !important;
     top: 0px !important;
 }
-
 .bg-checkbox-active {
     color: #fff;
     /* background: #1882ff; */
@@ -811,35 +810,4 @@ function offHover() {
     border-color: #ffffff;
 }
 
-.bluesky-border-primary{
-    border-color: #7944eb !important;
-}
-.custom-text-purple{
-    color: #7944eb;
-}
-
-.bluesky-btn-primary {
-    color: #fff;
-    background-color: #7944eb;
-    border-color: #7944eb;
-    padding: 8px 18px 8px 18px;
-    border-radius: 8px 8px 8px 8px;
-}
-.bluesky-btn-primary:hover {
-    color: #fff;
-    background-color: #875ae9;
-    border-color: #875ae9;
-    padding: 8px 18px 8px 18px;
-    border-radius: 8px 8px 8px 8px;
-}
-
-.bluesky-btn-outline-primary {
-    color: #875ae9;
-    border-color: #875ae9;
-}
-.bluesky-btn-outline-primary:hover {
-    color: #fff;
-    background-color: #875ae9;
-    border-color: #875ae9;
-}
 </style>
