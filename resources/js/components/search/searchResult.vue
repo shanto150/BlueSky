@@ -198,8 +198,8 @@ function offHover() {
 
 function flight_det_card(type_id) {
     const isType1 = type_id == 1;
-    $('.baggade').toggleClass('btn-primary', isType1).toggleClass('btn-outline-primary', !isType1);
-    $('.fare_summary').toggleClass('btn-primary', !isType1).toggleClass('btn-outline-primary', isType1);
+    $('.baggade').toggleClass('bluesky-btn-primary', isType1).toggleClass('bluesky-btn-outline-primary', !isType1);
+    $('.fare_summary').toggleClass('bluesky-btn-primary', !isType1).toggleClass('bluesky-btn-outline-primary', isType1);
     $('#fare_summary_details').toggleClass('d-none', isType1);
     $('#baggade').toggleClass('d-none', !isType1);
 
@@ -223,7 +223,7 @@ function flight_det_card(type_id) {
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card border border-1 border-primary">
+            <div class="card border border-1 bluesky-border-primary">
 
                 <div class="card-body">
                     <div class="d-flex align-items-center gap-2">
@@ -257,7 +257,7 @@ function flight_det_card(type_id) {
                             <div class="row">
                                 <div class="col-md-4 pt-1 pr-0">
                                     <div class="input-group input-group-sm mb-3">
-                                        <button class="btn btn-outline-primary dropdown-toggle" type="button"
+                                        <button class="btn bluesky-btn-outline-primary dropdown-toggle" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
                                         <ul class="dropdown-menu p-1" style="width: 300px;">
                                             <table class="table table-sm">
@@ -274,7 +274,7 @@ function flight_det_card(type_id) {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-minus-circle text-primary">
+                                                                        class="feather feather-minus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
@@ -289,7 +289,7 @@ function flight_det_card(type_id) {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-plus-circle text-primary">
+                                                                        class="feather feather-plus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -311,7 +311,7 @@ function flight_det_card(type_id) {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-minus-circle text-primary">
+                                                                        class="feather feather-minus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
@@ -326,7 +326,7 @@ function flight_det_card(type_id) {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-plus-circle text-primary">
+                                                                        class="feather feather-plus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -347,7 +347,7 @@ function flight_det_card(type_id) {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-minus-circle text-primary">
+                                                                        class="feather feather-minus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
@@ -362,7 +362,7 @@ function flight_det_card(type_id) {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-plus-circle text-primary">
+                                                                        class="feather feather-plus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -403,7 +403,7 @@ function flight_det_card(type_id) {
                     <!-- in small screen -->
                     <div class="row d-sm-block d-md-none mt-2">
 
-                        <button class="col-md-12 btn btn-outline-primary dropdown-toggle" type="button"
+                        <button class="col-md-12 btn bluesky-btn-outline-primary dropdown-toggle" type="button"
                             data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
                         <ul class="dropdown-menu p-1" style="width: 300px;">
                             <table class="table table-sm">
@@ -419,7 +419,7 @@ function flight_det_card(type_id) {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-minus-circle text-primary">
+                                                        class="feather feather-minus-circle custom-text-purple">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                     </svg>
@@ -432,7 +432,7 @@ function flight_det_card(type_id) {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-plus-circle text-primary">
+                                                        class="feather feather-plus-circle custom-text-purple">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -453,7 +453,7 @@ function flight_det_card(type_id) {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-minus-circle text-primary">
+                                                        class="feather feather-minus-circle custom-text-purple">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                     </svg>
@@ -466,7 +466,7 @@ function flight_det_card(type_id) {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-plus-circle text-primary">
+                                                        class="feather feather-plus-circle custom-text-purple">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -486,7 +486,7 @@ function flight_det_card(type_id) {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-minus-circle text-primary">
+                                                        class="feather feather-minus-circle custom-text-purple">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                     </svg>
@@ -499,7 +499,7 @@ function flight_det_card(type_id) {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-plus-circle text-primary">
+                                                        class="feather feather-plus-circle custom-text-purple">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -594,20 +594,20 @@ function flight_det_card(type_id) {
                             <div class="d-flex">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-clock text-primary">
+                                    stroke-linejoin="round" class="feather feather-clock custom-text-purple">
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
                                 &nbsp;&nbsp;
                                 <span class="pt-1" style="font-size: 13px;">Book Flight within</span>
                                 &nbsp; &nbsp;
-                                <div class="dash-lable bg-light-primary text-primary rounded-1">
+                                <div class="dash-lable bg-light-primary custom-text-purple rounded-1">
                                     <p class="text-black mb-0">30</p>
                                 </div>
                                 &nbsp;
                                 <div class="ml-1 mr-1">:</div>
                                 &nbsp;
-                                <div class="dash-lable bg-light-primary text-primary rounded-1">
+                                <div class="dash-lable bg-light-primary custom-text-purple rounded-1">
                                     <p class="text-black mb-0">00</p>
                                 </div>
                             </div>
@@ -662,9 +662,9 @@ function flight_det_card(type_id) {
                                         <div class="col-md-12">
                                             <div class="d-flex gap-2">
                                                 <button type="button"
-                                                    class="btn btn-outline-primary w-100">Departure</button>
+                                                    class="btn bluesky-btn-primary w-100">Departure</button>
                                                 <button type="button"
-                                                    class="btn btn-outline-secondary w-100">Arrival</button>
+                                                    class="btn bluesky-btn-outline-primary w-100">Arrival</button>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mt-2">
@@ -674,7 +674,7 @@ function flight_det_card(type_id) {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-sunrise text-primary">
+                                                        class="feather feather-sunrise custom-text-purple">
                                                         <path d="M17 18a5 5 0 0 0-10 0"></path>
                                                         <line x1="12" y1="2" x2="12" y2="9"></line>
                                                         <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
@@ -692,7 +692,7 @@ function flight_det_card(type_id) {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-sun text-primary">
+                                                        class="feather feather-sun custom-text-purple">
                                                         <circle cx="12" cy="12" r="5"></circle>
                                                         <line x1="12" y1="1" x2="12" y2="3"></line>
                                                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -712,7 +712,7 @@ function flight_det_card(type_id) {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-sunset text-primary">
+                                                        class="feather feather-sunset custom-text-purple">
                                                         <path d="M17 18a5 5 0 0 0-10 0"></path>
                                                         <line x1="12" y1="9" x2="12" y2="2"></line>
                                                         <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
@@ -730,7 +730,7 @@ function flight_det_card(type_id) {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-moon text-primary">
+                                                        class="feather feather-moon custom-text-purple">
                                                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z">
                                                         </path>
                                                     </svg>
@@ -962,7 +962,7 @@ function flight_det_card(type_id) {
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            Netaki Subhas Chandra Bose..
+                                            Netaji Subhas Chandra Bose..
                                         </label>
                                     </div>
                                     <div class="form-check">
@@ -990,7 +990,7 @@ function flight_det_card(type_id) {
                     </div>
                 </div>
                 <div class="col-md-12 mt-4">
-                    <button class="btn btn-block btn-sm btn-outline-primary w-100">
+                    <button class="btn btn-block btn-sm bluesky-btn-outline-primary w-100">
                         Clear All Filters
                     </button>
                 </div>
@@ -1010,8 +1010,7 @@ function flight_det_card(type_id) {
                                         <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>DAC-DXB</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">Qatar Airways</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Boeing 707</small>
+
                                         </div>
                                     </div>
                                 </div>
@@ -1059,7 +1058,7 @@ function flight_det_card(type_id) {
                                         </div>
                                         <div class="d-flex gap-3 border-start">
                                             <div class="mt-2 ms-md-4">
-                                                <button class="btn btn-sm btn-block btn-primary"
+                                                <button class="btn btn-sm btn-block bluesky-btn-primary"
                                                     style="margin-left: 30px;" data-bs-toggle="collapse"
                                                     data-bs-target="#flight-package" aria-controls="flight-package">
 
@@ -1102,10 +1101,10 @@ function flight_det_card(type_id) {
                                     <div class="accordion accordion-flush" id="accordionFlushExample">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="flush-headingOne">
-                                                <a class="accordion-button collapsed m-0 p-0 px-2 py-1"
+                                                <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-1"
                                                     data-bs-toggle="collapse" data-bs-target="#flight-details"
                                                     aria-expanded="false" aria-controls="flight-details"
-                                                    style="color: #1184e3; font-size: 14px; background: #f1f4f7 !important;">
+                                                    style=" font-size: 14px; background: #f1f4f7 !important;">
                                                     <b>Flight Details</b>
                                                 </a>
                                             </h2>
@@ -1229,7 +1228,7 @@ function flight_det_card(type_id) {
                                                                             <div class="chip chip-sm"
                                                                                 style="font-size: 8px !important;">
                                                                                 <i
-                                                                                    class="fa fa-map-marker text-primary"></i>
+                                                                                    class="fa fa-map-marker custom-text-purple"></i>
                                                                                 Layover:Netaji Subha.. | 02 hr 30 min
                                                                             </div>
                                                                         </div>
@@ -1287,13 +1286,13 @@ function flight_det_card(type_id) {
 
                                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                     <button type="button"
-                                                        class="btn btn-primary btn-circle btn-sm waves-effect waves-light baggade"
+                                                        class="btn bluesky-btn-primary btn-circle btn-sm waves-effect waves-light baggade"
                                                         @click="flight_det_card(1)">
                                                         <span style="font-size: 13px;">Baggade</span>
                                                     </button>
 
                                                     <button type="button"
-                                                        class="btn btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary"
+                                                        class="btn bluesky-btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary"
                                                         @click="flight_det_card(2)">
                                                         <span style="font-size: 13px;">Fare Summary</span>
                                                     </button>
@@ -1539,8 +1538,7 @@ function flight_det_card(type_id) {
                                         <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>DAC-DXB</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">Emirates</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Boeing 707</small>
+
                                         </div>
                                     </div>
                                 </div>
@@ -1590,7 +1588,7 @@ function flight_det_card(type_id) {
                                         </div>
                                         <div class="d-flex gap-3 border-start">
                                             <div class="mt-2 ms-md-4">
-                                                <button class="btn btn-sm btn-block btn-primary"
+                                                <button class="btn btn-sm btn-block bluesky-btn-primary"
                                                     style="margin-left: 30px;" data-bs-toggle="collapse"
                                                     data-bs-target="#flight-package-2" aria-controls="flight-package-2">
 
@@ -1619,8 +1617,7 @@ function flight_det_card(type_id) {
                                         <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>DXB-DAC</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">Emirates</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Boeing 777</small>
+
                                         </div>
                                     </div>
                                 </div>
@@ -1688,10 +1685,10 @@ function flight_det_card(type_id) {
                                     <div class="accordion accordion-flush" id="accordionFlushExample">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="flush-headingOne">
-                                                <a class="accordion-button collapsed m-0 p-0 px-2 py-1"
+                                                <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-1"
                                                     data-bs-toggle="collapse" data-bs-target="#flight-details-2"
                                                     aria-expanded="false" aria-controls="flight-details-2"
-                                                    style="color: #1184e3; font-size: 14px; background: #f1f4f7 !important;">
+                                                    style=" font-size: 14px; background: #f1f4f7 !important;">
                                                     <b>Flight Details</b>
                                                 </a>
                                             </h2>
@@ -1749,9 +1746,9 @@ function flight_det_card(type_id) {
                                                     <div class="row mb-2">
                                                         <div class="col-md-12">
                                                             <div class="d-flex gap-1">
-                                                                <button class="btn btn-sm btn-primary">DAC-DXB</button>
+                                                                <button class="btn btn-sm bluesky-btn-primary">DAC-DXB</button>
                                                                 <button
-                                                                    class="btn btn-sm btn-outline-primary">DXB-DAC</button>
+                                                                    class="btn btn-sm bluesky-btn-outline-primary">DXB-DAC</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1825,7 +1822,7 @@ function flight_det_card(type_id) {
                                                                             <div class="chip chip-sm"
                                                                                 style="font-size: 8px !important;">
                                                                                 <i
-                                                                                    class="fa fa-map-marker text-primary"></i>
+                                                                                    class="fa fa-map-marker custom-text-purple"></i>
                                                                                 Layover:Netaji Subha.. | 02 hr 30 min
                                                                             </div>
                                                                         </div>
@@ -1935,13 +1932,13 @@ function flight_det_card(type_id) {
 
                                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                                     <button type="button"
-                                                        class="btn btn-primary btn-circle btn-sm waves-effect waves-light baggade"
+                                                        class="btn bluesky-btn-primary btn-circle btn-sm waves-effect waves-light baggade"
                                                         @click="flight_det_card(1)">
                                                         <span style="font-size: 13px;">Baggade</span>
                                                     </button>
 
                                                     <button type="button"
-                                                        class="btn btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary"
+                                                        class="btn bluesky-btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary"
                                                         @click="flight_det_card(2)">
                                                         <span style="font-size: 13px;">Fare Summary</span>
                                                     </button>
@@ -2050,7 +2047,19 @@ function flight_det_card(type_id) {
 <style>
 .bg-checkbox-active {
     color: #fff;
-    background: #1882ff;
+    /* background: #1882ff; */
+    background: #875ae9;
+}
+
+.form-check-input:checked {
+    background-color: #875ae9;
+    border-color: #ffffff;
+}
+
+.form-check-input:focus {
+    border-color: #e2d7fa;
+    outline: 0;
+    /* box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25); */
 }
 
 .bg-checkbox {
@@ -2086,29 +2095,50 @@ function flight_det_card(type_id) {
     font-size: 19px;
 }
 
-/* #searchbar .bar div.box .label {
-    display: block;
-    font-size: .8571428571rem;
-    font-weight: 400;
-    line-height: 14px;
-}
-
-#searchbar .box span.label {
-    color: #00026e;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-} */
 li.menu-item {
     margin: 0px 0px 10px -25px
 }
 
 .icon-color {
-    color: #31a0fc;
+    color: #875ae9;
 }
 
 .accordion-button:after {
     margin-left: 3px !important;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23027de2'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237944eb'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
 }
+
+.bluesky-border-primary{
+    border-color: #7944eb !important;
+}
+.custom-text-purple{
+    color: #7944eb;
+}
+
+.bluesky-btn-primary {
+    color: #fff;
+    background-color: #7944eb;
+    border-color: #7944eb;
+    padding: 8px 18px 8px 18px;
+    border-radius: 8px 8px 8px 8px;
+}
+.bluesky-btn-primary:hover {
+    color: #fff;
+    background-color: #875ae9;
+    border-color: #875ae9;
+    padding: 8px 18px 8px 18px;
+    border-radius: 8px 8px 8px 8px;
+}
+
+.bluesky-btn-outline-primary {
+    color: #875ae9;
+    border-color: #875ae9;
+}
+.bluesky-btn-outline-primary:hover {
+    color: #fff;
+    background-color: #875ae9;
+    border-color: #875ae9;
+}
+
 
 </style>
