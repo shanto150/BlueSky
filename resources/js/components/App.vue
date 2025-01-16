@@ -195,4 +195,53 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
     background-image: linear-gradient(blue, #00ffff, blue);
     opacity: 0.3;
 }
+
+
+.bg-checkbox-active {
+    color: #fff;
+    /* background: #1882ff; */
+    background: #875ae9;
+}
+
+.form-check-input:checked {
+    background-color: #875ae9;
+    border-color: #ffffff;
+}
+
+.form-check-input:checked {
+    background-color: #875ae9;
+    border-color: #ffffff;
+}
+
+.bluesky-border-primary{
+    border-color: #7944eb !important;
+}
+.custom-text-purple{
+    color: #7944eb;
+}
+
+.bluesky-btn-primary {
+    color: #fff;
+    background-color: #7944eb;
+    border-color: #7944eb;
+    padding: 8px 18px 8px 18px;
+    border-radius: 8px 8px 8px 8px;
+}
+.bluesky-btn-primary:hover {
+    color: #fff;
+    background-color: #875ae9;
+    border-color: #875ae9;
+    padding: 8px 18px 8px 18px;
+    border-radius: 8px 8px 8px 8px;
+}
+
+.bluesky-btn-outline-primary {
+    color: #875ae9;
+    border-color: #875ae9;
+}
+.bluesky-btn-outline-primary:hover {
+    color: #fff;
+    background-color: #875ae9;
+    border-color: #875ae9;
+}
 </style>
