@@ -363,12 +363,15 @@ function offHover() {
     </div> -->
     <div class="row">
         <div class="col-md-12">
-            <div class="card border border-1 border-primary">
+            <div class="card border border-1 bluesky-border-primary">
+
                 <div class="card-body">
                     <div class="d-flex align-items-center gap-2">
+
                         <div class="bg-checkbox-active one-way rounded rounded-1 p-1">
                             <input @click="tourTypeChange(1)" class="form-check-input" type="radio"
                                 name="flexRadioDefault" id="flexRadioDefault1">
+
                             <label class="form-check-label-box" for="flexRadioDefault1">
                                 &nbsp;One Way
                             </label>
@@ -394,9 +397,9 @@ function offHover() {
                             <div class="row">
                                 <div class="col-md-4 pt-1 pr-0">
                                     <div class="input-group input-group-sm mb-3">
-                                        <button class="btn btn-outline-primary dropdown-toggle" type="button"
+                                        <button class="btn bluesky-btn-outline-primary dropdown-toggle" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
-                                        <ul class="dropdown-menu p-1 " style="width: 300px;">
+                                        <ul class="dropdown-menu p-1" style="width: 300px;">
                                             <table class="table table-sm">
                                                 <tbody>
                                                     <tr>
@@ -411,7 +414,7 @@ function offHover() {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-minus-circle text-primary">
+                                                                        class="feather feather-minus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
@@ -426,7 +429,7 @@ function offHover() {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-plus-circle text-primary">
+                                                                        class="feather feather-plus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -448,7 +451,7 @@ function offHover() {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-minus-circle text-primary">
+                                                                        class="feather feather-minus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
@@ -463,7 +466,7 @@ function offHover() {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-plus-circle text-primary">
+                                                                        class="feather feather-plus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -484,7 +487,7 @@ function offHover() {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-minus-circle text-primary">
+                                                                        class="feather feather-minus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
@@ -499,7 +502,7 @@ function offHover() {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-plus-circle text-primary">
+                                                                        class="feather feather-plus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -540,7 +543,7 @@ function offHover() {
                     <!-- in small screen -->
                     <div class="row d-sm-block d-md-none mt-2">
 
-                        <button class="col-md-12 btn btn-outline-primary dropdown-toggle" type="button"
+                        <button class="col-md-12 btn bluesky-btn-outline-primary dropdown-toggle" type="button"
                             data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
                         <ul class="dropdown-menu p-1" style="width: 300px;">
                             <table class="table table-sm">
@@ -556,7 +559,7 @@ function offHover() {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-minus-circle text-primary">
+                                                        class="feather feather-minus-circle custom-text-purple">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                     </svg>
@@ -569,7 +572,7 @@ function offHover() {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-plus-circle text-primary">
+                                                        class="feather feather-plus-circle custom-text-purple">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -590,7 +593,7 @@ function offHover() {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-minus-circle text-primary">
+                                                        class="feather feather-minus-circle custom-text-purple">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                     </svg>
@@ -603,7 +606,7 @@ function offHover() {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-plus-circle text-primary">
+                                                        class="feather feather-plus-circle custom-text-purple">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -623,7 +626,7 @@ function offHover() {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-minus-circle text-primary">
+                                                        class="feather feather-minus-circle custom-text-purple">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                     </svg>
@@ -636,7 +639,7 @@ function offHover() {
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-plus-circle text-primary">
+                                                        class="feather feather-plus-circle custom-text-purple">
                                                         <circle cx="12" cy="12" r="10"></circle>
                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -669,6 +672,7 @@ function offHover() {
                     </div>
                     <!-- end in small screen -->
 
+
                     <div class="row mt-2">
                         <div class="col-md-6">
                             <div class="d-flex">
@@ -678,8 +682,7 @@ function offHover() {
                                     </select>
                                 </div>
                                 <div class="py-2" style="margin: 0 5px 0 5px;">
-                                    <img
-                                        src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.svg"
+                                    <img src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.svg"
                                         alt="">
                                 </div>
                                 <div class="w-50">
@@ -795,5 +798,48 @@ function offHover() {
 .select2-selection__arrow {
     height: 22px !important;
     top: 0px !important;
+}
+
+.bg-checkbox-active {
+    color: #fff;
+    /* background: #1882ff; */
+    background: #875ae9;
+}
+
+.form-check-input:checked {
+    background-color: #875ae9;
+    border-color: #ffffff;
+}
+
+.bluesky-border-primary{
+    border-color: #7944eb !important;
+}
+.custom-text-purple{
+    color: #7944eb;
+}
+
+.bluesky-btn-primary {
+    color: #fff;
+    background-color: #7944eb;
+    border-color: #7944eb;
+    padding: 8px 18px 8px 18px;
+    border-radius: 8px 8px 8px 8px;
+}
+.bluesky-btn-primary:hover {
+    color: #fff;
+    background-color: #875ae9;
+    border-color: #875ae9;
+    padding: 8px 18px 8px 18px;
+    border-radius: 8px 8px 8px 8px;
+}
+
+.bluesky-btn-outline-primary {
+    color: #875ae9;
+    border-color: #875ae9;
+}
+.bluesky-btn-outline-primary:hover {
+    color: #fff;
+    background-color: #875ae9;
+    border-color: #875ae9;
 }
 </style>
