@@ -1738,15 +1738,11 @@ function offHover() {
                                                                                 style="font-size: 13px; color: #5e6878;"><b>10:50
                                                                                     AM | 19 Jan, Thursday</b></small>
                                                                             <br>
-                                                                            <small
-                                                                                style="font-size: 12px; color: #5e6878;">Terminal:2</small>
+                                                                            <small style="font-size: 12px; color: #5e6878;">Terminal:2</small>
                                                                             <br>
-                                                                            <small
-                                                                                style="font-size: 12px; color: #5e6878;">Flight
-                                                                                No:78ER457</small>
+                                                                            <small style="font-size: 12px; color: #5e6878;">Flight No:78ER457</small>
                                                                             <br>
-                                                                            <small
-                                                                                style="font-size: 12px; color: #5e6878;">Class:Economy</small>
+                                                                            <small style="font-size: 12px; color: #5e6878;">Class:Economy</small>
                                                                         </div>
 
                                                                     </div>
