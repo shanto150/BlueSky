@@ -196,18 +196,9 @@ function offHover() {
     $("#img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_With_Icon.jpg');
 }
 
-function flight_det_card(type_id) {
-    const isType1 = type_id == 1;
-    $('.baggade').toggleClass('bluesky-btn-primary', isType1).toggleClass('bluesky-btn-outline-primary', !isType1);
-    $('.fare_summary').toggleClass('bluesky-btn-primary', !isType1).toggleClass('bluesky-btn-outline-primary', isType1);
-    $('#fare_summary_details').toggleClass('d-none', isType1);
-    $('#baggade').toggleClass('d-none', !isType1);
-
-}
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-
         <div class="breadcrumb-title pe-3">Settings</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
@@ -250,7 +241,6 @@ function flight_det_card(type_id) {
                                 &nbsp; Multi City
                             </label>
                         </div>
-
 
                         <!-- in medium screen -->
                         <div class="ms-auto d-none d-md-block">
@@ -1230,8 +1220,11 @@ function flight_det_card(type_id) {
                                                             <div class="row mt-2 p-2 pb-0">
                                                                 <!-- 8px -->
                                                                 <div class="chip chip-sm"
-                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6;">
-                                                                    <i class="fa fa-map-marker custom-text-purple"></i>
+                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
+                                                                    <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                        src="../../../../public/theme/appimages/location.svg"
+                                                                        alt="">
+
                                                                     Destination : Dubai Internation Airport
                                                                 </div>
                                                             </div>
@@ -1282,109 +1275,59 @@ function flight_det_card(type_id) {
                                             </div>
                                         </div>
                                         <div class="col-md-4" style="background-color: #f4f4ff;">
-                                            <div class="d-flex justify-content-center mt-2">
-
-                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                    <button type="button"
-                                                        class="btn bluesky-btn-primary btn-circle btn-sm waves-effect waves-light baggade"
-                                                        @click="flight_det_card(1)">
-                                                        <span style="font-size: 13px;">Baggade</span>
-                                                    </button>
-
-                                                    <button type="button"
-                                                        class="btn bluesky-btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary"
-                                                        @click="flight_det_card(2)">
-                                                        <span style="font-size: 13px;">Fare Summary</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            <div class="card text-center mt-2" id="baggade">
-                                                <div class="card-body mb-0 pb-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-sm ">
-                                                            <tbody class="text-start">
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
-                                                                        <small>Economy</small>
-                                                                    </td>
-
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small>
-                                                                    </td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
-                                                                        <small>Economy</small>
-                                                                    </td>
-
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small>
-                                                                    </td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                            <!-- upcoming one -->
+                                            <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header rounded" id="flush-headingOne" style="background-color: #7944eb !important;">
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#flush-fare-summary" aria-expanded="false"
+                                                            aria-controls="flush-fare-summary">
+                                                            Fare Summary
+                                                        </button>
+                                                    </h2>
+                                                    <div id="flush-fare-summary" class="accordion-collapse collapse"
+                                                        aria-labelledby="flush-headingOne"
+                                                        data-bs-parent="#accordionFlushExample" style="">
+                                                        <div class="accordion-body">Anim pariatur cliche reprehenderit,
+                                                            enim eiusmod high life accusamus terry richardson ad squid.
+                                                            3 wolf moon officia aute, non cupidatat skateboard dolor
+                                                            brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
+                                                            wolf moon tempor, sunt aliqua put a bird on it squid
+                                                            single-origin coffee nulla assumenda shoreditch et. Nihil
+                                                            anim keffiyeh helvetica, craft beer labore wes anderson cred
+                                                            nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                                            vice lomo. Leggings occaecat craft beer farm-to-table, raw
+                                                            denim aesthetic synth nesciunt you probably haven't heard of
+                                                            them accusamus labore sustainable VHS.</div>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="card text-start mt-2 d-none" id="fare_summary_details">
-                                                <div class="card-body mb-0 pb-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-sm ">
-                                                            <tbody class="text-start">
-                                                                <thead>
-                                                                    <th style="font-size: 10px;">Passenger</th>
-                                                                    <th style="font-size: 10px;">Tax+Fees</th>
-                                                                    <th style="font-size: 10px;">Total Fare</th>
-                                                                </thead>
-                                                            <tbody style="font-size: 10px;;">
-                                                                <tr>
-                                                                    <td>4 Adults</td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 980
-                                                                    </td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                        120980</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4 Child</td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 500
-                                                                    </td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                        15670</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4 Infants</td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 500
-                                                                    </td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                        15670</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Discount</td>
-                                                                    <td></td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> -670
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><b>Total Payable</b></td>
-                                                                    <td></td>
-                                                                    <td>
-                                                                        <b><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                            151650</b>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                            </tbody>
-                                                        </table>
+                                                <div class="accordion-item mt-2">
+                                                    <h2 class="accordion-header" id="flush-headingTwo">
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                                            aria-controls="flush-collapseTwo">
+                                                            Baggadge Information
+                                                        </button>
+                                                    </h2>
+                                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                                        aria-labelledby="flush-headingTwo"
+                                                        data-bs-parent="#accordionFlushExample" style="">
+                                                        <div class="accordion-body">Anim pariatur cliche reprehenderit,
+                                                            enim eiusmod high life accusamus terry richardson ad squid.
+                                                            3 wolf moon officia aute, non cupidatat skateboard dolor
+                                                            brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
+                                                            wolf moon tempor, sunt aliqua put a bird on it squid
+                                                            single-origin coffee nulla assumenda shoreditch et. Nihil
+                                                            anim keffiyeh helvetica, craft beer labore wes anderson cred
+                                                            nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                                            vice lomo. Leggings occaecat craft beer farm-to-table, raw
+                                                            denim aesthetic synth nesciunt you probably haven't heard of
+                                                            them accusamus labore sustainable VHS.</div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -1840,9 +1783,13 @@ function flight_det_card(type_id) {
                                                             </div>
                                                             <div class="row mt-2 p-2 pb-0">
                                                                 <div class="chip chip-sm"
-                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6;">
-                                                                    <i class="fa fa-map-marker custom-text-purple"></i>
-                                                                    Layover:Netaji Subhash Chandra Bose... | 02 hr 30 min
+                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
+
+                                                                    <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                        src="../../../../public/theme/appimages/location.svg"
+                                                                        alt="">
+                                                                    Layover:Netaji Subhash Chandra Bose... | 02 hr 30
+                                                                    min
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1944,110 +1891,7 @@ function flight_det_card(type_id) {
                                             </div>
                                         </div>
                                         <div class="col-md-4" style="background-color: #f4f4ff;">
-                                            <div class="d-flex justify-content-center mt-2">
-
-                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                    <button type="button"
-                                                        class="btn bluesky-btn-primary btn-circle btn-sm waves-effect waves-light baggade"
-                                                        @click="flight_det_card(1)">
-                                                        <span style="font-size: 13px;">Baggade</span>
-                                                    </button>
-
-                                                    <button type="button"
-                                                        class="btn bluesky-btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary"
-                                                        @click="flight_det_card(2)">
-                                                        <span style="font-size: 13px;">Fare Summary</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            <div class="card text-center mt-2" id="baggade">
-                                                <div class="card-body mb-0 pb-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-sm ">
-                                                            <tbody class="text-start">
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
-                                                                        <small>Economy</small>
-                                                                    </td>
-
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small>
-                                                                    </td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
-                                                                        <small>Economy</small>
-                                                                    </td>
-
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small>
-                                                                    </td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="card text-start mt-2 d-none" id="fare_summary_details">
-                                                <div class="card-body mb-0 pb-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-sm ">
-                                                            <tbody class="text-start">
-                                                                <thead>
-                                                                    <th style="font-size: 10px;">Passenger</th>
-                                                                    <th style="font-size: 10px;">Tax+Fees</th>
-                                                                    <th style="font-size: 10px;">Total Fare</th>
-                                                                </thead>
-                                                            <tbody style="font-size: 10px;;">
-                                                                <tr>
-                                                                    <td>4 Adults</td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 980
-                                                                    </td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                        120980</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4 Child</td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 500
-                                                                    </td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                        15670</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4 Infants</td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 500
-                                                                    </td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                        15670</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Discount</td>
-                                                                    <td></td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> -670
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><b>Total Payable</b></td>
-                                                                    <td></td>
-                                                                    <td>
-                                                                        <b><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                            151650</b>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <!-- upcoming 2 -->
                                         </div>
                                     </div>
                                 </div>
