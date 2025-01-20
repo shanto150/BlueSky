@@ -213,6 +213,12 @@ const options = {
 };
 
 
+$('#s_status').on('change', function () {
+    // get value
+    var s_status = $(this).val();
+});
+
+
 async function getListValues() {
     try {
         authStore.GlobalLoading = true;
