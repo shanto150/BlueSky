@@ -13,16 +13,19 @@ class APIController extends BaseController {
 
     public function Lowfaresearch( Request $request ) {
 
-        // dd( $request->all() );
+        $validator = validator( $request->all(), [
+            'from' => 'required',
+            'to' => 'required',
+        ] );
 
         $url = 'https://apac.universal-api.pp.travelport.com/B2BGateway/connect/uAPI/AirService';
         $xmlpayload = '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><LowFareSearchReq xmlns="http://www.travelport.com/schema/air_v52_0" TraceId="c8f38268-3b70-4141-869d-010611bc23e5" TargetBranch="P7186658" SolutionResult="true" ReturnUpsellFare="true"><BillingPointOfSaleInfo xmlns="http://www.travelport.com/schema/common_v52_0" OriginApplication="UAPI"/>';
-        if ( $request->way == 1 ) {
+        if ( $request->Way == 1 ) {
             $xmlpayload .= '<SearchAirLeg><SearchOrigin>
-                        <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="'.$request->from.'" PreferCity="true"/>
+                        <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="DAC" PreferCity="true"/>
                         </SearchOrigin><SearchDestination>
-                        <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="'.$request->to.'" PreferCity="true"/>
-                        </SearchDestination><SearchDepTime PreferredTime="'.$request->dep_date.'"/></SearchAirLeg>';
+                        <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="DXB" PreferCity="true"/>
+                        </SearchDestination><SearchDepTime PreferredTime="2025-01-18"/></SearchAirLeg>';
         } else {
             $xmlpayload .= '<SearchAirLeg><SearchOrigin>
                         <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="'.$request->from.'" PreferCity="true"/>
@@ -47,7 +50,7 @@ class APIController extends BaseController {
         $password = env( 'API_PASSWORD' );
 
         $ch = curl_init();
-
+ 
         // Set cURL options
         curl_setopt( $ch, CURLOPT_URL, $url );
         curl_setopt( $ch, CURLOPT_POST, true );
@@ -70,6 +73,8 @@ class APIController extends BaseController {
 
         curl_close( $ch );
 
+        // dd( $response );
+
         //good format****
         $response = preg_replace( '/(<\/?)(\w+):([^>]*>)/', "$1$2$3", $response );
         $xml = new SimpleXMLElement( $response );
@@ -77,12 +82,12 @@ class APIController extends BaseController {
         $array = json_decode( json_encode( ( array )$body ), TRUE );
         //End good ******
 
-        // return $array;
+        return $array;
 
         // Retrieve fares with all details
-        $classWiseFares = $this->getClassWiseFaresWithDetails( $array );
+        // $classWiseFares = $this->getClassWiseFaresWithDetails( $array );
 
-        return $classWiseFares;
+        // return $classWiseFares;
 
     }
 
@@ -121,7 +126,6 @@ class APIController extends BaseController {
         }
         return $fares;
     }
-
 
     // Convert the given date-time string to the desired format
 
@@ -197,17 +201,23 @@ class APIController extends BaseController {
         if ( isset( $jsonData[ 'airLowFareSearchRsp' ][ 'airAirPricingSolution' ] ) ) {
 
             foreach ( $jsonData[ 'airLowFareSearchRsp' ][ 'airAirPricingSolution' ] as $priceSolution ) {
-                foreach ( $priceSolution[ 'airJourney' ] as $airJourney ) {
+                dd( $priceSolution[ 'airJourney' ] );
 
-                    foreach ( $airJourney[ 'airAirSegmentRef' ] as $airAirSegmentRef ) {
+                if ( !isset( $priceSolution[ 'airJourney' ] ) ) {
+                    foreach ( $priceSolution[ 'airJourney' ] as $airJourney ) {
 
-                        if ( $airAirSegmentRef[ 'Key' ] === $fareInfoRef ) {
-                            return [
-                                'TravelTime' => isset( $airJourney[ '@attributes' ][ 'TravelTime' ] )? $airJourney[ '@attributes' ][ 'TravelTime' ] : 'N/A',
-                            ];
+                        if ( !isset( $airJourney[ 'airAirSegmentRef' ] ) ) {
+                            foreach ( $airJourney[ 'airAirSegmentRef' ] as $airAirSegmentRef ) {
+
+                                if ( $airAirSegmentRef[ 'Key' ] === $fareInfoRef ) {
+                                    return [
+                                        'TravelTime' => isset( $airJourney[ '@attributes' ][ 'TravelTime' ] )? $airJourney[ '@attributes' ][ 'TravelTime' ] : 'N/A',
+                                    ];
+                                }
+                            }
                         }
-                    }
 
+                    }
                 }
 
             }
