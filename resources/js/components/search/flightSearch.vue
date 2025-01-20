@@ -1,8 +1,28 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive } from "vue";
-import axiosTravel from "../../axiosTravel";
 import axiosInstance from "../../axiosInstance"
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
+
+const fdate = ref();
+const format = (fdate) => {
+    const day = fdate.getDate();
+    const month = fdate.getMonth() + 1;
+    const year = fdate.getFullYear();
+
+    const date= `${year}-${month}-${day}`;
+    form.dep_date=date;
+    return date;
+}
+const tformat = (tdate) => {
+    const day = tdate.getDate();
+    const month = tdate.getMonth() + 1;
+    const year = tdate.getFullYear();
+
+    return `${day}/${month}/${year}`;
+}
+const tdate = ref();
 
 const form = reactive({ Way: '', from: '', to: "", dep_date: '', ADT: '', CNN: '', INF: '' });
 
@@ -10,9 +30,12 @@ form.Way = 1;
 
 
 async function Lowfaresearch() {
+
     try {
         const response = await axiosInstance.post("Lowfaresearch", form);
         Notification.showToast('s', response.data.message);
+        console.log(response);
+
     } catch (error) {
         console.log(error);
     }
@@ -20,6 +43,130 @@ async function Lowfaresearch() {
 }
 
 
+function changeType(type) {
+
+    if (type == 1) {
+        $('.one-way').addClass('bg-checkbox-active');
+        $('.round-way').removeClass('bg-checkbox-active');
+        $('.multi-city').removeClass('bg-checkbox-active');
+        $('.one-way').removeClass('bg-checkbox');
+        $('.round-way').addClass('bg-checkbox');
+        $('.multi-city').addClass('bg-checkbox');
+    } else if (type == 2) {
+        $('.one-way').removeClass('bg-checkbox-active');
+        $('.round-way').addClass('bg-checkbox-active');
+        $('.multi-city').removeClass('bg-checkbox-active');
+        $('.round-way').removeClass('bg-checkbox');
+        $('.one-way').addClass('bg-checkbox');
+        $('.multi-city').addClass('bg-checkbox');
+    } else {
+        $('.one-way').removeClass('bg-checkbox-active');
+        $('.round-way').removeClass('bg-checkbox-active');
+        $('.multi-city').addClass('bg-checkbox-active');
+        $('.multi-city').removeClass('bg-checkbox');
+        $('.one-way').addClass('bg-checkbox');
+        $('.round-way').addClass('bg-checkbox');
+    }
+
+
+}
+
+onMounted(() => {
+    $("#origin_ids").select2({
+        placeholder: '=Select=',
+        theme: 'bootstrap-5',
+        width: '100%',
+        allowClear: true,
+        height: '50',
+    });
+
+    $(".select2C").select2({
+        theme: 'bootstrap-5',
+        width: '100%',
+        height: '50',
+    });
+});
+getAirports();
+
+function formatState(state) {
+    if (!state.id) {
+        return state.text;
+    }
+    var $state = $('<div class="row"> <div class="col-md-2" style="border-right:1px solid #9e56ef"><b style="font-size:12px">' + state.id + '</b></div> <div class="col-md-8" style="font-size:13px; padding-top:3px">' + state.text + ',' + state.city + '</div></div>');
+
+    return $state;
+};
+
+async function getAirports() {
+
+    try {
+        const response = await axiosInstance.get('airports');
+        var getDatas = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.code, text: value.Airport_Name, city: value.City_name }
+            getDatas.push(obj);
+
+        });
+
+        $("#origin_ids").select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            // allowClear: true,
+            tags: true,
+            height: '50',
+            data: getDatas,
+            templateResult: function (state) {
+                if (!state.id) {
+                    return state.text;
+                }
+                var $state = $('<div class="row"> <div class="col-md-2" style="border-right:1px solid #9e56ef"><b style="font-size:12px">' + state.id + '</b></div> <div class="col-md-8" style="font-size:13px;">' + state.text + ',' + state.city + '</div></div>');
+
+                return $state;
+            },
+            templateSelection: formatState,
+
+
+        });
+
+        $('#origin_ids').prepend('<option selected=""></option>');
+
+        $("#destination_ids").select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            // allowClear: true,
+            tags: true,
+            height: '50',
+            data: getDatas,
+            templateResult: function (state) {
+                if (!state.id) {
+                    return state.text;
+                }
+                var $state = $('<div class="row"> <div class="col-md-2" style="border-right:1px solid #9e56ef"><b style="font-size:12px">' + state.id + '</b></div> <div class="col-md-8" style="font-size:13px;">' + state.text + ',' + state.city + '</div></div>');
+
+                return $state;
+            },
+            templateSelection: formatState,
+        });
+
+        $('#destination_ids').prepend('<option selected=""></option>');
+
+
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
+
+function onHover() {
+
+    $("#img").attr('src', '');
+}
+
+function offHover() {
+    $("#img").attr('src', '');
+}
 </script>
 
 <template>
@@ -38,7 +185,7 @@ async function Lowfaresearch() {
             </nav>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -106,5 +253,276 @@ async function Lowfaresearch() {
                 </div>
             </div>
         </div>
+    </div> -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card border border-1 border-primary">
+
+                <div class="card-body">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-checkbox-active one-way rounded rounded-1 p-2">
+                            <input @click="changeType(1)" class="form-check-input" type="radio" name="flexRadioDefault"
+                                id="flexRadioDefault1">
+
+                            <label class="form-check-label-box" for="flexRadioDefault1">
+                                &nbsp;One Way
+                            </label>
+                        </div>
+                        <div class="bg-checkbox round-way rounded rounded-1 p-2">
+                            <input @click="changeType(2)" class="form-check-input" type="radio" name="flexRadioDefault"
+                                id="flexRadioDefault2">
+                            <label class="form-check-label-box" for="flexRadioDefault2">
+                                &nbsp;Round Trip
+                            </label>
+                        </div>
+                        <div class="bg-checkbox rounded multi-city rounded-1 p-2">
+                            <input @click="changeType(3)" class="form-check-input" type="radio" name="flexRadioDefault"
+                                id="flexRadioDefault3">
+                            <label class="form-check-label-box" for="flexRadioDefault3">
+                                &nbsp; Multi City
+                            </label>
+                        </div>
+
+                        <div class="ms-auto">
+                            <div class="row">
+                                <div class="col-md-4 pr-0">
+                                    <div class="input-group mb-3">
+                                        <button class="btn btn-outline-primary dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
+                                        <ul class="dropdown-menu p-1" style="width: 300px;">
+                                            <table class="table table-sm">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><small> Adult <br> <span style="font-size: 9px;">Above 12
+                                                                    Years</span></small></td>
+                                                        <td style="width: 150px;">
+                                                            <div class="input-group product-qty">
+                                                                <button type="button"
+                                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                                    data-type="minus">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-minus-circle text-primary">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                                    </svg>
+                                                                </button>
+                                                                <input type="text" name="quantity"
+                                                                    class="form-control input-number quantity"
+                                                                    value="1">
+                                                                <button type="button"
+                                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                                    data-type="plus">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-plus-circle text-primary">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>Children <br><span style="font-size: 9px;">02 to
+                                                                    Under 12 Years
+                                                                </span></small></td>
+                                                        <td style="width: 150px;">
+                                                            <div class="input-group product-qty">
+                                                                <button type="button"
+                                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                                    data-type="minus">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-minus-circle text-primary">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                                    </svg>
+                                                                </button>
+                                                                <input type="text" name="quantity"
+                                                                    class="form-control input-number quantity"
+                                                                    value="1">
+                                                                <button type="button"
+                                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                                    data-type="plus">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-plus-circle text-primary">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>Infant <br><span style="font-size: 9px;">Under 02
+                                                                    Years</span></small></td>
+                                                        <td style="width: 150px;">
+                                                            <div class="input-group product-qty">
+                                                                <button type="button"
+                                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                                    data-type="minus">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-minus-circle text-primary">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                                    </svg>
+                                                                </button>
+                                                                <input type="text" name="quantity"
+                                                                    class="form-control input-number quantity"
+                                                                    value="1">
+                                                                <button type="button"
+                                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                                    data-type="plus">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-plus-circle text-primary">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </ul>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 pr-0">
+                                    <select name="" id="class_type" class="form-control select2C">
+                                        <option value="" selected>Economy</option>
+                                        <option value="">Premium Economy</option>
+                                        <option value="">Business Class</option>
+                                        <option value="">First Class</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4 pr-0">
+                                    <select name="" id="pre_airline" class="form-control select2C">
+                                        <option value="" selected>Prefered Airlines</option>
+                                        <option value="">Qatar </option>
+                                        <option value="">Saudia</option>
+                                        <option value="">Emirates</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-3">
+                            <select id="origin_id" v-model="form.from" name="origin_name" class="form-control form-control-lg origin_name">
+                                <option value="DAC">DAC</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select id="destination_id" v-model="form.to" name="destination_name"
+                                class="form-control form-control destination_name">
+                                <option value="DXB">DXB</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <VueDatePicker v-model="fdate" placeholder="Select Date" :enable-time-picker="false"
+                                :format="format"></VueDatePicker>
+                        </div>
+                        <div class="col-md-2 hide-me">
+                            <VueDatePicker v-model="tdate" placeholder="Select Date" :enable-time-picker="false"
+                                :format="tformat"></VueDatePicker>
+                        </div>
+                        <div class="col-md-1">
+                            <!-- <router-link :to="{ name: 'searchResult' }"> -->
+                                <button @click="Lowfaresearch()" class="btn btn-sm btn-block btn-outline-primary text-center">
+                                    <i class="fa fa-search px-3"></i>
+                                </button>
+
+                                <!-- <img src="" alt="" style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img"> -->
+                            <!-- </router-link> -->
+                            <!-- <img src="../../../../public/build/assets/s_Hover_State.jpg" alt="" style="width: 53px;"> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
+
+<style>
+.bg-checkbox-active {
+    color: #fff;
+    background: #1882ff;
+}
+
+.bg-checkbox {
+    color: #616b7a;
+    background: #ebf0f5;
+}
+
+/* search bar */
+#searchbar {
+    margin-top: 15px;
+}
+
+#searchbar .bar {
+    display: flex;
+}
+
+/* #searchbar .flight .flight-search div.location {
+    flex-basis: calc(25% - 10px);
+    margin-right: 10px;
+    max-width: calc(25% - 10px);
+} */
+
+#searchbar .bar div.box {
+    border: 1px solid #dbdde0;
+    border-radius: 10px;
+    cursor: pointer;
+    /* padding: 2px 15px; */
+    position: relative;
+}
+
+#searchbar .bar div.box .row .col-md-4 .short-code {
+    padding: 16px 0px 0px 10px;
+    font-size: 19px;
+}
+
+/* #searchbar .bar div.box .label {
+    display: block;
+    font-size: .8571428571rem;
+    font-weight: 400;
+    line-height: 14px;
+}
+
+#searchbar .box span.label {
+    color: #00026e;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+} */
+
+.input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    margin-left: calc(var(--bs-border-width)* -1);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+</style>

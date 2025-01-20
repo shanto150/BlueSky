@@ -22,6 +22,7 @@ class RolePermissionController extends BaseController
         $data= DB::table('roles as r')
         ->join('role_permissions as rp','r.id','rp.role_id')
         ->selectRaw('r.name,r.id as idd,count(rp.id) total_perms,r.created_at,r.status,r.updated_at,f_username(r.updated_by) updated_by,f_username(r.created_by) created_by')->groupBy('r.id','r.name','r.created_at','r.status','r.updated_at','r.updated_by','r.created_by')->get();
+
         return DataTables::of($data)->addIndexColumn()->make(true);
 
     }
