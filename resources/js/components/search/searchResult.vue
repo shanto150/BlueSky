@@ -532,8 +532,7 @@ function offHover() {
                                     </select>
                                 </div>
                                 <div class="py-2" style="margin: 0 5px 0 5px;">
-                                    <img src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.svg"
-                                        alt="">
+                                    <img src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.svg" alt="">
                                 </div>
                                 <div class="w-50">
                                     <select id="destination_id" name="destination_name"
@@ -1235,52 +1234,83 @@ function offHover() {
                                                 <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <p class="text-start fw-bold">Eligibility Category - 1</p>
-                                                            <span>Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                elit. Iste itaque quidem nam doloremque accusantium
-                                                                minima excepturi architecto illo quo dolorem nulla, ab
-                                                                earum? Neque quis repellendus, deserunt amet ducimus
-                                                                doloribus!</span>
+                                                            <p class="text-start fw-bold">Combinations</p>
+                                                            <span>
+                                                                Maximum stay none for economy unrestricted fares.
+
+                                                                Layover
+
+                                                                Stopovers for economy unrestricted fares unlimited
+                                                                stopovers permitted.
+
+                                                                Combinations
+
+                                                                Permitted combinations fares may be combined on a half
+                                                                round trip basis with any fare for any carrier in any
+                                                                rule and tariff to form round trips/circle trips.
+                                                                End-one-end permitted. Validate all fare component.
+                                                                Travel must be via construction point. Add-ons
+                                                                permitted. Open jaws fares may be combined on a half
+                                                                round trip basis with any fare for any carrier in any
+                                                                rule and tariff to form single or double open jaws. A
+                                                                maximum of 2 international fare components permitted.
+                                                                Mileage of an international open segment must be equal
+                                                                to/less than mileage of the shortest flown fare
+                                                                component. No mileage restriction on an open segment
+                                                                within one country.
+
+                                                                Travel Restrictions
+
+                                                                Travel restrictions valid for travel commencing on/after
+                                                                12 may 2017.
+
+                                                                Accompanied Travel Restrictions
+
+                                                                Children discount for economy unrestricted fare note -
+                                                                general rule does not apply. An accompanied child 2-11
+                                                                years of age - charge 75 percent of the fare. Must be
+                                                                accompanied.
+                                                            </span>
                                                         </div>
                                                         <div class="col-md-12 mt-2">
-                                                            <p class="text-start fw-bold pt-0 mt-0">Day/Time Application
-                                                                Category - 1</p>
-                                                            <span>Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                elit. Iste itaque quidem nam doloremque accusantium
-                                                                minima excepturi architecto illo quo dolorem nulla, ab
-                                                                earum? Neque quis repellendus, deserunt amet ducimus
-                                                                doloribus!</span>
+                                                            <p class="text-start fw-bold pt-0 mt-0">Travel Restrictions
+                                                            </p>
+                                                            <span>
+                                                                Travel Restrictions
+
+                                                                Travel restrictions valid for travel commencing on/after
+                                                                12 may 2017.
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="primarycontact" role="tabpanel">
-                                                    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they
-                                                        sold out
-                                                        mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table
-                                                        readymade.
-                                                        Messenger bag gentrify pitchfork tattooed craft beer, iphone
-                                                        skateboard
-                                                        locavore carles etsy salvia banksy hoodie helvetica. DIY synth
-                                                        PBR
-                                                        banksy irony. Leggings gentrify squid 8-bit cred pitchfork.
-                                                        Williamsburg
-                                                        banh mi whatever gluten-free, carles pitchfork biodiesel fixie
-                                                        etsy
-                                                        retro mlkshk vice blog. Scenester cred you probably haven't
-                                                        heard of
-                                                        them, vinyl craft beer blog stumptown. Pitchfork sustainable
-                                                        tofu synth
-                                                        chambray yr.</p>
+                                                    <p>
+                                                        Refund Policy
+                                                        Refunds and Date Changes are done as per the following policies.
+
+                                                        Refund is calculated by deducting Airline’s fee and ST fee from
+                                                        the paid amount.
+
+                                                        Date Change fee is calculated by adding Airline’s fee, fare
+                                                        difference and ST fee.
+
+                                                        *Fees are shown for all traveler
+                                                        *ST Convenience fee is non-refundable. We cannot guarantee the
+                                                        accuracy of airline refund/date change fees as they are subject
+                                                        to change without prior notice.
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4" style="background-color: #f4f4ff;">
-                                            <!-- upcoming one -->
+
                                             <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
                                                 <div class="accordion-item">
-                                                    <h2 class="accordion-header rounded" id="flush-headingOne" style="background-color: #7944eb !important;">
-                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed" type="button"
-                                                            data-bs-toggle="collapse"
+                                                    <h2 class="accordion-header rounded" id="flush-headingOne"
+                                                        style="background-color: #7944eb !important;">
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                            type="button" data-bs-toggle="collapse"
                                                             data-bs-target="#flush-fare-summary" aria-expanded="false"
                                                             aria-controls="flush-fare-summary">
                                                             Fare Summary
@@ -1289,23 +1319,117 @@ function offHover() {
                                                     <div id="flush-fare-summary" class="accordion-collapse collapse"
                                                         aria-labelledby="flush-headingOne"
                                                         data-bs-parent="#accordionFlushExample" style="">
-                                                        <div class="accordion-body">Anim pariatur cliche reprehenderit,
-                                                            enim eiusmod high life accusamus terry richardson ad squid.
-                                                            3 wolf moon officia aute, non cupidatat skateboard dolor
-                                                            brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
-                                                            wolf moon tempor, sunt aliqua put a bird on it squid
-                                                            single-origin coffee nulla assumenda shoreditch et. Nihil
-                                                            anim keffiyeh helvetica, craft beer labore wes anderson cred
-                                                            nesciunt sapiente ea proident. Ad vegan excepteur butcher
-                                                            vice lomo. Leggings occaecat craft beer farm-to-table, raw
-                                                            denim aesthetic synth nesciunt you probably haven't heard of
-                                                            them accusamus labore sustainable VHS.</div>
+                                                        <div class="accordion-body">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            Base Fare
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳30000</td>
+                                                                                    <td>
+                                                                                        ৳60000
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳20000</td>
+                                                                                    <td>
+                                                                                        ৳40000
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                    <div class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            TAX
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳5000</td>
+                                                                                    <td>
+                                                                                        ৳10000
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳2000</td>
+                                                                                    <td>
+                                                                                        ৳4000
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                    <div class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            AIT
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳1275</td>
+                                                                                    <td>
+                                                                                        ৳2550
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳870</td>
+                                                                                    <td>
+                                                                                        ৳1740
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                    <div class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            Service Charge
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳1275</td>
+                                                                                    <td>
+                                                                                        ৳2550
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳870</td>
+                                                                                    <td>
+                                                                                        ৳1740
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="accordion-item mt-2">
                                                     <h2 class="accordion-header" id="flush-headingTwo">
-                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed" type="button"
-                                                            data-bs-toggle="collapse"
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                            type="button" data-bs-toggle="collapse"
                                                             data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                                             aria-controls="flush-collapseTwo">
                                                             Baggadge Information
@@ -1314,20 +1438,56 @@ function offHover() {
                                                     <div id="flush-collapseTwo" class="accordion-collapse collapse"
                                                         aria-labelledby="flush-headingTwo"
                                                         data-bs-parent="#accordionFlushExample" style="">
-                                                        <div class="accordion-body">Anim pariatur cliche reprehenderit,
-                                                            enim eiusmod high life accusamus terry richardson ad squid.
-                                                            3 wolf moon officia aute, non cupidatat skateboard dolor
-                                                            brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3
-                                                            wolf moon tempor, sunt aliqua put a bird on it squid
-                                                            single-origin coffee nulla assumenda shoreditch et. Nihil
-                                                            anim keffiyeh helvetica, craft beer labore wes anderson cred
-                                                            nesciunt sapiente ea proident. Ad vegan excepteur butcher
-                                                            vice lomo. Leggings occaecat craft beer farm-to-table, raw
-                                                            denim aesthetic synth nesciunt you probably haven't heard of
-                                                            them accusamus labore sustainable VHS.</div>
+                                                        <div class="accordion-body">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>DAC-CCU</b>
+                                                                                        <br>
+                                                                                        <small>Economy</small>
+                                                                                    </td>
+
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Cabin</b>
+                                                                                        <br>
+                                                                                        <small>10 Kg</small>
+                                                                                    </td>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Check In</b>
+                                                                                        <br>
+                                                                                        <small>2 Pieces</small>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>CCU-BDX</b>
+                                                                                        <br>
+                                                                                        <small>Economy</small>
+                                                                                    </td>
+
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Cabin</b>
+                                                                                        <br>
+                                                                                        <small>10 Kg</small>
+                                                                                    </td>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Check In</b>
+                                                                                        <br>
+                                                                                        <small>2 Pieces</small>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -1738,11 +1898,15 @@ function offHover() {
                                                                                 style="font-size: 13px; color: #5e6878;"><b>10:50
                                                                                     AM | 19 Jan, Thursday</b></small>
                                                                             <br>
-                                                                            <small style="font-size: 12px; color: #5e6878;">Terminal:2</small>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Terminal:2</small>
                                                                             <br>
-                                                                            <small style="font-size: 12px; color: #5e6878;">Flight No:78ER457</small>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Flight
+                                                                                No:78ER457</small>
                                                                             <br>
-                                                                            <small style="font-size: 12px; color: #5e6878;">Class:Economy</small>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Class:Economy</small>
                                                                         </div>
 
                                                                     </div>
@@ -1963,4 +2127,9 @@ li.menu-item {
     margin-left: 3px !important;
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237944eb'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
 }
+
+.fare-summary-bg{
+    background: #faf8ff;
+}
+
 </style>
