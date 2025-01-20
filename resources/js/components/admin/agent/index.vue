@@ -291,21 +291,21 @@ async function getListValues() {
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
 
-        <div class="breadcrumb-title pe-3"> B2B Agency</div>
+        <div class="breadcrumb-title pe-3"> B2B Agent</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item">
                         <router-link :to="{ name: 'Home' }">Dashboard</router-link>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">B2B Agency List</li>
+                    <li class="breadcrumb-item active" aria-current="page">B2B Agent List</li>
                 </ol>
             </nav>
         </div>
         <div class="ms-auto">
             <div class="btn-group">
                 <router-link :to="{ name: 'CreateAgency' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i> Agency
+                    <i class="fa fa-circle-plus"></i> B2B Agent
                 </router-link>
 
             </div>
