@@ -539,7 +539,7 @@ function offHover() {
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <div class="w-50">
-                                    <select id="origin_id" name="origin_name"
+                                    <select id="origin_ids" name="origin_name"
                                         class="form-control form-control-lg origin_name">
                                     </select>
                                 </div>
@@ -548,7 +548,7 @@ function offHover() {
                                         alt="">
                                 </div>
                                 <div class="w-50">
-                                    <select id="destination_id" name="destination_name"
+                                    <select id="destination_ids" name="destination_name"
                                         class="form-control form-control destination_name">
                                     </select>
                                 </div>
