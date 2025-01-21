@@ -112,6 +112,60 @@ onMounted(() => {
         height: '50',
     });
 
+    //adult section
+
+    $('.adult-left-minus').on('click', function () {
+        var total_adult = $(".adult").val();
+        total_adult = parseInt(total_adult) - 1;
+        $(".adult").val(total_adult);
+
+    });
+
+    $('.adult-right-plus').on('click', function () {
+        var total_adult = $(".adult").val();
+        total_adult = parseInt(total_adult) + 1;
+        $(".adult").val(total_adult);
+    });
+
+
+    // child section
+    $('.child-left-minus').on('click', function () {
+        var total_child = $(".child").val();
+        if (total_child > 0) {
+
+            total_child = parseInt(total_child) - 1;
+            $(".child").val(total_child);
+        }
+
+    });
+
+    $('.child-right-plus').on('click', function () {
+        var total_child = $(".child").val();
+        if (total_child <4) {
+
+            total_child = parseInt(total_child) + 1;
+            $(".child").val(total_child);
+        }
+    });
+
+    //infant
+    $('.infant-left-minus').on('click', function () {
+        var total_infant = $(".infant").val();
+        if (total_infant > 0) {
+
+            total_infant = parseInt(total_infant) - 1;
+            $(".infant").val(total_infant);
+        }
+
+    });
+
+    $('.infant-right-plus').on('click', function () {
+        var total_infant = $(".infant").val();
+        total_infant = parseInt(total_infant) + 1;
+        $(".infant").val(total_infant);
+    });
+
+
     // $(".select2C").select2({
     //     theme: 'bootstrap-5',
     //     width: '100%',
@@ -339,7 +393,7 @@ function offHover() {
                                                         <td style="width: 150px;">
                                                             <div class="input-group product-qty">
                                                                 <button type="button"
-                                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                                    class="adult-left-minus btn btn-light rounded-0 rounded-start btn-number"
                                                                     data-type="minus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
@@ -350,11 +404,10 @@ function offHover() {
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
                                                                 </button>
-                                                                <input type="text" name="quantity"
-                                                                    class="form-control input-number quantity"
-                                                                    value="1">
+                                                                <input type="text" name="adult"
+                                                                    class="form-control input-number adult" value="1">
                                                                 <button type="button"
-                                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                                    class="adult-right-plus btn btn-light rounded-0 rounded-end btn-number"
                                                                     data-type="plus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
@@ -376,7 +429,7 @@ function offHover() {
                                                         <td style="width: 150px;">
                                                             <div class="input-group product-qty">
                                                                 <button type="button"
-                                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                                    class="child-left-minus btn btn-light rounded-0 rounded-start btn-number"
                                                                     data-type="minus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
@@ -387,11 +440,10 @@ function offHover() {
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
                                                                 </button>
-                                                                <input type="text" name="quantity"
-                                                                    class="form-control input-number quantity"
-                                                                    value="1">
+                                                                <input type="text" name="child"
+                                                                    class="form-control input-number child" value="1">
                                                                 <button type="button"
-                                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                                    class="child-right-plus btn btn-light rounded-0 rounded-end btn-number"
                                                                     data-type="plus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
@@ -412,7 +464,7 @@ function offHover() {
                                                         <td style="width: 150px;">
                                                             <div class="input-group product-qty">
                                                                 <button type="button"
-                                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                                    class="infant-left-minus btn btn-light rounded-0 rounded-start btn-number"
                                                                     data-type="minus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
@@ -423,11 +475,10 @@ function offHover() {
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
                                                                 </button>
-                                                                <input type="text" name="quantity"
-                                                                    class="form-control input-number quantity"
-                                                                    value="1">
+                                                                <input type="text" name="infant"
+                                                                    class="form-control input-number infant" value="1">
                                                                 <button type="button"
-                                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                                    class="infant-right-plus btn btn-light rounded-0 rounded-end btn-number"
                                                                     data-type="plus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
