@@ -259,7 +259,7 @@ function flight_det_card(type_id) {
                                     <div class="input-group input-group-sm mb-3">
                                         <button class="btn bluesky-btn-outline-primary dropdown-toggle" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
-                                        <ul class="dropdown-menu p-1" style="width: 300px;">
+                                        <ul class="dropdown-menu p-1" style="width: 300px;" @click.stop>
                                             <table class="table table-sm">
                                                 <tbody>
                                                     <tr>

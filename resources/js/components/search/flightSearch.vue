@@ -16,8 +16,8 @@ const format = (fdate) => {
     const month = fdate.getMonth() + 1;
     const year = fdate.getFullYear();
 
-    const date= `${year}-${month}-${day}`;
-    form.dep_date=date;
+    const date = `${year}-${month}-${day}`;
+    form.dep_date = date;
     return date;
 }
 
@@ -330,7 +330,7 @@ function offHover() {
                                     <div class="input-group input-group-sm mb-3">
                                         <button class="btn bluesky-btn-outline-primary dropdown-toggle" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
-                                        <ul class="dropdown-menu p-1" style="width: 300px;">
+                                        <ul class="dropdown-menu p-1" style="width: 300px;" @click.stop>
                                             <table class="table table-sm">
                                                 <tbody>
                                                     <tr>
@@ -730,6 +730,7 @@ function offHover() {
     height: 22px !important;
     top: 0px !important;
 }
+
 .bg-checkbox-active {
     color: #fff;
     /* background: #1882ff; */
@@ -740,5 +741,4 @@ function offHover() {
     background-color: #875ae9;
     border-color: #ffffff;
 }
-
 </style>
