@@ -62,12 +62,42 @@ onMounted(() => {
                 </li>
 
                 <li>
+                    <a v-wave class="has-arrow" href="javascript:;">
+                        <div class="parent-icon">
+
+                            <img src="../../../../public/theme/appimages/flight_management.svg" alt="">
+                        </div>
+                        <div class="menu-title">Flight Management</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <router-link v-wave :to="{ name: 'flightSearch' }">
+                                <i class='bx bx-paper-plane'></i> Search
+                            </router-link>
+                        </li>
+
+                        <li>
+                            <router-link v-wave >
+                                <!-- :to="{ name: 'zoneList' }" -->
+                                <i class='bx bx-paper-plane'></i> Booking & Ticketing
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link v-wave >
+                                <!-- :to="{ name: 'designationList' }" -->
+                                <i class='bx bx-paper-plane'></i> Flight PNR
+                            </router-link>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- <li>
                     <router-link v-wave :to="{ name: 'flightSearch' }">
                         <div class="parent-icon"><i class="bx bx-unite"></i>
                         </div>
                         <div class="menu-title">Flight Search</div>
                     </router-link>
-                </li>
+                </li> -->
                 <li>
                     <router-link v-wave :to="{ name: 'AgentList' }">
                         <div class="parent-icon"><i class="bx bx-unite"></i>
