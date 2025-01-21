@@ -45,7 +45,6 @@ const form = reactive({ Way: '', from: '', to: "", dep_date: '', ADT: '', CNN: '
 
 form.Way = 1;
 
-
 async function Lowfaresearch() {
 
     try {
@@ -223,75 +222,7 @@ function offHover() {
             </nav>
         </div>
     </div>
-    <!-- <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4 border border-1 border-primary m-2 pt-1">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" v-model="form.Way" checked type="radio"
-                                    name="inlineRadioOptions" id="inlineRadio1" value="1">
-                                <label class="form-check-label" for="inlineRadio1">One Way</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" v-model="form.Way" type="radio"
-                                    name="inlineRadioOptions" id="inlineRadio2" value="2">
-                                <label class="form-check-label" for="inlineRadio2">Round</label>
-                            </div>
 
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-md-2">
-                            <label for="">From</label>
-                            <input type="text" v-model="form.from" value="DAC" list="from_countries"
-                                class="form-control mt-1 form-control-sm" name="from" placeholder="From">
-                            <datalist id="from_countries">
-                                <option>DAC</option>
-                            </datalist>
-
-                        </div>
-                        <div class="col-md-2">
-                            <label for="">To</label>
-                            <input type="text" value="DXB" list="to_countries" v-model="form.to"
-                                class="form-control mt-1 form-control-sm" name="to" placeholder="To">
-                            <datalist id="to_countries">
-                                <option>DXB</option>
-                            </datalist>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="">Date</label>
-                            <input type="date" value="2024-12-25" v-model="form.dep_date"
-                                class="form-control form-control-sm" name="date" placeholder="Date">
-                        </div>
-
-                        <div class="col-md-1">
-                            <label for="">Adult</label>
-                            <input type="text" v-model="form.ADT" class="form-control form-control-sm" name="adult"
-                                placeholder="Adult">
-                        </div>
-                        <div class="col-md-1">
-                            <label for="">Child</label>
-                            <input type="text" v-model="form.CNN" class="form-control form-control-sm" name="child"
-                                placeholder="Child">
-                        </div>
-                        <div class="col-md-1">
-                            <label for="">infent</label>
-                            <input type="text" v-model="form.INF" class="form-control form-control-sm" name="infent"
-                                placeholder="infent">
-                        </div>
-
-                        <div class="col-md-2 mt-3">
-                            <button @click="Lowfaresearch()" class="btn btn-sm btn-danger w-100"><i
-                                    class="fa fa-search"></i>Search</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="row">
         <div class="col-md-12">
             <div class="card border border-1 bluesky-border-primary">
