@@ -112,58 +112,39 @@ onMounted(() => {
         height: '50',
     });
 
-    //adult section
+    const updateTotalPassengers = () => {
+        const totalAdult = parseInt($(".adult").val());
+        const totalChild = parseInt($(".child").val());
+        const totalKids = parseInt($(".kids").val());
+        const totalInfant = parseInt($(".infant").val());
+        $(".total_pass").html(totalAdult + totalChild + totalKids + totalInfant);
+    };
 
-    $('.adult-left-minus').on('click', function () {
-        var total_adult = $(".adult").val();
-        total_adult = parseInt(total_adult) - 1;
-        $(".adult").val(total_adult);
+    const updatePassengerCount = (selector, increment, min, max) => {
+        $(selector).on('click', function () {
+            const input = $(this).siblings('input');
+            let count = parseInt(input.val());
+            count = increment ? Math.min(count + 1, max) : Math.max(count - 1, min);
+            input.val(count);
+            updateTotalPassengers();
+        });
+    };
 
-    });
+    // Adult section
+    updatePassengerCount('.adult-left-minus', false, 1, 9);
+    updatePassengerCount('.adult-right-plus', true, 1, 9);
 
-    $('.adult-right-plus').on('click', function () {
-        var total_adult = $(".adult").val();
-        total_adult = parseInt(total_adult) + 1;
-        $(".adult").val(total_adult);
-    });
+    // Child section
+    updatePassengerCount('.child-left-minus', false, 0, 4);
+    updatePassengerCount('.child-right-plus', true, 0, 4);
 
+    // Kids section
+    updatePassengerCount('.kids-left-minus', false, 0, 4);
+    updatePassengerCount('.kids-right-plus', true, 0, 4);
 
-    // child section
-    $('.child-left-minus').on('click', function () {
-        var total_child = $(".child").val();
-        if (total_child > 0) {
-
-            total_child = parseInt(total_child) - 1;
-            $(".child").val(total_child);
-        }
-
-    });
-
-    $('.child-right-plus').on('click', function () {
-        var total_child = $(".child").val();
-        if (total_child <4) {
-
-            total_child = parseInt(total_child) + 1;
-            $(".child").val(total_child);
-        }
-    });
-
-    //infant
-    $('.infant-left-minus').on('click', function () {
-        var total_infant = $(".infant").val();
-        if (total_infant > 0) {
-
-            total_infant = parseInt(total_infant) - 1;
-            $(".infant").val(total_infant);
-        }
-
-    });
-
-    $('.infant-right-plus').on('click', function () {
-        var total_infant = $(".infant").val();
-        total_infant = parseInt(total_infant) + 1;
-        $(".infant").val(total_infant);
-    });
+    // Infant section
+    updatePassengerCount('.infant-left-minus', false, 0, 4);
+    updatePassengerCount('.infant-right-plus', true, 0, 4);
 
 
     // $(".select2C").select2({
@@ -383,7 +364,8 @@ function offHover() {
                                 <div class="col-md-4 pt-1 pr-0">
                                     <div class="input-group input-group-sm mb-3">
                                         <button class="btn bluesky-btn-outline-primary dropdown-toggle" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
+                                            data-bs-toggle="dropdown" aria-expanded="false"><span
+                                                class="total_pass">1</span> Passangers</button>
                                         <ul class="dropdown-menu p-1" style="width: 300px;" @click.stop>
                                             <table class="table table-sm">
                                                 <tbody>
@@ -423,7 +405,7 @@ function offHover() {
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><small>Children <br><span style="font-size: 9px;">02 to
+                                                        <td><small>Children <br><span style="font-size: 9px;">05 to
                                                                     Under 12 Years
                                                                 </span></small></td>
                                                         <td style="width: 150px;">
@@ -441,9 +423,45 @@ function offHover() {
                                                                     </svg>
                                                                 </button>
                                                                 <input type="text" name="child"
-                                                                    class="form-control input-number child" value="1">
+                                                                    class="form-control input-number child" value="0">
                                                                 <button type="button"
                                                                     class="child-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                                    data-type="plus">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-plus-circle custom-text-purple">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>Kids <br><span style="font-size: 9px;">02 to
+                                                                    Under 5 Years
+                                                                </span></small></td>
+                                                        <td style="width: 150px;">
+                                                            <div class="input-group product-qty">
+                                                                <button type="button"
+                                                                    class="kids-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                                    data-type="minus">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-minus-circle custom-text-purple">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                                    </svg>
+                                                                </button>
+                                                                <input type="text" name="kids"
+                                                                    class="form-control input-number kids" value="0">
+                                                                <button type="button"
+                                                                    class="kids-right-plus btn btn-light rounded-0 rounded-end btn-number"
                                                                     data-type="plus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
@@ -476,7 +494,7 @@ function offHover() {
                                                                     </svg>
                                                                 </button>
                                                                 <input type="text" name="infant"
-                                                                    class="form-control input-number infant" value="1">
+                                                                    class="form-control input-number infant" value="0">
                                                                 <button type="button"
                                                                     class="infant-right-plus btn btn-light rounded-0 rounded-end btn-number"
                                                                     data-type="plus">
