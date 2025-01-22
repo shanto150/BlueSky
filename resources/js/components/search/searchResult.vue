@@ -286,7 +286,6 @@ function flight_det_card(type_id) {
                             </label>
                         </div>
 
-
                         <!-- in medium screen -->
                         <div class="ms-auto d-none d-md-block">
                             <div class="row">
@@ -1251,7 +1250,7 @@ function flight_det_card(type_id) {
                                                                             <p class="p-0 m-0"><b>DAC</b></p>
                                                                             <small
                                                                                 style="font-size: 13px; color: #5e6878;"><b>10:50
-                                                                                    AM | 19 Jan, Thursday</b></small>
+                                                                                    AM | 19 Jan, Thu</b></small>
                                                                             <br>
                                                                             <small
                                                                                 style="font-size: 12px; color: #5e6878;">Terminal:2</small>
@@ -1275,7 +1274,7 @@ function flight_det_card(type_id) {
                                                                                     <small
                                                                                         style="font-size: 13px; color: #5e6878;"><b>11:55
                                                                                             AM | 19 Jan,
-                                                                                            Thursday</b></small>
+                                                                                            Thu</b></small>
                                                                                     <br>
                                                                                     <small
                                                                                         style="font-size: 11px; color: #5e6878;">Terminal:3</small>
@@ -1311,42 +1310,36 @@ function flight_det_card(type_id) {
                                                 <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
                                                     <div class="row">
                                                         <div class="col-md-12">
-                                                            <p class="text-start fw-bold">Eligibility Category - 1</p>
-                                                            <span>Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                elit. Iste itaque quidem nam doloremque accusantium
-                                                                minima excepturi architecto illo quo dolorem nulla, ab
-                                                                earum? Neque quis repellendus, deserunt amet ducimus
-                                                                doloribus!</span>
+
+                                                            <p class="text-start fw-bold">PENALTIES/GENERAL</p>
+                                                            <span>
+                                                                1. Reissue/Refund minimum penalty amount before departure 0 BDT 2. Reissue/Refund maximum penalty amount before departure 5999 BDT
+                                                                3. Reissue/Refund maximum penalty amount for the ticket before departure 9599 BDT
+                                                                4. Revalidation minimum penalty amount before departure 0 BDT
+                                                                5. Revalidation maximum penalty amount before departure 0 BDT
+                                                                6. Revalidation maximum penalty amount for the ticket before departure 0 BDT 7. Reissue/Refund minimum penalty amount before departure no show 5999 BDT 8. Reissue/Refund maximum penalty amount before departure no show 5999 BDT 9. Reissue/Refund maximum penalty amount for the ticket before departure no show 9599 BDT 10. Revalidation minimum penalty amount before departure no show 0 BDT 11. Revalidation maximum penalty amount before departure no show 0 BDT 12. Revalidation maximum penalty amount for the ticket before departure no show 0 BDT 13. Reissue/Refund minimum penalty amount after departure 0 BDT 14. Reissue/Refund maximum penalty amount with sale currency 5999 BDT 15. Reissue/Refund maximum penalty amount for the ticket after departure 9599 BDT 16. Revalidation minimum penalty amount after departure 0 BDT 17. Revalidation maximum penalty amount after departure 0 BDT 18. Revalidation maximum penalty amount for the ticket after departure 0 BDT 19. Reissue/Refund minimum penalty amount after departure no show 5999 BDT 20. Reissue/Refund maximum penalty amount after departure no show 5999 BDT 21. Reissue/Refund maximum penalty amount for the ticket after departure no show 9599 BDT 22. Revalidation minimum penalty amount after departure no show 0 BDT 23. Revalidation maximum penalty amount after departure no show 0 BDT 24. Revalidation maximum penalty amount for the ticket after departure no show 0 BDT 25. Part of rule is free form text from Cat16? Not allowed 26. Reissue penalties can be waived for passenger and family death/illness before departure? Not allowed 27. Revalidation before departure is allowed? Not allowed 28. Reissue/Refund before departure allowed? Allowed with restrictions 29. Reissue penalties can be waived for passenger and family death/illness for before departure no show? Not allowed 30. Revalidation before departure when no show is allowed? Not allowed 31. Reissue/Refund before departure when no show allowed? Allowed with restrictions 32. Reissue penalties can be waived for passenger and family death/illness after departure? Not allowed 33. Revalidation after departure is allowed? Not allowed 34. Reissue/Refund after departure allowed? Allowed with restrictions 35. Reissue penalties can be waived for passenger and family death/illness after departure no show? Not allowed 36. Revalidation after departure when no show is allowed? Not allowed 37. Reissue/Refund after departure when no show allowed? Allowed with restrictions 38. Reissue/Refund minimum penalty amount before departure 11998 BDT 39. Reissue/Refund maximum penalty amount before departure 16798 BDT 40. Reissue/Refund maximum penalty amount for the ticket before departure 16798 BDT 41. Reissue/Refund minimum penalty amount before departure no show 11998 BDT 42. Reissue/Refund maximum penalty amount before departure no show 16798 BDT 43. Reissue/Refund maximum penalty amount for the ticket before departure no show 16798 BDT 44. Reissue/Refund minimum penalty amount after departure 11998 BDT 45. Reissue/Refund maximum penalty amount with sale currency 16798 BDT 46. Reissue/Refund maximum penalty amount for the ticket after departure 16798 BDT 47. Reissue/Refund minimum penalty amount after departure no show 11998 BDT 48. Reissue/Refund maximum penalty amount after departure no show 16798 BDT 49. Reissue/Refund maximum penalty amount for the ticket after departure no show 16798 BDT 50. Part of rule is free form text from Cat16? Not allowed 51. Reissue/Refund before departure allowed? Allowed with restrictions 52. Reissue/Refund before departure when no show allowed? Allowed with restrictions 53. Reissue/Refund after departure allowed? Allowed with restrictions 54. Reissue/Refund after departure when no show allowed? Allowed with restrictions
+                                                            </span>
                                                         </div>
-                                                        <div class="col-md-12 mt-2">
-                                                            <p class="text-start fw-bold pt-0 mt-0">Day/Time Application
-                                                                Category - 1</p>
-                                                            <span>Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                elit. Iste itaque quidem nam doloremque accusantium
-                                                                minima excepturi architecto illo quo dolorem nulla, ab
-                                                                earum? Neque quis repellendus, deserunt amet ducimus
-                                                                doloribus!</span>
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="primarycontact" role="tabpanel">
-                                                    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they
-                                                        sold out
-                                                        mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table
-                                                        readymade.
-                                                        Messenger bag gentrify pitchfork tattooed craft beer, iphone
-                                                        skateboard
-                                                        locavore carles etsy salvia banksy hoodie helvetica. DIY synth
-                                                        PBR
-                                                        banksy irony. Leggings gentrify squid 8-bit cred pitchfork.
-                                                        Williamsburg
-                                                        banh mi whatever gluten-free, carles pitchfork biodiesel fixie
-                                                        etsy
-                                                        retro mlkshk vice blog. Scenester cred you probably haven't
-                                                        heard of
-                                                        them, vinyl craft beer blog stumptown. Pitchfork sustainable
-                                                        tofu synth
-                                                        chambray yr.</p>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <p class="text-start fw-bold">Max Stay</p>
+                                                            <span>Maximum stay none for economy unrestricted fares.</span>
+                                                        </div>
+                                                        <div class="col-md-12 mt-2">
+                                                            <p class="text-start fw-bold pt-0 mt-0">Layover</p>
+                                                            <span>Stopovers for economy unrestricted fares unlimited stopovers permitted.</span>
+                                                        </div>
+                                                        <div class="col-md-12 mt-2">
+                                                            <p class="text-start fw-bold pt-0 mt-0">Combinations</p>
+                                                            <span>
+                                                                Permitted combinations fares may be combined on a half round trip basis with any fare for any carrier in any rule and tariff to form round trips/circle trips. End-one-end permitted. Validate all fare component. Travel must be via construction point. Add-ons permitted. Open jaws fares may be combined on a half round trip basis with any fare for any carrier in any rule and tariff to form single or double open jaws. A maximum of 2 international fare components permitted. Mileage of an international open segment must be equal to/less than mileage of the shortest flown fare component. No mileage restriction on an open segment within one country.
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1862,7 +1855,7 @@ function flight_det_card(type_id) {
                                                                             <p class="p-0 m-0"><b>DAC</b></p>
                                                                             <small
                                                                                 style="font-size: 13px; color: #5e6878;"><b>10:50
-                                                                                    AM | 19 Jan, Thursday</b></small>
+                                                                                    AM | 19 Jan, Thu</b></small>
                                                                             <br>
                                                                             <small
                                                                                 style="font-size: 12px; color: #5e6878;">Terminal:2</small>
@@ -1886,7 +1879,7 @@ function flight_det_card(type_id) {
                                                                                     <small
                                                                                         style="font-size: 13px; color: #5e6878;"><b>11:55
                                                                                             AM | 19 Jan,
-                                                                                            Thursday</b></small>
+                                                                                            Thu</b></small>
                                                                                     <br>
                                                                                     <small
                                                                                         style="font-size: 11px; color: #5e6878;">Terminal:3</small>
@@ -1942,7 +1935,7 @@ function flight_det_card(type_id) {
                                                                             <p class="p-0 m-0"><b>CCU</b></p>
                                                                             <small
                                                                                 style="font-size: 11px; color: #5e6878;"><b>10:50
-                                                                                    AM | 19 Jan, Thursday</b></small>
+                                                                                    AM | 19 Jan, Thu</b></small>
                                                                             <br>
                                                                             <small
                                                                                 style="font-size: 11px; color: #5e6878;">Terminal:2</small>
@@ -1966,7 +1959,7 @@ function flight_det_card(type_id) {
                                                                                     <small
                                                                                         style="font-size: 11px; color: #5e6878;"><b>02:55
                                                                                             PM | 19 Jan,
-                                                                                            Thursday</b></small>
+                                                                                            Thu</b></small>
                                                                                     <br>
                                                                                     <small
                                                                                         style="font-size: 11px; color: #5e6878;">Terminal:3</small>
