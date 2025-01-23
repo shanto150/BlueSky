@@ -9,10 +9,12 @@ use App\Http\Controllers\Admin\Area\AreaController;
 use App\Http\Controllers\Admin\Agent\AgentController;
 use App\Http\Controllers\Admin\Role\RolePermissionController;
 use App\Http\Controllers\Admin\Department\DepartmentController;
+use App\Http\Controllers\Admin\AirlineLogo\AirlineLogoController;
 use App\Http\Controllers\Admin\Designation\DesignationController;
 use App\Http\Controllers\Admin\OfficeLocation\LocationController;
 use App\Http\Controllers\Admin\IssuedBankMFS\IssuedBankMFSController;
 use App\Http\Controllers\Admin\PaymentAccount\PaymentAccountSController;
+use App\Http\Controllers\Admin\AircraftType\AircraftTypeDesignatorController;
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('register', [AuthController::class, 'register'])->name('register');
@@ -99,6 +101,21 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/deletePaymentAcct', [PaymentAccountSController::class, 'destroy'])->name('settings.deposit.destroy');
     Route::post('/editPaymentAcct', [PaymentAccountSController::class, 'edit'])->name('settings.deposit.editPaymentAcct');
     Route::post('/payment-acct/update', [PaymentAccountSController::class, 'update'])->name('settings.deposit.updatePaymentAcct');
+
+    // AircraftTypeDesignator
+    Route::get('getAircraftTypeDesignator', [AircraftTypeDesignatorController::class, 'index'])->name('settings.aircraft.getAircraftTypeDesignator');
+    Route::post('/AircraftType/save', [AircraftTypeDesignatorController::class, 'store'])->name('settings.aircraft.store');
+    Route::post('/editAircraft', [AircraftTypeDesignatorController::class, 'edit'])->name('settings.aircraft.edit');
+    Route::post('/AircraftType/update', [AircraftTypeDesignatorController::class, 'update'])->name('settings.aircraft.update');
+    Route::post('/deleteAircraft', [AircraftTypeDesignatorController::class, 'destroy'])->name('settings.aircraft.destroy');
+
+    //airlines
+    Route::get('getAirlines', [AirlineLogoController::class, 'index'])->name('settings.airlines.getAirlines');
+    Route::post('/airlines/update', [AirlineLogoController::class, 'update'])->name('settings.airlines.update');
+    Route::post('/editAirlines', [AirlineLogoController::class, 'edit'])->name('settings.airlines.edit');
+
+    Route::post('/Airlines/save', [AirlineLogoController::class, 'store'])->name('settings.airlines.store');
+    Route::post('/deleteAirlines', [AirlineLogoController::class, 'destroy'])->name('settings.airlines.destroy');
 
     //users managemnt
     Route::get('getInternalUsers', [UserController::class, 'index'])->name('user.getInternalUsers');

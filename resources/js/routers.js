@@ -66,6 +66,16 @@ const paymentacct = () => import('./components/admin/settings/deposit/paymentAcc
 const paymentAcctCreate = () => import('./components/admin/settings/deposit/paymentAccount/create.vue')
 const payAcctEdit = () => import('./components/admin/settings/deposit/paymentAccount/edit.vue')
 
+//aircraft type designator
+const aircraftList = () => import('./components/admin/settings/aircraft/index.vue')
+const aircraftCreate = () => import('./components/admin/settings/aircraft/create.vue')
+const aircraftEdit = () => import('./components/admin/settings/aircraft/edit.vue')
+
+//airlines
+const airlinesList = () => import('./components/admin/settings/airlines/index.vue')
+const airlinesCreate = () => import('./components/admin/settings/airlines/create.vue')
+const airlinesEdit = () => import('./components/admin/settings/airlines/edit.vue')
+
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
     { path: '/sendResetLinkEmail', component: sendResetLinkEmail, name: 'sendResetLinkEmail', meta: { guest: true } },
@@ -136,6 +146,16 @@ const routes = [
     { path: '/all-payment-accounts', component: paymentacct, name: 'paymentacct', meta: { auth: true } },
     { path: '/create-payment-account', component: paymentAcctCreate, name: 'paymentAcctCreate', meta: { auth: true } },
     { path: '/edit-payment-account/:id', component: payAcctEdit, name: 'payAcctEdit', meta: { auth: true },props:true  },
+
+    //aircraft
+    { path: '/all-aircraft-list', component: aircraftList, name: 'aircraftList', meta: { auth: true } },
+    { path: '/create-aircraft', component: aircraftCreate, name: 'aircraftCreate', meta: { auth: true } },
+    { path: '/edit-aircraft/:id', component: aircraftEdit, name: 'aircraftEdit', meta: { auth: true },props:true  },
+
+    //airlines
+    { path: '/all-airlinesList-list', component: airlinesList, name: 'airlinesList', meta: { auth: true } },
+    { path: '/create-airline', component: airlinesCreate, name: 'airlinesCreate', meta: { auth: true } },
+    { path: '/edit-airlines/:id', component: airlinesEdit, name: 'airlinesEdit', meta: { auth: true },props:true  },
 ]
 
 const router = createRouter({

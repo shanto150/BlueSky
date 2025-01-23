@@ -1,23 +1,23 @@
 <?php
-namespace App\Models\AirlineLogo;
+
+namespace App\Models\AircraftType;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\Activitylog\LogOptions;
 use App\Models\User;
+use Spatie\Activitylog\LogOptions;
 
-class AirlineLogo extends Model
+class AircraftTypeDesignator extends Model
 {
     use HasFactory,LogsActivity;
     protected $fillable = [
-        'name',
-        'code',
-        'logo_path',
-        'country_name',
+        'iata_code',
+        'icao_code',
+        'model',
         'created_by',
-        'updated_by',
-        'airline_business_type'
+        'updated_by'
+
     ];
 
 
@@ -25,7 +25,7 @@ class AirlineLogo extends Model
     {
         return LogOptions::defaults()
         ->logOnly(['name', 'status', 'user.name'])
-        ->useLogName('AirlineLogo')
+        ->useLogName('AircraftTypeDesignator')
         ->logOnlyDirty();
     }
 
@@ -33,5 +33,4 @@ class AirlineLogo extends Model
     {
         return $this->belongsTo(User::class,'created_by');
     }
-
 }
