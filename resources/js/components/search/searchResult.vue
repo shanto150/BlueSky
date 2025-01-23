@@ -231,18 +231,9 @@ function offHover() {
     $("#img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_With_Icon.jpg');
 }
 
-function flight_det_card(type_id) {
-    const isType1 = type_id == 1;
-    $('.baggade').toggleClass('bluesky-btn-primary', isType1).toggleClass('bluesky-btn-outline-primary', !isType1);
-    $('.fare_summary').toggleClass('bluesky-btn-primary', !isType1).toggleClass('bluesky-btn-outline-primary', isType1);
-    $('#fare_summary_details').toggleClass('d-none', isType1);
-    $('#baggade').toggleClass('d-none', !isType1);
-
-}
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-
         <div class="breadcrumb-title pe-3">Settings</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
@@ -610,8 +601,7 @@ function flight_det_card(type_id) {
                                     </select>
                                 </div>
                                 <div class="py-2" style="margin: 0 5px 0 5px;">
-                                    <img src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.svg"
-                                        alt="">
+                                    <img src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.svg" alt="">
                                 </div>
                                 <div class="w-50">
                                     <select id="destination_id" name="destination_name"
@@ -1298,8 +1288,11 @@ function flight_det_card(type_id) {
                                                             <div class="row mt-2 p-2 pb-0">
                                                                 <!-- 8px -->
                                                                 <div class="chip chip-sm"
-                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6;">
-                                                                    <i class="fa fa-map-marker custom-text-purple"></i>
+                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
+                                                                    <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                        src="../../../../public/theme/appimages/location.svg"
+                                                                        alt="">
+
                                                                     Destination : Dubai Internation Airport
                                                                 </div>
                                                             </div>
@@ -1344,107 +1337,188 @@ function flight_det_card(type_id) {
                                             </div>
                                         </div>
                                         <div class="col-md-4" style="background-color: #f4f4ff;">
-                                            <div class="d-flex justify-content-center mt-2">
 
-                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                    <button type="button"
-                                                        class="btn bluesky-btn-primary btn-circle btn-sm waves-effect waves-light baggade"
-                                                        @click="flight_det_card(1)">
-                                                        <span style="font-size: 13px;">Baggade</span>
-                                                    </button>
+                                            <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header rounded" id="flush-headingOne"
+                                                        style="background-color: #7944eb !important;">
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                            type="button" data-bs-toggle="collapse"
+                                                            data-bs-target="#flush-fare-summary" aria-expanded="false"
+                                                            aria-controls="flush-fare-summary">
+                                                            Fare Summary
+                                                        </button>
+                                                    </h2>
+                                                    <div id="flush-fare-summary" class="accordion-collapse collapse"
+                                                        aria-labelledby="flush-headingOne"
+                                                        data-bs-parent="#accordionFlushExample" style="">
+                                                        <div class="accordion-body">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            Base Fare
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳30000</td>
+                                                                                    <td>
+                                                                                        ৳60000
+                                                                                    </td>
+                                                                                </tr>
 
-                                                    <button type="button"
-                                                        class="btn bluesky-btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary"
-                                                        @click="flight_det_card(2)">
-                                                        <span style="font-size: 13px;">Fare Summary</span>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳20000</td>
+                                                                                    <td>
+                                                                                        ৳40000
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
 
-                                            <div class="card text-center mt-2" id="baggade">
-                                                <div class="card-body mb-0 pb-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-sm ">
-                                                            <tbody class="text-start">
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
-                                                                        <small>Economy</small>
-                                                                    </td>
+                                                                    <div class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            TAX
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳5000</td>
+                                                                                    <td>
+                                                                                        ৳10000
+                                                                                    </td>
 
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small>
-                                                                    </td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
-                                                                        <small>Economy</small>
-                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳2000</td>
+                                                                                    <td>
+                                                                                        ৳4000
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
 
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small>
-                                                                    </td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                                    <div class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            AIT
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳1275</td>
+                                                                                    <td>
+                                                                                        ৳2550
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳870</td>
+                                                                                    <td>
+                                                                                        ৳1740
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                    <div class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            Service Charge
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳1275</td>
+                                                                                    <td>
+                                                                                        ৳2550
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳870</td>
+                                                                                    <td>
+                                                                                        ৳1740
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <div class="accordion-item mt-2">
+                                                    <h2 class="accordion-header" id="flush-headingTwo">
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                            type="button" data-bs-toggle="collapse"
+                                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                                            aria-controls="flush-collapseTwo">
+                                                            Baggadge Information
+                                                        </button>
+                                                    </h2>
+                                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                                        aria-labelledby="flush-headingTwo"
+                                                        data-bs-parent="#accordionFlushExample" style="">
+                                                        <div class="accordion-body">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>DAC-CCU</b>
+                                                                                        <br>
+                                                                                        <small>Economy</small>
+                                                                                    </td>
 
-                                            <div class="card text-start mt-2 d-none" id="fare_summary_details">
-                                                <div class="card-body mb-0 pb-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-sm ">
-                                                            <tbody class="text-start">
-                                                                <thead>
-                                                                    <th style="font-size: 10px;">Passenger</th>
-                                                                    <th style="font-size: 10px;">Tax+Fees</th>
-                                                                    <th style="font-size: 10px;">Total Fare</th>
-                                                                </thead>
-                                                            <tbody style="font-size: 10px;;">
-                                                                <tr>
-                                                                    <td>4 Adults</td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 980
-                                                                    </td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                        120980</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4 Child</td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 500
-                                                                    </td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                        15670</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4 Infants</td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 500
-                                                                    </td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                        15670</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Discount</td>
-                                                                    <td></td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> -670
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><b>Total Payable</b></td>
-                                                                    <td></td>
-                                                                    <td>
-                                                                        <b><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                            151650</b>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                            </tbody>
-                                                        </table>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Cabin</b>
+                                                                                        <br>
+                                                                                        <small>10 Kg</small>
+                                                                                    </td>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Check In</b>
+                                                                                        <br>
+                                                                                        <small>2 Pieces</small>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>CCU-BDX</b>
+                                                                                        <br>
+                                                                                        <small>Economy</small>
+                                                                                    </td>
+
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Cabin</b>
+                                                                                        <br>
+                                                                                        <small>10 Kg</small>
+                                                                                    </td>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Check In</b>
+                                                                                        <br>
+                                                                                        <small>2 Pieces</small>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1902,8 +1976,11 @@ function flight_det_card(type_id) {
                                                             </div>
                                                             <div class="row mt-2 p-2 pb-0">
                                                                 <div class="chip chip-sm"
-                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6;">
-                                                                    <i class="fa fa-map-marker custom-text-purple"></i>
+                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
+
+                                                                    <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                        src="../../../../public/theme/appimages/location.svg"
+                                                                        alt="">
                                                                     Layover:Netaji Subhash Chandra Bose... | 02 hr 30
                                                                     min
                                                                 </div>
@@ -2007,110 +2084,7 @@ function flight_det_card(type_id) {
                                             </div>
                                         </div>
                                         <div class="col-md-4" style="background-color: #f4f4ff;">
-                                            <div class="d-flex justify-content-center mt-2">
-
-                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                    <button type="button"
-                                                        class="btn bluesky-btn-primary btn-circle btn-sm waves-effect waves-light baggade"
-                                                        @click="flight_det_card(1)">
-                                                        <span style="font-size: 13px;">Baggade</span>
-                                                    </button>
-
-                                                    <button type="button"
-                                                        class="btn bluesky-btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary"
-                                                        @click="flight_det_card(2)">
-                                                        <span style="font-size: 13px;">Fare Summary</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            <div class="card text-center mt-2" id="baggade">
-                                                <div class="card-body mb-0 pb-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-sm ">
-                                                            <tbody class="text-start">
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
-                                                                        <small>Economy</small>
-                                                                    </td>
-
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small>
-                                                                    </td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
-                                                                        <small>Economy</small>
-                                                                    </td>
-
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small>
-                                                                    </td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="card text-start mt-2 d-none" id="fare_summary_details">
-                                                <div class="card-body mb-0 pb-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-sm ">
-                                                            <tbody class="text-start">
-                                                                <thead>
-                                                                    <th style="font-size: 10px;">Passenger</th>
-                                                                    <th style="font-size: 10px;">Tax+Fees</th>
-                                                                    <th style="font-size: 10px;">Total Fare</th>
-                                                                </thead>
-                                                            <tbody style="font-size: 10px;;">
-                                                                <tr>
-                                                                    <td>4 Adults</td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 980
-                                                                    </td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                        120980</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4 Child</td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 500
-                                                                    </td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                        15670</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>4 Infants</td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> 500
-                                                                    </td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                        15670</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Discount</td>
-                                                                    <td></td>
-                                                                    <td><i class="fa fa-bangladeshi-taka-sign"></i> -670
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><b>Total Payable</b></td>
-                                                                    <td></td>
-                                                                    <td>
-                                                                        <b><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                                            151650</b>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <!-- upcoming 2 -->
                                         </div>
                                     </div>
                                 </div>
@@ -2186,4 +2160,9 @@ li.menu-item {
     margin-left: 3px !important;
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237944eb'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
 }
+
+.fare-summary-bg{
+    background: #faf8ff;
+}
+
 </style>
