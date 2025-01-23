@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Designation;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\DataTables;
-use App\Http\Controllers\BaseController;
-use App\Models\Designation\Designation;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Models\Designation\Designation;
+use Spatie\Activitylog\Models\Activity;
+use App\Http\Controllers\BaseController;
 
 class DesignationController extends BaseController
 {
@@ -136,5 +137,11 @@ class DesignationController extends BaseController
             return $this->ErrorResponse($error);
 
         }
+    }
+
+    public function designationlog()
+    {
+        $activits = Activity::where('log_name','Designation')->get();
+        return $this->SuccessResponse($activits, 'Activity Recived.');
     }
 }
