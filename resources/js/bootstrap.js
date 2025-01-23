@@ -8,17 +8,17 @@ import axios from 'axios';
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-const urls = document.head.querySelector('meta[name="api-base-url"]').content;
-// alert(urls);
-axios.get(urls, { transformRequest: [(data, headers) => {
-   delete window.axios.defaults.headers.common['X-Requested-With'];
-//    console.log(urls);
-   return data;
+// const urls = document.head.querySelector('meta[name="api-base-url"]').content;
+// // alert(urls);
+// axios.get(urls, { transformRequest: [(data, headers) => {
+//    delete window.axios.defaults.headers.common['X-Requested-With'];
+// //    console.log(urls);
+//    return data;
 
-}] })
-.then((response) => {
-//    console.log(response);
-})
+// }] })
+// .then((response) => {
+// //    console.log(response);
+// })
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
