@@ -15,8 +15,18 @@ async function update(props) {
     form.airlines_id = props.id;
 
     try {
-        const response = await axiosInstance.post("/airlines/update", form);
+        // const response = await axiosInstance.post("/airlines/update", form);
 
+        const authStore = useAuthStore();
+        const accessToken = authStore.decryptWithAES(authStore.token);
+        const response = await axios.post('/api/airlines/update', form, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: "Bearer " + accessToken,
+                Accept: "application/json",
+
+            },
+        });
         Notification.showToast('s', response.data.message);
 
     } catch (error) {
@@ -24,19 +34,24 @@ async function update(props) {
     }
 }
 
+const handleFileChange = (event) => {
+    form.airline_picture = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(form.airline_picture);
+    reader.onload = (e) => {
+        previewImage.value = e.target.result;
+    };
+}
 
+getAirLinesData(props);
 
-getAreaData(props);
-
-async function getAreaData(props) {
+async function getAirLinesData(props) {
 
     try {
         authStore.GlobalLoading = true;
         Loading.value = false;
 
         const response = await axiosInstance.post('editAirlines', { 'id': props });
-
-        console.log(response);
 
         const name = response.data[0].name;
         const code = response.data[0].code;
@@ -48,15 +63,12 @@ async function getAreaData(props) {
         form.code = code;
         form.country_name = country_name;
         form.airlines_business_type = airline_business_type;
-        this.previewImage = logo_path;
-
-
+        previewImage.value = logo_path
         authStore.GlobalLoading = false;
         Loading.value = true;
     } catch (error) {
         authStore.GlobalLoading = false;
         Loading.value = true;
-        console.log(error);
     }
 }
 
@@ -77,10 +89,10 @@ onMounted(() => {
 
                     </li>
                     <li class="breadcrumb-item">
-                        <router-link :to="{ name: 'aircraftList' }">Aircraft List</router-link>
+                        <router-link :to="{ name: 'airlinesList' }">Airlines List</router-link>
 
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Aircraft Edit</li>
+                    <li class="breadcrumb-item active" aria-current="page">Airlines Edit</li>
                 </ol>
             </nav>
         </div>
@@ -88,7 +100,7 @@ onMounted(() => {
 
     <div class="card">
         <div class="card-header">
-            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Aircraft Edit</h5>
+            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Airlines Edit</h5>
         </div>
 
         <div v-if="authStore.GlobalLoading" class="mt-2 center-body position-absolute top-50 start-50">
