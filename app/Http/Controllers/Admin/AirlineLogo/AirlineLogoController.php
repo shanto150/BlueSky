@@ -94,6 +94,10 @@ class AirlineLogoController extends BaseController
                 File::makeDirectory($image_path, 0777, true);
             }
 
+            if($airline->logo_path){
+                File::delete(public_path($airline->logo_path));
+            }
+
             $request_image->move($image_path, $image_name);
             $airline->logo_path = '/uploads/airlines/' . $image_name;
 

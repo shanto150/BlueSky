@@ -25,9 +25,9 @@ async function update(props) {
 
 
 
-getAreaData(props);
+getAirCraftData(props);
 
-async function getAreaData(props) {
+async function getAirCraftData(props) {
 
     try {
         authStore.GlobalLoading = true;
