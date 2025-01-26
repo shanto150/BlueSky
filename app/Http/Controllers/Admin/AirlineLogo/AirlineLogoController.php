@@ -119,6 +119,10 @@ class AirlineLogoController extends BaseController
 
             $aircraft = AirlineLogo::where('id', $request->id)->first();
 
+            if($aircraft->logo_path){
+                File::delete(public_path($aircraft->logo_path));
+            }
+
             $aircraft->delete();
             $success = '';
             return $this->SuccessResponse($success, 'Successfully Airline deleted.');

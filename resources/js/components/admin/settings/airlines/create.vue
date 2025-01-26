@@ -41,6 +41,7 @@ async function save() {
 
             },
         });
+        previewImage.value ="";
         document.getElementById("addAirlinesform").reset();
 
         Notification.showToast('s', response.data.message);
