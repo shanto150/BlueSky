@@ -160,15 +160,19 @@ class AreaController extends BaseController
 
     public function airports(Request $request)
     {
-        $airp = DB::table('airports')
-            // ->orWhere('Country_name', 'like', '%' . $request->q . '%')
-            // ->orWhere('City_name', 'like', '%' . $request->q . '%')
-            // ->orWhere('code', 'like', '%' . $request->q . '%')
-            // ->orWhere('Airport_Name', 'like', '%' . $request->q . '%')
-            ->select(['City_name', 'code', 'Airport_Name', 'Country_name'])
-            ->take(50)
-            ->get();
+        $airp = DB::table('airports')->limit(3000)->get();
+        // $inv_items=json_encode($airp);
         return response()->json($airp);
+
+        // $data = [];
+        // if($request->has('q')){
+        //     $search = $request->q;
+        //     $data = DB::table("airports")
+        //     		->select("id","code","City_name","Airport_Name","Country_name","countryshortcode")
+        //     		->where('code','LIKE',"%$search%")
+        //     		->get();
+        // }
+        // return response()->json($data);
     }
 
     public function districtList(Request $request)
