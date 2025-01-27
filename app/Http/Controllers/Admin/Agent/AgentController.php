@@ -36,7 +36,7 @@ class AgentController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

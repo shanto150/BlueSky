@@ -104,10 +104,10 @@ const options = {
             title: "Net Balance",
             data: 'net_balance',
         },
-        {
-            title: "Status",
-            data: 'status',
-        },
+        // {
+        //     title: "Status",
+        //     data: 'status',
+        // },
 
         {
             title: "Created By",

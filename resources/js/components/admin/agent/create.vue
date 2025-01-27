@@ -3,9 +3,21 @@ import { ref, onMounted, reactive } from "vue";
 import axiosInstance from "../../../axiosInstance"
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import { useAuthStore } from "../../../stores/authStore";
 
-const form = reactive({ name: "", email: "", country: "", address: "", established_date: "", postal_code: "", ca_number: "" });
+const form = reactive({
+    name: "", email: "", country: "", address: "", established_date: "", postal_code: "", ca_number: "", iata_number: "", agent_code: "", phone: "", city: "", zone: "", reg_number: "", fax: "", trade_licence: "", hajj_no: '', ownername: "", nid_number: "", email_address: "", designation: "", dob: "", owner_phone: "", kam_id: "", remarks: ""
+});
+
 const previewImage = ref('');
+const trade_licence_Image = ref('');
+const ca_Image = ref('');
+const Iata_Image = ref('');
+const Hajj_Image = ref('');
+const TIN_Image = ref('');
+const NID_Image = ref('');
+const owner_profile_img = ref('');
+
 
 const isAgencyDetails = ref(true);
 const isAgencyDocument = ref(false);
@@ -17,6 +29,7 @@ const classDocupActive = ref(false);
 const classKAMActive = ref(false);
 const state_iata = ref(false);
 const state_hajj = ref(false);
+
 function nextPhase(id) {
     if (id == 1) {
         this.isAgencyDetails = false;
@@ -64,11 +77,31 @@ function nextPhase(id) {
         this.isAssignKam = false;
         this.classDocupActive = true;
         this.classKAMActive = false;
-
+    }
+    else if (id == 4) {
+        save();
 
     }
+}
 
+async function save() {
 
+    try {
+        const authStore = useAuthStore();
+        const accessToken = authStore.decryptWithAES(authStore.token);
+        const response = await axios.post('/api/agent/save', form, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: "Bearer " + accessToken,
+                Accept: "application/json",
+
+            },
+        });
+        document.getElementById("addAgentForm").reset();
+        Notification.showToast('s', response.data.message);
+    } catch (error) {
+        ErrorCatch.CatchError(error);
+    }
 }
 
 function iata_non_iata(value_stage) {
@@ -79,7 +112,7 @@ function iata_non_iata(value_stage) {
     }
 }
 
-function hajjNonHajj(value_stage){
+function hajjNonHajj(value_stage) {
     if (value_stage == 1) {
         return this.state_hajj = true;
     } else {
@@ -87,18 +120,101 @@ function hajjNonHajj(value_stage){
     }
 }
 
-
+// agency image
 const handleFileChange = (event) => {
     form.profile_picture = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(form.profile_picture);
-    // console.log(reader.readAsDataURL(form.profile_picture));
 
     reader.onload = (e) => {
         previewImage.value = e.target.result;
     };
 }
 
+// trade licence
+const handleTradeLicenceFileChange = (event) => {
+
+    form.profile_picture = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(form.profile_picture);
+
+    reader.onload = (e) => {
+        trade_licence_Image.value = e.target.result;
+    };
+}
+
+// civil aviation
+const handleCivilAviationFileChange = (event) => {
+
+    form.profile_picture = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(form.profile_picture);
+
+    reader.onload = (e) => {
+        ca_Image.value = e.target.result;
+    };
+}
+
+// iata
+const handleIataFileChange = (event) => {
+
+    form.profile_picture = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(form.profile_picture);
+
+    reader.onload = (e) => {
+        Iata_Image.value = e.target.result;
+    };
+}
+
+// hajj
+const handleHajjLicenseFileChange = (event) => {
+
+    form.profile_picture = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(form.profile_picture);
+
+    reader.onload = (e) => {
+        Hajj_Image.value = e.target.result;
+    };
+}
+// tin
+const handleTINFileChange = (event) => {
+
+    form.profile_picture = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(form.profile_picture);
+
+    reader.onload = (e) => {
+        TIN_Image.value = e.target.result;
+    };
+}
+
+// nid
+
+const handleNIDFileChange = (event) => {
+
+    form.profile_picture = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(form.profile_picture);
+
+    reader.onload = (e) => {
+        NID_Image.value = e.target.result;
+    };
+}
+
+//owner image
+
+const handleOwnerProfileFileChange = (event) => {
+
+    form.profile_picture = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(form.profile_picture);
+
+    reader.onload = (e) => {
+        owner_profile_img.value = e.target.result;
+    };
+}
 </script>
 
 <template>
@@ -276,7 +392,9 @@ const handleFileChange = (event) => {
                                                         2Mb)</label>
 
                                                     <div class="input-group mb-3">
-                                                        <input type="file" @change="handleFileChange" class="form-control" id="inputGroupFile02">
+                                                        <input type="file" @change="handleFileChange"
+                                                            class="form-control" id="inputGroupFile02">
+
                                                         <label class="input-group-text"
                                                             for="inputGroupFile02">Upload</label>
                                                     </div>
@@ -288,19 +406,22 @@ const handleFileChange = (event) => {
                                             <div class="row">
                                                 <div class="col-12 col-lg-12">
                                                     <label for="agent_code" class="form-label">Agency Code</label>
-                                                    <input type="text" v-model="form.agent_code" class="form-control form-control-sm" name="agent_code" id="agent_code"
-                                                        placeholder="Enter Agency Code">
+                                                    <input type="text" v-model="form.agent_code"
+                                                        class="form-control form-control-sm" name="agent_code"
+                                                        id="agent_code" placeholder="Enter Agency Code">
                                                 </div>
 
                                                 <div class="col-12 col-md-12 mt-2">
                                                     <label for="date" class="form-label">Phone</label>
-                                                    <input type="text" v-model="form.phone"  class="form-control form-control-sm" id="phone" name="phone"
+                                                    <input type="text" v-model="form.phone"
+                                                        class="form-control form-control-sm" id="phone" name="phone"
                                                         placeholder="Enter Phone Number">
                                                 </div>
 
                                                 <div class="col-12 col-lg-12 mt-2">
                                                     <label for="city" class="form-label">City</label>
-                                                    <select class="form-select form-select-sm" name="city" v-model="form.city" id="city"
+                                                    <select class="form-select form-select-sm" name="city"
+                                                        v-model="form.city" id="city"
                                                         aria-label="Default select example">
                                                         <option>Select City</option>
                                                     </select>
@@ -309,7 +430,7 @@ const handleFileChange = (event) => {
                                                 <div class="col-12 col-lg-12 mt-2">
                                                     <label for="zone" class="form-label">Zone</label>
                                                     <select class="form-select form-select-sm" name="zone"
-                                                    v-model="form.zone" id="zone"
+                                                        v-model="form.zone" id="zone"
                                                         aria-label="Default select example">
                                                         <option>Select Zone</option>
                                                     </select>
@@ -318,33 +439,36 @@ const handleFileChange = (event) => {
                                                 <div class="col-12 col-md-12 mt-2">
                                                     <label for="registration" class="form-label">Registration
                                                         Number</label>
-                                                    <input type="text" class="form-control form-control-sm" id="reg_number" name="reg_number" v-model="form.reg_number"
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        id="reg_number" name="reg_number" v-model="form.reg_number"
                                                         placeholder="Enter Registration Number">
                                                 </div>
 
                                                 <div class="col-12 col-md-12 mt-2">
                                                     <label for="fax" class="form-label">Fax</label>
-                                                    <input type="text" name="fax" v-model="form.fax" class="form-control form-control-sm" id="fax"
+                                                    <input type="text" name="fax" v-model="form.fax"
+                                                        class="form-control form-control-sm" id="fax"
                                                         placeholder="Enter Fax">
                                                 </div>
 
                                                 <div class="col-12 col-md-12 mt-2">
                                                     <label for="trade_licence" class="form-label">Trade Licence</label>
-                                                    <input type="text" name="trade_licence" v-model="form.trade_licence" class="form-control form-control-sm" id="trade_licence"
+                                                    <input type="text" name="trade_licence" v-model="form.trade_licence"
+                                                        class="form-control form-control-sm" id="trade_licence"
                                                         placeholder="Enter Trade Licence">
                                                 </div>
 
                                                 <div class="col-12 col-lg-12 d-flex align-items-center gap-3 mt-2">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="hajjNonHajj" @change="hajjNonHajj(1)" id="flexRadioDefault1">
+                                                        <input class="form-check-input" type="radio" name="hajjNonHajj"
+                                                            @change="hajjNonHajj(1)" id="flexRadioDefault1">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             Hajj
                                                         </label>
                                                     </div>
                                                     <div class="form-check form-check-success">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="hajjNonHajj" @change="hajjNonHajj(2)" id="flexRadioSuccess">
+                                                        <input class="form-check-input" type="radio" name="hajjNonHajj"
+                                                            @change="hajjNonHajj(2)" id="flexRadioSuccess">
                                                         <label class="form-check-label" for="flexRadioSuccess">
                                                             Non-Hajj
                                                         </label>
@@ -353,13 +477,12 @@ const handleFileChange = (event) => {
 
                                                 <div class="col-12 col-md-12 mt-2" v-show="state_hajj">
                                                     <input type="text" class="form-control form-control-sm" id="hajn"
-                                                        placeholder="Enter Number">
+                                                        v-model="form.hajj_no" placeholder="Enter Number">
                                                 </div>
 
                                                 <div v-if="previewImage" class="d-flex align-items-center mt-4">
-                                                    <img  :src="previewImage" height="60"
-                                                        width="60" class="border border-1 rounded rounded-2"
-                                                        alt="Profile Picture">
+                                                    <img :src="previewImage" height="60" width="60"
+                                                        class="border border-1 rounded rounded-2" alt="Profile Picture">
 
                                                     <div class="flex-grow-1 ms-3">
                                                         <p class="mb-0"><i
@@ -385,94 +508,148 @@ const handleFileChange = (event) => {
                                 </div>
 
                                 <div class="row" v-if="isAgencyDocument">
-                                    <p>Upload Your Documents <br> <span style="font-size: 12px;">Supported Formats :Jpeg,Png or Pdf | Max File Size : 2MB</span></p>
+                                    <p>Upload Your Documents <br> <span style="font-size: 12px;">Supported Formats
+                                            :Jpeg,Png or Pdf | Max File Size : 2MB</span></p>
+
+                                    <!-- Trade Licence -->
                                     <div class="col-md-3 d-flex justify-content-center m-1 flex-column"
                                         style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: black; height: 100px; background-color: transparent; border-radius: 3px; border: 2px dotted #7785f4">
-                                        <div class="d-inline text-center">
-                                            <img id="doc_output" class="rounded" src="/public/theme/appimages/rqf.png" height="40" width="40" alt="">
+                                        <div v-if="trade_licence_Image" class="d-inline text-center">
+                                            <img id="tl_doc_output" class="rounded" :src="trade_licence_Image"
+                                                height="40" width="40" alt="">
+
+                                        </div>
+                                        <div v-else class="d-inline text-center">
+                                            <img id="doc_output" class="rounded" src="/public/theme/appimages/rqf.png"
+                                                height="40" width="40" alt="">
                                         </div>
 
                                         <div class="d-inline text-center">Trade License</div>
                                         <label for="tl" role="button" class="d-inline text-center">
                                             Choose File <b style="color: #7C1843">Here</b></label>
                                         <input type="file" id="tl" form="myform" name="trade_licence_img"
-                                            style="display: none">
+                                            style="display: none" @change="handleTradeLicenceFileChange">
+
                                     </div>
+                                    <!-- ./End Trade Licence -->
+
+
+                                    <!-- Civil Aviation Certificate -->
                                     <div class="col-md-3 d-flex justify-content-center m-1 flex-column"
                                         style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: black; height: 100px; background-color: transparent; border-radius: 3px; border: 2px dotted #7785f4">
-                                        <div class="d-inline text-center">
+
+
+                                        <div v-if="ca_Image" class="d-inline text-center">
+                                            <img id="doc_output" class="rounded" :src="ca_Image" height="40" width="40"
+                                                alt="">
+                                        </div>
+                                        <div v-else class="d-inline text-center">
                                             <img id="doc_output" class="rounded" src="/public/theme/appimages/rqf.png"
                                                 height="40" width="40" alt="">
-
                                         </div>
 
                                         <div class="d-inline text-center">Civil Aviation Certificate</div>
-                                        <label for="tl" role="button" class="d-inline text-center">
+                                        <label for="ca_certificate" role="button" class="d-inline text-center">
                                             Choose File <b style="color: #7C1843">Here</b></label>
-                                        <input type="file" id="tl" form="myform" name="trade_licence_img"
-                                            style="display: none">
+                                        <input type="file" @change="handleCivilAviationFileChange" id="ca_certificate"
+                                            form="myform" name="ca_certificate_img" style="display: none">
                                     </div>
 
+                                    <!-- ./End Civil Aviation Certificate -->
+
+                                    <!-- IATA Certificate -->
                                     <div class="col-md-3 d-flex justify-content-center m-1 flex-column"
                                         style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: black; height: 100px; background-color: transparent; border-radius: 3px; border: 2px dotted #7785f4">
-                                        <div class="d-inline text-center">
+                                        <div v-if="Iata_Image" class="d-inline text-center">
+                                            <img id="doc_output" class="rounded" :src="Iata_Image" height="40"
+                                                width="40" alt="">
+                                        </div>
+                                        <div v-else class="d-inline text-center">
                                             <img id="doc_output" class="rounded" src="/public/theme/appimages/rqf.png"
                                                 height="40" width="40" alt="">
                                         </div>
 
                                         <div class="d-inline text-center">IATA Certificate</div>
-                                        <label for="tl" role="button" class="d-inline text-center">
+                                        <label for="iata" role="button" class="d-inline text-center">
                                             Choose File <b style="color: #7C1843">Here</b></label>
-                                        <input type="file" id="tl" form="myform" name="trade_licence_img"
-                                            style="display: none">
+                                        <input type="file" id="iata" @change="handleIataFileChange" form="myform"
+                                            name="iata_img" style="display: none">
                                     </div>
 
+                                    <!-- ./end IATA Certificate -->
+
+
+                                    <!-- Hajj License -->
                                     <div class="col-md-3 d-flex justify-content-center m-1 flex-column"
                                         style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: black; height: 100px; background-color: transparent; border-radius: 3px; border: 2px dotted #7785f4">
-                                        <div class="d-inline text-center">
+                                        <div v-if="Hajj_Image" class="d-inline text-center">
+                                            <img id="doc_output" class="rounded" :src="Hajj_Image" height="40"
+                                                width="40" alt="">
+
+                                        </div>
+                                        <div v-else class="d-inline text-center">
                                             <img id="doc_output" class="rounded" src="/public/theme/appimages/rqf.png"
                                                 height="40" width="40" alt="">
-
                                         </div>
 
                                         <div class="d-inline text-center">Hajj License</div>
-                                        <label for="tl" role="button" class="d-inline text-center">
+                                        <label for="hajj" role="button" class="d-inline text-center">
                                             Choose File <b style="color: #7C1843">Here</b></label>
-                                        <input type="file" id="tl" form="myform" name="trade_licence_img"
-                                            style="display: none">
+                                        <input type="file" @change="handleHajjLicenseFileChange" id="hajj" form="myform"
+                                            name="hajj_licence_img" style="display: none">
                                     </div>
+
+                                    <!-- ./End Hajj License  -->
+
+                                    <!-- TIN -->
                                     <div class="col-md-3 d-flex justify-content-center m-1 flex-column"
                                         style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: black; height: 100px; background-color: transparent; border-radius: 3px; border: 2px dotted #7785f4">
-                                        <div class="d-inline text-center">
+
+                                        <div v-if="TIN_Image" class="d-inline text-center">
+                                            <img id="doc_output" class="rounded" :src="TIN_Image" height="40" width="40"
+                                                alt="">
+
+                                        </div>
+                                        <div v-else class="d-inline text-center">
                                             <img id="doc_output" class="rounded" src="/public/theme/appimages/rqf.png"
                                                 height="40" width="40" alt="">
-
                                         </div>
 
                                         <div class="d-inline text-center">TIN</div>
-                                        <label for="tl" role="button" class="d-inline text-center">
+                                        <label for="tin" role="button" class="d-inline text-center">
                                             Choose File <b style="color: #7C1843">Here</b></label>
-                                        <input type="file" id="tl" form="myform" name="trade_licence_img"
-                                            style="display: none">
+                                        <input type="file" @change="handleTINFileChange" id="tin" form="myform"
+                                            name="tin_img" style="display: none">
                                     </div>
 
+                                    <!-- ./End TIN -->
+
+                                    <!--    NID -->
                                     <div class="col-md-3 d-flex justify-content-center m-1 flex-column"
                                         style="width: 250px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: black; height: 100px; background-color: transparent; border-radius: 3px; border: 2px dotted #7785f4">
-                                        <div class="d-inline text-center">
+                                        <div v-if="NID_Image" class="d-inline text-center">
+                                            <img id="doc_output" class="rounded" :src="NID_Image" height="40" width="40"
+                                                alt="">
+
+                                        </div>
+                                        <div v-else class="d-inline text-center">
                                             <img id="doc_output" class="rounded" src="/public/theme/appimages/rqf.png"
                                                 height="40" width="40" alt="">
 
                                         </div>
 
                                         <div class="d-inline text-center">NID</div>
-                                        <label for="tl" role="button" class="d-inline text-center">
+                                        <label for="nid" role="button" class="d-inline text-center">
                                             Choose File <b style="color: #7C1843">Here</b></label>
-                                        <input type="file" id="tl" form="myform" name="trade_licence_img"
-                                            style="display: none">
+                                        <input type="file" id="nid" @change="handleNIDFileChange" form="myform"
+                                            name="nid_img" style="display: none">
                                     </div>
+
+                                    <!-- ./End NID -->
 
 
                                 </div>
+
                                 <div class="row mt-5" v-if="isAgencyDocument">
                                     <!-- mobile version -->
                                     <div class="col-12 	d-lg-none">
@@ -499,30 +676,32 @@ const handleFileChange = (event) => {
                                     <!-- end big screen -->
 
                                 </div>
+
                                 <div class="row" v-if="isAgencyUserInfo">
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-12 col-lg-12">
                                                 <label for="ownername" class="form-label">Owner Name</label>
                                                 <input type="text" class="form-control form-control-sm" id="ownername"
-                                                    placeholder="Enter Owner Name">
+                                                    placeholder="Enter Owner Name" v-model="form.ownername">
                                             </div>
                                             <div class="col-12 col-lg-12 mt-2">
                                                 <label for="nidNum" class="form-label">NID Number</label>
                                                 <input type="number" class="form-control form-control-sm" id="nidNum"
-                                                    placeholder="Enter NID Number">
+                                                    placeholder="Enter NID Number" v-model="form.nid_number">
                                             </div>
                                             <div class="col-12 col-lg-12 mt-2">
                                                 <label for="email" class="form-label">Email</label>
                                                 <input type="email" class="form-control form-control-sm" id="email"
-                                                    placeholder="Enter NID Number">
+                                                    placeholder="Enter Email" v-model="form.email_address">
                                             </div>
                                             <div class="col-12 col-md-12 mt-2"><label for="pro_img"
-                                                    class="form-label">Profile Image
-                                                    (Max 2Mb)</label>
-                                                <div class="input-group mb-3"><input type="file" class="form-control"
-                                                        id="inputGroupFile02"><label class="input-group-text"
-                                                        for="inputGroupFile02">Upload</label></div>
+                                                    class="form-label">Profile Image (Max 2Mb)</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="file" class="form-control" id="owner_pro_img"
+                                                        name="owner_pro_img" @change="handleOwnerProfileFileChange">
+                                                    <label class="input-group-text" for="owner_pro_img">Upload</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -531,22 +710,22 @@ const handleFileChange = (event) => {
                                             <div class="col-12 col-lg-12">
                                                 <label for="desg" class="form-label">Designation</label>
                                                 <input type="text" class="form-control form-control-sm" id="desg"
-                                                    placeholder="Enter Designation">
+                                                    placeholder="Enter Designation" v-model="form.designation">
                                             </div>
                                             <div class="col-12 col-lg-12 mt-2">
-                                                <label for="nidNum" class="form-label">Date of Birth</label>
-                                                <input type="date" class="form-control form-control-sm" id="nidNum"
-                                                    placeholder="Enter NID Number">
+                                                <label for="dob" class="form-label">Date of Birth</label>
+                                                <input type="date" class="form-control form-control-sm" id="dob"
+                                                    placeholder="Enter Date of Birth" v-model="form.dob">
                                             </div>
                                             <div class="col-12 col-lg-12 mt-2">
                                                 <label for="phone" class="form-label">Phone</label>
                                                 <input type="phone" class="form-control form-control-sm" id="phone"
-                                                    placeholder="Enter Phone Number">
+                                                    placeholder="Enter Phone Number" v-model="form.owner_phone">
                                             </div>
 
-                                            <div class="d-flex align-items-center mt-4"><img
-                                                    src="/public/theme/appimages/rqf.png"
-                                                    class="rounded-circle p-1 border" width="60" height="60" alt="...">
+                                            <div v-if="owner_profile_img" class="d-flex align-items-center mt-4"><img
+                                                    :src="owner_profile_img" class="rounded-circle p-1 border"
+                                                    width="60" height="60" alt="...">
                                                 <div class="flex-grow-1 ms-3">
                                                     <p class="mb-0"><i
                                                             class="btn-outline-success rounded-circle fa fa-circle-check"></i>
@@ -589,7 +768,7 @@ const handleFileChange = (event) => {
                                     <div class="col-12 col-lg-6">
                                         <label for="kam" class="form-label">KAM</label>
                                         <select class="form-select form-select-sm" id="kam"
-                                            aria-label="Default select example">
+                                            aria-label="Default select example" v-model="form.kam_id">
                                             <option>Select KAM</option>
                                             <option value="">Abir Mahmud</option>
                                             <option value="">Atiqur Rahman</option>
@@ -599,7 +778,7 @@ const handleFileChange = (event) => {
                                     <div class="col-12 col-lg-6">
                                         <label for="remarks" class="form-label">Remarks</label>
                                         <textarea name="remarks" id="remarks" placeholder="Enter Short Note"
-                                            class="form-control from-control-sm"></textarea>
+                                            class="form-control from-control-sm" v-model="form.remarks"></textarea>
                                     </div>
 
                                 </div>
@@ -623,8 +802,8 @@ const handleFileChange = (event) => {
                                     </div>
                                     <div class="col-md-9 d-none d-lg-block"></div>
                                     <div class="col-12 col-lg-1 d-none d-lg-block">
-                                        <button class="btn btn-primary btn-sm px-4 ms-2" v-if="isAssignKam"
-                                            v-on:click="nextPhase(4)">Submit</button>
+                                        <a class="btn btn-primary btn-sm px-4 ms-2" v-if="isAssignKam"
+                                            v-on:click="nextPhase(4)">Submit</a>
                                     </div>
                                 </div>
                             </div>
