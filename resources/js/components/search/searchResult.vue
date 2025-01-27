@@ -1223,11 +1223,10 @@ function offHover() {
                                                                     <b>
                                                                         <img src="../../../../public/theme/appimages/Plane.svg"
                                                                             alt="">
-                                                                        Departure
-                                                                    </b>
+                                                                        </b>
+                                                                        <small><b>Departure</b> from Hazrat Shahjalal International Airport</small>
                                                                 </div>
-                                                                <div class="p-2">Hazrat Shahjalal International Airport
-                                                                </div>
+
                                                                 <div class="p-2">Duration: 01 hr 45 min</div>
                                                             </div>
 
@@ -1237,7 +1236,7 @@ function offHover() {
                                                                 <div class="col-md-5 border-end">
                                                                     <div class="d-flex border-right">
                                                                         <div class="text-start mt-2">
-                                                                            <p class="p-0 m-0"><b>DAC</b></p>
+                                                                            <p class="p-0 m-0 custom-text-purple"><b>DAC</b></p>
                                                                             <small
                                                                                 style="font-size: 13px; color: #5e6878;"><b>10:50
                                                                                     AM | 19 Jan, Thu</b></small>
@@ -1260,7 +1259,7 @@ function offHover() {
                                                                         <div class="col-md-7">
                                                                             <div class="d-flex border-right">
                                                                                 <div class="text-start mt-2">
-                                                                                    <p class="p-0 m-0"><b>DXB</b></p>
+                                                                                    <p class="p-0 m-0 custom-text-purple"><b>DXB</b></p>
                                                                                     <small
                                                                                         style="font-size: 13px; color: #5e6878;"><b>11:55
                                                                                             AM | 19 Jan,

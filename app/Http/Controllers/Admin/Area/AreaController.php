@@ -166,7 +166,7 @@ class AreaController extends BaseController
             // ->orWhere('code', 'like', '%' . $request->q . '%')
             // ->orWhere('Airport_Name', 'like', '%' . $request->q . '%')
             ->select(['City_name', 'code', 'Airport_Name', 'Country_name'])
-            ->take(50)
+            // ->take(50)
             ->get();
         return response()->json($airp);
     }

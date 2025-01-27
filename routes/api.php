@@ -33,7 +33,7 @@ Route::middleware(['auth:api'])->group(function () {
 
     //agent section
     Route::get('getAgent', [AgentController::class, 'index'])->name('agent.index');
-    Route::get('airports', [AreaController::class, 'airports']);
+    Route::post('/agent/save', [AgentController::class, 'store']);
 
     // area
     Route::get('getarea', [AreaController::class, 'index'])->name('area.index');
@@ -131,4 +131,5 @@ Route::middleware(['auth:api'])->group(function () {
 
 });
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
+Route::get('airports', [AreaController::class, 'airports']);
 Route::post('/role/update', [RolePermissionController::class, 'update']);
