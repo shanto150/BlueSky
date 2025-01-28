@@ -8,8 +8,6 @@ import 'simplebar-vue/dist/simplebar.min.css';
 
 
 const airports = ref([]); // All airports
-const filteredAirports = ref([]); // Filtered results
-const showAirportList = ref(false);
 const initialLoadLimit = 20; // Limit for init
 const showOriginList = ref(false);
 const showDestinationList = ref(false);
@@ -40,8 +38,22 @@ const form = reactive({ Way: '', from: '', to: "", dep_date: '', ADT: '', CNN: '
 form.Way = 1;
 
 
-async function Lowfaresearch() {
+function validateSelections() {
+    if (!form.from) {
+        alert('Please select a valid departure city or airport.');
+        return false;
+    }
+    if (!form.to) {
+        alert('Please select a valid arrival city or airport.');
+        return false;
+    }
+    return true;
+}
 
+async function Lowfaresearch() {
+    if (!validateSelections()) {
+        return;
+    }
     try {
         const response = await axiosInstance.post("Lowfaresearch", form);
         Notification.showToast('s', response.data.message);
@@ -163,6 +175,16 @@ function selectOrigin(airport) {
 
 function selectDestination(airport) {
     form.to = airport.id;
+    showDestinationList.value = false;
+}
+
+function clearOrigin() {
+    form.from = '';
+    showOriginList.value = false;
+}
+
+function clearDestination() {
+    form.to = '';
     showDestinationList.value = false;
 }
 
@@ -369,22 +391,32 @@ function offHover() {
                         </div>
                     </div>
 
-                    <div class="row mt-4">
+                    <div class="row mt-4 searchparameters">
 
                         <div class="col-md-3 position-relative">
                             <input id="origin_id" v-model="form.from" name="origin_name"
                                 class="form-control form-control-lg origin_name"
                                 @input="filterOriginAirports($event.target.value)" @focus="onOriginFocus"
                                 placeholder="Enter departure city or airport">
+                            <span v-if="form.from" @click="clearOrigin" class="clear-icon">✖</span>
                             <div v-if="showOriginList" id="origin_results"
                                 class="position-absolute w-100 mt-1 bg-white border rounded shadow-sm"
-                                style="z-index: 1000;">
+                                style="z-index: 1000; animation: fadeIn 0.5s ease-in-out;">
                                 <SimpleBar style="max-height: 300px;" class="search-results-simplebar">
 
                                     <div v-for="airport in filteredOriginAirports" :key="airport.id"
                                         class="p-2 cursor-pointer hover:bg-gray-100" @click="selectOrigin(airport)">
-                                        <div class="fw-bold">{{ airport.text }}</div>
-                                        <div class="small text-muted">{{ airport.city }} ({{ airport.id }})</div>
+
+                                        <div class="hstack align-items-center gap-3">
+										<div class="mb-0 widgets-icons bg-light-info text-info d-flex align-items-center justify-content-center">
+											<h5>{{ airport.id }}</h5>
+										</div>
+										 <div class="flex-grow-1">
+                                          <h6 class="mb-0 font-14">{{ airport.text }}</h6>
+										  <p class="mb-0 d-flex align-items-center gap-2">{{ airport.city }} </p>
+										</div>
+									  </div>
+
                                     </div>
                                     <div v-if="filteredOriginAirports.length === 0" class="p-2 text-center text-muted">
                                         No matching airports found
@@ -398,9 +430,10 @@ function offHover() {
                                 class="form-control form-control-lg destination_name"
                                 @input="filterDestinationAirports($event.target.value)" @focus="onDestinationFocus"
                                 placeholder="Enter arrival city or airport">
+                            <span v-if="form.to" @click="clearDestination" class="clear-icon">✖</span>
                             <div v-if="showDestinationList" id="destination_results"
                                 class="position-absolute w-100 mt-1 bg-white border rounded shadow-sm"
-                                style="z-index: 1000;">
+                                style="z-index: 1000; animation: fadeIn 0.5s ease-in-out;">
                                 <SimpleBar style="max-height: 300px;" class="search-results-simplebar">
 
                                     <div v-for="airport in filteredDestinationAirports" :key="airport.id"
@@ -437,6 +470,7 @@ function offHover() {
                             <!-- <img src="../../../../public/build/assets/s_Hover_State.jpg" alt="" style="width: 53px;"> -->
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -444,6 +478,97 @@ function offHover() {
 </template>
 
 <style>
+
+/* new */
+.flight-search-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.route-selection {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 2;
+}
+
+.location-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.airport-code {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.airport-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.city {
+    font-weight: 500;
+}
+
+.airport-name {
+    font-size: 0.875rem;
+}
+
+.swap-button {
+    display: flex;
+    align-items: center;
+}
+
+.swap-icon {
+    padding: 0.5rem;
+    border-radius: 50%;
+    background: #f5f5f5;
+}
+
+.date-selection {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 1;
+    border-left: 1px solid #eee;
+    padding-left: 2rem;
+}
+
+.date-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.date {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.date-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.month {
+    font-weight: 500;
+}
+
+.day {
+    font-size: 0.875rem;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+/* new */
 .bg-checkbox-active {
     color: #fff;
     background: #1882ff;
@@ -512,5 +637,31 @@ function offHover() {
 /* Optional: Add some padding to prevent content from touching the scrollbar */
 .simplebar-content {
     padding-right: 2px !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#origin_results {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.clear-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 12px;
 }
 </style>
