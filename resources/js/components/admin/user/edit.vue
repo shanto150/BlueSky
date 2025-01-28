@@ -329,7 +329,7 @@ const handleFileChange = (event) => {
                         <p class="text-center">Profile Image</p>
 
                         <div class="mb-3 pt-0 text-center mx-auto">
-                            <img v-if="!previewImage" src="../../../../../public/build/assets/profile-default-img.jpg"
+                            <img v-if="!previewImage" src=""
                                 height="150" width="150" class="border border-1 rounded rounded-2"
                                 alt="Profile Picture">
 

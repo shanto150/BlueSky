@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\API\APIController;
 use App\Http\Controllers\Admin\Area\AreaController;
+use App\Http\Controllers\Admin\Agent\AgentController;
 use App\Http\Controllers\Admin\Role\RolePermissionController;
 use App\Http\Controllers\Admin\Department\DepartmentController;
 use App\Http\Controllers\Admin\Designation\DesignationController;
@@ -26,6 +28,10 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('me', [AuthController::class, 'me'])->name('me');
     Route::post('registerOTP', [AuthController::class, 'registerOTP'])->name('registerOTP');
     Route::post('ForcePassReset', [AuthController::class, 'ForcePassReset'])->name('ForcePassReset');
+
+    //agent section
+    Route::get('getAgent', [AgentController::class, 'index'])->name('agent.index');
+    Route::get('airports', [AreaController::class, 'airports']);
 
     // area
     Route::get('getarea', [AreaController::class, 'index'])->name('area.index');

@@ -228,8 +228,6 @@ async function getListValues() {
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-
-
         <div class="breadcrumb-title pe-3">Settings</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
@@ -246,7 +244,6 @@ async function getListValues() {
                 <router-link :to="{ name: 'zoneCreate' }" class="btn btn-primary btn-sm">
                     <i class="fa fa-circle-plus"></i>Area
                 </router-link>
-
             </div>
         </div>
     </div>
@@ -768,5 +765,4 @@ async function getListValues() {
     --bs-btn-disabled-border-color: #f1892a;
     --bs-gradient: none;
 }
-
 </style>
