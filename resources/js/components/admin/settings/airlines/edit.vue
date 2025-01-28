@@ -129,7 +129,7 @@ onMounted(() => {
                         <input type="text" v-model="form.country" class="form-control" id="country" name="country"
                             placeholder="Country">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mt-2">
                         <label for="input1" class="form-label">Business Type</label>
                         <input type="text" v-model="form.airlines_business_type" class="form-control" id="airlines_business_type" name="airlines_business_type"
                             placeholder="Business Type">

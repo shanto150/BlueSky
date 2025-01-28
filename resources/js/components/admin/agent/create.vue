@@ -122,9 +122,9 @@ function hajjNonHajj(value_stage) {
 
 // agency image
 const handleFileChange = (event) => {
-    form.profile_picture = event.target.files[0];
+    form.agency_img = event.target.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(form.profile_picture);
+    reader.readAsDataURL(form.agency_img);
 
     reader.onload = (e) => {
         previewImage.value = e.target.result;
@@ -134,9 +134,9 @@ const handleFileChange = (event) => {
 // trade licence
 const handleTradeLicenceFileChange = (event) => {
 
-    form.profile_picture = event.target.files[0];
+    form.trade_licence_img = event.target.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(form.profile_picture);
+    reader.readAsDataURL(form.trade_licence_img);
 
     reader.onload = (e) => {
         trade_licence_Image.value = e.target.result;
@@ -146,9 +146,9 @@ const handleTradeLicenceFileChange = (event) => {
 // civil aviation
 const handleCivilAviationFileChange = (event) => {
 
-    form.profile_picture = event.target.files[0];
+    form.ca_img = event.target.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(form.profile_picture);
+    reader.readAsDataURL(form.ca_img);
 
     reader.onload = (e) => {
         ca_Image.value = e.target.result;
@@ -158,9 +158,9 @@ const handleCivilAviationFileChange = (event) => {
 // iata
 const handleIataFileChange = (event) => {
 
-    form.profile_picture = event.target.files[0];
+    form.iata_img = event.target.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(form.profile_picture);
+    reader.readAsDataURL(form.iata_img);
 
     reader.onload = (e) => {
         Iata_Image.value = e.target.result;
@@ -170,9 +170,9 @@ const handleIataFileChange = (event) => {
 // hajj
 const handleHajjLicenseFileChange = (event) => {
 
-    form.profile_picture = event.target.files[0];
+    form.hajj_licence_img = event.target.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(form.profile_picture);
+    reader.readAsDataURL(form.hajj_licence_img);
 
     reader.onload = (e) => {
         Hajj_Image.value = e.target.result;
@@ -181,9 +181,9 @@ const handleHajjLicenseFileChange = (event) => {
 // tin
 const handleTINFileChange = (event) => {
 
-    form.profile_picture = event.target.files[0];
+    form.tin_img = event.target.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(form.profile_picture);
+    reader.readAsDataURL(form.tin_img);
 
     reader.onload = (e) => {
         TIN_Image.value = e.target.result;
@@ -194,9 +194,9 @@ const handleTINFileChange = (event) => {
 
 const handleNIDFileChange = (event) => {
 
-    form.profile_picture = event.target.files[0];
+    form.nid_img = event.target.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(form.profile_picture);
+    reader.readAsDataURL(form.nid_img);
 
     reader.onload = (e) => {
         NID_Image.value = e.target.result;
@@ -207,9 +207,9 @@ const handleNIDFileChange = (event) => {
 
 const handleOwnerProfileFileChange = (event) => {
 
-    form.profile_picture = event.target.files[0];
+    form.owner_pro_img = event.target.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(form.profile_picture);
+    reader.readAsDataURL(form.owner_pro_img);
 
     reader.onload = (e) => {
         owner_profile_img.value = e.target.result;
@@ -423,7 +423,8 @@ const handleOwnerProfileFileChange = (event) => {
                                                     <select class="form-select form-select-sm" name="city"
                                                         v-model="form.city" id="city"
                                                         aria-label="Default select example">
-                                                        <option>Select City</option>
+                                                        <option value="" selected>Select City</option>
+                                                        <option value="1">Dhaka</option>
                                                     </select>
                                                 </div>
 
@@ -432,7 +433,8 @@ const handleOwnerProfileFileChange = (event) => {
                                                     <select class="form-select form-select-sm" name="zone"
                                                         v-model="form.zone" id="zone"
                                                         aria-label="Default select example">
-                                                        <option>Select Zone</option>
+                                                        <option value="" selected>Select Zone</option>
+                                                        <option value="1">Dhaka</option>
                                                     </select>
                                                 </div>
 
@@ -770,8 +772,8 @@ const handleOwnerProfileFileChange = (event) => {
                                         <select class="form-select form-select-sm" id="kam"
                                             aria-label="Default select example" v-model="form.kam_id">
                                             <option>Select KAM</option>
-                                            <option value="">Abir Mahmud</option>
-                                            <option value="">Atiqur Rahman</option>
+                                            <option value="1">Abir Mahmud</option>
+                                            <option value="2">Atiqur Rahman</option>
                                         </select>
                                     </div>
 

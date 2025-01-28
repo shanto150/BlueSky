@@ -50,7 +50,7 @@ class APIController extends BaseController {
         $password = env( 'API_PASSWORD' );
 
         $ch = curl_init();
- 
+
         // Set cURL options
         curl_setopt( $ch, CURLOPT_URL, $url );
         curl_setopt( $ch, CURLOPT_POST, true );
