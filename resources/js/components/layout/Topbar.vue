@@ -51,10 +51,12 @@ function darkMode() {
                         </li>
 
                         <li class="nav-item dropdown dropdown-large">
+
                             <a v-wave class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative"
                                 href="#" data-bs-toggle="dropdown"><span class="alert-count">7</span>
                                 <i class='bx bx-bell'></i>
                             </a>
+
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a href="javascript:;">
                                     <div class="msg-header">
@@ -203,7 +205,7 @@ function darkMode() {
                 <div v-wave class="user-box dropdown px-3">
                     <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#"
                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../../themeassets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+                        <img src="../../themeassets/images/avatars/avatar-4.png" class="user-img" alt="user avatar">
                         <div class="user-info">
                             <p class="user-name mb-0">{{ authStore.name }}</p>
                             <p class="designattion mb-0">{{ authStore.email }}</p>
