@@ -16,7 +16,11 @@ const format = (fdate) => {
     const month = fdate.getMonth() + 1;
     const year = fdate.getFullYear();
 
-    const date = `${year}-${month}-${day}`;
+    const formattedDay = day <= 9 ? `0${day}` : day;
+    const formattedMonth = month <= 9 ? `0${month}` : month;
+
+    const date = `${year}-${formattedMonth}-${formattedDay}`;
+
     form.dep_date = date;
     return date;
 }
