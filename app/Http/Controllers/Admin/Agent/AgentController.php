@@ -1,16 +1,15 @@
 <?php
 namespace App\Http\Controllers\Admin\Agent;
 
-use App\Models\User;
+use App\Http\Controllers\BaseController;
 use App\Models\Agent\Agent;
-use Illuminate\Http\Request;
-use App\Models\Agent\AgentUser;
 use App\Models\Agent\AgentImage;
-use Yajra\DataTables\DataTables;
+use App\Models\Agent\AgentUser;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\BaseController;
+use Yajra\DataTables\DataTables;
 
 class AgentController extends BaseController
 {
@@ -39,7 +38,7 @@ class AgentController extends BaseController
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+
         $agent = new Agent;
 
         $agent->name       = $request->name;
@@ -66,29 +65,32 @@ class AgentController extends BaseController
         $agent->designation        = $request->designation;
         $agent->created_by         = auth()->user()->id;
 
-        if (($request->hasFile('agent_image'))) {
+        if (($request->hasFile('agency_img'))) {
 
-
-            $request_image = $request->file('agent_image');
+            $request_image = $request->file('agency_img');
             $image_name    = str_replace(' ', '', (now()->format('dmY-') . time())) . '.' . $request_image->extension();
 
-            $image_path = public_path('/uploads/agents/agent_image/');
+            $image_path = public_path('/uploads/agents/agency_img/');
             if (! File::exists($image_path)) {
                 File::makeDirectory($image_path, 0777, true);
             }
 
             $request_image->move($image_path, $image_name);
-            $agent->logo_path = '/uploads/agents/agent_image/' . $image_name;
+
+            $agent->logo_path = '/uploads/agents/agency_img/' . $image_name;
 
         }
+        $agent->save();
 
-        $user                      = new AgentUser;
-        $user->name                = $request->ownername;
-        $user->nid                 = $request->nid_number;
-        $user->email               = $request->email_address;
-        $user->designation     = $request->designation;
-        $user->dob                 = $request->dob;
-        $user->phone               = $request->owner_phone;
+        $agent_user              = new AgentUser;
+        $agent_user->name        = $request->ownername;
+        $agent_user->nid         = $request->nid_number;
+        $agent_user->email       = $request->email_address;
+        $agent_user->designation = $request->designation;
+        $agent_user->dob         = $request->dob;
+        $agent_user->phone       = $request->owner_phone;
+        $agent_user->agent_id    = $agent->id;
+        $agent_user->created_by  = auth()->user()->id;
 
         if ($request->hasFile('owner_pro_img')) {
             $request_image = $request->file('owner_pro_img');
@@ -100,15 +102,12 @@ class AgentController extends BaseController
             }
 
             $request_image->move($image_path, $image_name);
-            $user->img_path = '/uploads/agents/agent_owner/' . $image_name;
+            $agent_user->img_path = '/uploads/agents/agent_owner/' . $image_name;
         }
-        $user->save();
+        $agent_user->save();
 
-
-        $agent->user_id = $user->id;
+        $agent->user_id = $agent_user->id;
         $agent->save();
-
-
 
         if (($request->hasFile('nid_img'))) {
             $agent_img                  = new AgentImage;

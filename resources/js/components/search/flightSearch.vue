@@ -18,7 +18,6 @@ const format = (fdate) => {
 
     const formattedDay = day <= 9 ? `0${day}` : day;
     const formattedMonth = month <= 9 ? `0${month}` : month;
-
     const date = `${year}-${formattedMonth}-${formattedDay}`;
 
     form.dep_date = date;

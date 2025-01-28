@@ -307,6 +307,11 @@ const handleOwnerProfileFileChange = (event) => {
                                                     <input type="text" class="form-control form-control-sm" id="email"
                                                         v-model="form.email" name="email" placeholder="Enter Email">
                                                 </div>
+                                                <div class="col-12 col-lg-12 mt-2 mt-2">
+                                                    <label for="address" class="form-label">Address</label>
+
+                                                    <textarea class="form-control form-control-sm" cols="1" rows="4" name="address" v-model="form.address" id="address" placeholder="Enter Address"></textarea>
+                                                </div>
 
                                                 <div class="col-12 col-lg-12 mt-2">
                                                     <label for="country" class="form-label">Country</label>
@@ -318,13 +323,7 @@ const handleOwnerProfileFileChange = (event) => {
                                                     </select>
                                                 </div>
 
-                                                <div class="col-12 col-lg-12 mt-2 mt-2">
-                                                    <label for="address" class="form-label">Address</label>
 
-                                                    <textarea class="form-control form-control-sm" cols="1" rows="1"
-                                                        name="address" v-model="form.address" id="address"
-                                                        placeholder="Enter Address"></textarea>
-                                                </div>
 
                                                 <div class="col-12 col-md-12 mt-2">
                                                     <label for="date" class="form-label">Established Date</label>
