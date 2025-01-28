@@ -23,12 +23,8 @@ return new class extends Migration
             $table->string('img_path',255)->nullable();
             $table->string('created_by');
             $table->string('updated_by')->nullable();
-
             $table->timestamps();
             $table->index('agent_id');
-
-            $table->foreign('agent_id')->references('id')->on('agent_users')->onDelete('cascade');
-
         });
     }
 
