@@ -99,8 +99,8 @@ const routes = [
     // agent
     { path: '/agent-list', component: AgentList, name: 'AgentList', meta: { auth: true } },
     { path: '/agent-details', component: agentDetails, name: 'agentDetails', meta: { auth: true } },
-    { path: '/agent-approve', component: agentApprove, name: 'agentApprove', meta: { auth: true } },
-    { path: '/agent-recmoanded', component: agentRecomanded, name: 'agentRecomanded', meta: { auth: true } },
+    { path: '/agent-recmoanded/:id', component: agentApprove, name: 'agentApprove', meta: { auth: true },props:true },
+    { path: '/agent-approve/:id', component: agentRecomanded, name: 'agentRecomanded', meta: { auth: true },props:true },
     { path: '/agent-view', component: agentView, name: 'agentView', meta: { auth: true } },
     { path: '/agent-create', component: CreateAgency, name: 'CreateAgency', meta: { auth: true } },
 

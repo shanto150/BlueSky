@@ -47,11 +47,11 @@ function nextPhase(id) {
         window.scrollTo(0, 0);
     }
     else if (id == 3) {
+        getKam();
         this.isAgencyUserInfo = false;
         this.isAssignKam = true;
         this.classKAMActive = true;
         this.classDocupActive = false;
-
     }
 
     else if (id == 44) {
@@ -215,6 +215,122 @@ const handleOwnerProfileFileChange = (event) => {
         owner_profile_img.value = e.target.result;
     };
 }
+
+onMounted(() => {
+
+});
+
+getDistrict();
+
+async function getDistrict() {
+    try {
+        const response = await axiosInstance.get('divisions');
+
+        var options = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name, bn: value.bn_name, clr: MF.getRandomColor() }
+            options.push(obj);
+
+        });
+
+        $("#district").select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            allowClear: true,
+            height: '50',
+            data: options,
+            tags: true,
+            templateResult: function (state) {
+                if (!state.id) {
+                    return state.text;
+                }
+
+                var $state = $('<div class="clearfix"><div class="float-start">' + state.text + '</div><div class="float-end">' + state.bn + '</div></div>');
+                return $state;
+            }
+        });
+        $('#district').prepend('<option selected=""></option>');
+
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
+
+getZone();
+
+async function getZone() {
+    try {
+        const response = await axiosInstance.get('getAllOffLoc');
+
+        var options = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name }
+            options.push(obj);
+
+        });
+
+        $("#zone").select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            allowClear: true,
+            height: '50',
+            data: options,
+            tags: true,
+            templateResult: function (state) {
+                if (!state.id) {
+
+                    return state.text;
+                }
+
+                var $state = $('<div class="clearfix"><div class="float-start">' + state.text + '</div></div>');
+                return $state;
+            }
+        });
+        $('#zone').prepend('<option selected=""></option>');
+
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
+
+getKam();
+
+async function getKam() {
+    try {
+        const response = await axiosInstance.get('getKam');
+        var options = [];
+        $.each(response.data, function (key, value) {
+            var obj = { id: value.id, text: value.name }
+            options.push(obj);
+        });
+
+        $("#kam_id").select2({
+            placeholder: '=Select=',
+            theme: 'bootstrap-5',
+            width: '100%',
+            allowClear: true,
+            height: '50',
+            data: options,
+            tags: true,
+            templateResult: function (state) {
+                if (!state.id) {
+                    return state.text;
+                }
+                var $state = $('<div class="clearfix"><div class="float-start">' + state.text + '</div></div>');
+                return $state;
+            }
+        });
+        $('#kam_id').prepend('<option selected=""></option>');
+
+    } catch (error) {
+        // console.log(error);
+
+    }
+}
 </script>
 
 <template>
@@ -310,7 +426,9 @@ const handleOwnerProfileFileChange = (event) => {
                                                 <div class="col-12 col-lg-12 mt-2 mt-2">
                                                     <label for="address" class="form-label">Address</label>
 
-                                                    <textarea class="form-control form-control-sm" cols="1" rows="4" name="address" v-model="form.address" id="address" placeholder="Enter Address"></textarea>
+                                                    <textarea class="form-control form-control-sm" cols="1" rows="4"
+                                                        name="address" v-model="form.address" id="address"
+                                                        placeholder="Enter Address"></textarea>
                                                 </div>
 
                                                 <div class="col-12 col-lg-12 mt-2">
@@ -361,7 +479,7 @@ const handleOwnerProfileFileChange = (event) => {
                                                             IATA
                                                         </label>
                                                     </div>
-                                                    <div class="form-check form-check-success">
+                                                    <div class="form-check">
                                                         <input class="form-check-input" type="radio"
                                                             name="iata_non_iata" @change="iata_non_iata(2)" value="2"
                                                             id="flexRadioSuccess">
@@ -370,7 +488,7 @@ const handleOwnerProfileFileChange = (event) => {
                                                         </label>
                                                     </div>
 
-                                                    <div class="form-check form-check-info">
+                                                    <div class="form-check">
                                                         <input class="form-check-input" type="radio"
                                                             name="iata_non_iata" @change="iata_non_iata(3)" value="3"
                                                             id="flexRadioInfo">
@@ -418,12 +536,11 @@ const handleOwnerProfileFileChange = (event) => {
                                                 </div>
 
                                                 <div class="col-12 col-lg-12 mt-2">
-                                                    <label for="city" class="form-label">City</label>
-                                                    <select class="form-select form-select-sm" name="city"
-                                                        v-model="form.city" id="city"
+                                                    <label for="district" class="form-label">District</label>
+                                                    <select class="form-select form-select-sm" name="district"
+                                                        v-model="form.city" id="district"
                                                         aria-label="Default select example">
-                                                        <option value="" selected>Select City</option>
-                                                        <option value="1">Dhaka</option>
+                                                        <option value="" selected>Select District</option>
                                                     </select>
                                                 </div>
 
@@ -433,7 +550,6 @@ const handleOwnerProfileFileChange = (event) => {
                                                         v-model="form.zone" id="zone"
                                                         aria-label="Default select example">
                                                         <option value="" selected>Select Zone</option>
-                                                        <option value="1">Dhaka</option>
                                                     </select>
                                                 </div>
 
@@ -441,8 +557,7 @@ const handleOwnerProfileFileChange = (event) => {
                                                     <label for="registration" class="form-label">Registration
                                                         Number</label>
                                                     <input type="text" class="form-control form-control-sm"
-                                                        id="reg_number" name="reg_number" v-model="form.reg_number"
-                                                        placeholder="Enter Registration Number">
+                                                        id="reg_number" name="reg_number" v-model="form.reg_number" placeholder="Enter Registration Number">
                                                 </div>
 
                                                 <div class="col-12 col-md-12 mt-2">
@@ -454,20 +569,18 @@ const handleOwnerProfileFileChange = (event) => {
 
                                                 <div class="col-12 col-md-12 mt-2">
                                                     <label for="trade_licence" class="form-label">Trade Licence</label>
-                                                    <input type="text" name="trade_licence" v-model="form.trade_licence"
-                                                        class="form-control form-control-sm" id="trade_licence"
-                                                        placeholder="Enter Trade Licence">
+                                                    <input type="text" name="trade_licence" v-model="form.trade_licence" class="form-control form-control-sm" id="trade_licence" placeholder="Enter Trade Licence">
                                                 </div>
 
                                                 <div class="col-12 col-lg-12 d-flex align-items-center gap-3 mt-2">
+
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="hajjNonHajj"
-                                                            @change="hajjNonHajj(1)" id="flexRadioDefault1">
+                                                        <input class="form-check-input" type="radio" name="hajjNonHajj" @change="hajjNonHajj(1)" id="flexRadioDefault1">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             Hajj
                                                         </label>
                                                     </div>
-                                                    <div class="form-check form-check-success">
+                                                    <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="hajjNonHajj"
                                                             @change="hajjNonHajj(2)" id="flexRadioSuccess">
                                                         <label class="form-check-label" for="flexRadioSuccess">
@@ -509,8 +622,7 @@ const handleOwnerProfileFileChange = (event) => {
                                 </div>
 
                                 <div class="row" v-if="isAgencyDocument">
-                                    <p>Upload Your Documents <br> <span style="font-size: 12px;">Supported Formats
-                                            :Jpeg,Png or Pdf | Max File Size : 2MB</span></p>
+                                    <p>Upload Your Documents <br> <span style="font-size: 12px;">Supported Formats :Jpeg,Png or Pdf | Max File Size : 2MB</span></p>
 
                                     <!-- Trade Licence -->
                                     <div class="col-md-3 d-flex justify-content-center m-1 flex-column"
@@ -768,11 +880,9 @@ const handleOwnerProfileFileChange = (event) => {
 
                                     <div class="col-12 col-lg-6">
                                         <label for="kam" class="form-label">KAM</label>
-                                        <select class="form-select form-select-sm" id="kam"
-                                            aria-label="Default select example" v-model="form.kam_id">
-                                            <option>Select KAM</option>
-                                            <option value="1">Abir Mahmud</option>
-                                            <option value="2">Atiqur Rahman</option>
+
+                                        <select class="form-select form-select-sm" name="kam_id" v-model="form.kam_id" id="kam_id" aria-label="Default select example">
+                                            <option value="" selected>Select KAM</option>
                                         </select>
                                     </div>
 

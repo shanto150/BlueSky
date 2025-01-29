@@ -32,6 +32,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('ForcePassReset', [AuthController::class, 'ForcePassReset'])->name('ForcePassReset');
 
     //agent section
+    Route::get('getKam', [AgentController::class, 'getKam']);
     Route::get('getAgent', [AgentController::class, 'index'])->name('agent.index');
     Route::post('/agent/save', [AgentController::class, 'store']);
 
