@@ -168,18 +168,24 @@ const options = {
 
                 // html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
                 //if approved
-                html += '<button type="button"  style="size:30px;width:30px;height:30px; margin-left: 5px;" class="btn btn-outline-info rounded-circle"><i class="fa-solid fa-file" style="margin:2px 0px 10px -4px;font-size:14px;"></i></button> <router-link style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle"> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </router-link> <router-link  style="size: 30px; width: 30px; height: 30px;  margin-left: 5px;" class="btn btn-outline-primary rounded-circle" placement="top" > <i class="fa fa-eye" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i> </router-link> <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"  class="btn btn-outline-user-edit rounded-circle mt-2"><i class="fa-solid fa-user-pen"  style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button> <button type="button"  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="mt-2 btn btn-outline-only-edit rounded-circle"> <i class="fa-solid fa-pencil" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>  <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"  class="mt-2 btn btn-outline-action-log rounded-circle">  <i class="fa-solid fa-arrow-trend-up" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i> </button>';
+                html += '<button  style="size: 30px; width: 30px; height: 30px;" class="btn btn-outline-info rounded-circle agent-view" placement="top" data-item-id=' + idd + '> <i class="fa-solid fa-file" style="margin:1px 0px 11px -3px;font-size:14px;"></i> </button>';
+
+                html += '<button  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle agent-recommended" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>';
+
+                // html += '<button type="button"  style="size:30px;width:30px;height:30px; margin-left: 5px;" class="btn btn-outline-info rounded-circle"><i class="fa-solid fa-file" style="margin:2px 0px 10px -4px;font-size:14px;"></i></button> <router-link style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle"> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </router-link> <router-link  style="size: 30px; width: 30px; height: 30px;  margin-left: 5px;" class="btn btn-outline-primary rounded-circle" placement="top" > <i class="fa fa-eye" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i> </router-link> <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"  class="btn btn-outline-user-edit rounded-circle mt-2"><i class="fa-solid fa-user-pen"  style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button> <button type="button"  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="mt-2 btn btn-outline-only-edit rounded-circle"> <i class="fa-solid fa-pencil" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>  <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"  class="mt-2 btn btn-outline-action-log rounded-circle">  <i class="fa-solid fa-arrow-trend-up" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i> </button>';
                 return html;
             },
         }
     ],
     "drawCallback": function (settings) {
         // edit function
-        $(".edit-item").on('click', function (e) {
-
+        $(".agent-view").on('click', function (e) {
             var itemIdd = $(this).attr('data-item-id');
-
-            router.push({ name: 'zoneEdit', params: { id: itemIdd } });
+            router.push({ name: 'agentView', params: { id: itemIdd } });
+        });
+        $(".agent-recommended").on('click', function (e) {
+            var itemIdd = $(this).attr('data-item-id');
+            router.push({ name: 'agentApprove', params: { id: itemIdd } });
         });
 
         // delete function

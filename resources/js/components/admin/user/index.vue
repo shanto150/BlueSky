@@ -269,7 +269,9 @@ const options = {
 };
 
 async function getListValues() {
+
     try {
+
         authStore.GlobalLoading = true;
         const response = await axiosInstance.get("getInternalUsers");
         rData.value = response.data.data;

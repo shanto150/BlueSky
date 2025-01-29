@@ -25,6 +25,12 @@ class AgentController extends BaseController
         return DataTables::of($data)->addIndexColumn()->make(true);
     }
 
+    public function getKam()
+    {
+        $kams = DB::table('users')->where('type',1)->get();
+        return response()->json($kams);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -39,22 +45,19 @@ class AgentController extends BaseController
     public function store(Request $request)
     {
 
-        $agent = new Agent;
-
-        $agent->name       = $request->name;
-        $agent->agent_code = $request->agent_code;
-        $agent->email      = $request->email;
-        $agent->phone      = $request->phone;
-        $agent->country    = $request->country;
-        $agent->city       = $request->city;
-        $agent->zone       = $request->zone;
-        $agent->address    = $request->address;
-
-        $agent->established_date = $request->established_date;
-        $agent->postal_code      = $request->postal_code;
-        $agent->ca_number        = $request->ca_number;
-        $agent->iata_number      = $request->iata_number;
-
+        $agent                     = new Agent;
+        $agent->name               = $request->name;
+        $agent->agent_code         = $request->agent_code;
+        $agent->email              = $request->email;
+        $agent->phone              = $request->phone;
+        $agent->country            = $request->country;
+        $agent->city               = $request->city;
+        $agent->zone               = $request->zone;
+        $agent->address            = $request->address;
+        $agent->established_date   = $request->established_date;
+        $agent->postal_code        = $request->postal_code;
+        $agent->ca_number          = $request->ca_number;
+        $agent->iata_number        = $request->iata_number;
         $agent->reg_number         = $request->reg_number;
         $agent->fax                = $request->fax;
         $agent->trade_licence      = $request->trade_licence;
@@ -80,6 +83,7 @@ class AgentController extends BaseController
             $agent->logo_path = '/uploads/agents/agency_img/' . $image_name;
 
         }
+
         $agent->save();
 
         $agent_user              = new AgentUser;
@@ -104,8 +108,8 @@ class AgentController extends BaseController
             $request_image->move($image_path, $image_name);
             $agent_user->img_path = '/uploads/agents/agent_owner/' . $image_name;
         }
-        $agent_user->save();
 
+        $agent_user->save();
         $agent->user_id = $agent_user->id;
         $agent->save();
 
@@ -180,6 +184,7 @@ class AgentController extends BaseController
             $agent_img->attachment_path = '/uploads/agents/iata_img/' . $image_name;
             $agent_img->save();
         }
+
         if (($request->hasFile('hajj_licence_img'))) {
             $agent_img                  = new AgentImage;
             $agent_img->agent_id        = $agent->id;
