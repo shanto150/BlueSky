@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email', 50)->unique();
             $table->string('phone', 20);
             $table->string('logo_path', 255)->nullable();
-            $table->string('designation',100)->nullable();
+            // $table->string('designation',100)->nullable();
             $table->string('country');
             $table->string('city');
             $table->string('zone');

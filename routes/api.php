@@ -35,6 +35,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('getKam', [AgentController::class, 'getKam']);
     Route::get('getAgent', [AgentController::class, 'index'])->name('agent.index');
     Route::post('/agent/save', [AgentController::class, 'store']);
+    Route::post('/recommendedAgent', [AgentController::class, 'recommendedAgentDetails'])->name('agent.recommendedAgentDetails');
+    Route::post('/AgentAllImage', [AgentController::class, 'AgentAllImage'])->name('agent.AgentAllImage');
 
     // area
     Route::get('getarea', [AreaController::class, 'index'])->name('area.index');

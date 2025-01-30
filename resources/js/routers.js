@@ -18,7 +18,7 @@ const searchResult = () => import('./components/search/searchResult.vue')
 // agent
 const AgentList = () => import('./components/admin/agent/index.vue')
 const agentDetails = () => import('./components/admin/agent/agentDetails.vue')
-const agentApprove = () => import('./components/admin/agent/agentApprove.vue')
+const agentApproved = () => import('./components/admin/agent/agentApproved.vue')
 const agentRecomanded = () => import('./components/admin/agent/agentRecomanded.vue')
 const agentView = () => import('./components/admin/agent/agentView.vue')
 const CreateAgency = () => import('./components/admin/agent/create.vue')
@@ -99,8 +99,8 @@ const routes = [
     // agent
     { path: '/agent-list', component: AgentList, name: 'AgentList', meta: { auth: true } },
     { path: '/agent-details', component: agentDetails, name: 'agentDetails', meta: { auth: true } },
-    { path: '/agent-recmoanded/:id', component: agentApprove, name: 'agentApprove', meta: { auth: true },props:true },
-    { path: '/agent-approve/:id', component: agentRecomanded, name: 'agentRecomanded', meta: { auth: true },props:true },
+    { path: '/agent-recommended/:ids', component: agentRecomanded, name: 'agentRecomanded',  meta: { auth: true },props:true},
+    { path: '/agent-approve/:id', component: agentApproved, name: 'agentApproved', meta: { auth: true },props:true},
     { path: '/agent-view', component: agentView, name: 'agentView', meta: { auth: true } },
     { path: '/agent-create', component: CreateAgency, name: 'CreateAgency', meta: { auth: true } },
 

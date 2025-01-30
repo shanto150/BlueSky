@@ -20,20 +20,39 @@ class AgentController extends BaseController
     {
         $data = DB::table('agents as ag')
             ->join('users as u', 'ag.user_id', 'u.id')
-            ->selectRaw('ag.id as idd,u.name as owner,ag.name,ag.phone,ag.agent_code as agent_code,ag.email as email,ag.created_at,ag.status,ag.updated_at,f_username(ag.updated_by) updated_by,f_username(ag.created_by) created_by,ag.designation,ag.country,ag.city,ag.address,f_zonename(ag.zone) as zone,ag.trade_licence,ag.ca_number,ag.established_date,ag.reg_number,ag.postal_code,ag.fax,ag.iata_number,ag.hajj_agency_number,f_username(ag.kam) as kam,ag.remarks,ag.net_balance')->get();
+            ->join('agent_users as au', 'ag.id', 'au.agent_id')
+            ->selectRaw('ag.id as idd,u.name as owner,ag.name,ag.phone,ag.agent_code as agent_code,ag.email as email,ag.created_at,ag.status,ag.updated_at,f_username(ag.updated_by) updated_by,f_username(ag.created_by) created_by,au.designation,ag.country,ag.city,ag.address,f_zonename(ag.zone) as zone,ag.trade_licence,ag.ca_number,ag.established_date,ag.reg_number,ag.postal_code,ag.fax,ag.iata_number,ag.hajj_agency_number,f_username(ag.kam) as kam,ag.remarks,ag.net_balance')->get();
 
         return DataTables::of($data)->addIndexColumn()->make(true);
     }
 
     public function getKam()
     {
-        $kams = DB::table('users')->where('type',1)->get();
+        $kams = DB::table('users')->where('type', 1)->get();
         return response()->json($kams);
     }
 
     /**
      * Show the form for creating a new resource.
      */
+    public function recommendedAgentDetails(Request $request)
+    {
+
+        // $data = Agent::where('id',$request->id)->first();
+        $data = DB::table('agents as ag')
+            ->join('agent_users as au', 'ag.id', 'au.agent_id')
+            ->where('ag.id', $request->id)
+            ->selectRaw('ag.id as idd,au.name as owner,au.designation as designation,au.nid as owner_nid,au.dob as dob,au.email as owner_email,au.phone as owner_phone,ag.name as name,ag.phone as phone,ag.agent_code as agent_code,ag.email as email,ag.created_at,ag.status,ag.updated_at,f_username(ag.updated_by) updated_by,f_username(ag.created_by) created_by,ag.country,ag.city,ag.address,f_zonename(ag.zone) as zone,ag.trade_licence,ag.ca_number,ag.established_date,ag.reg_number,ag.postal_code,ag.fax,ag.iata_number,ag.hajj_agency_number,f_username(ag.kam) as kam,ag.remarks,ag.net_balance,ag.remarks as remarks,ag.logo_path as logo_path')->get();
+        return response()->json($data);
+    }
+
+    public function AgentAllImage(Request $request)
+    {
+        $data = AgentImage::where('agent_id', $request->id)
+        ->get();
+        return response()->json($data);
+
+    }
     public function create()
     {
         //
