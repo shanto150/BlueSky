@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agent_images', function (Blueprint $table) {
+        Schema::create('agent_approval_logs', function (Blueprint $table) {
             $table->id();
             $table->integer('agent_id')->unsigned();
-            $table->string('attachment_type',20); //trade_licence_img,ca_certificate_img,tin_img,hajj_licence_img,nid_img,iata_certificate_img
-            $table->string('attachment_path',300);
-            $table->string('status')->default('Pending')->comment('Pending,Approved,Reject');
-            $table->index('attachment_type');
+            $table->string('status');
+            $table->integer('approver_id')->unsigned()->nullable();
+            $table->longText('remarks')->nullable();
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
             $table->timestamps();
             $table->foreign('agent_id')->references('id')->on('agents')->onDelete('cascade');
+            $table->index('approver_id');
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agent_images');
+        Schema::dropIfExists('agent_approval_logs');
     }
 };
