@@ -5,6 +5,9 @@ import { ref, onMounted, reactive } from "vue";
 import moment from "moment";
 const props = defineProps(['ids']);
 const previewImage = ref('');
+const form = reactive({
+    note: '', status: '', approver: '', agent_id: "", useEmail: useAuthStore().email
+});
 
 
 getAgentData(props.ids);
@@ -50,6 +53,10 @@ async function getAgentData(props) {
             $('#cstatus').html(status);
         } else if (status == 'Hold') {
             $("#status_color").addClass("text-warning bg-light-warning");
+            $('#cstatus').html(status);
+        }
+        else if (status == 'Recommended') {
+            $("#status_color").addClass("text-info bg-light-info");
             $('#cstatus').html(status);
         }
         else if (status == 'Reject') {
@@ -154,6 +161,28 @@ async function getApprover() {
 
     }
 }
+onMounted(() => {
+    $("#status").on('change', function () {
+        form.status_val = $(this).val();
+    });
+    $("#approver").on('change', function () {
+        form.approver = $(this).val();
+    });
+});
+
+async function update(props) {
+    form.agent_id = props.ids;
+    try {
+        const response = await axiosInstance.post("/agentRecomendation/update", form);
+
+        Notification.showToast('s', response.data.message);
+
+    } catch (error) {
+        ErrorCatch.CatchError(error);
+    }
+}
+
+
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -181,7 +210,8 @@ async function getApprover() {
                     <div class="d-flex flex-column align-items-center text-center">
                         <img v-if="previewImage" :src="previewImage" height="60" width="60"
                             class="border border-1 rounded rounded-2" alt="Profile Picture">
-                        <img v-else src="../../../.../../../../../public/theme/appimages/Plane_origin.svg" height="60" width="60" class="border border-1 rounded rounded-2" alt="Profile Picture">
+                        <img v-else src="../../../.../../../../../public/theme/appimages/Plane_origin.svg" height="60"
+                            width="60" class="border border-1 rounded rounded-2" alt="Profile Picture">
                         <div class="mt-3">
                             <h4 class="agency_name"></h4>
                         </div>
@@ -194,7 +224,6 @@ async function getApprover() {
                     </div>
                     <hr class="my-2">
                     <ul class="list-group list-group-flush">
-
                         <span id="agent_images"></span>
                     </ul>
                 </div>
@@ -365,7 +394,6 @@ async function getApprover() {
                             <div class="col-md-12">
                                 <table class="table table-borderless table-sm table-responsive">
                                     <tbody>
-
                                         <tr>
                                             <td class="m-0 pl-2" width="50%">
                                                 <label for=""><b>KAM:</b></label>
@@ -386,47 +414,53 @@ async function getApprover() {
         </div>
 
         <div class="col-lg-3">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="m-0 p-0" style="border-left: 5px solid #00d54a;"> &nbsp; Recomandation</h5>
-
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label for="status" class="form-label">Status</label><select class="form-select form-select-sm"
-                                id="status" aria-label="Default select example">
-                                <option value="Recommended">Recommended</option>
-                                <option value="Hold">Hold</option>
-                                <option value="Cancel">Cancel</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-12 mt-2">
-                            <label for="Kam" class="form-label">Approver</label><select
-                                class="form-select form-select-sm" id="approver" aria-label="Default select example">
-
-                            </select>
-                        </div>
-
-                        <div class="col-md-12 mt-2">
-                            <label for="date" class="form-label">Recommendation Note</label>
-
-                            <textarea class="form-control form-control-sm" name="note" id="note"></textarea>
-                        </div>
-
-
+            <form id="addRecomandationForm">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="m-0 p-0" style="border-left: 5px solid #00d54a;"> &nbsp; Recomandation</h5>
 
                     </div>
-                </div>
-                <div class="card-footer">
-                    <div class="d-block">
-                        <button class="btn btn-sm btn-outline-danger float-left">Cancel</button>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="status" class="form-label">Status</label><select
+                                    class="form-select form-select-sm" v-model="form.status" id="status"
+                                    aria-label="Default select example">
+                                    <option value="Recommended">Recommended</option>
+                                    <option value="Hold">Hold</option>
+                                    <option value="Cancel">Cancel</option>
+                                </select>
+                            </div>
 
-                        <button class="btn btn-sm btn-outline-primary float-end">Submit</button>
+                            <div class="col-md-12 mt-2">
+                                <label for="Kam" class="form-label">Approver</label><select
+                                    class="form-select form-select-sm" v-model="form.approver" id="approver"
+                                    aria-label="Default select example">
+
+                                </select>
+                            </div>
+
+                            <div class="col-md-12 mt-2">
+                                <label for="date" class="form-label">Recommendation Note</label>
+
+                                <textarea class="form-control form-control-sm" v-model="form.note" name="note"
+                                    id="note"></textarea>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-block">
+                            <button class="btn btn-sm btn-outline-danger float-left">Cancel</button>
+
+                            <button type="button" @click="update(props)"
+                                class="btn btn-sm btn-outline-primary float-end">Submit</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </template>

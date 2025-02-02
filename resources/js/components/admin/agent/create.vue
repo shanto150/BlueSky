@@ -6,7 +6,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import { useAuthStore } from "../../../stores/authStore";
 
 const form = reactive({
-    name: "", email: "", country: "", address: "", established_date: "", postal_code: "", ca_number: "", iata_number: "", agent_code: "", phone: "", city: "", zone: "", reg_number: "", fax: "", trade_licence: "", hajj_no: '', ownername: "", nid_number: "", email_address: "", designation: "", dob: "", owner_phone: "", kam_id: "", remarks: ""
+    name: "", email: "", country: "", address: "", established_date: "", postal_code: "", ca_number: "", iata_number: "", agent_code: "", phone: "", city: "", zone: "", reg_number: "", fax: "", trade_licence: "", hajj_no: '', ownername: "", nid_number: "", email_address: "", designation: "", dob: "", owner_phone: "", kam_ids: "", remarks: ""
 });
 
 const previewImage = ref('');
@@ -30,6 +30,25 @@ const classKAMActive = ref(false);
 const state_iata = ref(false);
 const state_hajj = ref(false);
 
+onMounted(() => {
+
+    $('#country').on("change", function () {
+        form.country = $(this).val();
+    });
+
+    $('#zone').on("change", function () {
+        form.zone = $(this).val();
+    });
+    $('#district').on("change", function () {
+        form.city = $(this).val();
+    });
+
+    $('.kam_ids').on("change", function () {
+        form.kam_ids = $(this).val();
+    });
+
+});
+
 function nextPhase(id) {
     if (id == 1) {
         this.isAgencyDetails = false;
@@ -45,6 +64,7 @@ function nextPhase(id) {
         this.classDocActive = false;
         this.classDocupActive = true;
         window.scrollTo(0, 0);
+
     }
     else if (id == 3) {
         getKam();
@@ -55,7 +75,8 @@ function nextPhase(id) {
     }
 
     else if (id == 44) {
-
+        getDistrict();
+        getZone();
         this.isAgencyDetails = true;
         this.isAgencyDocument = false;
         this.classAgencyActive = true;
@@ -216,9 +237,6 @@ const handleOwnerProfileFileChange = (event) => {
     };
 }
 
-onMounted(() => {
-
-});
 
 getDistrict();
 
@@ -308,7 +326,7 @@ async function getKam() {
             options.push(obj);
         });
 
-        $("#kam_id").select2({
+        $("#kam_ids").select2({
             placeholder: '=Select=',
             theme: 'bootstrap-5',
             width: '100%',
@@ -324,11 +342,10 @@ async function getKam() {
                 return $state;
             }
         });
-        $('#kam_id').prepend('<option selected=""></option>');
+        $('#kam_ids').prepend('<option selected=""></option>');
 
     } catch (error) {
         // console.log(error);
-
     }
 }
 </script>
@@ -557,7 +574,8 @@ async function getKam() {
                                                     <label for="registration" class="form-label">Registration
                                                         Number</label>
                                                     <input type="text" class="form-control form-control-sm"
-                                                        id="reg_number" name="reg_number" v-model="form.reg_number" placeholder="Enter Registration Number">
+                                                        id="reg_number" name="reg_number" v-model="form.reg_number"
+                                                        placeholder="Enter Registration Number">
                                                 </div>
 
                                                 <div class="col-12 col-md-12 mt-2">
@@ -569,13 +587,16 @@ async function getKam() {
 
                                                 <div class="col-12 col-md-12 mt-2">
                                                     <label for="trade_licence" class="form-label">Trade Licence</label>
-                                                    <input type="text" name="trade_licence" v-model="form.trade_licence" class="form-control form-control-sm" id="trade_licence" placeholder="Enter Trade Licence">
+                                                    <input type="text" name="trade_licence" v-model="form.trade_licence"
+                                                        class="form-control form-control-sm" id="trade_licence"
+                                                        placeholder="Enter Trade Licence">
                                                 </div>
 
                                                 <div class="col-12 col-lg-12 d-flex align-items-center gap-3 mt-2">
 
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="hajjNonHajj" @change="hajjNonHajj(1)" id="flexRadioDefault1">
+                                                        <input class="form-check-input" type="radio" name="hajjNonHajj"
+                                                            @change="hajjNonHajj(1)" id="flexRadioDefault1">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             Hajj
                                                         </label>
@@ -622,7 +643,8 @@ async function getKam() {
                                 </div>
 
                                 <div class="row" v-if="isAgencyDocument">
-                                    <p>Upload Your Documents <br> <span style="font-size: 12px;">Supported Formats :Jpeg,Png or Pdf | Max File Size : 2MB</span></p>
+                                    <p>Upload Your Documents <br> <span style="font-size: 12px;">Supported Formats
+                                            :Jpeg,Png or Pdf | Max File Size : 2MB</span></p>
 
                                     <!-- Trade Licence -->
                                     <div class="col-md-3 d-flex justify-content-center m-1 flex-column"
@@ -881,7 +903,8 @@ async function getKam() {
                                     <div class="col-12 col-lg-6">
                                         <label for="kam" class="form-label">KAM</label>
 
-                                        <select class="form-select form-select-sm" name="kam_id" v-model="form.kam_id" id="kam_id" aria-label="Default select example">
+                                        <select class="form-select form-select-sm kam_ids" name="kam_ids"
+                                            v-model="form.kam_ids" id="kam_ids" aria-label="Default select example">
                                             <option value="" selected>Select KAM</option>
                                         </select>
                                     </div>

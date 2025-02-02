@@ -37,6 +37,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/agent/save', [AgentController::class, 'store']);
     Route::post('/recommendedAgent', [AgentController::class, 'recommendedAgentDetails'])->name('agent.recommendedAgentDetails');
     Route::post('/AgentAllImage', [AgentController::class, 'AgentAllImage'])->name('agent.AgentAllImage');
+    Route::post('/agentRecomendation/update', [AgentController::class, 'agentRecomendation'])->name('agent.agentRecomendation');
 
     // area
     Route::get('getarea', [AreaController::class, 'index'])->name('area.index');

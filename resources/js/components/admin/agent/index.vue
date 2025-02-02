@@ -167,7 +167,7 @@ const options = {
         // edit function
         $(".agent-view").on('click', function (e) {
             var itemIdd = $(this).attr('data-item-id');
-            router.push({ name: 'agentView', params: { id: itemIdd } });
+            router.push({ name: 'agentView', params: { ids: itemIdd } });
         });
         $(".agent-recommended").on('click', function (e) {
             var itemIdd = $(this).attr('data-item-id');

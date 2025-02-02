@@ -1,15 +1,16 @@
 <?php
 namespace App\Http\Controllers\Admin\Agent;
 
-use App\Http\Controllers\BaseController;
-use App\Models\Agent\Agent;
-use App\Models\Agent\AgentImage;
-use App\Models\Agent\AgentUser;
 use App\Models\User;
+use App\Models\Agent\Agent;
 use Illuminate\Http\Request;
+use App\Models\Agent\AgentUser;
+use App\Models\Agent\AgentImage;
+use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Yajra\DataTables\DataTables;
+use App\Models\Agent\AgentApprovalLog;
+use App\Http\Controllers\BaseController;
 
 class AgentController extends BaseController
 {
@@ -22,7 +23,7 @@ class AgentController extends BaseController
             ->join('users as u', 'ag.user_id', 'u.id')
             ->join('agent_users as au', 'ag.id', 'au.agent_id')
             ->selectRaw('ag.id as idd,u.name as owner,ag.name,ag.phone,ag.agent_code as agent_code,ag.email as email,ag.created_at,ag.status,ag.updated_at,f_username(ag.updated_by) updated_by,f_username(ag.created_by) created_by,au.designation,ag.country,ag.city,ag.address,f_zonename(ag.zone) as zone,ag.trade_licence,ag.ca_number,ag.established_date,ag.reg_number,ag.postal_code,ag.fax,ag.iata_number,ag.hajj_agency_number,f_username(ag.kam) as kam,ag.remarks,ag.net_balance')->get();
-        // dd($data);
+
         return DataTables::of($data)->addIndexColumn()->make(true);
     }
 
@@ -37,19 +38,37 @@ class AgentController extends BaseController
      */
     public function recommendedAgentDetails(Request $request)
     {
-
-        // $data = Agent::where('id',$request->id)->first();
         $data = DB::table('agents as ag')
             ->join('agent_users as au', 'ag.id', 'au.agent_id')
+            ->join('districts as dis', 'dis.id', 'ag.city')
             ->where('ag.id', $request->id)
-            ->selectRaw('ag.id as idd,au.name as owner,au.designation as designation,au.nid as owner_nid,au.dob as dob,au.email as owner_email,au.phone as owner_phone,ag.name as name,ag.phone as phone,ag.agent_code as agent_code,ag.email as email,ag.created_at,ag.status,ag.updated_at,f_username(ag.updated_by) updated_by,f_username(ag.created_by) created_by,ag.country,ag.city,ag.address,f_zonename(ag.zone) as zone,ag.trade_licence,ag.ca_number,ag.established_date,ag.reg_number,ag.postal_code,ag.fax,ag.iata_number,ag.hajj_agency_number,f_username(ag.kam) as kam,ag.remarks,ag.net_balance,ag.remarks as remarks,ag.logo_path as logo_path')->get();
+            ->selectRaw('ag.id as idd,au.name as owner,au.designation as designation,au.nid as owner_nid,au.dob as dob,au.email as owner_email,au.phone as owner_phone,ag.name as name,ag.phone as phone,ag.agent_code as agent_code,ag.email as email,ag.created_at,ag.status,ag.updated_at,f_username(ag.updated_by) updated_by,f_username(ag.created_by) created_by,ag.country,ag.address,f_zonename(ag.zone) as zone,ag.trade_licence,ag.ca_number,ag.established_date,ag.reg_number,ag.postal_code,ag.fax,ag.iata_number,ag.hajj_agency_number,f_username(ag.kam) as kam,ag.remarks,ag.net_balance,ag.remarks as remarks,ag.logo_path as logo_path,dis.name as city')->get();
         return response()->json($data);
+    }
+
+    public function agentRecomendation(Request $request)
+    {
+
+        $agent = Agent::where('id', $request->agent_id)->first();
+        $agent->status = $request->status;
+        $agent->save();
+
+        $agent_approver_log = new AgentApprovalLog;
+        $agent_approver_log->agent_id = $request->agent_id;
+        $agent_approver_log->status = $request->status;
+        $agent_approver_log->remarks = $request->note;
+        $agent_approver_log->approver_id = $request->approver;
+        $agent_approver_log->created_by = auth()->user()->id;
+        $agent_approver_log->save();
+        $success = '';
+
+        return $this->SuccessResponse($success, 'Successfully Agent Saved.');
+
     }
 
     public function AgentAllImage(Request $request)
     {
-        $data = AgentImage::where('agent_id', $request->id)
-        ->get();
+        $data = AgentImage::where('agent_id', $request->id)->get();
         return response()->json($data);
 
     }
@@ -63,7 +82,7 @@ class AgentController extends BaseController
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+
         $agent                     = new Agent;
         $agent->name               = $request->name;
         $agent->agent_code         = $request->agent_code;

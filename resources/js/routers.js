@@ -101,7 +101,7 @@ const routes = [
     { path: '/agent-details', component: agentDetails, name: 'agentDetails', meta: { auth: true } },
     { path: '/agent-recommended/:ids', component: agentRecomanded, name: 'agentRecomanded',  meta: { auth: true },props:true},
     { path: '/agent-approve/:id', component: agentApproved, name: 'agentApproved', meta: { auth: true },props:true},
-    { path: '/agent-view', component: agentView, name: 'agentView', meta: { auth: true } },
+    { path: '/agent-view/:ids', component: agentView, name: 'agentView', meta: { auth: true } ,props:true},
     { path: '/agent-create', component: CreateAgency, name: 'CreateAgency', meta: { auth: true } },
 
     //deposit
