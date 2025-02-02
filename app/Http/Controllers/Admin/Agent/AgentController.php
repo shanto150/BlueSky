@@ -22,7 +22,7 @@ class AgentController extends BaseController
             ->join('users as u', 'ag.user_id', 'u.id')
             ->join('agent_users as au', 'ag.id', 'au.agent_id')
             ->selectRaw('ag.id as idd,u.name as owner,ag.name,ag.phone,ag.agent_code as agent_code,ag.email as email,ag.created_at,ag.status,ag.updated_at,f_username(ag.updated_by) updated_by,f_username(ag.created_by) created_by,au.designation,ag.country,ag.city,ag.address,f_zonename(ag.zone) as zone,ag.trade_licence,ag.ca_number,ag.established_date,ag.reg_number,ag.postal_code,ag.fax,ag.iata_number,ag.hajj_agency_number,f_username(ag.kam) as kam,ag.remarks,ag.net_balance')->get();
-
+        // dd($data);
         return DataTables::of($data)->addIndexColumn()->make(true);
     }
 
@@ -63,7 +63,7 @@ class AgentController extends BaseController
      */
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $agent                     = new Agent;
         $agent->name               = $request->name;
         $agent->agent_code         = $request->agent_code;
@@ -84,7 +84,7 @@ class AgentController extends BaseController
         $agent->kam                = $request->kam_id;
         $agent->remarks            = $request->remarks;
         $agent->status             = 'Pending';
-        $agent->designation        = $request->designation;
+        // $agent->designation        = $request->designation;
         $agent->created_by         = auth()->user()->id;
 
         if (($request->hasFile('agency_img'))) {

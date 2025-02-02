@@ -86,29 +86,40 @@ async function getAgentData(props) {
         console.log(error);
     }
 }
+
 getAgentAllImage(props.ids);
 async function getAgentAllImage(props) {
 
     try {
         const response = await axiosInstance.post('AgentAllImage', { 'id': props });
         $.each(response.data, function (key, value) {
-            // const title ='';
-            // if (value.attachment_type == 'trade_licence_img') {
-            //     title = 'Trade Licence';
-            // }
-            // else if (value.attachment_type == 'nid_img') {
-            //     title = 'NID Image';
-            // }
-            // else if (value.attachment_type == 'agent_owner') {
-            //     title = 'Agent Owner';
-            // }
-            $("#agent_images").append('<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"><h6 style="font-size: 14px;" class="mb-0">' + value.attachment_type + '</h6><span class="text-secondary"><img height="40" width="40" src="' + value.attachment_path + '" alt=""></span></li>');
+            var title = '';
+            if (value.attachment_type == 'trade_licence_img') {
+                title = 'Trade Licence';
+            }
+            else if (value.attachment_type == 'nid_img') {
+                title = 'NID';
+            }
+            else if (value.attachment_type == 'ca_img') {
+                title = 'Agent Owner';
+            }
+            else if (value.attachment_type == 'iata_img') {
+                title = 'IATA';
+            }
+            else if (value.attachment_type == 'hajj_licence_img') {
+                title = 'Hajj Licence';
+            }
+            else if (value.attachment_type == 'tin_img') {
+                title = 'TIN';
+            }
+            $("#agent_images").append('<li class="list-group-item d-flex justify-content-between align-items-center flex-wrap"><h6 style="font-size: 14px;" class="mb-0">' + title + '</h6><span class="text-secondary"><img height="40" width="40" src="' + value.attachment_path + '" alt=""></span></li>');
         });
 
     } catch (error) {
         console.log(error);
     }
 }
+
 getApprover();
 
 async function getApprover() {
