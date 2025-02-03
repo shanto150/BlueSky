@@ -64,7 +64,7 @@ const formats = (fdates) => {
 
 
 
-const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '', ADT: '', CNN: '', KID: '', INF: '' });
+const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '', ADT: 1, CNN: '', KID: '', INF: '' });
 form.Way = 1;
 async function Lowfaresearch() {
     try {
