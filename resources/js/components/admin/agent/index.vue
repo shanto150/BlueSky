@@ -142,6 +142,12 @@ const options = {
                 }else if (row.status == 'Recommended') {
                     html += '<div class="badge rounded-pill text-primary bg-light-primary p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Recommended </div>';
                 }
+                else if (row.status == 'Hold') {
+                    html += '<div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Hold </div>';
+                }
+                else if (row.status == 'Cancel') {
+                    html += '<div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Cancelled </div>';
+                }
 
                 return html;
             },

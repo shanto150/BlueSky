@@ -12,7 +12,7 @@ getAgentData(props.ids);
 async function getAgentData(props) {
 
     try {
-        const response = await axiosInstance.post('recommendedAgent', { 'id': props });
+        const response = await axiosInstance.post('viewAgent', { 'id': props });
 
         const agency_name = response.data[0].name;
         const status = response.data[0].status;
@@ -40,6 +40,9 @@ async function getAgentData(props) {
         const kam_name = response.data[0].kam;
         const remarks = response.data[0].remarks;
         const logo = response.data[0].logo_path;
+        const approver = response.data[0].approver;
+        const approver_remarks = response.data[0].approver_remarks;
+
         previewImage.value = logo;
 
         if (status == 'Pending') {
@@ -85,6 +88,8 @@ async function getAgentData(props) {
         $(".owner_phone").html(owner_phone);
         $(".kam_name").html(kam_name);
         $(".remarks").html(remarks);
+        $(".approver").html(approver);
+        $(".approver_remarks").html(approver_remarks);
 
     } catch (error) {
         console.log(error);
@@ -124,6 +129,26 @@ async function getAgentAllImage(props) {
     }
 }
 
+getAgentApprovalLog(props.ids);
+
+async function getAgentApprovalLog(props) {
+    try {
+        const response = await axiosInstance.post('getAgentApprovalLog', { 'id': props });
+        $.each(response.data, function (key, value) {
+            console.log(value);
+            if (value.status == 'Recommended') {
+            $("#agent_recommended").append('<table class="table table-borderless table-sm table-responsive"> <tbody> <tr> <td class="m-0 pl-2" width="50%"> <label for=""><b>Recommended By:</b></label> <p class="m-0 approver">'+value.approver_name+'</p> </td> <td class="m-0 pl-2" width="50%"> <label for=""><b>Remarks:</b></label> <p class="m-0 approver_remarks">'+value.remarks+'</p> </td> </tr> </tbody> </table>');
+
+            }else if (value.status == 'Approved') {
+
+                $("#agent_approved").append('<table class="table table-borderless table-sm table-responsive"> <tbody> <tr> <td class="m-0 pl-2" width="50%"> <label for=""><b>Approved By:</b></label> <p class="m-0">'+value.approver_name+'</p> </td><td class="m-0 pl-2" width="50%"> <label for=""><b>Remarks:</b></label> <p class="m-0 approver_remarks">'+value.remarks+'</p> </td> </tr> </tbody></table>');
+            }
+
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 </script>
 <template>
@@ -351,21 +376,7 @@ async function getAgentAllImage(props) {
 
                         </div>
                         <div class="card-body">
-                            <table class="table table-borderless table-sm table-responsive">
-                                <tbody>
-                                    <tr>
-                                        <td class="m-0 pl-2" width="50%">
-                                            <label for=""><b>Approver:</b></label>
-                                            <p class="m-0">Mr.Y</p>
-                                        </td>
-                                        <td class="m-0 pl-2" width="50%">
-                                            <label for=""><b>Remarks:</b></label>
-                                            <p class="m-0">This agency is new and recommended by mr.x</p>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
+                            <span id="agent_recommended"></span>
                         </div>
                     </div>
                 </div>
@@ -376,17 +387,7 @@ async function getAgentAllImage(props) {
 
                         </div>
                         <div class="card-body">
-                            <table class="table table-borderless table-sm table-responsive">
-                                <tbody>
-                                    <tr>
-                                        <td class="m-0 pl-2" width="50%">
-                                            <label for=""><b>Approved By:</b></label>
-                                            <p class="m-0">Mr.Y</p>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
+                            <span id="agent_approved">-</span>
                         </div>
                     </div>
                 </div>

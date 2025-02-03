@@ -36,6 +36,16 @@ class AgentController extends BaseController
     /**
      * Show the form for creating a new resource.
      */
+    public function viewAgent(Request $request)
+    {
+        $data = DB::table('agents as ag')
+            ->join('agent_users as au', 'ag.id', 'au.agent_id')
+            ->join('agent_approval_logs as aal', 'ag.id', 'aal.agent_id')
+            ->join('districts as dis', 'dis.id', 'ag.city')
+            ->where('ag.id', $request->id)
+            ->selectRaw('ag.id as idd,au.name as owner,au.designation as designation,au.nid as owner_nid,au.dob as dob,au.email as owner_email,au.phone as owner_phone,ag.name as name,ag.phone as phone,ag.agent_code as agent_code,ag.email as email,ag.created_at,ag.status,ag.updated_at,f_username(ag.updated_by) updated_by,f_username(ag.created_by) created_by,ag.country,ag.address,f_zonename(ag.zone) as zone,ag.trade_licence,ag.ca_number,ag.established_date,ag.reg_number,ag.postal_code,ag.fax,ag.iata_number,ag.hajj_agency_number,f_username(ag.kam) as kam,ag.remarks,ag.net_balance,ag.remarks as remarks,ag.logo_path as logo_path,dis.name as city')->get();
+        return response()->json($data);
+    }
     public function recommendedAgentDetails(Request $request)
     {
         $data = DB::table('agents as ag')
@@ -69,6 +79,14 @@ class AgentController extends BaseController
     public function AgentAllImage(Request $request)
     {
         $data = AgentImage::where('agent_id', $request->id)->get();
+        return response()->json($data);
+
+    }
+    public function getAgentApprovalLog(Request $request)
+    {
+        $data = DB::table('agent_approval_logs as aal')->where('agent_id', $request->id)
+        ->selectRaw('aal.remarks as remarks,aal.status as status,f_username(aal.approver_id) as approver_name')
+        ->get();
         return response()->json($data);
 
     }
