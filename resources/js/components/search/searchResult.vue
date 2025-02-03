@@ -1179,7 +1179,7 @@ function offHover() {
                                             <p class="p-0 m-0"><b>02:50 PM</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">03 Jan, Fri</small>
                                             <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
+                                            <small style="font-size: 12px; color: #5e6878;">Arrival</small>
                                         </div>
 
                                     </div>
@@ -1899,7 +1899,7 @@ function offHover() {
                                             <p class="p-0 m-0"><b>02:50 PM</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">03 Jan, Fri</small>
                                             <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
+                                            <small style="font-size: 12px; color: #5e6878;">Arrival</small>
                                         </div>
 
                                     </div>
@@ -1979,7 +1979,7 @@ function offHover() {
                                             <p class="p-0 m-0"><b>04:25 AM</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">28 Feb, Fri</small>
                                             <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
+                                            <small style="font-size: 12px; color: #5e6878;">Arrival</small>
                                         </div>
 
                                     </div>
