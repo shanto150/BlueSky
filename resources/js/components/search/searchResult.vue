@@ -133,7 +133,6 @@ onMounted(() => {
         form.CNN = totalChild;
         form.KID = totalKids;
         form.INF = totalInfant;
-
         $(".total_pass").html(totalAdult + totalChild + totalKids + totalInfant);
     };
 
