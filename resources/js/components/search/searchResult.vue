@@ -64,7 +64,7 @@ const formats = (fdates) => {
 
 
 
-const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '', ADT: '', CNN: '', INF: '' });
+const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '', ADT: '', CNN: '', KID: '', INF: '' });
 form.Way = 1;
 async function Lowfaresearch() {
     try {
@@ -128,6 +128,12 @@ onMounted(() => {
         const totalChild = parseInt($(".child").val());
         const totalKids = parseInt($(".kids").val());
         const totalInfant = parseInt($(".infant").val());
+
+        form.ADT = totalAdult;
+        form.CNN = totalChild;
+        form.KID = totalKids;
+        form.INF = totalInfant;
+
         $(".total_pass").html(totalAdult + totalChild + totalKids + totalInfant);
     };
 
