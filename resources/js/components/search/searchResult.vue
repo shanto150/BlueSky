@@ -49,7 +49,7 @@ const formats = (fdates) => {
         const day2 = fdates[1].getDate();
         const month2 = fdates[1].getMonth() + 1;
         const year2 = fdates[1].getFullYear();
-        $("#todateVal input").val(`${day2}/${month2}/${year2}`);
+        $("#todateVal input").val(`${day2}-${month2}-${year2}`);
         const date2 = `${year2}-${String(month2).padStart(2, "0")}-${String(day2).padStart(2, "0")}`;
 
         form.arrival_date = date2;
