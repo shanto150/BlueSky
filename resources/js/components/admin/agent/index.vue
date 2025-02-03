@@ -200,6 +200,10 @@ const options = {
     ],
     "drawCallback": function (settings) {
         // edit function
+        $(".agent-approve").on('click', function (e) {
+            var itemIdd = $(this).attr('data-item-id');
+            router.push({ name: 'agentApproved', params: { ids: itemIdd } });
+        });
         $(".agent-view").on('click', function (e) {
             var itemIdd = $(this).attr('data-item-id');
             router.push({ name: 'agentView', params: { ids: itemIdd } });

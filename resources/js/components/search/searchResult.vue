@@ -65,7 +65,7 @@ const formats = (fdates) => {
 
 
 const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '', ADT: 1, CNN: '', KID: '', INF: '' });
-form.Way = 1;
+
 async function Lowfaresearch() {
     try {
         const response = await axiosInstance.post("Lowfaresearch", form);
@@ -79,6 +79,7 @@ async function Lowfaresearch() {
 function tourTypeChange(type) {
 
     if (type == 1) {
+        form.Way = 1;
         $('.one-way').addClass('bg-checkbox-active');
         $('.round-way').removeClass('bg-checkbox-active');
         $('.multi-city').removeClass('bg-checkbox-active');
@@ -94,6 +95,7 @@ function tourTypeChange(type) {
 
 
     } else if (type == 2) {
+        form.Way = 2;
         $('.one-way').removeClass('bg-checkbox-active');
         $('.round-way').addClass('bg-checkbox-active');
         $('.multi-city').removeClass('bg-checkbox-active');
@@ -109,6 +111,7 @@ function tourTypeChange(type) {
 
 
     } else {
+        form.Way = 3;
         $('.one-way').removeClass('bg-checkbox-active');
         $('.round-way').removeClass('bg-checkbox-active');
         $('.multi-city').addClass('bg-checkbox-active');
