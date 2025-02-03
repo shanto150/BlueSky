@@ -39,6 +39,7 @@
         "pinia-plugin-persistedstate": "^3.2.1",
         "qrcode": "^1.5.4",
         "select2": "^4.1.0-rc.0",
+        "simplebar-vue": "^2.4.0",
         "v-wave": "^3.0.2",
         "vue": "^3.4.38",
         "vue-3-simple-progress-bar": "^1.0.4",

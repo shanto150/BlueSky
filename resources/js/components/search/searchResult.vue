@@ -1,9 +1,18 @@
 <script setup>
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, onUnmounted, reactive } from "vue";
 import axiosInstance from "../../axiosInstance"
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import CustomMinMaxSlider from "../../components/search/CustomMinMaxSlider.vue";
+import SimpleBar from "simplebar-vue";
+import "simplebar-vue/dist/simplebar.min.css";
+
+const airports = ref([]); // All airports
+const initialLoadLimit = 20; // Limit for init
+const showOriginList = ref(false);
+const showDestinationList = ref(false);
+const filteredOriginAirports = ref([]);
+const filteredDestinationAirports = ref([]);
 
 const fdate = ref();
 const sliderMin = ref(150);
@@ -14,6 +23,7 @@ const isMultiCalendar = ref(false);
 const isRanges = ref();
 
 const isRounded = 'oneway';
+const tdate = ref();
 
 const format = (fdate) => {
 
@@ -21,7 +31,10 @@ const format = (fdate) => {
     const month = fdate.getMonth() + 1;
     const year = fdate.getFullYear();
 
-    return `${day}/${month}/${year}`;
+    // return `${day}/${month}/${year}`;
+    const date = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    form.dep_date = date;
+    return date;
 }
 
 const formats = (fdates) => {
@@ -37,14 +50,31 @@ const formats = (fdates) => {
         const month2 = fdates[1].getMonth() + 1;
         const year2 = fdates[1].getFullYear();
         $("#todateVal input").val(`${day2}/${month2}/${year2}`);
+        const date2 = `${year2}-${String(month2).padStart(2, "0")}-${String(day2).padStart(2, "0")}`;
+
+        form.arrival_date = date2;
     }
 
-    return `${day}/${month}/${year}`;
+    // return `${day}/${month}/${year}`;
+    const date = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    form.dep_date = date;
+    return date;
 }
-const tdate = ref();
 
-const form = reactive({ Way: '', from: '', to: "", dep_date: '', ADT: '', CNN: '', INF: '' });
 
+
+
+const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '', ADT: '', CNN: '', INF: '' });
+form.Way = 1;
+async function Lowfaresearch() {
+    try {
+        const response = await axiosInstance.post("Lowfaresearch", form);
+        Notification.showToast("s", response.data.message);
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 function tourTypeChange(type) {
 
@@ -90,13 +120,8 @@ function tourTypeChange(type) {
 }
 
 onMounted(() => {
-    $("#origin_id").select2({
-        placeholder: '=Select=',
-        theme: 'bootstrap-5',
-        width: '100%',
-        allowClear: true,
-        height: '50',
-    });
+    getAirports();
+    document.addEventListener("click", handleClickOutside);
 
     const updateTotalPassengers = () => {
         const totalAdult = parseInt($(".adult").val());
@@ -131,95 +156,94 @@ onMounted(() => {
     // Infant section
     updatePassengerCount('.infant-left-minus', false, 0, 4);
     updatePassengerCount('.infant-right-plus', true, 0, 4);
-
-
-    // $(".select2C").select2({
-    //     theme: 'bootstrap-5',
-    //     width: '100%',
-    //     height: '50',
-    //     // width: 'element'
-    // });
-
-    // $("#class_type").select2({
-    //     theme: 'bootstrap-5',
-    // });
-    // $("#pre_airline").select2({
-    //     theme: 'bootstrap-5',
-    // });
 });
-getAirports();
 
-function formatState(state) {
-    if (!state.id) {
-        return state.text;
-    }
-    var $state = $('<div class="row"> <div class="col-md-2" style="border-right:1px solid #9e56ef"><b style="font-size:12px">' + state.id + '</b></div> <div class="col-md-8" style="font-size:13px; padding-top:3px">' + state.text + ',' + state.city + '</div></div>');
-
-    return $state;
-};
+onUnmounted(() => {
+    document.removeEventListener("click", handleClickOutside);
+});
 
 async function getAirports() {
-
     try {
-        const response = await axiosInstance.get('airports');
-        var getDatas = [];
-        $.each(response.data, function (key, value) {
-            var obj = { id: value.code, text: value.Airport_Name, city: value.City_name }
-            getDatas.push(obj);
-
-        });
-
-        $("#origin_id").select2({
-            placeholder: '=Select=',
-            theme: 'bootstrap-5',
-            width: '100%',
-            // allowClear: true,
-            tags: true,
-            height: '50',
-            data: getDatas,
-            templateResult: function (state) {
-                if (!state.id) {
-                    return state.text;
-                }
-                var $state = $('<div class="row"> <div class="col-md-2" style="border-right:1px solid #9e56ef"><b style="font-size:12px">' + state.id + '</b></div> <div class="col-md-8" style="font-size:13px;">' + state.text + ',' + state.city + '</div></div>');
-
-                return $state;
-            },
-            templateSelection: formatState,
-
-
-        }).on('change', function (e) {
-
-        });;
-
-        $('#origin_id').prepend('<option selected=""></option>');
-
-        $("#destination_id").select2({
-            placeholder: '=Select=',
-            theme: 'bootstrap-5',
-            width: '100%',
-            // allowClear: true,
-            tags: true,
-            height: '50',
-            data: getDatas,
-            templateResult: function (state) {
-                if (!state.id) {
-                    return state.text;
-                }
-                var $state = $('<div class="row"> <div class="col-md-2" style="border-right:1px solid #9e56ef"><b style="font-size:12px">' + state.id + '</b></div> <div class="col-md-8" style="font-size:13px;">' + state.text + ',' + state.city + '</div></div>');
-
-                return $state;
-            },
-            templateSelection: formatState,
-        });
-
-        $('#destination_id').prepend('<option selected=""></option>');
-
-
+        const response = await axiosInstance.get("airports");
+        airports.value = response.data.map((value) => ({
+            id: value.code,
+            text: value.Airport_Name,
+            city: value.City_name,
+        }));
     } catch (error) {
-        // console.log(error);
-
+        console.error("Error fetching airports:", error);
     }
+}
+
+function handleClickOutside(event) {
+    const originInput = document.getElementById("origin_id");
+    const originResults = document.getElementById("origin_results");
+    const destinationInput = document.getElementById("destination_id");
+    const destinationResults = document.getElementById("destination_results");
+
+    if (!originInput?.contains(event.target) && !originResults?.contains(event.target)) {
+        showOriginList.value = false;
+    }
+
+    if (
+        !destinationInput?.contains(event.target) &&
+        !destinationResults?.contains(event.target)
+    ) {
+        showDestinationList.value = false;
+    }
+}
+
+// Generalized filtering function
+function filterAirports(searchText, airports) {
+    if (!searchText) {
+        return airports.slice(0, initialLoadLimit);
+    }
+    const search = searchText.toLowerCase();
+    return airports.filter(
+        (airport) =>
+            airport.id.toLowerCase().includes(search) ||
+            airport.text.toLowerCase().includes(search) ||
+            airport.city.toLowerCase().includes(search)
+    );
+}
+
+// Update filter functions
+function filterOriginAirports(searchText) {
+    filteredOriginAirports.value = filterAirports(searchText, airports.value);
+}
+
+function filterDestinationAirports(searchText) {
+    filteredDestinationAirports.value = filterAirports(searchText, airports.value);
+}
+
+function onOriginFocus() {
+    showOriginList.value = true;
+    filteredOriginAirports.value = airports.value.slice(0, initialLoadLimit);
+}
+
+function onDestinationFocus() {
+    showDestinationList.value = true;
+    filteredDestinationAirports.value = airports.value.slice(0, initialLoadLimit);
+}
+
+function selectOrigin(airport) {
+    form.from = airport.id;
+    showOriginList.value = false;
+}
+
+function selectDestination(airport) {
+    form.to = airport.id;
+    showDestinationList.value = false;
+}
+
+function clearOrigin() {
+    form.from = "";
+    showOriginList.value = false;
+}
+
+function clearDestination() {
+    form.to = "";
+    showDestinationList.value = false;
 }
 
 function onHover() {
@@ -593,21 +617,68 @@ function offHover() {
 
 
                     <div class="row mt-2">
-                        <div class="col-md-6">
-                            <div class="d-flex">
-                                <div class="w-50">
-                                    <select id="origin_id" name="origin_name"
-                                        class="form-control form-control-lg origin_name">
-                                    </select>
-                                </div>
-                                <div class="py-2" style="margin: 0 5px 0 5px;">
-                                    <img src="../../../../public/theme/appimages/fluent_arrow-swap-28-regular.svg" alt="">
-                                </div>
-                                <div class="w-50">
-                                    <select id="destination_id" name="destination_name"
-                                        class="form-control form-control destination_name">
-                                    </select>
-                                </div>
+
+                        <div class="col-md-3 position-relative">
+                            <input id="origin_id" v-model="form.from" name="origin_name"
+                                class="form-control origin_name placeholder-font-size"
+                                @input="filterOriginAirports($event.target.value)" @focus="onOriginFocus"
+                                @click="onOriginFocus" placeholder="City,Airport" autocomplete="off" />
+                            <span v-if="form.from" @click="clearOrigin" class="clear-icon">✖</span>
+                            <div v-if="showOriginList" id="origin_results"
+                                class="position-absolute w-100 mt-2 bg-white border rounded shadow-sm"
+                                style="z-index: 1000; animation: fadeIn 0.5s ease-in-out">
+                                <div class="arrow"></div>
+                                <SimpleBar style="max-height: 300px" class="search-results-simplebar">
+                                    <div v-for="airport in filteredOriginAirports" :key="airport.id"
+                                        class="p-2 cursor-pointer hover:bg-gray-100" @click="selectOrigin(airport)">
+                                        <div class="hstack align-items-center gap-1">
+                                            <div style="width: 50px"
+                                                class="d-flex align-items-center justify-content-center">
+                                                <h6 class="fw-bolder">{{ airport.id }}</h6>
+                                            </div>
+                                            <div class="flex-grow-1 border-start p-2">
+                                                <div class="font-12">{{ airport.text }}</div>
+                                                <div class="small text-muted">{{ airport.city }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-if="filteredOriginAirports.length === 0" class="p-2 text-center text-muted">
+                                        No matching airports found
+                                    </div>
+                                </SimpleBar>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 position-relative">
+                            <input autocomplete="off" id="destination_id" v-model="form.to" name="destination_name"
+                                class="form-control  destination_name placeholder-font-size"
+                                @input="filterDestinationAirports($event.target.value)" @click="onDestinationFocus"
+                                @focus="onDestinationFocus" placeholder="City,Airport" />
+                            <span v-if="form.to" @click="clearDestination" class="clear-icon">✖</span>
+                            <div v-if="showDestinationList" id="destination_results"
+                                class="position-absolute w-100 mt-2 bg-white border border-info bg-info rounded shadow-sm"
+                                style="z-index: 1000; animation: fadeIn 0.5s ease-in-out">
+                                <div class="arrow"></div>
+                                <SimpleBar style="max-height: 300px" class="search-results-simplebar">
+                                    <div v-for="airport in filteredDestinationAirports" :key="airport.id"
+                                        class="p-2 cursor-pointer hover:bg-gray-100"
+                                        @click="selectDestination(airport)">
+                                        <div class="hstack align-items-center gap-1">
+                                            <div style="width: 50px"
+                                                class="d-flex align-items-center justify-content-center">
+                                                <h6 class="fw-bolder">{{ airport.id }}</h6>
+                                            </div>
+                                            <div class="flex-grow-1 border-start p-2">
+                                                <div class="font-12">{{ airport.text }}</div>
+                                                <div class="small text-muted">{{ airport.city }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-if="filteredDestinationAirports.length === 0"
+                                        class="p-2 text-center text-muted">
+                                        No matching airports found
+                                    </div>
+                                </SimpleBar>
                             </div>
                         </div>
 
@@ -632,13 +703,14 @@ function offHover() {
                         </div>
 
                         <div class="col-md-1 mt-2 mt-md-0">
-                            <router-link :to="{ name: 'searchResult' }">
-                                <img src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt=""
-                                    class="d-sm-block d-md-none" style="width: 100%;" id="img">
-                                <img src="../../../../public/theme/appimages/s_With_Icon.jpg" alt=""
-                                    style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img"
-                                    class="d-none d-md-block">
-                            </router-link>
+                            <!-- <router-link> -->
+                            <img @click="Lowfaresearch()"
+                                src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt=""
+                                class="d-sm-block d-md-none" style="width: 100%;" id="img">
+                            <img @click="Lowfaresearch()" src="../../../../public/theme/appimages/s_With_Icon.jpg"
+                                alt="" style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img"
+                                class="d-none d-md-block">
+                            <!-- </router-link> -->
                         </div>
                     </div>
                 </div>
@@ -1223,8 +1295,9 @@ function offHover() {
                                                                     <b>
                                                                         <img src="../../../../public/theme/appimages/Plane.svg"
                                                                             alt="">
-                                                                        </b>
-                                                                        <small><b>Departure</b> from Hazrat Shahjalal International Airport</small>
+                                                                    </b>
+                                                                    <small><b>Departure</b> from Hazrat Shahjalal
+                                                                        International Airport</small>
                                                                 </div>
 
                                                                 <div class="p-2">Duration: 01 hr 45 min</div>
@@ -1236,7 +1309,9 @@ function offHover() {
                                                                 <div class="col-md-5 border-end">
                                                                     <div class="d-flex border-right">
                                                                         <div class="text-start mt-2">
-                                                                            <p class="p-0 m-0 custom-text-purple"><b>DAC</b></p>
+                                                                            <p class="p-0 m-0 custom-text-purple">
+                                                                                <b>DAC</b>
+                                                                            </p>
                                                                             <small
                                                                                 style="font-size: 13px; color: #5e6878;"><b>10:50
                                                                                     AM | 19 Jan, Thu</b></small>
@@ -1259,7 +1334,10 @@ function offHover() {
                                                                         <div class="col-md-7">
                                                                             <div class="d-flex border-right">
                                                                                 <div class="text-start mt-2">
-                                                                                    <p class="p-0 m-0 custom-text-purple"><b>DXB</b></p>
+                                                                                    <p
+                                                                                        class="p-0 m-0 custom-text-purple">
+                                                                                        <b>DXB</b>
+                                                                                    </p>
                                                                                     <small
                                                                                         style="font-size: 13px; color: #5e6878;"><b>11:55
                                                                                             AM | 19 Jan,
@@ -1305,11 +1383,86 @@ function offHover() {
 
                                                             <p class="text-start fw-bold">PENALTIES/GENERAL</p>
                                                             <span>
-                                                                1. Reissue/Refund minimum penalty amount before departure 0 BDT 2. Reissue/Refund maximum penalty amount before departure 5999 BDT
-                                                                3. Reissue/Refund maximum penalty amount for the ticket before departure 9599 BDT
-                                                                4. Revalidation minimum penalty amount before departure 0 BDT
-                                                                5. Revalidation maximum penalty amount before departure 0 BDT
-                                                                6. Revalidation maximum penalty amount for the ticket before departure 0 BDT 7. Reissue/Refund minimum penalty amount before departure no show 5999 BDT 8. Reissue/Refund maximum penalty amount before departure no show 5999 BDT 9. Reissue/Refund maximum penalty amount for the ticket before departure no show 9599 BDT 10. Revalidation minimum penalty amount before departure no show 0 BDT 11. Revalidation maximum penalty amount before departure no show 0 BDT 12. Revalidation maximum penalty amount for the ticket before departure no show 0 BDT 13. Reissue/Refund minimum penalty amount after departure 0 BDT 14. Reissue/Refund maximum penalty amount with sale currency 5999 BDT 15. Reissue/Refund maximum penalty amount for the ticket after departure 9599 BDT 16. Revalidation minimum penalty amount after departure 0 BDT 17. Revalidation maximum penalty amount after departure 0 BDT 18. Revalidation maximum penalty amount for the ticket after departure 0 BDT 19. Reissue/Refund minimum penalty amount after departure no show 5999 BDT 20. Reissue/Refund maximum penalty amount after departure no show 5999 BDT 21. Reissue/Refund maximum penalty amount for the ticket after departure no show 9599 BDT 22. Revalidation minimum penalty amount after departure no show 0 BDT 23. Revalidation maximum penalty amount after departure no show 0 BDT 24. Revalidation maximum penalty amount for the ticket after departure no show 0 BDT 25. Part of rule is free form text from Cat16? Not allowed 26. Reissue penalties can be waived for passenger and family death/illness before departure? Not allowed 27. Revalidation before departure is allowed? Not allowed 28. Reissue/Refund before departure allowed? Allowed with restrictions 29. Reissue penalties can be waived for passenger and family death/illness for before departure no show? Not allowed 30. Revalidation before departure when no show is allowed? Not allowed 31. Reissue/Refund before departure when no show allowed? Allowed with restrictions 32. Reissue penalties can be waived for passenger and family death/illness after departure? Not allowed 33. Revalidation after departure is allowed? Not allowed 34. Reissue/Refund after departure allowed? Allowed with restrictions 35. Reissue penalties can be waived for passenger and family death/illness after departure no show? Not allowed 36. Revalidation after departure when no show is allowed? Not allowed 37. Reissue/Refund after departure when no show allowed? Allowed with restrictions 38. Reissue/Refund minimum penalty amount before departure 11998 BDT 39. Reissue/Refund maximum penalty amount before departure 16798 BDT 40. Reissue/Refund maximum penalty amount for the ticket before departure 16798 BDT 41. Reissue/Refund minimum penalty amount before departure no show 11998 BDT 42. Reissue/Refund maximum penalty amount before departure no show 16798 BDT 43. Reissue/Refund maximum penalty amount for the ticket before departure no show 16798 BDT 44. Reissue/Refund minimum penalty amount after departure 11998 BDT 45. Reissue/Refund maximum penalty amount with sale currency 16798 BDT 46. Reissue/Refund maximum penalty amount for the ticket after departure 16798 BDT 47. Reissue/Refund minimum penalty amount after departure no show 11998 BDT 48. Reissue/Refund maximum penalty amount after departure no show 16798 BDT 49. Reissue/Refund maximum penalty amount for the ticket after departure no show 16798 BDT 50. Part of rule is free form text from Cat16? Not allowed 51. Reissue/Refund before departure allowed? Allowed with restrictions 52. Reissue/Refund before departure when no show allowed? Allowed with restrictions 53. Reissue/Refund after departure allowed? Allowed with restrictions 54. Reissue/Refund after departure when no show allowed? Allowed with restrictions
+                                                                1. Reissue/Refund minimum penalty amount before
+                                                                departure 0 BDT 2. Reissue/Refund maximum penalty amount
+                                                                before departure 5999 BDT
+                                                                3. Reissue/Refund maximum penalty amount for the ticket
+                                                                before departure 9599 BDT
+                                                                4. Revalidation minimum penalty amount before departure
+                                                                0 BDT
+                                                                5. Revalidation maximum penalty amount before departure
+                                                                0 BDT
+                                                                6. Revalidation maximum penalty amount for the ticket
+                                                                before departure 0 BDT 7. Reissue/Refund minimum penalty
+                                                                amount before departure no show 5999 BDT 8.
+                                                                Reissue/Refund maximum penalty amount before departure
+                                                                no show 5999 BDT 9. Reissue/Refund maximum penalty
+                                                                amount for the ticket before departure no show 9599 BDT
+                                                                10. Revalidation minimum penalty amount before departure
+                                                                no show 0 BDT 11. Revalidation maximum penalty amount
+                                                                before departure no show 0 BDT 12. Revalidation maximum
+                                                                penalty amount for the ticket before departure no show 0
+                                                                BDT 13. Reissue/Refund minimum penalty amount after
+                                                                departure 0 BDT 14. Reissue/Refund maximum penalty
+                                                                amount with sale currency 5999 BDT 15. Reissue/Refund
+                                                                maximum penalty amount for the ticket after departure
+                                                                9599 BDT 16. Revalidation minimum penalty amount after
+                                                                departure 0 BDT 17. Revalidation maximum penalty amount
+                                                                after departure 0 BDT 18. Revalidation maximum penalty
+                                                                amount for the ticket after departure 0 BDT 19.
+                                                                Reissue/Refund minimum penalty amount after departure no
+                                                                show 5999 BDT 20. Reissue/Refund maximum penalty amount
+                                                                after departure no show 5999 BDT 21. Reissue/Refund
+                                                                maximum penalty amount for the ticket after departure no
+                                                                show 9599 BDT 22. Revalidation minimum penalty amount
+                                                                after departure no show 0 BDT 23. Revalidation maximum
+                                                                penalty amount after departure no show 0 BDT 24.
+                                                                Revalidation maximum penalty amount for the ticket after
+                                                                departure no show 0 BDT 25. Part of rule is free form
+                                                                text from Cat16? Not allowed 26. Reissue penalties can
+                                                                be waived for passenger and family death/illness before
+                                                                departure? Not allowed 27. Revalidation before departure
+                                                                is allowed? Not allowed 28. Reissue/Refund before
+                                                                departure allowed? Allowed with restrictions 29. Reissue
+                                                                penalties can be waived for passenger and family
+                                                                death/illness for before departure no show? Not allowed
+                                                                30. Revalidation before departure when no show is
+                                                                allowed? Not allowed 31. Reissue/Refund before departure
+                                                                when no show allowed? Allowed with restrictions 32.
+                                                                Reissue penalties can be waived for passenger and family
+                                                                death/illness after departure? Not allowed 33.
+                                                                Revalidation after departure is allowed? Not allowed 34.
+                                                                Reissue/Refund after departure allowed? Allowed with
+                                                                restrictions 35. Reissue penalties can be waived for
+                                                                passenger and family death/illness after departure no
+                                                                show? Not allowed 36. Revalidation after departure when
+                                                                no show is allowed? Not allowed 37. Reissue/Refund after
+                                                                departure when no show allowed? Allowed with
+                                                                restrictions 38. Reissue/Refund minimum penalty amount
+                                                                before departure 11998 BDT 39. Reissue/Refund maximum
+                                                                penalty amount before departure 16798 BDT 40.
+                                                                Reissue/Refund maximum penalty amount for the ticket
+                                                                before departure 16798 BDT 41. Reissue/Refund minimum
+                                                                penalty amount before departure no show 11998 BDT 42.
+                                                                Reissue/Refund maximum penalty amount before departure
+                                                                no show 16798 BDT 43. Reissue/Refund maximum penalty
+                                                                amount for the ticket before departure no show 16798 BDT
+                                                                44. Reissue/Refund minimum penalty amount after
+                                                                departure 11998 BDT 45. Reissue/Refund maximum penalty
+                                                                amount with sale currency 16798 BDT 46. Reissue/Refund
+                                                                maximum penalty amount for the ticket after departure
+                                                                16798 BDT 47. Reissue/Refund minimum penalty amount
+                                                                after departure no show 11998 BDT 48. Reissue/Refund
+                                                                maximum penalty amount after departure no show 16798 BDT
+                                                                49. Reissue/Refund maximum penalty amount for the ticket
+                                                                after departure no show 16798 BDT 50. Part of rule is
+                                                                free form text from Cat16? Not allowed 51.
+                                                                Reissue/Refund before departure allowed? Allowed with
+                                                                restrictions 52. Reissue/Refund before departure when no
+                                                                show allowed? Allowed with restrictions 53.
+                                                                Reissue/Refund after departure allowed? Allowed with
+                                                                restrictions 54. Reissue/Refund after departure when no
+                                                                show allowed? Allowed with restrictions
                                                             </span>
                                                         </div>
 
@@ -1319,16 +1472,30 @@ function offHover() {
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <p class="text-start fw-bold">Max Stay</p>
-                                                            <span>Maximum stay none for economy unrestricted fares.</span>
+                                                            <span>Maximum stay none for economy unrestricted
+                                                                fares.</span>
                                                         </div>
                                                         <div class="col-md-12 mt-2">
                                                             <p class="text-start fw-bold pt-0 mt-0">Layover</p>
-                                                            <span>Stopovers for economy unrestricted fares unlimited stopovers permitted.</span>
+                                                            <span>Stopovers for economy unrestricted fares unlimited
+                                                                stopovers permitted.</span>
                                                         </div>
                                                         <div class="col-md-12 mt-2">
                                                             <p class="text-start fw-bold pt-0 mt-0">Combinations</p>
                                                             <span>
-                                                                Permitted combinations fares may be combined on a half round trip basis with any fare for any carrier in any rule and tariff to form round trips/circle trips. End-one-end permitted. Validate all fare component. Travel must be via construction point. Add-ons permitted. Open jaws fares may be combined on a half round trip basis with any fare for any carrier in any rule and tariff to form single or double open jaws. A maximum of 2 international fare components permitted. Mileage of an international open segment must be equal to/less than mileage of the shortest flown fare component. No mileage restriction on an open segment within one country.
+                                                                Permitted combinations fares may be combined on a half
+                                                                round trip basis with any fare for any carrier in any
+                                                                rule and tariff to form round trips/circle trips.
+                                                                End-one-end permitted. Validate all fare component.
+                                                                Travel must be via construction point. Add-ons
+                                                                permitted. Open jaws fares may be combined on a half
+                                                                round trip basis with any fare for any carrier in any
+                                                                rule and tariff to form single or double open jaws. A
+                                                                maximum of 2 international fare components permitted.
+                                                                Mileage of an international open segment must be equal
+                                                                to/less than mileage of the shortest flown fare
+                                                                component. No mileage restriction on an open segment
+                                                                within one country.
                                                             </span>
                                                         </div>
                                                     </div>
@@ -1354,7 +1521,8 @@ function offHover() {
                                                         <div class="accordion-body">
                                                             <div class="card">
                                                                 <div class="card-body">
-                                                                    <div class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                    <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
                                                                         <span class="custom-text-purple">
                                                                             Base Fare
                                                                         </span>
@@ -1379,7 +1547,8 @@ function offHover() {
                                                                         </table>
                                                                     </div>
 
-                                                                    <div class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                    <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
                                                                         <span class="custom-text-purple">
                                                                             TAX
                                                                         </span>
@@ -1404,7 +1573,8 @@ function offHover() {
                                                                         </table>
                                                                     </div>
 
-                                                                    <div class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                    <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
                                                                         <span class="custom-text-purple">
                                                                             AIT
                                                                         </span>
@@ -1429,7 +1599,8 @@ function offHover() {
                                                                         </table>
                                                                     </div>
 
-                                                                    <div class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                    <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
                                                                         <span class="custom-text-purple">
                                                                             Service Charge
                                                                         </span>
@@ -2160,8 +2331,84 @@ li.menu-item {
     background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237944eb'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
 }
 
-.fare-summary-bg{
+.fare-summary-bg {
     background: #faf8ff;
 }
 
+
+/* search bar design */
+.placeholder-font-size::placeholder {
+    font-size: 16px;
+    /* Change the font size as needed */
+}
+
+.arrow {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #875ae9;
+    /* Change color as needed */
+    position: absolute;
+    top: -10px;
+    /* Adjust position as needed */
+    left: 50%;
+    /* Center the arrow */
+    transform: translateX(-50%);
+    /* Adjust for the width of the arrow */
+}
+
+.form-control:focus {
+    border-color: #875ae9;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 2px #875ae9;
+}
+
+.search-results-simplebar {
+    .simplebar-track.simplebar-vertical {
+        width: 7px;
+        background: #ffffff;
+        border-radius: 4px;
+    }
+
+    .simplebar-scrollbar::before {
+        background: linear-gradient(45deg, #1e0aca, #96048a);
+        border-radius: 4px;
+        opacity: 0.5;
+    }
+
+    .simplebar-scrollbar.simplebar-visible::before {
+        opacity: 0.7;
+    }
+}
+
+.simplebar-content {
+    padding-right: 2px !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#origin_results {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.clear-icon {
+    position: absolute;
+    right: 10px;
+    top: 45%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 12px;
+    color: #875ae9;
+}
 </style>

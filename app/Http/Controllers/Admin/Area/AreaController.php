@@ -160,14 +160,7 @@ class AreaController extends BaseController
 
     public function airports(Request $request)
     {
-        $airp = DB::table('airports')
-            // ->orWhere('Country_name', 'like', '%' . $request->q . '%')
-            // ->orWhere('City_name', 'like', '%' . $request->q . '%')
-            // ->orWhere('code', 'like', '%' . $request->q . '%')
-            // ->orWhere('Airport_Name', 'like', '%' . $request->q . '%')
-            ->select(['City_name', 'code', 'Airport_Name', 'Country_name'])
-            // ->take(50)
-            ->get();
+        $airp = DB::table('airports')->get();
         return response()->json($airp);
     }
 

@@ -12,7 +12,7 @@ use App\Http\Controllers\BaseController;
 class APIController extends BaseController {
 
     public function Lowfaresearch( Request $request ) {
-
+        dd($request->all());
         $validator = validator( $request->all(), [
             'from' => 'required',
             'to' => 'required',
