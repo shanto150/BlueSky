@@ -41,6 +41,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/getAgentApprovalLog', [AgentController::class, 'getAgentApprovalLog'])->name('agent.getAgentApprovalLog');
     Route::post('/agentRecomendation/update', [AgentController::class, 'agentRecomendation'])->name('agent.agentRecomendation');
 
+    Route::post('/agentApproval/update', [AgentController::class, 'agentApproval'])->name('agent.agentApproval');
+
     // area
     Route::get('getarea', [AreaController::class, 'index'])->name('area.index');
     Route::get('divisions', [AreaController::class, 'divisionsList']);
