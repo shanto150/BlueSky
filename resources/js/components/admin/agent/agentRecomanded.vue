@@ -210,7 +210,7 @@ async function update(props) {
                     <div class="d-flex flex-column align-items-center text-center">
                         <img v-if="previewImage" :src="previewImage" height="60" width="60"
                             class="border border-1 rounded rounded-2" alt="Profile Picture">
-                        <img v-else src="../../../.../../../../../public/theme/appimages/Plane_origin.svg" height="60"
+                        <img v-else src="../../../../../public/theme/appimages/Plane_origin.svg" height="60"
                             width="60" class="border border-1 rounded rounded-2" alt="Profile Picture">
                         <div class="mt-3">
                             <h4 class="agency_name"></h4>
