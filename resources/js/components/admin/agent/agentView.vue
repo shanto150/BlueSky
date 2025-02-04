@@ -373,7 +373,6 @@ async function getAgentApprovalLog(props) {
                     <div class="card">
                         <div class="card-header">
                             <h5 class="m-0 p-0"> &nbsp; Recommendeation</h5>
-
                         </div>
                         <div class="card-body">
                             <span id="agent_recommended"></span>
@@ -384,10 +383,9 @@ async function getAgentApprovalLog(props) {
                     <div class="card">
                         <div class="card-header">
                             <h5 class="m-0 p-0"> &nbsp; Approval</h5>
-
                         </div>
                         <div class="card-body">
-                            <span id="agent_approved">-</span>
+                            <span id="agent_approved"></span>
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ import moment from "moment";
 const props = defineProps(['ids']);
 const previewImage = ref('');
 const form = reactive({
-    note: '', status: '', approver: '', agent_id: "", useEmail: useAuthStore().email
+    note: '', status: '', agent_id: "", useEmail: useAuthStore().email
 });
 
 
@@ -127,40 +127,6 @@ async function getAgentAllImage(props) {
     }
 }
 
-getApprover();
-
-async function getApprover() {
-    try {
-        const response = await axiosInstance.get('getKam');
-        var options = [];
-        $.each(response.data, function (key, value) {
-            var obj = { id: value.id, text: value.name }
-            options.push(obj);
-        });
-
-        $("#approver").select2({
-            placeholder: '=Select=',
-            theme: 'bootstrap-5',
-            width: '100%',
-            allowClear: true,
-            height: '50',
-            data: options,
-            tags: true,
-            templateResult: function (state) {
-                if (!state.id) {
-                    return state.text;
-                }
-                var $state = $('<div class="clearfix"><div class="float-start">' + state.text + '</div></div>');
-                return $state;
-            }
-        });
-        $('#approver').prepend('<option selected=""></option>');
-
-    } catch (error) {
-        // console.log(error);
-
-    }
-}
 
 getAgentApprovalLog(props.ids);
 
@@ -185,17 +151,19 @@ async function getAgentApprovalLog(props) {
 
 onMounted(() => {
     $("#status").on('change', function () {
-        form.status_val = $(this).val();
+        form.status = $(this).val();
     });
-    $("#approver").on('change', function () {
-        form.approver = $(this).val();
-    });
+    // $("#approver").on('change', function () {
+    //     form.approver = $(this).val();
+    // });
 });
 
 async function update(props) {
     form.agent_id = props.ids;
+    console.log(form);
+
     try {
-        const response = await axiosInstance.post("/agentRecomendation/update", form);
+        const response = await axiosInstance.post("/agentApproval/update", form);
 
         Notification.showToast('s', response.data.message);
 
@@ -444,38 +412,41 @@ async function update(props) {
         </div>
 
         <div class="col-lg-3">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="m-0 p-0" style="border-left: 5px solid #00d54a;"> &nbsp; Approval</h5>
+            <form id="addApprovalForm">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="m-0 p-0" style="border-left: 5px solid #00d54a;"> &nbsp; Approval</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="Kam" class="form-label">Status</label><select class="form-select form-select-sm" v-model="form.status"
+                                    id="status"  aria-label="Default select example">
+                                    <option value="Approved" selected>Approved</option>
+                                    <option value="Decline">Decline</option>
+                                </select>
+                            </div>
 
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label for="Kam" class="form-label">Status</label><select class="form-select form-select-sm"
-                                id="city" aria-label="Default select example">
-                                <option>Approved</option>
-                            </select>
+                            <div class="col-md-12 mt-2">
+                                <label for="date" class="form-label">Note</label>
+
+                                <textarea v-model="form.note" class="form-control form-control-sm" name="note" id="note"></textarea>
+                            </div>
+
+
+
                         </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-block">
+                            <button class="btn btn-sm btn-outline-danger float-left">Cancel</button>
 
-                        <div class="col-md-12 mt-2">
-                            <label for="date" class="form-label">Note</label>
-
-                            <textarea class="form-control form-control-sm" name="note" id="note"></textarea>
+                            <button type="button" @click="update(props)" class="btn btn-sm btn-outline-primary float-end">Submit</button>
                         </div>
-
-
-
                     </div>
                 </div>
-                <div class="card-footer">
-                    <div class="d-block">
-                        <button class="btn btn-sm btn-outline-danger float-left">Cancel</button>
+            </form>
 
-                        <button class="btn btn-sm btn-outline-primary float-end">Submit</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </template>

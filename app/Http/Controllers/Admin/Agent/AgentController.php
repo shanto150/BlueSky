@@ -76,6 +76,26 @@ class AgentController extends BaseController
 
     }
 
+    public function agentApproval(Request $request)
+    {
+        // dd($request->all());
+        $agent = Agent::where('id', $request->agent_id)->first();
+        $agent->status = $request->status;
+        $agent->save();
+
+        $agent_approver_log = new AgentApprovalLog;
+        $agent_approver_log->agent_id = $request->agent_id;
+        $agent_approver_log->status = $request->status;
+        $agent_approver_log->remarks = $request->note;
+        $agent_approver_log->approver_id = auth()->user()->id;
+        $agent_approver_log->created_by = auth()->user()->id;
+        $agent_approver_log->save();
+        $success = '';
+
+        return $this->SuccessResponse($success, 'Successfully Agent Saved.');
+
+    }
+
     public function AgentAllImage(Request $request)
     {
         $data = AgentImage::where('agent_id', $request->id)->get();

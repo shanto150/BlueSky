@@ -426,9 +426,10 @@ async function update(props) {
                                 <label for="status" class="form-label">Status</label><select
                                     class="form-select form-select-sm" v-model="form.status" id="status"
                                     aria-label="Default select example">
-                                    <option value="Recommended">Recommended</option>
+                                    <option value="Recommended" selected>Recommended</option>
                                     <option value="Hold">Hold</option>
-                                    <option value="Cancel">Cancel</option>
+                                    <option value="Decline">Decline</option>
+
                                 </select>
                             </div>
 
