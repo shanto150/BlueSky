@@ -163,7 +163,7 @@ const options = {
                 var html = "";
 
                 if (row.status == 'Approved') {
-                    html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Active </div>';
+                    html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Approved </div>';
                 } else if (row.status == 'Pending') {
                     html += '<div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Pending </div>';
                 } else if (row.status == 'Recommended') {
