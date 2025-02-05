@@ -75,6 +75,11 @@ onMounted(() => {
                                 <i class='bx bx-paper-plane'></i> Search
                             </router-link>
                         </li>
+                        <li>
+                            <router-link v-wave :to="{ name: 'searchResult' }">
+                                <i class='bx bx-paper-plane'></i> Search Result
+                            </router-link>
+                        </li>
 
                         <li>
                             <router-link v-wave :to="{ name: 'flightSearch' }">
