@@ -26,12 +26,9 @@ const isRounded = 'oneway';
 const tdate = ref();
 
 const format = (fdate) => {
-
     const day = fdate.getDate();
     const month = fdate.getMonth() + 1;
     const year = fdate.getFullYear();
-
-    // return `${day}/${month}/${year}`;
     const date = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
     form.dep_date = date;
     return date;
@@ -61,16 +58,12 @@ const formats = (fdates) => {
     return date;
 }
 
-
-
-
 const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '', ADT: 1, CNN: '', KID: '', INF: '' });
 
 async function Lowfaresearch() {
     try {
         const response = await axiosInstance.post("Lowfaresearch", form);
         Notification.showToast("s", response.data.message);
-        console.log(response);
     } catch (error) {
         console.log(error);
     }
@@ -86,7 +79,6 @@ function tourTypeChange(type) {
         $('.one-way').removeClass('bg-checkbox');
         $('.round-way').addClass('bg-checkbox');
         $('.multi-city').addClass('bg-checkbox');
-
         $('#toDateChange').addClass('d-none');
         this.isAutoApply = !this.isAutoApply;
         this.isMultiCalendar = !this.isMultiCalendar;
@@ -123,6 +115,7 @@ function tourTypeChange(type) {
 }
 
 onMounted(() => {
+    form.Way = 1;
     getAirports();
     document.addEventListener("click", handleClickOutside);
 
