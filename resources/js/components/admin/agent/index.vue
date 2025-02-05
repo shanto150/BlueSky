@@ -28,27 +28,25 @@ const options = {
         {
             extend: 'excel',
             text: '<i class="fa fa-file-excel"></i> Excel',
-            title: 'Agent_list',
+            title: 'Agents List',
             messageTop: function () {
-                return 'Agent List';
-
+                return 'Agents List';
             },
             className: 'btn btn-danger btn-sm text-white',
             exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 10]
+                columns: [1,2,3,4,5,6,7,10],
             }
         },
         {
             extend: 'csv',
             text: '<i class="fa fa-file-csv"></i> CSV',
-            title: 'Agent_list',
+            title: 'Agents List',
             messageTop: function () {
-
-                return 'Agent List';
+                return 'Agents List';
             },
             className: 'btn btn-info btn-sm text-white',
             exportOptions: {
-                columns: [1, 2, 3, 4, 5, 6, 7, 10]
+                columns: [1,2,3,4,5,6,7,10],
             }
         }
     ],
@@ -189,11 +187,11 @@ const options = {
 
                 html += '<button  style="size: 30px; width: 30px; height: 30px;" class="btn btn-outline-info rounded-circle agent-view" placement="top" data-item-id=' + idd + '> <i class="fa-solid fa-file" style="margin:1px 0px 11px -3px;font-size:14px;"></i> </button>';
 
-                if(status == 'Pending' || status == 'Hold'){
+                if (status == 'Pending' || status == 'Hold') {
 
                     html += '<button  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle agent-recommended" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>';
                 }
-                if(status == 'Recommended'){
+                if (status == 'Recommended') {
 
                     html += '<button  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle agent-approve" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>';
                 }
