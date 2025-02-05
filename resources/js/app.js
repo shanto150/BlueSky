@@ -10,7 +10,8 @@ import "./themeassets/js/app.js";
 import "https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js";
 import "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js";
 
-
+import jQuery from 'jquery';
+window.jQuery = window.$ = jQuery;
 
 
 import { createApp, markRaw } from "vue";
