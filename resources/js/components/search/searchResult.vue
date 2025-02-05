@@ -752,7 +752,7 @@ function offHover() {
                         </div>
                         <div class="col-md-2">
                             <VueDatePicker v-model="tdate" placeholder="Select Date" :enable-time-picker="false"
-                                :format="tformat"></VueDatePicker>
+                                :format="format"></VueDatePicker>
                         </div>
 
 
