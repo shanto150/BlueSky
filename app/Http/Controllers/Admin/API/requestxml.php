@@ -37,7 +37,28 @@ class RequestXML {
                 </SearchAirLeg>';
     }
 
-    private function getCommonElements() {
+    private function buildSearchPassengers(Request $request) {
+        $passengers = '';
+
+        if ($request->ADT > 0) {
+            $passengers .= '<SearchPassenger xmlns="http://www.travelport.com/schema/common_v52_0"
+                Code="ADT" BookingTravelerRef="ADT_0"/>';
+        }
+
+        if (($request->CNN && $request->CNN > 0) || ($request->KID && $request->KID > 0)) {
+            $passengers .= '<SearchPassenger xmlns="http://www.travelport.com/schema/common_v52_0"
+                Code="CNN" Age="8" BookingTravelerRef="CNN_0"/>';
+        }
+
+        if ($request->INF > 0) {
+            $passengers .= '<SearchPassenger xmlns="http://www.travelport.com/schema/common_v52_0"
+                Code="INF" Age="1" BookingTravelerRef="INF_0"/>';
+        }
+
+        return $passengers;
+    }
+
+    private function getCommonElements(Request $request) {
         return '<AirSearchModifiers>
                     <PreferredProviders>
                         <Provider xmlns="http://www.travelport.com/schema/common_v52_0" Code="'.self::PROVIDER_CODE.'"/>
@@ -45,11 +66,9 @@ class RequestXML {
                     <PreferredCabins>
                         <CabinClass xmlns="http://www.travelport.com/schema/common_v52_0" Type="'.self::CABIN_TYPE.'"/>
                     </PreferredCabins>
-                </AirSearchModifiers>
-                <SearchPassenger xmlns="http://www.travelport.com/schema/common_v52_0" Code="ADT" BookingTravelerRef="ADT_0"/>
-                <SearchPassenger xmlns="http://www.travelport.com/schema/common_v52_0" Code="CNN" Age="8" BookingTravelerRef="CNN_0"/>
-                <SearchPassenger xmlns="http://www.travelport.com/schema/common_v52_0" Code="INF" Age="1" BookingTravelerRef="INF_0"/>
-                <AirPricingModifiers FaresIndicator="PublicAndPrivateFares"/>';
+                </AirSearchModifiers>'
+                . $this->buildSearchPassengers($request) .
+                '<AirPricingModifiers FaresIndicator="PublicAndPrivateFares"/>';
     }
 
     private function getEnvelopeFooter() {
@@ -64,7 +83,7 @@ class RequestXML {
             $xml .= $this->buildSearchAirLeg($request->to, $request->from, $request->return_date);
         }
 
-        $xml .= $this->getCommonElements();
+        $xml .= $this->getCommonElements($request);
         $xml .= $this->getEnvelopeFooter();
 
         return $xml;
