@@ -161,7 +161,10 @@ class AreaController extends BaseController
     public function airports(Request $request)
     {
         $airp = DB::table('airports')->get();
+<<<<<<< HEAD
         // $inv_items=json_encode($airp);
+=======
+>>>>>>> 5a49c7a2fc204d552611045f1cdcfe9c18f1a9ee
         return response()->json($airp);
 
         // $data = [];

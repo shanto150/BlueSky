@@ -2,13 +2,13 @@
 import DataTable from "datatables.net-vue3";
 import DataBS5 from "datatables.net-bs5";
 import axiosInstance from "../../../axiosInstance";
-import { ref, onMounted } from "vue";
 import { data } from "jquery";
 import { icons } from "lucide-vue-next";
 import { useRouter } from 'vue-router';
 const router = useRouter();
 import { useAuthStore } from '../../../stores/authStore';
 const authStore = useAuthStore();
+import { ref, reactive, onMounted, render } from "vue";
 
 DataTable.use(DataBS5);
 
@@ -24,7 +24,34 @@ const options = {
     ordering: false,
     dom: "<'row'<'col-sm-4'B><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'f>>" + "<'row'<'col-sm-12'tr>>" +
         "<'row justify-content-between Reduct_table_gap'<'d-md-flex justify-content-between align-items-center dt-layout-start col-md-auto me-auto'i><'d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto'p>>",
-    buttons: ['copy', 'csv', 'pdf', 'excel', 'print'],
+    buttons: [
+        {
+            extend: 'excel',
+            text: '<i class="fa fa-file-excel"></i> Excel',
+            title: 'Agent_list',
+            messageTop: function () {
+                return 'Agent List';
+
+            },
+            className: 'btn btn-danger btn-sm text-white',
+            exportOptions: {
+                columns: [1, 2, 3, 4, 5, 6, 7, 10]
+            }
+        },
+        {
+            extend: 'csv',
+            text: '<i class="fa fa-file-csv"></i> CSV',
+            title: 'Agent_list',
+            messageTop: function () {
+
+                return 'Agent List';
+            },
+            className: 'btn btn-info btn-sm text-white',
+            exportOptions: {
+                columns: [1, 2, 3, 4, 5, 6, 7, 10]
+            }
+        }
+    ],
     language: {
         search: "",
         searchPlaceholder: "Search by anything",
@@ -64,13 +91,11 @@ const options = {
                 if (row.hajj_agency_number) {
                     html += '<span class="text-primary">';
 
-                    html += 'Hajj'+ "</span>";
+                    html += 'Hajj' + "</span>";
 
                 } else {
                     html += '<span class="text-primary">';
-
                     html += 'Non-Hajj' + "</span>";
-
                 }
 
                 return html;
@@ -104,11 +129,10 @@ const options = {
             title: "Net Balance",
             data: 'net_balance',
         },
-        {
-            title: "Status",
-            data: 'status',
-        },
-
+        // {
+        //     title: "Status",
+        //     data: 'status',
+        // },
         {
             title: "Created By",
             render: function (data, type, row) {
@@ -121,7 +145,6 @@ const options = {
             },
         },
         {
-
             title: "Updated By",
             render: function (data, type, row) {
                 var html = "";
@@ -140,11 +163,17 @@ const options = {
                 var html = "";
 
                 if (row.status == 'Approved') {
-                    html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Active </div>';
+                    html += '<div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Approved </div>';
                 } else if (row.status == 'Pending') {
                     html += '<div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Pending </div>';
-                }else if (row.status == 'Recommended') {
+                } else if (row.status == 'Recommended') {
                     html += '<div class="badge rounded-pill text-primary bg-light-primary p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Recommended </div>';
+                }
+                else if (row.status == 'Hold') {
+                    html += '<div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Hold </div>';
+                }
+                else if (row.status == 'Decline') {
+                    html += '<div class="badge rounded-pill text-danger bg-light-danger p-2 text-uppercase px-3"><i class="bx bxs-circle me-1"></i>Declined </div>';
                 }
 
                 return html;
@@ -158,28 +187,38 @@ const options = {
                 var idd = row.idd;
                 var status = row.status;
 
-                // html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" data-item-id=' + idd + '> <i class="fa-solid fa-pencil" style="margin: 0px 0px 10px -5px; font-size: 14px;" ></i> </button>';
-                // if (status == 1) {
+                html += '<button  style="size: 30px; width: 30px; height: 30px;" class="btn btn-outline-info rounded-circle agent-view" placement="top" data-item-id=' + idd + '> <i class="fa-solid fa-file" style="margin:1px 0px 11px -3px;font-size:14px;"></i> </button>';
 
-                //     html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-ban rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-ban" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
-                // } else {
-                //     html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle status-change" data-item-id=' + idd + '> <i class="fa-solid fa-check" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
-                // }
+                if(status == 'Pending' || status == 'Hold'){
 
-                // html += '<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id=' + idd + '> <i class="fa-solid fa-trash" style="margin: 2px 0px 10px  -4px; font-size: 14px;"></i> </button>';
-                //if approved
-                html += '<button type="button"  style="size:30px;width:30px;height:30px; margin-left: 5px;" class="btn btn-outline-info rounded-circle"><i class="fa-solid fa-file" style="margin:2px 0px 10px -4px;font-size:14px;"></i></button> <router-link style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle"> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </router-link> <router-link  style="size: 30px; width: 30px; height: 30px;  margin-left: 5px;" class="btn btn-outline-primary rounded-circle" placement="top" > <i class="fa fa-eye" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i> </router-link> <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"  class="btn btn-outline-user-edit rounded-circle mt-2"><i class="fa-solid fa-user-pen"  style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button> <button type="button"  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="mt-2 btn btn-outline-only-edit rounded-circle"> <i class="fa-solid fa-pencil" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>  <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"  class="mt-2 btn btn-outline-action-log rounded-circle">  <i class="fa-solid fa-arrow-trend-up" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i> </button>';
+                    html += '<button  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle agent-recommended" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>';
+                }
+                if(status == 'Recommended'){
+
+                    html += '<button  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle agent-approve" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>';
+                }
+
+
+                // html += '<button type="button"  style="size:30px;width:30px;height:30px; margin-left: 5px;" class="btn btn-outline-info rounded-circle"><i class="fa-solid fa-file" style="margin:2px 0px 10px -4px;font-size:14px;"></i></button> <router-link style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle"> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </router-link> <router-link  style="size: 30px; width: 30px; height: 30px;  margin-left: 5px;" class="btn btn-outline-primary rounded-circle" placement="top" > <i class="fa fa-eye" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i> </router-link> <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"  class="btn btn-outline-user-edit rounded-circle mt-2"><i class="fa-solid fa-user-pen"  style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button> <button type="button"  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="mt-2 btn btn-outline-only-edit rounded-circle"> <i class="fa-solid fa-pencil" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>  <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"  class="mt-2 btn btn-outline-action-log rounded-circle">  <i class="fa-solid fa-arrow-trend-up" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i> </button>';
                 return html;
             },
         }
     ],
     "drawCallback": function (settings) {
         // edit function
-        $(".edit-item").on('click', function (e) {
-
+        $(".agent-approve").on('click', function (e) {
+            var itemIdd = $(this).attr('data-item-id');
+            router.push({ name: 'agentApproved', params: { ids: itemIdd } });
+        });
+        $(".agent-view").on('click', function (e) {
+            var itemIdd = $(this).attr('data-item-id');
+            router.push({ name: 'agentView', params: { ids: itemIdd } });
+        });
+        $(".agent-recommended").on('click', function (e) {
             var itemIdd = $(this).attr('data-item-id');
 
-            router.push({ name: 'zoneEdit', params: { id: itemIdd } });
+            router.push({ name: 'agentRecomanded', params: { ids: itemIdd } });
+
         });
 
         // delete function

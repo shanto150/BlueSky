@@ -77,27 +77,19 @@ onMounted(() => {
                         </li>
 
                         <li>
-                            <router-link v-wave >
-                                <!-- :to="{ name: 'zoneList' }" -->
+                            <router-link v-wave :to="{ name: 'flightSearch' }">
+
                                 <i class='bx bx-paper-plane'></i> Booking & Ticketing
                             </router-link>
                         </li>
                         <li>
-                            <router-link v-wave >
-                                <!-- :to="{ name: 'designationList' }" -->
+                            <router-link v-wave :to="{ name: 'flightSearch' }">
                                 <i class='bx bx-paper-plane'></i> Flight PNR
                             </router-link>
                         </li>
                     </ul>
                 </li>
 
-                <!-- <li>
-                    <router-link v-wave :to="{ name: 'flightSearch' }">
-                        <div class="parent-icon"><i class="bx bx-unite"></i>
-                        </div>
-                        <div class="menu-title">Flight Search</div>
-                    </router-link>
-                </li> -->
                 <li>
                     <router-link v-wave :to="{ name: 'AgentList' }">
                         <div class="parent-icon"><i class="bx bx-unite"></i>
@@ -155,6 +147,16 @@ onMounted(() => {
                         <li>
                             <router-link v-wave :to="{ name: 'offLoc' }">
                                 <i class='bx bx-paper-plane'></i> Office Location
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link v-wave :to="{ name: 'aircraftList' }">
+                                <i class='bx bx-paper-plane'></i> Aircrafts
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link v-wave :to="{ name: 'airlinesList' }">
+                                <i class='bx bx-paper-plane'></i> Airlines
                             </router-link>
                         </li>
 

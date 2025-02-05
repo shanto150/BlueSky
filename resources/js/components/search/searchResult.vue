@@ -1,121 +1,84 @@
 <script setup>
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, onUnmounted, reactive } from "vue";
 import axiosInstance from "../../axiosInstance"
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import CustomMinMaxSlider from "../../components/search/CustomMinMaxSlider.vue";
+import SimpleBar from "simplebar-vue";
+import "simplebar-vue/dist/simplebar.min.css";
+
+const airports = ref([]); // All airports
+const initialLoadLimit = 20; // Limit for init
+const showOriginList = ref(false);
+const showDestinationList = ref(false);
+const filteredOriginAirports = ref([]);
+const filteredDestinationAirports = ref([]);
 
 const fdate = ref();
 const sliderMin = ref(150);
 const sliderMax = ref(180);
+
+const isAutoApply = ref(true);
+const isMultiCalendar = ref(false);
+const isRanges = ref();
+
+const isRounded = 'oneway';
+const tdate = ref();
 
 const format = (fdate) => {
     const day = fdate.getDate();
     const month = fdate.getMonth() + 1;
     const year = fdate.getFullYear();
 
-    return `${day}/${month}/${year}`;
+    // return `${day}/${month}/${year}`;
+    const date = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    form.dep_date = date;
+    return date;
 }
-const tformat = (tdate) => {
-    const day = tdate.getDate();
-    const month = tdate.getMonth() + 1;
-    const year = tdate.getFullYear();
 
-    return `${day}/${month}/${year}`;
-}
-const tdate = ref();
+const formats = (fdates) => {
 
-const form = reactive({ Way: '', from: '', to: "", dep_date: '', ADT: '', CNN: '', INF: '' });
+    const day = fdates[0].getDate();
+    const month = fdates[0].getMonth() + 1;
+    const year = fdates[0].getFullYear();
+    $("#fromdateVal input").val(`${day}/${month}/${year}`);
 
-form.Way = 1;
+    if (fdates[1]) {
 
-async function GenerateXML() {
+        const day2 = fdates[1].getDate();
+        const month2 = fdates[1].getMonth() + 1;
+        const year2 = fdates[1].getFullYear();
+        $("#todateVal input").val(`${day2}-${month2}-${year2}`);
+        const date2 = `${year2}-${String(month2).padStart(2, "0")}-${String(day2).padStart(2, "0")}`;
 
-    var html = "";
-    html += '<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">';
-    html += '<s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">';
-    html += '<LowFareSearchReq xmlns="http://www.travelport.com/schema/air_v52_0" TraceId="c8f38268-3b70-4141-869d-010611bc23e5" TargetBranch="P7186658" SolutionResult="true" ReturnUpsellFare="true">';
-    html += '<BillingPointOfSaleInfo xmlns="http://www.travelport.com/schema/common_v52_0" OriginApplication="UAPI"/>';
-    if (form.Way == 1) {
-        html += '<SearchAirLeg>';
-        html += '<SearchOrigin>';
-        html += '<CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="' + form.from + '" PreferCity="true"/>';
-        html += '</SearchOrigin>';
-        html += '<SearchDestination>';
-        html += '<CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="' + form.to + '" PreferCity="true"/>';
-        html += '</SearchDestination>';
-        html += '<SearchDepTime PreferredTime="' + form.dep_date + '"/>';
-        html += '</SearchAirLeg>';
-    } else {
-        html += '<SearchAirLeg>';
-        html += '<SearchOrigin>';
-        html += '<CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="DAC" PreferCity="true"/>';
-        html += '</SearchOrigin>';
-        html += '<SearchDestination>';
-        html += '<CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="DAC" PreferCity="true"/>';
-        html += '</SearchDestination>';
-        html += '<SearchDepTime PreferredTime="2023-08-08"/>';
-        html += '</SearchAirLeg>';
-
-        html += '<SearchAirLeg>';
-        html += '<SearchOrigin>';
-        html += '<CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="DAC" PreferCity="true"/>';
-        html += '</SearchOrigin>';
-        html += '<SearchDestination>';
-        html += '<CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0" Code="DAC" PreferCity="true"/>';
-        html += '</SearchDestination>';
-        html += '<SearchDepTime PreferredTime="2023-08-08"/>';
-        html += '</SearchAirLeg>';
+        form.arrival_date = date2;
     }
 
-    html += '<AirSearchModifiers>';
-    html += '<PreferredProviders>';
-    html += '<Provider xmlns="http://www.travelport.com/schema/common_v52_0" Code="1G"/>';
-    html += '</PreferredProviders>';
-
-    html += '<PreferredCabins>';
-    html += '<CabinClass xmlns="http://www.travelport.com/schema/common_v52_0" Type="Economy"/>';
-    html += '</PreferredCabins>';
-    html += '</AirSearchModifiers>';
-
-    html += '<SearchPassenger xmlns="http://www.travelport.com/schema/common_v52_0" Code="ADT" BookingTravelerRef="ADT_0"/>';
-    html += '<AirPricingModifiers FaresIndicator="PublicAndPrivateFares"/>';
-
-    html += '</LowFareSearchReq>';
-    html += '</s:Body>';
-    html += '</s:Envelope>';
-
-    return html;
+    // return `${day}/${month}/${year}`;
+    const date = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    form.dep_date = date;
+    return date;
 }
 
-async function SendAPIRequest() {
 
-    // 'Access-Control-Allow-Origin': 'http://127.0.0.1:8000',
-    //'Access-Control-Allow-Methods': '*',
-    //'Access-Control-Allow-Credentials': 'true',
-    //'Access-Control-Allow-Headers': '*',
-    //'Access-Control-Expose-Headers': '*',
 
-    const reqxml = await GenerateXML();
-    axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-    axios.post('http://apac.universal-api.pp.travelport.com/B2BGateway/connect/uAPI/AirService',
-        reqxml,
-        {
-            headers: {
-                'Content-Type': 'text/xml',
-            },
-            auth: {
-                'username': "Universal API/uAPI1974892322-0c5d2a63",
-                'password': "Pi2-3$fB+j"
-            }
-        }).then(res => {
-            console.log(res.data);
-        }).catch(err => { console.log(err) });
+
+const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '', ADT: 1, CNN: '', KID: '', INF: '' });
+
+async function Lowfaresearch() {
+    try {
+        const response = await axiosInstance.post("Lowfaresearch", form);
+        Notification.showToast("s", response.data.message);
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-function changeType(type) {
+function tourTypeChange(type) {
 
     if (type == 1) {
+        form.Way = 1;
         $('.one-way').addClass('bg-checkbox-active');
         $('.round-way').removeClass('bg-checkbox-active');
         $('.multi-city').removeClass('bg-checkbox-active');
@@ -123,6 +86,7 @@ function changeType(type) {
         $('.round-way').addClass('bg-checkbox');
         $('.multi-city').addClass('bg-checkbox');
     } else if (type == 2) {
+        form.Way = 2;
         $('.one-way').removeClass('bg-checkbox-active');
         $('.round-way').addClass('bg-checkbox-active');
         $('.multi-city').removeClass('bg-checkbox-active');
@@ -130,6 +94,7 @@ function changeType(type) {
         $('.one-way').addClass('bg-checkbox');
         $('.multi-city').addClass('bg-checkbox');
     } else {
+        form.Way = 3;
         $('.one-way').removeClass('bg-checkbox-active');
         $('.round-way').removeClass('bg-checkbox-active');
         $('.multi-city').addClass('bg-checkbox-active');
@@ -142,94 +107,135 @@ function changeType(type) {
 }
 
 onMounted(() => {
-    $("#origin_id").select2({
-        placeholder: '=Select=',
-        theme: 'bootstrap-5',
-        width: '100%',
-        allowClear: true,
-        height: '50',
-    });
+    getAirports();
+    document.addEventListener("click", handleClickOutside);
 
-    $(".select2C").select2({
-        theme: 'bootstrap-5',
-        width: '100%',
-        height: '50',
-        width: 'element'
-    });
+    const updateTotalPassengers = () => {
+        const totalAdult = parseInt($(".adult").val());
+        const totalChild = parseInt($(".child").val());
+        const totalKids = parseInt($(".kids").val());
+        const totalInfant = parseInt($(".infant").val());
+
+        form.ADT = totalAdult;
+        form.CNN = totalChild;
+        form.KID = totalKids;
+        form.INF = totalInfant;
+        $(".total_pass").html(totalAdult + totalChild + totalKids + totalInfant);
+    };
+
+    const updatePassengerCount = (selector, increment, min, max) => {
+        $(selector).on('click', function () {
+            const input = $(this).siblings('input');
+            let count = parseInt(input.val());
+            count = increment ? Math.min(count + 1, max) : Math.max(count - 1, min);
+            input.val(count);
+            updateTotalPassengers();
+        });
+    };
+
+    // Adult section
+    updatePassengerCount('.adult-left-minus', false, 1, 9);
+    updatePassengerCount('.adult-right-plus', true, 1, 9);
+
+    // Child section
+    updatePassengerCount('.child-left-minus', false, 0, 4);
+    updatePassengerCount('.child-right-plus', true, 0, 4);
+
+    // Kids section
+    updatePassengerCount('.kids-left-minus', false, 0, 4);
+    updatePassengerCount('.kids-right-plus', true, 0, 4);
+
+    // Infant section
+    updatePassengerCount('.infant-left-minus', false, 0, 4);
+    updatePassengerCount('.infant-right-plus', true, 0, 4);
 });
-getAirports();
 
-function formatState(state) {
-    if (!state.id) {
-        return state.text;
-    }
-    var $state = $('<div class="row"> <div class="col-md-2" style="border-right:1px solid #9e56ef"><b style="font-size:12px">' + state.id + '</b></div> <div class="col-md-8" style="font-size:13px; padding-top:3px">' + state.text + ',' + state.city + '</div></div>');
-
-    return $state;
-};
+onUnmounted(() => {
+    document.removeEventListener("click", handleClickOutside);
+});
 
 async function getAirports() {
-
     try {
-        const response = await axiosInstance.get('airports');
-        var getDatas = [];
-        $.each(response.data, function (key, value) {
-            var obj = { id: value.code, text: value.Airport_Name, city: value.City_name }
-            getDatas.push(obj);
-
-        });
-
-        $("#origin_id").select2({
-            placeholder: '=Select=',
-            theme: 'bootstrap-5',
-            width: '100%',
-            // allowClear: true,
-            tags: true,
-            height: '50',
-            data: getDatas,
-            templateResult: function (state) {
-                if (!state.id) {
-                    return state.text;
-                }
-                var $state = $('<div class="row"> <div class="col-md-2" style="border-right:1px solid #9e56ef"><b style="font-size:12px">' + state.id + '</b></div> <div class="col-md-8" style="font-size:13px;">' + state.text + ',' + state.city + '</div></div>');
-
-                return $state;
-            },
-            templateSelection: formatState,
-
-
-        }).on('change', function (e) {
-
-        });;
-
-        $('#origin_id').prepend('<option selected=""></option>');
-
-        $("#destination_id").select2({
-            placeholder: '=Select=',
-            theme: 'bootstrap-5',
-            width: '100%',
-            // allowClear: true,
-            tags: true,
-            height: '50',
-            data: getDatas,
-            templateResult: function (state) {
-                if (!state.id) {
-                    return state.text;
-                }
-                var $state = $('<div class="row"> <div class="col-md-2" style="border-right:1px solid #9e56ef"><b style="font-size:12px">' + state.id + '</b></div> <div class="col-md-8" style="font-size:13px;">' + state.text + ',' + state.city + '</div></div>');
-
-                return $state;
-            },
-            templateSelection: formatState,
-        });
-
-        $('#destination_id').prepend('<option selected=""></option>');
-
-
+        const response = await axiosInstance.get("airports");
+        airports.value = response.data.map((value) => ({
+            id: value.code,
+            text: value.Airport_Name,
+            city: value.City_name,
+        }));
     } catch (error) {
-        // console.log(error);
-
+        console.error("Error fetching airports:", error);
     }
+}
+
+function handleClickOutside(event) {
+    const originInput = document.getElementById("origin_id");
+    const originResults = document.getElementById("origin_results");
+    const destinationInput = document.getElementById("destination_id");
+    const destinationResults = document.getElementById("destination_results");
+
+    if (!originInput?.contains(event.target) && !originResults?.contains(event.target)) {
+        showOriginList.value = false;
+    }
+
+    if (
+        !destinationInput?.contains(event.target) &&
+        !destinationResults?.contains(event.target)
+    ) {
+        showDestinationList.value = false;
+    }
+}
+
+// Generalized filtering function
+function filterAirports(searchText, airports) {
+    if (!searchText) {
+        return airports.slice(0, initialLoadLimit);
+    }
+    const search = searchText.toLowerCase();
+    return airports.filter(
+        (airport) =>
+            airport.id.toLowerCase().includes(search) ||
+            airport.text.toLowerCase().includes(search) ||
+            airport.city.toLowerCase().includes(search)
+    );
+}
+
+// Update filter functions
+function filterOriginAirports(searchText) {
+    filteredOriginAirports.value = filterAirports(searchText, airports.value);
+}
+
+function filterDestinationAirports(searchText) {
+    filteredDestinationAirports.value = filterAirports(searchText, airports.value);
+}
+
+function onOriginFocus() {
+    showOriginList.value = true;
+    filteredOriginAirports.value = airports.value.slice(0, initialLoadLimit);
+}
+
+function onDestinationFocus() {
+    showDestinationList.value = true;
+    filteredDestinationAirports.value = airports.value.slice(0, initialLoadLimit);
+}
+
+function selectOrigin(airport) {
+    form.from = airport.id;
+    showOriginList.value = false;
+}
+
+function selectDestination(airport) {
+    form.to = airport.id;
+    showDestinationList.value = false;
+}
+
+function clearOrigin() {
+    form.from = "";
+    showOriginList.value = false;
+}
+
+function clearDestination() {
+    form.to = "";
+    showDestinationList.value = false;
 }
 
 function onHover() {
@@ -241,34 +247,9 @@ function offHover() {
     $("#img").attr('src', '');
 }
 
-function flight_det_card(type_id){
-    if(type_id==1){
-        $('.baggade').addClass('btn-primary');
-        $('.baggade').removeClass('btn-outline-primary');
-        $('.fare_summary').addClass('btn-outline-primary');
-        $('.fare_summary').removeClass('btn-primary');
-        // $("#baggade").show();
-        $("#fare_summary_details").addClass('d-none');
-        $("#baggade").removeClass('d-none');
-
-
-    }else{
-        $('.baggade').removeClass('btn-primary');
-        $('.baggade').addClass('btn-outline-primary');
-        $('.fare_summary').addClass('btn-primary');
-        $('.fare_summary').removeClass('btn-outline-primary');
-        // $("#baggade").hide();
-        // $("#fare_summary_details").show();
-        $("#baggade").addClass('d-none');
-        $("#fare_summary_details").removeClass('d-none');
-
-    }
-
-}
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-
         <div class="breadcrumb-title pe-3">Settings</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
@@ -383,13 +364,15 @@ function flight_det_card(type_id){
                             </label>
                         </div>
 
-                        <div class="ms-auto">
+                        <!-- in medium screen -->
+                        <div class="ms-auto d-none d-md-block">
                             <div class="row">
-                                <div class="col-md-4 pr-0">
-                                    <div class="input-group mb-3">
-                                        <button class="btn btn-outline-primary dropdown-toggle" type="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
-                                        <ul class="dropdown-menu p-1" style="width: 300px;">
+                                <div class="col-md-4 pt-1 pr-0">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <button class="btn bluesky-btn-outline-primary dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false"><span
+                                                class="total_pass">1</span> Passangers</button>
+                                        <ul class="dropdown-menu p-1" style="width: 300px;" @click.stop>
                                             <table class="table table-sm">
                                                 <tbody>
                                                     <tr>
@@ -398,7 +381,7 @@ function flight_det_card(type_id){
                                                         <td style="width: 150px;">
                                                             <div class="input-group product-qty">
                                                                 <button type="button"
-                                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                                    class="adult-left-minus btn btn-light rounded-0 rounded-start btn-number"
                                                                     data-type="minus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
@@ -409,11 +392,10 @@ function flight_det_card(type_id){
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
                                                                 </button>
-                                                                <input type="text" name="quantity"
-                                                                    class="form-control input-number quantity"
-                                                                    value="1">
+                                                                <input type="text" name="adult"
+                                                                    class="form-control input-number adult" value="1">
                                                                 <button type="button"
-                                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                                    class="adult-right-plus btn btn-light rounded-0 rounded-end btn-number"
                                                                     data-type="plus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
@@ -436,7 +418,7 @@ function flight_det_card(type_id){
                                                         <td style="width: 150px;">
                                                             <div class="input-group product-qty">
                                                                 <button type="button"
-                                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                                    class="child-left-minus btn btn-light rounded-0 rounded-start btn-number"
                                                                     data-type="minus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
@@ -447,17 +429,16 @@ function flight_det_card(type_id){
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
                                                                 </button>
-                                                                <input type="text" name="quantity"
-                                                                    class="form-control input-number quantity"
-                                                                    value="1">
+                                                                <input type="text" name="child"
+                                                                    class="form-control input-number child" value="0">
                                                                 <button type="button"
-                                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                                    class="child-right-plus btn btn-light rounded-0 rounded-end btn-number"
                                                                     data-type="plus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-plus-circle text-primary">
+                                                                        class="feather feather-plus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -467,27 +448,62 @@ function flight_det_card(type_id){
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><small>Infant <br><span style="font-size: 8px;">Under 02
-                                                                    Years</span></small></td>
+                                                        <td><small>Kids <br><span style="font-size: 9px;">02 to
+                                                                    Under 5 Years
+                                                                </span></small></td>
                                                         <td style="width: 150px;">
                                                             <div class="input-group product-qty">
                                                                 <button type="button"
-                                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                                    class="kids-left-minus btn btn-light rounded-0 rounded-start btn-number"
                                                                     data-type="minus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-minus-circle text-primary">
+                                                                        class="feather feather-minus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
                                                                 </button>
-                                                                <input type="text" name="quantity"
-                                                                    class="form-control input-number quantity"
-                                                                    value="1">
+                                                                <input type="text" name="kids"
+                                                                    class="form-control input-number kids" value="0">
                                                                 <button type="button"
-                                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                                    class="kids-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                                    data-type="plus">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-plus-circle custom-text-purple">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><small>Infant <br><span style="font-size: 9px;">Under 02
+                                                                    Years</span></small></td>
+                                                        <td style="width: 150px;">
+                                                            <div class="input-group product-qty">
+                                                                <button type="button"
+                                                                    class="infant-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                                    data-type="minus">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-minus-circle custom-text-purple">
+                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                                    </svg>
+                                                                </button>
+                                                                <input type="text" name="infant"
+                                                                    class="form-control input-number infant" value="0">
+                                                                <button type="button"
+                                                                    class="infant-right-plus btn btn-light rounded-0 rounded-end btn-number"
                                                                     data-type="plus">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                         height="24" viewBox="0 0 24 24" fill="none"
@@ -509,8 +525,8 @@ function flight_det_card(type_id){
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 pr-0">
-                                    <select name="" id="class_type" class="form-control select2C">
+                                <div class="col-md-4 p-1">
+                                    <select name="" id="class_type" class="form-control form-control-sm select2">
                                         <option value="" selected>Economy</option>
                                         <option value="">Premium Economy</option>
                                         <option value="">Business Class</option>
@@ -518,8 +534,8 @@ function flight_det_card(type_id){
                                     </select>
                                 </div>
 
-                                <div class="col-md-4 pr-0">
-                                    <select name="" id="pre_airline" class="form-control select2C">
+                                <div class="col-md-4 p-1">
+                                    <select name="" id="pre_airline" class="form-control form-control-sm select2">
                                         <option value="" selected>Prefered Airlines</option>
                                         <option value="">Qatar </option>
                                         <option value="">Saudia</option>
@@ -528,17 +544,206 @@ function flight_det_card(type_id){
                                 </div>
                             </div>
                         </div>
+                        <!-- end in medium  screen -->
                     </div>
 
-                    <div class="row mt-4">
-                        <div class="col-md-3">
-                            <select id="origin_id" name="origin_name" class="form-control form-control-lg origin_name">
+                    <!-- in small screen -->
+                    <div class="row d-sm-block d-md-none mt-2">
+
+                        <button class="col-md-12 btn bluesky-btn-outline-primary dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
+                        <ul class="dropdown-menu p-1" style="width: 300px;">
+                            <table class="table table-sm">
+                                <tbody>
+                                    <tr>
+                                        <td><small> Adult <br> <span style="font-size: 9px;">Above 12
+                                                    Years</span></small></td>
+                                        <td style="width: 150px;">
+                                            <div class="input-group product-qty">
+                                                <button type="button"
+                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                    data-type="minus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-minus-circle custom-text-purple">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" name="quantity"
+                                                    class="form-control input-number quantity" value="1">
+                                                <button type="button"
+                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                    data-type="plus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-plus-circle custom-text-purple">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><small>Children <br><span style="font-size: 9px;">02 to
+                                                    Under 12 Years
+                                                </span></small></td>
+                                        <td style="width: 150px;">
+                                            <div class="input-group product-qty">
+                                                <button type="button"
+                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                    data-type="minus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-minus-circle custom-text-purple">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" name="quantity"
+                                                    class="form-control input-number quantity" value="1">
+                                                <button type="button"
+                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                    data-type="plus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-plus-circle custom-text-purple">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><small>Infant <br><span style="font-size: 9px;">Under 02
+                                                    Years</span></small></td>
+                                        <td style="width: 150px;">
+                                            <div class="input-group product-qty">
+                                                <button type="button"
+                                                    class="quantity-left-minus btn btn-light rounded-0 rounded-start btn-number"
+                                                    data-type="minus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-minus-circle custom-text-purple">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                    </svg>
+                                                </button>
+                                                <input type="text" name="quantity"
+                                                    class="form-control input-number quantity" value="1">
+                                                <button type="button"
+                                                    class="quantity-right-plus btn btn-light rounded-0 rounded-end btn-number"
+                                                    data-type="plus">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-plus-circle custom-text-purple">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ul>
+
+                        <div class="col-md-12 p-1 mt-2">
+                            <select name="" id="class_type" class="form-control form-control-sm">
+                                <option value="" selected>Economy</option>
+                                <option value="">Premium Economy</option>
+                                <option value="">Business Class</option>
+                                <option value="">First Class</option>
                             </select>
                         </div>
-                        <div class="col-md-3">
-                            <select id="destination_id" name="destination_name"
-                                class="form-control form-control destination_name">
+
+                        <div class="col-md-12 p-1 mt-2">
+                            <select name="" id="pre_airline" class="form-control form-control-sm">
+                                <option value="" selected>Prefered Airlines</option>
+                                <option value="">Qatar </option>
+                                <option value="">Saudia</option>
+                                <option value="">Emirates</option>
                             </select>
+                        </div>
+                    </div>
+                    <!-- end in small screen -->
+
+
+                    <div class="row mt-2">
+
+                        <div class="col-md-3 position-relative">
+                            <input id="origin_id" v-model="form.from" name="origin_name"
+                                class="form-control origin_name placeholder-font-size"
+                                @input="filterOriginAirports($event.target.value)" @focus="onOriginFocus"
+                                @click="onOriginFocus" placeholder="City,Airport" autocomplete="off" />
+                            <span v-if="form.from" @click="clearOrigin" class="clear-icon">✖</span>
+                            <div v-if="showOriginList" id="origin_results"
+                                class="position-absolute w-100 mt-2 bg-white border rounded shadow-sm"
+                                style="z-index: 1000; animation: fadeIn 0.5s ease-in-out">
+                                <div class="arrow"></div>
+                                <SimpleBar style="max-height: 300px" class="search-results-simplebar">
+                                    <div v-for="airport in filteredOriginAirports" :key="airport.id"
+                                        class="p-2 cursor-pointer hover:bg-gray-100" @click="selectOrigin(airport)">
+                                        <div class="hstack align-items-center gap-1">
+                                            <div style="width: 50px"
+                                                class="d-flex align-items-center justify-content-center">
+                                                <h6 class="fw-bolder">{{ airport.id }}</h6>
+                                            </div>
+                                            <div class="flex-grow-1 border-start p-2">
+                                                <div class="font-12">{{ airport.text }}</div>
+                                                <div class="small text-muted">{{ airport.city }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-if="filteredOriginAirports.length === 0" class="p-2 text-center text-muted">
+                                        No matching airports found
+                                    </div>
+                                </SimpleBar>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 position-relative">
+                            <input autocomplete="off" id="destination_id" v-model="form.to" name="destination_name"
+                                class="form-control  destination_name placeholder-font-size"
+                                @input="filterDestinationAirports($event.target.value)" @click="onDestinationFocus"
+                                @focus="onDestinationFocus" placeholder="City,Airport" />
+                            <span v-if="form.to" @click="clearDestination" class="clear-icon">✖</span>
+                            <div v-if="showDestinationList" id="destination_results"
+                                class="position-absolute w-100 mt-2 bg-white border border-info bg-info rounded shadow-sm"
+                                style="z-index: 1000; animation: fadeIn 0.5s ease-in-out">
+                                <div class="arrow"></div>
+                                <SimpleBar style="max-height: 300px" class="search-results-simplebar">
+                                    <div v-for="airport in filteredDestinationAirports" :key="airport.id"
+                                        class="p-2 cursor-pointer hover:bg-gray-100"
+                                        @click="selectDestination(airport)">
+                                        <div class="hstack align-items-center gap-1">
+                                            <div style="width: 50px"
+                                                class="d-flex align-items-center justify-content-center">
+                                                <h6 class="fw-bolder">{{ airport.id }}</h6>
+                                            </div>
+                                            <div class="flex-grow-1 border-start p-2">
+                                                <div class="font-12">{{ airport.text }}</div>
+                                                <div class="small text-muted">{{ airport.city }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-if="filteredDestinationAirports.length === 0"
+                                        class="p-2 text-center text-muted">
+                                        No matching airports found
+                                    </div>
+                                </SimpleBar>
+                            </div>
                         </div>
 
                         <div class="col-md-2">
@@ -549,14 +754,23 @@ function flight_det_card(type_id){
                             <VueDatePicker v-model="tdate" placeholder="Select Date" :enable-time-picker="false"
                                 :format="tformat"></VueDatePicker>
                         </div>
-                        <div class="col-md-1">
-                            <router-link :to="{ name: 'searchResult' }">
-                                <button class="btn btn-sm btn-block btn-outline-primary text-center">
-                                    <i class="fa fa-search px-3"></i>
-                                </button>
-                                <!-- <img src="" alt="" style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img"> -->
-                            </router-link>
-                            <!-- <img src="../../../../public/build/assets/s_Hover_State.jpg" alt="" style="width: 53px;"> -->
+
+
+                        <div class="col-md-2 d-none mt-2 mt-md-0" id="toDateChange">
+                            <VueDatePicker v-model="tdate" id="todateVal" placeholder="Select Date"
+                                :enable-time-picker="false">
+                            </VueDatePicker>
+                        </div>
+
+                        <div class="col-md-1 mt-2 mt-md-0">
+                            <!-- <router-link> -->
+                            <img @click="Lowfaresearch()"
+                                src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt=""
+                                class="d-sm-block d-md-none" style="width: 100%;" id="img">
+                            <img @click="Lowfaresearch()" src="../../../../public/theme/appimages/s_With_Icon.jpg"
+                                alt="" style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img"
+                                class="d-none d-md-block">
+                            <!-- </router-link> -->
                         </div>
                     </div>
                 </div>
@@ -1018,7 +1232,7 @@ function flight_det_card(type_id){
                                             <p class="p-0 m-0"><b>02:50 PM</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">03 Jan, Fri</small>
                                             <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
+                                            <small style="font-size: 12px; color: #5e6878;">Arrival</small>
                                         </div>
 
                                     </div>
@@ -1130,159 +1344,407 @@ function flight_det_card(type_id){
                                             </ul>
                                             <div class="tab-content pt-3">
                                                 <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
-                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
-                                                        Nesciunt
-                                                        tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                        cliche
-                                                        tempor, williamsburg carles vegan helvetica. Reprehenderit
-                                                        butcher retro
-                                                        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-                                                        terry
-                                                        richardson ex squid. Aliquip placeat salvia cillum iphone.
-                                                        Seitan
-                                                        aliquip quis cardigan american apparel, butcher voluptate nisi.
-                                                    </p>
-                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
-                                                        Nesciunt
-                                                        tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                        cliche
-                                                        tempor, williamsburg carles vegan helvetica. Reprehenderit
-                                                        butcher retro
-                                                        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-                                                        terry
-                                                        richardson ex squid. Aliquip placeat salvia cillum iphone.
-                                                        Seitan
-                                                        aliquip quis cardigan american apparel, butcher voluptate nisi.
-                                                    </p>
+                                                    <div class="card">
+                                                        <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <b>
+                                                                        <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                            alt="">
+                                                                    </b>
+                                                                    <small><b>Departure</b> from Hazrat Shahjalal
+                                                                        International Airport</small>
+                                                                </div>
+
+                                                                <div class="p-2">Duration: 01 hr 45 min</div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-5 border-end">
+                                                                    <div class="d-flex border-right">
+                                                                        <div class="text-start mt-2">
+                                                                            <p class="p-0 m-0 custom-text-purple">
+                                                                                <b>DAC</b>
+                                                                            </p>
+                                                                            <small
+                                                                                style="font-size: 13px; color: #5e6878;"><b>10:50
+                                                                                    AM | 19 Jan, Thu</b></small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Terminal:2</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Flight
+                                                                                No:78ER457</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Class:Economy</small>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <div class="row">
+                                                                        <div class="col-md-7">
+                                                                            <div class="d-flex border-right">
+                                                                                <div class="text-start mt-2">
+                                                                                    <p
+                                                                                        class="p-0 m-0 custom-text-purple">
+                                                                                        <b>DXB</b>
+                                                                                    </p>
+                                                                                    <small
+                                                                                        style="font-size: 13px; color: #5e6878;"><b>11:55
+                                                                                            AM | 19 Jan,
+                                                                                            Thu</b></small>
+                                                                                    <br>
+                                                                                    <small
+                                                                                        style="font-size: 11px; color: #5e6878;">Terminal:3</small>
+                                                                                    <br>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-5 text-center">
+                                                                            <img height="60" width="100"
+                                                                                src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
+                                                                                alt="">
+                                                                            <p class="mb-0 pb-0">Qatar Airways</p>
+                                                                            <p class="mb-0 pb-0">Boeing 707</p>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-2 p-2 pb-0">
+                                                                <!-- 8px -->
+                                                                <div class="chip chip-sm"
+                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
+                                                                    <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                        src="../../../../public/theme/appimages/location.svg"
+                                                                        alt="">
+
+                                                                    Destination : Dubai Internation Airport
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                                 <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-                                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla
-                                                        single-origin coffee squid. Exercitation +1 labore velit, blog
-                                                        sartorial
-                                                        PBR leggings next level wes anderson artisan four loko
-                                                        farm-to-table
-                                                        craft beer twee. Qui photo booth letterpress, commodo enim craft
-                                                        beer
-                                                        mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo
-                                                        nostrud
-                                                        organic, assumenda labore aesthetic magna delectus mollit.
-                                                        Keytar
-                                                        helvetica VHS salvia yr, vero magna velit sapiente labore
-                                                        stumptown.
-                                                        Vegan fanny pack odio cillum wes anderson 8-bit, sustainable
-                                                        jean shorts
-                                                        beard ut DIY ethical culpa terry richardson biodiesel. Art party
-                                                        scenester stumptown, tumblr butcher vero sint qui sapiente
-                                                        accusamus
-                                                        tattooed echo park.</p>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+
+                                                            <p class="text-start fw-bold">PENALTIES/GENERAL</p>
+                                                            <span>
+                                                                1. Reissue/Refund minimum penalty amount before
+                                                                departure 0 BDT 2. Reissue/Refund maximum penalty amount
+                                                                before departure 5999 BDT
+                                                                3. Reissue/Refund maximum penalty amount for the ticket
+                                                                before departure 9599 BDT
+                                                                4. Revalidation minimum penalty amount before departure
+                                                                0 BDT
+                                                                5. Revalidation maximum penalty amount before departure
+                                                                0 BDT
+                                                                6. Revalidation maximum penalty amount for the ticket
+                                                                before departure 0 BDT 7. Reissue/Refund minimum penalty
+                                                                amount before departure no show 5999 BDT 8.
+                                                                Reissue/Refund maximum penalty amount before departure
+                                                                no show 5999 BDT 9. Reissue/Refund maximum penalty
+                                                                amount for the ticket before departure no show 9599 BDT
+                                                                10. Revalidation minimum penalty amount before departure
+                                                                no show 0 BDT 11. Revalidation maximum penalty amount
+                                                                before departure no show 0 BDT 12. Revalidation maximum
+                                                                penalty amount for the ticket before departure no show 0
+                                                                BDT 13. Reissue/Refund minimum penalty amount after
+                                                                departure 0 BDT 14. Reissue/Refund maximum penalty
+                                                                amount with sale currency 5999 BDT 15. Reissue/Refund
+                                                                maximum penalty amount for the ticket after departure
+                                                                9599 BDT 16. Revalidation minimum penalty amount after
+                                                                departure 0 BDT 17. Revalidation maximum penalty amount
+                                                                after departure 0 BDT 18. Revalidation maximum penalty
+                                                                amount for the ticket after departure 0 BDT 19.
+                                                                Reissue/Refund minimum penalty amount after departure no
+                                                                show 5999 BDT 20. Reissue/Refund maximum penalty amount
+                                                                after departure no show 5999 BDT 21. Reissue/Refund
+                                                                maximum penalty amount for the ticket after departure no
+                                                                show 9599 BDT 22. Revalidation minimum penalty amount
+                                                                after departure no show 0 BDT 23. Revalidation maximum
+                                                                penalty amount after departure no show 0 BDT 24.
+                                                                Revalidation maximum penalty amount for the ticket after
+                                                                departure no show 0 BDT 25. Part of rule is free form
+                                                                text from Cat16? Not allowed 26. Reissue penalties can
+                                                                be waived for passenger and family death/illness before
+                                                                departure? Not allowed 27. Revalidation before departure
+                                                                is allowed? Not allowed 28. Reissue/Refund before
+                                                                departure allowed? Allowed with restrictions 29. Reissue
+                                                                penalties can be waived for passenger and family
+                                                                death/illness for before departure no show? Not allowed
+                                                                30. Revalidation before departure when no show is
+                                                                allowed? Not allowed 31. Reissue/Refund before departure
+                                                                when no show allowed? Allowed with restrictions 32.
+                                                                Reissue penalties can be waived for passenger and family
+                                                                death/illness after departure? Not allowed 33.
+                                                                Revalidation after departure is allowed? Not allowed 34.
+                                                                Reissue/Refund after departure allowed? Allowed with
+                                                                restrictions 35. Reissue penalties can be waived for
+                                                                passenger and family death/illness after departure no
+                                                                show? Not allowed 36. Revalidation after departure when
+                                                                no show is allowed? Not allowed 37. Reissue/Refund after
+                                                                departure when no show allowed? Allowed with
+                                                                restrictions 38. Reissue/Refund minimum penalty amount
+                                                                before departure 11998 BDT 39. Reissue/Refund maximum
+                                                                penalty amount before departure 16798 BDT 40.
+                                                                Reissue/Refund maximum penalty amount for the ticket
+                                                                before departure 16798 BDT 41. Reissue/Refund minimum
+                                                                penalty amount before departure no show 11998 BDT 42.
+                                                                Reissue/Refund maximum penalty amount before departure
+                                                                no show 16798 BDT 43. Reissue/Refund maximum penalty
+                                                                amount for the ticket before departure no show 16798 BDT
+                                                                44. Reissue/Refund minimum penalty amount after
+                                                                departure 11998 BDT 45. Reissue/Refund maximum penalty
+                                                                amount with sale currency 16798 BDT 46. Reissue/Refund
+                                                                maximum penalty amount for the ticket after departure
+                                                                16798 BDT 47. Reissue/Refund minimum penalty amount
+                                                                after departure no show 11998 BDT 48. Reissue/Refund
+                                                                maximum penalty amount after departure no show 16798 BDT
+                                                                49. Reissue/Refund maximum penalty amount for the ticket
+                                                                after departure no show 16798 BDT 50. Part of rule is
+                                                                free form text from Cat16? Not allowed 51.
+                                                                Reissue/Refund before departure allowed? Allowed with
+                                                                restrictions 52. Reissue/Refund before departure when no
+                                                                show allowed? Allowed with restrictions 53.
+                                                                Reissue/Refund after departure allowed? Allowed with
+                                                                restrictions 54. Reissue/Refund after departure when no
+                                                                show allowed? Allowed with restrictions
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="primarycontact" role="tabpanel">
-                                                    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they
-                                                        sold out
-                                                        mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table
-                                                        readymade.
-                                                        Messenger bag gentrify pitchfork tattooed craft beer, iphone
-                                                        skateboard
-                                                        locavore carles etsy salvia banksy hoodie helvetica. DIY synth
-                                                        PBR
-                                                        banksy irony. Leggings gentrify squid 8-bit cred pitchfork.
-                                                        Williamsburg
-                                                        banh mi whatever gluten-free, carles pitchfork biodiesel fixie
-                                                        etsy
-                                                        retro mlkshk vice blog. Scenester cred you probably haven't
-                                                        heard of
-                                                        them, vinyl craft beer blog stumptown. Pitchfork sustainable
-                                                        tofu synth
-                                                        chambray yr.</p>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <p class="text-start fw-bold">Max Stay</p>
+                                                            <span>Maximum stay none for economy unrestricted
+                                                                fares.</span>
+                                                        </div>
+                                                        <div class="col-md-12 mt-2">
+                                                            <p class="text-start fw-bold pt-0 mt-0">Layover</p>
+                                                            <span>Stopovers for economy unrestricted fares unlimited
+                                                                stopovers permitted.</span>
+                                                        </div>
+                                                        <div class="col-md-12 mt-2">
+                                                            <p class="text-start fw-bold pt-0 mt-0">Combinations</p>
+                                                            <span>
+                                                                Permitted combinations fares may be combined on a half
+                                                                round trip basis with any fare for any carrier in any
+                                                                rule and tariff to form round trips/circle trips.
+                                                                End-one-end permitted. Validate all fare component.
+                                                                Travel must be via construction point. Add-ons
+                                                                permitted. Open jaws fares may be combined on a half
+                                                                round trip basis with any fare for any carrier in any
+                                                                rule and tariff to form single or double open jaws. A
+                                                                maximum of 2 international fare components permitted.
+                                                                Mileage of an international open segment must be equal
+                                                                to/less than mileage of the shortest flown fare
+                                                                component. No mileage restriction on an open segment
+                                                                within one country.
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4" style="background-color: #f4f4ff;">
-                                            <div class="d-flex justify-content-center mt-2">
 
-                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                    <button type="button"
-                                                        class="btn btn-primary btn-circle btn-sm waves-effect waves-light baggade" @click="flight_det_card(1)">
-                                                        <span style="font-size: 13px;">Baggade</span>
-                                                    </button>
+                                            <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header rounded" id="flush-headingOne"
+                                                        style="background-color: #7944eb !important;">
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                            type="button" data-bs-toggle="collapse"
+                                                            data-bs-target="#flush-fare-summary" aria-expanded="false"
+                                                            aria-controls="flush-fare-summary">
+                                                            Fare Summary
+                                                        </button>
+                                                    </h2>
+                                                    <div id="flush-fare-summary" class="accordion-collapse collapse"
+                                                        aria-labelledby="flush-headingOne"
+                                                        data-bs-parent="#accordionFlushExample" style="">
+                                                        <div class="accordion-body">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            Base Fare
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳30000</td>
+                                                                                    <td>
+                                                                                        ৳60000
+                                                                                    </td>
+                                                                                </tr>
 
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary" @click="flight_det_card(2)">
-                                                        <span style="font-size: 13px;">Fare Summary</span>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳20000</td>
+                                                                                    <td>
+                                                                                        ৳40000
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
 
-                                            <div class="card text-center mt-2" id="baggade">
-                                                <div class="card-body mb-0 pb-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-sm ">
-                                                            <tbody class="text-start">
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
-                                                                        <small>Economy</small></td>
+                                                                    <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            TAX
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳5000</td>
+                                                                                    <td>
+                                                                                        ৳10000
+                                                                                    </td>
 
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small></td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
-                                                                        <small>Economy</small></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳2000</td>
+                                                                                    <td>
+                                                                                        ৳4000
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
 
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small></td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                                                                    <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            AIT
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳1275</td>
+                                                                                    <td>
+                                                                                        ৳2550
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳870</td>
+                                                                                    <td>
+                                                                                        ৳1740
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            Service Charge
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳1275</td>
+                                                                                    <td>
+                                                                                        ৳2550
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳870</td>
+                                                                                    <td>
+                                                                                        ৳1740
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <div class="accordion-item mt-2">
+                                                    <h2 class="accordion-header" id="flush-headingTwo">
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                            type="button" data-bs-toggle="collapse"
+                                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                                            aria-controls="flush-collapseTwo">
+                                                            Baggadge Information
+                                                        </button>
+                                                    </h2>
+                                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                                        aria-labelledby="flush-headingTwo"
+                                                        data-bs-parent="#accordionFlushExample" style="">
+                                                        <div class="accordion-body">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>DAC-CCU</b>
+                                                                                        <br>
+                                                                                        <small>Economy</small>
+                                                                                    </td>
 
-                                            <div class="card text-start mt-2 d-none" id="fare_summary_details">
-                                                <div class="card-body mb-0 pb-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-sm ">
-                                                            <tbody class="text-start">
-                                                                <thead>
-                                                                    <th style="font-size: 10px;">Passenger</th>
-                                                                    <th style="font-size: 10px;">Tax+Fees</th>
-                                                                    <th style="font-size: 10px;">Total Fare</th>
-                                                                </thead>
-                                                                <tbody style="font-size: 10px;;">
-                                                                    <tr>
-                                                                        <td>4 Adults</td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 980</td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 120980</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>4 Child</td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 500</td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 15670</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>4 Infants</td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 500</td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> 15670</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Discount</td>
-                                                                        <td></td>
-                                                                        <td><i class="fa fa-bangladeshi-taka-sign"></i> -670</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><b>Total Payable</b></td>
-                                                                        <td></td>
-                                                                        <td>
-                                                                            <b><i class="fa fa-bangladeshi-taka-sign"></i> 151650</b>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </tbody>
-                                                        </table>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Cabin</b>
+                                                                                        <br>
+                                                                                        <small>10 Kg</small>
+                                                                                    </td>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Check In</b>
+                                                                                        <br>
+                                                                                        <small>2 Pieces</small>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>CCU-BDX</b>
+                                                                                        <br>
+                                                                                        <small>Economy</small>
+                                                                                    </td>
+
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Cabin</b>
+                                                                                        <br>
+                                                                                        <small>10 Kg</small>
+                                                                                    </td>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Check In</b>
+                                                                                        <br>
+                                                                                        <small>2 Pieces</small>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1337,7 +1799,7 @@ function flight_det_card(type_id){
                                             <p class="p-0 m-0"><b>02:50 PM</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">03 Jan, Fri</small>
                                             <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
+                                            <small style="font-size: 12px; color: #5e6878;">Arrival</small>
                                         </div>
 
                                     </div>
@@ -1367,9 +1829,61 @@ function flight_det_card(type_id){
                                     </div>
 
                                 </div>
+
+                                <!-- return -->
+                                <div class="col-md-3 m-0 p-0">
+                                    <div class="d-flex">
+                                        <img style="margin: 0 40px 0 28px;"
+                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
+                                            height="70">
+                                        <div class="text-left mt-2">
+                                            <p class="p-0 m-0"><b>DXB-DAC</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">Emirates</small>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5 border-start">
+                                    <div class="d-flex gap-5">
+                                        <div class="mt-2">
+                                            <p class="p-0 m-0"><b>01:00 AM
+                                                </b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">18 Feb, Tue</small>
+                                            <br>
+                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
+                                        </div>
+
+                                        <div class="text-center mt-2">
+                                            <small style="font-size: 12px; color: #5e6878;">05 hr 25 Min</small>
+                                            <br>
+                                            <div class="d-flex">
+                                                <div>
+                                                    ....
+                                                </div>
+                                                <div>
+                                                    <img src="../../../../public/theme/appimages/Plane-return.svg"
+                                                        alt="">
+                                                </div>
+                                                <div>
+                                                    ....
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-2">
+                                            <p class="p-0 m-0"><b>04:25 AM</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">28 Feb, Fri</small>
+                                            <br>
+                                            <small style="font-size: 12px; color: #5e6878;">Arrival</small>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- ./return end -->
                             </div>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer" style="background-color:#f1f4f7;">
                             <div class="float-start">
                                 <div class="d-flex gap-2">
 
@@ -1447,30 +1961,170 @@ function flight_det_card(type_id){
                                             </ul>
                                             <div class="tab-content pt-3">
                                                 <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
-                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
-                                                        Nesciunt
-                                                        tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                        cliche
-                                                        tempor, williamsburg carles vegan helvetica. Reprehenderit
-                                                        butcher retro
-                                                        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-                                                        terry
-                                                        richardson ex squid. Aliquip placeat salvia cillum iphone.
-                                                        Seitan
-                                                        aliquip quis cardigan american apparel, butcher voluptate nisi.
-                                                    </p>
-                                                    <p>Raw denim you probably haven't heard of them jean shorts Austin.
-                                                        Nesciunt
-                                                        tofu stumptown aliqua, retro synth master cleanse. Mustache
-                                                        cliche
-                                                        tempor, williamsburg carles vegan helvetica. Reprehenderit
-                                                        butcher retro
-                                                        keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure
-                                                        terry
-                                                        richardson ex squid. Aliquip placeat salvia cillum iphone.
-                                                        Seitan
-                                                        aliquip quis cardigan american apparel, butcher voluptate nisi.
-                                                    </p>
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-12">
+                                                            <div class="d-flex gap-1">
+                                                                <button
+                                                                    class="btn btn-sm bluesky-btn-primary">DAC-DXB</button>
+                                                                <button
+                                                                    class="btn btn-sm bluesky-btn-outline-primary">DXB-DAC</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
+
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <b>
+                                                                        <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                            alt="">
+                                                                        Departure
+                                                                    </b>
+                                                                </div>
+                                                                <div class="p-2">Hazrat Shahjalal International Airport
+                                                                </div>
+                                                                <div class="p-2">Duration: 01 hr 45 min</div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-5 border-end">
+                                                                    <div class="d-flex border-right">
+                                                                        <div class="text-start mt-2">
+                                                                            <p class="p-0 m-0"><b>DAC</b></p>
+                                                                            <small
+                                                                                style="font-size: 13px; color: #5e6878;"><b>10:50
+                                                                                    AM | 19 Jan, Thu</b></small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Terminal:2</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Flight
+                                                                                No:78ER457</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 12px; color: #5e6878;">Class:Economy</small>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <div class="row">
+                                                                        <div class="col-md-7">
+                                                                            <div class="d-flex border-right">
+                                                                                <div class="text-start mt-2">
+                                                                                    <p class="p-0 m-0"><b>CCU</b></p>
+                                                                                    <small
+                                                                                        style="font-size: 13px; color: #5e6878;"><b>11:55
+                                                                                            AM | 19 Jan,
+                                                                                            Thu</b></small>
+                                                                                    <br>
+                                                                                    <small
+                                                                                        style="font-size: 11px; color: #5e6878;">Terminal:3</small>
+                                                                                    <br>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-5 text-center">
+                                                                            <img height="50" width="50"
+                                                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
+                                                                                alt="">
+                                                                            <p class="mb-0 pb-0">Emirates Airline</p>
+                                                                            <p class="mb-0 pb-0">Boeing 707</p>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-2 p-2 pb-0">
+                                                                <div class="chip chip-sm"
+                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
+
+                                                                    <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                        src="../../../../public/theme/appimages/location.svg"
+                                                                        alt="">
+                                                                    Layover:Netaji Subhash Chandra Bose... | 02 hr 30
+                                                                    min
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="card ">
+                                                        <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
+                                                            <div class="d-flex">
+                                                                <div class="p-2 flex-grow-1">
+                                                                    <b>
+                                                                        <img src="../../../../public/theme/appimages/Plane_des.svg"
+                                                                            alt="">
+                                                                        Destination
+                                                                    </b>
+                                                                </div>
+                                                                <div class="p-2">Dubai Internation Airport
+                                                                </div>
+                                                                <div class="p-2">Duration: 03 hr 25 min</div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-md-5 border-end">
+                                                                    <div class="d-flex border-right">
+                                                                        <div class="text-start mt-2">
+                                                                            <p class="p-0 m-0"><b>CCU</b></p>
+                                                                            <small
+                                                                                style="font-size: 11px; color: #5e6878;"><b>10:50
+                                                                                    AM | 19 Jan, Thu</b></small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 11px; color: #5e6878;">Terminal:2</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 11px; color: #5e6878;">Flight
+                                                                                No:78ER457</small>
+                                                                            <br>
+                                                                            <small
+                                                                                style="font-size: 11px; color: #5e6878;">Class:Economy</small>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <div class="row">
+                                                                        <div class="col-md-7">
+                                                                            <div class="d-flex border-right">
+                                                                                <div class="text-start mt-2">
+                                                                                    <p class="p-0 m-0"><b>DXB</b></p>
+                                                                                    <small
+                                                                                        style="font-size: 11px; color: #5e6878;"><b>02:55
+                                                                                            PM | 19 Jan,
+                                                                                            Thu</b></small>
+                                                                                    <br>
+                                                                                    <small
+                                                                                        style="font-size: 11px; color: #5e6878;">Terminal:3</small>
+                                                                                    <br>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-5 text-center">
+                                                                            <img height="50" width="50"
+                                                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
+                                                                                alt="">
+                                                                            <p class="mb-0 pb-0">Emirates Airline</p>
+                                                                            <p class="mb-0 pb-0">Boeing 777</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
                                                     <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla
@@ -1515,77 +2169,7 @@ function flight_det_card(type_id){
                                             </div>
                                         </div>
                                         <div class="col-md-4" style="background-color: #f4f4ff;">
-                                            <div class="d-flex justify-content-center mt-2">
-
-                                                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                    <button type="button"
-                                                        class="btn btn-primary btn-circle btn-sm waves-effect waves-light baggade" @click="flight_det_card(1)">
-                                                        <span style="font-size: 13px;">Baggade</span>
-                                                    </button>
-
-                                                    <button type="button"
-                                                        class="btn btn-outline-primary btn-circle btn-sm waves-effect waves-light fare_summary" @click="flight_det_card(2)">
-                                                        <span style="font-size: 13px;">Fare Summary</span>
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            <div class="card text-center mt-2" id="baggade">
-                                                <div class="card-body mb-0 pb-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-sm ">
-                                                            <tbody class="text-start">
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
-                                                                        <small>Economy</small></td>
-
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small></td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
-                                                                        <small>Economy</small></td>
-
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small></td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card text-center mt-2 d-none" id="fare_summary_details">
-                                                <div class="card-body mb-0 pb-0">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-sm ">
-                                                            <tbody class="text-start">
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>DAC-CCU</b> <br>
-                                                                        <small>Economy</small></td>
-
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small></td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="font-size: 11px;"><b>CCU-BDX</b> <br>
-                                                                        <small>Economy</small></td>
-
-                                                                    <td style="font-size: 11px;"><b>Cabin</b> <br>
-                                                                        <small>10 Kg</small></td>
-                                                                    <td style="font-size: 11px;"><b>Check In</b> <br>
-                                                                        <small>2 Pieces</small></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <!-- upcoming 2 -->
                                         </div>
                                     </div>
                                 </div>
@@ -1637,16 +2221,97 @@ function flight_det_card(type_id){
     font-size: 19px;
 }
 
-/* #searchbar .bar div.box .label {
-    display: block;
-    font-size: .8571428571rem;
-    font-weight: 400;
-    line-height: 14px;
+li.menu-item {
+    margin: 0px 0px 10px -25px
 }
 
-#searchbar .box span.label {
-    color: #00026e;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-} */
+.icon-color {
+    color: #875ae9;
+}
+
+.accordion-button:after {
+    margin-left: 3px !important;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237944eb'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+.fare-summary-bg {
+    background: #faf8ff;
+}
+
+
+/* search bar design */
+.placeholder-font-size::placeholder {
+    font-size: 16px;
+    /* Change the font size as needed */
+}
+
+.arrow {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #875ae9;
+    /* Change color as needed */
+    position: absolute;
+    top: -10px;
+    /* Adjust position as needed */
+    left: 50%;
+    /* Center the arrow */
+    transform: translateX(-50%);
+    /* Adjust for the width of the arrow */
+}
+
+.form-control:focus {
+    border-color: #875ae9;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 2px #875ae9;
+}
+
+.search-results-simplebar {
+    .simplebar-track.simplebar-vertical {
+        width: 7px;
+        background: #ffffff;
+        border-radius: 4px;
+    }
+
+    .simplebar-scrollbar::before {
+        background: linear-gradient(45deg, #1e0aca, #96048a);
+        border-radius: 4px;
+        opacity: 0.5;
+    }
+
+    .simplebar-scrollbar.simplebar-visible::before {
+        opacity: 0.7;
+    }
+}
+
+.simplebar-content {
+    padding-right: 2px !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#origin_results {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.clear-icon {
+    position: absolute;
+    right: 10px;
+    top: 45%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 12px;
+    color: #875ae9;
+}
 </style>

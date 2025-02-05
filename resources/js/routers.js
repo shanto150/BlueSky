@@ -18,7 +18,7 @@ const searchResult = () => import('./components/search/searchResult.vue')
 // agent
 const AgentList = () => import('./components/admin/agent/index.vue')
 const agentDetails = () => import('./components/admin/agent/agentDetails.vue')
-const agentApprove = () => import('./components/admin/agent/agentApprove.vue')
+const agentApproved = () => import('./components/admin/agent/agentApproved.vue')
 const agentRecomanded = () => import('./components/admin/agent/agentRecomanded.vue')
 const agentView = () => import('./components/admin/agent/agentView.vue')
 const CreateAgency = () => import('./components/admin/agent/create.vue')
@@ -66,6 +66,16 @@ const paymentacct = () => import('./components/admin/settings/deposit/paymentAcc
 const paymentAcctCreate = () => import('./components/admin/settings/deposit/paymentAccount/create.vue')
 const payAcctEdit = () => import('./components/admin/settings/deposit/paymentAccount/edit.vue')
 
+//aircraft type designator
+const aircraftList = () => import('./components/admin/settings/aircraft/index.vue')
+const aircraftCreate = () => import('./components/admin/settings/aircraft/create.vue')
+const aircraftEdit = () => import('./components/admin/settings/aircraft/edit.vue')
+
+//airlines
+const airlinesList = () => import('./components/admin/settings/airlines/index.vue')
+const airlinesCreate = () => import('./components/admin/settings/airlines/create.vue')
+const airlinesEdit = () => import('./components/admin/settings/airlines/edit.vue')
+
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
     { path: '/sendResetLinkEmail', component: sendResetLinkEmail, name: 'sendResetLinkEmail', meta: { guest: true } },
@@ -89,9 +99,9 @@ const routes = [
     // agent
     { path: '/agent-list', component: AgentList, name: 'AgentList', meta: { auth: true } },
     { path: '/agent-details', component: agentDetails, name: 'agentDetails', meta: { auth: true } },
-    { path: '/agent-approve', component: agentApprove, name: 'agentApprove', meta: { auth: true } },
-    { path: '/agent-recmoanded', component: agentRecomanded, name: 'agentRecomanded', meta: { auth: true } },
-    { path: '/agent-view', component: agentView, name: 'agentView', meta: { auth: true } },
+    { path: '/agent-recommended/:ids', component: agentRecomanded, name: 'agentRecomanded',  meta: { auth: true },props:true},
+    { path: '/agent-approve/:ids', component: agentApproved, name: 'agentApproved', meta: { auth: true },props:true},
+    { path: '/agent-view/:ids', component: agentView, name: 'agentView', meta: { auth: true } ,props:true},
     { path: '/agent-create', component: CreateAgency, name: 'CreateAgency', meta: { auth: true } },
 
     //deposit
@@ -136,6 +146,16 @@ const routes = [
     { path: '/all-payment-accounts', component: paymentacct, name: 'paymentacct', meta: { auth: true } },
     { path: '/create-payment-account', component: paymentAcctCreate, name: 'paymentAcctCreate', meta: { auth: true } },
     { path: '/edit-payment-account/:id', component: payAcctEdit, name: 'payAcctEdit', meta: { auth: true },props:true  },
+
+    //aircraft
+    { path: '/all-aircraft-list', component: aircraftList, name: 'aircraftList', meta: { auth: true } },
+    { path: '/create-aircraft', component: aircraftCreate, name: 'aircraftCreate', meta: { auth: true } },
+    { path: '/edit-aircraft/:id', component: aircraftEdit, name: 'aircraftEdit', meta: { auth: true },props:true  },
+
+    //airlines
+    { path: '/all-airlinesList-list', component: airlinesList, name: 'airlinesList', meta: { auth: true } },
+    { path: '/create-airline', component: airlinesCreate, name: 'airlinesCreate', meta: { auth: true } },
+    { path: '/edit-airlines/:id', component: airlinesEdit, name: 'airlinesEdit', meta: { auth: true },props:true  },
 ]
 
 const router = createRouter({

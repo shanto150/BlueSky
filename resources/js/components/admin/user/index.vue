@@ -18,7 +18,6 @@ DataBS5.Buttons.jszip(jszip);
 const rData = ref([]);
 const form = reactive({ status: '', useridStatus: '' });
 onMounted(() => {
-
     $('#status').on("change", function () {
         form.status = $(this).val();
     });
@@ -269,7 +268,9 @@ const options = {
 };
 
 async function getListValues() {
+
     try {
+
         authStore.GlobalLoading = true;
         const response = await axiosInstance.get("getInternalUsers");
         rData.value = response.data.data;

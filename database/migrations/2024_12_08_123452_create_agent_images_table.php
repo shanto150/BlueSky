@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('agent_images', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('agent_id');
+            $table->integer('agent_id')->unsigned();
             $table->string('attachment_type',20); //trade_licence_img,ca_certificate_img,tin_img,hajj_licence_img,nid_img,iata_certificate_img
             $table->string('attachment_path',300);
             $table->string('status')->default('Pending')->comment('Pending,Approved,Reject');
-            $table->index('agent_id');
             $table->index('attachment_type');
             $table->timestamps();
             $table->foreign('agent_id')->references('id')->on('agents')->onDelete('cascade');
