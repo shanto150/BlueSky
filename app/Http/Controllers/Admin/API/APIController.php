@@ -11,6 +11,8 @@ class APIController extends BaseController {
 
     public function Lowfaresearch( Request $request ) {
 
+        // dd( $request->all() );
+
         $request->validate([
             'from' => 'required',
             'to' => 'required',
@@ -20,7 +22,7 @@ class APIController extends BaseController {
         $requestXML = new RequestXML();
         $xmlpayload = $requestXML->generateLowFareSearchXML($request);
 
-        dd( $xmlpayload );
+        // dd( $xmlpayload );
 
         $username = env( 'API_USERNAME' );
         $password = env( 'API_PASSWORD' );
@@ -176,7 +178,9 @@ class APIController extends BaseController {
         }
 
         header( 'Content-Type: application/json' );
-        echo json_encode( [ 'flights' => $response ], JSON_PRETTY_PRINT );
+        // echo json_encode( [ 'flights' => $response ], JSON_PRETTY_PRINT );
+
+        return response()->json(['flights' => $response], 200, [], JSON_PRETTY_PRINT);
 
     }
 

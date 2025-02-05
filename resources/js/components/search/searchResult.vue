@@ -17,6 +17,7 @@ const filteredDestinationAirports = ref([]);
 const fdate = ref();
 const sliderMin = ref(150);
 const sliderMax = ref(180);
+const flights = ref([])
 
 const isAutoApply = ref(true);
 const isMultiCalendar = ref(false);
@@ -26,6 +27,7 @@ const isRounded = 'oneway';
 const tdate = ref();
 
 const format = (fdate) => {
+
     const day = fdate.getDate();
     const month = fdate.getMonth() + 1;
     const year = fdate.getFullYear();
@@ -60,16 +62,13 @@ const formats = (fdates) => {
     return date;
 }
 
-
-
-
 const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '', ADT: 1, CNN: '', KID: '', INF: '' });
 
 async function Lowfaresearch() {
     try {
         const response = await axiosInstance.post("Lowfaresearch", form);
-        Notification.showToast("s", response.data.message);
-        console.log(response);
+        console.log(response.data.flights);
+        flights.value = response.data.flights;
     } catch (error) {
         console.log(error);
     }
@@ -85,6 +84,14 @@ function tourTypeChange(type) {
         $('.one-way').removeClass('bg-checkbox');
         $('.round-way').addClass('bg-checkbox');
         $('.multi-city').addClass('bg-checkbox');
+
+        $('#toDateChange').addClass('d-none');
+        this.isAutoApply = !this.isAutoApply;
+        this.isMultiCalendar = !this.isMultiCalendar;
+        this.isRanges = !this.isRanges;
+        this.isRounded = 'oneway';
+
+
     } else if (type == 2) {
         form.Way = 2;
         $('.one-way').removeClass('bg-checkbox-active');
@@ -93,6 +100,14 @@ function tourTypeChange(type) {
         $('.round-way').removeClass('bg-checkbox');
         $('.one-way').addClass('bg-checkbox');
         $('.multi-city').addClass('bg-checkbox');
+
+        $('#toDateChange').removeClass('d-none');
+        this.isAutoApply = !this.isAutoApply;
+        this.isMultiCalendar = !this.isMultiCalendar;
+        this.isRanges = !this.isRanges;
+        this.isRounded = 'round';
+
+
     } else {
         form.Way = 3;
         $('.one-way').removeClass('bg-checkbox-active');
@@ -103,10 +118,10 @@ function tourTypeChange(type) {
         $('.round-way').addClass('bg-checkbox');
     }
 
-
 }
 
 onMounted(() => {
+    form.Way = 1;
     getAirports();
     document.addEventListener("click", handleClickOutside);
 
@@ -240,11 +255,11 @@ function clearDestination() {
 
 function onHover() {
 
-    $("#img").attr('src', '');
+    $("#img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_Hover_State.jpg');
 }
 
 function offHover() {
-    $("#img").attr('src', '');
+    $("#img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_With_Icon.jpg');
 }
 
 </script>
@@ -257,108 +272,37 @@ function offHover() {
                     <li class="breadcrumb-item">
                         <router-link :to="{ name: 'Home' }">Dashboard</router-link>
                     </li>
-
                     <li class="breadcrumb-item active" aria-current="page">Flight Search Result</li>
                 </ol>
             </nav>
         </div>
     </div>
-    <!-- <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4 border border-1 border-primary m-2 pt-1">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" v-model="form.Way" checked type="radio"
-                                    name="inlineRadioOptions" id="inlineRadio1" value="1">
-                                <label class="form-check-label" for="inlineRadio1">One Way</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" v-model="form.Way" type="radio"
-                                    name="inlineRadioOptions" id="inlineRadio2" value="2">
-                                <label class="form-check-label" for="inlineRadio2">Round</label>
-                            </div>
 
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-md-2">
-                            <label for="">From</label>
-                            <input type="text" v-model="form.from" list="from_countries"
-                                class="form-control mt-1 form-control-sm" name="from" placeholder="From">
-                            <datalist id="from_countries">
-                                <option>Russia</option>
-                                <option>Germany</option>
-                                <option>United Kingdom</option>
-                            </datalist>
-
-                        </div>
-                        <div class="col-md-2">
-                            <label for="">To</label>
-                            <input type="text" list="to_countries" v-model="form.to"
-                                class="form-control mt-1 form-control-sm" name="to" placeholder="To">
-                            <datalist id="to_countries">
-                                <option>Bangladesh-BD</option>
-                                <option>Indio</option>
-                                <option>USA</option>
-                            </datalist>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="">Date</label>
-                            <input type="date" v-model="form.dep_date" class="form-control form-control-sm" name="date"
-                                placeholder="Date">
-                        </div>
-
-                        <div class="col-md-1">
-                            <label for="">Adult</label>
-                            <input type="text" v-model="form.ADT" class="form-control form-control-sm" name="adult"
-                                placeholder="Adult">
-                        </div>
-                        <div class="col-md-1">
-                            <label for="">Child</label>
-                            <input type="text" v-model="form.CNN" class="form-control form-control-sm" name="child"
-                                placeholder="Child">
-                        </div>
-                        <div class="col-md-1">
-                            <label for="">infent</label>
-                            <input type="text" v-model="form.INF" class="form-control form-control-sm" name="infent"
-                                placeholder="infent">
-                        </div>
-                        <div class="col-md-2 mt-3">
-                            <button @click="SendAPIRequest()" class="btn btn-sm btn-danger w-100"><i
-                                    class="fa fa-search"></i>Search</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="row">
         <div class="col-md-12">
-            <div class="card border border-1 border-primary">
+            <div class="card border border-1 bluesky-border-primary">
 
                 <div class="card-body">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="bg-checkbox-active one-way rounded rounded-1 p-2">
-                            <input @click="changeType(1)" class="form-check-input" type="radio" name="flexRadioDefault"
-                                id="flexRadioDefault1">
+                    <div class="d-flex align-items-center gap-2">
+
+                        <div class="bg-checkbox-active one-way rounded rounded-1 p-1">
+                            <input @click="tourTypeChange(1)" class="form-check-input" type="radio"
+                                name="flexRadioDefault" id="flexRadioDefault1">
 
                             <label class="form-check-label-box" for="flexRadioDefault1">
                                 &nbsp;One Way
                             </label>
                         </div>
-                        <div class="bg-checkbox round-way rounded rounded-1 p-2">
-                            <input @click="changeType(2)" class="form-check-input" type="radio" name="flexRadioDefault"
-                                id="flexRadioDefault2">
+                        <div class="bg-checkbox round-way rounded rounded-1 p-1">
+                            <input @click="tourTypeChange(2)" class="form-check-input" type="radio"
+                                name="flexRadioDefault" id="flexRadioDefault2">
                             <label class="form-check-label-box" for="flexRadioDefault2">
                                 &nbsp;Round Trip
                             </label>
                         </div>
-                        <div class="bg-checkbox rounded multi-city rounded-1 p-2">
-                            <input @click="changeType(3)" class="form-check-input" type="radio" name="flexRadioDefault"
-                                id="flexRadioDefault3">
+                        <div class="bg-checkbox rounded multi-city rounded-1 p-1">
+                            <input @click="tourTypeChange(3)" class="form-check-input" type="radio"
+                                name="flexRadioDefault" id="flexRadioDefault3">
                             <label class="form-check-label-box" for="flexRadioDefault3">
                                 &nbsp; Multi City
                             </label>
@@ -376,7 +320,7 @@ function offHover() {
                                             <table class="table table-sm">
                                                 <tbody>
                                                     <tr>
-                                                        <td><small> Adult <br> <span style="font-size: 8px;">Above 12
+                                                        <td><small> Adult <br> <span style="font-size: 9px;">Above 12
                                                                     Years</span></small></td>
                                                         <td style="width: 150px;">
                                                             <div class="input-group product-qty">
@@ -387,7 +331,7 @@ function offHover() {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-minus-circle text-primary">
+                                                                        class="feather feather-minus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
@@ -401,18 +345,17 @@ function offHover() {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-plus-circle text-primary">
+                                                                        class="feather feather-plus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
                                                                 </button>
                                                             </div>
-
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><small>Children <br><span style="font-size: 8px;">02 to
+                                                        <td><small>Children <br><span style="font-size: 9px;">02 to
                                                                     Under 12 Years
                                                                 </span></small></td>
                                                         <td style="width: 150px;">
@@ -424,7 +367,7 @@ function offHover() {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-minus-circle text-primary">
+                                                                        class="feather feather-minus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
                                                                     </svg>
@@ -509,7 +452,7 @@ function offHover() {
                                                                         height="24" viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
                                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                                        class="feather feather-plus-circle text-primary">
+                                                                        class="feather feather-plus-circle custom-text-purple">
                                                                         <circle cx="12" cy="12" r="10"></circle>
                                                                         <line x1="12" y1="8" x2="12" y2="16"></line>
                                                                         <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -746,13 +689,17 @@ function offHover() {
                             </div>
                         </div>
 
-                        <div class="col-md-2">
-                            <VueDatePicker v-model="fdate" placeholder="Select Date" :enable-time-picker="false"
-                                :format="format"></VueDatePicker>
+                        <div class="col-md-2 mt-2 mt-md-0" v-if="isRounded == 'oneway'">
+                            <VueDatePicker class="dateChange" id="fromdateVal" v-model="fdate" placeholder="Select Date"
+                                :enable-time-picker="false" :format="format" :auto-apply="isAutoApply"
+                                :multi-calendars="isMultiCalendar" :range="isRanges"></VueDatePicker>
+
                         </div>
-                        <div class="col-md-2">
-                            <VueDatePicker v-model="tdate" placeholder="Select Date" :enable-time-picker="false"
-                                :format="format"></VueDatePicker>
+                        <div class="col-md-2 mt-2 mt-md-0" v-if="isRounded == 'round'">
+                            <VueDatePicker class="dateChange" id="fromdateVal" v-model="fdate" placeholder="Select Date"
+                                :enable-time-picker="false" :format="formats" :auto-apply="isAutoApply"
+                                :multi-calendars="isMultiCalendar" :range="isRanges"></VueDatePicker>
+
                         </div>
 
 
@@ -784,20 +731,20 @@ function offHover() {
                             <div class="d-flex">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-clock text-primary">
+                                    stroke-linejoin="round" class="feather feather-clock custom-text-purple">
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
                                 &nbsp;&nbsp;
                                 <span class="pt-1" style="font-size: 13px;">Book Flight within</span>
                                 &nbsp; &nbsp;
-                                <div class="dash-lable bg-light-primary text-primary rounded-1">
+                                <div class="dash-lable bg-light-primary custom-text-purple rounded-1">
                                     <p class="text-black mb-0">30</p>
                                 </div>
                                 &nbsp;
                                 <div class="ml-1 mr-1">:</div>
                                 &nbsp;
-                                <div class="dash-lable bg-light-primary text-primary rounded-1">
+                                <div class="dash-lable bg-light-primary custom-text-purple rounded-1">
                                     <p class="text-black mb-0">00</p>
                                 </div>
                             </div>
@@ -827,6 +774,107 @@ function offHover() {
                                         </p>
                                         <div class="text-center p-0">
                                             <span class="text-danger">*</span> Price may change based on policy
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Flight Schedule -->
+                    <div class="accordion" id="class-type">
+                        <div class="accordion-item mt-3">
+                            <h6 class="accordion-header" id="headingSix">
+                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
+                                    aria-controls="collapseSix">
+                                    Flight Schedule
+                                </button>
+                            </h6>
+                            <div id="collapseSix" class="accordion-collapse collapse show" aria-labelledby="headingSix"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="d-flex gap-2">
+                                                <button type="button"
+                                                    class="btn bluesky-btn-primary w-100">Departure</button>
+                                                <button type="button"
+                                                    class="btn bluesky-btn-outline-primary w-100">Arrival</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mt-2">
+                                            <div class="d-flex gap-2">
+                                                <div
+                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-sunrise custom-text-purple">
+                                                        <path d="M17 18a5 5 0 0 0-10 0"></path>
+                                                        <line x1="12" y1="2" x2="12" y2="9"></line>
+                                                        <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+                                                        <line x1="1" y1="18" x2="3" y2="18"></line>
+                                                        <line x1="21" y1="18" x2="23" y2="18"></line>
+                                                        <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+                                                        <line x1="23" y1="22" x2="1" y2="22"></line>
+                                                        <polyline points="8 6 12 2 16 6"></polyline>
+                                                    </svg>
+                                                    <br>
+                                                    <span style="font-size: 8px; font-weight: bold;">00-06 AM</span>
+                                                </div>
+                                                <div
+                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-sun custom-text-purple">
+                                                        <circle cx="12" cy="12" r="5"></circle>
+                                                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                                                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                                                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                                    </svg>
+                                                    <br>
+                                                    <span style="font-size: 8px; font-weight: bold;">06-12 PM</span>
+                                                </div>
+
+                                                <div
+                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-sunset custom-text-purple">
+                                                        <path d="M17 18a5 5 0 0 0-10 0"></path>
+                                                        <line x1="12" y1="9" x2="12" y2="2"></line>
+                                                        <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+                                                        <line x1="1" y1="18" x2="3" y2="18"></line>
+                                                        <line x1="21" y1="18" x2="23" y2="18"></line>
+                                                        <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+                                                        <line x1="23" y1="22" x2="1" y2="22"></line>
+                                                        <polyline points="16 5 12 9 8 5"></polyline>
+                                                    </svg>
+                                                    <br>
+                                                    <span style="font-size: 8px; font-weight: bold;">12-06 PM</span>
+                                                </div>
+                                                <div
+                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="feather feather-moon custom-text-purple">
+                                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z">
+                                                        </path>
+                                                    </svg>
+                                                    <br>
+                                                    <span style="font-size: 8px; font-weight: bold;">06-12 AM</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -992,106 +1040,6 @@ function offHover() {
                         </div>
                     </div>
 
-                    <!-- Flight Schedule -->
-                    <div class="accordion" id="class-type">
-                        <div class="accordion-item mt-3">
-                            <h6 class="accordion-header" id="headingSix">
-                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
-                                    aria-controls="collapseSix">
-                                    Flight Schedule
-                                </button>
-                            </h6>
-                            <div id="collapseSix" class="accordion-collapse collapse show" aria-labelledby="headingSix"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="d-flex gap-2">
-                                                <button type="button"
-                                                    class="btn btn-outline-primary w-100">Departure</button>
-                                                <button type="button"
-                                                    class="btn btn-outline-secondary w-100">Arrival</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 mt-2">
-                                            <div class="d-flex gap-2">
-                                                <div
-                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-sunrise text-primary">
-                                                        <path d="M17 18a5 5 0 0 0-10 0"></path>
-                                                        <line x1="12" y1="2" x2="12" y2="9"></line>
-                                                        <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
-                                                        <line x1="1" y1="18" x2="3" y2="18"></line>
-                                                        <line x1="21" y1="18" x2="23" y2="18"></line>
-                                                        <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
-                                                        <line x1="23" y1="22" x2="1" y2="22"></line>
-                                                        <polyline points="8 6 12 2 16 6"></polyline>
-                                                    </svg>
-                                                    <br>
-                                                    <span style="font-size: 8px; font-weight: bold;">00-06 AM</span>
-                                                </div>
-                                                <div
-                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-sun text-primary">
-                                                        <circle cx="12" cy="12" r="5"></circle>
-                                                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                                                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                                                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                                                    </svg>
-                                                    <br>
-                                                    <span style="font-size: 8px; font-weight: bold;">06-12 PM</span>
-                                                </div>
-
-                                                <div
-                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-sunset text-primary">
-                                                        <path d="M17 18a5 5 0 0 0-10 0"></path>
-                                                        <line x1="12" y1="9" x2="12" y2="2"></line>
-                                                        <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
-                                                        <line x1="1" y1="18" x2="3" y2="18"></line>
-                                                        <line x1="21" y1="18" x2="23" y2="18"></line>
-                                                        <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
-                                                        <line x1="23" y1="22" x2="1" y2="22"></line>
-                                                        <polyline points="16 5 12 9 8 5"></polyline>
-                                                    </svg>
-                                                    <br>
-                                                    <span style="font-size: 8px; font-weight: bold;">12-06 PM</span>
-                                                </div>
-                                                <div
-                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-moon text-primary">
-                                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z">
-                                                        </path>
-                                                    </svg>
-                                                    <br>
-                                                    <span style="font-size: 8px; font-weight: bold;">06-12 AM</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Baggage -->
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
@@ -1151,7 +1099,7 @@ function offHover() {
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            Netaki Subhas Chandra Bose..
+                                            Netaji Subhas Chandra Bose..
                                         </label>
                                     </div>
                                     <div class="form-check">
@@ -1179,690 +1127,49 @@ function offHover() {
                     </div>
                 </div>
                 <div class="col-md-12 mt-4">
-                    <button class="btn btn-block btn-sm btn-outline-primary w-100">
+                    <button class="btn btn-block btn-sm bluesky-btn-outline-primary w-100">
                         Clear All Filters
                     </button>
                 </div>
             </div>
         </div>
         <div class="col-md-9">
-            <div class="row">
-                <p>Showing 10 of 20 Total Flights</p>
-                <div class="col-md-12">
+            <div class="row" id="Flights">
+                <p>Showing {{ flights.length }} of {{ totalFlights }} Total Flights</p>
+
+                <div v-for="(flight, index) in flights" :key="index" class="col-md-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-4 m-0 p-0">
+                                <div class="col-md-3 m-0 p-0">
                                     <div class="d-flex">
                                         <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
                                             height="70">
-                                        <div class="text-center mt-2">
-                                            <p class="p-0 m-0"><b>DAC-DXB</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">Qatar Airways</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Boeing 707</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 border-start">
-                                    <div class="d-flex gap-2">
-                                        <div class="mt-2">
-                                            <p class="p-0 m-0"><b>10:50 AM</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">03 Jan, Fri</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
-                                        </div>
-
-                                        <div class="text-center mt-2">
-                                            <small style="font-size: 12px; color: #5e6878;">04 hr 15 Min</small>
-                                            <br>
-                                            <div class="d-flex">
-                                                <div>
-                                                    ....
-                                                </div>
-                                                <div><i class="fa fa-plane"
-                                                        style="color: #1882ffb3; margin-top: 4px; font-size: 20px;"></i></div>
-                                                <div>
-                                                    ....
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="mt-2">
-                                            <p class="p-0 m-0"><b>02:50 PM</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">03 Jan, Fri</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Arrival</small>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4 border-start">
-                                    <div class="d-flex gap-2">
-                                        <div class="mt-2">
-                                            <p class="p-0 m-0"><b>01 Stop</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">CCU</small><br>
-                                            <small style="font-size: 12px; color: #5e6878;">1 hr 15 min</small>
-                                        </div>
-                                        <div class="d-flex gap-3 border-start">
-                                            <div class="mt-2">
-                                                <div class="text-right" style="padding-left: 10px;">
-                                                    <p class="p-0 m-0"><b><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                            65000</b></p>
-                                                    <small style="font-size: 12px; color: #5e6878;"><del><i
-                                                                class="fa fa-bangladeshi-taka-sign"></i>
-                                                            77000</del></small><br>
-                                                    <small style="font-size: 12px; color: #5e6878;">Economy
-                                                        Calss</small>
-                                                    <button class="btn btn-sm btn-block btn-primary mt-2">Book
-                                                        Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-footer">
-                            <div class="float-start">
-                                <div class="d-flex gap-2">
-
-                                    <div class="border border-1 text-center p-1"
-                                        style="background-color: #def1ec; color: #12ce69;">
-                                        <i class="fa fa-refresh"></i> Refundable
-                                    </div>
-                                    <div class="border border-1 text-center p-1"
-                                        style="background-color: #d6dffa; color: #027de2;">
-                                        <i class="fa fa-rug"></i> BS1234FG
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="float-end">
-                                <div class="d-flex gap-2">
-
-                                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-headingOne">
-                                                <button class="accordion-button collapsed m-0 p-0 px-2 py-1"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#flight-details" aria-expanded="false"
-                                                    aria-controls="flight-details" style="color: #1184e3;">
-                                                    Flight Details
-                                                </button>
-                                            </h2>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="flight-details" class="accordion-collapse collapse m-0" aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlushExample" style="">
-                        <div class="accordion-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
-                                                <li class="nav-item" role="presentation">
-                                                    <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome"
-                                                        role="tab" aria-selected="true">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="tab-icon"><i
-                                                                    class="bx bx-comment-detail font-18 me-1"></i>
-                                                            </div>
-                                                            <div class="tab-title"> Flight Details </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile"
-                                                        role="tab" aria-selected="false" tabindex="-1">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="tab-icon"><i
-                                                                    class="bx bx-bookmark-alt font-18 me-1"></i>
-                                                            </div>
-                                                            <div class="tab-title">Fare Rules</div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <a class="nav-link" data-bs-toggle="tab" href="#primarycontact"
-                                                        role="tab" aria-selected="false" tabindex="-1">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="tab-icon"><i
-                                                                    class="bx bx-star font-18 me-1"></i>
-                                                            </div>
-                                                            <div class="tab-title">Refund Policy</div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content pt-3">
-                                                <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
-                                                    <div class="card">
-                                                        <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
-                                                            <div class="d-flex">
-                                                                <div class="p-2 flex-grow-1">
-                                                                    <b>
-                                                                        <img src="../../../../public/theme/appimages/Plane.svg"
-                                                                            alt="">
-                                                                    </b>
-                                                                    <small><b>Departure</b> from Hazrat Shahjalal
-                                                                        International Airport</small>
-                                                                </div>
-
-                                                                <div class="p-2">Duration: 01 hr 45 min</div>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <div class="col-md-5 border-end">
-                                                                    <div class="d-flex border-right">
-                                                                        <div class="text-start mt-2">
-                                                                            <p class="p-0 m-0 custom-text-purple">
-                                                                                <b>DAC</b>
-                                                                            </p>
-                                                                            <small
-                                                                                style="font-size: 13px; color: #5e6878;"><b>10:50
-                                                                                    AM | 19 Jan, Thu</b></small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 12px; color: #5e6878;">Terminal:2</small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 12px; color: #5e6878;">Flight
-                                                                                No:78ER457</small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 12px; color: #5e6878;">Class:Economy</small>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-7">
-                                                                    <div class="row">
-                                                                        <div class="col-md-7">
-                                                                            <div class="d-flex border-right">
-                                                                                <div class="text-start mt-2">
-                                                                                    <p
-                                                                                        class="p-0 m-0 custom-text-purple">
-                                                                                        <b>DXB</b>
-                                                                                    </p>
-                                                                                    <small
-                                                                                        style="font-size: 13px; color: #5e6878;"><b>11:55
-                                                                                            AM | 19 Jan,
-                                                                                            Thu</b></small>
-                                                                                    <br>
-                                                                                    <small
-                                                                                        style="font-size: 11px; color: #5e6878;">Terminal:3</small>
-                                                                                    <br>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-5 text-center">
-                                                                            <img height="60" width="100"
-                                                                                src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
-                                                                                alt="">
-                                                                            <p class="mb-0 pb-0">Qatar Airways</p>
-                                                                            <p class="mb-0 pb-0">Boeing 707</p>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row mt-2 p-2 pb-0">
-                                                                <!-- 8px -->
-                                                                <div class="chip chip-sm"
-                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
-                                                                    <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
-                                                                        src="../../../../public/theme/appimages/location.svg"
-                                                                        alt="">
-
-                                                                    Destination : Dubai Internation Airport
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-
-                                                            <p class="text-start fw-bold">PENALTIES/GENERAL</p>
-                                                            <span>
-                                                                1. Reissue/Refund minimum penalty amount before
-                                                                departure 0 BDT 2. Reissue/Refund maximum penalty amount
-                                                                before departure 5999 BDT
-                                                                3. Reissue/Refund maximum penalty amount for the ticket
-                                                                before departure 9599 BDT
-                                                                4. Revalidation minimum penalty amount before departure
-                                                                0 BDT
-                                                                5. Revalidation maximum penalty amount before departure
-                                                                0 BDT
-                                                                6. Revalidation maximum penalty amount for the ticket
-                                                                before departure 0 BDT 7. Reissue/Refund minimum penalty
-                                                                amount before departure no show 5999 BDT 8.
-                                                                Reissue/Refund maximum penalty amount before departure
-                                                                no show 5999 BDT 9. Reissue/Refund maximum penalty
-                                                                amount for the ticket before departure no show 9599 BDT
-                                                                10. Revalidation minimum penalty amount before departure
-                                                                no show 0 BDT 11. Revalidation maximum penalty amount
-                                                                before departure no show 0 BDT 12. Revalidation maximum
-                                                                penalty amount for the ticket before departure no show 0
-                                                                BDT 13. Reissue/Refund minimum penalty amount after
-                                                                departure 0 BDT 14. Reissue/Refund maximum penalty
-                                                                amount with sale currency 5999 BDT 15. Reissue/Refund
-                                                                maximum penalty amount for the ticket after departure
-                                                                9599 BDT 16. Revalidation minimum penalty amount after
-                                                                departure 0 BDT 17. Revalidation maximum penalty amount
-                                                                after departure 0 BDT 18. Revalidation maximum penalty
-                                                                amount for the ticket after departure 0 BDT 19.
-                                                                Reissue/Refund minimum penalty amount after departure no
-                                                                show 5999 BDT 20. Reissue/Refund maximum penalty amount
-                                                                after departure no show 5999 BDT 21. Reissue/Refund
-                                                                maximum penalty amount for the ticket after departure no
-                                                                show 9599 BDT 22. Revalidation minimum penalty amount
-                                                                after departure no show 0 BDT 23. Revalidation maximum
-                                                                penalty amount after departure no show 0 BDT 24.
-                                                                Revalidation maximum penalty amount for the ticket after
-                                                                departure no show 0 BDT 25. Part of rule is free form
-                                                                text from Cat16? Not allowed 26. Reissue penalties can
-                                                                be waived for passenger and family death/illness before
-                                                                departure? Not allowed 27. Revalidation before departure
-                                                                is allowed? Not allowed 28. Reissue/Refund before
-                                                                departure allowed? Allowed with restrictions 29. Reissue
-                                                                penalties can be waived for passenger and family
-                                                                death/illness for before departure no show? Not allowed
-                                                                30. Revalidation before departure when no show is
-                                                                allowed? Not allowed 31. Reissue/Refund before departure
-                                                                when no show allowed? Allowed with restrictions 32.
-                                                                Reissue penalties can be waived for passenger and family
-                                                                death/illness after departure? Not allowed 33.
-                                                                Revalidation after departure is allowed? Not allowed 34.
-                                                                Reissue/Refund after departure allowed? Allowed with
-                                                                restrictions 35. Reissue penalties can be waived for
-                                                                passenger and family death/illness after departure no
-                                                                show? Not allowed 36. Revalidation after departure when
-                                                                no show is allowed? Not allowed 37. Reissue/Refund after
-                                                                departure when no show allowed? Allowed with
-                                                                restrictions 38. Reissue/Refund minimum penalty amount
-                                                                before departure 11998 BDT 39. Reissue/Refund maximum
-                                                                penalty amount before departure 16798 BDT 40.
-                                                                Reissue/Refund maximum penalty amount for the ticket
-                                                                before departure 16798 BDT 41. Reissue/Refund minimum
-                                                                penalty amount before departure no show 11998 BDT 42.
-                                                                Reissue/Refund maximum penalty amount before departure
-                                                                no show 16798 BDT 43. Reissue/Refund maximum penalty
-                                                                amount for the ticket before departure no show 16798 BDT
-                                                                44. Reissue/Refund minimum penalty amount after
-                                                                departure 11998 BDT 45. Reissue/Refund maximum penalty
-                                                                amount with sale currency 16798 BDT 46. Reissue/Refund
-                                                                maximum penalty amount for the ticket after departure
-                                                                16798 BDT 47. Reissue/Refund minimum penalty amount
-                                                                after departure no show 11998 BDT 48. Reissue/Refund
-                                                                maximum penalty amount after departure no show 16798 BDT
-                                                                49. Reissue/Refund maximum penalty amount for the ticket
-                                                                after departure no show 16798 BDT 50. Part of rule is
-                                                                free form text from Cat16? Not allowed 51.
-                                                                Reissue/Refund before departure allowed? Allowed with
-                                                                restrictions 52. Reissue/Refund before departure when no
-                                                                show allowed? Allowed with restrictions 53.
-                                                                Reissue/Refund after departure allowed? Allowed with
-                                                                restrictions 54. Reissue/Refund after departure when no
-                                                                show allowed? Allowed with restrictions
-                                                            </span>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade" id="primarycontact" role="tabpanel">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <p class="text-start fw-bold">Max Stay</p>
-                                                            <span>Maximum stay none for economy unrestricted
-                                                                fares.</span>
-                                                        </div>
-                                                        <div class="col-md-12 mt-2">
-                                                            <p class="text-start fw-bold pt-0 mt-0">Layover</p>
-                                                            <span>Stopovers for economy unrestricted fares unlimited
-                                                                stopovers permitted.</span>
-                                                        </div>
-                                                        <div class="col-md-12 mt-2">
-                                                            <p class="text-start fw-bold pt-0 mt-0">Combinations</p>
-                                                            <span>
-                                                                Permitted combinations fares may be combined on a half
-                                                                round trip basis with any fare for any carrier in any
-                                                                rule and tariff to form round trips/circle trips.
-                                                                End-one-end permitted. Validate all fare component.
-                                                                Travel must be via construction point. Add-ons
-                                                                permitted. Open jaws fares may be combined on a half
-                                                                round trip basis with any fare for any carrier in any
-                                                                rule and tariff to form single or double open jaws. A
-                                                                maximum of 2 international fare components permitted.
-                                                                Mileage of an international open segment must be equal
-                                                                to/less than mileage of the shortest flown fare
-                                                                component. No mileage restriction on an open segment
-                                                                within one country.
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4" style="background-color: #f4f4ff;">
-
-                                            <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
-                                                <div class="accordion-item">
-                                                    <h2 class="accordion-header rounded" id="flush-headingOne"
-                                                        style="background-color: #7944eb !important;">
-                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
-                                                            type="button" data-bs-toggle="collapse"
-                                                            data-bs-target="#flush-fare-summary" aria-expanded="false"
-                                                            aria-controls="flush-fare-summary">
-                                                            Fare Summary
-                                                        </button>
-                                                    </h2>
-                                                    <div id="flush-fare-summary" class="accordion-collapse collapse"
-                                                        aria-labelledby="flush-headingOne"
-                                                        data-bs-parent="#accordionFlushExample" style="">
-                                                        <div class="accordion-body">
-                                                            <div class="card">
-                                                                <div class="card-body">
-                                                                    <div
-                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
-                                                                        <span class="custom-text-purple">
-                                                                            Base Fare
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-sm table-striped">
-                                                                            <tbody class="text-start">
-                                                                                <tr>
-                                                                                    <td>Adults: 2x৳30000</td>
-                                                                                    <td>
-                                                                                        ৳60000
-                                                                                    </td>
-                                                                                </tr>
-
-                                                                                <tr>
-                                                                                    <td>Childs: 2x৳20000</td>
-                                                                                    <td>
-                                                                                        ৳40000
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
-                                                                        <span class="custom-text-purple">
-                                                                            TAX
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-sm table-striped ">
-                                                                            <tbody class="text-start">
-                                                                                <tr>
-                                                                                    <td>Adults: 2x৳5000</td>
-                                                                                    <td>
-                                                                                        ৳10000
-                                                                                    </td>
-
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Childs: 2x৳2000</td>
-                                                                                    <td>
-                                                                                        ৳4000
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
-                                                                        <span class="custom-text-purple">
-                                                                            AIT
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-sm table-striped ">
-                                                                            <tbody class="text-start">
-                                                                                <tr>
-                                                                                    <td>Adults: 2x৳1275</td>
-                                                                                    <td>
-                                                                                        ৳2550
-                                                                                    </td>
-
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Childs: 2x৳870</td>
-                                                                                    <td>
-                                                                                        ৳1740
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-
-                                                                    <div
-                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
-                                                                        <span class="custom-text-purple">
-                                                                            Service Charge
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-sm table-striped ">
-                                                                            <tbody class="text-start">
-                                                                                <tr>
-                                                                                    <td>Adults: 2x৳1275</td>
-                                                                                    <td>
-                                                                                        ৳2550
-                                                                                    </td>
-
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Childs: 2x৳870</td>
-                                                                                    <td>
-                                                                                        ৳1740
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="accordion-item mt-2">
-                                                    <h2 class="accordion-header" id="flush-headingTwo">
-                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
-                                                            type="button" data-bs-toggle="collapse"
-                                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                                            aria-controls="flush-collapseTwo">
-                                                            Baggadge Information
-                                                        </button>
-                                                    </h2>
-                                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                                                        aria-labelledby="flush-headingTwo"
-                                                        data-bs-parent="#accordionFlushExample" style="">
-                                                        <div class="accordion-body">
-                                                            <div class="card">
-                                                                <div class="card-body">
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-sm ">
-                                                                            <tbody class="text-start">
-                                                                                <tr>
-                                                                                    <td style="font-size: 11px;">
-                                                                                        <b>DAC-CCU</b>
-                                                                                        <br>
-                                                                                        <small>Economy</small>
-                                                                                    </td>
-
-                                                                                    <td style="font-size: 11px;">
-                                                                                        <b>Cabin</b>
-                                                                                        <br>
-                                                                                        <small>10 Kg</small>
-                                                                                    </td>
-                                                                                    <td style="font-size: 11px;">
-                                                                                        <b>Check In</b>
-                                                                                        <br>
-                                                                                        <small>2 Pieces</small>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td style="font-size: 11px;">
-                                                                                        <b>CCU-BDX</b>
-                                                                                        <br>
-                                                                                        <small>Economy</small>
-                                                                                    </td>
-
-                                                                                    <td style="font-size: 11px;">
-                                                                                        <b>Cabin</b>
-                                                                                        <br>
-                                                                                        <small>10 Kg</small>
-                                                                                    </td>
-                                                                                    <td style="font-size: 11px;">
-                                                                                        <b>Check In</b>
-                                                                                        <br>
-                                                                                        <small>2 Pieces</small>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4 m-0 p-0">
-                                    <div class="d-flex">
-                                        <img style="margin: 0 40px 0 28px;"
-                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
-                                            height="70">
-                                        <div class="text-center mt-2">
-                                            <p class="p-0 m-0"><b>DAC-DXB</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">Qatar Airways</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Boeing 707</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 border-start">
-                                    <div class="d-flex gap-2">
-                                        <div class="mt-2">
-                                            <p class="p-0 m-0"><b>10:50 AM</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">03 Jan, Fri</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
-                                        </div>
-
-                                        <div class="text-center mt-2">
-                                            <small style="font-size: 12px; color: #5e6878;">04 hr 15 Min</small>
-                                            <br>
-                                            <div class="d-flex">
-                                                <div>
-                                                    ....
-                                                </div>
-                                                <div><i class="fa fa-plane"
-                                                        style="color: #1882ffb3; margin-top: 4px; font-size: 20px;"></i></div>
-                                                <div>
-                                                    ....
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="mt-2">
-                                            <p class="p-0 m-0"><b>02:50 PM</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">03 Jan, Fri</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Arrival</small>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4 border-start">
-                                    <div class="d-flex gap-2">
-                                        <div class="mt-2">
-                                            <p class="p-0 m-0"><b>01 Stop</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">CCU</small><br>
-                                            <small style="font-size: 12px; color: #5e6878;">1 hr 15 min</small>
-                                        </div>
-                                        <div class="d-flex gap-3 border-start">
-                                            <div class="mt-2">
-                                                <div class="text-right" style="padding-left: 10px;">
-                                                    <p class="p-0 m-0"><b><i class="fa fa-bangladeshi-taka-sign"></i>
-                                                            65000</b></p>
-                                                    <small style="font-size: 12px; color: #5e6878;">
-                                                        <del><i class="fa fa-bangladeshi-taka-sign"></i> 67000</del>
-                                                    </small><br>
-                                                    <small style="font-size: 12px; color: #5e6878;">Economy
-                                                        Calss</small>
-                                                    <button class="btn btn-sm btn-block btn-primary mt-2">Book
-                                                        Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- return -->
-                                <div class="col-md-3 m-0 p-0">
-                                    <div class="d-flex">
-                                        <img style="margin: 0 40px 0 28px;"
-                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
-                                            height="70">
                                         <div class="text-left mt-2">
-                                            <p class="p-0 m-0"><b>DXB-DAC</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">Emirates</small>
+                                            <p class="p-0 m-0"><b>{{ flight.origin }}-{{ flight.destination }}</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.carrier_code }}</small>
 
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-5 border-start">
                                     <div class="d-flex gap-5">
                                         <div class="mt-2">
-                                            <p class="p-0 m-0"><b>01:00 AM
-                                                </b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">18 Feb, Tue</small>
+                                            <p class="p-0 m-0"><b>{{ flight.departure_time }}</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.departure_date }}</small>
                                             <br>
                                             <small style="font-size: 12px; color: #5e6878;">Departure</small>
                                         </div>
 
                                         <div class="text-center mt-2">
-                                            <small style="font-size: 12px; color: #5e6878;">05 hr 25 Min</small>
+                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.total_flight_duration }}</small>
                                             <br>
                                             <div class="d-flex">
                                                 <div>
                                                     ....
                                                 </div>
                                                 <div>
-                                                    <img src="../../../../public/theme/appimages/Plane-return.svg"
+                                                    <img src="../../../../public/theme/appimages/Plane_origin.svg"
                                                         alt="">
                                                 </div>
                                                 <div>
@@ -1872,44 +1179,70 @@ function offHover() {
                                         </div>
 
                                         <div class="mt-2">
-                                            <p class="p-0 m-0"><b>04:25 AM</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">28 Feb, Fri</small>
+                                            <p class="p-0 m-0"><b>{{ flight.arrival_time }}</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.arrival_date }}</small>
                                             <br>
                                             <small style="font-size: 12px; color: #5e6878;">Arrival</small>
                                         </div>
 
                                     </div>
                                 </div>
-                                <!-- ./return end -->
+                                <div class="col-md-4 border-start">
+                                    <div class="d-flex gap-2">
+                                        <div class="mt-2">
+                                            <p class="p-0 m-0"><b> {{flight.connections}}-Stop</b></p>
+                                        </div>
+                                        <div class="d-flex gap-3 border-start">
+                                            <div class="mt-2 ms-md-4">
+                                                <button class="btn btn-sm btn-block bluesky-btn-primary"
+                                                    style="margin-left: 30px;" data-bs-toggle="collapse"
+                                                    data-bs-target="#flight-package" aria-controls="flight-package">
+
+                                                    <div class="text-right" style="padding-left: 10px;">
+                                                        <p class="p-0 m-0"><b><i
+                                                                    class="fa fa-bangladeshi-taka-sign"></i>
+                                                                65000</b></p>
+                                                        <small style="color: #dbdbdb"><del>
+                                                                ৳ 77000</del></small>
+                                                        <br>
+                                                        <small style="font-size: 12px;">Economy Class</small>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                         <div class="card-footer" style="background-color:#f1f4f7;">
                             <div class="float-start">
                                 <div class="d-flex gap-2">
-
                                     <div class="border border-1 text-center p-1"
                                         style="background-color: #def1ec; color: #12ce69;">
                                         <i class="fa fa-refresh"></i> Refundable
                                     </div>
                                     <div class="border border-1 text-center p-1"
                                         style="background-color: #d6dffa; color: #027de2;">
-                                        <i class="fa fa-rug"></i> BS1234FG
+                                        <i class="fa fa-rug"></i> Fare Basis:AHGC001
+                                    </div>
+                                    <div class="border border-1 text-center p-1"
+                                        style="background-color: #e4e3f6; color: #7944eb;">
+                                        <i class="fa-regular fa-seat-airline"></i> Available Seats: 20
                                     </div>
                                 </div>
-
                             </div>
-                            <div class="float-end">
+                            <div class="float-end me-2">
                                 <div class="d-flex gap-2">
-
-                                    <div class="accordion accordion-flush" id="accordionFlushExample2">
+                                    <div class="accordion accordion-flush" id="accordionFlushExample">
                                         <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-headingTwo">
-                                                <button class="accordion-button collapsed m-0 p-0 px-2 py-1"
-                                                    type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#flight-details-2" aria-expanded="false"
-                                                    aria-controls="flight-details-2" style="color: #1184e3;">
-                                                    Flight Details
-                                                </button>
+                                            <h2 class="accordion-header" id="flush-headingOne">
+                                                <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-1"
+                                                    data-bs-toggle="collapse" data-bs-target="#flight-details"
+                                                    aria-expanded="false" aria-controls="flight-details"
+                                                    style=" font-size: 14px; background: #f1f4f7 !important;">
+                                                    <b>Flight Details</b>
+                                                </a>
                                             </h2>
                                         </div>
                                     </div>
@@ -1917,266 +1250,8 @@ function offHover() {
                             </div>
                         </div>
                     </div>
-                    <div id="flight-details-2" class="accordion-collapse collapse m-0"
-                        aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample2" style="">
-                        <div class="accordion-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
-                                                <li class="nav-item" role="presentation">
-                                                    <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome"
-                                                        role="tab" aria-selected="true">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="tab-icon"><i
-                                                                    class="bx bx-comment-detail font-18 me-1"></i>
-                                                            </div>
-                                                            <div class="tab-title"> Flight Details </div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile"
-                                                        role="tab" aria-selected="false" tabindex="-1">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="tab-icon"><i
-                                                                    class="bx bx-bookmark-alt font-18 me-1"></i>
-                                                            </div>
-                                                            <div class="tab-title">Fare Rules</div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <a class="nav-link" data-bs-toggle="tab" href="#primarycontact"
-                                                        role="tab" aria-selected="false" tabindex="-1">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="tab-icon"><i
-                                                                    class="bx bx-star font-18 me-1"></i>
-                                                            </div>
-                                                            <div class="tab-title">Refund Policy</div>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content pt-3">
-                                                <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
-                                                    <div class="row mb-2">
-                                                        <div class="col-md-12">
-                                                            <div class="d-flex gap-1">
-                                                                <button
-                                                                    class="btn btn-sm bluesky-btn-primary">DAC-DXB</button>
-                                                                <button
-                                                                    class="btn btn-sm bluesky-btn-outline-primary">DXB-DAC</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card">
-                                                        <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
-
-                                                            <div class="d-flex">
-                                                                <div class="p-2 flex-grow-1">
-                                                                    <b>
-                                                                        <img src="../../../../public/theme/appimages/Plane.svg"
-                                                                            alt="">
-                                                                        Departure
-                                                                    </b>
-                                                                </div>
-                                                                <div class="p-2">Hazrat Shahjalal International Airport
-                                                                </div>
-                                                                <div class="p-2">Duration: 01 hr 45 min</div>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <div class="col-md-5 border-end">
-                                                                    <div class="d-flex border-right">
-                                                                        <div class="text-start mt-2">
-                                                                            <p class="p-0 m-0"><b>DAC</b></p>
-                                                                            <small
-                                                                                style="font-size: 13px; color: #5e6878;"><b>10:50
-                                                                                    AM | 19 Jan, Thu</b></small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 12px; color: #5e6878;">Terminal:2</small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 12px; color: #5e6878;">Flight
-                                                                                No:78ER457</small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 12px; color: #5e6878;">Class:Economy</small>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-7">
-                                                                    <div class="row">
-                                                                        <div class="col-md-7">
-                                                                            <div class="d-flex border-right">
-                                                                                <div class="text-start mt-2">
-                                                                                    <p class="p-0 m-0"><b>CCU</b></p>
-                                                                                    <small
-                                                                                        style="font-size: 13px; color: #5e6878;"><b>11:55
-                                                                                            AM | 19 Jan,
-                                                                                            Thu</b></small>
-                                                                                    <br>
-                                                                                    <small
-                                                                                        style="font-size: 11px; color: #5e6878;">Terminal:3</small>
-                                                                                    <br>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-5 text-center">
-                                                                            <img height="50" width="50"
-                                                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
-                                                                                alt="">
-                                                                            <p class="mb-0 pb-0">Emirates Airline</p>
-                                                                            <p class="mb-0 pb-0">Boeing 707</p>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row mt-2 p-2 pb-0">
-                                                                <div class="chip chip-sm"
-                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
-
-                                                                    <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
-                                                                        src="../../../../public/theme/appimages/location.svg"
-                                                                        alt="">
-                                                                    Layover:Netaji Subhash Chandra Bose... | 02 hr 30
-                                                                    min
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="card ">
-                                                        <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
-                                                            <div class="d-flex">
-                                                                <div class="p-2 flex-grow-1">
-                                                                    <b>
-                                                                        <img src="../../../../public/theme/appimages/Plane_des.svg"
-                                                                            alt="">
-                                                                        Destination
-                                                                    </b>
-                                                                </div>
-                                                                <div class="p-2">Dubai Internation Airport
-                                                                </div>
-                                                                <div class="p-2">Duration: 03 hr 25 min</div>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="card-body">
-                                                            <div class="row">
-                                                                <div class="col-md-5 border-end">
-                                                                    <div class="d-flex border-right">
-                                                                        <div class="text-start mt-2">
-                                                                            <p class="p-0 m-0"><b>CCU</b></p>
-                                                                            <small
-                                                                                style="font-size: 11px; color: #5e6878;"><b>10:50
-                                                                                    AM | 19 Jan, Thu</b></small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 11px; color: #5e6878;">Terminal:2</small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 11px; color: #5e6878;">Flight
-                                                                                No:78ER457</small>
-                                                                            <br>
-                                                                            <small
-                                                                                style="font-size: 11px; color: #5e6878;">Class:Economy</small>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-7">
-                                                                    <div class="row">
-                                                                        <div class="col-md-7">
-                                                                            <div class="d-flex border-right">
-                                                                                <div class="text-start mt-2">
-                                                                                    <p class="p-0 m-0"><b>DXB</b></p>
-                                                                                    <small
-                                                                                        style="font-size: 11px; color: #5e6878;"><b>02:55
-                                                                                            PM | 19 Jan,
-                                                                                            Thu</b></small>
-                                                                                    <br>
-                                                                                    <small
-                                                                                        style="font-size: 11px; color: #5e6878;">Terminal:3</small>
-                                                                                    <br>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-5 text-center">
-                                                                            <img height="50" width="50"
-                                                                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
-                                                                                alt="">
-                                                                            <p class="mb-0 pb-0">Emirates Airline</p>
-                                                                            <p class="mb-0 pb-0">Boeing 777</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
-                                                    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla
-                                                        single-origin coffee squid. Exercitation +1 labore velit, blog
-                                                        sartorial
-                                                        PBR leggings next level wes anderson artisan four loko
-                                                        farm-to-table
-                                                        craft beer twee. Qui photo booth letterpress, commodo enim craft
-                                                        beer
-                                                        mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo
-                                                        nostrud
-                                                        organic, assumenda labore aesthetic magna delectus mollit.
-                                                        Keytar
-                                                        helvetica VHS salvia yr, vero magna velit sapiente labore
-                                                        stumptown.
-                                                        Vegan fanny pack odio cillum wes anderson 8-bit, sustainable
-                                                        jean shorts
-                                                        beard ut DIY ethical culpa terry richardson biodiesel. Art party
-                                                        scenester stumptown, tumblr butcher vero sint qui sapiente
-                                                        accusamus
-                                                        tattooed echo park.</p>
-                                                </div>
-                                                <div class="tab-pane fade" id="primarycontact" role="tabpanel">
-                                                    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they
-                                                        sold out
-                                                        mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table
-                                                        readymade.
-                                                        Messenger bag gentrify pitchfork tattooed craft beer, iphone
-                                                        skateboard
-                                                        locavore carles etsy salvia banksy hoodie helvetica. DIY synth
-                                                        PBR
-                                                        banksy irony. Leggings gentrify squid 8-bit cred pitchfork.
-                                                        Williamsburg
-                                                        banh mi whatever gluten-free, carles pitchfork biodiesel fixie
-                                                        etsy
-                                                        retro mlkshk vice blog. Scenester cred you probably haven't
-                                                        heard of
-                                                        them, vinyl craft beer blog stumptown. Pitchfork sustainable
-                                                        tofu synth
-                                                        chambray yr.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4" style="background-color: #f4f4ff;">
-                                            <!-- upcoming 2 -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -2185,7 +1260,19 @@ function offHover() {
 <style>
 .bg-checkbox-active {
     color: #fff;
-    background: #1882ff;
+    /* background: #1882ff; */
+    background: #875ae9;
+}
+
+.form-check-input:checked {
+    background-color: #875ae9;
+    border-color: #ffffff;
+}
+
+.form-check-input:focus {
+    border-color: #e2d7fa;
+    outline: 0;
+    /* box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25); */
 }
 
 .bg-checkbox {
