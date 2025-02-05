@@ -820,5 +820,4 @@ function offHover() {
   cursor: pointer;
   margin-right: 12px;
 }
-
 </style>

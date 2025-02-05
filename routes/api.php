@@ -9,10 +9,12 @@ use App\Http\Controllers\Admin\Area\AreaController;
 use App\Http\Controllers\Admin\Agent\AgentController;
 use App\Http\Controllers\Admin\Role\RolePermissionController;
 use App\Http\Controllers\Admin\Department\DepartmentController;
+use App\Http\Controllers\Admin\AirlineLogo\AirlineLogoController;
 use App\Http\Controllers\Admin\Designation\DesignationController;
 use App\Http\Controllers\Admin\OfficeLocation\LocationController;
 use App\Http\Controllers\Admin\IssuedBankMFS\IssuedBankMFSController;
 use App\Http\Controllers\Admin\PaymentAccount\PaymentAccountSController;
+use App\Http\Controllers\Admin\AircraftType\AircraftTypeDesignatorController;
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::post('register', [AuthController::class, 'register'])->name('register');
@@ -32,7 +34,16 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('ForcePassReset', [AuthController::class, 'ForcePassReset'])->name('ForcePassReset');
 
     //agent section
+    Route::get('getKam', [AgentController::class, 'getKam']);
     Route::get('getAgent', [AgentController::class, 'index'])->name('agent.index');
+    Route::post('/agent/save', [AgentController::class, 'store']);
+    Route::post('/viewAgent', [AgentController::class, 'viewAgent'])->name('agent.viewAgent');
+    Route::post('/recommendedAgent', [AgentController::class, 'recommendedAgentDetails'])->name('agent.recommendedAgentDetails');
+    Route::post('/AgentAllImage', [AgentController::class, 'AgentAllImage'])->name('agent.AgentAllImage');
+    Route::post('/getAgentApprovalLog', [AgentController::class, 'getAgentApprovalLog'])->name('agent.getAgentApprovalLog');
+    Route::post('/agentRecomendation/update', [AgentController::class, 'agentRecomendation'])->name('agent.agentRecomendation');
+
+    Route::post('/agentApproval/update', [AgentController::class, 'agentApproval'])->name('agent.agentApproval');
 
     // area
     Route::get('getarea', [AreaController::class, 'index'])->name('area.index');
@@ -101,6 +112,21 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/editPaymentAcct', [PaymentAccountSController::class, 'edit'])->name('settings.deposit.editPaymentAcct');
     Route::post('/payment-acct/update', [PaymentAccountSController::class, 'update'])->name('settings.deposit.updatePaymentAcct');
 
+    // AircraftTypeDesignator
+    Route::get('getAircraftTypeDesignator', [AircraftTypeDesignatorController::class, 'index'])->name('settings.aircraft.getAircraftTypeDesignator');
+    Route::post('/AircraftType/save', [AircraftTypeDesignatorController::class, 'store'])->name('settings.aircraft.store');
+    Route::post('/editAircraft', [AircraftTypeDesignatorController::class, 'edit'])->name('settings.aircraft.edit');
+    Route::post('/AircraftType/update', [AircraftTypeDesignatorController::class, 'update'])->name('settings.aircraft.update');
+    Route::post('/deleteAircraft', [AircraftTypeDesignatorController::class, 'destroy'])->name('settings.aircraft.destroy');
+
+    //airlines
+    Route::get('getAirlines', [AirlineLogoController::class, 'index'])->name('settings.airlines.getAirlines');
+    Route::post('/airlines/update', [AirlineLogoController::class, 'update'])->name('settings.airlines.update');
+    Route::post('/editAirlines', [AirlineLogoController::class, 'edit'])->name('settings.airlines.edit');
+
+    Route::post('/Airlines/save', [AirlineLogoController::class, 'store'])->name('settings.airlines.store');
+    Route::post('/deleteAirlines', [AirlineLogoController::class, 'destroy'])->name('settings.airlines.destroy');
+
     //users managemnt
     Route::get('getInternalUsers', [UserController::class, 'index'])->name('user.getInternalUsers');
     Route::get('getAllUsers', [UserController::class, 'getAllUsers'])->name('user.getAllUsers');
@@ -115,4 +141,5 @@ Route::middleware(['auth:api'])->group(function () {
 
 });
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
+Route::get('airports', [AreaController::class, 'airports']);
 Route::post('/role/update', [RolePermissionController::class, 'update']);

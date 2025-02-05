@@ -91,7 +91,7 @@ class IssuedBankMFSController extends BaseController
             $bank_mfs = IssuedBankMFS::where('id', $request->id)->first();
             $bank_mfs->delete();
             $success = '';
-            return $this->SuccessResponse($success, 'Successfully Department deleted.');
+            return $this->SuccessResponse($success, 'Successfully Bank MFS deleted.');
 
         } else {
             $error = 'Id can not be null.';
