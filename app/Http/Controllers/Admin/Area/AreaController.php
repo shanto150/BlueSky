@@ -162,6 +162,16 @@ class AreaController extends BaseController
     {
         $airp = DB::table('airports')->get();
         return response()->json($airp);
+
+        // $data = [];
+        // if($request->has('q')){
+        //     $search = $request->q;
+        //     $data = DB::table("airports")
+        //     		->select("id","code","City_name","Airport_Name","Country_name","countryshortcode")
+        //     		->where('code','LIKE',"%$search%")
+        //     		->get();
+        // }
+        // return response()->json($data);
     }
 
     public function districtList(Request $request)

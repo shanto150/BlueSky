@@ -17,6 +17,11 @@ export default defineConfig({
     resolve: {
         alias: {
             vue: "vue/dist/vue.esm-bundler.js",
+            '$': 'jQuery',
+            'jquery': 'jquery/dist/jquery.js',
         },
     },
+    optimizeDeps: {
+        include: ['jquery']
+    }
 });

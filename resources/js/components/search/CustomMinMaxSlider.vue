@@ -121,8 +121,7 @@ const onInput = ({ target }) => {
     position: absolute;
     width: var(--ProgressPercent, 100%);
     height: 100%;
-    /* background: #027de2; */
-    background: #7944eb;
+    background: #027de2;
     border-radius: 999px;
 }
 
@@ -140,8 +139,7 @@ const onInput = ({ target }) => {
     height: var(--thumbRadius);
     margin-top: calc((var(--trackHeight) - var(--thumbRadius)) / 2);
     background: #e4eaef;
-    /* border: 1px solid #027de2; */
-    border: 1px solid #7944eb;
+    border: 1px solid #027de2;
     border-radius: 999px;
     pointer-events: all;
     appearance: none;
@@ -163,8 +161,7 @@ const onInput = ({ target }) => {
     height: var(--thumbRadius);
     margin-top: calc((var(--trackHeight) - var(--thumbRadius)) / 2);
     background: #e4eaef;
-    /* border: 1px solid #027de2; */
-    border: 1px solid #7944eb;
+    border: 1px solid #027de2;
     border-radius: 999px;
     pointer-events: all;
     appearance: none;
@@ -192,8 +189,7 @@ const onInput = ({ target }) => {
 .custom-slider .minmax-indicator::before {
     content: "";
     position: absolute;
-    /* background: #027de2; */
-    background: #7944eb;
+    background: #027de2;
     height: 100%;
     left: var(--progressLeft);
     right: var(--progressRight);

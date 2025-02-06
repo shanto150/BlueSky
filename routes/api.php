@@ -21,6 +21,8 @@ Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('sendResetLinkEmail', [AuthController::class, 'sendResetLinkEmail'])->name('sendResetLinkEmail');
 Route::post('PassReset', [AuthController::class, 'resetPassword'])->name('password.reset');
 
+Route::get('airports', [AreaController::class, 'airports']);
+
 
 Route::get('/migrate', function () {Artisan::call('migrate:refresh');return Artisan::output();})->name('migrate');
 
