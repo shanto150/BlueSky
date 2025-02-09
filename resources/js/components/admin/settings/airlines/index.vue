@@ -381,7 +381,7 @@ async function getListValues() {
     border: 1px solid #E4EAEF;
     border-radius: 9px;
     background-color: white;
-    background-image: url('../../../../../../../public/theme/appimages/Search.svg');
+    background-image: url('../../../../../../public/theme/appimages/Search.svg');
     background-position: 7px 6px;
     /*left,top*/
     background-repeat: no-repeat;

@@ -264,12 +264,6 @@ const handleFileChange = (event) => {
                         <p class="text-center">Profile Image</p>
 
                         <div class="mb-3 pt-0 text-center mx-auto">
-<<<<<<< HEAD
-                            <img v-if="!previewImage" src="" height="150" width="150"
-                                class="border border-1 rounded rounded-2" alt="Profile Picture">
-
-=======
->>>>>>> 9ddb7fe0cf9fca5ad5cae40e6c047ebe6c93055c
                             <img v-if="previewImage" :src="previewImage" height="150" width="150"
                                 class="border border-1 rounded rounded-2" alt="Profile Picture">
                             <img v-else src="../../../../../public/theme/appimages/profile_default_img.svg" height="150" width="150"
