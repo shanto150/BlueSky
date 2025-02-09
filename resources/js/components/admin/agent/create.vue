@@ -281,6 +281,7 @@ getZone();
 async function getZone() {
     try {
         const response = await axiosInstance.get('getAllOffLoc');
+        console.log(response.data);
 
         var options = [];
         $.each(response.data, function (key, value) {
