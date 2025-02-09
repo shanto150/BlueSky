@@ -16,7 +16,6 @@ getDepartment();
 async function getDepartment() {
     try {
         const response = await axiosInstance.get('getAllDept');
-        console.log(response.data);
 
         var options = [];
         $.each(response.data, function (key, value) {
@@ -265,7 +264,6 @@ const handleFileChange = (event) => {
                         <p class="text-center">Profile Image</p>
 
                         <div class="mb-3 pt-0 text-center mx-auto">
-
                             <img v-if="previewImage" :src="previewImage" height="150" width="150"
                                 class="border border-1 rounded rounded-2" alt="Profile Picture">
                             <img v-else src="../../../../../public/theme/appimages/profile_default_img.svg" height="150" width="150"
