@@ -1187,6 +1187,7 @@ function offHover() {
                                         <div class="mt-2">
                                             <p class="p-0 m-0"><b> {{flight.connections}}-Stop</b></p>
                                         </div>
+
                                         <div class="d-flex gap-3 border-start">
                                             <div class="mt-2 ms-md-4">
                                                 <button class="btn btn-sm btn-block bluesky-btn-primary"

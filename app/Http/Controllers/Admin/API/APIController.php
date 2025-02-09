@@ -56,6 +56,10 @@ class APIController extends BaseController {
         //good format****
         $response = preg_replace( '/(<\/?)(\w+):([^>]*>)/', "$1$2$3", $response );
         $xml = new SimpleXMLElement( $response );
+<<<<<<< HEAD
+
+=======
+>>>>>>> 3ce8f08b13196f64876c2a14cd04a3df175b5493
         $body = $xml->xpath( '//SOAPBody' )[0];
         $array = json_decode( json_encode( ( array )$body ), TRUE );
         //End good ******
