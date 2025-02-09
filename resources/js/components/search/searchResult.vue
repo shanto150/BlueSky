@@ -29,12 +29,9 @@ const isRounded = 'oneway';
 const tdate = ref();
 
 const format = (fdate) => {
-
     const day = fdate.getDate();
     const month = fdate.getMonth() + 1;
     const year = fdate.getFullYear();
-
-    // return `${day}/${month}/${year}`;
     const date = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
     form.dep_date = date;
     return date;
@@ -89,7 +86,6 @@ function tourTypeChange(type) {
         $('.one-way').removeClass('bg-checkbox');
         $('.round-way').addClass('bg-checkbox');
         $('.multi-city').addClass('bg-checkbox');
-
         $('#toDateChange').addClass('d-none');
         this.isAutoApply = !this.isAutoApply;
         this.isMultiCalendar = !this.isMultiCalendar;

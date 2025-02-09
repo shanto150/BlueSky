@@ -1,19 +1,11 @@
 import "./bootstrap";
-
-
 import "https://code.jquery.com/jquery-3.7.1.min.js";
 import "./themeassets/js/bootstrap.bundle.min.js";
 import "./themeassets/plugins/bs-stepper/js/bs-stepper.min.js";
 import "./themeassets/plugins/bs-stepper/js/main.js";
-
 import "./themeassets/js/app.js";
 import "https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js";
 import "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js";
-
-import jQuery from 'jquery';
-window.jQuery = window.$ = jQuery;
-
-
 import { createApp, markRaw } from "vue";
 import { createPinia } from "pinia";
 import App from "./components/App.vue";
@@ -26,10 +18,8 @@ import VueTippy from "vue-tippy";
 import VueDeviceDetect from "@tenrok/vue-device-detect";
 import VWave from "v-wave";
 import moment from "moment";
-
 import Scrollbar from "vue3-perfect-scrollbar-z";
 import "vue3-perfect-scrollbar-z/dist/styles.css";
-
 // if expose with window means we can access it direct with this name in any vue
 import Notification from "./Helpers/Notification.js";
 window.Notification = Notification;

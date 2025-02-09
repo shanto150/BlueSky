@@ -281,6 +281,7 @@ getZone();
 async function getZone() {
     try {
         const response = await axiosInstance.get('getAllOffLoc');
+        console.log(response.data);
 
         var options = [];
         $.each(response.data, function (key, value) {
@@ -954,6 +955,9 @@ async function getKam() {
 </template>
 
 <style>
+.form-check-input[type=radio] {
+    border-color: #8556ea;
+}
 .vl {
     border-left: 6px solid #fff;
     height: 80px;
