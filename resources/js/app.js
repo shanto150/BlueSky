@@ -1,5 +1,4 @@
 import "./bootstrap";
-// test
 import "https://code.jquery.com/jquery-3.7.1.min.js";
 import "./themeassets/js/bootstrap.bundle.min.js";
 import "./themeassets/plugins/bs-stepper/js/bs-stepper.min.js";
