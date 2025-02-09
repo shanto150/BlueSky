@@ -37,7 +37,7 @@ class RequestXML {
                 </SearchAirLeg>';
     }
 
-    private function buildSearchPassengers(Request $request) {
+    private function buildSearchPassengers( $request) {
         $passengers = '';
 
         if ($request->ADT > 0) {
@@ -58,7 +58,7 @@ class RequestXML {
         return $passengers;
     }
 
-    private function getCommonElements(Request $request) {
+    private function getCommonElements($request) {
         return '<AirSearchModifiers>
                     <PreferredProviders>
                         <Provider xmlns="http://www.travelport.com/schema/common_v52_0" Code="'.self::PROVIDER_CODE.'"/>
@@ -75,7 +75,7 @@ class RequestXML {
         return '</LowFareSearchReq></s:Body></s:Envelope>';
     }
 
-    public function generateLowFareSearchXML(Request $request) {
+    public function generateLowFareSearchXML( $request) {
         $xml = $this->getEnvelopeHeader();
         $xml .= $this->buildSearchAirLeg($request->from, $request->to, $request->dep_date);
 
