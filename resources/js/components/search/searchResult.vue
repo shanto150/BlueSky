@@ -250,11 +250,11 @@ function clearDestination() {
 }
 
 function onHover() {
-    $("#img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_Hover_State.jpg');
+    $("#h_img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_Hover_State.jpg');
 }
 
 function offHover() {
-    $("#img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_With_Icon.jpg');
+    $("#h_img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_With_Icon.jpg');
 }
 
 </script>
@@ -275,7 +275,7 @@ function offHover() {
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card border border-1 bluesky-border-primary">
+            <div class="card border border-1 bluesky-border-primary" style="min-height: 135px;">
 
                 <div class="card-body">
                     <div class="d-flex align-items-center gap-2">
@@ -710,7 +710,7 @@ function offHover() {
                                 src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt=""
                                 class="d-sm-block d-md-none" style="width: 100%;" id="img">
                             <img @click="Lowfaresearch()" src="../../../../public/theme/appimages/s_With_Icon.jpg"
-                                alt="" style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="img"
+                                alt="" style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="h_img"
                                 class="d-none d-md-block">
                             <!-- </router-link> -->
                         </div>
