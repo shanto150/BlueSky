@@ -12,15 +12,14 @@ class APIController extends BaseController {
     public function Lowfaresearch( Request $request ) {
 
         // dd( $request->all() );
-
-        $request->validate([
+        $request->validate( [
             'from' => 'required',
             'to' => 'required',
-        ]);
+        ] );
 
         $url = 'https://apac.universal-api.pp.travelport.com/B2BGateway/connect/uAPI/AirService';
         $requestXML = new RequestXML();
-        $xmlpayload = $requestXML->generateLowFareSearchXML($request);
+        $xmlpayload = $requestXML->generateLowFareSearchXML( $request );
 
         // dd( $xmlpayload );
 
@@ -72,7 +71,6 @@ class APIController extends BaseController {
         $segments = isset( $jsonData[ 'airLowFareSearchRsp' ][ 'airAirSegmentList' ][ 'airAirSegment' ] ) ? $jsonData[ 'airLowFareSearchRsp' ][ 'airAirSegmentList' ][ 'airAirSegment' ] : [];
         $pricingSolutions = isset( $jsonData[ 'airLowFareSearchRsp' ][ 'airPriceSolutionList' ][ 'airPriceSolution' ] ) ? $jsonData[ 'airLowFareSearchRsp' ][ 'airPriceSolutionList' ][ 'airPriceSolution' ] : [];
 
-
         // Get filters from input
         $filterOrigin = isset( $request->from ) ? $request->from : 'DAC';
         $filterDestination = isset( $request->to ) ? $request->to : 'DFW';
@@ -81,6 +79,7 @@ class APIController extends BaseController {
         // dd( $filterOrigin, $filterDestination, $filterAirline );
 
         // Find all connections
+
         function findConnections( $segments, $origin, $destination, $filterAirline = '' ) {
             $connections = [];
             foreach ( $segments as $segment ) {
@@ -102,6 +101,7 @@ class APIController extends BaseController {
         }
 
         // Flatten connections into combinations
+
         function flattenConnections( $connections, $currentPath = [] ) {
             $combinations = [];
             foreach ( $connections as $connection ) {
@@ -116,6 +116,7 @@ class APIController extends BaseController {
         }
 
         // Calculate flight duration
+
         function calculateFlightDuration( $departure, $arrival ) {
             $departureTime = new DateTime( $departure );
             $arrivalTime = new DateTime( $arrival );
@@ -125,6 +126,7 @@ class APIController extends BaseController {
         }
 
         // Format duration in hours and minutes
+
         function formatDuration( $totalMinutes ) {
             $hours = floor( $totalMinutes / 60 );
             $minutes = $totalMinutes % 60;
@@ -132,6 +134,7 @@ class APIController extends BaseController {
         }
 
         // Find ADT pricing information
+
         function findPricing( $pricingSolutions ) {
             foreach ( $pricingSolutions as $solution ) {
                 foreach ( isset( $solution[ 'airPricingInfo' ] ) ? $solution[ 'airPricingInfo' ] : [] as $info ) {
@@ -180,7 +183,7 @@ class APIController extends BaseController {
         header( 'Content-Type: application/json' );
         // echo json_encode( [ 'flights' => $response ], JSON_PRETTY_PRINT );
 
-        return response()->json(['flights' => $response], 200, [], JSON_PRETTY_PRINT);
+        return response()->json( [ 'flights' => $response ], 200, [], JSON_PRETTY_PRINT );
 
     }
 
