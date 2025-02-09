@@ -185,7 +185,7 @@ const options = {
                 var idd = row.idd;
                 var status = row.status;
 
-                html += '<button  style="size: 30px; width: 30px; height: 30px;" class="btn btn-outline-info rounded-circle agent-view" placement="top" data-item-id=' + idd + '> <i class="fa-solid fa-file" style="margin:1px 0px 11px -3px;font-size:14px;"></i> </button>';
+                html += '<button  style="size: 30px; width: 30px; height: 30px;" class="btn btn-outline-info rounded-circle agent-view" placement="top" data-item-id=' + idd + '> <i class="fa fa-eye" style="margin:1px 0px 11px -6px;font-size:14px;"></i> </button>';
 
                 if (status == 'Pending' || status == 'Hold') {
 
