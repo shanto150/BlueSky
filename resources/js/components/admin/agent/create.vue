@@ -954,6 +954,9 @@ async function getKam() {
 </template>
 
 <style>
+.form-check-input[type=radio] {
+    border-color: #8556ea;
+}
 .vl {
     border-left: 6px solid #fff;
     height: 80px;
