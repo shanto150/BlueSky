@@ -710,7 +710,6 @@ function offHover() {
 
                         <div class="col-md-1 mt-2 mt-md-0">
                             <!-- <router-link> -->
-
                             <img @click="Lowfaresearch()"
                                 src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt=""
                                 class="d-sm-block d-md-none" style="width: 100%;" id="img">
