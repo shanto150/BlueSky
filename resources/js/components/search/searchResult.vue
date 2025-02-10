@@ -6,6 +6,8 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import CustomMinMaxSlider from "../../components/search/CustomMinMaxSlider.vue";
 import SimpleBar from "simplebar-vue";
 import "simplebar-vue/dist/simplebar.min.css";
+import { useAuthStore } from '../../stores/authStore';
+const authStore = useAuthStore();
 
 const airports = ref([]); // All airports
 const initialLoadLimit = 20; // Limit for init
@@ -63,10 +65,13 @@ const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '
 
 async function Lowfaresearch() {
     try {
+        authStore.GlobalLoading = true;
         const response = await axiosInstance.post("Lowfaresearch", form);
         console.log(response.data.flights);
         flights.value = response.data.flights;
+        authStore.GlobalLoading = false;
     } catch (error) {
+        authStore.GlobalLoading = false;
         console.log(error);
     }
 }
@@ -250,11 +255,11 @@ function clearDestination() {
 }
 
 function onHover() {
-    $("#h_img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_Hover_State.jpg');
+    $("#s_image").attr('src', 'http://[::1]:5173/public/theme/appimages/s_Hover_State.jpg');
 }
 
 function offHover() {
-    $("#h_img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_With_Icon.jpg');
+    $("#s_image").attr('src', 'http://[::1]:5173/public/theme/appimages/s_With_Icon.jpg');
 }
 
 </script>
@@ -710,7 +715,7 @@ function offHover() {
                                 src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt=""
                                 class="d-sm-block d-md-none" style="width: 100%;" id="img">
                             <img @click="Lowfaresearch()" src="../../../../public/theme/appimages/s_With_Icon.jpg"
-                                alt="" style="width: 53px;" @mouseover="onHover();" @mouseout="offHover();" id="h_img"
+                                alt="" style="width: 53px; cursor:pointer" @mouseover="onHover();" @mouseout="offHover();" id="s_image"
                                 class="d-none d-md-block">
                             <!-- </router-link> -->
                         </div>
