@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Designation\Designation;
 use Spatie\Activitylog\Models\Activity;
 use App\Http\Controllers\BaseController;
@@ -36,7 +37,8 @@ class DesignationController extends BaseController
      */
     public function store(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
+        $auth = Auth::user();
+
 
         $validator = validator($request->all(),
             ['des_name' => 'required'],
@@ -85,7 +87,7 @@ class DesignationController extends BaseController
      */
     public function update(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
+        $auth = Auth::user();
         $dept = Designation::where('id', $request->dept_id)->first();
         $dept->name = $request->des_name != null ? $request->des_name : $dept->name;
         $dept->status = $request->status_val != null ? $request->status_val : $dept->status;

@@ -166,15 +166,8 @@ onMounted(() => {
                         </li> -->
 
                         <li> <a v-wave class="has-arrow" href="javascript:;"><i
-                                    class='bx bx-paper-plane'></i>Flight Management </a>
+                                    class='bx bx-paper-plane'></i>Flight Management</a>
                             <ul>
-                                <!-- <router-link v-wave :to="{ name: 'paymentacct' }">
-                                    <i class='bx bx-paper-plane'></i> Payment Account
-                                </router-link>
-
-                                <router-link v-wave :to="{ name: 'issuedBankMFS' }">
-                                    <i class='bx bx-paper-plane'></i> Issused Bank & MFS
-                                </router-link> -->
                                 <router-link v-wave :to="{ name: 'aircraftList' }">
                                     <i class='bx bx-paper-plane'></i> Aircrafts
                                 </router-link>

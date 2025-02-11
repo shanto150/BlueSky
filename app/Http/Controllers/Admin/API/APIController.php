@@ -12,10 +12,10 @@ class APIController extends BaseController {
     public function Lowfaresearch( Request $request ) {
 
         // dd( $request->all() );
-        $request->validate( [
+        $request->validate([
             'from' => 'required',
             'to' => 'required',
-        ] );
+        ]);
 
         $url = 'https://apac.universal-api.pp.travelport.com/B2BGateway/connect/uAPI/AirService';
         $requestXML = new RequestXML();

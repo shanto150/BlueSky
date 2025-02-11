@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseController;
 use App\Models\AircraftType\AircraftTypeDesignator;
 
@@ -35,7 +36,8 @@ class AircraftTypeDesignatorController extends BaseController
      */
     public function store(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
+
+        $auth = Auth::user();
 
         $validator = validator($request->all(),
             ['iata_code' => 'required'],
@@ -81,8 +83,7 @@ class AircraftTypeDesignatorController extends BaseController
      */
     public function update(Request $request)
     {
-        // dd($request->all());
-        $auth = User::where('email', $request->useEmail)->first();
+        $auth = Auth::user();
 
         $aircraft = AircraftTypeDesignator::where('id', $request->aircraft_id)->first();
         $aircraft->iata_code = $request->iata_code != null ? $request->iata_code : $aircraft->name;

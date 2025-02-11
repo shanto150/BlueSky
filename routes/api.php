@@ -143,3 +143,14 @@ Route::middleware(['auth:api'])->group(function () {
 Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
 Route::get('airports', [AreaController::class, 'airports']);
 Route::post('/role/update', [RolePermissionController::class, 'update']);
+
+Route::middleware('auth:sanctum')->get('abilities', function(Request $request) {
+    return $request->user()->roles()->with('permissions')
+        ->get()
+        ->pluck('permissions')
+        ->flatten()
+        ->pluck('name')
+        ->unique()
+        ->values()
+        ->toArray();
+});
