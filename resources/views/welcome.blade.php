@@ -25,11 +25,15 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
         let allValue = JSON.parse(localStorage.getItem('piniaUserAuth'));
-        if (allValue.isDarkMode) {
-            $("html").attr("data-bs-theme", 'dark')
-        } else {
-            $("html").attr("data-bs-theme", 'light')
+        if(allValue != null){
+
+            if (allValue.isDarkMode) {
+                $("html").attr("data-bs-theme", 'dark')
+            } else {
+                $("html").attr("data-bs-theme", 'light')
+            }
         }
+
     </script>
 
 </body>

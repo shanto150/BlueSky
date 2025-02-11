@@ -1,13 +1,13 @@
 <?php
-
 namespace App\Http\Controllers\Admin\IssuedBankMFS;
 
-use App\Http\Controllers\BaseController;
-use App\Models\IssuedBankMFS\IssuedBankMFS;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BaseController;
+use App\Models\IssuedBankMFS\IssuedBankMFS;
 
 class IssuedBankMFSController extends BaseController
 {
@@ -21,7 +21,7 @@ class IssuedBankMFSController extends BaseController
 
     public function save(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
+        $auth = Auth::user();
 
         $validator = validator($request->all(),
             ['bank_mfs_name' => 'required'],
@@ -30,9 +30,9 @@ class IssuedBankMFSController extends BaseController
             return $this->ErrorResponse($validator->errors()->all());
         }
 
-        $bank_mfs = new IssuedBankMFS;
-        $bank_mfs->name = $request->bank_mfs_name;
-        $bank_mfs->status = 1;
+        $bank_mfs             = new IssuedBankMFS;
+        $bank_mfs->name       = $request->bank_mfs_name;
+        $bank_mfs->status     = 1;
         $bank_mfs->created_by = $auth->id;
         $bank_mfs->save();
 
@@ -50,10 +50,11 @@ class IssuedBankMFSController extends BaseController
 
     public function update(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
-        $bank_mfs = IssuedBankMFS::where('id', $request->bank_mfs_id)->first();
-        $bank_mfs->name = $request->bank_mfs_name != null ? $request->bank_mfs_name : $bank_mfs->name;
-        $bank_mfs->status = $request->status_val != null ? $request->status_val : $bank_mfs->status;
+        $auth = Auth::user();
+
+        $bank_mfs             = IssuedBankMFS::where('id', $request->bank_mfs_id)->first();
+        $bank_mfs->name       = $request->bank_mfs_name != null ? $request->bank_mfs_name : $bank_mfs->name;
+        $bank_mfs->status     = $request->status_val != null ? $request->status_val : $bank_mfs->status;
         $bank_mfs->updated_by = $auth->id;
         $bank_mfs->save();
 
