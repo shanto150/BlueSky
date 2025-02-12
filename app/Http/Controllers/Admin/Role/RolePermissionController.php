@@ -1,13 +1,14 @@
 <?php
 namespace App\Http\Controllers\Admin\Role;
 
-use App\Http\Controllers\BaseController;
-use App\Models\Role\Role;
-use App\Models\Role\RolePermission;
 use App\Models\User;
+use App\Models\Role\Role;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use App\Models\Role\RolePermission;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BaseController;
 
 class RolePermissionController extends BaseController
 {
@@ -47,6 +48,7 @@ class RolePermissionController extends BaseController
 
     public function roleSave(Request $request)
     {
+        // $this->authorize('role_create');
 
         $auth = User::where('email', $request->useEmail)->first();
 
@@ -95,6 +97,8 @@ class RolePermissionController extends BaseController
      */
     public function edit(Request $request)
     {
+        // $this->authorize('role_edit');
+
         $data = Role::find($request->id);
         return response()->json($data);
 
@@ -111,6 +115,8 @@ class RolePermissionController extends BaseController
      */
     public function update(Request $request)
     {
+        // $this->authorize('role_edit');
+
         $role         = Role::find($request->role_id);
         $role->name   = $request->roleName ? $request->roleName : $role->name;
         $role->status = $request->status_val ? $request->status_val : $role->status;
@@ -146,7 +152,7 @@ class RolePermissionController extends BaseController
     public function destroy(Request $request)
     {
         $this->authorize('role_delete');
-        // dd($this->authorize('role_delete'));
+
         if ($request->id) {
 
             $role  = Role::where('id', $request->id)->first();
