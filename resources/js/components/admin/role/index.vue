@@ -175,10 +175,10 @@ const options = {
                         const response = axiosInstance.post("deleteRole", { 'id': idd });
 
                         response.then(data => {
-                            console.log(data.data.message);
-                            if(data.data.message){
+
+                            if (data.data.message) {
                                 Notification.showToast('s', data.data.message);
-                            }else{
+                            } else {
                                 Notification.showToast('E', 'This action is not allowed.');
                             }
 
