@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         try {
             foreach (RolePermission::pluck('feature_name') as $permission) {
                 Gate::define($permission, function ($user) use ($permission) {
-
+                    // dd($user);
                    $data =  $user->role->role_permissions()->where('feature_name', $permission)->count() > 0;
 
                     if($data == false){
