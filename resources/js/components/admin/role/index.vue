@@ -173,8 +173,22 @@ const options = {
 
                     if (closedBy == 'yes') {
                         const response = axiosInstance.post("deleteRole", { 'id': idd });
+
+                        response.then(data => {
+                            console.log(data.data.message);
+                            if(data.data.message){
+                                Notification.showToast('s', data.data.message);
+                            }else{
+                                Notification.showToast('E', 'This action is not allowed.');
+                            }
+
+                        }).catch(error => {
+                            console.error(error);
+                        });
+
                         getListValues();
-                        Notification.showToast('s', 'Successfully Role Deleted.');
+
+
                     } else {
 
                     }

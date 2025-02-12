@@ -32,12 +32,19 @@ class AuthServiceProvider extends ServiceProvider
         try {
             foreach (RolePermission::pluck('feature_name') as $permission) {
                 Gate::define($permission, function ($user) use ($permission) {
-                    return $user->roles()->whereHas('permissions', function ($q) use ($permission) {
-                        $q->where('feature_name', $permission);
-                    })->count() > 0;
+
+                   $data =  $user->role->role_permissions()->where('feature_name', $permission)->count() > 0;
+
+                    if($data == false){
+
+                        exit();
+                    }else{
+                        return $data;
+                    }
                 });
             }
         } catch (\Exception $e) {
+
             info('registerUserAccessToGates: Database not found or not yet migrated. Ignoring user permissions while booting app.');
         }
     }

@@ -154,16 +154,6 @@ onMounted(() => {
                                 <i class='bx bx-paper-plane'></i> Office Location
                             </router-link>
                         </li>
-                        <!-- <li>
-                            <router-link v-wave :to="{ name: 'aircraftList' }">
-                                <i class='bx bx-paper-plane'></i> Aircrafts
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link v-wave :to="{ name: 'airlinesList' }">
-                                <i class='bx bx-paper-plane'></i> Airlines
-                            </router-link>
-                        </li> -->
 
                         <li> <a v-wave class="has-arrow" href="javascript:;"><i
                                     class='bx bx-paper-plane'></i>Flight Management</a>
