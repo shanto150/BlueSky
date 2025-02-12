@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted, reactive } from "vue";
+import { ref, onMounted, onUnmounted, reactive, watch } from "vue";
 import axiosInstance from "../../axiosInstance"
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -16,10 +16,13 @@ const showDestinationList = ref(false);
 const filteredOriginAirports = ref([]);
 const filteredDestinationAirports = ref([]);
 
+const totalFlights = ref(0);
+const loadging = ref(false);
 const fdate = ref();
 const sliderMin = ref(150);
 const sliderMax = ref(180);
 const flights = ref([])
+const ExecutionTime = ref([])
 
 const isAutoApply = ref(true);
 const isMultiCalendar = ref(false);
@@ -36,6 +39,8 @@ const format = (fdate) => {
     form.dep_date = date;
     return date;
 }
+
+// authStore.GlobalLoading = true;
 
 const formats = (fdates) => {
 
@@ -66,12 +71,30 @@ const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '
 async function Lowfaresearch() {
     try {
         authStore.GlobalLoading = true;
+        loadging.value = true;
+        // Start time measurement
+        const startTime = performance.now();
+
         const response = await axiosInstance.post("Lowfaresearch", form);
+
+
+        // End time measurement
+        const endTime = performance.now();
+
+        // Calculate execution time in seconds
+        ExecutionTime.value = ((endTime - startTime) / 1000).toFixed(2);
+
+
         console.log(response.data.flights);
         flights.value = response.data.flights;
+        totalFlights.value = response.data.flights.length;
         authStore.GlobalLoading = false;
+        loadging.value = false;
+
+
     } catch (error) {
         authStore.GlobalLoading = false;
+        loadging.value = false;
         console.log(error);
     }
 }
@@ -170,6 +193,14 @@ onUnmounted(() => {
     document.removeEventListener("click", handleClickOutside);
 });
 
+watch(
+    () => form.from,
+    (newValue) => {
+        showOriginList.value = true; // Always show dropdown when typing
+        filterOriginAirports(newValue);
+    }
+);
+
 async function getAirports() {
     try {
         const response = await axiosInstance.get("airports");
@@ -207,12 +238,20 @@ function filterAirports(searchText, airports) {
         return airports.slice(0, initialLoadLimit);
     }
     const search = searchText.toLowerCase();
-    return airports.filter(
-        (airport) =>
-            airport.id.toLowerCase().includes(search) ||
-            airport.text.toLowerCase().includes(search) ||
-            airport.city.toLowerCase().includes(search)
+    // First, check for matches in the id field
+    const idMatches = airports.filter(airport =>
+        airport.id.toLowerCase().includes(search)
     );
+
+    // Then check for matches in other fields
+    const otherMatches = airports.filter(airport =>
+        !airport.id.toLowerCase().includes(search) && // Exclude id matches
+        (airport.text.toLowerCase().includes(search) ||
+            airport.city.toLowerCase().includes(search))
+    );
+
+    // Combine the results, with id matches first
+    return [...idMatches, ...otherMatches];
 }
 
 // Update filter functions
@@ -226,7 +265,9 @@ function filterDestinationAirports(searchText) {
 
 function onOriginFocus() {
     showOriginList.value = true;
-    filteredOriginAirports.value = airports.value.slice(0, initialLoadLimit);
+    if (!filteredOriginAirports.value.length) {
+        filteredOriginAirports.value = airports.value.slice(0, initialLoadLimit);
+    }
 }
 
 function onDestinationFocus() {
@@ -630,7 +671,7 @@ function offHover() {
                             <input id="origin_id" v-model="form.from" name="origin_name"
                                 class="form-control origin_name placeholder-font-size"
                                 @input="filterOriginAirports($event.target.value)" @focus="onOriginFocus"
-                                @click="onOriginFocus" placeholder="City,Airport" autocomplete="off" />
+                                 placeholder="City,Airport" autocomplete="off" />
                             <span v-if="form.from" @click="clearOrigin" class="clear-icon">✖</span>
                             <div v-if="showOriginList" id="origin_results"
                                 class="position-absolute w-100 mt-2 bg-white border rounded shadow-sm"
@@ -716,8 +757,8 @@ function offHover() {
                                 src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt=""
                                 class="d-sm-block d-md-none" style="width: 100%;" id="img">
                             <img @click="Lowfaresearch()" src="../../../../public/theme/appimages/s_With_Icon.jpg"
-                                alt="" style="width: 53px; cursor:pointer" @mouseover="onHover();" @mouseout="offHover();" id="s_image"
-                                class="d-none d-md-block">
+                                alt="" style="width: 53px; cursor:pointer" @mouseover="onHover();"
+                                @mouseout="offHover();" id="s_image" class="d-none d-md-block">
                             <!-- </router-link> -->
                         </div>
                     </div>
@@ -1135,8 +1176,14 @@ function offHover() {
             </div>
         </div>
         <div class="col-md-9">
+            <div v-show="loadging" class="text-center" id="blueloader">
+                <img src="../../../../public//uploads/airlines/blu1.gif" height="200" width="240" alt="">
+            </div>
             <div class="row" id="Flights">
-                <p>Showing {{ flights.length }} of {{ totalFlights }} Total Flights</p>
+                <p v-show="flights.length > 0">
+                    Showing {{ flights.length }} of {{ totalFlights }} Total Flights
+                    (In {{ ExecutionTime }} seconds)
+                </p>
 
                 <div v-for="(flight, index) in flights" :key="index" class="col-md-12">
                     <div class="card">
@@ -1144,26 +1191,37 @@ function offHover() {
                             <div class="row">
                                 <div class="col-md-3 m-0 p-0">
                                     <div class="d-flex">
-                                        <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
-                                            height="70">
+                                        <img :src="flight.logopath" alt=""
+                                            style="width: 60px; height: 40px; margin-right: 20px; margin-left: 10px; margin-top: 10px;">
+                                        <!-- <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
+                                            height="70"> -->
                                         <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>{{ flight.origin }}-{{ flight.destination }}</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.carrier_code }}</small>
-
+                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.carrier_code }} |
+                                                {{ flight.ailine_name }}</small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-5 border-start">
                                     <div class="d-flex gap-5">
                                         <div class="mt-2">
-                                            <p class="p-0 m-0"><b>{{ flight.departure_time }}</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.departure_date }}</small>
+                                            <p class="p-0 m-0"><b>{{ new Date(`2000/01/01
+                                                    ${flight.departure_time}`).toLocaleTimeString('en-US', {
+                                                hour:
+                                                    'numeric', minute: 'numeric', hour12: true
+                                            }) }}</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">{{ new
+                                                Date(flight.departure_date).toLocaleDateString('en-US', {
+                                                    day:
+                                                        'numeric', month: 'short', weekday: 'short'
+                                                }) }}</small>
                                             <br>
                                             <small style="font-size: 12px; color: #5e6878;">Departure</small>
                                         </div>
 
                                         <div class="text-center mt-2">
-                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.total_flight_duration }}</small>
+                                            <small style="font-size: 12px; color: #5e6878;">{{
+                                                flight.total_flight_duration }}</small>
                                             <br>
                                             <div class="d-flex">
                                                 <div>
@@ -1180,8 +1238,17 @@ function offHover() {
                                         </div>
 
                                         <div class="mt-2">
-                                            <p class="p-0 m-0"><b>{{ flight.arrival_time }}</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.arrival_date }}</small>
+                                            <!-- <p class="p-0 m-0"><b>{{ flight.arrival_time }}</b></p> -->
+                                            <p class="p-0 m-0"><b>{{ new Date(`2000/01/01
+                                                    ${flight.arrival_time}`).toLocaleTimeString('en-US', {
+                                                hour:
+                                                    'numeric', minute: 'numeric', hour12: true
+                                            }) }}</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">{{ new
+                                                Date(flight.arrival_date).toLocaleDateString('en-US', {
+                                                    day: 'numeric',
+                                                    month: 'short', weekday: 'short'
+                                                }) }}</small>
                                             <br>
                                             <small style="font-size: 12px; color: #5e6878;">Arrival</small>
                                         </div>
@@ -1191,7 +1258,7 @@ function offHover() {
                                 <div class="col-md-4 border-start">
                                     <div class="d-flex gap-2">
                                         <div class="mt-2">
-                                            <p class="p-0 m-0"><b> {{flight.connections}}-Stop</b></p>
+                                            <p class="p-0 m-0"><b> {{ flight.connections }}-Stop</b></p>
                                         </div>
 
                                         <div class="d-flex gap-3 border-start">
@@ -1201,13 +1268,8 @@ function offHover() {
                                                     data-bs-target="#flight-package" aria-controls="flight-package">
 
                                                     <div class="text-right" style="padding-left: 10px;">
-                                                        <p class="p-0 m-0"><b><i
-                                                                    class="fa fa-bangladeshi-taka-sign"></i>
-                                                                65000</b></p>
-                                                        <small style="color: #dbdbdb"><del>
-                                                                ৳ 77000</del></small>
-                                                        <br>
-                                                        <small style="font-size: 12px;">Economy Class</small>
+                                                        <p class="p-0 m-0"><b>{{ flight.total_price_ADT }}</b></p>
+                                                        <small style="font-size: 12px;">{{ flight.cabin_class }}</small>
                                                     </div>
                                                 </button>
                                             </div>
@@ -1224,13 +1286,11 @@ function offHover() {
                                         style="background-color: #def1ec; color: #12ce69;">
                                         <i class="fa fa-refresh"></i> Refundable
                                     </div>
-                                    <div class="border border-1 text-center p-1"
-                                        style="background-color: #d6dffa; color: #027de2;">
-                                        <i class="fa fa-rug"></i> Fare Basis:AHGC001
-                                    </div>
+
                                     <div class="border border-1 text-center p-1"
                                         style="background-color: #e4e3f6; color: #7944eb;">
-                                        <i class="fa-regular fa-seat-airline"></i> Available Seats: 20
+                                        <i class="fa-regular fa-seat-airline"></i> Available Seats: {{
+                                            flight.booking_count }}
                                     </div>
                                 </div>
                             </div>
@@ -1240,9 +1300,10 @@ function offHover() {
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="flush-headingOne">
                                                 <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-1"
-                                                    data-bs-toggle="collapse" data-bs-target="#flight-details"
-                                                    aria-expanded="false" aria-controls="flight-details"
-                                                    style=" font-size: 14px; background: #f1f4f7 !important;">
+                                                    :data-bs-target="'#flight-details-' + index"
+                                                    :aria-controls="'flight-details-' + index" data-bs-toggle="collapse"
+                                                    aria-expanded="false"
+                                                    style="font-size: 14px; background: #f1f4f7 !important;">
                                                     <b>Flight Details</b>
                                                 </a>
                                             </h2>
@@ -1252,6 +1313,506 @@ function offHover() {
                             </div>
                         </div>
                     </div>
+
+
+                    <div :id="`flight-details-${index}`" class="accordion-collapse collapse m-0"
+                        aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" style="">
+                        <div class="accordion-body">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome"
+                                                        role="tab" aria-selected="true">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tab-icon"><i
+                                                                    class="bx bx-comment-detail font-18 me-1"></i>
+                                                            </div>
+                                                            <div class="tab-title"> Flight Details</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile"
+                                                        role="tab" aria-selected="false" tabindex="-1">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tab-icon"><i
+                                                                    class="bx bx-bookmark-alt font-18 me-1"></i>
+                                                            </div>
+                                                            <div class="tab-title">Fare Rules</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#primarycontact"
+                                                        role="tab" aria-selected="false" tabindex="-1">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="tab-icon"><i
+                                                                    class="bx bx-star font-18 me-1"></i>
+                                                            </div>
+                                                            <div class="tab-title">Refund Policy</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content pt-3">
+                                                <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
+
+                                                    <div v-for="(detail, detailIndex) in flight.details"
+                                                        :key="detailIndex">
+                                                        <div class="card">
+                                                            <div
+                                                                class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
+                                                                <div class="d-flex">
+                                                                    <div class="p-2 flex-grow-1">
+                                                                        <b>
+                                                                            <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                                alt="">
+                                                                        </b>
+                                                                        <small><b>Departure</b> from {{ detail.origin_airport_name
+                                                                            }}</small>
+                                                                    </div>
+
+                                                                    <div class="p-2">Flying Time: {{ detail.flight_duration
+                                                                        }}</div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-5 border-end">
+                                                                        <div class="d-flex border-right">
+                                                                            <div class="text-start mt-2">
+                                                                                <p class="p-0 m-0 custom-text-purple">
+                                                                                    <b>{{ detail.origin }}</b>
+                                                                                </p>
+                                                                                <small
+                                                                                    style="font-size: 13px; color: #5e6878;">
+                                                                                    <b>{{ new Date(`2000/01/01
+                                                                                        ${detail.departure_time}`).toLocaleTimeString('en-US',
+                                                                                        {
+                                                                                            hour:
+                                                                                                'numeric', minute: 'numeric',
+                                                                                            hour12: true
+                                                                                        }) }} | {{ new
+                                                                                            Date(detail.departure_date).toLocaleDateString('en-US',
+                                                                                                {
+                                                                                                    day: 'numeric', month:
+                                                                                                        'short', weekday: 'short'
+                                                                                                })
+                                                                                        }}</b>
+
+                                                                                </small>
+                                                                                <br>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                    {{ detail.origin_terminal }}
+                                                                                </small>
+                                                                                <br>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Flight
+                                                                                    No: {{ detail.flight_number
+                                                                                    }}</small>
+                                                                                <br>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Class:
+                                                                                    {{ detail.booking_code }}</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                        <div class="row">
+                                                                            <div class="col-md-7">
+                                                                                <div class="d-flex border-right">
+                                                                                    <div class="text-start mt-2">
+                                                                                        <p
+                                                                                            class="p-0 m-0 custom-text-purple">
+                                                                                            <b>{{ detail.destination
+                                                                                                }}</b>
+                                                                                        </p>
+                                                                                        <small
+                                                                                            style="font-size: 13px; color: #5e6878;">
+                                                                                            <!-- <b>{{ detail.arrival_time }}</b> -->
+                                                                                            <b>
+                                                                                                {{ new Date(`2000/01/01
+                                                                                                ${detail.arrival_time}`).toLocaleTimeString('en-US',
+                                                                                                    {
+                                                                                                        hour:
+                                                                                                            'numeric', minute:
+                                                                                                            'numeric',
+                                                                                                hour12: true
+                                                                                                }) }}
+                                                                                                | {{ new
+                                                                                                    Date(detail.arrival_date).toLocaleDateString('en-US',
+                                                                                                        {
+                                                                                                            day: 'numeric', month:
+                                                                                                                'short', weekday:
+                                                                                                'short' })
+                                                                                                }}</b>
+
+                                                                                        </small>
+                                                                                        <br>
+                                                                                        <small
+                                                                                            style="font-size: 11px; color: #5e6878;">Terminal:
+                                                                                            {{
+                                                                                                detail.destination_terminal
+                                                                                            }}</small>
+                                                                                        <br>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-md-5 text-center">
+                                                                                <img :src="detail.logopath" alt=""
+                                                                                    style="width: 60px; height: 40px; margin-right: 20px">
+                                                                                <p class="mb-0 pb-0">{{
+                                                                                    detail.ailine_name }}</p>
+                                                                                <p class="mb-0 pb-0"
+                                                                                    style="font-size: 10px;">{{
+                                                                                        detail.Equipment }}</p>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mt-2 p-2 pb-0">
+                                                                    <div class="chip chip-sm"
+                                                                        style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
+                                                                        <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                            src="../../../../public/theme/appimages/location.svg"
+                                                                            alt="">
+                                                                        Layover : {{ detail.destination_airport_name }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+
+                                                            <p class="text-start fw-bold">PENALTIES/GENERAL</p>
+                                                            <span>
+                                                                1. Reissue/Refund minimum penalty amount before
+                                                                departure 0 BDT 2. Reissue/Refund maximum penalty amount
+                                                                before departure 5999 BDT
+                                                                3. Reissue/Refund maximum penalty amount for the ticket
+                                                                before departure 9599 BDT
+                                                                4. Revalidation minimum penalty amount before departure
+                                                                0 BDT
+                                                                5. Revalidation maximum penalty amount before departure
+                                                                0 BDT
+                                                                6. Revalidation maximum penalty amount for the ticket
+                                                                before departure 0 BDT 7. Reissue/Refund minimum penalty
+                                                                amount before departure no show 5999 BDT 8.
+                                                                Reissue/Refund maximum penalty amount before departure
+                                                                no show 5999 BDT 9. Reissue/Refund maximum penalty
+                                                                amount for the ticket before departure no show 9599 BDT
+                                                                10. Revalidation minimum penalty amount before departure
+                                                                no show 0 BDT 11. Revalidation maximum penalty amount
+                                                                before departure no show 0 BDT 12. Revalidation maximum
+                                                                penalty amount for the ticket before departure no show 0
+                                                                BDT 13. Reissue/Refund minimum penalty amount after
+                                                                departure 0 BDT 14. Reissue/Refund maximum penalty
+                                                                amount with sale currency 5999 BDT 15. Reissue/Refund
+                                                                maximum penalty amount for the ticket after departure
+                                                                9599 BDT 16. Revalidation minimum penalty amount after
+                                                                departure 0 BDT 17. Revalidation maximum penalty amount
+                                                                after departure 0 BDT 18. Revalidation maximum penalty
+                                                                amount for the ticket after departure 0 BDT 19.
+                                                                Reissue/Refund minimum penalty amount after departure no
+                                                                show 5999 BDT 20. Reissue/Refund maximum penalty amount
+                                                                after departure no show 5999 BDT 21. Reissue/Refund
+                                                                maximum penalty amount for the ticket after departure no
+                                                                show 9599 BDT 22. Revalidation minimum penalty amount
+                                                                after departure no show 0 BDT 23. Revalidation maximum
+                                                                penalty amount after departure no show 0 BDT 24.
+                                                                Revalidation maximum penalty amount for the ticket after
+                                                                departure no show 0 BDT 25. Part of rule is free form
+                                                                text from Cat16? Not allowed 26. Reissue penalties can
+                                                                be waived for passenger and family death/illness before
+                                                                departure? Not allowed 27. Revalidation before departure
+                                                                is allowed? Not allowed 28. Reissue/Refund before
+                                                                departure allowed? Allowed with restrictions 29. Reissue
+                                                                penalties can be waived for passenger and family
+                                                                death/illness for before departure no show? Not allowed
+                                                                30. Revalidation before departure when no show is
+                                                                allowed? Not allowed 31. Reissue/Refund before departure
+                                                                when no show allowed? Allowed with restrictions 32.
+                                                                Reissue penalties can be waived for passenger and family
+                                                                death/illness after departure? Not allowed 33.
+                                                                Revalidation after departure is allowed? Not allowed 34.
+                                                                Reissue/Refund after departure allowed? Allowed with
+                                                                restrictions 35. Reissue penalties can be waived for
+                                                                passenger and family death/illness after departure no
+                                                                show? Not allowed 36. Revalidation after departure when
+                                                                no show is allowed? Not allowed 37. Reissue/Refund after
+                                                                departure when no show allowed? Allowed with
+                                                                restrictions 38. Reissue/Refund minimum penalty amount
+                                                                before departure 11998 BDT 39. Reissue/Refund maximum
+                                                                penalty amount before departure 16798 BDT 40.
+                                                                Reissue/Refund maximum penalty amount for the ticket
+                                                                before departure 16798 BDT 41. Reissue/Refund minimum
+                                                                penalty amount before departure no show 11998 BDT 42.
+                                                                Reissue/Refund maximum penalty amount before departure
+                                                                no show 16798 BDT 43. Reissue/Refund maximum penalty
+                                                                amount for the ticket before departure no show 16798 BDT
+                                                                44. Reissue/Refund minimum penalty amount after
+                                                                departure 11998 BDT 45. Reissue/Refund maximum penalty
+                                                                amount with sale currency 16798 BDT 46. Reissue/Refund
+                                                                maximum penalty amount for the ticket after departure
+                                                                16798 BDT 47. Reissue/Refund minimum penalty amount
+                                                                after departure no show 11998 BDT 48. Reissue/Refund
+                                                                maximum penalty amount after departure no show 16798 BDT
+                                                                49. Reissue/Refund maximum penalty amount for the ticket
+                                                                after departure no show 16798 BDT 50. Part of rule is
+                                                                free form text from Cat16? Not allowed 51.
+                                                                Reissue/Refund before departure allowed? Allowed with
+                                                                restrictions 52. Reissue/Refund before departure when no
+                                                                show allowed? Allowed with restrictions 53.
+                                                                Reissue/Refund after departure allowed? Allowed with
+                                                                restrictions 54. Reissue/Refund after departure when no
+                                                                show allowed? Allowed with restrictions
+                                                            </span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="primarycontact" role="tabpanel">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <p class="text-start fw-bold">Max Stay</p>
+                                                            <span>Maximum stay none for economy unrestricted
+                                                                fares.</span>
+                                                        </div>
+                                                        <div class="col-md-12 mt-2">
+                                                            <p class="text-start fw-bold pt-0 mt-0">Layover</p>
+                                                            <span>Stopovers for economy unrestricted fares unlimited
+                                                                stopovers permitted.</span>
+                                                        </div>
+                                                        <div class="col-md-12 mt-2">
+                                                            <p class="text-start fw-bold pt-0 mt-0">Combinations</p>
+                                                            <span>
+                                                                Permitted combinations fares may be combined on a half
+                                                                round trip basis with any fare for any carrier in any
+                                                                rule and tariff to form round trips/circle trips.
+                                                                End-one-end permitted. Validate all fare component.
+                                                                Travel must be via construction point. Add-ons
+                                                                permitted. Open jaws fares may be combined on a half
+                                                                round trip basis with any fare for any carrier in any
+                                                                rule and tariff to form single or double open jaws. A
+                                                                maximum of 2 international fare components permitted.
+                                                                Mileage of an international open segment must be equal
+                                                                to/less than mileage of the shortest flown fare
+                                                                component. No mileage restriction on an open segment
+                                                                within one country.
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" style="background-color: #f4f4ff;">
+
+                                            <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header rounded" id="flush-headingOne"
+                                                        style="background-color: #7944eb !important;">
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                            type="button" data-bs-toggle="collapse"
+                                                            data-bs-target="#flush-fare-summary" aria-expanded="false"
+                                                            aria-controls="flush-fare-summary">
+                                                            Fare Summary
+                                                        </button>
+                                                    </h2>
+                                                    <div id="flush-fare-summary" class="accordion-collapse collapse"
+                                                        aria-labelledby="flush-headingOne"
+                                                        data-bs-parent="#accordionFlushExample" style="">
+                                                        <div class="accordion-body">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            Base Fare
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳30000</td>
+                                                                                    <td>
+                                                                                        ৳60000
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳20000</td>
+                                                                                    <td>
+                                                                                        ৳40000
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            TAX
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳5000</td>
+                                                                                    <td>
+                                                                                        ৳10000
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳2000</td>
+                                                                                    <td>
+                                                                                        ৳4000
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            AIT
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳1275</td>
+                                                                                    <td>
+                                                                                        ৳2550
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳870</td>
+                                                                                    <td>
+                                                                                        ৳1740
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+                                                                    <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            Service Charge
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td>Adults: 2x৳1275</td>
+                                                                                    <td>
+                                                                                        ৳2550
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Childs: 2x৳870</td>
+                                                                                    <td>
+                                                                                        ৳1740
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item mt-2">
+                                                    <h2 class="accordion-header" id="flush-headingTwo">
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                            type="button" data-bs-toggle="collapse"
+                                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                                            aria-controls="flush-collapseTwo">
+                                                            Baggadge Information
+                                                        </button>
+                                                    </h2>
+                                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                                        aria-labelledby="flush-headingTwo"
+                                                        data-bs-parent="#accordionFlushExample" style="">
+                                                        <div class="accordion-body">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm ">
+                                                                            <tbody class="text-start">
+                                                                                <tr>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>DAC-CCU</b>
+                                                                                        <br>
+                                                                                        <small>Economy</small>
+                                                                                    </td>
+
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Cabin</b>
+                                                                                        <br>
+                                                                                        <small>10 Kg</small>
+                                                                                    </td>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Check In</b>
+                                                                                        <br>
+                                                                                        <small>2 Pieces</small>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>CCU-BDX</b>
+                                                                                        <br>
+                                                                                        <small>Economy</small>
+                                                                                    </td>
+
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Cabin</b>
+                                                                                        <br>
+                                                                                        <small>10 Kg</small>
+                                                                                    </td>
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b>Check In</b>
+                                                                                        <br>
+                                                                                        <small>2 Pieces</small>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -1403,4 +1964,5 @@ li.menu-item {
     margin-right: 12px;
     color: #875ae9;
 }
+
 </style>

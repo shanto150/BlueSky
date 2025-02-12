@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin\API;
 
-use Illuminate\Http\Request;
 
 class RequestXML {
     // Class constants
