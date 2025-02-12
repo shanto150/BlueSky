@@ -24,7 +24,6 @@ class AirlineLogoController extends BaseController
     public function store(Request $request)
     {
 
-
         $auth = Auth::user();
 
         $validator = validator($request->all(),
@@ -46,12 +45,13 @@ class AirlineLogoController extends BaseController
         if ($request->hasFile('airline_picture')) {
 
             $request_image = $request->file('airline_picture');
-            $image_name = str_replace(' ', '', (now()->format('dmY-') . time())) . '.' . $request_image->extension();
+            $image_name = $request->code . '.' . $request_image->extension();
 
             $image_path = public_path('/uploads/airlines/');
             if (!File::exists($image_path)) {
                 File::makeDirectory($image_path, 0777, true);
             }
+
 
             $request_image->move($image_path, $image_name);
             $airline->logo_path = '/uploads/airlines/' . $image_name;
@@ -88,7 +88,7 @@ class AirlineLogoController extends BaseController
         if ($request->hasFile('airline_picture')) {
 
             $request_image = $request->file('airline_picture');
-            $image_name = str_replace(' ', '', (now()->format('dmY-') . time())) . '.' . $request_image->extension();
+            $image_name = $request->code . '.' . $request_image->extension();
 
             $image_path = public_path('/uploads/airlines/');
             if (!File::exists($image_path)) {
