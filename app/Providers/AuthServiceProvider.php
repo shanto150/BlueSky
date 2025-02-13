@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Providers;
 
 use App\Models\Role\RolePermission;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -32,13 +31,11 @@ class AuthServiceProvider extends ServiceProvider
         try {
             foreach (RolePermission::pluck('feature_name') as $permission) {
                 Gate::define($permission, function ($user) use ($permission) {
-                    // dd($user);
-                   $data =  $user->role->role_permissions()->where('feature_name', $permission)->count() > 0;
+                    $data = $user->role->role_permissions()->where('feature_name', $permission)->count() > 0;
 
-                    if($data == false){
-
+                    if ($data == false) {
                         exit();
-                    }else{
+                    } else {
                         return $data;
                     }
                 });

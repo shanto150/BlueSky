@@ -1,14 +1,13 @@
 <?php
 namespace App\Http\Controllers\Admin\Role;
 
-use App\Models\User;
-use App\Models\Role\Role;
-use Illuminate\Http\Request;
-use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\DB;
-use App\Models\Role\RolePermission;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseController;
+use App\Models\Role\Role;
+use App\Models\Role\RolePermission;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
 
 class RolePermissionController extends BaseController
 {
@@ -48,7 +47,7 @@ class RolePermissionController extends BaseController
 
     public function roleSave(Request $request)
     {
-        // $this->authorize('role_create');
+        $this->authorize('role_create');
 
         $auth = User::where('email', $request->useEmail)->first();
 
@@ -80,7 +79,9 @@ class RolePermissionController extends BaseController
             $perms->save();
         }
 
-        return response()->json(['message' => 'Successfully Role Saved.', 'types' => 's']);
+        // return response()->json(['message' => 'Successfully Role Saved.', 'types' => 's']);
+        $success = '';
+        return $this->SuccessResponse($success, 'Successfully Role Saved.');
 
     }
 
@@ -115,11 +116,14 @@ class RolePermissionController extends BaseController
      */
     public function update(Request $request)
     {
-        // $this->authorize('role_edit');
+        dd($request->all());
+        $this->authorize('role_edit');
 
         $role         = Role::find($request->role_id);
         $role->name   = $request->roleName ? $request->roleName : $role->name;
         $role->status = $request->status_val ? $request->status_val : $role->status;
+
+        $role->save();
 
         return response()->json(['message' => 'Successfully Role Saved.', 'types' => 's']);
 

@@ -44,56 +44,69 @@ onMounted(() => {
         if ($(this).is(":checked") == true) {
             getRolesData(props);
         }
-        // var valueArray = $('.form-check-input').map(function () {
-        //     return this.value;
-        // }).get();
-        // console.log(valueArray);
-
-
-
     });
 
     $("#status").on('change', function () {
-        var status_val = $(this).val();
-        $('#status_val').val(status_val);
+        console.log($(this).val());
+
+        form.status_val = $(this).val();
+
     });
 });
-function dataSave() {
-    updateRole(form);
-}
 
-const urlss = document.head.querySelector('meta[name="api-base-url"]').content;
-const updateRole = async (formData) => {
+async function dataSave() {
+    // console.log(form.value);
 
     try {
-        const url = urlss + "/api/role/update";
 
-        const config = {
-            method: 'post',
-            url: url,
-            headers: {
-                'Content-Type': 'application/json'
-                // headers: { Authorization: 'Bearer ' + authStore.decryptWithAES(authStore.token), "Accept": "application/json", }
-            },
-            data: JSON.stringify(formData.value)
-        }
+        const response = await axiosInstance.post("/role/update", JSON.stringify(form.value));
+        document.getElementById("editRoleForm").reset();
+        if (response.data.message) {
 
-        const res = await axios(config);
-        if (res.data.types == 's') {
-            document.getElementById("editRoleForm").reset();
-            Notification.showToast(res.data.types, res.data.message);
-
-        } else if (res.data.types == "e") {
-            Notification.showToast(res.data.types, res.data.message);
-
+            Notification.showToast('s', response.data.message);
+        } else {
+            Notification.showToast('E', 'This action is not allowed.');
         }
 
 
-    } catch (err) {
-        Notification.showToast("e", err);
-
+    } catch (error) {
+        ErrorCatch.CatchError(error);
     }
+    // updateRole(form);
 }
+
+// const urlss = document.head.querySelector('meta[name="api-base-url"]').content;
+// const updateRole = async (formData) => {
+
+//     try {
+//         const url = urlss + "/api/role/update";
+
+//         const config = {
+//             method: 'post',
+//             url: url,
+//             headers: {
+//                 'Content-Type': 'application/json'
+//                 // headers: { Authorization: 'Bearer ' + authStore.decryptWithAES(authStore.token), "Accept": "application/json", }
+//             },
+//             data: JSON.stringify(formData.value)
+//         }
+
+//         const res = await axios(config);
+//         if (res.data.types == 's') {
+//             document.getElementById("editRoleForm").reset();
+//             Notification.showToast(res.data.types, res.data.message);
+
+//         } else if (res.data.types == "e") {
+//             Notification.showToast(res.data.types, res.data.message);
+
+//         }
+
+
+//     } catch (err) {
+//         Notification.showToast("e", err);
+
+//     }
+// }
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -121,7 +134,7 @@ const updateRole = async (formData) => {
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Role Name</label>
                         <input type="text" class="form-control form-control-sm" placeholder="Enter Role Name"
-                            name="role_name" id="role_name">
+                            name="role_name" v-model.trim="form.roleName" id="role_name">
                     </div>
 
                     <div class="col-md-6 mb-3">
