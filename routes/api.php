@@ -58,6 +58,8 @@ Route::middleware(['auth:api'])->group(function () {
 
     //role-permission
     Route::get('getroles', [RolePermissionController::class, 'index'])->name('roles.index');
+    Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
+    Route::post('/role/update', [RolePermissionController::class, 'update']);
     Route::post('editRole', [RolePermissionController::class, 'edit'])->name('roles.edit');
     Route::post('getPermissionList', [RolePermissionController::class, 'getPermissionList'])->name('roles.getPermissionList');
     Route::post('/changeRoleStatus', [RolePermissionController::class, 'changeRoleStatus'])->name('roles.changeRoleStatus');
@@ -140,17 +142,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/Lowfaresearch', [APIController::class, 'Lowfaresearch']);
 
 });
-Route::post('/role/save', [RolePermissionController::class, 'roleSave']);
 Route::get('airports', [AreaController::class, 'airports']);
-Route::post('/role/update', [RolePermissionController::class, 'update']);
 
-Route::middleware('auth:sanctum')->get('abilities', function(Request $request) {
-    return $request->user()->roles()->with('permissions')
-        ->get()
-        ->pluck('permissions')
-        ->flatten()
-        ->pluck('name')
-        ->unique()
-        ->values()
-        ->toArray();
+Route::get('abilities', function(Request $request) {
+    return Auth::user()->role()->with('role_permissions')->get()->pluck('role_permissions')->flatten()->pluck('feature_name')->unique()->values()->toArray();
 });

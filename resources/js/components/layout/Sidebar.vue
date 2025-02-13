@@ -1,13 +1,40 @@
 <script setup>
 import { MetisMenu } from "metismenujs";
-import { onMounted } from "vue";
+import { ref, inject, onMounted } from 'vue'
+import axiosInstance from "../../axiosInstance"
+import { AbilityBuilder, createMongoAbility } from '@casl/ability';
+import { useAbility } from '@casl/vue'
+import { ABILITY_TOKEN } from '@casl/vue';
+import { abilitiesPlugin } from '@casl/vue';
+
+import ability from '../../services/ability';
+
+// const ability = inject(ABILITY_TOKEN)
 
 function menuTaggle() {
     $(".wrapper").toggleClass("toggled");
 }
+
+async function getPermissionValues() {
+    try {
+        const response = await axiosInstance.get("abilities");
+        const permissions = response.data;
+        const { can, rules } = new AbilityBuilder(createMongoAbility);
+        can(permissions);
+        ability.update(rules);
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 onMounted(() => {
     new MetisMenu("#menu");
+    // getPermissionValues();
 });
+
+
+
 </script>
 <template>
     <!-- main script -->
@@ -155,8 +182,8 @@ onMounted(() => {
                             </router-link>
                         </li>
 
-                        <li> <a v-wave class="has-arrow" href="javascript:;"><i
-                                    class='bx bx-paper-plane'></i>Flight Management</a>
+                        <li> <a v-wave class="has-arrow" href="javascript:;"><i class='bx bx-paper-plane'></i>Flight
+                                Management</a>
                             <ul>
                                 <router-link v-wave :to="{ name: 'aircraftList' }">
                                     <i class='bx bx-paper-plane'></i> Aircrafts
