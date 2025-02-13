@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\API;
 use DateTime;
 use SimpleXMLElement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\BaseController;
 
 class APIController extends BaseController {
@@ -18,7 +19,12 @@ class APIController extends BaseController {
         ] );
 
         $requestXML = new RequestXML();
-        $xmlpayload = $requestXML->generateLowFareSearchXML( $request );
+        $start_time = microtime(true);
+        $xmlpayload = $requestXML->generateLowFareSearchXML($request);
+        $execution_time = microtime(true) - $start_time;
+        Log::info('XML Generation Time: ' . number_format($execution_time, 4) . ' seconds');
+
+
 
         // dd( $xmlpayload );
         $array = $this->performCurlRequest( $xmlpayload );

@@ -193,14 +193,6 @@ onUnmounted(() => {
     document.removeEventListener("click", handleClickOutside);
 });
 
-watch(
-    () => form.from,
-    (newValue) => {
-        showOriginList.value = true; // Always show dropdown when typing
-        filterOriginAirports(newValue);
-    }
-);
-
 async function getAirports() {
     try {
         const response = await axiosInstance.get("airports");
