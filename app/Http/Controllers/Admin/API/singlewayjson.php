@@ -4,14 +4,39 @@ namespace App\Http\Controllers\Admin\API;
 
 use DateTime;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\Debugbar\Facades\Debugbar;
 
 class Singlewayjson {
 
-    public function checkJson( $jsonData, $request ) {
+    private $airports;
+    private $airlineNames;
+    private $aircraftModels;
+    private $cachedLogoExistence = [];
 
-        $airports = DB:: table( 'airports' )->get();
-        $airlineName = DB:: table( 'airline_logos' )->get();
-        $aircraft_model = DB:: table( 'aircraft_type_designators' )->get();
+    public function __construct() {
+        // Load database data once during initialization
+        $this->airports = DB::table('airports')->pluck('Airport_Name', 'code')->toArray();
+        $this->airlineNames = DB::table('airline_logos')->pluck('name', 'code')->toArray();
+        $this->aircraftModels = DB::table('aircraft_type_designators')->pluck('model', 'iata_code')->toArray();
+    }
+
+    private function getLogoPath($carrier) {
+        // Check if we've already verified this carrier's logo
+        if (!isset($this->cachedLogoExistence[$carrier])) {
+            $path = public_path('uploads/airlines/' . $carrier . '.gif');
+            $this->cachedLogoExistence[$carrier] = file_exists($path);
+        }
+
+        // Return default image if logo doesn't exist
+        if (!$this->cachedLogoExistence[$carrier]) {
+            return '/uploads/airlines/default.png';
+        }
+
+        return '/uploads/airlines/' . $carrier . '.gif';
+    }
+
+
+    public function checkJson( $jsonData, $request ) {
 
         if ( !$jsonData ) {
             die( json_encode( [ 'error' => 'Unable to load JSON file.' ] ) );
@@ -210,7 +235,7 @@ class Singlewayjson {
             $totalDuration = 0;
             $connectionCount = count( $combo ) - 1;
             $detailedSegments = [];
-            $logopath = '/uploads/airlines/' . $firstSegment[ 'Carrier' ] . '.gif';
+            $logopath = $this->getLogoPath($firstSegment['Carrier']);
             $bookingInfo = findBookingInfo( $pricingSolutions, $combo[ 0 ] );
             $firstTerminalInfo = findTerminalInfo($jsonData, $combo[0]);
             $lastTerminalInfo = findTerminalInfo($jsonData, $combo[count($combo) - 1]);
@@ -230,11 +255,11 @@ class Singlewayjson {
                     'arrival_time' => substr( $segmentAttributes[ 'ArrivalTime' ], 11, 5 ),
                     'carrier' => $segmentAttributes[ 'Carrier' ],
                     'flight_number' => $segmentAttributes[ 'FlightNumber' ],
-                    'Equipment' => $aircraft_model->where( 'iata_code', $segmentAttributes[ 'Equipment' ] )->value( 'model' ),
-                    'origin_airport_name' => $airports->where( 'code', $segmentAttributes[ 'Origin' ] )->value( 'Airport_Name' ),
-                    'destination_airport_name' => $airports->where( 'code', $segmentAttributes[ 'Destination' ] )->value( 'Airport_Name' ),
+                    'Equipment' => $this->aircraftModels[$segmentAttributes['Equipment']] ?? '',
+                    'origin_airport_name' => $this->airports[$segmentAttributes['Origin']] ?? '',
+                    'destination_airport_name' => $this->airports[$segmentAttributes['Destination']] ?? '',
+                    'ailine_name' => $this->airlineName[$segmentAttributes['Carrier']] ?? '',
                     'logopath' => $logopath,
-                    'ailine_name' => $airlineName->where( 'code', $segmentAttributes[ 'Carrier' ] )->value( 'name' ),
                     'flight_duration' => formatDuration( calculateFlightDuration( $segmentAttributes[ 'DepartureTime' ], $segmentAttributes[ 'ArrivalTime' ] ) ),
                     'booking_code' => $bookingInfo[ 'booking_code' ],
                     'booking_count' => $bookingInfo[ 'booking_count' ],
@@ -255,7 +280,7 @@ class Singlewayjson {
                 'arrival_time' => substr( $lastSegment[ 'ArrivalTime' ], 11, 5 ),
                 'carrier_code' => $firstSegment[ 'Carrier' ],
                 'logopath' => $logopath,
-                'ailine_name' => $airlineName->where( 'code', $firstSegment[ 'Carrier' ] )->value( 'name' ),
+                'ailine_name' => $this->airlineName[$firstSegment[ 'Carrier' ]] ?? '',
                 'flight_numbers' => $firstSegment[ 'FlightNumber' ] . '-' . $lastSegment[ 'FlightNumber' ],
                 'total_flight_duration' => formatDuration( $totalDuration ),
                 'connections' => $connectionCount,

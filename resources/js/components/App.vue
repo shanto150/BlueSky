@@ -244,4 +244,6 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
     background-color: #875ae9;
     border-color: #875ae9;
 }
+
+
 </style>
