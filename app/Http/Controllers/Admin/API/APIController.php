@@ -6,6 +6,7 @@ use DateTime;
 use SimpleXMLElement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use App\Http\Controllers\BaseController;
 
 class APIController extends BaseController {
@@ -18,19 +19,31 @@ class APIController extends BaseController {
             'to' => 'required',
         ] );
 
-        $requestXML = new RequestXML();
+        // $requestXML = new RequestXML();
+        // $start_time = microtime(true);
+        // $xmlpayload = $requestXML->generateLowFareSearchXML($request);
+        // $execution_time = microtime(true) - $start_time;
+        // Log::info('XML Generation Time: ' . number_format($execution_time, 4) . ' seconds');
+
+
         $start_time = microtime(true);
+        $requestXML = new RequestXML();
         $xmlpayload = $requestXML->generateLowFareSearchXML($request);
         $execution_time = microtime(true) - $start_time;
-        Log::info('XML Generation Time: ' . number_format($execution_time, 4) . ' seconds');
+        Log::info('Header XML Generation Time: ' . number_format($execution_time, 2) . ' seconds');
 
-
-
-        // dd( $xmlpayload );
+        $start_time = microtime(true);
         $array = $this->performCurlRequest( $xmlpayload );
-        // dd($array);
+        $execution_time = microtime(true) - $start_time;
+        Log::info('API Response Time: ' . number_format($execution_time, 2) . ' seconds');
+
+        $start_time = microtime(true);
         $sRjson= new Singlewayjson();
         $json = $sRjson->checkJson( $array, $request );
+        $execution_time = microtime(true) - $start_time;
+        Log::info('Json Generation Time: ' . number_format($execution_time, 2) . ' seconds');
+
+
 
         return  $json;
 
@@ -41,20 +54,27 @@ class APIController extends BaseController {
         $username = env( 'API_USERNAME' );
         $password = env( 'API_PASSWORD' );
 
-        $url = 'https://apac.universal-api.pp.travelport.com/B2BGateway/connect/uAPI/AirService';
+        $start_time = microtime(true);
         $ch = curl_init();
         // Set cURL options
-        curl_setopt( $ch, CURLOPT_URL, $url );
-        curl_setopt( $ch, CURLOPT_POST, true );
-        curl_setopt( $ch, CURLOPT_POSTFIELDS, $xmlpayload );
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-        curl_setopt( $ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: text/xml;charset=UTF-8',
+        curl_setopt_array( $ch, [
+            CURLOPT_URL => 'https://apac.universal-api.pp.travelport.com/B2BGateway/connect/uAPI/AirService',
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $xmlpayload,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: text/xml;charset=UTF-8',
+            ],
+            CURLOPT_USERPWD => "$username:$password",
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+            CURLOPT_RETURNTRANSFER => true,
         ] );
-        curl_setopt( $ch, CURLOPT_USERPWD, "$username:$password" );
 
         // Execute and fetch the response
         $response = curl_exec( $ch );
+        $execution_time = microtime(true) - $start_time;
+        Log::info('API Time: ' . number_format($execution_time, 2) . ' seconds');
 
         // Check for errors
         if ( curl_errno( $ch ) ) {

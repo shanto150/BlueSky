@@ -228,6 +228,7 @@ const options = {
     }
 };
 
+// authStore.GlobalLoading = true;
 
 async function getListValues() {
     try {
