@@ -1,15 +1,11 @@
 <script setup>
+import { ref, inject, onMounted } from 'vue';
 import { MetisMenu } from "metismenujs";
-import { ref, inject, onMounted } from 'vue'
 import axiosInstance from "../../axiosInstance"
 import ability from '../../services/ability';
 import { AbilityBuilder, createMongoAbility } from '@casl/ability'
-import { useAbility } from '@casl/vue'
-import { ABILITY_TOKEN } from '@casl/vue';
-import { abilitiesPlugin } from '@casl/vue';
 
-const abilitysw = inject(ABILITY_TOKEN)
-// const { can } = useAbility()
+
 function menuTaggle() {
     $(".wrapper").toggleClass("toggled");
 }
@@ -18,11 +14,13 @@ async function getPermissionValues() {
     try {
         const response = await axiosInstance.get("abilities");
         const permissions = response.data;
-        console.log(permissions);
 
         const { can, rules } = new AbilityBuilder(createMongoAbility);
+
         can(permissions);
+
         ability.update(rules);
+        console.log(can(permissions));
 
     } catch (error) {
         console.log(error);
@@ -32,6 +30,7 @@ async function getPermissionValues() {
 onMounted(() => {
     new MetisMenu("#menu");
     getPermissionValues();
+
 });
 
 
@@ -156,7 +155,8 @@ onMounted(() => {
                     </a>
                     <ul>
                         <li>
-                            <router-link v-wave :to="{ name: 'roleList' }">
+                            <!-- v-if="can('role_create')" -->
+                            <router-link   v-wave :to="{ name: 'roleList' }">
                                 <i class='bx bx-paper-plane'></i> Roles Permission
                             </router-link>
                         </li>
