@@ -1,0 +1,278 @@
+<?php
+
+namespace App\Http\Controllers\Admin\API;
+
+use DateTime;
+use Illuminate\Support\Facades\DB;
+
+class Singlewayjson {
+
+    public function checkJson( $jsonData, $request ) {
+
+        $airports = DB:: table( 'airports' )->get();
+        $airlineName = DB:: table( 'airline_logos' )->get();
+        $aircraft_model = DB:: table( 'aircraft_type_designators' )->get();
+
+        if ( !$jsonData ) {
+            die( json_encode( [ 'error' => 'Unable to load JSON file.' ] ) );
+        }
+
+        // dd( $jsonData );
+
+        // Extract necessary data
+        $segments = isset( $jsonData[ 'airLowFareSearchRsp' ][ 'airAirSegmentList' ][ 'airAirSegment' ] ) ? $jsonData[ 'airLowFareSearchRsp' ][ 'airAirSegmentList' ][ 'airAirSegment' ] : [];
+        $pricingSolutions = isset( $jsonData[ 'airLowFareSearchRsp' ][ 'airAirPricingSolution' ] ) ? $jsonData[ 'airLowFareSearchRsp' ][ 'airAirPricingSolution' ]: [];
+
+        // Get filters from input
+        $filterOrigin = isset( $request->from ) ? $request->from : 'DAC';
+        $filterDestination = isset( $request->to ) ? $request->to : 'DFW';
+        $filterAirline = isset( $request->airline ) ? $request->airline : '';
+
+        // Find all connections
+        function findConnections( $segments, $origin, $destination, $filterAirline = '' ) {
+            $connections = [];
+            foreach ( $segments as $segment ) {
+                $segOrigin = $segment[ '@attributes' ][ 'Origin' ];
+                $segDestination = $segment[ '@attributes' ][ 'Destination' ];
+                $segCarrier = $segment[ '@attributes' ][ 'Carrier' ];
+
+                if ( $segOrigin == $origin && ( $filterAirline == '' || $segCarrier == $filterAirline ) ) {
+                    $remainingConnections = findConnections( $segments, $segDestination, $destination, $filterAirline );
+                    if ( $segDestination == $destination || $remainingConnections ) {
+                        $connections[] = [
+                            'segment' => $segment,
+                            'connections' => $remainingConnections
+                        ];
+                    }
+                }
+            }
+            return $connections;
+        }
+
+        // Flatten connections into combinations
+        function flattenConnections( $connections, $currentPath = [] ) {
+            $combinations = [];
+            foreach ( $connections as $connection ) {
+                $path = array_merge( $currentPath, [ $connection[ 'segment' ] ] );
+                if ( empty( $connection[ 'connections' ] ) ) {
+                    $combinations[] = $path;
+                } else {
+                    $combinations = array_merge( $combinations, flattenConnections( $connection[ 'connections' ], $path ) );
+                }
+            }
+            return $combinations;
+        }
+
+        // Calculate flight duration
+        function calculateFlightDuration( $departure, $arrival ) {
+            $departureTime = new DateTime( $departure );
+            $arrivalTime = new DateTime( $arrival );
+            $interval = $departureTime->diff( $arrivalTime );
+            return $interval->h * 60 + $interval->i;
+            // Total minutes
+        }
+
+        // Find pricing for a segment
+        function findPricing( $pricingSolutions, $segmentKey ) {
+            foreach ( $pricingSolutions as $solution ) {
+                if ( isset( $solution[ 'airJourney' ][ 'airAirSegmentRef' ] ) ) {
+                    $segmentRefs = $solution[ 'airJourney' ][ 'airAirSegmentRef' ];
+
+                    // Check for single segment
+                    if ( isset( $segmentRefs[ '@attributes' ] ) ) {
+                        if ( $segmentRefs[ '@attributes' ][ 'Key' ] === $segmentKey[ '@attributes' ][ 'Key' ] ) {
+                            return $solution[ '@attributes' ][ 'TotalPrice' ];
+                        }
+                    }
+                    // Check for multiple segments
+                    else {
+                        foreach ( $segmentRefs as $ref ) {
+                            if ( $ref[ '@attributes' ][ 'Key' ] === $segmentKey[ '@attributes' ][ 'Key' ] ) {
+                                return $solution[ '@attributes' ][ 'TotalPrice' ];
+                            }
+                        }
+                    }
+                }
+            }
+            return 'Price not found';
+            // Default return if no price found
+        }
+
+        // Format duration in hours and minutes
+        function formatDuration( $totalMinutes ) {
+            $hours = floor( $totalMinutes / 60 );
+            $minutes = $totalMinutes % 60;
+            return sprintf( '%dh %dm', $hours, $minutes );
+        }
+
+        // Format currency
+        function format_currency($code_value) {
+            // Extract the currency code (letters)
+            $code = preg_replace('/[^a-zA-Z]/', '', $code_value);
+
+            // Extract the value (digits)
+            $value = preg_replace('/[^0-9]/', '', $code_value);
+
+            // Format the value with commas
+            $formatted_value = number_format($value);
+
+            // Concatenate the code and formatted value
+            return $code . ' ' . $formatted_value;
+        }
+
+        //find booking info
+        function findBookingInfo( $pricingSolutions, $segmentKey ) {
+            foreach ( $pricingSolutions as $solution ) {
+                if ( isset( $solution[ 'airAirPricingInfo' ][ 'airBookingInfo' ] ) ) {
+                    $bookingInfos = $solution[ 'airAirPricingInfo' ][ 'airBookingInfo' ];
+
+                    // Handle single booking info case
+                    if ( isset( $bookingInfos[ '@attributes' ] ) ) {
+                        if ( $bookingInfos[ '@attributes' ][ 'SegmentRef' ] === $segmentKey[ '@attributes' ][ 'Key' ] ) {
+                            return [
+                                'booking_code' => $bookingInfos[ '@attributes' ][ 'BookingCode' ] ?? 'Not found',
+                                'booking_count' => $bookingInfos[ '@attributes' ][ 'BookingCount' ] ?? 'Not found',
+                                'cabin_class' => $bookingInfos[ '@attributes' ][ 'CabinClass' ] ?? 'Not found'
+                            ];
+                        }
+                    }
+                    // Handle multiple booking infos case
+                    else {
+                        foreach ( $bookingInfos as $bookingInfo ) {
+                            if ( $bookingInfo[ '@attributes' ][ 'SegmentRef' ] === $segmentKey[ '@attributes' ][ 'Key' ] ) {
+                                return [
+                                    'booking_code' => $bookingInfo[ '@attributes' ][ 'BookingCode' ] ?? 'Not found',
+                                    'booking_count' => $bookingInfo[ '@attributes' ][ 'BookingCount' ] ?? 'Not found',
+                                    'cabin_class' => $bookingInfo[ '@attributes' ][ 'CabinClass' ] ?? 'Not found'
+                                ];
+                            }
+                        }
+                    }
+                }
+            }
+            return [
+                'booking_code' => 'Not found',
+                'booking_count' => 'Not found',
+                'cabin_class' => 'Not found'
+            ];
+        }
+
+        // Get origin and destination terminals
+        function findTerminalInfo($jsonData, $segmentKey) {
+            if (isset($jsonData['airLowFareSearchRsp']['airFlightDetailsList']['airFlightDetails'])) {
+                $flightDetails = $jsonData['airLowFareSearchRsp']['airFlightDetailsList']['airFlightDetails'];
+
+                // Get FlightDetailsRef key from segment
+                if (isset($segmentKey['airFlightDetailsRef']['@attributes']['Key'])) {
+                    $flightDetailsRefKey = $segmentKey['airFlightDetailsRef']['@attributes']['Key'];
+
+                    // Handle single flight details case
+                    if (isset($flightDetails['@attributes'])) {
+                        if ($flightDetails['@attributes']['Key'] === $flightDetailsRefKey) {
+                            return [
+                                'origin_terminal' => $flightDetails['@attributes']['OriginTerminal'] ?? 'Not found',
+                                'destination_terminal' => $flightDetails['@attributes']['DestinationTerminal'] ?? 'Not found'
+                            ];
+                        }
+                    }
+                    // Handle multiple flight details case
+                    else {
+                        foreach ($flightDetails as $detail) {
+                            if ($detail['@attributes']['Key'] === $flightDetailsRefKey) {
+                                return [
+                                    'origin_terminal' => $detail['@attributes']['OriginTerminal'] ?? 'Not found',
+                                    'destination_terminal' => $detail['@attributes']['DestinationTerminal'] ?? 'Not found'
+                                ];
+                            }
+                        }
+                    }
+                }
+            }
+
+            return [
+                'origin_terminal' => 'Not found',
+                'destination_terminal' => 'Not found'
+            ];
+        }
+
+        // Generate connections and combinations
+        $connections = findConnections( $segments, $filterOrigin, $filterDestination, $filterAirline );
+        $combinations = flattenConnections( $connections );
+
+        // Prepare JSON output
+        $response = [];
+        foreach ( $combinations as $combo ) {
+
+            // dd($combo);
+
+            $firstSegment = $combo[ 0 ][ '@attributes' ];
+            $lastSegment = $combo[ count( $combo ) - 1 ][ '@attributes' ];
+            $totalDuration = 0;
+            $connectionCount = count( $combo ) - 1;
+            $detailedSegments = [];
+            $logopath = '/uploads/airlines/' . $firstSegment[ 'Carrier' ] . '.gif';
+            $bookingInfo = findBookingInfo( $pricingSolutions, $combo[ 0 ] );
+            $firstTerminalInfo = findTerminalInfo($jsonData, $combo[0]);
+            $lastTerminalInfo = findTerminalInfo($jsonData, $combo[count($combo) - 1]);
+
+            foreach ( $combo as $segment ) {
+                $segmentAttributes = $segment[ '@attributes' ];
+                $totalDuration += calculateFlightDuration( $segmentAttributes[ 'DepartureTime' ], $segmentAttributes[ 'ArrivalTime' ] );
+                $bookingInfo = findBookingInfo( $pricingSolutions, $segment );
+                $terminalInfo = findTerminalInfo($jsonData, $segment);
+                // Store full segment details
+                $detailedSegments[] = [
+                    'origin' => $segmentAttributes[ 'Origin' ],
+                    'destination' => $segmentAttributes[ 'Destination' ],
+                    'departure_date' => substr( $segmentAttributes[ 'DepartureTime' ], 0, 10 ),
+                    'departure_time' => substr( $segmentAttributes[ 'DepartureTime' ], 11, 5 ),
+                    'arrival_date' => substr( $segmentAttributes[ 'ArrivalTime' ], 0, 10 ),
+                    'arrival_time' => substr( $segmentAttributes[ 'ArrivalTime' ], 11, 5 ),
+                    'carrier' => $segmentAttributes[ 'Carrier' ],
+                    'flight_number' => $segmentAttributes[ 'FlightNumber' ],
+                    'Equipment' => $aircraft_model->where( 'iata_code', $segmentAttributes[ 'Equipment' ] )->value( 'model' ),
+                    'origin_airport_name' => $airports->where( 'code', $segmentAttributes[ 'Origin' ] )->value( 'Airport_Name' ),
+                    'destination_airport_name' => $airports->where( 'code', $segmentAttributes[ 'Destination' ] )->value( 'Airport_Name' ),
+                    'logopath' => $logopath,
+                    'ailine_name' => $airlineName->where( 'code', $segmentAttributes[ 'Carrier' ] )->value( 'name' ),
+                    'flight_duration' => formatDuration( calculateFlightDuration( $segmentAttributes[ 'DepartureTime' ], $segmentAttributes[ 'ArrivalTime' ] ) ),
+                    'booking_code' => $bookingInfo[ 'booking_code' ],
+                    'booking_count' => $bookingInfo[ 'booking_count' ],
+                    'origin_terminal' => $terminalInfo['origin_terminal'],
+                    'destination_terminal' => $terminalInfo['destination_terminal'],
+                    'cabin_class' => $bookingInfo[ 'cabin_class' ]
+                ];
+            }
+
+            // $airlineNm = $airlineName->where( 'code', $firstSegment[ 'Carrier' ] )->value( 'name' );
+
+            $response[] = [
+                'origin' => $firstSegment[ 'Origin' ],
+                'destination' => $lastSegment[ 'Destination' ],
+                'departure_date' => substr( $firstSegment[ 'DepartureTime' ], 0, 10 ),
+                'departure_time' => substr( $firstSegment[ 'DepartureTime' ], 11, 5 ),
+                'arrival_date' => substr( $lastSegment[ 'ArrivalTime' ], 0, 10 ),
+                'arrival_time' => substr( $lastSegment[ 'ArrivalTime' ], 11, 5 ),
+                'carrier_code' => $firstSegment[ 'Carrier' ],
+                'logopath' => $logopath,
+                'ailine_name' => $airlineName->where( 'code', $firstSegment[ 'Carrier' ] )->value( 'name' ),
+                'flight_numbers' => $firstSegment[ 'FlightNumber' ] . '-' . $lastSegment[ 'FlightNumber' ],
+                'total_flight_duration' => formatDuration( $totalDuration ),
+                'connections' => $connectionCount,
+                'total_price_ADT' => format_currency(findPricing( $pricingSolutions, $combo[ 0 ] )),
+                'booking_code' => $bookingInfo[ 'booking_code' ],
+                'booking_count' => $bookingInfo[ 'booking_count' ],
+                'cabin_class' => $bookingInfo[ 'cabin_class' ],
+                'origin_terminal' => $firstTerminalInfo['origin_terminal'],
+                'destination_terminal' => $lastTerminalInfo['destination_terminal'],
+                'details' => $detailedSegments
+            ];
+        }
+
+        header( 'Content-Type: application/json' );
+        // echo json_encode( [ 'flights' => $response ], JSON_PRETTY_PRINT );
+
+        return response()->json( [ 'flights' => $response ], 200, [], JSON_PRETTY_PRINT );
+    }
+
+}
