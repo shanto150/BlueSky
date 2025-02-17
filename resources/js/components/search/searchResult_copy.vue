@@ -1145,9 +1145,11 @@ function offHover() {
                                             height="70">
                                         <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>DAC-DXB</b></p>
-                                            <small style="font-size: 12px; color: #8727A4;">Qatar Airways</small>
+                                            <small style="font-size: 12px; color: #8727A4;">QR |
+                                                Qatar Airways</small>
+                                            <!-- <small style="font-size: 12px; color: #8727A4;">Qatar Airways</small>
                                             <br>
-                                            <small style="font-size: 12px; color: #8727A4;">Boeing 707</small>
+                                            <small style="font-size: 12px; color: #8727A4;">Boeing 707</small> -->
 
                                         </div>
                                     </div>
@@ -1866,9 +1868,9 @@ function offHover() {
                                             height="70">
                                         <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>DAC-DXB</b></p>
-                                            <small style="font-size: 12px; color: #8727A4;">Emirates</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #8727A4;">Boing 787</small>
+                                            <small style="font-size: 12px; color: #8727A4;">EK |
+                                                Emirates</small>
+
 
                                         </div>
                                     </div>
@@ -1947,9 +1949,8 @@ function offHover() {
                                             height="70">
                                         <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>DXB-DAC</b></p>
-                                            <small style="font-size: 12px; color: #8727A4;">Emirates</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #8727A4;">Boing 787</small>
+                                            <small style="font-size: 12px; color: #8727A4;">EK |
+                                                Emirates</small>
 
                                         </div>
                                     </div>
