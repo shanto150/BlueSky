@@ -28,9 +28,6 @@ window.MF = MF;
 import ErrorCatch from "./Helpers/ErrorCatch";
 window.ErrorCatch = ErrorCatch;
 // if expose with window means we can access it direct with this name in any vue
-// import { abilitiesPlugin } from '@casl/vue';
-// import ability from './services/ability';
-
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -51,13 +48,10 @@ app.use(VueTippy, {
     directive: "tippy", // => v-tippy
     component: "tippy", // => <tippy/>
 });
-// app.use(abilitiesPlugin, ability, {
-//     useGlobalProperties: true
-// });
+
 const authStore = useAuthStore();
 
 app.mount("#app");
-
 
 router.beforeEach(async (to, from) => {
     if (authStore.isDarkMode) {

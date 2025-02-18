@@ -3,8 +3,7 @@ import { ref, inject, onMounted } from 'vue';
 import { MetisMenu } from "metismenujs";
 import axiosInstance from "../../axiosInstance"
 import ability from '../../services/ability';
-import { AbilityBuilder, createMongoAbility } from '@casl/ability'
-
+import { AbilityBuilder, createMongoAbility } from '@casl/ability';
 
 function menuTaggle() {
     $(".wrapper").toggleClass("toggled");
@@ -14,14 +13,9 @@ async function getPermissionValues() {
     try {
         const response = await axiosInstance.get("abilities");
         const permissions = response.data;
-
         const { can, rules } = new AbilityBuilder(createMongoAbility);
-
         can(permissions);
-
         ability.update(rules);
-        console.log(can(permissions));
-
     } catch (error) {
         console.log(error);
     }
@@ -30,10 +24,7 @@ async function getPermissionValues() {
 onMounted(() => {
     new MetisMenu("#menu");
     getPermissionValues();
-
 });
-
-
 
 </script>
 <template>
