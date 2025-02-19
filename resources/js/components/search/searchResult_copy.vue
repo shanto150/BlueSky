@@ -1145,11 +1145,7 @@ function offHover() {
                                             height="70">
                                         <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>DAC-DXB</b></p>
-                                            <small style="font-size: 12px; color: #8727A4;">QR |
-                                                Qatar Airways</small>
-                                            <!-- <small style="font-size: 12px; color: #8727A4;">Qatar Airways</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #8727A4;">Boeing 707</small> -->
+                                            <small style="font-size: 12px; color: #5e6878;">Qatar Airways</small>
 
                                         </div>
                                     </div>
@@ -1171,7 +1167,7 @@ function offHover() {
                                                     ....
                                                 </div>
                                                 <div>
-                                                    <img style="margin-top: 4px;" src="../../../../public/theme/appimages/Plane_origin.svg"
+                                                    <img src="../../../../public/theme/appimages/Plane_origin.svg"
                                                         alt="">
                                                 </div>
                                                 <div>
@@ -1868,9 +1864,7 @@ function offHover() {
                                             height="70">
                                         <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>DAC-DXB</b></p>
-                                            <small style="font-size: 12px; color: #8727A4;">EK |
-                                                Emirates</small>
-
+                                            <small style="font-size: 12px; color: #5e6878;">Emirates</small>
 
                                         </div>
                                     </div>
@@ -1893,7 +1887,7 @@ function offHover() {
                                                     ....
                                                 </div>
                                                 <div>
-                                                    <img style="margin-top: 4px;" src="../../../../public/theme/appimages/Plane_origin.svg"
+                                                    <img src="../../../../public/theme/appimages/Plane_origin.svg"
                                                         alt="">
                                                 </div>
                                                 <div>
@@ -1949,8 +1943,7 @@ function offHover() {
                                             height="70">
                                         <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>DXB-DAC</b></p>
-                                            <small style="font-size: 12px; color: #8727A4;">EK |
-                                                Emirates</small>
+                                            <small style="font-size: 12px; color: #5e6878;">Emirates</small>
 
                                         </div>
                                     </div>
@@ -1974,7 +1967,7 @@ function offHover() {
                                                     ....
                                                 </div>
                                                 <div>
-                                                    <img style="margin-top: 4px;" src="../../../../public/theme/appimages/Plane-return.svg"
+                                                    <img src="../../../../public/theme/appimages/Plane-return.svg"
                                                         alt="">
                                                 </div>
                                                 <div>

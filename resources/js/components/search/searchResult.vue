@@ -9,6 +9,7 @@ import "simplebar-vue/dist/simplebar.min.css";
 import { useAuthStore } from '../../stores/authStore';
 const authStore = useAuthStore();
 
+
 const airports = ref([]); // All airports
 const initialLoadLimit = 20; // Limit for init
 const showOriginList = ref(false);
@@ -31,6 +32,51 @@ const isRanges = ref();
 const isRounded = 'oneway';
 const tdate = ref();
 
+onMounted(() => {
+    form.Way = 1;
+    getAirports();
+    document.addEventListener("click", handleClickOutside);
+
+    const updateTotalPassengers = () => {
+        const totalAdult = parseInt($(".adult").val());
+        const totalChild = parseInt($(".child").val());
+        const totalKids = parseInt($(".kids").val());
+        const totalInfant = parseInt($(".infant").val());
+
+        form.ADT = totalAdult;
+        form.CNN = totalChild;
+        form.KID = totalKids;
+        form.INF = totalInfant;
+        $(".total_pass").html(totalAdult + totalChild + totalKids + totalInfant);
+    };
+
+    const updatePassengerCount = (selector, increment, min, max) => {
+        $(selector).on('click', function () {
+            const input = $(this).siblings('input');
+            let count = parseInt(input.val());
+            count = increment ? Math.min(count + 1, max) : Math.max(count - 1, min);
+            input.val(count);
+            updateTotalPassengers();
+        });
+    };
+
+    // Adult section
+    updatePassengerCount('.adult-left-minus', false, 1, 9);
+    updatePassengerCount('.adult-right-plus', true, 1, 9);
+
+    // Child section
+    updatePassengerCount('.child-left-minus', false, 0, 4);
+    updatePassengerCount('.child-right-plus', true, 0, 4);
+
+    // Kids section
+    updatePassengerCount('.kids-left-minus', false, 0, 4);
+    updatePassengerCount('.kids-right-plus', true, 0, 4);
+
+    // Infant section
+    updatePassengerCount('.infant-left-minus', false, 0, 4);
+    updatePassengerCount('.infant-right-plus', true, 0, 4);
+});
+
 const format = (fdate) => {
     const day = fdate.getDate();
     const month = fdate.getMonth() + 1;
@@ -40,7 +86,7 @@ const format = (fdate) => {
     return date;
 }
 
-// authStore.GlobalLoading = true;
+
 
 const formats = (fdates) => {
 
@@ -77,6 +123,7 @@ async function Lowfaresearch() {
 
         const response = await axiosInstance.post("Lowfaresearch", form);
 
+        console.log(response.data.flights);
 
         // End time measurement
         const endTime = performance.now();
@@ -143,51 +190,6 @@ function tourTypeChange(type) {
     }
 
 }
-
-onMounted(() => {
-    form.Way = 1;
-    getAirports();
-    document.addEventListener("click", handleClickOutside);
-
-    const updateTotalPassengers = () => {
-        const totalAdult = parseInt($(".adult").val());
-        const totalChild = parseInt($(".child").val());
-        const totalKids = parseInt($(".kids").val());
-        const totalInfant = parseInt($(".infant").val());
-
-        form.ADT = totalAdult;
-        form.CNN = totalChild;
-        form.KID = totalKids;
-        form.INF = totalInfant;
-        $(".total_pass").html(totalAdult + totalChild + totalKids + totalInfant);
-    };
-
-    const updatePassengerCount = (selector, increment, min, max) => {
-        $(selector).on('click', function () {
-            const input = $(this).siblings('input');
-            let count = parseInt(input.val());
-            count = increment ? Math.min(count + 1, max) : Math.max(count - 1, min);
-            input.val(count);
-            updateTotalPassengers();
-        });
-    };
-
-    // Adult section
-    updatePassengerCount('.adult-left-minus', false, 1, 9);
-    updatePassengerCount('.adult-right-plus', true, 1, 9);
-
-    // Child section
-    updatePassengerCount('.child-left-minus', false, 0, 4);
-    updatePassengerCount('.child-right-plus', true, 0, 4);
-
-    // Kids section
-    updatePassengerCount('.kids-left-minus', false, 0, 4);
-    updatePassengerCount('.kids-right-plus', true, 0, 4);
-
-    // Infant section
-    updatePassengerCount('.infant-left-minus', false, 0, 4);
-    updatePassengerCount('.infant-right-plus', true, 0, 4);
-});
 
 onUnmounted(() => {
     document.removeEventListener("click", handleClickOutside);
@@ -288,6 +290,7 @@ function clearDestination() {
 }
 
 function onHover() {
+
     $("#s_image").attr('src', 'http://[::1]:5173/public/theme/appimages/s_Hover_State.jpg');
 }
 
@@ -313,7 +316,7 @@ function offHover() {
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card border border-1 bluesky-border-primary" style="min-height: 135px;">
+            <div class="card border border-1 bluesky-border-primary">
 
                 <div class="card-body">
                     <div class="d-flex align-items-center gap-2">
@@ -662,7 +665,7 @@ function offHover() {
                             <input id="origin_id" v-model="form.from" name="origin_name"
                                 class="form-control origin_name placeholder-font-size"
                                 @input="filterOriginAirports($event.target.value)" @focus="onOriginFocus"
-                                 placeholder="City,Airport" autocomplete="off" />
+                                placeholder="City,Airport" autocomplete="off" />
                             <span v-if="form.from" @click="clearOrigin" class="clear-icon">✖</span>
                             <div v-if="showOriginList" id="origin_results"
                                 class="position-absolute w-100 mt-2 bg-white border rounded shadow-sm"
@@ -1168,8 +1171,10 @@ function offHover() {
         </div>
         <div class="col-md-9">
             <div v-show="loadging" class="text-center" id="blueloader">
-                <img src="../../../../public//uploads/airlines/blu1.gif" height="200" width="240" alt="">
+                <img src="../../../../public/uploads/airlines/bluespin.png" height="40" width="40" alt=""
+                    style="animation: spin .8s linear infinite;">
             </div>
+
             <div class="row" id="Flights">
                 <p v-show="flights.length > 0">
                     Showing {{ flights.length }} of {{ totalFlights }} Total Flights
@@ -1200,7 +1205,7 @@ function offHover() {
                                                     ${flight.departure_time}`).toLocaleTimeString('en-US', {
                                                 hour:
                                                     'numeric', minute: 'numeric', hour12: true
-                                            }) }}</b></p>
+                                                    }) }}</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">{{ new
                                                 Date(flight.departure_date).toLocaleDateString('en-US', {
                                                     day:
@@ -1211,8 +1216,10 @@ function offHover() {
                                         </div>
 
                                         <div class="text-center mt-2">
-                                            <small style="font-size: 12px; color: #5e6878;">{{
-                                                flight.total_flight_duration }}</small>
+                                            <!-- <small style="font-size: 12px; color: #5e6878;">{{
+                                                flight.total_flight_duration }}</small> -->
+                                                <small style="font-size: 12px; color: #5e6878;">{{
+                                                flight.TravelTime }}</small>
                                             <br>
                                             <div class="d-flex">
                                                 <div>
@@ -1234,7 +1241,7 @@ function offHover() {
                                                     ${flight.arrival_time}`).toLocaleTimeString('en-US', {
                                                 hour:
                                                     'numeric', minute: 'numeric', hour12: true
-                                            }) }}</b></p>
+                                                    }) }}</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">{{ new
                                                 Date(flight.arrival_date).toLocaleDateString('en-US', {
                                                     day: 'numeric',
@@ -1362,11 +1369,14 @@ function offHover() {
                                                                             <img src="../../../../public/theme/appimages/Plane.svg"
                                                                                 alt="">
                                                                         </b>
-                                                                        <small><b>Departure</b> from {{ detail.origin_airport_name
+                                                                        <small><b>Departure</b> from {{
+                                                                            detail.origin_airport_name
                                                                             }}</small>
                                                                     </div>
 
-                                                                    <div class="p-2">Flying Time: {{ detail.flight_duration
+                                                                    <div class="p-2">Flying Time: {{
+                                                                        detail.FlightTime
+
                                                                         }}</div>
                                                                 </div>
 
@@ -1421,7 +1431,7 @@ function offHover() {
                                                                                         <p
                                                                                             class="p-0 m-0 custom-text-purple">
                                                                                             <b>{{ detail.destination
-                                                                                                }}</b>
+                                                                                            }}</b>
                                                                                         </p>
                                                                                         <small
                                                                                             style="font-size: 13px; color: #5e6878;">
@@ -1433,14 +1443,15 @@ function offHover() {
                                                                                                         hour:
                                                                                                             'numeric', minute:
                                                                                                             'numeric',
-                                                                                                hour12: true
-                                                                                                }) }}
+                                                                                                        hour12: true
+                                                                                                    }) }}
                                                                                                 | {{ new
                                                                                                     Date(detail.arrival_date).toLocaleDateString('en-US',
                                                                                                         {
                                                                                                             day: 'numeric', month:
                                                                                                                 'short', weekday:
-                                                                                                'short' })
+                                                                                                                'short'
+                                                                                                        })
                                                                                                 }}</b>
 
                                                                                         </small>
@@ -1474,7 +1485,7 @@ function offHover() {
                                                                         <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
                                                                             src="../../../../public/theme/appimages/location.svg"
                                                                             alt="">
-                                                                        Layover : {{ detail.destination_airport_name }}
+                                                                        Layover at {{ detail.airports_city }} - {{ flight.Layover }} |  {{ detail.destination_airport_name }}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1806,6 +1817,7 @@ function offHover() {
 
                 </div>
 
+                <!-- <iframe frameborder="0" marginheight="0" marginwidth="0" height="520" src="https://cdn.crichdplays.ru/embed2.php?id=skysp2" name="iframe_a" scrolling="no" width="640">test</iframe> -->
             </div>
         </div>
     </div>
@@ -1945,6 +1957,7 @@ li.menu-item {
     animation: fadeIn 0.5s ease-in-out;
 }
 
+
 .clear-icon {
     position: absolute;
     right: 10px;
@@ -1956,4 +1969,45 @@ li.menu-item {
     color: #875ae9;
 }
 
+/* middle sping */
+.center-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    width: 100px;
+    height: 100px;
+}
+
+.loader-circle-57 {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-circle-57:before {
+    content: "";
+    color: red;
+    height: 50px;
+    width: 50px;
+    background: #0000;
+    border-radius: 50%;
+    border: 5px solid #027de2d5;
+    animation: loader-circle-57-spin 1s infinite
+}
+
+@keyframes loader-circle-57-spin {
+    50% {
+        transform: rotatez(180deg);
+        border-style: dashed;
+        border-color: #9c54f0 #02b9af #4e86f4;
+    }
+
+    100% {
+        transform: rotatez(360deg);
+    }
+}
 </style>
