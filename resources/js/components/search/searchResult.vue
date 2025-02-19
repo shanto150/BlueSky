@@ -1226,7 +1226,7 @@ function offHover() {
                                                     ....
                                                 </div>
                                                 <div>
-                                                    <img src="../../../../public/theme/appimages/Plane_origin.svg"
+                                                    <img style="margin-top: 4px;" src="../../../../public/theme/appimages/Plane_origin.svg"
                                                         alt="">
                                                 </div>
                                                 <div>
