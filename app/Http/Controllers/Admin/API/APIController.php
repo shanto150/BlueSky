@@ -44,7 +44,6 @@ class APIController extends BaseController {
         Log::info('Json Generation Time: ' . number_format($execution_time, 2) . ' seconds');
 
 
-
         return  $json;
 
     }
