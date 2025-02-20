@@ -1831,10 +1831,7 @@ function offHover() {
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-                <!-- <iframe frameborder="0" marginheight="0" marginwidth="0" height="520" src="https://cdn.crichdplays.ru/embed2.php?id=skysp2" name="iframe_a" scrolling="no" width="640">test</iframe> -->
             </div>
         </div>
     </div>
