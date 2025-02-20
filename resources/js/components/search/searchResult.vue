@@ -1367,16 +1367,19 @@ function offHover() {
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
                                                                         <b>
-                                                                            <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                            <span v-if="detailIndex + 1 == Object.keys(flight.details).length">
+                                                                                <img src="../../../../public/theme/appimages/Plane_des.svg"
                                                                                 alt="">
+                                                                            </span>
+                                                                            <span v-else>
+                                                                                <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                                alt="">
+                                                                            </span>
                                                                         </b>
                                                                         <small>
+                                                                            <span v-if="detailIndex + 1 == Object.keys(flight.details).length">Destination to {{ detail.destination_airport_name }}</span>
+                                                                            <span v-else><b>Departure</b> from {{ detail.origin_airport_name }}</span>
 
-                                                                            <b>Departure</b>
-
-                                                                            from {{
-                                                                                detail.origin_airport_name
-                                                                            }}
                                                                         </small>
                                                                     </div>
 
