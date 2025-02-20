@@ -11,6 +11,8 @@ const form = reactive({
     phone: '', dept_name: '', desg: '', off_loct: '', report_to: '', role_id: '',
 });
 
+
+
 getDepartment();
 
 async function getDepartment() {

@@ -43,7 +43,6 @@ class APIController extends BaseController {
         $execution_time = microtime(true) - $start_time;
         Log::info('Json Generation Time: ' . number_format($execution_time, 2) . ' seconds');
 
-        // dd( $json );
 
         return  $json;
 
