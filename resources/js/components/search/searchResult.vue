@@ -1218,7 +1218,7 @@ function offHover() {
                                         <div class="text-center mt-2">
                                             <!-- <small style="font-size: 12px; color: #5e6878;">{{
                                                 flight.total_flight_duration }}</small> -->
-                                                <small style="font-size: 12px; color: #5e6878;">{{
+                                            <small style="font-size: 12px; color: #5e6878;">{{
                                                 flight.TravelTime }}</small>
                                             <br>
                                             <div class="d-flex">
@@ -1226,7 +1226,8 @@ function offHover() {
                                                     ....
                                                 </div>
                                                 <div>
-                                                    <img style="margin-top: 4px;" src="../../../../public/theme/appimages/Plane_origin.svg"
+                                                    <img style="margin-top: 4px;"
+                                                        src="../../../../public/theme/appimages/Plane_origin.svg"
                                                         alt="">
                                                 </div>
                                                 <div>
@@ -1369,12 +1370,17 @@ function offHover() {
                                                                             <img src="../../../../public/theme/appimages/Plane.svg"
                                                                                 alt="">
                                                                         </b>
-                                                                        <small><b>Departure</b> from {{
-                                                                            detail.origin_airport_name
-                                                                            }}</small>
+                                                                        <small>
+
+                                                                            <b>Departure</b>
+
+                                                                            from {{
+                                                                                detail.origin_airport_name
+                                                                            }}
+                                                                        </small>
                                                                     </div>
 
-                                                                    <div class="p-2">Flying Time: {{
+                                                                    <div class="p-2">Flight Time: {{
                                                                         detail.FlightTime
 
                                                                         }}</div>
@@ -1485,7 +1491,14 @@ function offHover() {
                                                                         <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
                                                                             src="../../../../public/theme/appimages/location.svg"
                                                                             alt="">
-                                                                        Layover at {{ detail.airports_city }} - {{ flight.Layover }} |  {{ detail.destination_airport_name }}
+
+                                                                        <span
+                                                                            v-if="detailIndex + 1 == Object.keys(flight.details).length">Destination
+                                                                            at</span>
+                                                                        <span v-else> Layover at</span>
+                                                                        {{ detail.airports_city }} - {{
+                                                                            flight.Layover }} | {{
+                                                                            detail.destination_airport_name }}
                                                                     </div>
                                                                 </div>
                                                             </div>
