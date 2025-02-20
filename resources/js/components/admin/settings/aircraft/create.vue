@@ -48,7 +48,7 @@ async function save() {
 
     <div class="card">
         <div class="card-header">
-            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea; border-radius: 10px;"> &nbsp; Create New Aircraft</h5>
+            <h5 class="m-0 p-0" style="border-left:5px solid #7239ea;"> &nbsp; Create New Aircraft</h5>
         </div>
 
         <form id="addAirCraftform">

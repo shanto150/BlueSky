@@ -1194,7 +1194,7 @@ function offHover() {
                                         <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>{{ flight.origin }}-{{ flight.destination }}</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">{{ flight.carrier_code }} |
-                                                {{ flight.ailine_name }}</small>
+                                                {{ flight.airline_name }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1216,15 +1216,18 @@ function offHover() {
                                         </div>
 
                                         <div class="text-center mt-2">
+                                            <!-- <small style="font-size: 12px; color: #5e6878;">{{
+                                                flight.total_flight_duration }}</small> -->
                                             <small style="font-size: 12px; color: #5e6878;">{{
-                                                flight.total_flight_duration }}</small>
+                                                flight.TravelTime }}</small>
                                             <br>
                                             <div class="d-flex">
                                                 <div>
                                                     ....
                                                 </div>
                                                 <div>
-                                                    <img src="../../../../public/theme/appimages/Plane_origin.svg"
+                                                    <img style="margin-top: 4px;"
+                                                        src="../../../../public/theme/appimages/Plane_origin.svg"
                                                         alt="">
                                                 </div>
                                                 <div>
@@ -1278,7 +1281,7 @@ function offHover() {
                         <div class="card-footer" style="background-color:#f1f4f7;">
                             <div class="float-start">
                                 <div class="d-flex gap-2">
-                                    <div class="border border-1 text-center p-1"
+                                    <div v-show="flight.refundable" class="border border-1 text-center p-1"
                                         style="background-color: #def1ec; color: #12ce69;">
                                         <i class="fa fa-refresh"></i> Refundable
                                     </div>
@@ -1364,16 +1367,25 @@ function offHover() {
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
                                                                         <b>
-                                                                            <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                            <span v-if="detailIndex + 1 == Object.keys(flight.details).length">
+                                                                                <img src="../../../../public/theme/appimages/Plane_des.svg"
                                                                                 alt="">
+                                                                            </span>
+                                                                            <span v-else>
+                                                                                <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                                alt="">
+                                                                            </span>
                                                                         </b>
-                                                                        <small><b>Departure</b> from {{
-                                                                            detail.origin_airport_name
-                                                                            }}</small>
+                                                                        <small>
+                                                                            <span v-if="detailIndex + 1 == Object.keys(flight.details).length"><b>Destination</b> to {{ detail.destination_airport_name }}</span>
+                                                                            <span v-else><b>Departure</b> from {{ detail.origin_airport_name }}</span>
+
+                                                                        </small>
                                                                     </div>
 
-                                                                    <div class="p-2">Flying Time: {{
-                                                                        detail.flight_duration
+                                                                    <div class="p-2">Flight Time: {{
+                                                                        detail.FlightTime
+
                                                                         }}</div>
                                                                 </div>
 
@@ -1482,7 +1494,14 @@ function offHover() {
                                                                         <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
                                                                             src="../../../../public/theme/appimages/location.svg"
                                                                             alt="">
-                                                                        Layover : {{ detail.destination_airport_name }}
+
+                                                                        <span
+                                                                            v-if="detailIndex + 1 == Object.keys(flight.details).length">Destination
+                                                                            at</span>
+                                                                        <span v-else> Layover at</span>
+                                                                        {{ detail.airports_city }} - {{
+                                                                            flight.Layover }} | {{
+                                                                            detail.destination_airport_name }}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1814,6 +1833,7 @@ function offHover() {
 
                 </div>
 
+                <!-- <iframe frameborder="0" marginheight="0" marginwidth="0" height="520" src="https://cdn.crichdplays.ru/embed2.php?id=skysp2" name="iframe_a" scrolling="no" width="640">test</iframe> -->
             </div>
         </div>
     </div>

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin\Department;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\DataTables;
-use App\Http\Controllers\BaseController;
-use App\Models\Department\Department;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Department\Department;
+use App\Http\Controllers\BaseController;
 
 class DepartmentController extends BaseController
 {
@@ -38,7 +39,7 @@ class DepartmentController extends BaseController
      */
     public function store(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
+        $auth = Auth::user();
 
         $validator = validator($request->all(),
             ['dept_name' => 'required'],
@@ -88,7 +89,7 @@ class DepartmentController extends BaseController
      */
     public function update(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
+        $auth = Auth::user();
         $dept = Department::where('id', $request->dept_id)->first();
         $dept->name = $request->dept_name != null ? $request->dept_name : $dept->name;
         $dept->status = $request->status_val != null ? $request->status_val : $dept->status;

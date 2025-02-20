@@ -1,42 +1,29 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useAuthStore } from "../../../stores/authStore";
-const authStore = useAuthStore();
 
-const form = ref({ roleName: "", checkedNames: [],useEmail:authStore.email, error: "" });
-function dataSave() {
-    createRole(form);
-}
-const urlss = document.head.querySelector('meta[name="api-base-url"]').content;
-const createRole = async (formData) => {
+import { useAuthStore } from "../../../stores/authStore";
+import axiosInstance from "../../../axiosInstance"
+import { ref, onMounted, reactive } from "vue";
+import { data } from "jquery";
+
+const authStore = useAuthStore();
+const form = ref({ roleName: "", checkedNames: [], useEmail: authStore.email, error: "" });
+async function dataSave() {
+
 
     try {
-        const url=urlss+"/api/role/save";
 
-        const config = {
-            method: 'post',
-            url: url,
-            headers: {
-                'Content-Type': 'application/json'
-                // headers: { Authorization: 'Bearer ' + authStore.decryptWithAES(authStore.token), "Accept": "application/json", }
-            },
-            data: JSON.stringify(formData.value)
-        }
+        const response = await axiosInstance.post("/role/save", JSON.stringify(form.value));
+        document.getElementById("AddRoleForm").reset();
+        if(response.data.message){
 
-        const res = await axios(config);
-        if (res.data.types=='s') {
-            document.getElementById("AddRoleForm").reset();
-            Notification.showToast(res.data.types, res.data.message);
-
-        }else if(res.data.types=="e"){
-            Notification.showToast(res.data.types, res.data.message);
-
+            Notification.showToast('s', response.data.message);
+        }else{
+            Notification.showToast('E', 'This action is not allowed.');
         }
 
 
-    } catch (err) {
-        Notification.showToast("e", err);
-
+    } catch (error) {
+        ErrorCatch.CatchError(error);
     }
 }
 

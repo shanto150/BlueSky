@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Admin\PaymentAccount;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseController;
 use App\Models\PaymentAccount\PaymentAccount;
 
@@ -37,7 +36,7 @@ class PaymentAccountSController extends BaseController
      */
     public function store(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
+        $auth = Auth::user();
 
         $validator = validator($request->all(),
             ['acc_type' => 'required'],
@@ -52,16 +51,16 @@ class PaymentAccountSController extends BaseController
             return $this->ErrorResponse($validator->errors()->all());
         }
 
-        $pay_acc    = new PaymentAccount;
-        $pay_acc->acc_type  = $request->acc_type;
-        $pay_acc->bank_name  = $request->bank_name;
-        $pay_acc->acc_name  = $request->acc_name;
-        $pay_acc->acc_no  = $request->acc_no;
-        $pay_acc->branch  = $request->branch;
-        $pay_acc->routing_no  = $request->routing_no;
-        $pay_acc->service_charge  = $request->service_charge;
-        $pay_acc->status = 1;
-        $pay_acc->created_by = $auth->id;
+        $pay_acc                 = new PaymentAccount;
+        $pay_acc->acc_type       = $request->acc_type;
+        $pay_acc->bank_name      = $request->bank_name;
+        $pay_acc->acc_name       = $request->acc_name;
+        $pay_acc->acc_no         = $request->acc_no;
+        $pay_acc->branch         = $request->branch;
+        $pay_acc->routing_no     = $request->routing_no;
+        $pay_acc->service_charge = $request->service_charge;
+        $pay_acc->status         = 1;
+        $pay_acc->created_by     = $auth->id;
         $pay_acc->save();
 
         $success = '';
@@ -114,18 +113,19 @@ class PaymentAccountSController extends BaseController
     public function update(Request $request)
     {
 
-        $auth = User::where('email', $request->useEmail)->first();
+        $auth = Auth::user();
+
         $pay_acc = PaymentAccount::where('id', $request->pay_acct_id)->first();
 
-        $pay_acc->acc_type  = $request->acc_type ? $request->acc_type : $pay_acc->acc_type;
-        $pay_acc->bank_name  = $request->bank_name ? $request->bank_name : $pay_acc->bank_name;
-        $pay_acc->acc_name  = $request->acc_name ? $request->acc_name : $pay_acc->acc_name;
-        $pay_acc->acc_no  =  $request->acc_no ?  $request->acc_no : $pay_acc->acc_no;
-        $pay_acc->branch  = $request->branch ?  $request->branch : $pay_acc->branch;
-        $pay_acc->routing_no  = $request->routing_no ?  $request->routing_no : $pay_acc->routing_no;
-        $pay_acc->service_charge  = $request->service_charge ?  $request->service_charge : $pay_acc->service_charge;
+        $pay_acc->acc_type       = $request->acc_type ? $request->acc_type : $pay_acc->acc_type;
+        $pay_acc->bank_name      = $request->bank_name ? $request->bank_name : $pay_acc->bank_name;
+        $pay_acc->acc_name       = $request->acc_name ? $request->acc_name : $pay_acc->acc_name;
+        $pay_acc->acc_no         = $request->acc_no ? $request->acc_no : $pay_acc->acc_no;
+        $pay_acc->branch         = $request->branch ? $request->branch : $pay_acc->branch;
+        $pay_acc->routing_no     = $request->routing_no ? $request->routing_no : $pay_acc->routing_no;
+        $pay_acc->service_charge = $request->service_charge ? $request->service_charge : $pay_acc->service_charge;
 
-        $pay_acc->status = $request->status_val != null ? $request->status_val : $pay_acc->status;
+        $pay_acc->status     = $request->status_val != null ? $request->status_val : $pay_acc->status;
         $pay_acc->updated_by = $auth->id;
         $pay_acc->save();
 
