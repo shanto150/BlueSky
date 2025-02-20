@@ -1495,13 +1495,9 @@ function offHover() {
                                                                             src="../../../../public/theme/appimages/location.svg"
                                                                             alt="">
 
-                                                                        <span
-                                                                            v-if="detailIndex + 1 == Object.keys(flight.details).length">Destination
-                                                                            at</span>
-                                                                        <span v-else> Layover at</span>
-                                                                        {{ detail.airports_city }} - {{
-                                                                            flight.Layover }} | {{
-                                                                            detail.destination_airport_name }}
+                                                                        <span v-if="detailIndex + 1 == Object.keys(flight.details).length"><i class="fa-solid fa-location-dot text-success"></i> congratulations ! you have reached your destination</span>
+                                                                        <span v-else> Layover at {{ detail.airports_city }} - {{ flight.Layover }} | {{ detail.destination_airport_name }}</span>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
