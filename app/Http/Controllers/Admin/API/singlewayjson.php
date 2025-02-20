@@ -2,20 +2,22 @@
 namespace App\Http\Controllers\Admin\API;
 
 use Illuminate\Support\Facades\DB;
+use Barryvdh\Debugbar\Facades\Debugbar;
 
 class Singlewayjson
 {
 
     private $airports;
     private $airlineNames;
+    private $airlineLogos;
     private $aircraftModels;
     private $cachedLogoExistence = [];
 
     public function __construct()
     {
-        // Load database data once during initialization
-        $this->airports       = DB::table('airports')->pluck('Airport_Name', 'code')->toArray();
-        $this->airportsCity   = DB::table('airports')->pluck('City_name', 'code')->toArray();
+
+        $this->airports       = DB::table('airports')->select('code', 'Airport_Name', 'City_name')->get()->keyBy('code')->toArray();
+
         $this->airlineNames   = DB::table('airline_logos')->pluck('name', 'code')->toArray();
         $this->airlineLogos   = DB::table('airline_logos')->pluck('logo_path', 'code')->toArray();
         $this->aircraftModels = DB::table('aircraft_type_designators')->pluck('model', 'iata_code')->toArray();
@@ -65,14 +67,6 @@ class Singlewayjson
             if ($minutes == 'Not found') {
                 return '0h : 0m';
             }
-            // $days = floor($minutes / 1440);
-            // $hours = floor(($minutes - $days * 1440) / 60);
-            // $minutes = $minutes - ($days * 1440) - ($hours * 60);
-            // if ($days == 0) {
-            //     return $hours . 'h : ' . $minutes . 'm';
-            // }
-            // return 'P' . $days . $hours . 'h : ' . $minutes . 'm';
-
             $hours = floor($minutes / 60);
             $mints   = $minutes - ($hours * 60);
 
@@ -360,6 +354,10 @@ class Singlewayjson
                 $bookingInfo       = findBookingInfo($pricingSolutions, $segment);
                 $airFlightDetails  = airFlightDetails($jsonData, $segment);
                 $totalFlightTime += intval($airFlightDetails['FlightTime']);
+
+                $originCode = $segmentAttributes['Origin'];
+                $destinationCode = $segmentAttributes['Destination'];
+
                 // Store full segment details
                 // dd( $segmentAttributes );
                 $detailedSegments[] = [
@@ -373,9 +371,9 @@ class Singlewayjson
                     'carrier'                  => $segmentAttributes['Carrier'],
                     'flight_number'            => $segmentAttributes['FlightNumber'],
                     'Equipment'                => $this->aircraftModels[$segmentAttributes['Equipment']] ?? '',
-                    'origin_airport_name'      => $this->airports[$segmentAttributes['Origin']] ?? '',
-                    'destination_airport_name' => $this->airports[$segmentAttributes['Destination']] ?? '',
-                    'airports_city'            => $this->airportsCity[$segmentAttributes['Destination']] ?? '',
+                    'origin_airport_name'      => $this->airports[$originCode]->Airport_Name ?? '',
+                    'destination_airport_name' => $this->airports[$destinationCode]->Airport_Name ?? '',
+                    'airports_city'            => $this->airports[$destinationCode]->City_name ?? '',
                     'airline_name'             => $this->airlineNames[$segmentAttributes['Carrier']] ?? '',
                     'logopath'                 => $logopath,
                     'FlightTime'               => convertToDuration($airFlightDetails['FlightTime']),

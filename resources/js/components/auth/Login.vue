@@ -212,7 +212,7 @@ onMounted(() => {
                     <div class="d-flex justify-content-center mt-5">
                         <!-- Show Only in LG and XL -->
                         <div class="d-none d-lg-block d-xl-block">
-                            <p class="well p-0 m-0">Nice To See You !</p>
+                            <p class="well p-0 m-0">Nice To See You !xxx</p>
                             <p class="wellbellow p-0 m-0">Bluesky NDC Travel Platform</p>
                         </div>
                         <!-- show only in mobile view -->

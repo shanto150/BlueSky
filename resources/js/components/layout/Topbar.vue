@@ -38,7 +38,7 @@ function darkMode() {
 
                         <li class="nav-item dropdown dropdown-app">
 
-                            <div v-if="authStore.GlobalLoading" class="nav-link dropdown-toggle dropdown-toggle-nocaret">
+                            <div v-show="authStore.GlobalLoading" class="nav-link dropdown-toggle dropdown-toggle-nocaret">
                                 <div class="center-body1">
                                     <div class="loader-circle-571">
                                         <img class="position-absolute"
