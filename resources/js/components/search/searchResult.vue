@@ -1194,7 +1194,7 @@ function offHover() {
                                         <div class="text-left mt-2">
                                             <p class="p-0 m-0"><b>{{ flight.origin }}-{{ flight.destination }}</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">{{ flight.carrier_code }} |
-                                                {{ flight.ailine_name }}</small>
+                                                {{ flight.airline_name }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -1281,7 +1281,7 @@ function offHover() {
                         <div class="card-footer" style="background-color:#f1f4f7;">
                             <div class="float-start">
                                 <div class="d-flex gap-2">
-                                    <div class="border border-1 text-center p-1"
+                                    <div v-show="flight.refundable" class="border border-1 text-center p-1"
                                         style="background-color: #def1ec; color: #12ce69;">
                                         <i class="fa fa-refresh"></i> Refundable
                                     </div>
@@ -1377,7 +1377,7 @@ function offHover() {
                                                                             </span>
                                                                         </b>
                                                                         <small>
-                                                                            <span v-if="detailIndex + 1 == Object.keys(flight.details).length">Destination to {{ detail.destination_airport_name }}</span>
+                                                                            <span v-if="detailIndex + 1 == Object.keys(flight.details).length"><b>Destination</b> to {{ detail.destination_airport_name }}</span>
                                                                             <span v-else><b>Departure</b> from {{ detail.origin_airport_name }}</span>
 
                                                                         </small>

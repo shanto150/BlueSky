@@ -17,23 +17,27 @@ class Singlewayjson
         $this->airports       = DB::table('airports')->pluck('Airport_Name', 'code')->toArray();
         $this->airportsCity   = DB::table('airports')->pluck('City_name', 'code')->toArray();
         $this->airlineNames   = DB::table('airline_logos')->pluck('name', 'code')->toArray();
+        $this->airlineLogos   = DB::table('airline_logos')->pluck('logo_path', 'code')->toArray();
         $this->aircraftModels = DB::table('aircraft_type_designators')->pluck('model', 'iata_code')->toArray();
     }
 
     private function getLogoPath($carrier)
     {
         // Check if we've already verified this carrier's logo
+        $path = '/uploads/airlines/' . $carrier . '.svg';
         if (! isset($this->cachedLogoExistence[$carrier])) {
-            $path                                = public_path('uploads/airlines/' . $carrier . '.gif');
+            $air_lo = $this->airlineLogos[$carrier] ?? '';
+            $path                                = $air_lo;
             $this->cachedLogoExistence[$carrier] = file_exists($path);
+
         }
 
         // Return default image if logo doesn't exist
         if (! $this->cachedLogoExistence[$carrier]) {
-            return '/uploads/airlines/default.png';
+            $path = '/uploads/airlines/default.svg';
         }
 
-        return '/uploads/airlines/' . $carrier . '.gif';
+        return $path;
     }
 
     public function checkJson($jsonData, $request)
@@ -156,11 +160,12 @@ class Singlewayjson
 
         function format_currency($code_value)
         {
-            // Extract the currency code ( letters )
-            $code = preg_replace('/[ ^a-zA-Z ]/', '', $code_value);
-
             // Extract the value ( digits )
-            $value = preg_replace('/[ ^0-9 ]/', '', $code_value);
+            $value = preg_replace('/[ ^a-zA-Z ]/', '', $code_value);
+
+
+            // Extract the currency code ( letters )
+            $code = preg_replace('/[ ^0-9 ]/', '', $code_value);
 
             // Format the value with commas
             $formatted_value = number_format($value);
@@ -373,7 +378,6 @@ class Singlewayjson
                     'airports_city'            => $this->airportsCity[$segmentAttributes['Destination']] ?? '',
                     'airline_name'             => $this->airlineNames[$segmentAttributes['Carrier']] ?? '',
                     'logopath'                 => $logopath,
-                    //'ailine_name' => $airlineName->where( 'code', $segmentAttributes[ 'Carrier' ] )->value( 'name' ),
                     'FlightTime'               => convertToDuration($airFlightDetails['FlightTime']),
                     'FlightTime1'              => $airFlightDetails['FlightTime'],
                     'booking_code'             => $bookingInfo['booking_code'],
@@ -398,12 +402,11 @@ class Singlewayjson
                 'arrival_time'         => substr($lastSegment['ArrivalTime'], 11, 5),
                 'carrier_code'         => $firstSegment['Carrier'],
                 'logopath'             => $logopath,
-                //'ailine_name' => $airlineName->where( 'code', $firstSegment[ 'Carrier' ] )->value( 'name' ),
                 'airline_name'         => $this->airlineNames[$firstSegment['Carrier']] ?? '',
                 'flight_numbers'       => $firstSegment['FlightNumber'] . '-' . $lastSegment['FlightNumber'],
                 'TravelTime'           => convertToDuration($firstairFlightDetails['TravelTime']),
                 'connections'          => $connectionCount,
-                'total_price_ADT'      => findPricing($pricingSolutions, $combo[0]),
+                'total_price_ADT'      => format_currency(findPricing($pricingSolutions, $combo[0])),
                 'booking_code'         => $bookingInfo['booking_code'],
                 'booking_count'        => $bookingInfo['booking_count'],
                 'cabin_class'          => $bookingInfo['cabin_class'],
@@ -417,6 +420,7 @@ class Singlewayjson
             ];
         }
 
+        // dd($response);
         header('Content-Type: application/json');
         // echo json_encode( [ 'flights' => $response ], JSON_PRETTY_PRINT );
 
