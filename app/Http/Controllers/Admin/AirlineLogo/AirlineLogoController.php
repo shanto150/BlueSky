@@ -54,7 +54,7 @@ class AirlineLogoController extends BaseController
 
 
             $request_image->move($image_path, $image_name);
-            $airline->logo_path = '/uploads/airlines/' . $image_name;
+            $airline->logo_path = 'uploads/airlines/' . $image_name;
 
         } else {
             $profilePicturePath = null;
@@ -100,7 +100,7 @@ class AirlineLogoController extends BaseController
             }
 
             $request_image->move($image_path, $image_name);
-            $airline->logo_path = '/uploads/airlines/' . $image_name;
+            $airline->logo_path = 'uploads/airlines/' . $image_name;
 
         } else {
             $profilePicturePath = null;

@@ -1198,11 +1198,10 @@ function offHover() {
                                                     data-bs-target="#flight-package" aria-controls="flight-package">
 
                                                     <div class="text-right" style="padding-left: 10px;">
-                                                        <p class="p-0 m-0"><b><i
-                                                                    class="fa fa-bangladeshi-taka-sign"></i>
+                                                        <p class="p-0 m-0"><b>BDT
                                                                 65000</b></p>
                                                         <small style="color: #dbdbdb"><del>
-                                                                ৳ 77000</del></small>
+                                                                BDT 77000</del></small>
                                                         <br>
                                                         <small style="font-size: 12px;">Economy Class</small>
                                                     </div>
@@ -1715,7 +1714,7 @@ function offHover() {
                                             <div class="card card-hober">
                                                 <div class="card-header border-bottom-1">
                                                     <h5 class="card-title text-center">Economy</h5>
-                                                    <h6 class="text-center"><i class="fa fa-bangladeshi-taka-sign"></i>
+                                                    <h6 class="text-center">BDT
                                                         65000</h6>
                                                 </div>
                                                 <div class="card-body">
@@ -1920,11 +1919,10 @@ function offHover() {
                                                     data-bs-target="#flight-package-2" aria-controls="flight-package-2">
 
                                                     <div class="text-right" style="padding-left: 10px;">
-                                                        <p class="p-0 m-0"><b><i
-                                                                    class="fa fa-bangladeshi-taka-sign"></i>
+                                                        <p class="p-0 m-0"><b>BDT
                                                                 65000</b></p>
                                                         <small style="color: #dbdbdb"><del>
-                                                                ৳ 77000</del></small>
+                                                                BDT 77000</del></small>
                                                         <br>
                                                         <small style="font-size: 12px;">Economy Class</small>
                                                     </div>
