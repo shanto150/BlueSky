@@ -27,7 +27,7 @@ class Singlewayjson
         $path = '/uploads/airlines/' . $carrier . '.svg';
         if (! isset($this->cachedLogoExistence[$carrier])) {
             $air_lo = $this->airlineLogos[$carrier] ?? '';
-            $path                                = $air_lo;
+            $path = $air_lo;
             $this->cachedLogoExistence[$carrier] = file_exists($path);
 
         }

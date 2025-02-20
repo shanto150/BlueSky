@@ -316,7 +316,7 @@ function offHover() {
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card border border-1 bluesky-border-primary">
+            <div class="card border border-1 bluesky-border-primary" style="min-height: 150px;">
 
                 <div class="card-body">
                     <div class="d-flex align-items-center gap-2">
@@ -1187,6 +1187,7 @@ function offHover() {
                             <div class="row">
                                 <div class="col-md-3 m-0 p-0">
                                     <div class="d-flex">
+                                        <!-- <p>{{ flight.logopath }}</p> -->
                                         <img :src="flight.logopath" alt=""
                                             style="width: 60px; height: 40px; margin-right: 20px; margin-left: 10px; margin-top: 10px;">
                                         <!-- <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
