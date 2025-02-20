@@ -1,13 +1,36 @@
 <script setup>
+import { ref, inject, onMounted } from 'vue';
 import { MetisMenu } from "metismenujs";
-import { onMounted } from "vue";
+import axiosInstance from "../../axiosInstance"
+import ability from '../../services/ability';
+import { AbilityBuilder, createMongoAbility } from '@casl/ability';
+import { useAbility } from '@casl/vue';
+
+// const can  = useAbility();
 
 function menuTaggle() {
     $(".wrapper").toggleClass("toggled");
 }
+
+async function getPermissionValues() {
+    try {
+        const response = await axiosInstance.get("abilities");
+        const permissions = response.data;
+        const { can, rules } = new AbilityBuilder(createMongoAbility);
+        can(permissions);
+        ability.update(rules);
+        // console.log(permissions);
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 onMounted(() => {
     new MetisMenu("#menu");
+    getPermissionValues();
 });
+
 </script>
 <template>
     <!-- main script -->
@@ -128,7 +151,8 @@ onMounted(() => {
                     </a>
                     <ul>
                         <li>
-                            <router-link v-wave :to="{ name: 'roleList' }">
+                            <!-- v-if="can('role_create')" -->
+                            <router-link   v-wave :to="{ name: 'roleList' }">
                                 <i class='bx bx-paper-plane'></i> Roles Permission
                             </router-link>
                         </li>
@@ -154,15 +178,17 @@ onMounted(() => {
                                 <i class='bx bx-paper-plane'></i> Office Location
                             </router-link>
                         </li>
-                        <li>
-                            <router-link v-wave :to="{ name: 'aircraftList' }">
-                                <i class='bx bx-paper-plane'></i> Aircrafts
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link v-wave :to="{ name: 'airlinesList' }">
-                                <i class='bx bx-paper-plane'></i> Airlines
-                            </router-link>
+
+                        <li> <a v-wave class="has-arrow" href="javascript:;"><i class='bx bx-paper-plane'></i>Flight
+                                Management</a>
+                            <ul>
+                                <router-link v-wave :to="{ name: 'aircraftList' }">
+                                    <i class='bx bx-paper-plane'></i> Aircrafts
+                                </router-link>
+                                <router-link v-wave :to="{ name: 'airlinesList' }">
+                                    <i class='bx bx-paper-plane'></i> Airlines
+                                </router-link>
+                            </ul>
                         </li>
 
                         <li> <a v-wave class="has-arrow" href="javascript:;"><i

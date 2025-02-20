@@ -6,15 +6,15 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\Models\AirlineLogo\AirlineLogo;
 use App\Http\Controllers\BaseController;
-use Illuminate\Support\Facades\File;
 
 class AirlineLogoController extends BaseController
 {
     public function index()
     {
-
         $data = DB::table('airline_logos as al')
             ->selectRaw('al.id as idd,al.created_at,al.updated_at,f_username(al.updated_by) updated_by,f_username(al.created_by) created_by,al.name as a_name,al.code as code,al.logo_path as logo,al.airline_business_type as busi_type,al.country_name as country')->get();
 
@@ -23,8 +23,8 @@ class AirlineLogoController extends BaseController
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $auth = User::where('email', $request->useEmail)->first();
+
+        $auth = Auth::user();
 
         $validator = validator($request->all(),
             ['name' => 'required'],
@@ -45,15 +45,16 @@ class AirlineLogoController extends BaseController
         if ($request->hasFile('airline_picture')) {
 
             $request_image = $request->file('airline_picture');
-            $image_name = str_replace(' ', '', (now()->format('dmY-') . time())) . '.' . $request_image->extension();
+            $image_name = $request->code . '.' . $request_image->extension();
 
             $image_path = public_path('/uploads/airlines/');
             if (!File::exists($image_path)) {
                 File::makeDirectory($image_path, 0777, true);
             }
 
+
             $request_image->move($image_path, $image_name);
-            $airline->logo_path = '/uploads/airlines/' . $image_name;
+            $airline->logo_path = 'uploads/airlines/' . $image_name;
 
         } else {
             $profilePicturePath = null;
@@ -77,7 +78,7 @@ class AirlineLogoController extends BaseController
 
     public function update(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
+        $auth = Auth::user();
         $airline = AirlineLogo::where('id',$request->airlines_id)->first();
         $airline->name = $request->name??$airline->name;
         $airline->code = $request->code??$airline->code;
@@ -87,7 +88,7 @@ class AirlineLogoController extends BaseController
         if ($request->hasFile('airline_picture')) {
 
             $request_image = $request->file('airline_picture');
-            $image_name = str_replace(' ', '', (now()->format('dmY-') . time())) . '.' . $request_image->extension();
+            $image_name = $request->code . '.' . $request_image->extension();
 
             $image_path = public_path('/uploads/airlines/');
             if (!File::exists($image_path)) {
@@ -99,7 +100,7 @@ class AirlineLogoController extends BaseController
             }
 
             $request_image->move($image_path, $image_name);
-            $airline->logo_path = '/uploads/airlines/' . $image_name;
+            $airline->logo_path = 'uploads/airlines/' . $image_name;
 
         } else {
             $profilePicturePath = null;

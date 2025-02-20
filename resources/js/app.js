@@ -1,7 +1,7 @@
 import "./bootstrap";
 import "https://code.jquery.com/jquery-3.7.1.min.js";
 import "./themeassets/js/bootstrap.bundle.min.js";
-import "./themeassets/plugins/bs-stepper/js/bs-stepper.min.js";
+// import "./themeassets/plugins/bs-stepper/js/bs-stepper.min.js";
 import "./themeassets/plugins/bs-stepper/js/main.js";
 import "./themeassets/js/app.js";
 import "https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js";
@@ -52,7 +52,6 @@ app.use(VueTippy, {
 const authStore = useAuthStore();
 
 app.mount("#app");
-
 
 router.beforeEach(async (to, from) => {
     if (authStore.isDarkMode) {

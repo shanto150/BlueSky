@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Area;
 
-use App\Http\Controllers\BaseController;
-use App\Models\Area\Area;
 use App\Models\User;
+use App\Models\Area\Area;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BaseController;
 
 class AreaController extends BaseController
 {
@@ -37,7 +38,9 @@ class AreaController extends BaseController
      */
     public function store(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
+
+        // $auth = User::where('email', $request->useEmail)->first();
+        $auth = Auth::user();
 
         $validator = validator($request->all(),
             ['area_name' => 'required'],
@@ -85,7 +88,7 @@ class AreaController extends BaseController
      */
     public function update(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
+        $auth = Auth::user();
 
         // $validator = validator($request->all(),
         //     ['area_name' => 'required'],

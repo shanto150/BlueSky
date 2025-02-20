@@ -1,6 +1,7 @@
 class ErrorCatch {
 
     CatchError (eEes) {
+
         if (eEes.response.status == 422) {
             Notification.showToast('e', eEes.response.data.message);
             return;

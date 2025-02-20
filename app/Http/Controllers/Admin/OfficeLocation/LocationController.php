@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Admin\OfficeLocation;
 
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseController;
 use App\Models\OfficeLocation\Officelocation;
 
@@ -18,7 +17,7 @@ class LocationController extends BaseController
     public function index()
     {
         $data = DB::table('officelocations as lct')
-            // ->join('users as u', 'lct.id', 'u.dept_id')
+        // ->join('users as u', 'lct.id', 'u.dept_id')
             ->selectRaw('lct.id as idd,lct.name,status,lct.updated_at,f_username(lct.updated_by) updated_by,f_username(lct.created_by) created_by,lct.created_at,lct.updated_at')->get();
 
         return DataTables::of($data)->addIndexColumn()->make(true);
@@ -37,7 +36,7 @@ class LocationController extends BaseController
      */
     public function store(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
+        $auth = Auth::user();
 
         $validator = validator($request->all(),
             ['loc_name' => 'required'],
@@ -46,9 +45,9 @@ class LocationController extends BaseController
             return $this->ErrorResponse($validator->errors()->all());
         }
 
-        $location = new Officelocation;
-        $location->name = $request->loc_name;
-        $location->status = 1;
+        $location             = new Officelocation;
+        $location->name       = $request->loc_name;
+        $location->status     = 1;
         $location->created_by = $auth->id;
         $location->save();
 
@@ -85,10 +84,11 @@ class LocationController extends BaseController
      */
     public function update(Request $request)
     {
-        $auth = User::where('email', $request->useEmail)->first();
-        $off_loc = Officelocation::where('id', $request->office_loc_id)->first();
-        $off_loc->name = $request->loc_name != null ? $request->loc_name : $off_loc->name;
-        $off_loc->status = $request->status_val != null ? $request->status_val : $off_loc->status;
+        $auth = Auth::user();
+
+        $off_loc             = Officelocation::where('id', $request->office_loc_id)->first();
+        $off_loc->name       = $request->loc_name != null ? $request->loc_name : $off_loc->name;
+        $off_loc->status     = $request->status_val != null ? $request->status_val : $off_loc->status;
         $off_loc->updated_by = $auth->id;
         $off_loc->save();
 
@@ -127,9 +127,8 @@ class LocationController extends BaseController
 
             $off_loc = Officelocation::where('id', $request->id)->first();
             $off_loc->delete();
-            $success= '';
+            $success = '';
             return $this->SuccessResponse($success, 'Successfully Office Location deleted.');
-
 
         } else {
             $error = 'Id can not be null.';
