@@ -27,7 +27,7 @@ class Singlewayjson
     {
         // Check if we've already verified this carrier's logo
         $path = '/uploads/airlines/' . $carrier . '.svg';
-        if (! isset($this->cachedLogoExistence[$carrier])) {
+        if (!isset($this->cachedLogoExistence[$carrier])) {
             $air_lo = $this->airlineLogos[$carrier] ?? '';
             $path = $air_lo;
             $this->cachedLogoExistence[$carrier] = file_exists($path);
@@ -35,7 +35,7 @@ class Singlewayjson
         }
 
         // Return default image if logo doesn't exist
-        if (! $this->cachedLogoExistence[$carrier]) {
+        if (!$this->cachedLogoExistence[$carrier]) {
             $path = '/uploads/airlines/default.svg';
         }
 

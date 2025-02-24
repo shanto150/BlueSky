@@ -1479,8 +1479,8 @@ function offHover() {
                                                                             <div class="col-md-5 text-center">
                                                                                 <img :src="detail.logopath" alt=""
                                                                                     style="width: 60px; height: 40px; margin-right: 20px">
-                                                                                <p class="mb-0 pb-0">{{
-                                                                                    detail.ailine_name }}</p>
+                                                                                <p style="font-size: 10px;" class="mb-0 pb-0"><b>{{
+                                                                                    detail.airline_name }}</b></p>
                                                                                 <p class="mb-0 pb-0"
                                                                                     style="font-size: 10px;">{{
                                                                                         detail.Equipment }}</p>
