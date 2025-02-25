@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Admin\API\requestxml;
+use App\Http\Controllers\Admin\API\singlewayjson;
 
 class APIController extends BaseController {
 
