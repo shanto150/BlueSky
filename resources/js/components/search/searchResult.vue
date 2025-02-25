@@ -36,7 +36,7 @@ onMounted(() => {
     form.Way = 1;
     getAirports();
     document.addEventListener("click", handleClickOutside);
-
+//  loadging.value = true;
     const updateTotalPassengers = () => {
         const totalAdult = parseInt($(".adult").val());
         const totalChild = parseInt($(".child").val());
@@ -86,8 +86,6 @@ const format = (fdate) => {
     return date;
 }
 
-
-
 const formats = (fdates) => {
 
     const day = fdates[0].getDate();
@@ -116,14 +114,19 @@ const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '
 
 async function Lowfaresearch() {
     try {
+        // Clear existing data
+        flights.value = []; // Clear flights array
+        totalFlights.value = 0; // Reset total flights count
+        ExecutionTime.value = 0; // Reset execution time
+
+        // Show loading
         authStore.GlobalLoading = true;
         loadging.value = true;
+
         // Start time measurement
         const startTime = performance.now();
 
         const response = await axiosInstance.post("Lowfaresearch", form);
-
-        console.log(response.data.flights);
 
         // End time measurement
         const endTime = performance.now();
@@ -131,18 +134,17 @@ async function Lowfaresearch() {
         // Calculate execution time in seconds
         ExecutionTime.value = ((endTime - startTime) / 1000).toFixed(2);
 
-
-        console.log(response.data.flights);
         flights.value = response.data.flights;
         totalFlights.value = response.data.flights.length;
-        authStore.GlobalLoading = false;
-        loadging.value = false;
-
 
     } catch (error) {
-        authStore.GlobalLoading = false;
-        loadging.value = false;
         console.log(error);
+    } finally {
+        // Hide loading after a minimum duration of 1 second for better UX
+        setTimeout(() => {
+            loadging.value = false;
+            authStore.GlobalLoading = false;
+        }, 1000);
     }
 }
 
@@ -1170,10 +1172,10 @@ function offHover() {
             </div>
         </div>
         <div class="col-md-9">
-            <div v-show="loadging" class="text-center" id="blueloader">
+            <!-- <div v-show="loadging" class="text-center" id="blueloader">
                 <img src="../../../../public/uploads/airlines/bluespin.png" height="40" width="40" alt=""
                     style="animation: spin .8s linear infinite;">
-            </div>
+            </div> -->
 
             <div class="row" id="Flights">
                 <p v-show="flights.length > 0">
@@ -1205,7 +1207,7 @@ function offHover() {
                                                     ${flight.departure_time}`).toLocaleTimeString('en-US', {
                                                 hour:
                                                     'numeric', minute: 'numeric', hour12: true
-                                                    }) }}</b></p>
+                                            }) }}</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">{{ new
                                                 Date(flight.departure_date).toLocaleDateString('en-US', {
                                                     day:
@@ -1242,7 +1244,7 @@ function offHover() {
                                                     ${flight.arrival_time}`).toLocaleTimeString('en-US', {
                                                 hour:
                                                     'numeric', minute: 'numeric', hour12: true
-                                                    }) }}</b></p>
+                                            }) }}</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">{{ new
                                                 Date(flight.arrival_date).toLocaleDateString('en-US', {
                                                     day: 'numeric',
@@ -1367,18 +1369,23 @@ function offHover() {
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
                                                                         <b>
-                                                                            <span v-if="detailIndex + 1 == Object.keys(flight.details).length">
+                                                                            <span
+                                                                                v-if="detailIndex + 1 == Object.keys(flight.details).length">
                                                                                 <img src="../../../../public/theme/appimages/Plane_des.svg"
-                                                                                alt="">
+                                                                                    alt="">
                                                                             </span>
                                                                             <span v-else>
                                                                                 <img src="../../../../public/theme/appimages/Plane.svg"
-                                                                                alt="">
+                                                                                    alt="">
                                                                             </span>
                                                                         </b>
                                                                         <small>
-                                                                            <span v-if="detailIndex + 1 == Object.keys(flight.details).length"><b>Destination</b> to {{ detail.destination_airport_name }}</span>
-                                                                            <span v-else><b>Departure</b> from {{ detail.origin_airport_name }}</span>
+                                                                            <span
+                                                                                v-if="detailIndex + 1 == Object.keys(flight.details).length"><b>Destination</b>
+                                                                                to {{ detail.destination_airport_name
+                                                                                }}</span>
+                                                                            <span v-else><b>Departure</b> from {{
+                                                                                detail.origin_airport_name }}</span>
 
                                                                         </small>
                                                                     </div>
@@ -1386,7 +1393,7 @@ function offHover() {
                                                                     <div class="p-2">Flight Time: {{
                                                                         detail.FlightTime
 
-                                                                        }}</div>
+                                                                    }}</div>
                                                                 </div>
 
                                                             </div>
@@ -1440,7 +1447,7 @@ function offHover() {
                                                                                         <p
                                                                                             class="p-0 m-0 custom-text-purple">
                                                                                             <b>{{ detail.destination
-                                                                                            }}</b>
+                                                                                                }}</b>
                                                                                         </p>
                                                                                         <small
                                                                                             style="font-size: 13px; color: #5e6878;">
@@ -1495,8 +1502,14 @@ function offHover() {
                                                                             src="../../../../public/theme/appimages/location.svg"
                                                                             alt="">
 
-                                                                        <span v-if="detailIndex + 1 == Object.keys(flight.details).length"><i class="fa-solid fa-location-dot text-success"></i> congratulations ! you have reached your destination</span>
-                                                                        <span v-else> Layover at {{ detail.airports_city }} - {{ flight.Layover }} | {{ detail.destination_airport_name }}</span>
+                                                                        <span
+                                                                            v-if="detailIndex + 1 == Object.keys(flight.details).length"><i
+                                                                                class="fa-solid fa-location-dot text-success"></i>
+                                                                            congratulations ! you have reached your
+                                                                            destination</span>
+                                                                        <span v-else> Layover at {{ detail.airports_city
+                                                                            }} - {{ flight.Layover }} | {{
+                                                                            detail.destination_airport_name }}</span>
 
                                                                     </div>
                                                                 </div>
@@ -1829,13 +1842,112 @@ function offHover() {
 
                 </div>
 
-                <!-- <iframe frameborder="0" marginheight="0" marginwidth="0" height="520" src="https://cdn.crichdplays.ru/embed2.php?id=skysp2" name="iframe_a" scrolling="no" width="640">test</iframe> -->
             </div>
+
+            <Transition name="fade">
+                <div v-show="loadging" class="loading-container">
+                    <div class="loading-plane"></div>
+                    <div class="loading-track">
+                        <div class="loading-progress"></div>
+                    </div>
+                    <div class="loading-text">Searching for the best flights...</div>
+                </div>
+            </Transition>
+
         </div>
     </div>
 </template>
 
 <style>
+/* Leading */
+@keyframes plane-loading {
+    0% {
+        transform: translateX(-100%) translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateX(0) translateY(-30px) rotate(-5deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(100%) translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+}
+
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.685);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+}
+
+.loading-plane {
+    width: 80px;
+    height: 80px;
+    background: url('/theme/appimages/pp.gif') no-repeat center;
+    background-size: contain;
+    /* animation: plane-loading 2s infinite ease-in-out; */
+}
+
+.loading-track {
+    width: 200px;
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 2px;
+    margin-top: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loading-progress {
+    position: absolute;
+    height: 100%;
+    background: linear-gradient(to right, #02b9af, #4e86f4, #9c54f0);
+    width: 50%;
+    border-radius: 2px;
+    animation: progress 2s infinite ease-in-out;
+}
+
+.loading-text {
+    margin-top: 20px;
+    color: #875ae9;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+@keyframes progress {
+    0% {
+        left: -50%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+/* end loading */
+
 .bg-checkbox-active {
     color: #fff;
     /* background: #1882ff; */
