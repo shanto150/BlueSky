@@ -153,7 +153,7 @@ onMounted(() => {
                         <li>
                             <!-- v-if="can('role_create')" -->
                             <router-link   v-wave :to="{ name: 'roleList' }">
-                                <i class='bx bx-paper-plane'></i> Roles Permission
+                                <i class='bx bx-paper-plane'></i> Roles Permissions
                             </router-link>
                         </li>
 
