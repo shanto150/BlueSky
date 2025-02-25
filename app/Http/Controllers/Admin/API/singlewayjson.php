@@ -35,7 +35,7 @@ class Singlewayjson
         }
 
         // Return default image if logo doesn't exist
-        if (!$this->cachedLogoExistence[$carrier]) {
+        if (! $this->cachedLogoExistence[$carrier]) {
             $path = '/uploads/airlines/default.svg';
         }
 
