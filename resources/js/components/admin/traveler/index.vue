@@ -117,6 +117,30 @@ const options = {
             title: "Total Usage & Ticketed",
             render: function (data, type, row) {
                 var html = "";
+                html += "৳100000";
+                html += "<br>";
+
+                html += '<span class="text-primary">';
+                html += "10</span>";
+                return html;
+            },
+        },
+        {
+            title: "Created",
+            render: function (data, type, row) {
+                var html = "";
+                html += row.created_by;
+                html += "<br>";
+
+                html += '<span class="text-primary">';
+                html += row.created_at + "</span>";
+                return html;
+            },
+        },
+        {
+            title: "Updated",
+            render: function (data, type, row) {
+                var html = "";
                 html += row.updated_by || "";
                 html += "<br>";
 
@@ -125,7 +149,6 @@ const options = {
                 return html;
             },
         },
-
         {
             title: "Action",
             render: function (data, type, row) {
