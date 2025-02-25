@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin\API;
 
-use DateTime;
 use SimpleXMLElement;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Barryvdh\Debugbar\Facades\Debugbar;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Admin\API\requestxml;
+use App\Http\Controllers\Admin\API\singlewayjson;
 
 class APIController extends BaseController {
 
@@ -19,29 +18,24 @@ class APIController extends BaseController {
             'to' => 'required',
         ] );
 
-        // $requestXML = new RequestXML();
-        // $start_time = microtime(true);
-        // $xmlpayload = $requestXML->generateLowFareSearchXML($request);
-        // $execution_time = microtime(true) - $start_time;
-        // Log::info('XML Generation Time: ' . number_format($execution_time, 4) . ' seconds');
-
 
         $start_time = microtime(true);
         $requestXML = new RequestXML();
         $xmlpayload = $requestXML->generateLowFareSearchXML($request);
+        // dd($xmlpayload);
         $execution_time = microtime(true) - $start_time;
-        Log::info('Header XML Generation Time: ' . number_format($execution_time, 2) . ' seconds');
+        custom_debug('xHeader XML Generation Time', number_format($execution_time, 2) . ' seconds');
 
         $start_time = microtime(true);
         $array = $this->performCurlRequest( $xmlpayload );
         $execution_time = microtime(true) - $start_time;
-        Log::info('API Response Time: ' . number_format($execution_time, 2) . ' seconds');
+        custom_debug('xAPI Response Time', number_format($execution_time, 2) . ' seconds');
 
         $start_time = microtime(true);
         $sRjson= new Singlewayjson();
         $json = $sRjson->checkJson( $array, $request );
         $execution_time = microtime(true) - $start_time;
-        Log::info('Json Generation Time: ' . number_format($execution_time, 2) . ' seconds');
+        custom_debug('xJson Generation Time', number_format($execution_time, 2) . ' seconds');
 
 
         return  $json;
@@ -72,8 +66,6 @@ class APIController extends BaseController {
 
         // Execute and fetch the response
         $response = curl_exec( $ch );
-        $execution_time = microtime(true) - $start_time;
-        Log::info('API Time: ' . number_format($execution_time, 2) . ' seconds');
 
         // Check for errors
         if ( curl_errno( $ch ) ) {
