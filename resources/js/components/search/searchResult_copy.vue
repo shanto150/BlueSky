@@ -768,8 +768,8 @@ function offHover() {
                                     <div class="slider-cont">
                                         <CustomMinMaxSlider :min="65" :max="368" v-model:min-value="sliderMin"
                                             v-model:max-value="sliderMax" />
-                                        <p class="text-center mb-0"> <i class="fa fa-bangladeshi-taka-sign"></i> {{
-                                            sliderMin }} - <i class="fa fa-bangladeshi-taka-sign"></i> {{ sliderMax }}
+                                        <p class="text-center mb-0"> BDT {{
+                                            sliderMin }} - BDT {{ sliderMax }}
                                         </p>
                                         <div class="text-center p-0">
                                             <span class="text-danger">*</span> Price may change based on policy
@@ -1759,8 +1759,7 @@ function offHover() {
                                             <div class="card card-hober">
                                                 <div class="card-header text-black border-bottom-1">
                                                     <h5 class="card-title text-center">Premium Economy</h5>
-                                                    <h6 class="text-center text-black"><i
-                                                            class="fa fa-bangladeshi-taka-sign"></i> 70500</h6>
+                                                    <h6 class="text-center text-black">BDT 70500</h6>
                                                 </div>
                                                 <div class="card-body">
                                                     <ul style="list-style-type:none;" class="">
@@ -1804,8 +1803,7 @@ function offHover() {
                                             <div class="card card-hober">
                                                 <div class="card-header text-black border-bottom-1">
                                                     <h5 class="card-title text-center">First Class</h5>
-                                                    <h6 class="text-center text-black"><i
-                                                            class="fa fa-bangladeshi-taka-sign"></i> 90500</h6>
+                                                    <h6 class="text-center text-black">BDT 90500</h6>
                                                 </div>
                                                 <div class="card-body">
                                                     <ul style="list-style-type:none;" class="">

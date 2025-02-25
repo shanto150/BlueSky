@@ -76,6 +76,9 @@ const airlinesList = () => import('./components/admin/settings/airlines/index.vu
 const airlinesCreate = () => import('./components/admin/settings/airlines/create.vue')
 const airlinesEdit = () => import('./components/admin/settings/airlines/edit.vue')
 
+// traveler management
+const TravelerList = () => import('./components/admin/traveler/index.vue')
+
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
     { path: '/sendResetLinkEmail', component: sendResetLinkEmail, name: 'sendResetLinkEmail', meta: { guest: true } },
@@ -157,6 +160,9 @@ const routes = [
     { path: '/all-airlinesList-list', component: airlinesList, name: 'airlinesList', meta: { auth: true } },
     { path: '/create-airline', component: airlinesCreate, name: 'airlinesCreate', meta: { auth: true } },
     { path: '/edit-airlines/:id', component: airlinesEdit, name: 'airlinesEdit', meta: { auth: true },props:true  },
+
+    //traveler
+    { path: '/all-traveler-list', component: TravelerList, name: 'TravelerList', meta: { auth: true } },
 ]
 
 const router = createRouter({
