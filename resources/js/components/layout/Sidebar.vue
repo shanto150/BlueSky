@@ -105,7 +105,7 @@ onMounted(() => {
                         </li>
 
                         <li>
-                            <router-link v-wave :to="{ name: 'flightSearch' }">
+                            <router-link v-wave :to="{ name: 'bookingList' }">
 
                                 <i class='bx bx-paper-plane'></i> Booking & Ticketing
                             </router-link>

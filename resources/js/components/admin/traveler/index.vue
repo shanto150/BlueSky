@@ -81,7 +81,8 @@ const options = {
                 html +='19-Oct-1992';
 
                 html += "<br>";
-                html +='Male|Adult';
+                html += '<span class="text-primary">';
+                html +='Male|Adult'+'</span>';
                 html += "</div>";
                 return html;
             },
