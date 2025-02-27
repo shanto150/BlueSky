@@ -59,7 +59,7 @@ const options = {
         targets: "_all",
     }],
     columns: [
-        { data: "DT_RowIndex", title: "SL" },
+        { data: "DT_RowIndex", title: "SL", width: '10%'},
         {
             title: "Agency Name & Code",
             render: function (data, type, row) {
@@ -75,7 +75,7 @@ const options = {
                 // html += row.email + "</span>";
                 return html;
             },
-            width: '100%',
+            // width: '100%',
         },
         {
             title: "Reference & Booking Code",
@@ -99,12 +99,14 @@ const options = {
 
                 return html;
             },
-            width: '100%',
+            // width: '20%',
 
         },
         {
             title: "Sector",
             data: 'zone',
+            // width: '20%',
+
         },
         {
             title: "Date",
@@ -117,26 +119,38 @@ const options = {
                 html += row.designation + "</span>";
                 return html;
             },
+            // width: '20%',
+
         },
         {
             title: "No. of Pax ",
             data: 'phone',
+            // width: '20%',
+
         },
         {
             title: "GDS & Airlines PNR",
             data: 'kam',
+            // width: '20%',
+
         },
         {
             title: "Total Fare",
             data: 'net_balance',
+            // width: '20%',
+
         },
         {
             title: "Last Ticketing Time & Way Type",
             data: 'status',
+            // width: '20%',
+
         },
         {
             title: "Ticket No. & Date",
             data: 'status',
+            // width: '20%',
+
         },
         {
             title: "Created By",
@@ -185,28 +199,33 @@ const options = {
             },
         },
         {
-            width: '150px',
             title: "Action",
             render: function (data, type, row) {
                 var html = "";
                 var idd = row.idd;
                 var status = row.status;
 
-                html += '<button  style="size: 30px; width: 30px; height: 30px;" class="btn btn-outline-info rounded-circle agent-view" placement="top" data-item-id=' + idd + '> <i class="fa fa-eye" style="margin:1px 0px 11px -6px;font-size:14px;"></i> </button>';
+                html += '<button  style="size: 30px; width: 30px; height: 30px;" class="btn btn-outline-warning rounded-circle agent-view" placement="top" data-item-id=' + idd + '> <i class="fa fa-eye" style="margin:1px 0px 11px -6px;font-size:14px;"></i> </button>';
 
-                if (status == 'Pending' || status == 'Hold') {
+                html +='<button type="button"  style="size:30px;width:30px;height:30px; margin-left: 5px;" class="btn btn-outline-info rounded-circle"><i class="fa-solid fa-file" style="margin:2px 0px 10px -4px;font-size:14px;"></i></button>';
 
-                    html += '<button  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle agent-recommended" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>';
-                }
-                if (status == 'Recommended') {
+                html +='<button type="button"  style="size:30px;width:30px;height:30px; margin-left: 5px;" class="btn btn-outline-timer rounded-circle"><i class="fa-solid fa-ticket" style="margin:2px 0px 10px -6px;font-size:14px;"></i></button>';
+                // if (status == 'Pending' || status == 'Hold') {
 
-                    html += '<button  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle agent-approve" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>';
-                }
+                    // html += '<button  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle agent-recommended" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>';
+                // }
+
+
+                html +='<button style="size: 30px; width: 30px; height: 30px;  margin-top: 5px;" class="btn btn-outline-purple rounded-circle delete-item" data-item-id="1"> <i class="fa-solid fa-envelope" style="margin: 2px 0px 10px -5px; font-size: 14px;"></i> </button>';
+
+
+                html +='<button style="size: 30px; width: 30px; height: 30px; margin-left: 5px; margin-top: 5px;" class="btn btn-outline-danger rounded-circle delete-item" data-item-id="1"> <i class="fa-solid fa-times" style="margin: 2px 0px 10px  -3px; font-size: 14px;"></i> </button>';
 
 
                 // html += '<button type="button"  style="size:30px;width:30px;height:30px; margin-left: 5px;" class="btn btn-outline-info rounded-circle"><i class="fa-solid fa-file" style="margin:2px 0px 10px -4px;font-size:14px;"></i></button> <router-link style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-success rounded-circle"> <i class="fa fa-check" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </router-link> <router-link  style="size: 30px; width: 30px; height: 30px;  margin-left: 5px;" class="btn btn-outline-primary rounded-circle" placement="top" > <i class="fa fa-eye" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i> </router-link> <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"  class="btn btn-outline-user-edit rounded-circle mt-2"><i class="fa-solid fa-user-pen"  style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button> <button type="button"  style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="mt-2 btn btn-outline-only-edit rounded-circle"> <i class="fa-solid fa-pencil" style="margin: 2px 0px 10px -4px; font-size: 14px;"></i> </button>  <button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;"  class="mt-2 btn btn-outline-action-log rounded-circle">  <i class="fa-solid fa-arrow-trend-up" style="margin: 2px 0px 10px -6px; font-size: 14px;"></i> </button>';
                 return html;
             },
+            width: '150%',
         }
     ],
     "drawCallback": function (settings) {
@@ -1430,6 +1449,39 @@ async function getListValues() {
     --bs-btn-disabled-color: #f1892a;
     --bs-btn-disabled-bg: transparent;
     --bs-btn-disabled-border-color: #f1892a;
+    --bs-gradient: none;
+}
+
+.btn-outline-purple {
+    --bs-btn-color: #7239ea;
+    --bs-btn-border-color: #7239ea;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #7239ea;
+    --bs-btn-hover-border-color: #7239ea;
+    --bs-btn-focus-shadow-rgb: 108, 117, 125;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #7239ea;
+    --bs-btn-active-border-color: #7239ea;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #7239ea;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #7239ea;
+    --bs-gradient: none;
+}
+.btn-outline-timer {
+    --bs-btn-color: #1ba3f0;
+    --bs-btn-border-color: #1ba3f0;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #1ba3f0;
+    --bs-btn-hover-border-color: #1ba3f0;
+    --bs-btn-focus-shadow-rgb: 108, 117, 125;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #1ba3f0;
+    --bs-btn-active-border-color: #1ba3f0;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #1ba3f0;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #1ba3f0;
     --bs-gradient: none;
 }
 </style>
