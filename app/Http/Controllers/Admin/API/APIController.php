@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin\API;
 
-use SimpleXMLElement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Admin\API\XmlToJson;
 use App\Http\Controllers\Admin\API\requestxml;
-use App\Http\Controllers\Admin\API\singlewayjson;
 
 class APIController extends BaseController {
 
@@ -18,36 +17,24 @@ class APIController extends BaseController {
             'to' => 'required',
         ] );
 
-
-        $start_time = microtime(true);
         $requestXML = new RequestXML();
-        $xmlpayload = $requestXML->generateLowFareSearchXML($request);
-        // dd($xmlpayload);
-        $execution_time = microtime(true) - $start_time;
-        custom_debug('xHeader XML Generation Time', number_format($execution_time, 2) . ' seconds');
+        $xmlpayload = $requestXML->generateLowFareSearchXML( $request );
 
-        $start_time = microtime(true);
+        // dd( $xmlpayload );
+
         $array = $this->performCurlRequest( $xmlpayload );
-        $execution_time = microtime(true) - $start_time;
-        custom_debug('xAPI Response Time', number_format($execution_time, 2) . ' seconds');
 
-        $start_time = microtime(true);
-        $sRjson= new Singlewayjson();
-        $json = $sRjson->checkJson( $array, $request );
-        $execution_time = microtime(true) - $start_time;
-        custom_debug('xJson Generation Time', number_format($execution_time, 2) . ' seconds');
-
-
-        return  $json;
+        header( 'Content-Type: application/json' );
+        echo json_encode( $array, JSON_PRETTY_PRINT );
 
     }
 
-    public function performCurlRequest($xmlpayload) {
+    public function performCurlRequest( $xmlpayload ) {
 
         $username = env( 'API_USERNAME' );
         $password = env( 'API_PASSWORD' );
 
-        $start_time = microtime(true);
+        $start_time = microtime( true );
         $ch = curl_init();
         // Set cURL options
         curl_setopt_array( $ch, [
@@ -76,19 +63,10 @@ class APIController extends BaseController {
 
         curl_close( $ch );
 
-        // dd( $response );
+        $converter = new XmlToJson($response);
+        $result = $converter->parse();
+        return $result;
 
-        //good format****
-        $response = preg_replace( '/(<\/?)(\w+):([^>]*>)/', "$1$2$3", $response );
-        $xml = new SimpleXMLElement( $response );
-        $body = $xml->xpath( '//SOAPBody' )[ 0 ];
-        //return $boday as simaple json not array
-        // $jsonData = json_encode( $body );
-        // dd( $jsonData );
-        $array = json_decode( json_encode( ( array )$body ), TRUE );
-        //End good ******
-
-        return  $array;
     }
 
 }
