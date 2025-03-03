@@ -1263,6 +1263,10 @@ async function Lowfaresearch() {
                                     <div class="d-flex gap-2">
                                         <div class="mt-2">
                                             <p class="p-0 m-0"><b> {{ flight.outbound.connections }}-Stop</b></p>
+                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> CCU</b></span>
+                                            <br>
+
+                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> 01 Hr 15 min</b></span>
                                         </div>
 
                                         <div class="d-flex gap-3 border-start">
@@ -1347,9 +1351,11 @@ async function Lowfaresearch() {
                                     <div class="d-flex gap-2">
                                         <div class="mt-2">
                                             <p class="p-0 m-0"><b> {{ flight.inbound.connections }}-Stop</b></p>
+                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> CCU</b></span>
+                                            <br>
+
+                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> 01 Hr 15 min</b></span>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
