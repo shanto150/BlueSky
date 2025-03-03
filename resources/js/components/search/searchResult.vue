@@ -40,7 +40,7 @@ onMounted(() => {
     form.Way = 1;
     getAirports();
     document.addEventListener("click", handleClickOutside);
-//  loadging.value = true;
+    //  loadging.value = true;
     const updateTotalPassengers = () => {
         const totalAdult = parseInt($(".adult").val());
         const totalChild = parseInt($(".child").val());
@@ -1197,7 +1197,6 @@ async function Lowfaresearch() {
                         <div class="card-body">
                             <div class="row mb-3" v-if="flight.outbound">
                                 <div class="col-md-3 m-0 p-0">
-                                {{ index }}
                                     <div class="d-flex">
                                         <!-- <p>{{ flight.logopath }}</p> -->
                                         <img :src="flight.logopath" alt=""
@@ -1205,8 +1204,10 @@ async function Lowfaresearch() {
                                         <!-- <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
                                             height="70"> -->
                                         <div class="text-left mt-2">
-                                            <p class="p-0 m-0"><b>{{ flight.outbound.origin }}-{{ flight.outbound.destination }}</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.outbound.carrier_code }} |
+                                            <p class="p-0 m-0"><b>{{ flight.outbound.origin }}-{{
+                                                    flight.outbound.destination }}</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">{{
+                                                flight.outbound.carrier_code }} |
                                                 {{ flight.airline_name }}</small>
                                         </div>
                                     </div>
@@ -1263,10 +1264,12 @@ async function Lowfaresearch() {
                                     <div class="d-flex gap-2">
                                         <div class="mt-2">
                                             <p class="p-0 m-0"><b> {{ flight.outbound.connections }}-Stop</b></p>
-                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> CCU</b></span>
+                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b>
+                                                    CCU</b></span>
                                             <br>
 
-                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> 01 Hr 15 min</b></span>
+                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b>
+                                                    01 Hr 15 min</b></span>
                                         </div>
 
                                         <div class="d-flex gap-3 border-start">
@@ -1276,8 +1279,10 @@ async function Lowfaresearch() {
                                                     data-bs-target="#flight-package" aria-controls="flight-package">
 
                                                     <div class="text-right" style="padding-left: 10px;">
-                                                        <p class="p-0 m-0"><b>BDT {{ flight.outbound.totalPrice.toLocaleString() }}</b></p>
-                                                        <small style="font-size: 12px;">{{ flight.outbound.cabin_class }}</small>
+                                                        <p class="p-0 m-0"><b>BDT {{
+                                                                flight.outbound.totalPrice.toLocaleString() }}</b></p>
+                                                        <small style="font-size: 12px;">{{ flight.outbound.cabin_class
+                                                            }}</small>
                                                     </div>
                                                 </button>
                                             </div>
@@ -1293,8 +1298,10 @@ async function Lowfaresearch() {
                                         <!-- <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
                                             height="70"> -->
                                         <div class="text-left mt-2">
-                                            <p class="p-0 m-0"><b>{{ flight.inbound.origin }}-{{ flight.inbound.destination }}</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.inbound.carrier_code }} |
+                                            <p class="p-0 m-0"><b>{{ flight.inbound.origin }}-{{
+                                                    flight.inbound.destination }}</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">{{
+                                                flight.inbound.carrier_code }} |
                                                 {{ flight.inbound.airline_name }}</small>
                                         </div>
                                     </div>
@@ -1351,9 +1358,11 @@ async function Lowfaresearch() {
                                     <div class="d-flex gap-2">
                                         <div class="mt-2">
                                             <p class="p-0 m-0"><b> {{ flight.inbound.connections }}-Stop</b></p>
-                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> CCU</b></span>
+                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b>
+                                                    CCU</b></span>
                                             <br>
-                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> 01 Hr 15 min</b></span>
+                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b>
+                                                    01 Hr 15 min</b></span>
                                         </div>
                                     </div>
                                 </div>
@@ -1443,17 +1452,21 @@ async function Lowfaresearch() {
                                                     <div class="row mb-2">
                                                         <div class="col-md-12">
                                                             <div class="d-flex gap-1">
-                                                                <button
-                                                                    class="btn btn-sm bluesky-btn-primary" v-if="flight.outbound">{{ flight.outbound.origin }}-{{ flight.outbound.destination }}</button>
-                                                                <button
-                                                                    class="btn btn-sm bluesky-btn-outline-primary" v-if="flight.inbound">{{ flight.inbound.origin }}-{{ flight.inbound.destination }}</button>
+                                                                <button class="btn btn-sm bluesky-btn-primary"
+                                                                    v-if="flight.outbound">{{ flight.outbound.origin
+                                                                    }}-{{ flight.outbound.destination }}</button>
+                                                                <button class="btn btn-sm bluesky-btn-outline-primary"
+                                                                    v-if="flight.inbound">{{ flight.inbound.origin }}-{{
+                                                                    flight.inbound.destination }}</button>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <div v-for="(detail, detailIndex) in flight.inbound.segments" :key="detailIndex">
+                                                    <div v-for="(detail, detailIndex) in flight.inbound.segments"
+                                                        :key="detailIndex">
                                                         <div class="card">
-                                                            <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
+                                                            <div
+                                                                class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
                                                                         <b>
@@ -1481,7 +1494,7 @@ async function Lowfaresearch() {
                                                                     <div class="p-2">Flight Time: {{
                                                                         detail.FlightTime
 
-                                                                    }}</div>
+                                                                        }}</div>
                                                                 </div>
 
                                                             </div>
@@ -1535,7 +1548,7 @@ async function Lowfaresearch() {
                                                                                         <p
                                                                                             class="p-0 m-0 custom-text-purple">
                                                                                             <b>{{ detail.destination
-                                                                                                }}</b>
+                                                                                            }}</b>
                                                                                         </p>
                                                                                         <small
                                                                                             style="font-size: 13px; color: #5e6878;">
@@ -1573,8 +1586,9 @@ async function Lowfaresearch() {
                                                                             <div class="col-md-5 text-center">
                                                                                 <img :src="detail.logopath" alt=""
                                                                                     style="width: 60px; height: 40px; margin-right: 20px">
-                                                                                <p style="font-size: 10px;" class="mb-0 pb-0"><b>{{
-                                                                                    detail.airline_name }}</b></p>
+                                                                                <p style="font-size: 10px;"
+                                                                                    class="mb-0 pb-0"><b>{{
+                                                                                        detail.airline_name }}</b></p>
                                                                                 <p class="mb-0 pb-0"
                                                                                     style="font-size: 10px;">{{
                                                                                         detail.Equipment }}</p>
@@ -1596,8 +1610,8 @@ async function Lowfaresearch() {
                                                                             congratulations ! you have reached your
                                                                             destination</span>
                                                                         <span v-else> Layover at {{ detail.airports_city
-                                                                            }} - {{ flight.Layover }} | {{
-                                                                            detail.destination_airport_name }}</span>
+                                                                        }} - {{ flight.Layover }} | {{
+                                                                                detail.destination_airport_name }}</span>
 
                                                                     </div>
                                                                 </div>
