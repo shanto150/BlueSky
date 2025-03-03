@@ -1353,7 +1353,6 @@ async function Lowfaresearch() {
                                             <p class="p-0 m-0"><b> {{ flight.inbound.connections }}-Stop</b></p>
                                             <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> CCU</b></span>
                                             <br>
-
                                             <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> 01 Hr 15 min</b></span>
                                         </div>
                                     </div>
