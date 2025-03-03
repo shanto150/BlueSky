@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin\API;
 
-
 class RequestXML {
     // Class constants
     private const TARGET_BRANCH = 'P7186658';
@@ -22,34 +21,61 @@ class RequestXML {
                 OriginApplication="UAPI"/>';
     }
 
-    private function buildSearchAirLeg($from, $to, $depDate) {
-        return '<SearchAirLeg>
-                    <SearchOrigin>
-                        <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0"
-                        Code="'.$from.'" PreferCity="true"/>
-                    </SearchOrigin>
-                    <SearchDestination>
-                        <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0"
-                        Code="'.$to.'" PreferCity="true"/>
-                    </SearchDestination>
-                    <SearchDepTime PreferredTime="'.$depDate.'"/>
-                </SearchAirLeg>';
+    private function buildSearchAirLeg( $request ) {
+        $searchAirLegs = '';
+        if ( $request->Way > 1 ) {
+            $searchAirLegs .= '<SearchAirLeg>
+                <SearchOrigin>
+                    <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0"
+                    Code="'.$request->from.'" PreferCity="true"/>
+                </SearchOrigin>
+                <SearchDestination>
+                    <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0"
+                    Code="'.$request->to.'" PreferCity="true"/>
+                </SearchDestination>
+                <SearchDepTime PreferredTime="'.$request->dep_date.'"/>
+            </SearchAirLeg>
+            <SearchAirLeg>
+                <SearchOrigin>
+                    <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0"
+                    Code="'.$request->to.'" PreferCity="true"/>
+                </SearchOrigin>
+                <SearchDestination>
+                    <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0"
+                    Code="'.$request->from.'" PreferCity="true"/>
+                </SearchDestination>
+                <SearchDepTime PreferredTime="'.$request->arrival_date.'"/>
+            </SearchAirLeg>';
+        } else {
+            $searchAirLegs .= '<SearchAirLeg>
+                <SearchOrigin>
+                    <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0"
+                    Code="'.$request->from.'" PreferCity="true"/>
+                </SearchOrigin>
+                <SearchDestination>
+                    <CityOrAirport xmlns="http://www.travelport.com/schema/common_v52_0"
+                    Code="'.$request->to.'" PreferCity="true"/>
+                </SearchDestination>
+                <SearchDepTime PreferredTime="'.$request->dep_date.'"/>
+            </SearchAirLeg>';
+        }
+        return $searchAirLegs;
     }
 
-    private function buildSearchPassengers( $request) {
+    private function buildSearchPassengers( $request ) {
         $passengers = '';
 
-        if ($request->ADT > 0) {
+        if ( $request->ADT > 0 ) {
             $passengers .= '<SearchPassenger xmlns="http://www.travelport.com/schema/common_v52_0"
                 Code="ADT" BookingTravelerRef="ADT_0"/>';
         }
 
-        if (($request->CNN && $request->CNN > 0) || ($request->KID && $request->KID > 0)) {
+        if ( ( $request->CNN && $request->CNN > 0 ) || ( $request->KID && $request->KID > 0 ) ) {
             $passengers .= '<SearchPassenger xmlns="http://www.travelport.com/schema/common_v52_0"
                 Code="CNN" Age="8" BookingTravelerRef="CNN_0"/>';
         }
 
-        if ($request->INF > 0) {
+        if ( $request->INF > 0 ) {
             $passengers .= '<SearchPassenger xmlns="http://www.travelport.com/schema/common_v52_0"
                 Code="INF" Age="1" BookingTravelerRef="INF_0"/>';
         }
@@ -57,7 +83,7 @@ class RequestXML {
         return $passengers;
     }
 
-    private function getCommonElements($request) {
+    private function getCommonElements( $request ) {
         return '<AirSearchModifiers>
                     <PreferredProviders>
                         <Provider xmlns="http://www.travelport.com/schema/common_v52_0" Code="'.self::PROVIDER_CODE.'"/>
@@ -66,23 +92,18 @@ class RequestXML {
                         <CabinClass xmlns="http://www.travelport.com/schema/common_v52_0" Type="'.self::CABIN_TYPE.'"/>
                     </PreferredCabins>
                 </AirSearchModifiers>'
-                . $this->buildSearchPassengers($request) .
-                '<AirPricingModifiers FaresIndicator="PublicAndPrivateFares"/>';
+        . $this->buildSearchPassengers( $request ) .
+        '<AirPricingModifiers FaresIndicator="PublicAndPrivateFares"/>';
     }
 
     private function getEnvelopeFooter() {
         return '</LowFareSearchReq></s:Body></s:Envelope>';
     }
 
-    public function generateLowFareSearchXML( $request) {
+    public function generateLowFareSearchXML( $request ) {
         $xml = $this->getEnvelopeHeader();
-        $xml .= $this->buildSearchAirLeg($request->from, $request->to, $request->dep_date);
-
-        if ($request->Way != 1) {
-            $xml .= $this->buildSearchAirLeg($request->to, $request->from, $request->return_date);
-        }
-
-        $xml .= $this->getCommonElements($request);
+        $xml .= $this->buildSearchAirLeg( $request );
+        $xml .= $this->getCommonElements( $request );
         $xml .= $this->getEnvelopeFooter();
 
         return $xml;
