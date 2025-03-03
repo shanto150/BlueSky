@@ -7,7 +7,11 @@ import CustomMinMaxSlider from "../../components/search/CustomMinMaxSlider.vue";
 import SimpleBar from "simplebar-vue";
 import "simplebar-vue/dist/simplebar.min.css";
 import { useAuthStore } from '../../stores/authStore';
+
+import flightData from './dacjfk.json'; // Import the JSON file
+
 const authStore = useAuthStore();
+
 
 
 const airports = ref([]); // All airports
@@ -98,8 +102,8 @@ const formats = (fdates) => {
         const day2 = fdates[1].getDate();
         const month2 = fdates[1].getMonth() + 1;
         const year2 = fdates[1].getFullYear();
-        $("#todateVal input").val(`${day2}-${month2}-${year2}`);
         const date2 = `${year2}-${String(month2).padStart(2, "0")}-${String(day2).padStart(2, "0")}`;
+        $("#todateVal input").val(date2);
 
         form.arrival_date = date2;
     }
@@ -111,42 +115,6 @@ const formats = (fdates) => {
 }
 
 const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '', ADT: 1, CNN: '', KID: '', INF: '' });
-
-async function Lowfaresearch() {
-    try {
-        // Clear existing data
-        flights.value = []; // Clear flights array
-        totalFlights.value = 0; // Reset total flights count
-        ExecutionTime.value = 0; // Reset execution time
-
-        // Show loading
-        authStore.GlobalLoading = true;
-        loadging.value = true;
-
-        // Start time measurement
-        const startTime = performance.now();
-
-        const response = await axiosInstance.post("Lowfaresearch", form);
-
-        // End time measurement
-        const endTime = performance.now();
-
-        // Calculate execution time in seconds
-        ExecutionTime.value = ((endTime - startTime) / 1000).toFixed(2);
-
-        flights.value = response.data.flights;
-        totalFlights.value = response.data.flights.length;
-
-    } catch (error) {
-        console.log(error);
-    } finally {
-        // Hide loading after a minimum duration of 1 second for better UX
-        setTimeout(() => {
-            loadging.value = false;
-            authStore.GlobalLoading = false;
-        }, 1000);
-    }
-}
 
 function tourTypeChange(type) {
 
@@ -298,6 +266,45 @@ function onHover() {
 
 function offHover() {
     $("#s_image").attr('src', 'http://[::1]:5173/public/theme/appimages/s_With_Icon.jpg');
+}
+
+async function Lowfaresearch() {
+    try {
+        // Clear existing data
+        flights.value = []; // Clear flights array
+        totalFlights.value = 0; // Reset total flights count
+        ExecutionTime.value = 0; // Reset execution time
+
+        // Show loading
+        authStore.GlobalLoading = true;
+        loadging.value = true;
+
+        // Start time measurement
+        const startTime = performance.now();
+
+        // const response = await axiosInstance.post("Lowfaresearch", form);
+
+        flights.value = flightData.flights;
+        totalFlights.value = flightData.flights.length;
+
+        // End time measurement
+        const endTime = performance.now();
+
+        // Calculate execution time in seconds
+        ExecutionTime.value = ((endTime - startTime) / 1000).toFixed(2);
+
+        // flights.value = response.data.flights;
+        // totalFlights.value = response.data.flights.length;
+
+    } catch (error) {
+        console.log(error);
+    } finally {
+        // Hide loading after a minimum duration of 1 second for better UX
+        setTimeout(() => {
+            loadging.value = false;
+            authStore.GlobalLoading = false;
+        }, 1000);
+    }
 }
 
 </script>
@@ -1186,16 +1193,17 @@ function offHover() {
                 <div v-for="(flight, index) in flights" :key="index" class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row mb-3" v-if="flight.outbound">
                                 <div class="col-md-3 m-0 p-0">
+                                {{ index }}
                                     <div class="d-flex">
                                         <img :src="flight.logopath" alt=""
                                             style="width: 60px; height: 40px; margin-right: 20px; margin-left: 10px; margin-top: 10px;">
                                         <!-- <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
                                             height="70"> -->
                                         <div class="text-left mt-2">
-                                            <p class="p-0 m-0"><b>{{ flight.origin }}-{{ flight.destination }}</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.carrier_code }} |
+                                            <p class="p-0 m-0"><b>{{ flight.outbound.origin }}-{{ flight.outbound.destination }}</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.outbound.carrier_code }} |
                                                 {{ flight.airline_name }}</small>
                                         </div>
                                     </div>
@@ -1203,13 +1211,9 @@ function offHover() {
                                 <div class="col-md-5 border-start">
                                     <div class="d-flex gap-5">
                                         <div class="mt-2">
-                                            <p class="p-0 m-0"><b>{{ new Date(`2000/01/01
-                                                    ${flight.departure_time}`).toLocaleTimeString('en-US', {
-                                                hour:
-                                                    'numeric', minute: 'numeric', hour12: true
-                                            }) }}</b></p>
+                                            <p class="p-0 m-0"><b>{{ flight.outbound.departure_time }}</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">{{ new
-                                                Date(flight.departure_date).toLocaleDateString('en-US', {
+                                                Date(flight.outbound.departure_date).toLocaleDateString('en-US', {
                                                     day:
                                                         'numeric', month: 'short', weekday: 'short'
                                                 }) }}</small>
@@ -1221,7 +1225,7 @@ function offHover() {
                                             <!-- <small style="font-size: 12px; color: #5e6878;">{{
                                                 flight.total_flight_duration }}</small> -->
                                             <small style="font-size: 12px; color: #5e6878;">{{
-                                                flight.TravelTime }}</small>
+                                                flight.outbound.travelTime }}</small>
                                             <br>
                                             <div class="d-flex">
                                                 <div>
@@ -1240,13 +1244,9 @@ function offHover() {
 
                                         <div class="mt-2">
                                             <!-- <p class="p-0 m-0"><b>{{ flight.arrival_time }}</b></p> -->
-                                            <p class="p-0 m-0"><b>{{ new Date(`2000/01/01
-                                                    ${flight.arrival_time}`).toLocaleTimeString('en-US', {
-                                                hour:
-                                                    'numeric', minute: 'numeric', hour12: true
-                                            }) }}</b></p>
+                                            <p class="p-0 m-0"><b>{{ flight.outbound.arrival_time }}</b></p>
                                             <small style="font-size: 12px; color: #5e6878;">{{ new
-                                                Date(flight.arrival_date).toLocaleDateString('en-US', {
+                                                Date(flight.outbound.arrival_date).toLocaleDateString('en-US', {
                                                     day: 'numeric',
                                                     month: 'short', weekday: 'short'
                                                 }) }}</small>
@@ -1259,7 +1259,7 @@ function offHover() {
                                 <div class="col-md-4 border-start">
                                     <div class="d-flex gap-2">
                                         <div class="mt-2">
-                                            <p class="p-0 m-0"><b> {{ flight.connections }}-Stop</b></p>
+                                            <p class="p-0 m-0"><b> {{ flight.outbound.connections }}-Stop</b></p>
                                         </div>
 
                                         <div class="d-flex gap-3 border-start">
@@ -1269,12 +1269,84 @@ function offHover() {
                                                     data-bs-target="#flight-package" aria-controls="flight-package">
 
                                                     <div class="text-right" style="padding-left: 10px;">
-                                                        <p class="p-0 m-0"><b>{{ flight.total_price_ADT }}</b></p>
-                                                        <small style="font-size: 12px;">{{ flight.cabin_class }}</small>
+                                                        <p class="p-0 m-0"><b>BDT {{ flight.outbound.totalPrice.toLocaleString() }}</b></p>
+                                                        <small style="font-size: 12px;">{{ flight.outbound.cabin_class }}</small>
                                                     </div>
                                                 </button>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3" v-if="flight.inbound">
+                                <div class="col-md-3 m-0 p-0">
+                                    <div class="d-flex">
+                                        <img :src="flight.logopath" alt=""
+                                            style="width: 60px; height: 40px; margin-right: 20px; margin-left: 10px; margin-top: 10px;">
+                                        <!-- <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
+                                            height="70"> -->
+                                        <div class="text-left mt-2">
+                                            <p class="p-0 m-0"><b>{{ flight.inbound.origin }}-{{ flight.inbound.destination }}</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.inbound.carrier_code }} |
+                                                {{ flight.inbound.airline_name }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 border-start">
+                                    <div class="d-flex gap-5">
+                                        <div class="mt-2">
+                                            <p class="p-0 m-0"><b>{{ flight.inbound.departure_time }}</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">{{ new
+                                                Date(flight.inbound.departure_date).toLocaleDateString('en-US', {
+                                                    day:
+                                                        'numeric', month: 'short', weekday: 'short'
+                                                }) }}</small>
+                                            <br>
+                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
+                                        </div>
+
+                                        <div class="text-center mt-2">
+                                            <!-- <small style="font-size: 12px; color: #5e6878;">{{
+                                                flight.total_flight_duration }}</small> -->
+                                            <small style="font-size: 12px; color: #5e6878;">{{
+                                                flight.inbound.travelTime }}</small>
+                                            <br>
+                                            <div class="d-flex">
+                                                <div>
+                                                    ....
+                                                </div>
+                                                <div>
+                                                    <img style="margin-top: 4px;"
+                                                        src="../../../../public/theme/appimages/Plane_origin.svg"
+                                                        alt="">
+                                                </div>
+                                                <div>
+                                                    ....
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-2">
+                                            <!-- <p class="p-0 m-0"><b>{{ flight.arrival_time }}</b></p> -->
+                                            <p class="p-0 m-0"><b>{{ flight.inbound.arrival_time }}</b></p>
+                                            <small style="font-size: 12px; color: #5e6878;">{{ new
+                                                Date(flight.inbound.arrival_date).toLocaleDateString('en-US', {
+                                                    day: 'numeric',
+                                                    month: 'short', weekday: 'short'
+                                                }) }}</small>
+                                            <br>
+                                            <small style="font-size: 12px; color: #5e6878;">Arrival</small>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 border-start">
+                                    <div class="d-flex gap-2">
+                                        <div class="mt-2">
+                                            <p class="p-0 m-0"><b> {{ flight.inbound.connections }}-Stop</b></p>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
@@ -1283,7 +1355,7 @@ function offHover() {
                         <div class="card-footer" style="background-color:#f1f4f7;">
                             <div class="float-start">
                                 <div class="d-flex gap-2">
-                                    <div v-show="flight.refundable" class="border border-1 text-center p-1"
+                                    <div v-show="flight.outbound.refundable" class="border border-1 text-center p-1"
                                         style="background-color: #def1ec; color: #12ce69;">
                                         <i class="fa fa-refresh"></i> Refundable
                                     </div>
@@ -1291,7 +1363,7 @@ function offHover() {
                                     <div class="border border-1 text-center p-1"
                                         style="background-color: #e4e3f6; color: #7944eb;">
                                         <i class="fa-regular fa-seat-airline"></i> Available Seats: {{
-                                            flight.booking_count }}
+                                            flight.outbound.booking_count }}
                                     </div>
                                 </div>
                             </div>
@@ -1314,7 +1386,6 @@ function offHover() {
                             </div>
                         </div>
                     </div>
-
 
                     <div :id="`flight-details-${index}`" class="accordion-collapse collapse m-0"
                         aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" style="">
@@ -1361,16 +1432,25 @@ function offHover() {
                                             <div class="tab-content pt-3">
                                                 <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
 
-                                                    <div v-for="(detail, detailIndex) in flight.details"
-                                                        :key="detailIndex">
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-12">
+                                                            <div class="d-flex gap-1">
+                                                                <button
+                                                                    class="btn btn-sm bluesky-btn-primary" v-if="flight.outbound">{{ flight.outbound.origin }}-{{ flight.outbound.destination }}</button>
+                                                                <button
+                                                                    class="btn btn-sm bluesky-btn-outline-primary" v-if="flight.inbound">{{ flight.inbound.origin }}-{{ flight.inbound.destination }}</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div v-for="(detail, detailIndex) in flight.inbound.segments" :key="detailIndex">
                                                         <div class="card">
-                                                            <div
-                                                                class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
+                                                            <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
                                                                         <b>
                                                                             <span
-                                                                                v-if="detailIndex + 1 == Object.keys(flight.details).length">
+                                                                                v-if="detailIndex + 1 == Object.keys(flight.outbound.segments).length">
                                                                                 <img src="../../../../public/theme/appimages/Plane_des.svg"
                                                                                     alt="">
                                                                             </span>
@@ -1381,7 +1461,7 @@ function offHover() {
                                                                         </b>
                                                                         <small>
                                                                             <span
-                                                                                v-if="detailIndex + 1 == Object.keys(flight.details).length"><b>Destination</b>
+                                                                                v-if="detailIndex + 1 == Object.keys(flight.outbound.segments).length"><b>Destination</b>
                                                                                 to {{ detail.destination_airport_name
                                                                                 }}</span>
                                                                             <span v-else><b>Departure</b> from {{
@@ -1503,7 +1583,7 @@ function offHover() {
                                                                             alt="">
 
                                                                         <span
-                                                                            v-if="detailIndex + 1 == Object.keys(flight.details).length"><i
+                                                                            v-if="detailIndex + 1 == Object.keys(flight.outbound.segments).length"><i
                                                                                 class="fa-solid fa-location-dot text-success"></i>
                                                                             congratulations ! you have reached your
                                                                             destination</span>
@@ -1516,6 +1596,9 @@ function offHover() {
                                                             </div>
                                                         </div>
                                                     </div>
+
+
+
 
                                                 </div>
                                                 <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
