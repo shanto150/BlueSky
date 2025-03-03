@@ -15,6 +15,7 @@ const ForcePassChange = () => import('./components/auth/forcePasswordChange.vue'
 const flightSearch = () => import('./components/search/flightSearch.vue')
 const searchResult = () => import('./components/search/searchResult.vue')
 const backupsearchResult = () => import('./components/search/searchResult_copy.vue')
+const bookingList = () => import('./components/admin/booking/index.vue')
 // agent
 const AgentList = () => import('./components/admin/agent/index.vue')
 const agentDetails = () => import('./components/admin/agent/agentDetails.vue')
@@ -76,6 +77,9 @@ const airlinesList = () => import('./components/admin/settings/airlines/index.vu
 const airlinesCreate = () => import('./components/admin/settings/airlines/create.vue')
 const airlinesEdit = () => import('./components/admin/settings/airlines/edit.vue')
 
+// traveler management
+const TravelerList = () => import('./components/admin/traveler/index.vue')
+
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
     { path: '/sendResetLinkEmail', component: sendResetLinkEmail, name: 'sendResetLinkEmail', meta: { guest: true } },
@@ -95,6 +99,9 @@ const routes = [
     { path: '/flight-search', component: flightSearch, name: 'flightSearch', meta: { auth: true } },
     { path: '/flight-search-way', component: searchResult, name: 'searchResult', meta: { auth: true } },
     { path: '/flight-search-result', component: backupsearchResult, name: 'backupsearchResult', meta: { auth: true } },
+
+    //booking
+    { path: '/flight-booking-list', component: bookingList, name: 'bookingList', meta: { auth: true } },
 
 
     // agent
@@ -157,6 +164,9 @@ const routes = [
     { path: '/all-airlinesList-list', component: airlinesList, name: 'airlinesList', meta: { auth: true } },
     { path: '/create-airline', component: airlinesCreate, name: 'airlinesCreate', meta: { auth: true } },
     { path: '/edit-airlines/:id', component: airlinesEdit, name: 'airlinesEdit', meta: { auth: true },props:true  },
+
+    //traveler
+    { path: '/all-traveler-list', component: TravelerList, name: 'TravelerList', meta: { auth: true } },
 ]
 
 const router = createRouter({

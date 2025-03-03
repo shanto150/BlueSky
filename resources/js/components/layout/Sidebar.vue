@@ -105,7 +105,7 @@ onMounted(() => {
                         </li>
 
                         <li>
-                            <router-link v-wave :to="{ name: 'flightSearch' }">
+                            <router-link v-wave :to="{ name: 'bookingList' }">
 
                                 <i class='bx bx-paper-plane'></i> Booking & Ticketing
                             </router-link>
@@ -142,6 +142,13 @@ onMounted(() => {
                     </router-link>
                 </li>
 
+                <li>
+                    <router-link v-wave :to="{ name: 'TravelerList' }">
+                        <div class="parent-icon"><i style="font-size: 15px;" class="fa fa-users"></i>
+                        </div>
+                        <div class="menu-title">Travelers</div>
+                    </router-link>
+                </li>
 
                 <li>
                     <a v-wave class="has-arrow" href="javascript:;">

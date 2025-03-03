@@ -79,11 +79,13 @@ const options = {
                 html += '<div class="col-md-4">';
                 html += '<img src="'+ row.img +'" height="60"  class="w-100">';
                 html += '</div>';
-                html += '<div class="col-md-8">'
+                html += '<div class="col-md-8" style="white-space:nowrap;">'
 
                 html += row.name;
                 html += "<br>";
-                html += row.emp_id;
+                html += '<span class="text-primary">';
+
+                html += row.emp_id + "</span>";
                 html += "<br>";
                 html += row.desg;
                 html += " | ";
@@ -93,12 +95,12 @@ const options = {
                 html += '</div>';
                 return html;
             },
-            width: '100%',
+            width: '200%',
 
 
         },
         {
-            title: "Role & Office Location",
+            title: "Role & Office",
             render: function (data, type, row) {
                 var html = "";
                 html += row.r_name;
