@@ -17,7 +17,6 @@ class Singlewayjson
     {
 
         $this->airports       = DB::table('airports')->select('code', 'Airport_Name', 'City_name')->get()->keyBy('code')->toArray();
-
         $this->airlineNames   = DB::table('airline_logos')->pluck('name', 'code')->toArray();
         $this->airlineLogos   = DB::table('airline_logos')->pluck('logo_path', 'code')->toArray();
         $this->aircraftModels = DB::table('aircraft_type_designators')->pluck('model', 'iata_code')->toArray();
