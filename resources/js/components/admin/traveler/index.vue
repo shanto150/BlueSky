@@ -86,7 +86,7 @@ const options = {
                 html += "</div>";
                 return html;
             },
-            width: '100%',
+            width: '60%',
         },
         {
             title: "Passport Info",
@@ -94,12 +94,12 @@ const options = {
                 var html = "";
                 html += '023948bdf93450';
                 html += "<br>";
-                html += '19-Aug-2026';
+                html += '12-Dec-2026';
                 html += "<br>";
-                html += 'Bangladeshi';
+                html += '<span class="text-primary">Bangladeshi</span>';
                 return html;
             },
-            width: '20%',
+            width: '30%',
 
         },
         {
@@ -108,8 +108,8 @@ const options = {
                 var html = "";
                 html += row.email;
                 html += "<br>";
-                html += row.phone;
-
+                html += '<span class="text-primary">';
+                html += row.phone + '</span>';
                 return html;
             }
         },
@@ -157,7 +157,7 @@ const options = {
                 var idd = row.idd;
                 var status = row.status;
 
-                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa-solid fa-eye" style="margin: 0px 0px 10px -5px; font-size: 14px;" ></i> </button>';
+                html += '<button  style="size: 30px; width: 30px; height: 30px" class="btn btn-outline-only-edit rounded-circle edit-item" placement="top" id="edit_tool" data-item-id=' + idd + '> <i class="fa-solid fa-eye" style="margin: 0px 0px 10px -6px; font-size: 14px;" ></i> </button>';
 
                 html += '<button type="button" style="size: 30px; width: 30px; height: 30px; margin-left: 5px;" class="btn btn-outline-purple rounded-circle status-change" data-item-id=' + idd + ' data-status=' + status + '> <i class="fa fa-file" style="margin: 2px 0px 10px -3px; font-size: 14px;"></i> </button>';
 

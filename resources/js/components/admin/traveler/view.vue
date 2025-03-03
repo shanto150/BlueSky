@@ -59,8 +59,8 @@ import moment from "moment";
                         <div class="card-header">
                             <h5 class="m-0 p-0"> &nbsp; Traveller Information</h5>
                         </div>
-                        <div class="card-body">
-                            <table class="table table-border table-sm table-responsive">
+                        <div class="card-body" style="min-height: 480px;">
+                            <table class="table table-bordered table-sm table-responsive">
                                 <tbody>
                                     <tr>
                                         <td class="m-0 pl-2" width="50%">
@@ -69,7 +69,7 @@ import moment from "moment";
                                         </td>
                                         <td class="m-0 pl-2" width="50%">
                                             <label for=""><b>Expiry Date:</b></label>
-                                            <p class="m-0">12/12/2026</p>
+                                            <p class="m-0">12-Dec-2026</p>
                                         </td>
                                     </tr>
                                     <tr>
