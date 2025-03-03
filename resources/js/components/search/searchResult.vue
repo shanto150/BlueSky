@@ -86,6 +86,8 @@ const format = (fdate) => {
     const month = fdate.getMonth() + 1;
     const year = fdate.getFullYear();
     const date = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+
     form.dep_date = date;
     return date;
 }
@@ -325,7 +327,7 @@ async function Lowfaresearch() {
 
     <div class="row">
         <div class="col-md-12">
-            <div class="card border border-1 bluesky-border-primary">
+            <div class="card border border-1 bluesky-border-primary" style="min-height: 150px;">
 
                 <div class="card-body">
                     <div class="d-flex align-items-center gap-2">
@@ -1197,6 +1199,7 @@ async function Lowfaresearch() {
                                 <div class="col-md-3 m-0 p-0">
                                 {{ index }}
                                     <div class="d-flex">
+                                        <!-- <p>{{ flight.logopath }}</p> -->
                                         <img :src="flight.logopath" alt=""
                                             style="width: 60px; height: 40px; margin-right: 20px; margin-left: 10px; margin-top: 10px;">
                                         <!-- <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
@@ -1565,8 +1568,8 @@ async function Lowfaresearch() {
                                                                             <div class="col-md-5 text-center">
                                                                                 <img :src="detail.logopath" alt=""
                                                                                     style="width: 60px; height: 40px; margin-right: 20px">
-                                                                                <p class="mb-0 pb-0">{{
-                                                                                    detail.ailine_name }}</p>
+                                                                                <p style="font-size: 10px;" class="mb-0 pb-0"><b>{{
+                                                                                    detail.airline_name }}</b></p>
                                                                                 <p class="mb-0 pb-0"
                                                                                     style="font-size: 10px;">{{
                                                                                         detail.Equipment }}</p>
@@ -1922,9 +1925,7 @@ async function Lowfaresearch() {
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
 
             <Transition name="fade">
