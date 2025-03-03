@@ -79,6 +79,7 @@ const airlinesEdit = () => import('./components/admin/settings/airlines/edit.vue
 
 // traveler management
 const TravelerList = () => import('./components/admin/traveler/index.vue')
+const TravelerView = () => import('./components/admin/traveler/view.vue')
 
 const routes = [
     { path: '/', component: Login, name: 'Login', meta: { guest: true } },
@@ -167,6 +168,7 @@ const routes = [
 
     //traveler
     { path: '/all-traveler-list', component: TravelerList, name: 'TravelerList', meta: { auth: true } },
+    { path: '/view-traveler/', component: TravelerView, name: 'TravelerView', meta: { auth: true } },
 ]
 
 const router = createRouter({

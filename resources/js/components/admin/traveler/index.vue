@@ -122,7 +122,7 @@ const options = {
                 html += "<br>";
 
                 html += '<span class="text-primary">';
-                html += "10</span>";
+                html += "<i class='fa fa-ticket'></i> 10</span>";
                 return html;
             },
         },
@@ -176,7 +176,7 @@ const options = {
 
             var itemIdd = $(this).attr('data-item-id');
 
-            router.push({ name: 'EditUser', params: { id: itemIdd } });
+            router.push({ name: 'TravelerView' });
         });
 
         // delete function
