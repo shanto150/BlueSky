@@ -843,11 +843,12 @@ function offHover() {
                                 <div class="accordion" id="price-range">
                                     <div class="accordion-item">
                                         <p class="accordion-header" id="headingOne">
-                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-1"
+                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
                                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                                 aria-expanded="true" aria-controls="collapseOne">
-                                                <span style="float:left;">Price Range</span>
-
+                                                <span style="float:left;">
+                                                    <span style="font-size: 13px;">Price Range</span>
+                                                </span>
                                             </button>
                                         </p>
                                         <div id="collapseOne" class="accordion-collapse collapse show"
@@ -874,10 +875,10 @@ function offHover() {
                                 <div class="accordion" id="class-type">
                                     <div class="accordion-item mt-3">
                                         <h6 class="accordion-header" id="headingSix">
-                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-1"
+                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
                                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
                                                 aria-expanded="false" aria-controls="collapseSix">
-                                                Flight Schedule
+                                                <span style="font-size: 13px;">Flight Schedule</span>
                                             </button>
                                         </h6>
                                         <div id="collapseSix" class="accordion-collapse collapse show"
@@ -941,10 +942,10 @@ function offHover() {
                                 <div class="accordion" id="arilines">
                                     <div class="accordion-item mt-3">
                                         <h6 class="accordion-header" id="headingfour">
-                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-1"
+                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
                                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
                                                 aria-expanded="false" aria-controls="collapseFour">
-                                                Airlines
+                                                <span class="" style="font-size: 13px;">Airlines</span>
                                             </button>
                                         </h6>
                                         <div id="collapseFour" class="accordion-collapse collapse show"
@@ -995,10 +996,12 @@ function offHover() {
                                 <div class="accordion" id="stop">
                                     <div class="accordion-item mt-3">
                                         <h2 class="accordion-header" id="headingTwo">
-                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-1"
+                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
                                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                                 aria-expanded="false" aria-controls="collapseTwo">
-                                                Stop
+
+                                                <span class="" style="font-size: 13px;">Stop
+                                                </span>
                                             </button>
                                         </h2>
                                         <div id="collapseTwo" class="accordion-collapse collapse show"
@@ -1034,10 +1037,11 @@ function offHover() {
                                 <div class="accordion" id="refund">
                                     <div class="accordion-item mt-3">
                                         <h2 class="accordion-header" id="headingThree">
-                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-1"
+                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
                                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                                 aria-expanded="false" aria-controls="collapseThree">
-                                                Refund Availability
+
+                                                <span style="font-size: 13px;">Refund Availability</span>
                                             </button>
                                         </h2>
                                         <div id="collapseThree" class="accordion-collapse collapse show"
@@ -1073,10 +1077,12 @@ function offHover() {
                                 <div class="accordion" id="class-type">
                                     <div class="accordion-item mt-3">
                                         <h6 class="accordion-header" id="headingFive">
-                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-1"
+                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
                                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
                                                 aria-expanded="false" aria-controls="collapseFive">
-                                                Class
+
+                                                <span style="font-size: 13px;">Class</span>
+
                                             </button>
                                         </h6>
                                         <div id="collapseFive" class="accordion-collapse collapse show"
@@ -1120,10 +1126,12 @@ function offHover() {
                                 <div class="accordion" id="class-type">
                                     <div class="accordion-item mt-3">
                                         <h2 class="accordion-header" id="headingSeven">
-                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-1"
+                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
                                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven"
                                                 aria-expanded="false" aria-controls="collapseSeven">
-                                                Baggage
+
+                                                <span style="font-size: 13px;">Baggage</span>
+
                                             </button>
                                         </h2>
                                         <div id="collapseSeven" class="accordion-collapse collapse show"
@@ -1167,10 +1175,12 @@ function offHover() {
                                 <div class="accordion" id="class-type">
                                     <div class="accordion-item mt-3">
                                         <h6 class="accordion-header" id="headingEight">
-                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-1"
+                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
                                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight"
                                                 aria-expanded="false" aria-controls="collapseEight">
-                                                Layover
+
+                                                <span style="font-size: 13px;">Layover</span>
+
                                             </button>
                                         </h6>
                                         <div id="collapseEight" class="accordion-collapse collapse show"
@@ -1327,7 +1337,7 @@ function offHover() {
                                                 <div class="accordion accordion-flush" id="accordionFlushExample">
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="flush-headingOne">
-                                                            <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-1"
+                                                            <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-2"
                                                                 data-bs-toggle="collapse"
                                                                 data-bs-target="#flight-details" aria-expanded="false"
                                                                 aria-controls="flight-details"
@@ -1391,7 +1401,7 @@ function offHover() {
                                                                 role="tabpanel">
                                                                 <div class="card">
                                                                     <div
-                                                                        class="card-header accorion-item-title-color m-0 p-0 px-2 py-1">
+                                                                        class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
                                                                         <div class="d-flex">
                                                                             <div class="p-2 flex-grow-1">
                                                                                 <b>
@@ -1761,7 +1771,7 @@ function offHover() {
                                                                     style="background-color: #7944eb !important;">
                                                                     <button
                                                                         class="accordion-button m-0 p-0 px-3 py-2 collapsed"
-                                                                        type="button" data-bs-toggle="collapse"
+                                                                      type="button" data-bs-toggle="collapse"
                                                                         data-bs-target="#flush-fare-summary"
                                                                         aria-expanded="false"
                                                                         aria-controls="flush-fare-summary">
@@ -1893,7 +1903,7 @@ function offHover() {
                                                                 <h2 class="accordion-header" id="flush-headingTwo">
                                                                     <button
                                                                         class="accordion-button m-0 p-0 px-3 py-2 collapsed"
-                                                                        type="button" data-bs-toggle="collapse"
+                                                                      type="button" data-bs-toggle="collapse"
                                                                         data-bs-target="#flush-collapseTwo"
                                                                         aria-expanded="false"
                                                                         aria-controls="flush-collapseTwo">
@@ -2313,7 +2323,7 @@ function offHover() {
                                                 <div class="accordion accordion-flush" id="accordionFlushExample">
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="flush-headingOne">
-                                                            <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-1"
+                                                            <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-2"
                                                                 data-bs-toggle="collapse"
                                                                 data-bs-target="#flight-details-2" aria-expanded="false"
                                                                 aria-controls="flight-details-2"
@@ -2388,7 +2398,7 @@ function offHover() {
                                                                 </div>
                                                                 <div class="card">
                                                                     <div
-                                                                        class="card-header accorion-item-title-color m-0 p-0 px-2 py-1">
+                                                                        class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
 
                                                                         <div class="d-flex">
                                                                             <div class="p-2 flex-grow-1">
@@ -2486,7 +2496,7 @@ function offHover() {
 
                                                                 <div class="card ">
                                                                     <div
-                                                                        class="card-header accorion-item-title-color m-0 p-0 px-2 py-1">
+                                                                        class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
                                                                         <div class="d-flex">
                                                                             <div class="p-2 flex-grow-1">
                                                                                 <b>
@@ -2685,7 +2695,7 @@ li.menu-item {
 
 .accordion-button:after {
     margin-left: 3px !important;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237944eb'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237944eb'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
 }
 
 .accorion-item-title-color {
