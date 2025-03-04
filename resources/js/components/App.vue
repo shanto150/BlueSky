@@ -213,7 +213,7 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
 }
 
 .bluesky-border-primary{
-    border-color: #7944eb !important;
+    border-color: #9368ee !important;
 }
 .custom-text-purple{
     color: #7944eb;
