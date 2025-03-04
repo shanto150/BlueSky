@@ -818,19 +818,19 @@ function offHover() {
                                             <img src="../../../../public/theme/animation/Session_Timer.gif" height="36"
                                                 width="36" alt="">
                                             &nbsp;&nbsp;
-                                            <span class="pt-2" style="font-size: 12px; margin-top: 4px;">Book Flight
-                                                within</span>
+                                            <span class="pt-2" style="font-size: 12px; margin-top: 4px;"><b>Book Flight
+                                                within</b></span>
                                             &nbsp; &nbsp;
                                             <div class="dash-lable bg-light-primary custom-text-purple rounded-1"
                                                 style="padding-top: 8px;">
-                                                <p class="text-black mb-0">30</p>
+                                                <p class="text-black mb-0" style="font-weight: 600;">30</p>
                                             </div>
                                             &nbsp;
-                                            <div class="ml-1 mr-1">:</div>
+                                            <div class="ml-1 mr-1" style="margin-top: 9px;"><b>:</b></div>
                                             &nbsp;
                                             <div class="dash-lable bg-light-primary custom-text-purple rounded-1"
                                                 style="padding-top: 8px;">
-                                                <p class="text-black mb-0">00</p>
+                                                <p class="text-black mb-0" style="font-weight: 600;">00</p>
                                             </div>
                                         </div>
                                     </div>
@@ -953,31 +953,38 @@ function offHover() {
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        Emirates
-                                                    </label>
+                                                    <div class="d-flex">
+                                                        <div class="bd-highlight">Emirates</div>
+                                                        <div class="ms-auto bd-highlight total-flight-from">05</div>
+                                                    </div>
+
                                                 </div>
-                                                <div class="form-check">
+                                                <div class="form-check mt-2">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        Qatar Airways
-                                                    </label>
+
+                                                    <div class="d-flex">
+                                                        <div class="bd-highlight">Qatar Airways</div>
+                                                        <div class="ms-auto bd-highlight total-flight-from">02</div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-check">
+                                                <div class="form-check mt-2">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        Us-Bangla Airlines
-                                                    </label>
+
+                                                    <div class="d-flex">
+                                                        <div class="bd-highlight">US-Bangla</div>
+                                                        <div class="ms-auto bd-highlight total-flight-from">02</div>
+                                                    </div>
                                                 </div>
 
-                                                <div class="form-check">
+                                                <div class="form-check mt-2">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        Biman Bangladesh
-                                                    </label>
+                                                    <div class="d-flex">
+                                                        <div class="bd-highlight">Biman Bangladesh</div>
+                                                        <div class="ms-auto bd-highlight total-flight-from">02</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1214,9 +1221,9 @@ function offHover() {
                         <div class="row">
                             <div class="d-flex">
                                 <p>Showing 10 of 20 Total Flights</p>
-                                <div class="text-right ">
+                                <!-- <div class="text-right ">
                                     <button class="btn btn-sm bluesky-btn-outline-primary">Show Price Chart</button>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-md-12">
                                 <hr style="margin: -7px 0px 30px !important;">
@@ -2765,5 +2772,15 @@ li.menu-item {
     cursor: pointer;
     margin-right: 12px;
     color: #875ae9;
+}
+
+.total-flight-from {
+    height: 25px;
+    width: 25px;
+    background-color: #eaf3fa;
+    color: #7239ea;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 2px 0 0 3px;
 }
 </style>
