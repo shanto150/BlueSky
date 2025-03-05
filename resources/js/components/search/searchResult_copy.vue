@@ -819,7 +819,7 @@ function offHover() {
                                                 width="36" alt="">
                                             &nbsp;&nbsp;
                                             <span class="pt-2" style="font-size: 12px; margin-top: 4px;"><b>Book Flight
-                                                within</b></span>
+                                                    within</b></span>
                                             &nbsp; &nbsp;
                                             <div class="dash-lable bg-light-primary custom-text-purple rounded-1"
                                                 style="padding-top: 8px;">
@@ -895,36 +895,36 @@ function offHover() {
                                                     </div>
                                                     <div class="col-md-12 mt-2">
                                                         <div class="d-flex gap-2">
-                                                            <div style="background: linear-gradient(180deg, rgba(135, 160, 174, 0.50) 0%, rgba(208, 200, 187, 0.30) 50%, rgba(254, 191, 84, 0.20) 100%);"
+                                                            <div style="background: linear-gradient(180deg, rgba(135, 160, 174, 0.50) 0%, rgba(208, 200, 187, 0.30) 50%, rgba(254, 191, 84, 0.20) 100%); height: 70px !important; min-width: 55px !important;"
                                                                 class="p-1 border border-1 text-center rounded rounded-1 accorion-item-title-color cursor-pointer">
 
                                                                 <img src="../../../../public/theme/animation/Sun_Rise.gif"
-                                                                    height="48" width="48" alt="">
+                                                                    style="width: 42px;" alt="">
                                                                 <br>
                                                                 <span style="font-size: 8px; font-weight: bold;">00-06
                                                                     AM</span>
                                                             </div>
-                                                            <div style="background: linear-gradient(180deg, rgba(255, 240.15, 143.65, 0.50) 0%, rgba(221.85, 201.52, 51.76, 0.30) 53%, rgba(187.85, 164.39, 11.90, 0.20) 100%);"
+                                                            <div style="background: linear-gradient(180deg, rgba(255, 240.15, 143.65, 0.50) 0%, rgba(221.85, 201.52, 51.76, 0.30) 53%, rgba(187.85, 164.39, 11.90, 0.20) 100%); height: 70px !important; min-width: 55px;"
                                                                 class="p-1 border border-1 text-center rounded rounded-1 accorion-item-title-color cursor-pointer">
                                                                 <img src="../../../../public/theme/animation/Noon.gif"
-                                                                    height="48" width="48" alt="">
+                                                                    style="width: 42px;" alt="">
                                                                 <br>
                                                                 <span style="font-size: 8px; font-weight: bold;">06-12
                                                                     PM</span>
                                                             </div>
 
-                                                            <div style="background: linear-gradient(180deg, rgba(40.98, 55.67, 121.12, 0.50) 0%, rgba(110, 87, 100, 0.30) 52%, rgba(230, 141, 91, 0.20) 100%);"
+                                                            <div style="background: linear-gradient(180deg, rgba(40.98, 55.67, 121.12, 0.50) 0%, rgba(110, 87, 100, 0.30) 52%, rgba(230, 141, 91, 0.20) 100%); height: 70px !important; min-width: 55px;"
                                                                 class="p-1 border border-1 text-center rounded rounded-1 accorion-item-title-color cursor-pointer">
                                                                 <img src="../../../../public/theme/animation/Sun_Set.gif"
-                                                                    height="48" width="48" alt="">
+                                                                    style="width: 32px; margin-bottom: 11px;" alt="">
                                                                 <br>
                                                                 <span style="font-size: 8px; font-weight: bold;">12-06
                                                                     PM</span>
                                                             </div>
-                                                            <div style="background: linear-gradient(182deg, #081627 0%, rgba(0, 66.30, 132.60, 0.40) 55%, rgba(157.25, 227.55, 255, 0.60) 100%);"
+                                                            <div style="background: linear-gradient(182deg, #081627 0%, rgba(0, 66.30, 132.60, 0.40) 55%, rgba(157.25, 227.55, 255, 0.60) 100%); height: 70px !important; min-width: 55px;"
                                                                 class="p-1 border border-1 text-center rounded rounded-1 accorion-item-title-color cursor-pointer">
                                                                 <img src="../../../../public/theme/animation/Night.gif"
-                                                                    height="48" width="48" alt="">
+                                                                    style="width: 35px; margin-bottom: 8px;" alt="">
 
                                                                 <br>
                                                                 <span style="font-size: 8px; font-weight: bold;">06-12
@@ -1229,105 +1229,160 @@ function offHover() {
                     </div>
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="d-flex">
-                                <p>Showing 10 of 20 Total Flights</p>
-                                <!-- <div class="text-right ">
-                                    <button class="btn btn-sm bluesky-btn-outline-primary">Show Price Chart</button>
-                                </div> -->
+                            <span class="">Showing 10 of 20 Total Flights</span>
+                            <div class="col-md-12 pb-2">
+                                <hr>
                             </div>
                             <div class="col-md-12">
-                                <hr style="margin: -7px 0px 30px !important;">
-                            </div>
-                            <div class="col-md-12">
-
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-3 m-0 p-0">
-                                                <div class="d-flex">
-                                                    <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
-                                                        height="70">
-                                                    <div class="text-left mt-2">
-                                                        <p class="p-0 m-0"><b>DAC-DXB</b></p>
-                                                        <small style="font-size: 12px; color: #5e6878;">Qatar
-                                                            Airways</small>
+                                            <div class="col-md-10 col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-3 p-0">
+                                                        <div class="d-flex flex-row">
+                                                            <div class="p-1">
+                                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
+                                                                    height="50" width="50">
+                                                            </div>
+                                                            <div class="pt-1 ps-2">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center h-100 w-100">
+                                                                    <div>
+                                                                        <div class="text-black"><b>DAC-DXB</b></div>
+                                                                        <div style="font-size: 11px; color: #8327a4">BG
+                                                                            | Bangladesh Airlines Limited
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5 border-start">
-                                                <div class="d-flex gap-5">
-                                                    <div class="mt-2">
-                                                        <p class="p-0 m-0"><b>10:50 AM</b></p>
-                                                        <small style="font-size: 12px; color: #5e6878;">03 Jan,
-                                                            Fri</small>
-                                                        <br>
-                                                        <small
-                                                            style="font-size: 12px; color: #5e6878;">Departure</small>
-                                                    </div>
+                                                    <div class="col-md-8 col-12 border-start border-end">
+                                                        <div class="row p-2">
+                                                            <div class="col-md-4 col-4">
+                                                                <div
+                                                                    class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                    <div class="text-black"><b>10:50 AM</b></div>
+                                                                    <div>
+                                                                        <small
+                                                                            style="font-size: 12px; color: #5e6878;">03
+                                                                            Jan,
+                                                                            Fri</small>
+                                                                    </div>
+                                                                    <div>
+                                                                        <small
+                                                                            style="font-size: 12px; color: #5e6878;">Departure</small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-4">
+                                                                <div class="d-block">
+                                                                    <div> <small class="ps-2"
+                                                                            style="font-size: 11px; color: #5e6878;">04
+                                                                            hr 15 Min</small></div>
 
-                                                    <div class="text-center mt-2">
-                                                        <small style="font-size: 12px; color: #5e6878;">04 hr 15
-                                                            Min</small>
-                                                        <br>
-                                                        <div class="d-flex">
-                                                            <div>
-                                                                ....
+
+                                                                    <div class="d-flex">
+                                                                        <div class="text-black">
+                                                                            <img src="../../../../public/theme/appimages/Left_Aligned Line.svg"
+                                                                                alt="">
+                                                                        </div>
+                                                                        <div>
+                                                                            <img style="transform: rotate(45deg)"
+                                                                                src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                                alt="" height="23" width="23">
+                                                                        </div>
+                                                                        <div class="text-black">
+                                                                            <img src="../../../../public/theme/appimages/Right_Aligned Line.svg"
+                                                                                alt="">
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                    <div class="d-flex ps-2">
+                                                                        <img title="Layover at Kolkata | 2H 25 Min"
+                                                                            src="../../../../public/theme/appimages/Layover.svg"
+                                                                            alt="">
+                                                                        <div class="text-black"
+                                                                            style="transform: skewY(5deg);">
+                                                                            ....
+                                                                        </div>
+                                                                        <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                            alt="">
+                                                                        <div class="text-black"
+                                                                            style="transform: skewY(175deg);">
+                                                                            ....
+                                                                        </div>
+                                                                        <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                            alt="">
+
+                                                                    </div>
+                                                                    <div class="d-flex ps-2">
+                                                                        <span
+                                                                            style="font-size: 7px; color: #5e6878;">CCU</span>
+                                                                        &nbsp; &nbsp; &nbsp;
+                                                                        <span
+                                                                            style="font-size: 7px; color: #5e6878;">DEL</span>
+                                                                        &nbsp; &nbsp;
+                                                                        <span
+                                                                            style="font-size: 7px; color: #5e6878;">DXB</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div>
-                                                                <img style="margin-top: 4px;"
-                                                                    src="../../../../public/theme/appimages/Plane_origin.svg"
-                                                                    alt="">
-                                                            </div>
-                                                            <div>
-                                                                ....
+                                                            <div class="col-md-4 col-4">
+                                                                <div
+                                                                    class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                    <div class="text-black"><b>10:50 AM</b></div>
+                                                                    <div>
+                                                                        <small
+                                                                            style="font-size: 12px; color: #5e6878;">03
+                                                                            Jan,
+                                                                            Fri</small>
+                                                                    </div>
+                                                                    <div>
+                                                                        <small
+                                                                            style="font-size: 12px; color: #5e6878;">Departure</small>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <div class="mt-2">
-                                                        <p class="p-0 m-0"><b>02:50 PM</b></p>
-                                                        <small style="font-size: 12px; color: #5e6878;">03 Jan,
-                                                            Fri</small>
-                                                        <br>
-                                                        <small style="font-size: 12px; color: #5e6878;">Arrival</small>
-                                                    </div>
-
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 ">
-                                                <div class="d-flex gap-3 border-start">
-                                                    <div class="mt-2 ms-md-4">
-                                                        <button class="btn btn-sm btn-block bluesky-btn-primary"
-                                                            style="margin-left: 30px;" data-bs-toggle="collapse"
-                                                            data-bs-target="#flight-package"
-                                                            aria-controls="flight-package">
+                                            <div class="col-12 col-sm-12 col-md-2">
 
-                                                            <div class="text-right" style="padding-left: 10px;">
-                                                                <p class="p-0 m-0"><b>BDT
-                                                                        65000</b></p>
-                                                                <small style="color: #dbdbdb"><del>
-                                                                        BDT 77000</del></small>
-                                                                <br>
-                                                                <small style="font-size: 12px;">Economy Class</small>
-                                                            </div>
-                                                        </button>
-                                                    </div>
+                                                <div class="d-grid">
+                                                    <button class="btn btn-sm bluesky-btn-primary"
+                                                        data-bs-toggle="collapse" data-bs-target="#flight-package-2"
+                                                        aria-controls="flight-package-2">
+
+                                                        <div class="text-right">
+                                                            <p class="p-0 m-0"><b>BDT
+                                                                    65000</b></p>
+                                                            <small style="color: #dbdbdb"><del>
+                                                                    BDT 77000</del></small>
+                                                            <br>
+                                                            <small style="font-size: 10px;">Economy
+                                                                Class</small>
+                                                        </div>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="card-footer" style="background-color:#f1f4f7;">
-                                        <div class="float-start">
+                                    <div class="card-footer p-0" style="background-color:#f1f4f7;">
+                                        <div class="float-start p-2">
                                             <div class="d-flex gap-2">
                                                 <div class="border border-1 text-center p-1"
-                                                    style="background-color: #def1ec; color: #12ce69;">
+                                                    style="background-color: #def1ec; color: #12ce69; font-size: 12px;">
                                                     <i class="fa fa-refresh"></i> Refundable
                                                 </div>
 
                                                 <div class="border border-1 text-center p-1"
-                                                    style="background-color: #e4e3f6; color: #7944eb;">
+                                                    style="background-color: #e4e3f6; color: #7944eb; font-size: 12px;">
                                                     <i class="fa-regular fa-seat-airline"></i> Available Seats: 09
                                                 </div>
                                             </div>
@@ -1341,7 +1396,7 @@ function offHover() {
                                                                 data-bs-toggle="collapse"
                                                                 data-bs-target="#flight-details" aria-expanded="false"
                                                                 aria-controls="flight-details"
-                                                                style=" font-size: 14px; background: #f1f4f7 !important;">
+                                                                style=" font-size: 12px; background: #f1f4f7 !important;">
                                                                 <b>Flight Details</b>
                                                             </a>
                                                         </h2>
@@ -1352,7 +1407,1049 @@ function offHover() {
                                     </div>
                                 </div>
 
+                                <!-- flight details -->
                                 <div id="flight-details" class="accordion-collapse collapse m-0"
+                                    aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" style="">
+                                    <div class="accordion-body">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
+                                                            <li class="nav-item" role="presentation">
+                                                                <a class="nav-link active" data-bs-toggle="tab"
+                                                                    href="#primaryhome" role="tab" aria-selected="true">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="tab-icon"><i
+                                                                                class="bx bx-comment-detail font-18 me-1"></i>
+                                                                        </div>
+                                                                        <div class="tab-title"> Flight Details</div>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="nav-item" role="presentation">
+                                                                <a class="nav-link" data-bs-toggle="tab"
+                                                                    href="#primaryprofile" role="tab"
+                                                                    aria-selected="false" tabindex="-1">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="tab-icon"><i
+                                                                                class="bx bx-bookmark-alt font-18 me-1"></i>
+                                                                        </div>
+                                                                        <div class="tab-title">Fare Rules</div>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="nav-item" role="presentation">
+                                                                <a class="nav-link" data-bs-toggle="tab"
+                                                                    href="#primarycontact" role="tab"
+                                                                    aria-selected="false" tabindex="-1">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="tab-icon"><i
+                                                                                class="bx bx-star font-18 me-1"></i>
+                                                                        </div>
+                                                                        <div class="tab-title">Refund Policy</div>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content pt-3">
+                                                            <div class="tab-pane fade active show" id="primaryhome"
+                                                                role="tabpanel">
+                                                                <div class="card">
+                                                                    <div
+                                                                        class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
+                                                                        <div class="d-flex">
+                                                                            <div class="p-2 flex-grow-1">
+                                                                                <b>
+                                                                                    <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                                        alt="">
+                                                                                </b>
+                                                                                <small><b>Departure From</b> Hazrat
+                                                                                    Shahjalal
+                                                                                    International Airport</small>
+                                                                            </div>
+
+                                                                            <div class="p-2">Flight Time: 01 hr 45 min
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <!-- <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-5 border-end">
+                                                                                <div class="d-flex border-right">
+                                                                                    <div class="text-start mt-2">
+                                                                                        <p
+                                                                                            class="p-0 m-0 custom-text-purple">
+                                                                                            <b>DAC</b>
+                                                                                        </p>
+                                                                                        <small
+                                                                                            style="font-size: 13px; color: #5e6878;"><b>10:50
+                                                                                                AM | 19 Jan,
+                                                                                                Thu</b></small>
+                                                                                        <br>
+                                                                                        <small
+                                                                                            style="font-size: 12px; color: #5e6878;">Terminal:2</small>
+                                                                                        <br>
+                                                                                        <small
+                                                                                            style="font-size: 12px; color: #5e6878;">Flight
+                                                                                            No:78ER457</small>
+                                                                                        <br>
+                                                                                        <small
+                                                                                            style="font-size: 12px; color: #5e6878;">Class:Economy</small>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-7">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-7">
+                                                                                        <div
+                                                                                            class="d-flex border-right">
+                                                                                            <div
+                                                                                                class="text-start mt-2">
+                                                                                                <p
+                                                                                                    class="p-0 m-0 custom-text-purple">
+                                                                                                    <b>DXB</b>
+                                                                                                </p>
+                                                                                                <small
+                                                                                                    style="font-size: 13px; color: #5e6878;"><b>11:55
+                                                                                                        AM | 19 Jan,
+                                                                                                        Thu</b></small>
+                                                                                                <br>
+                                                                                                <small
+                                                                                                    style="font-size: 11px; color: #5e6878;">Terminal:3</small>
+                                                                                                <br>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="col-md-5 text-center">
+                                                                                        <img height="60" width="100"
+                                                                                            src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
+                                                                                            alt="">
+                                                                                        <p class="mb-0 pb-0">Qatar
+                                                                                            Airways
+                                                                                        </p>
+                                                                                        <p class="mb-0 pb-0">Boeing 707
+                                                                                        </p>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row mt-2 p-2 pb-0">
+                                                                            <div class="chip chip-sm"
+                                                                                style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
+                                                                                <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                                    src="../../../../public/theme/appimages/location.svg"
+                                                                                    alt="">
+
+                                                                                Destination : Dubai Internation Airport
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> -->
+
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-4 col-4">
+                                                                                <div
+                                                                                    class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                                    <div class="text-black-"
+                                                                                        style="color: #0fb3a6;">
+                                                                                        <b>DAC</b>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <small style="font-size: 13px;"
+                                                                                            class="text-black"><b>10:30
+                                                                                                AM |</b></small> <span
+                                                                                            style="font-size: 11px;">19
+                                                                                            Jan,2025</span>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <small
+                                                                                            style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                            2</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4 d-none d-sm-block">
+                                                                                <img src="../../../../public/theme/appimages/Route.svg"
+                                                                                    alt="">
+                                                                            </div>
+                                                                            <div class="col-md-4 col-4">
+                                                                                <div
+                                                                                    class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                                    <div class="text-black-"
+                                                                                        style="color: #0fb3a6;">
+                                                                                        <b>DXB</b>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <small style="font-size: 13px;"
+                                                                                            class="text-black"><b>10:30
+                                                                                                AM |</b></small> <span
+                                                                                            style="font-size: 11px;">19
+                                                                                            Jan,2025</span>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <small
+                                                                                            style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                            3</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                            <div class="col-md-6">
+                                                                                <div class="d-flex gap-2 mt-2">
+
+                                                                                    <div class="border border-1 text-center p-1"
+                                                                                        style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 12px;">
+                                                                                        QR667- Boing787</div>
+                                                                                    <div class="border border-1 text-center p-1"
+                                                                                        style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 12px;">
+                                                                                        Class: Economy
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="float-end mt-2">
+                                                                                    <img height="35" width="60"
+                                                                                        src="../../../../public/uploads/airlines/EK.svg"
+                                                                                        alt="">
+                                                                                        <span class="pt-2 fw-bold" style="font-size: 11px;">Emirates</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="tab-pane fade" id="primaryprofile"
+                                                                role="tabpanel">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+
+                                                                        <p class="text-start fw-bold">PENALTIES/GENERAL
+                                                                        </p>
+                                                                        <span>
+                                                                            1. Reissue/Refund minimum penalty amount
+                                                                            before
+                                                                            departure 0 BDT 2. Reissue/Refund maximum
+                                                                            penalty amount
+                                                                            before departure 5999 BDT
+                                                                            3. Reissue/Refund maximum penalty amount for
+                                                                            the
+                                                                            ticket
+                                                                            before departure 9599 BDT
+                                                                            4. Revalidation minimum penalty amount
+                                                                            before
+                                                                            departure
+                                                                            0 BDT
+                                                                            5. Revalidation maximum penalty amount
+                                                                            before
+                                                                            departure
+                                                                            0 BDT
+                                                                            6. Revalidation maximum penalty amount for
+                                                                            the
+                                                                            ticket
+                                                                            before departure 0 BDT 7. Reissue/Refund
+                                                                            minimum
+                                                                            penalty
+                                                                            amount before departure no show 5999 BDT 8.
+                                                                            Reissue/Refund maximum penalty amount before
+                                                                            departure
+                                                                            no show 5999 BDT 9. Reissue/Refund maximum
+                                                                            penalty
+                                                                            amount for the ticket before departure no
+                                                                            show
+                                                                            9599 BDT
+                                                                            10. Revalidation minimum penalty amount
+                                                                            before
+                                                                            departure
+                                                                            no show 0 BDT 11. Revalidation maximum
+                                                                            penalty
+                                                                            amount
+                                                                            before departure no show 0 BDT 12.
+                                                                            Revalidation
+                                                                            maximum
+                                                                            penalty amount for the ticket before
+                                                                            departure
+                                                                            no show 0
+                                                                            BDT 13. Reissue/Refund minimum penalty
+                                                                            amount
+                                                                            after
+                                                                            departure 0 BDT 14. Reissue/Refund maximum
+                                                                            penalty
+                                                                            amount with sale currency 5999 BDT 15.
+                                                                            Reissue/Refund
+                                                                            maximum penalty amount for the ticket after
+                                                                            departure
+                                                                            9599 BDT 16. Revalidation minimum penalty
+                                                                            amount
+                                                                            after
+                                                                            departure 0 BDT 17. Revalidation maximum
+                                                                            penalty
+                                                                            amount
+                                                                            after departure 0 BDT 18. Revalidation
+                                                                            maximum
+                                                                            penalty
+                                                                            amount for the ticket after departure 0 BDT
+                                                                            19.
+                                                                            Reissue/Refund minimum penalty amount after
+                                                                            departure no
+                                                                            show 5999 BDT 20. Reissue/Refund maximum
+                                                                            penalty
+                                                                            amount
+                                                                            after departure no show 5999 BDT 21.
+                                                                            Reissue/Refund
+                                                                            maximum penalty amount for the ticket after
+                                                                            departure no
+                                                                            show 9599 BDT 22. Revalidation minimum
+                                                                            penalty
+                                                                            amount
+                                                                            after departure no show 0 BDT 23.
+                                                                            Revalidation
+                                                                            maximum
+                                                                            penalty amount after departure no show 0 BDT
+                                                                            24.
+                                                                            Revalidation maximum penalty amount for the
+                                                                            ticket after
+                                                                            departure no show 0 BDT 25. Part of rule is
+                                                                            free
+                                                                            form
+                                                                            text from Cat16? Not allowed 26. Reissue
+                                                                            penalties can
+                                                                            be waived for passenger and family
+                                                                            death/illness
+                                                                            before
+                                                                            departure? Not allowed 27. Revalidation
+                                                                            before
+                                                                            departure
+                                                                            is allowed? Not allowed 28. Reissue/Refund
+                                                                            before
+                                                                            departure allowed? Allowed with restrictions
+                                                                            29.
+                                                                            Reissue
+                                                                            penalties can be waived for passenger and
+                                                                            family
+                                                                            death/illness for before departure no show?
+                                                                            Not
+                                                                            allowed
+                                                                            30. Revalidation before departure when no
+                                                                            show
+                                                                            is
+                                                                            allowed? Not allowed 31. Reissue/Refund
+                                                                            before
+                                                                            departure
+                                                                            when no show allowed? Allowed with
+                                                                            restrictions
+                                                                            32.
+                                                                            Reissue penalties can be waived for
+                                                                            passenger
+                                                                            and family
+                                                                            death/illness after departure? Not allowed
+                                                                            33.
+                                                                            Revalidation after departure is allowed? Not
+                                                                            allowed 34.
+                                                                            Reissue/Refund after departure allowed?
+                                                                            Allowed
+                                                                            with
+                                                                            restrictions 35. Reissue penalties can be
+                                                                            waived
+                                                                            for
+                                                                            passenger and family death/illness after
+                                                                            departure no
+                                                                            show? Not allowed 36. Revalidation after
+                                                                            departure when
+                                                                            no show is allowed? Not allowed 37.
+                                                                            Reissue/Refund after
+                                                                            departure when no show allowed? Allowed with
+                                                                            restrictions 38. Reissue/Refund minimum
+                                                                            penalty
+                                                                            amount
+                                                                            before departure 11998 BDT 39.
+                                                                            Reissue/Refund
+                                                                            maximum
+                                                                            penalty amount before departure 16798 BDT
+                                                                            40.
+                                                                            Reissue/Refund maximum penalty amount for
+                                                                            the
+                                                                            ticket
+                                                                            before departure 16798 BDT 41.
+                                                                            Reissue/Refund
+                                                                            minimum
+                                                                            penalty amount before departure no show
+                                                                            11998
+                                                                            BDT 42.
+                                                                            Reissue/Refund maximum penalty amount before
+                                                                            departure
+                                                                            no show 16798 BDT 43. Reissue/Refund maximum
+                                                                            penalty
+                                                                            amount for the ticket before departure no
+                                                                            show
+                                                                            16798 BDT
+                                                                            44. Reissue/Refund minimum penalty amount
+                                                                            after
+                                                                            departure 11998 BDT 45. Reissue/Refund
+                                                                            maximum
+                                                                            penalty
+                                                                            amount with sale currency 16798 BDT 46.
+                                                                            Reissue/Refund
+                                                                            maximum penalty amount for the ticket after
+                                                                            departure
+                                                                            16798 BDT 47. Reissue/Refund minimum penalty
+                                                                            amount
+                                                                            after departure no show 11998 BDT 48.
+                                                                            Reissue/Refund
+                                                                            maximum penalty amount after departure no
+                                                                            show
+                                                                            16798 BDT
+                                                                            49. Reissue/Refund maximum penalty amount
+                                                                            for
+                                                                            the ticket
+                                                                            after departure no show 16798 BDT 50. Part
+                                                                            of
+                                                                            rule is
+                                                                            free form text from Cat16? Not allowed 51.
+                                                                            Reissue/Refund before departure allowed?
+                                                                            Allowed
+                                                                            with
+                                                                            restrictions 52. Reissue/Refund before
+                                                                            departure
+                                                                            when no
+                                                                            show allowed? Allowed with restrictions 53.
+                                                                            Reissue/Refund after departure allowed?
+                                                                            Allowed
+                                                                            with
+                                                                            restrictions 54. Reissue/Refund after
+                                                                            departure
+                                                                            when no
+                                                                            show allowed? Allowed with restrictions
+                                                                        </span>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-pane fade" id="primarycontact"
+                                                                role="tabpanel">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <p class="text-start fw-bold">Max Stay</p>
+                                                                        <span>Maximum stay none for economy unrestricted
+                                                                            fares.</span>
+                                                                    </div>
+                                                                    <div class="col-md-12 mt-2">
+                                                                        <p class="text-start fw-bold pt-0 mt-0">Layover
+                                                                        </p>
+                                                                        <span>Stopovers for economy unrestricted fares
+                                                                            unlimited
+                                                                            stopovers permitted.</span>
+                                                                    </div>
+                                                                    <div class="col-md-12 mt-2">
+                                                                        <p class="text-start fw-bold pt-0 mt-0">
+                                                                            Combinations
+                                                                        </p>
+                                                                        <span>
+                                                                            Permitted combinations fares may be combined
+                                                                            on
+                                                                            a half
+                                                                            round trip basis with any fare for any
+                                                                            carrier
+                                                                            in any
+                                                                            rule and tariff to form round trips/circle
+                                                                            trips.
+                                                                            End-one-end permitted. Validate all fare
+                                                                            component.
+                                                                            Travel must be via construction point.
+                                                                            Add-ons
+                                                                            permitted. Open jaws fares may be combined
+                                                                            on a
+                                                                            half
+                                                                            round trip basis with any fare for any
+                                                                            carrier
+                                                                            in any
+                                                                            rule and tariff to form single or double
+                                                                            open
+                                                                            jaws. A
+                                                                            maximum of 2 international fare components
+                                                                            permitted.
+                                                                            Mileage of an international open segment
+                                                                            must be
+                                                                            equal
+                                                                            to/less than mileage of the shortest flown
+                                                                            fare
+                                                                            component. No mileage restriction on an open
+                                                                            segment
+                                                                            within one country.
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4" style="background-color: #f4f4ff;">
+
+                                                        <div class="accordion accordion-flush mt-3"
+                                                            id="accordionFlushExample">
+                                                            <div class="accordion-item">
+                                                                <h2 class="accordion-header rounded"
+                                                                    id="flush-headingOne"
+                                                                    style="background-color: #7944eb !important;">
+                                                                    <button
+                                                                        class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                                        type="button" data-bs-toggle="collapse"
+                                                                        data-bs-target="#flush-fare-summary"
+                                                                        aria-expanded="false"
+                                                                        aria-controls="flush-fare-summary">
+                                                                        Fare Summary
+                                                                    </button>
+                                                                </h2>
+                                                                <div id="flush-fare-summary"
+                                                                    class="accordion-collapse collapse"
+                                                                    aria-labelledby="flush-headingOne"
+                                                                    data-bs-parent="#accordionFlushExample" style="">
+                                                                    <div class="accordion-body">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div
+                                                                                    class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                                    <span class="custom-text-purple">
+                                                                                        Base Fare
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="table-responsive">
+                                                                                    <table
+                                                                                        class="table table-sm table-striped">
+                                                                                        <tbody class="text-start">
+                                                                                            <tr>
+                                                                                                <td>Adults: 2x৳30000
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    ৳60000
+                                                                                                </td>
+                                                                                            </tr>
+
+                                                                                            <tr>
+                                                                                                <td>Childs: 2x৳20000
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    ৳40000
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                                    <span class="custom-text-purple">
+                                                                                        TAX
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="table-responsive">
+                                                                                    <table
+                                                                                        class="table table-sm table-striped ">
+                                                                                        <tbody class="text-start">
+                                                                                            <tr>
+                                                                                                <td>Adults: 2x৳5000</td>
+                                                                                                <td>
+                                                                                                    ৳10000
+                                                                                                </td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Childs: 2x৳2000</td>
+                                                                                                <td>
+                                                                                                    ৳4000
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                                    <span class="custom-text-purple">
+                                                                                        AIT
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="table-responsive">
+                                                                                    <table
+                                                                                        class="table table-sm table-striped ">
+                                                                                        <tbody class="text-start">
+                                                                                            <tr>
+                                                                                                <td>Adults: 2x৳1275</td>
+                                                                                                <td>
+                                                                                                    ৳2550
+                                                                                                </td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Childs: 2x৳870</td>
+                                                                                                <td>
+                                                                                                    ৳1740
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                                    <span class="custom-text-purple">
+                                                                                        Service Charge
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="table-responsive">
+                                                                                    <table
+                                                                                        class="table table-sm table-striped ">
+                                                                                        <tbody class="text-start">
+                                                                                            <tr>
+                                                                                                <td>Adults: 2x৳1275</td>
+                                                                                                <td>
+                                                                                                    ৳2550
+                                                                                                </td>
+
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Childs: 2x৳870</td>
+                                                                                                <td>
+                                                                                                    ৳1740
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="accordion-item mt-2">
+                                                                <h2 class="accordion-header" id="flush-headingTwo">
+                                                                    <button
+                                                                        class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                                        type="button" data-bs-toggle="collapse"
+                                                                        data-bs-target="#flush-collapseTwo"
+                                                                        aria-expanded="false"
+                                                                        aria-controls="flush-collapseTwo">
+                                                                        Baggadge Information
+                                                                    </button>
+                                                                </h2>
+                                                                <div id="flush-collapseTwo"
+                                                                    class="accordion-collapse collapse"
+                                                                    aria-labelledby="flush-headingTwo"
+                                                                    data-bs-parent="#accordionFlushExample" style="">
+                                                                    <div class="accordion-body">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table class="table table-sm ">
+                                                                                        <tbody class="text-start">
+                                                                                            <tr>
+                                                                                                <td
+                                                                                                    style="font-size: 11px;">
+                                                                                                    <b>DAC-CCU</b>
+                                                                                                    <br>
+                                                                                                    <small>Economy</small>
+                                                                                                </td>
+
+                                                                                                <td
+                                                                                                    style="font-size: 11px;">
+                                                                                                    <b>Cabin</b>
+                                                                                                    <br>
+                                                                                                    <small>10 Kg</small>
+                                                                                                </td>
+                                                                                                <td
+                                                                                                    style="font-size: 11px;">
+                                                                                                    <b>Check In</b>
+                                                                                                    <br>
+                                                                                                    <small>2
+                                                                                                        Pieces</small>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td
+                                                                                                    style="font-size: 11px;">
+                                                                                                    <b>CCU-BDX</b>
+                                                                                                    <br>
+                                                                                                    <small>Economy</small>
+                                                                                                </td>
+
+                                                                                                <td
+                                                                                                    style="font-size: 11px;">
+                                                                                                    <b>Cabin</b>
+                                                                                                    <br>
+                                                                                                    <small>10 Kg</small>
+                                                                                                </td>
+                                                                                                <td
+                                                                                                    style="font-size: 11px;">
+                                                                                                    <b>Check In</b>
+                                                                                                    <br>
+                                                                                                    <small>2
+                                                                                                        Pieces</small>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ./ end flight details -->
+                            </div>
+
+
+                            <!-- flight with return -->
+
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-">
+                                                <div class="row">
+                                                    <div class="col-md-10 col-sm-12">
+                                                        <div class="row">
+                                                            <div class="col-md-4 col-sm-3 p-0">
+                                                                <div class="d-flex flex-row">
+                                                                    <div class="p-1">
+                                                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
+                                                                            height="50" width="50">
+                                                                    </div>
+                                                                    <div class="pt-1 ps-2">
+                                                                        <div
+                                                                            class="d-flex justify-content-center align-items-center h-100 w-100">
+                                                                            <div>
+                                                                                <div class="text-black"><b>DAC-DXB</b>
+                                                                                </div>
+                                                                                <div
+                                                                                    style="font-size: 11px; color: #8327a4">
+                                                                                    BG
+                                                                                    | Bangladesh Airlines Limited
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-8 col-12 border-start border-end">
+                                                                <div class="row p-2">
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div
+                                                                            class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                            <div class="text-black"><b>10:50 AM</b>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">03
+                                                                                    Jan,
+                                                                                    Fri</small>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Departure</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div class="d-block">
+                                                                            <div> <small class="ps-2"
+                                                                                    style="font-size: 11px; color: #5e6878;">04
+                                                                                    hr 15 Min</small></div>
+
+
+                                                                            <div class="d-flex">
+                                                                                <div class="text-black">
+                                                                                    <img src="../../../../public/theme/appimages/Left_Aligned Line.svg"
+                                                                                        alt="">
+                                                                                </div>
+                                                                                <div>
+                                                                                    <img style="transform: rotate(45deg)"
+                                                                                        src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                                        alt="" height="23" width="23">
+                                                                                </div>
+                                                                                <div class="text-black">
+                                                                                    <img src="../../../../public/theme/appimages/Right_Aligned Line.svg"
+                                                                                        alt="">
+                                                                                </div>
+
+
+                                                                            </div>
+
+                                                                            <div class="d-flex ps-2">
+                                                                                <img title="Layover at Kolkata | 2H 25 Min"
+                                                                                    src="../../../../public/theme/appimages/Layover.svg"
+                                                                                    alt="">
+                                                                                <div class="text-black"
+                                                                                    style="transform: skewY(5deg);">
+                                                                                    ....
+                                                                                </div>
+                                                                                <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                                    alt="">
+                                                                                <div class="text-black"
+                                                                                    style="transform: skewY(175deg);">
+                                                                                    ....
+                                                                                </div>
+                                                                                <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                                    alt="">
+
+                                                                            </div>
+                                                                            <div class="d-flex ps-2">
+                                                                                <span
+                                                                                    style="font-size: 7px; color: #5e6878;">CCU</span>
+                                                                                &nbsp; &nbsp; &nbsp;
+                                                                                <span
+                                                                                    style="font-size: 7px; color: #5e6878;">DEL</span>
+                                                                                &nbsp; &nbsp;
+                                                                                <span
+                                                                                    style="font-size: 7px; color: #5e6878;">DXB</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div
+                                                                            class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                            <div class="text-black"><b>10:50 AM</b>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">03
+                                                                                    Jan,
+                                                                                    Fri</small>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Departure</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-12 col-md-2 d-none d-md-block">
+
+                                                        <div class="d-grid">
+                                                            <button class="btn btn-sm bluesky-btn-primary"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#flight-package-2"
+                                                                aria-controls="flight-package-2">
+
+                                                                <div class="text-right">
+                                                                    <p class="p-0 m-0"><b>BDT
+                                                                            65000</b></p>
+                                                                    <small style="color: #dbdbdb"><del>
+                                                                            BDT 77000</del></small>
+                                                                    <br>
+                                                                    <small style="font-size: 10px;">Economy
+                                                                        Class</small>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <!-- return section -->
+                                                    <div class="col-md-10 col-sm-12 border-top mt-3">
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-4 col-sm-3 p-0">
+                                                                <div class="d-flex flex-row">
+                                                                    <div class="p-1">
+                                                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
+                                                                            height="50" width="50">
+                                                                    </div>
+                                                                    <div class="pt-1 ps-2">
+                                                                        <div
+                                                                            class="d-flex justify-content-center align-items-center h-100 w-100">
+                                                                            <div>
+                                                                                <div class="text-black"><b>DXB-DAC</b>
+                                                                                </div>
+                                                                                <div
+                                                                                    style="font-size: 11px; color: #8327a4">
+                                                                                    BG
+                                                                                    | Bangladesh Airlines Limited
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-8 col-12 border-start border-end">
+                                                                <div class="row p-2">
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div
+                                                                            class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                            <div class="text-black"><b>10:50 AM</b>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">03
+                                                                                    Jan,
+                                                                                    Fri</small>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Departure</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div class="d-block">
+                                                                            <div> <small class="ps-2"
+                                                                                    style="font-size: 11px; color: #5e6878;">04
+                                                                                    hr 15 Min</small></div>
+
+
+                                                                            <div class="d-flex">
+                                                                                <div class="text-black">
+                                                                                    <img src="../../../../public/theme/appimages/Left_Aligned Line.svg"
+                                                                                        alt="">
+                                                                                </div>
+                                                                                <div>
+                                                                                    <img style="transform: rotate(225deg)"
+                                                                                        src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                                        alt="" height="23" width="23">
+                                                                                </div>
+                                                                                <div class="text-black">
+                                                                                    <img src="../../../../public/theme/appimages/Right_Aligned Line.svg"
+                                                                                        alt="">
+                                                                                </div>
+
+
+                                                                            </div>
+
+                                                                            <div class="d-flex ps-2">
+                                                                                <img title="Layover at Kolkata | 2H 25 Min"
+                                                                                    src="../../../../public/theme/appimages/Layover.svg"
+                                                                                    alt="">
+                                                                                <div class="text-black"
+                                                                                    style="transform: skewY(5deg);">
+                                                                                    ....
+                                                                                </div>
+                                                                                <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                                    alt="">
+                                                                                <div class="text-black"
+                                                                                    style="transform: skewY(175deg);">
+                                                                                    ....
+                                                                                </div>
+                                                                                <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                                    alt="">
+
+                                                                            </div>
+                                                                            <div class="d-flex ps-2">
+                                                                                <span
+                                                                                    style="font-size: 7px; color: #5e6878;">CCU</span>
+                                                                                &nbsp; &nbsp; &nbsp;
+                                                                                <span
+                                                                                    style="font-size: 7px; color: #5e6878;">DEL</span>
+                                                                                &nbsp; &nbsp;
+                                                                                <span
+                                                                                    style="font-size: 7px; color: #5e6878;">DXB</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div
+                                                                            class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                            <div class="text-black"><b>10:50 AM</b>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">03
+                                                                                    Jan,
+                                                                                    Fri</small>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Departure</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 col-sm-12 col-md-2 d-sm-block d-md-none">
+
+                                                        <div class="d-grid">
+                                                            <button class="btn btn-sm bluesky-btn-primary"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#flight-package-2"
+                                                                aria-controls="flight-package-2">
+
+                                                                <div class="text-right">
+                                                                    <p class="p-0 m-0"><b>BDT
+                                                                            65000</b></p>
+                                                                    <small style="color: #dbdbdb"><del>
+                                                                            BDT 77000</del></small>
+                                                                    <br>
+                                                                    <small style="font-size: 10px;">Economy
+                                                                        Class</small>
+                                                                </div>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- return section -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer p-0" style="background-color:#f1f4f7;">
+                                        <div class="float-start p-2">
+                                            <div class="d-flex gap-2">
+                                                <div class="border border-1 text-center p-1"
+                                                    style="background-color: #def1ec; color: #12ce69; font-size: 12px;">
+                                                    <i class="fa fa-refresh"></i> Refundable
+                                                </div>
+
+                                                <div class="border border-1 text-center p-1"
+                                                    style="background-color: #e4e3f6; color: #7944eb; font-size: 12px;">
+                                                    <i class="fa-regular fa-seat-airline"></i> Available Seats: 09
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="float-end me-2">
+                                            <div class="d-flex gap-2">
+                                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="flush-headingOne">
+                                                            <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-2"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#flight-details2" aria-expanded="false"
+                                                                aria-controls="flight-details2"
+                                                                style=" font-size: 12px; background: #f1f4f7 !important;">
+                                                                <b>Flight Details</b>
+                                                            </a>
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- flight details2 -->
+                                <div id="flight-details2" class="accordion-collapse collapse m-0"
                                     aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" style="">
                                     <div class="accordion-body">
                                         <div class="card">
@@ -1771,7 +2868,7 @@ function offHover() {
                                                                     style="background-color: #7944eb !important;">
                                                                     <button
                                                                         class="accordion-button m-0 p-0 px-3 py-2 collapsed"
-                                                                      type="button" data-bs-toggle="collapse"
+                                                                        type="button" data-bs-toggle="collapse"
                                                                         data-bs-target="#flush-fare-summary"
                                                                         aria-expanded="false"
                                                                         aria-controls="flush-fare-summary">
@@ -1903,7 +3000,7 @@ function offHover() {
                                                                 <h2 class="accordion-header" id="flush-headingTwo">
                                                                     <button
                                                                         class="accordion-button m-0 p-0 px-3 py-2 collapsed"
-                                                                      type="button" data-bs-toggle="collapse"
+                                                                        type="button" data-bs-toggle="collapse"
                                                                         data-bs-target="#flush-collapseTwo"
                                                                         aria-expanded="false"
                                                                         aria-controls="flush-collapseTwo">
@@ -1979,649 +3076,10 @@ function offHover() {
                                         </div>
                                     </div>
                                 </div>
-
-                                <div id="flight-package" class="accordion-collapse collapse m-0"
-                                    aria-labelledby="flush-headingpackage" data-bs-parent="#accordionFlushExample"
-                                    style="">
-                                    <div class="accordion-body">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="card card-hober">
-                                                            <div class="card-header border-bottom-1">
-                                                                <h5 class="card-title text-center">Economy</h5>
-                                                                <h6 class="text-center">BDT
-                                                                    65000</h6>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <ul style="list-style-type:none;" class="">
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa fa-refresh icon-color"></i>
-                                                                        Flexible to make 2 changes</li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-regular fa-circle-xmark icon-color"></i>
-                                                                        Cancellation within 24hrs of booking without
-                                                                        fees
-                                                                    </li>
-
-                                                                    <li class="menu-item">
-                                                                        <i
-                                                                            class="fa-solid fa-suitcase-rolling icon-color"></i>
-                                                                        Checked Baggage: 2 pieces, 23 kg each
-                                                                    </li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-solid fa-suitcase-rolling icon-color"></i>
-                                                                        Checked
-                                                                        Baggage: 2 pieces, 7 kg</li>
-                                                                    <li class="menu-item">
-                                                                        <i
-                                                                            class="fa-regular fa-seat-airline icon-color"></i>
-                                                                        Standard Seat selection included
-                                                                    </li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-regular fa-seat-airline icon-color"></i>
-                                                                        Preferred
-                                                                        Seat selection without fees</li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa fa-utensils icon-color"></i>
-                                                                        Free meal
-                                                                    </li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-brands fa-youtube icon-color"></i>
-                                                                        Multimedia
-                                                                        Support</li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-solid fa-wifi icon-color"></i>
-                                                                        Free
-                                                                        Wi-Fi
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-4">
-                                                        <div class="card card-hober">
-                                                            <div class="card-header text-black border-bottom-1">
-                                                                <h5 class="card-title text-center">Premium Economy</h5>
-                                                                <h6 class="text-center text-black">BDT 70500</h6>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <ul style="list-style-type:none;" class="">
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa fa-refresh icon-color"></i>
-                                                                        Flexible to make 4 changes</li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-regular fa-circle-xmark icon-color"></i>
-                                                                        Cancellation within 24hrs of booking without
-                                                                        fees
-                                                                    </li>
-
-                                                                    <li class="menu-item">
-                                                                        <i
-                                                                            class="fa-solid fa-suitcase-rolling icon-color"></i>
-                                                                        Checked Baggage: 2 pieces, 23 kg each
-                                                                    </li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-solid fa-suitcase-rolling icon-color"></i>
-                                                                        Checked
-                                                                        Baggage: 2 pieces, 7 kg</li>
-                                                                    <li class="menu-item">
-                                                                        <i
-                                                                            class="fa-regular fa-seat-airline icon-color"></i>
-                                                                        Standard Seat selection included
-                                                                    </li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-regular fa-seat-airline icon-color"></i>
-                                                                        Preferred
-                                                                        Seat selection without fees</li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa fa-utensils icon-color"></i>
-                                                                        Free meal
-                                                                    </li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-brands fa-youtube icon-color"></i>
-                                                                        Multimedia
-                                                                        Support</li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-solid fa-wifi icon-color"></i>
-                                                                        Free
-                                                                        Wi-Fi
-                                                                    </li>
-                                                                </ul>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="card card-hober">
-                                                            <div class="card-header text-black border-bottom-1">
-                                                                <h5 class="card-title text-center">First Class</h5>
-                                                                <h6 class="text-center text-black">BDT 90500</h6>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <ul style="list-style-type:none;" class="">
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa fa-refresh icon-color"></i>
-                                                                        Flexible to make 4 changes</li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-regular fa-circle-xmark icon-color"></i>
-
-                                                                        Cancellation within 24hrs of booking without
-                                                                        fees
-                                                                    </li>
-
-                                                                    <li class="menu-item">
-                                                                        <i
-                                                                            class="fa-solid fa-suitcase-rolling icon-color"></i>
-                                                                        Checked Baggage: 2 pieces, 23 kg each
-                                                                    </li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-solid fa-suitcase-rolling icon-color"></i>
-                                                                        Checked
-                                                                        Baggage: 2 pieces, 7 kg</li>
-                                                                    <li class="menu-item">
-                                                                        <i
-                                                                            class="fa-regular fa-seat-airline icon-color"></i>
-                                                                        Standard Seat selection included
-                                                                    </li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-regular fa-seat-airline icon-color"></i>
-                                                                        Preferred
-                                                                        Seat selection without fees</li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa fa-utensils icon-color"></i>
-                                                                        Free meal
-                                                                    </li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-brands fa-youtube icon-color"></i>
-                                                                        Multimedia
-                                                                        Support</li>
-                                                                    <li class="menu-item"> <i
-                                                                            class="fa-solid fa-wifi icon-color"></i>
-                                                                        Free
-                                                                        Wi-Fi
-                                                                    </li>
-                                                                </ul>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-3 m-0 p-0">
-                                                <div class="d-flex">
-                                                    <img style="margin: 0 40px 0 28px;"
-                                                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
-                                                        height="70">
-                                                    <div class="text-left mt-2">
-                                                        <p class="p-0 m-0"><b>DAC-DXB</b></p>
-                                                        <small style="font-size: 12px; color: #5e6878;">Emirates</small>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-5 border-start">
-                                                <div class="d-flex gap-5">
-                                                    <div class="mt-2">
-                                                        <p class="p-0 m-0"><b>10:50 AM</b></p>
-                                                        <small style="font-size: 12px; color: #5e6878;">03 Jan,
-                                                            Fri</small>
-                                                        <br>
-                                                        <small
-                                                            style="font-size: 12px; color: #5e6878;">Departure</small>
-                                                    </div>
-
-                                                    <div class="text-center mt-2">
-                                                        <small style="font-size: 12px; color: #5e6878;">04 hr 15
-                                                            Min</small>
-                                                        <br>
-                                                        <div class="d-flex">
-                                                            <div>
-                                                                ....
-                                                            </div>
-                                                            <div>
-                                                                <img style="margin-top: 4px;"
-                                                                    src="../../../../public/theme/appimages/Plane_origin.svg"
-                                                                    alt="">
-                                                            </div>
-                                                            <div>
-                                                                ....
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mt-2">
-                                                        <p class="p-0 m-0"><b>02:50 PM</b></p>
-                                                        <small style="font-size: 12px; color: #5e6878;">03 Jan,
-                                                            Fri</small>
-                                                        <br>
-                                                        <small style="font-size: 12px; color: #5e6878;">Arrival</small>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 border-start">
-                                                <div class="d-flex gap-2">
-                                                    <div class="mt-2">
-                                                        <p class="p-0 m-0"><b>01 Stop</b></p>
-                                                        <small style="font-size: 12px; color: #5e6878;">CCU</small><br>
-                                                        <small style="font-size: 12px; color: #5e6878;">1 hr 15
-                                                            min</small>
-                                                    </div>
-                                                    <div class="d-flex gap-3 border-start">
-                                                        <div class="mt-2 ms-md-4">
-                                                            <button class="btn btn-sm btn-block bluesky-btn-primary"
-                                                                style="margin-left: 30px;" data-bs-toggle="collapse"
-                                                                data-bs-target="#flight-package-2"
-                                                                aria-controls="flight-package-2">
-
-                                                                <div class="text-right" style="padding-left: 10px;">
-                                                                    <p class="p-0 m-0"><b>BDT
-                                                                            65000</b></p>
-                                                                    <small style="color: #dbdbdb"><del>
-                                                                            BDT 77000</del></small>
-                                                                    <br>
-                                                                    <small style="font-size: 12px;">Economy
-                                                                        Class</small>
-                                                                </div>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <!-- return -->
-                                            <div class="col-md-3 m-0 p-0">
-                                                <div class="d-flex">
-                                                    <img style="margin: 0 40px 0 28px;"
-                                                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
-                                                        height="70">
-                                                    <div class="text-left mt-2">
-                                                        <p class="p-0 m-0"><b>DXB-DAC</b></p>
-                                                        <small style="font-size: 12px; color: #5e6878;">Emirates</small>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-5 border-start">
-                                                <div class="d-flex gap-5">
-                                                    <div class="mt-2">
-                                                        <p class="p-0 m-0"><b>01:00 AM
-                                                            </b></p>
-                                                        <small style="font-size: 12px; color: #5e6878;">18 Feb,
-                                                            Tue</small>
-                                                        <br>
-                                                        <small
-                                                            style="font-size: 12px; color: #5e6878;">Departure</small>
-                                                    </div>
-
-                                                    <div class="text-center mt-2">
-                                                        <small style="font-size: 12px; color: #5e6878;">05 hr 25
-                                                            Min</small>
-                                                        <br>
-                                                        <div class="d-flex">
-                                                            <div>
-                                                                ....
-                                                            </div>
-                                                            <div>
-                                                                <img src="../../../../public/theme/appimages/Plane-return.svg"
-                                                                    alt="">
-                                                            </div>
-                                                            <div>
-                                                                ....
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mt-2">
-                                                        <p class="p-0 m-0"><b>04:25 AM</b></p>
-                                                        <small style="font-size: 12px; color: #5e6878;">28 Feb,
-                                                            Fri</small>
-                                                        <br>
-                                                        <small style="font-size: 12px; color: #5e6878;">Arrival</small>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <!-- ./return end -->
-                                        </div>
-                                    </div>
-                                    <div class="card-footer" style="background-color:#f1f4f7;">
-                                        <div class="float-start">
-                                            <div class="d-flex gap-2">
-                                                <div class="border border-1 text-center p-1"
-                                                    style="background-color: #def1ec; color: #12ce69;">
-                                                    <i class="fa fa-refresh"></i> Refundable
-                                                </div>
-                                                <div class="border border-1 text-center p-1"
-                                                    style="background-color: #d6dffa; color: #027de2;">
-                                                    <i class="fa fa-rug"></i> Fare Basis:AHGC001
-                                                </div>
-                                                <div class="border border-1 text-center p-1"
-                                                    style="background-color: #e4e3f6; color: #7944eb;">
-                                                    <i class="fa-regular fa-seat-airline"></i> Available Seats: 20
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="float-end me-2">
-                                            <div class="d-flex gap-2">
-
-                                                <div class="accordion accordion-flush" id="accordionFlushExample">
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="flush-headingOne">
-                                                            <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-2"
-                                                                data-bs-toggle="collapse"
-                                                                data-bs-target="#flight-details-2" aria-expanded="false"
-                                                                aria-controls="flight-details-2"
-                                                                style=" font-size: 14px; background: #f1f4f7 !important;">
-                                                                <b>Flight Details</b>
-                                                            </a>
-                                                        </h2>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="flight-details-2" class="accordion-collapse collapse m-0"
-                                    aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample2"
-                                    style="">
-                                    <div class="accordion-body">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
-                                                            <li class="nav-item" role="presentation">
-                                                                <a class="nav-link active" data-bs-toggle="tab"
-                                                                    href="#primaryhome" role="tab" aria-selected="true">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <div class="tab-icon"><i
-                                                                                class="bx bx-comment-detail font-18 me-1"></i>
-                                                                        </div>
-                                                                        <div class="tab-title"> Flight Details</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li class="nav-item" role="presentation">
-                                                                <a class="nav-link" data-bs-toggle="tab"
-                                                                    href="#primaryprofile" role="tab"
-                                                                    aria-selected="false" tabindex="-1">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <div class="tab-icon"><i
-                                                                                class="bx bx-bookmark-alt font-18 me-1"></i>
-                                                                        </div>
-                                                                        <div class="tab-title">Fare Rules</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li class="nav-item" role="presentation">
-                                                                <a class="nav-link" data-bs-toggle="tab"
-                                                                    href="#primarycontact" role="tab"
-                                                                    aria-selected="false" tabindex="-1">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <div class="tab-icon"><i
-                                                                                class="bx bx-star font-18 me-1"></i>
-                                                                        </div>
-                                                                        <div class="tab-title">Refund Policy</div>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="tab-content pt-3">
-                                                            <div class="tab-pane fade active show" id="primaryhome"
-                                                                role="tabpanel">
-                                                                <div class="row mb-2">
-                                                                    <div class="col-md-12">
-                                                                        <div class="d-flex gap-1">
-                                                                            <button
-                                                                                class="btn btn-sm bluesky-btn-primary">DAC-DXB</button>
-                                                                            <button
-                                                                                class="btn btn-sm bluesky-btn-outline-primary">DXB-DAC</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="card">
-                                                                    <div
-                                                                        class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
-
-                                                                        <div class="d-flex">
-                                                                            <div class="p-2 flex-grow-1">
-                                                                                <b>
-                                                                                    <img src="../../../../public/theme/appimages/Plane.svg"
-                                                                                        alt="">
-                                                                                    Departure
-                                                                                </b>
-                                                                            </div>
-                                                                            <div class="p-2">Hazrat Shahjalal
-                                                                                International
-                                                                                Airport
-                                                                            </div>
-                                                                            <div class="p-2">Duration: 01 hr 45 min
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        <div class="row">
-                                                                            <div class="col-md-5 border-end">
-                                                                                <div class="d-flex border-right">
-                                                                                    <div class="text-start mt-2">
-                                                                                        <p class="p-0 m-0"><b>DAC</b>
-                                                                                        </p>
-                                                                                        <small
-                                                                                            style="font-size: 13px; color: #5e6878;"><b>10:50
-                                                                                                AM | 19 Jan,
-                                                                                                Thu</b></small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 12px; color: #5e6878;">Terminal:2</small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 12px; color: #5e6878;">Flight
-                                                                                            No:78ER457</small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 12px; color: #5e6878;">Class:Economy</small>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-7">
-                                                                                <div class="row">
-                                                                                    <div class="col-md-7">
-                                                                                        <div
-                                                                                            class="d-flex border-right">
-                                                                                            <div
-                                                                                                class="text-start mt-2">
-                                                                                                <p class="p-0 m-0">
-                                                                                                    <b>CCU</b>
-                                                                                                </p>
-                                                                                                <small
-                                                                                                    style="font-size: 13px; color: #5e6878;"><b>11:55
-                                                                                                        AM | 19 Jan,
-                                                                                                        Thu</b></small>
-                                                                                                <br>
-                                                                                                <small
-                                                                                                    style="font-size: 11px; color: #5e6878;">Terminal:3</small>
-                                                                                                <br>
-
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-md-5 text-center">
-                                                                                        <img height="50" width="50"
-                                                                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
-                                                                                            alt="">
-                                                                                        <p class="mb-0 pb-0">Emirates
-                                                                                            Airline</p>
-                                                                                        <p class="mb-0 pb-0">Boeing 707
-                                                                                        </p>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row mt-2 p-2 pb-0">
-                                                                            <div class="chip chip-sm"
-                                                                                style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
-
-                                                                                <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
-                                                                                    src="../../../../public/theme/appimages/location.svg"
-                                                                                    alt="">
-                                                                                Layover:Netaji Subhash Chandra Bose... |
-                                                                                02
-                                                                                hr 30
-                                                                                min
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="card ">
-                                                                    <div
-                                                                        class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
-                                                                        <div class="d-flex">
-                                                                            <div class="p-2 flex-grow-1">
-                                                                                <b>
-                                                                                    <img src="../../../../public/theme/appimages/Plane_des.svg"
-                                                                                        alt="">
-                                                                                    Destination
-                                                                                </b>
-                                                                            </div>
-                                                                            <div class="p-2">Dubai Internation Airport
-                                                                            </div>
-                                                                            <div class="p-2">Duration: 03 hr 25 min
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        <div class="row">
-                                                                            <div class="col-md-5 border-end">
-                                                                                <div class="d-flex border-right">
-                                                                                    <div class="text-start mt-2">
-                                                                                        <p class="p-0 m-0"><b>CCU</b>
-                                                                                        </p>
-                                                                                        <small
-                                                                                            style="font-size: 11px; color: #5e6878;"><b>10:50
-                                                                                                AM | 19 Jan,
-                                                                                                Thu</b></small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 11px; color: #5e6878;">Terminal:2</small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 11px; color: #5e6878;">Flight
-                                                                                            No:78ER457</small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 11px; color: #5e6878;">Class:Economy</small>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-7">
-                                                                                <div class="row">
-                                                                                    <div class="col-md-7">
-                                                                                        <div
-                                                                                            class="d-flex border-right">
-                                                                                            <div
-                                                                                                class="text-start mt-2">
-                                                                                                <p class="p-0 m-0">
-                                                                                                    <b>DXB</b>
-                                                                                                </p>
-                                                                                                <small
-                                                                                                    style="font-size: 11px; color: #5e6878;"><b>02:55
-                                                                                                        PM | 19 Jan,
-                                                                                                        Thu</b></small>
-                                                                                                <br>
-                                                                                                <small
-                                                                                                    style="font-size: 11px; color: #5e6878;">Terminal:3</small>
-                                                                                                <br>
-
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-md-5 text-center">
-                                                                                        <img height="50" width="50"
-                                                                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
-                                                                                            alt="">
-                                                                                        <p class="mb-0 pb-0">Emirates
-                                                                                            Airline</p>
-                                                                                        <p class="mb-0 pb-0">Boeing 777
-                                                                                        </p>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="tab-pane fade" id="primaryprofile"
-                                                                role="tabpanel">
-                                                                <p>part2</p>
-                                                            </div>
-                                                            <div class="tab-pane fade" id="primarycontact"
-                                                                role="tabpanel">
-                                                                <p>Etsy mixtape wayfarers, ethical wes anderson tofu
-                                                                    before
-                                                                    they
-                                                                    sold out
-                                                                    mcsweeney's organic lomo retro fanny pack lo-fi
-                                                                    farm-to-table
-                                                                    readymade.
-                                                                    Messenger bag gentrify pitchfork tattooed craft
-                                                                    beer,
-                                                                    iphone
-                                                                    skateboard
-                                                                    locavore carles etsy salvia banksy hoodie helvetica.
-                                                                    DIY
-                                                                    synth
-                                                                    PBR
-                                                                    banksy irony. Leggings gentrify squid 8-bit cred
-                                                                    pitchfork.
-                                                                    Williamsburg
-                                                                    banh mi whatever gluten-free, carles pitchfork
-                                                                    biodiesel
-                                                                    fixie
-                                                                    etsy
-                                                                    retro mlkshk vice blog. Scenester cred you probably
-                                                                    haven't
-                                                                    heard of
-                                                                    them, vinyl craft beer blog stumptown. Pitchfork
-                                                                    sustainable
-                                                                    tofu synth
-                                                                    chambray yr.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4" style="background-color: #f4f4ff;">
-                                                        <!-- upcoming 2 -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- ./ end flight details2 -->
                             </div>
+                            <!-- ./ end flight with return -->
+
                         </div>
                     </div>
                 </div>
@@ -2695,7 +3153,7 @@ li.menu-item {
 
 .accordion-button:after {
     margin-left: 3px !important;
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237944eb'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%237944eb'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
 }
 
 .accorion-item-title-color {
