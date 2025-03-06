@@ -435,10 +435,13 @@ class XmlToJson {
         return $this->formatDuration($totalMinutes);
     }
 
-    private function formatDuration( $minutes ) {
-        $hours = floor( $minutes / 60 );
+    private function formatDuration($minutes) {
+        $hours = floor($minutes / 60);
         $remainingMinutes = $minutes % 60;
-        return sprintf( '%dh %dm', $hours, $remainingMinutes );
+        // Use str_pad to ensure 2 digits for hours and minutes
+        $paddedHours = str_pad($hours, 2, '0', STR_PAD_LEFT);
+        $paddedMinutes = str_pad($remainingMinutes, 2, '0', STR_PAD_LEFT);
+        return sprintf('%s hr %s Min', $paddedHours, $paddedMinutes);
     }
 
     private function calculateRawTravelTime( $segments ) {

@@ -40,7 +40,7 @@ onMounted(() => {
     form.Way = 1;
     getAirports();
     document.addEventListener("click", handleClickOutside);
-//  loadging.value = true;
+    //  loadging.value = true;
     const updateTotalPassengers = () => {
         const totalAdult = parseInt($(".adult").val());
         const totalChild = parseInt($(".child").val());
@@ -309,6 +309,16 @@ async function Lowfaresearch() {
     }
 }
 
+function showRouteDetails(info) {
+    const isActive = info === 2;
+    $('.active-btn').toggleClass('bluesky-route-btn-primary', !isActive);
+    $('.deactive-btn').toggleClass('bluesky-route-btn-primary', isActive);
+    $('.active-btn').toggleClass('bluesky-route-btn-outline-primary', isActive);
+    $('.deactive-btn').toggleClass('bluesky-route-btn-outline-primary', !isActive);
+    $('.flight-tab-hide').toggleClass('d-none', !isActive);
+    $('.flight-tab-active').toggleClass('d-none', isActive);
+}
+
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -325,6 +335,7 @@ async function Lowfaresearch() {
         </div>
     </div>
 
+    <!-- search Panel start -->
     <div class="row">
         <div class="col-md-12">
             <div class="card border border-1 bluesky-border-primary" style="min-height: 150px;">
@@ -770,6 +781,11 @@ async function Lowfaresearch() {
                 </div>
             </div>
         </div>
+    </div>
+    <!-- search Panel end -->
+
+    <div class="row">
+        <!-- left filter panel start -->
         <div class="col-md-3">
             <div class="row">
                 <div class="col-md-12">
@@ -1180,198 +1196,328 @@ async function Lowfaresearch() {
                 </div>
             </div>
         </div>
+        <!-- left filter panel end -->
+
+        <!-- result panel start -->
         <div class="col-md-9">
-            <!-- <div v-show="loadging" class="text-center" id="blueloader">
-                <img src="../../../../public/uploads/airlines/bluespin.png" height="40" width="40" alt=""
-                    style="animation: spin .8s linear infinite;">
-            </div> -->
 
-            <div class="row" id="Flights">
-                <p v-show="flights.length > 0">
-                    Showing {{ flights.length }} of {{ totalFlights }} Total Flights
-                    (In {{ ExecutionTime }} seconds)
-                </p>
+            <div class="row">
 
-                <div v-for="(flight, index) in flights" :key="index" class="col-md-12">
+                <span v-show="flights.length > 0">Showing {{ flights.length }} of {{ totalFlights }} Total Flights (In
+                    {{ ExecutionTime }} seconds)</span>
+                <div class="col-md-12 pb-2">
+                    <hr>
+                </div>
+
+                <div  v-for="(flight, index) in flights" :key="index" class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row mb-3" v-if="flight.outbound">
-                                <div class="col-md-3 m-0 p-0">
-                                {{ index }}
-                                    <div class="d-flex">
-                                        <!-- <p>{{ flight.logopath }}</p> -->
-                                        <img :src="flight.logopath" alt=""
-                                            style="width: 60px; height: 40px; margin-right: 20px; margin-left: 10px; margin-top: 10px;">
-                                        <!-- <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
-                                            height="70"> -->
-                                        <div class="text-left mt-2">
-                                            <p class="p-0 m-0"><b>{{ flight.outbound.origin }}-{{ flight.outbound.destination }}</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.outbound.carrier_code }} |
-                                                {{ flight.airline_name }}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-5 border-start">
-                                    <div class="d-flex gap-5">
-                                        <div class="mt-2">
-                                            <p class="p-0 m-0"><b>{{ flight.outbound.departure_time }}</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">{{ new
-                                                Date(flight.outbound.departure_date).toLocaleDateString('en-US', {
-                                                    day:
-                                                        'numeric', month: 'short', weekday: 'short'
-                                                }) }}</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
-                                        </div>
+                            <div class="row">
+                                <div class="col-md-12">
 
-                                        <div class="text-center mt-2">
-                                            <!-- <small style="font-size: 12px; color: #5e6878;">{{
-                                                flight.total_flight_duration }}</small> -->
-                                            <small style="font-size: 12px; color: #5e6878;">{{
-                                                flight.outbound.travelTime }}</small>
-                                            <br>
-                                            <div class="d-flex">
-                                                <div>
-                                                    ....
-                                                </div>
-                                                <div>
-                                                    <img style="margin-top: 4px;"
-                                                        src="../../../../public/theme/appimages/Plane_origin.svg"
-                                                        alt="">
-                                                </div>
-                                                <div>
-                                                    ....
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <!-- outbound start-->
+                                        <div class="row" v-show="flight.outbound">
+                                            <div class="col-md-10 col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-3 p-0">
+                                                        <div class="d-flex flex-row">
+                                                            <div class="p-1">
+                                                                <img :src="flight.outbound.first_logo_path" height="50" width="50">
+                                                            </div>
+                                                            <div class="pt-1 ps-2">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center h-100 w-100">
+                                                                    <div>
+                                                                        <div class="text-black"><b>{{ flight.outbound.origin }}-{{
+                                                                            flight.outbound.destination }}</b>
+                                                                        </div>
+                                                                        <div style="font-size: 11px; color: #8327a4">
+                                                                            {{ flight.outbound.first_carrier_code }} | {{ flight.outbound.first_airline_name }}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                        <div class="mt-2">
-                                            <!-- <p class="p-0 m-0"><b>{{ flight.arrival_time }}</b></p> -->
-                                            <p class="p-0 m-0"><b>{{ flight.outbound.arrival_time }}</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">{{ new
-                                                Date(flight.outbound.arrival_date).toLocaleDateString('en-US', {
-                                                    day: 'numeric',
-                                                    month: 'short', weekday: 'short'
-                                                }) }}</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Arrival</small>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4 border-start">
-                                    <div class="d-flex gap-2">
-                                        <div class="mt-2">
-                                            <p class="p-0 m-0"><b> {{ flight.outbound.connections }}-Stop</b></p>
-                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> CCU</b></span>
-                                            <br>
-
-                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> 01 Hr 15 min</b></span>
-                                        </div>
-
-                                        <div class="d-flex gap-3 border-start">
-                                            <div class="mt-2 ms-md-4">
-                                                <button class="btn btn-sm btn-block bluesky-btn-primary"
-                                                    style="margin-left: 30px;" data-bs-toggle="collapse"
-                                                    data-bs-target="#flight-package" aria-controls="flight-package">
-
-                                                    <div class="text-right" style="padding-left: 10px;">
-                                                        <p class="p-0 m-0"><b>BDT {{ flight.outbound.totalPrice.toLocaleString() }}</b></p>
-                                                        <small style="font-size: 12px;">{{ flight.outbound.cabin_class }}</small>
                                                     </div>
-                                                </button>
+                                                    <div class="col-md-8 col-12 border-start border-end">
+                                                        <div class="row p-2">
+                                                            <div class="col-md-4 col-4">
+                                                                <div
+                                                                    class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                    <div class="text-black"><b>{{ flight.outbound.departure_time }}</b>
+                                                                    </div>
+                                                                    <div>
+                                                                        <small style="font-size: 12px; color: #5e6878;">
+                                                                            {{ new
+                                                                            Date(flight.outbound.departure_date).toLocaleDateString('en-US', {
+                                                                                day:
+                                                                                    'numeric', month: 'short', weekday: 'short'
+                                                                            }) }}
+                                                                        </small>
+                                                                    </div>
+                                                                    <div>
+                                                                        <small
+                                                                            style="font-size: 12px; color: #5e6878;">Departure</small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-4">
+                                                                <div class="d-block">
+                                                                    <div> <small class="ps-2"
+                                                                            style="font-size: 11px; color: #5e6878;">{{ flight.outbound.total_flight_time }}</small></div>
+
+
+                                                                    <div class="d-flex">
+                                                                        <div class="text-black">
+                                                                            <img src="../../../../public/theme/appimages/Left_Aligned Line.svg"
+                                                                                alt="">
+                                                                        </div>
+                                                                        <div>
+                                                                            <img style="transform: rotate(45deg)"
+                                                                                src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                                alt="" height="23" width="23">
+                                                                        </div>
+                                                                        <div class="text-black">
+                                                                            <img src="../../../../public/theme/appimages/Right_Aligned Line.svg"
+                                                                                alt="">
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                    <div class="d-flex ps-2">
+                                                                        <img title="Layover at Kolkata | 2H 25 Min"
+                                                                            src="../../../../public/theme/appimages/Layover.svg"
+                                                                            alt="">
+                                                                        <div class="text-black"
+                                                                            style="transform: skewY(5deg);">
+                                                                            ....
+                                                                        </div>
+                                                                        <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                            alt="">
+                                                                        <div class="text-black"
+                                                                            style="transform: skewY(175deg);">
+                                                                            ....
+                                                                        </div>
+                                                                        <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                            alt="">
+
+                                                                    </div>
+                                                                    <div class="d-flex ps-2">
+                                                                        <span
+                                                                            style="font-size: 7px; color: #5e6878;">CCU</span>
+                                                                        &nbsp; &nbsp; &nbsp;
+                                                                        <span
+                                                                            style="font-size: 7px; color: #5e6878;">DEL</span>
+                                                                        &nbsp; &nbsp;
+                                                                        <span
+                                                                            style="font-size: 7px; color: #5e6878;">DXB</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-4">
+                                                                <div
+                                                                    class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                    <div class="text-black"><b>{{ flight.outbound.arrival_time }}</b>
+                                                                    </div>
+                                                                    <div>
+                                                                        <small
+                                                                            style="font-size: 12px; color: #5e6878;"> {{ new
+                                                                            Date(flight.outbound.arrival_date).toLocaleDateString('en-US', {
+                                                                                day:
+                                                                                    'numeric', month: 'short', weekday: 'short'
+                                                                            }) }}</small>
+                                                                    </div>
+                                                                    <div>
+                                                                        <small
+                                                                            style="font-size: 12px; color: #5e6878;">Arrival</small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-sm-12 col-md-2 d-none d-md-block">
+
+                                                <div class="d-grid">
+                                                    <button class="btn btn-sm bluesky-btn-primary"
+                                                        data-bs-toggle="collapse" data-bs-target="#flight-package-2"
+                                                        aria-controls="flight-package-2">
+
+                                                        <div class="text-right">
+                                                            <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{ flight.outbound.totalPrice }}</b></p>
+                                                            <!-- <small style="color: #dbdbdb"><del>
+                                                                    BDT 77000</del></small> -->
+                                                            <small style="font-size: 10px;">Economy Class</small>
+                                                        </div>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3" v-if="flight.inbound">
-                                <div class="col-md-3 m-0 p-0">
-                                    <div class="d-flex">
-                                        <img :src="flight.logopath" alt=""
-                                            style="width: 60px; height: 40px; margin-right: 20px; margin-left: 10px; margin-top: 10px;">
-                                        <!-- <img src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
-                                            height="70"> -->
-                                        <div class="text-left mt-2">
-                                            <p class="p-0 m-0"><b>{{ flight.inbound.origin }}-{{ flight.inbound.destination }}</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">{{ flight.inbound.carrier_code }} |
-                                                {{ flight.inbound.airline_name }}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-5 border-start">
-                                    <div class="d-flex gap-5">
-                                        <div class="mt-2">
-                                            <p class="p-0 m-0"><b>{{ flight.inbound.departure_time }}</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">{{ new
-                                                Date(flight.inbound.departure_date).toLocaleDateString('en-US', {
-                                                    day:
-                                                        'numeric', month: 'short', weekday: 'short'
-                                                }) }}</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Departure</small>
-                                        </div>
+                                        <!-- outbound end -->
 
-                                        <div class="text-center mt-2">
-                                            <!-- <small style="font-size: 12px; color: #5e6878;">{{
-                                                flight.total_flight_duration }}</small> -->
-                                            <small style="font-size: 12px; color: #5e6878;">{{
-                                                flight.inbound.travelTime }}</small>
-                                            <br>
-                                            <div class="d-flex">
-                                                <div>
-                                                    ....
+                                        <!-- inbound start -->
+                                        <div class="row" v-show="flight.inbound">
+                                            <div class="col-md-10 col-sm-12 border-top mt-3">
+                                                <div class="row mt-3">
+                                                    <div class="col-md-4 col-sm-3 p-0">
+                                                        <div class="d-flex flex-row">
+                                                            <div class="p-1">
+                                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/849px-Emirates_logo.svg.png?20190128215923"
+                                                                    height="50" width="50">
+                                                            </div>
+                                                            <div class="pt-1 ps-2">
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center h-100 w-100">
+                                                                    <div>
+                                                                        <div class="text-black"><b>DXB-DAC</b>
+                                                                        </div>
+                                                                        <div style="font-size: 11px; color: #8327a4">
+                                                                            BG
+                                                                            | Bangladesh Airlines Limited
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-8 col-12 border-start border-end">
+                                                        <div class="row p-2">
+                                                            <div class="col-md-4 col-4">
+                                                                <div
+                                                                    class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                    <div class="text-black"><b>10:50 AM</b>
+                                                                    </div>
+                                                                    <div>
+                                                                        <small
+                                                                            style="font-size: 12px; color: #5e6878;">03
+                                                                            Jan,
+                                                                            Fri</small>
+                                                                    </div>
+                                                                    <div>
+                                                                        <small
+                                                                            style="font-size: 12px; color: #5e6878;">Departure</small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-4">
+                                                                <div class="d-block">
+                                                                    <div> <small class="ps-2"
+                                                                            style="font-size: 11px; color: #5e6878;">04
+                                                                            hr 15 Min</small></div>
+
+
+                                                                    <div class="d-flex">
+                                                                        <div class="text-black">
+                                                                            <img src="../../../../public/theme/appimages/Left_Aligned Line.svg"
+                                                                                alt="">
+                                                                        </div>
+                                                                        <div>
+                                                                            <img style="transform: rotate(225deg)"
+                                                                                src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                                alt="" height="23" width="23">
+                                                                        </div>
+                                                                        <div class="text-black">
+                                                                            <img src="../../../../public/theme/appimages/Right_Aligned Line.svg"
+                                                                                alt="">
+                                                                        </div>
+
+
+                                                                    </div>
+
+                                                                    <div class="d-flex ps-2">
+                                                                        <img title="Layover at Kolkata | 2H 25 Min"
+                                                                            src="../../../../public/theme/appimages/Layover.svg"
+                                                                            alt="">
+                                                                        <div class="text-black"
+                                                                            style="transform: skewY(5deg);">
+                                                                            ....
+                                                                        </div>
+                                                                        <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                            alt="">
+                                                                        <div class="text-black"
+                                                                            style="transform: skewY(175deg);">
+                                                                            ....
+                                                                        </div>
+                                                                        <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                            alt="">
+
+                                                                    </div>
+                                                                    <div class="d-flex ps-2">
+                                                                        <span
+                                                                            style="font-size: 7px; color: #5e6878;">CCU</span>
+                                                                        &nbsp; &nbsp; &nbsp;
+                                                                        <span
+                                                                            style="font-size: 7px; color: #5e6878;">DEL</span>
+                                                                        &nbsp; &nbsp;
+                                                                        <span
+                                                                            style="font-size: 7px; color: #5e6878;">DXB</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-4">
+                                                                <div
+                                                                    class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                    <div class="text-black"><b>10:50 AM</b>
+                                                                    </div>
+                                                                    <div>
+                                                                        <small
+                                                                            style="font-size: 12px; color: #5e6878;">03
+                                                                            Jan,
+                                                                            Fri</small>
+                                                                    </div>
+                                                                    <div>
+                                                                        <small
+                                                                            style="font-size: 12px; color: #5e6878;">Departure</small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-                                                <div>
-                                                    <img style="margin-top: 4px;"
-                                                        src="../../../../public/theme/appimages/Plane_origin.svg"
-                                                        alt="">
-                                                </div>
-                                                <div>
-                                                    ....
+                                            </div>
+
+                                            <div class="col-12 col-sm-12 col-md-2 d-sm-block d-md-none">
+
+                                                <div class="d-grid">
+                                                    <button class="btn btn-sm bluesky-btn-primary"
+                                                        data-bs-toggle="collapse" data-bs-target="#flight-package-2"
+                                                        aria-controls="flight-package-2">
+
+                                                        <div class="text-right">
+                                                            <p class="p-0 m-0"><b>BDT
+                                                                    65000</b></p>
+                                                            <small style="color: #dbdbdb"><del>
+                                                                    BDT 77000</del></small>
+                                                            <br>
+                                                            <small style="font-size: 10px;">Economy
+                                                                Class</small>
+                                                        </div>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- inbound end -->
 
-                                        <div class="mt-2">
-                                            <!-- <p class="p-0 m-0"><b>{{ flight.arrival_time }}</b></p> -->
-                                            <p class="p-0 m-0"><b>{{ flight.inbound.arrival_time }}</b></p>
-                                            <small style="font-size: 12px; color: #5e6878;">{{ new
-                                                Date(flight.inbound.arrival_date).toLocaleDateString('en-US', {
-                                                    day: 'numeric',
-                                                    month: 'short', weekday: 'short'
-                                                }) }}</small>
-                                            <br>
-                                            <small style="font-size: 12px; color: #5e6878;">Arrival</small>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4 border-start">
-                                    <div class="d-flex gap-2">
-                                        <div class="mt-2">
-                                            <p class="p-0 m-0"><b> {{ flight.inbound.connections }}-Stop</b></p>
-                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> CCU</b></span>
-                                            <br>
-                                            <span style="font-size: 10px; color: rgb(94, 104, 120);" class="p-0 m-0"><b> 01 Hr 15 min</b></span>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="card-footer" style="background-color:#f1f4f7;">
-                            <div class="float-start">
+                        <div class="card-footer p-0" style="background-color:#f1f4f7;">
+                            <div class="float-start p-2">
                                 <div class="d-flex gap-2">
-                                    <div v-show="flight.outbound.refundable" class="border border-1 text-center p-1"
-                                        style="background-color: #def1ec; color: #12ce69;">
+                                    <div v-if="flight.outbound.refundable" class="border border-1 text-center p-1"
+                                        style="background-color: #def1ec; color: #12ce69; font-size: 12px;">
                                         <i class="fa fa-refresh"></i> Refundable
                                     </div>
 
                                     <div class="border border-1 text-center p-1"
-                                        style="background-color: #e4e3f6; color: #7944eb;">
-                                        <i class="fa-regular fa-seat-airline"></i> Available Seats: {{
-                                            flight.outbound.booking_count }}
+                                        style="background-color: #e4e3f6; color: #7944eb; font-size: 12px;">
+                                        <i class="fa-regular fa-seat-airline"></i> Available Seats: 09
                                     </div>
                                 </div>
                             </div>
@@ -1380,11 +1526,12 @@ async function Lowfaresearch() {
                                     <div class="accordion accordion-flush" id="accordionFlushExample">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="flush-headingOne">
-                                                <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-1"
-                                                    :data-bs-target="'#flight-details-' + index"
+                                                <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-2"
+
+                                                :data-bs-target="'#flight-details-' + index"
                                                     :aria-controls="'flight-details-' + index" data-bs-toggle="collapse"
                                                     aria-expanded="false"
-                                                    style="font-size: 14px; background: #f1f4f7 !important;">
+                                                    style=" font-size: 12px; background: #f1f4f7 !important;">
                                                     <b>Flight Details</b>
                                                 </a>
                                             </h2>
@@ -1395,8 +1542,9 @@ async function Lowfaresearch() {
                         </div>
                     </div>
 
-                    <div :id="`flight-details-${index}`" class="accordion-collapse collapse m-0"
-                        aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" style="">
+                    <!-- flight details2 -->
+                    <div :id="`flight-details-${index}`" class="accordion-collapse collapse m-0" aria-labelledby="flush-headingOne"
+                        data-bs-parent="#accordionFlushExample" style="">
                         <div class="accordion-body">
                             <div class="card">
                                 <div class="card-body">
@@ -1439,172 +1587,522 @@ async function Lowfaresearch() {
                                             </ul>
                                             <div class="tab-content pt-3">
                                                 <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
-
-                                                    <div class="row mb-2">
-                                                        <div class="col-md-12">
-                                                            <div class="d-flex gap-1">
-                                                                <button
-                                                                    class="btn btn-sm bluesky-btn-primary" v-if="flight.outbound">{{ flight.outbound.origin }}-{{ flight.outbound.destination }}</button>
-                                                                <button
-                                                                    class="btn btn-sm bluesky-btn-outline-primary" v-if="flight.inbound">{{ flight.inbound.origin }}-{{ flight.inbound.destination }}</button>
-                                                            </div>
+                                                    <div class="d-flex d-flex-row mb-1">
+                                                        <div class="p-1 bd-highlight">
+                                                            <button @click="showRouteDetails(1)"
+                                                                class="btn btn-sm bluesky-route-btn-primary active-btn px-2 py-1">DAC-DXB</button>
+                                                        </div>
+                                                        <div class="p-1 bd-highlight">
+                                                            <button @click="showRouteDetails(2)"
+                                                                class="btn btn-sm bluesky-route-btn-outline-primary deactive-btn px-2 py-1">DXB-DAC</button>
                                                         </div>
                                                     </div>
 
-                                                    <div v-for="(detail, detailIndex) in flight.inbound.segments" :key="detailIndex">
+                                                    <div class="flight-tab-active fadeIn">
                                                         <div class="card">
-                                                            <div class="card-header bg-body-secondary m-0 p-0 px-2 py-1">
+                                                            <div
+                                                                class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
                                                                         <b>
-                                                                            <span
-                                                                                v-if="detailIndex + 1 == Object.keys(flight.outbound.segments).length">
-                                                                                <img src="../../../../public/theme/appimages/Plane_des.svg"
-                                                                                    alt="">
-                                                                            </span>
-                                                                            <span v-else>
-                                                                                <img src="../../../../public/theme/appimages/Plane.svg"
-                                                                                    alt="">
-                                                                            </span>
+                                                                            <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                                alt="">
                                                                         </b>
-                                                                        <small>
-                                                                            <span
-                                                                                v-if="detailIndex + 1 == Object.keys(flight.outbound.segments).length"><b>Destination</b>
-                                                                                to {{ detail.destination_airport_name
-                                                                                }}</span>
-                                                                            <span v-else><b>Departure</b> from {{
-                                                                                detail.origin_airport_name }}</span>
-
+                                                                        <small><b><span
+                                                                                    class="bluesky-departure-text">Departure
+                                                                                    From</span></b>
+                                                                            <b><span
+                                                                                    class="bluesky-departure-airport-text">
+                                                                                    Hazrat Shahjalal
+                                                                                    International Airport
+                                                                                </span></b>
                                                                         </small>
                                                                     </div>
 
-                                                                    <div class="p-2">Flight Time: {{
-                                                                        detail.FlightTime
-
-                                                                    }}</div>
+                                                                    <div class="p-2 bluesky-departure-text fw-bold">
+                                                                        Flight Time: 01 hr 45 min
+                                                                    </div>
                                                                 </div>
-
                                                             </div>
+
                                                             <div class="card-body">
                                                                 <div class="row">
-                                                                    <div class="col-md-5 border-end">
-                                                                        <div class="d-flex border-right">
-                                                                            <div class="text-start mt-2">
-                                                                                <p class="p-0 m-0 custom-text-purple">
-                                                                                    <b>{{ detail.origin }}</b>
-                                                                                </p>
-                                                                                <small
-                                                                                    style="font-size: 13px; color: #5e6878;">
-                                                                                    <b>{{ new Date(`2000/01/01
-                                                                                        ${detail.departure_time}`).toLocaleTimeString('en-US',
-                                                                                        {
-                                                                                            hour:
-                                                                                                'numeric', minute: 'numeric',
-                                                                                            hour12: true
-                                                                                        }) }} | {{ new
-                                                                                            Date(detail.departure_date).toLocaleDateString('en-US',
-                                                                                                {
-                                                                                                    day: 'numeric', month:
-                                                                                                        'short', weekday: 'short'
-                                                                                                })
-                                                                                        }}</b>
-
-                                                                                </small>
-                                                                                <br>
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div
+                                                                            class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                            <div class="text-black-"
+                                                                                style="color: #0fb3a6;">
+                                                                                <b>DAC</b>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small style="font-size: 13px;"
+                                                                                    class="text-black"><b>10:30
+                                                                                        AM |</b></small>
+                                                                                <span style="font-size: 11px;">19
+                                                                                    Jan,2025</span>
+                                                                            </div>
+                                                                            <div>
                                                                                 <small
                                                                                     style="font-size: 12px; color: #5e6878;">Terminal:
-                                                                                    {{ detail.origin_terminal }}
-                                                                                </small>
-                                                                                <br>
-                                                                                <small
-                                                                                    style="font-size: 12px; color: #5e6878;">Flight
-                                                                                    No: {{ detail.flight_number
-                                                                                    }}</small>
-                                                                                <br>
-                                                                                <small
-                                                                                    style="font-size: 12px; color: #5e6878;">Class:
-                                                                                    {{ detail.booking_code }}</small>
+                                                                                    2</small>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-7">
-                                                                        <div class="row">
-                                                                            <div class="col-md-7">
-                                                                                <div class="d-flex border-right">
-                                                                                    <div class="text-start mt-2">
-                                                                                        <p
-                                                                                            class="p-0 m-0 custom-text-purple">
-                                                                                            <b>{{ detail.destination
-                                                                                                }}</b>
-                                                                                        </p>
-                                                                                        <small
-                                                                                            style="font-size: 13px; color: #5e6878;">
-                                                                                            <!-- <b>{{ detail.arrival_time }}</b> -->
-                                                                                            <b>
-                                                                                                {{ new Date(`2000/01/01
-                                                                                                ${detail.arrival_time}`).toLocaleTimeString('en-US',
-                                                                                                    {
-                                                                                                        hour:
-                                                                                                            'numeric', minute:
-                                                                                                            'numeric',
-                                                                                                        hour12: true
-                                                                                                    }) }}
-                                                                                                | {{ new
-                                                                                                    Date(detail.arrival_date).toLocaleDateString('en-US',
-                                                                                                        {
-                                                                                                            day: 'numeric', month:
-                                                                                                                'short', weekday:
-                                                                                                                'short'
-                                                                                                        })
-                                                                                                }}</b>
-
-                                                                                        </small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 11px; color: #5e6878;">Terminal:
-                                                                                            {{
-                                                                                                detail.destination_terminal
-                                                                                            }}</small>
-                                                                                        <br>
-                                                                                    </div>
-                                                                                </div>
+                                                                    <div class="col-md-4 d-none d-sm-block">
+                                                                        <img src="../../../../public/theme/appimages/Route.svg"
+                                                                            alt="">
+                                                                    </div>
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div
+                                                                            class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                            <div class="text-black-"
+                                                                                style="color: #0fb3a6;">
+                                                                                <b>CCU</b>
                                                                             </div>
-
-                                                                            <div class="col-md-5 text-center">
-                                                                                <img :src="detail.logopath" alt=""
-                                                                                    style="width: 60px; height: 40px; margin-right: 20px">
-                                                                                <p style="font-size: 10px;" class="mb-0 pb-0"><b>{{
-                                                                                    detail.airline_name }}</b></p>
-                                                                                <p class="mb-0 pb-0"
-                                                                                    style="font-size: 10px;">{{
-                                                                                        detail.Equipment }}</p>
+                                                                            <div>
+                                                                                <small style="font-size: 13px;"
+                                                                                    class="text-black"><b>10:30
+                                                                                        AM |</b></small>
+                                                                                <span style="font-size: 11px;">19
+                                                                                    Jan,2025</span>
                                                                             </div>
-
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                    3</small>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="row mt-2 p-2 pb-0">
-                                                                    <div class="chip chip-sm"
-                                                                        style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
-                                                                        <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
-                                                                            src="../../../../public/theme/appimages/location.svg"
+
+                                                                <div
+                                                                    class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                    <div class="col-md-6">
+                                                                        <div class="d-flex gap-2 mt-2">
+
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
+                                                                                QR667- Boing787</div>
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
+                                                                                Class: Economy
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="float-end mt-2">
+                                                                            <img height="35" width="60"
+                                                                                src="../../../../public/uploads/airlines/EK.svg"
+                                                                                alt="">
+                                                                            <span class="pt-2 fw-bold"
+                                                                                style="font-size: 11px;">Emirates</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div
+                                                                    class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                    <div class="col-md-12">
+                                                                        <div class="chip chip-sm mt-2 mb-0"
+                                                                            style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
+                                                                            <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                                src="../../../../public/theme/appimages/location.svg"
+                                                                                alt="">
+
+                                                                            <span class="bluesky-departure-text">Layover
+                                                                                at <span
+                                                                                    class="laover-city">Kolkata</span>
+                                                                                |</span>
+                                                                            <span
+                                                                                class="bluesky-departure-airport-text">Netaji
+                                                                                Subhas Chandra Bose
+                                                                                Airport</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="card">
+                                                            <div
+                                                                class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
+                                                                <div class="d-flex">
+                                                                    <div class="p-2 flex-grow-1">
+                                                                        <b>
+                                                                            <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                                alt="">
+                                                                        </b>
+                                                                        <small><b><span
+                                                                                    class="bluesky-departure-text">Departure
+                                                                                    From</span></b>
+                                                                            <b><span
+                                                                                    class="bluesky-departure-airport-text">
+                                                                                    Netaji Subhas Chandra
+                                                                                    Bose Airport
+                                                                                </span></b>
+                                                                        </small>
+                                                                    </div>
+
+                                                                    <div class="p-2 bluesky-departure-text fw-bold">
+                                                                        Flight Time: 01 hr 45 min
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div
+                                                                            class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                            <div class="text-black-"
+                                                                                style="color: #0fb3a6;">
+                                                                                <b>CCU</b>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small style="font-size: 13px;"
+                                                                                    class="text-black"><b>10:30
+                                                                                        AM |</b></small>
+                                                                                <span style="font-size: 11px;">19
+                                                                                    Jan,2025</span>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                    2</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 d-none d-sm-block">
+                                                                        <img src="../../../../public/theme/appimages/Route.svg"
                                                                             alt="">
+                                                                    </div>
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div
+                                                                            class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                            <div class="text-black-"
+                                                                                style="color: #0fb3a6;">
+                                                                                <b>DXB</b>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small style="font-size: 13px;"
+                                                                                    class="text-black"><b>10:30
+                                                                                        AM |</b></small>
+                                                                                <span style="font-size: 11px;">19
+                                                                                    Jan,2025</span>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                    3</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                                                        <span
-                                                                            v-if="detailIndex + 1 == Object.keys(flight.outbound.segments).length"><i
-                                                                                class="fa-solid fa-location-dot text-success"></i>
-                                                                            congratulations ! you have reached your
-                                                                            destination</span>
-                                                                        <span v-else> Layover at {{ detail.airports_city
-                                                                            }} - {{ flight.Layover }} | {{
-                                                                            detail.destination_airport_name }}</span>
+                                                                <div
+                                                                    class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                    <div class="col-md-6">
+                                                                        <div class="d-flex gap-2 mt-2">
 
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
+                                                                                QR667- Boing787</div>
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
+                                                                                Class: Economy
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="float-end mt-2">
+                                                                            <img height="35" width="60"
+                                                                                src="../../../../public/uploads/airlines/EK.svg"
+                                                                                alt="">
+                                                                            <span class="pt-2 fw-bold"
+                                                                                style="font-size: 11px;">Emirates</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div
+                                                                    class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                    <div class="col-md-12">
+                                                                        <div class="chip chip-sm mt-2 mb-0"
+                                                                            style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
+                                                                            <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                                src="../../../../public/theme/appimages/location.svg"
+                                                                                alt="">
+
+                                                                            <span class="bluesky-departure-text">Reached
+                                                                                Destination at <span
+                                                                                    class="desitnation-city">Dubai</span>
+                                                                                |</span>
+                                                                            <span
+                                                                                class="bluesky-departure-airport-text">Dubai
+                                                                                Internation
+                                                                                Airport</span>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
+                                                    <div class="flight-tab-hide d-none fadeIn">
+                                                        <div class="card">
+                                                            <div
+                                                                class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
+                                                                <div class="d-flex">
+                                                                    <div class="p-2 flex-grow-1">
+                                                                        <b>
+                                                                            <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                                alt="">
+                                                                        </b>
+                                                                        <small><b><span
+                                                                                    class="bluesky-departure-text">Departure
+                                                                                    From</span></b>
+                                                                            <b><span
+                                                                                    class="bluesky-departure-airport-text">
+                                                                                    Dubai Internation Airport
+                                                                                </span></b>
+                                                                        </small>
+                                                                    </div>
+
+                                                                    <div class="p-2 bluesky-departure-text fw-bold">
+                                                                        Flight Time: 01 hr 45 min
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div
+                                                                            class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                            <div class="text-black-"
+                                                                                style="color: #0fb3a6;">
+                                                                                <b>DXB</b>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small style="font-size: 13px;"
+                                                                                    class="text-black"><b>10:30
+                                                                                        AM |</b></small>
+                                                                                <span style="font-size: 11px;">19
+                                                                                    Jan,2025</span>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                    2</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 d-none d-sm-block">
+                                                                        <img src="../../../../public/theme/appimages/Route.svg"
+                                                                            alt="">
+                                                                    </div>
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div
+                                                                            class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                            <div class="text-black-"
+                                                                                style="color: #0fb3a6;">
+                                                                                <b>CCU</b>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small style="font-size: 13px;"
+                                                                                    class="text-black"><b>10:30
+                                                                                        AM |</b></small>
+                                                                                <span style="font-size: 11px;">19
+                                                                                    Jan,2025</span>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                    3</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div
+                                                                    class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                    <div class="col-md-6">
+                                                                        <div class="d-flex gap-2 mt-2">
+
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
+                                                                                QR667- Boing787</div>
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
+                                                                                Class: Economy
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="float-end mt-2">
+                                                                            <img height="35" width="60"
+                                                                                src="../../../../public/uploads/airlines/EK.svg"
+                                                                                alt="">
+                                                                            <span class="pt-2 fw-bold"
+                                                                                style="font-size: 11px;">Emirates</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div
+                                                                    class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                    <div class="col-md-12">
+                                                                        <div class="chip chip-sm mt-2 mb-0"
+                                                                            style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
+                                                                            <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                                src="../../../../public/theme/appimages/location.svg"
+                                                                                alt="">
+
+                                                                            <span class="bluesky-departure-text">Layover
+                                                                                at <span
+                                                                                    class="laover-city">Kolkata</span>
+                                                                                |</span>
+                                                                            <span
+                                                                                class="bluesky-departure-airport-text">Netaji
+                                                                                Subhas Chandra Bose
+                                                                                Airport</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="card">
+                                                            <div
+                                                                class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
+                                                                <div class="d-flex">
+                                                                    <div class="p-2 flex-grow-1">
+                                                                        <b>
+                                                                            <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                                alt="">
+                                                                        </b>
+                                                                        <small><b><span
+                                                                                    class="bluesky-departure-text">Departure
+                                                                                    From</span></b>
+                                                                            <b><span
+                                                                                    class="bluesky-departure-airport-text">
+                                                                                    Netaji Subhas Chandra
+                                                                                    Bose Airport
+                                                                                </span></b>
+                                                                        </small>
+                                                                    </div>
+
+                                                                    <div class="p-2 bluesky-departure-text fw-bold">
+                                                                        Flight Time: 01 hr 45 min
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div
+                                                                            class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                            <div class="text-black-"
+                                                                                style="color: #0fb3a6;">
+                                                                                <b>CCU</b>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small style="font-size: 13px;"
+                                                                                    class="text-black"><b>10:30
+                                                                                        AM |</b></small>
+                                                                                <span style="font-size: 11px;">19
+                                                                                    Jan,2025</span>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                    2</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 d-none d-sm-block">
+                                                                        <img src="../../../../public/theme/appimages/Route.svg"
+                                                                            alt="">
+                                                                    </div>
+                                                                    <div class="col-md-4 col-4">
+                                                                        <div
+                                                                            class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                            <div class="text-black-"
+                                                                                style="color: #0fb3a6;">
+                                                                                <b>DAC</b>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small style="font-size: 13px;"
+                                                                                    class="text-black"><b>10:30
+                                                                                        AM |</b></small>
+                                                                                <span style="font-size: 11px;">19
+                                                                                    Jan,2025</span>
+                                                                            </div>
+                                                                            <div>
+                                                                                <small
+                                                                                    style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                    1</small>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div
+                                                                    class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                    <div class="col-md-6">
+                                                                        <div class="d-flex gap-2 mt-2">
+
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
+                                                                                QR667- Boing787</div>
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
+                                                                                Class: Economy
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="float-end mt-2">
+                                                                            <img height="35" width="60"
+                                                                                src="../../../../public/uploads/airlines/EK.svg"
+                                                                                alt="">
+                                                                            <span class="pt-2 fw-bold"
+                                                                                style="font-size: 11px;">Emirates</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div
+                                                                    class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                    <div class="col-md-12">
+                                                                        <div class="chip chip-sm mt-2 mb-0"
+                                                                            style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
+                                                                            <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                                src="../../../../public/theme/appimages/location.svg"
+                                                                                alt="">
+
+                                                                            <span class="bluesky-departure-text">Reached
+                                                                                Destination at <span
+                                                                                    class="desitnation-city">Dhaka</span>
+                                                                                |</span>
+                                                                            <span
+                                                                                class="bluesky-departure-airport-text">Hazrat
+                                                                                Shahjalal International Airport</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
 
 
@@ -1613,88 +2111,16 @@ async function Lowfaresearch() {
                                                     <div class="row">
                                                         <div class="col-md-12">
 
-                                                            <p class="text-start fw-bold">PENALTIES/GENERAL</p>
+                                                            <p class="text-start fw-bold">PENALTIES/GENERAL
+                                                            </p>
                                                             <span>
-                                                                1. Reissue/Refund minimum penalty amount before
-                                                                departure 0 BDT 2. Reissue/Refund maximum penalty amount
+                                                                1. Reissue/Refund minimum penalty amount
+                                                                before
+                                                                departure 0 BDT 2. Reissue/Refund maximum
+                                                                penalty amount
                                                                 before departure 5999 BDT
-                                                                3. Reissue/Refund maximum penalty amount for the ticket
-                                                                before departure 9599 BDT
-                                                                4. Revalidation minimum penalty amount before departure
-                                                                0 BDT
-                                                                5. Revalidation maximum penalty amount before departure
-                                                                0 BDT
-                                                                6. Revalidation maximum penalty amount for the ticket
-                                                                before departure 0 BDT 7. Reissue/Refund minimum penalty
-                                                                amount before departure no show 5999 BDT 8.
-                                                                Reissue/Refund maximum penalty amount before departure
-                                                                no show 5999 BDT 9. Reissue/Refund maximum penalty
-                                                                amount for the ticket before departure no show 9599 BDT
-                                                                10. Revalidation minimum penalty amount before departure
-                                                                no show 0 BDT 11. Revalidation maximum penalty amount
-                                                                before departure no show 0 BDT 12. Revalidation maximum
-                                                                penalty amount for the ticket before departure no show 0
-                                                                BDT 13. Reissue/Refund minimum penalty amount after
-                                                                departure 0 BDT 14. Reissue/Refund maximum penalty
-                                                                amount with sale currency 5999 BDT 15. Reissue/Refund
-                                                                maximum penalty amount for the ticket after departure
-                                                                9599 BDT 16. Revalidation minimum penalty amount after
-                                                                departure 0 BDT 17. Revalidation maximum penalty amount
-                                                                after departure 0 BDT 18. Revalidation maximum penalty
-                                                                amount for the ticket after departure 0 BDT 19.
-                                                                Reissue/Refund minimum penalty amount after departure no
-                                                                show 5999 BDT 20. Reissue/Refund maximum penalty amount
-                                                                after departure no show 5999 BDT 21. Reissue/Refund
-                                                                maximum penalty amount for the ticket after departure no
-                                                                show 9599 BDT 22. Revalidation minimum penalty amount
-                                                                after departure no show 0 BDT 23. Revalidation maximum
-                                                                penalty amount after departure no show 0 BDT 24.
-                                                                Revalidation maximum penalty amount for the ticket after
-                                                                departure no show 0 BDT 25. Part of rule is free form
-                                                                text from Cat16? Not allowed 26. Reissue penalties can
-                                                                be waived for passenger and family death/illness before
-                                                                departure? Not allowed 27. Revalidation before departure
-                                                                is allowed? Not allowed 28. Reissue/Refund before
-                                                                departure allowed? Allowed with restrictions 29. Reissue
-                                                                penalties can be waived for passenger and family
-                                                                death/illness for before departure no show? Not allowed
-                                                                30. Revalidation before departure when no show is
-                                                                allowed? Not allowed 31. Reissue/Refund before departure
-                                                                when no show allowed? Allowed with restrictions 32.
-                                                                Reissue penalties can be waived for passenger and family
-                                                                death/illness after departure? Not allowed 33.
-                                                                Revalidation after departure is allowed? Not allowed 34.
-                                                                Reissue/Refund after departure allowed? Allowed with
-                                                                restrictions 35. Reissue penalties can be waived for
-                                                                passenger and family death/illness after departure no
-                                                                show? Not allowed 36. Revalidation after departure when
-                                                                no show is allowed? Not allowed 37. Reissue/Refund after
-                                                                departure when no show allowed? Allowed with
-                                                                restrictions 38. Reissue/Refund minimum penalty amount
-                                                                before departure 11998 BDT 39. Reissue/Refund maximum
-                                                                penalty amount before departure 16798 BDT 40.
-                                                                Reissue/Refund maximum penalty amount for the ticket
-                                                                before departure 16798 BDT 41. Reissue/Refund minimum
-                                                                penalty amount before departure no show 11998 BDT 42.
-                                                                Reissue/Refund maximum penalty amount before departure
-                                                                no show 16798 BDT 43. Reissue/Refund maximum penalty
-                                                                amount for the ticket before departure no show 16798 BDT
-                                                                44. Reissue/Refund minimum penalty amount after
-                                                                departure 11998 BDT 45. Reissue/Refund maximum penalty
-                                                                amount with sale currency 16798 BDT 46. Reissue/Refund
-                                                                maximum penalty amount for the ticket after departure
-                                                                16798 BDT 47. Reissue/Refund minimum penalty amount
-                                                                after departure no show 11998 BDT 48. Reissue/Refund
-                                                                maximum penalty amount after departure no show 16798 BDT
-                                                                49. Reissue/Refund maximum penalty amount for the ticket
-                                                                after departure no show 16798 BDT 50. Part of rule is
-                                                                free form text from Cat16? Not allowed 51.
-                                                                Reissue/Refund before departure allowed? Allowed with
-                                                                restrictions 52. Reissue/Refund before departure when no
-                                                                show allowed? Allowed with restrictions 53.
-                                                                Reissue/Refund after departure allowed? Allowed with
-                                                                restrictions 54. Reissue/Refund after departure when no
-                                                                show allowed? Allowed with restrictions
+                                                                3. Reissue/Refund maximum penalty amount for
+
                                                             </span>
                                                         </div>
 
@@ -1708,26 +2134,24 @@ async function Lowfaresearch() {
                                                                 fares.</span>
                                                         </div>
                                                         <div class="col-md-12 mt-2">
-                                                            <p class="text-start fw-bold pt-0 mt-0">Layover</p>
-                                                            <span>Stopovers for economy unrestricted fares unlimited
+                                                            <p class="text-start fw-bold pt-0 mt-0">Layover
+                                                            </p>
+                                                            <span>Stopovers for economy unrestricted fares
+                                                                unlimited
                                                                 stopovers permitted.</span>
                                                         </div>
                                                         <div class="col-md-12 mt-2">
-                                                            <p class="text-start fw-bold pt-0 mt-0">Combinations</p>
+                                                            <p class="text-start fw-bold pt-0 mt-0">
+                                                                Combinations
+                                                            </p>
                                                             <span>
-                                                                Permitted combinations fares may be combined on a half
-                                                                round trip basis with any fare for any carrier in any
-                                                                rule and tariff to form round trips/circle trips.
-                                                                End-one-end permitted. Validate all fare component.
-                                                                Travel must be via construction point. Add-ons
-                                                                permitted. Open jaws fares may be combined on a half
-                                                                round trip basis with any fare for any carrier in any
-                                                                rule and tariff to form single or double open jaws. A
-                                                                maximum of 2 international fare components permitted.
-                                                                Mileage of an international open segment must be equal
-                                                                to/less than mileage of the shortest flown fare
-                                                                component. No mileage restriction on an open segment
-                                                                within one country.
+                                                                Permitted combinations fares may be combined
+                                                                on
+                                                                a half
+                                                                round trip basis with any fare for any
+                                                                carrier
+                                                                in any
+
                                                             </span>
                                                         </div>
                                                     </div>
@@ -1763,14 +2187,16 @@ async function Lowfaresearch() {
                                                                         <table class="table table-sm table-striped">
                                                                             <tbody class="text-start">
                                                                                 <tr>
-                                                                                    <td>Adults: 2x৳30000</td>
+                                                                                    <td>Adults: 2x৳30000
+                                                                                    </td>
                                                                                     <td>
                                                                                         ৳60000
                                                                                     </td>
                                                                                 </tr>
 
                                                                                 <tr>
-                                                                                    <td>Childs: 2x৳20000</td>
+                                                                                    <td>Childs: 2x৳20000
+                                                                                    </td>
                                                                                     <td>
                                                                                         ৳40000
                                                                                     </td>
@@ -1894,7 +2320,8 @@ async function Lowfaresearch() {
                                                                                     <td style="font-size: 11px;">
                                                                                         <b>Check In</b>
                                                                                         <br>
-                                                                                        <small>2 Pieces</small>
+                                                                                        <small>2
+                                                                                            Pieces</small>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -1912,7 +2339,8 @@ async function Lowfaresearch() {
                                                                                     <td style="font-size: 11px;">
                                                                                         <b>Check In</b>
                                                                                         <br>
-                                                                                        <small>2 Pieces</small>
+                                                                                        <small>2
+                                                                                            Pieces</small>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -1930,21 +2358,21 @@ async function Lowfaresearch() {
                             </div>
                         </div>
                     </div>
+                    <!-- ./ end flight details2 -->
                 </div>
+
             </div>
 
             <Transition name="fade">
                 <div v-show="loadging" class="loading-container">
                     <div class="loading-plane"></div>
-                    <div class="loading-track">
-                        <div class="loading-progress"></div>
-                    </div>
-                    <div class="loading-text">Searching for the best flights...</div>
                 </div>
             </Transition>
 
         </div>
+        <!-- result panel end -->
     </div>
+
 </template>
 
 <style>
@@ -1972,21 +2400,24 @@ async function Lowfaresearch() {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.685);
+    background: rgba(255, 255, 255, 0.8);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
+
 }
 
 .loading-plane {
-    width: 80px;
-    height: 80px;
+    width: 300px;
+    height: 300px;
     background: url('/theme/appimages/pp.gif') no-repeat center;
     background-size: contain;
     /* animation: plane-loading 2s infinite ease-in-out; */
+    border: 1px solid #8adfdb;
+    border-radius: 50%;
 }
 
 .loading-track {

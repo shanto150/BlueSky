@@ -15,4 +15,8 @@ function custom_debug($message, $data = null) {
     // if (config('app.debug')) {
     //     echo "<script>console.log('" . addslashes($output) . "');</script>";
     // }
+
+    function hell($pa){
+        return $pa;
+    }
 }
