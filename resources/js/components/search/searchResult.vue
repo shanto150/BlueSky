@@ -284,10 +284,10 @@ async function Lowfaresearch() {
         // Start time measurement
         const startTime = performance.now();
 
-        // const response = await axiosInstance.post("Lowfaresearch", form);
+        const response = await axiosInstance.post("Lowfaresearch", form);
 
-        flights.value = flightData.flights;
-        totalFlights.value = flightData.flights.length;
+        // flights.value = flightData.flights;
+        // totalFlights.value = flightData.flights.length;
 
         // End time measurement
         const endTime = performance.now();
@@ -295,8 +295,8 @@ async function Lowfaresearch() {
         // Calculate execution time in seconds
         ExecutionTime.value = ((endTime - startTime) / 1000).toFixed(2);
 
-        // flights.value = response.data.flights;
-        // totalFlights.value = response.data.flights.length;
+        flights.value = response.data.flights;
+        totalFlights.value = response.data.flights.length;
 
     } catch (error) {
         console.log(error);
@@ -1950,10 +1950,10 @@ async function Lowfaresearch() {
             <Transition name="fade">
                 <div v-show="loadging" class="loading-container">
                     <div class="loading-plane"></div>
-                    <div class="loading-track">
+                    <!-- <div class="loading-track">
                         <div class="loading-progress"></div>
-                    </div>
-                    <div class="loading-text">Searching for the best flights...</div>
+                    </div> -->
+                    <!-- <div class="loading-text">Searching for the best flights...</div> -->
                 </div>
             </Transition>
 
@@ -1986,21 +1986,24 @@ async function Lowfaresearch() {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.685);
+    background: rgba(255, 255, 255, 0.8);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
+
 }
 
 .loading-plane {
-    width: 80px;
-    height: 80px;
+    width: 300px;
+    height: 300px;
     background: url('/theme/appimages/pp.gif') no-repeat center;
     background-size: contain;
     /* animation: plane-loading 2s infinite ease-in-out; */
+    border: 1px solid #8adfdb;
+    border-radius: 50%;
 }
 
 .loading-track {
