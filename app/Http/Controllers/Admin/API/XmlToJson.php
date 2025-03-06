@@ -13,11 +13,41 @@ class XmlToJson {
     private $fareInfoCache = [];
     private $flightDetailsCache = [];
     private $currency;
+    private $airlineNames = [];
+    private $airportData = []; // New property for airport data
 
-    public function __construct( $xmlContent ) {
-        $this->xml = new SimpleXMLElement( $xmlContent );
-        $this->xml->registerXPathNamespace( 'air', 'http://www.travelport.com/schema/air_v52_0' );
-        $this->currency = ( string )$this->xml->xpath( '//air:LowFareSearchRsp/@CurrencyType' )[ 0 ] ?? 'USD';
+    public function __construct($xmlContent) {
+        $this->xml = new SimpleXMLElement($xmlContent);
+        $this->xml->registerXPathNamespace('air', 'http://www.travelport.com/schema/air_v52_0');
+        $this->currency = (string)$this->xml->xpath('//air:LowFareSearchRsp/@CurrencyType')[0] ?? 'USD';
+
+        // Cache airline names and logo paths
+        $airlines = DB::table('airline_logos')
+            ->select('code', 'name', 'logo_path')
+            ->get()
+            ->mapWithKeys(function ($item) {
+                return [$item->code => [
+                    'name' => $item->name,
+                    'logo_path' => $item->logo_path
+                ]];
+            })
+            ->toArray();
+
+        // Cache airport data
+        $airports = DB::table('airports')
+            ->select('code', 'Airport_Name', 'City_Name')
+            ->get()
+            ->mapWithKeys(function ($item) {
+                return [$item->code => [
+                    'airport_name' => $item->Airport_Name,
+                    'city_name' => $item->City_Name
+                ]];
+            })
+            ->toArray();
+
+        $this->airlineNames = $airlines;
+        $this->airportData = $airports;
+
         $this->initializeCache();
     }
 
@@ -77,7 +107,7 @@ class XmlToJson {
         $this->segments[ $key ] = $this->parseSegment( $segment, $flightDetails );
     }
 
-    private function parseSegment( $segment, $flightDetails ) {
+    private function parseSegment($segment, $flightDetails) {
         // Helper function to format datetime
         $formatTime = function($datetime) {
             return date('h:i A', strtotime($datetime));
@@ -86,12 +116,37 @@ class XmlToJson {
         $departureTime = strtotime((string)$segment['DepartureTime']);
         $arrivalTime = strtotime((string)$segment['ArrivalTime']);
 
+        $carrierCode = (string)$segment['Carrier'];
+        $airlineInfo = $this->airlineNames[$carrierCode] ?? [
+            'name' => 'Unknown Airline',
+            'logo_path' => '/default-airline-logo.png'
+        ];
+
+        $originCode = (string)$segment['Origin'];
+        $destinationCode = (string)$segment['Destination'];
+
+        $originAirportInfo = $this->airportData[$originCode] ?? [
+            'airport_name' => 'Unknown Airport',
+            'city_name' => 'Unknown City'
+        ];
+
+        $destinationAirportInfo = $this->airportData[$destinationCode] ?? [
+            'airport_name' => 'Unknown Airport',
+            'city_name' => 'Unknown City'
+        ];
+
         return [
-            'carrier_code' => (string)$segment['Carrier'],
+            'carrier_code' => $carrierCode,
+            'airline_name' => $airlineInfo['name'],
+            'logo_path' => $airlineInfo['logo_path'],
             'flightNumber' => (string)$segment['FlightNumber'],
             'flight' => (string)$segment['Carrier'] . (string)$segment['FlightNumber'],
-            'departure_code' => (string)$segment['Origin'],
-            'arrival_code' => (string)$segment['Destination'],
+            'departure_code' => $originCode,
+            'arrival_code' => $destinationCode,
+            'Origin_Airport_Name' => $originAirportInfo['airport_name'],
+            'Origin_City_Name' => $originAirportInfo['city_name'],
+            'Destination_Airport_Name' => $destinationAirportInfo['airport_name'],
+            'Destination_City_Name' => $destinationAirportInfo['city_name'],
             'departure_time' => $formatTime((string)$segment['DepartureTime']),
             'arrival_time' => $formatTime((string)$segment['ArrivalTime']),
             'departure_date' => date('Y-m-d', $departureTime),
@@ -311,23 +366,51 @@ class XmlToJson {
         // Add lastitem flag to the last segment
         $segments[$totalSegments - 1]['lastitem'] = true;
 
+        // Get carrier codes and info
+        $firstCarrierCode = $firstSegment['carrier_code'];
+        $lastCarrierCode = $lastSegment['carrier_code'];
+
+        $firstAirlineInfo = $this->airlineNames[$firstCarrierCode] ?? [
+            'name' => 'Unknown Airline',
+            'logo_path' => '/default-airline-logo.png'
+        ];
+        $lastAirlineInfo = $this->airlineNames[$lastCarrierCode] ?? [
+            'name' => 'Unknown Airline',
+            'logo_path' => '/default-airline-logo.png'
+        ];
+
+        // Get origin and destination airport info
+        $originCode = $firstSegment['departure_code'];
+        $destinationCode = $lastSegment['arrival_code'];
+
+        $originInfo = $this->airportData[$originCode] ?? [
+            'airport_name' => 'Unknown Airport',
+            'city_name' => 'Unknown City'
+        ];
+
+        $destinationInfo = $this->airportData[$destinationCode] ?? [
+            'airport_name' => 'Unknown Airport',
+            'city_name' => 'Unknown City'
+        ];
+
         return array_merge([
-            'origin' => $firstSegment['departure_code'],
-            'destination' => $lastSegment['arrival_code'],
+            'origin' => $originCode,
+            'destination' => $destinationCode,
+            'origin_airport_name' => $originInfo['airport_name'],
+            'origin_city_name' => $originInfo['city_name'],
+            'destination_airport_name' => $destinationInfo['airport_name'],
+            'destination_city_name' => $destinationInfo['city_name'],
             'departure_date' => $firstSegment['departure_date'],
             'departure_time' => $firstSegment['departure_time'],
             'arrival_date' => $lastSegment['arrival_date'],
             'arrival_time' => $lastSegment['arrival_time'],
-            'carrier_code' => $firstSegment['carrier_code'],
-            'flightNumber' => $firstSegment['flightNumber'],
-            'flight' => $firstSegment['flight'],
-            'connections' => count($segments) - 1,
-            'booking_code' => $firstSegment['booking_code'],
-            'booking_count' => $firstSegment['booking_count'],
-            'cabin_class' => $firstSegment['cabin_class'],
-            'travelTime' => $this->calculateTotalTravelTime($segments),
-            'travelTimeRaw' => $this->calculateRawTravelTime($segments),
-            'segmentKey' => $firstSegment['segmentKey']
+            'first_carrier_code' => $firstCarrierCode,
+            'first_airline_name' => $firstAirlineInfo['name'],
+            'first_logo_path' => $firstAirlineInfo['logo_path'],
+            'last_carrier_code' => $lastCarrierCode,
+            'last_airline_name' => $lastAirlineInfo['name'],
+            'last_logo_path' => $lastAirlineInfo['logo_path'],
+            'total_flight_time' => $this->calculateTotalTravelTime($segments)
         ], $commonInfo, ['segments' => array_values($segments)]);
     }
 

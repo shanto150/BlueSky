@@ -284,10 +284,10 @@ async function Lowfaresearch() {
         // Start time measurement
         const startTime = performance.now();
 
-        // const response = await axiosInstance.post("Lowfaresearch", form);
+        const response = await axiosInstance.post("Lowfaresearch", form);
 
-        flights.value = flightData.flights;
-        totalFlights.value = flightData.flights.length;
+        // flights.value = flightData.flights;
+        // totalFlights.value = flightData.flights.length;
 
         // End time measurement
         const endTime = performance.now();
@@ -295,8 +295,8 @@ async function Lowfaresearch() {
         // Calculate execution time in seconds
         ExecutionTime.value = ((endTime - startTime) / 1000).toFixed(2);
 
-        // flights.value = response.data.flights;
-        // totalFlights.value = response.data.flights.length;
+        flights.value = response.data.flights;
+        totalFlights.value = response.data.flights.length;
 
     } catch (error) {
         console.log(error);
