@@ -261,6 +261,16 @@ function offHover() {
     $("#img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_With_Icon.jpg');
 }
 
+function showRouteDetails(info){
+    const isActive = info === 2;
+    $('.active-btn').toggleClass('bluesky-route-btn-primary', !isActive);
+    $('.deactive-btn').toggleClass('bluesky-route-btn-primary', isActive);
+    $('.active-btn').toggleClass('bluesky-route-btn-outline-primary', isActive);
+    $('.deactive-btn').toggleClass('bluesky-route-btn-outline-primary', !isActive);
+    $('.flight-tab-hide').toggleClass('d-none', !isActive);
+    $('.flight-tab-active').toggleClass('d-none', isActive);
+}
+
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -886,11 +896,11 @@ function offHover() {
                                             <div class="accordion-body">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <div class="d-flex gap-2">
+                                                        <div class="d-flex gap-2 border p-1">
                                                             <button type="button"
-                                                                class="btn btn-sm btn-sm-size bluesky-btn-primary w-100">Departure</button>
+                                                                class="btn btn-sm bluesky-route-btn-primary w-100">Departure</button>
                                                             <button type="button"
-                                                                class="btn btn-sm btn-sm-size bluesky-btn-outline-primary w-100">Arrival</button>
+                                                                class="btn btn-sm px-0 py-0 btn-sm-size bluesky-btn-outline-primary w-100">Arrival</button>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 mt-2">
@@ -1455,6 +1465,8 @@ function offHover() {
                                                         <div class="tab-content pt-3">
                                                             <div class="tab-pane fade active show" id="primaryhome"
                                                                 role="tabpanel">
+                                                                <button
+                                                                    class="btn btn-sm bluesky-route-btn-primary mt-1 mb-2 px-2 py-1">DAC-DXB</button>
                                                                 <div class="card">
                                                                     <div
                                                                         class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
@@ -1464,92 +1476,24 @@ function offHover() {
                                                                                     <img src="../../../../public/theme/appimages/Plane.svg"
                                                                                         alt="">
                                                                                 </b>
-                                                                                <small><b>Departure From</b> Hazrat
-                                                                                    Shahjalal
-                                                                                    International Airport</small>
+                                                                                <small><b><span
+                                                                                            class="bluesky-departure-text">Departure
+                                                                                            From</span></b>
+                                                                                    <b><span
+                                                                                            class="bluesky-departure-airport-text">
+                                                                                            Hazrat Shahjalal
+                                                                                            International Airport
+                                                                                        </span></b>
+                                                                                </small>
                                                                             </div>
 
-                                                                            <div class="p-2">Flight Time: 01 hr 45 min
+                                                                            <div
+                                                                                class="p-2 bluesky-departure-text fw-bold">
+                                                                                Flight Time: 01 hr 45 min
                                                                             </div>
                                                                         </div>
-
                                                                     </div>
-                                                                    <!-- <div class="card-body">
-                                                                        <div class="row">
-                                                                            <div class="col-md-5 border-end">
-                                                                                <div class="d-flex border-right">
-                                                                                    <div class="text-start mt-2">
-                                                                                        <p
-                                                                                            class="p-0 m-0 custom-text-purple">
-                                                                                            <b>DAC</b>
-                                                                                        </p>
-                                                                                        <small
-                                                                                            style="font-size: 13px; color: #5e6878;"><b>10:50
-                                                                                                AM | 19 Jan,
-                                                                                                Thu</b></small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 12px; color: #5e6878;">Terminal:2</small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 12px; color: #5e6878;">Flight
-                                                                                            No:78ER457</small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 12px; color: #5e6878;">Class:Economy</small>
-                                                                                    </div>
 
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-7">
-                                                                                <div class="row">
-                                                                                    <div class="col-md-7">
-                                                                                        <div
-                                                                                            class="d-flex border-right">
-                                                                                            <div
-                                                                                                class="text-start mt-2">
-                                                                                                <p
-                                                                                                    class="p-0 m-0 custom-text-purple">
-                                                                                                    <b>DXB</b>
-                                                                                                </p>
-                                                                                                <small
-                                                                                                    style="font-size: 13px; color: #5e6878;"><b>11:55
-                                                                                                        AM | 19 Jan,
-                                                                                                        Thu</b></small>
-                                                                                                <br>
-                                                                                                <small
-                                                                                                    style="font-size: 11px; color: #5e6878;">Terminal:3</small>
-                                                                                                <br>
-
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-md-5 text-center">
-                                                                                        <img height="60" width="100"
-                                                                                            src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
-                                                                                            alt="">
-                                                                                        <p class="mb-0 pb-0">Qatar
-                                                                                            Airways
-                                                                                        </p>
-                                                                                        <p class="mb-0 pb-0">Boeing 707
-                                                                                        </p>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row mt-2 p-2 pb-0">
-                                                                            <div class="chip chip-sm"
-                                                                                style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
-                                                                                <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
-                                                                                    src="../../../../public/theme/appimages/location.svg"
-                                                                                    alt="">
-
-                                                                                Destination : Dubai Internation Airport
-                                                                            </div>
-                                                                        </div>
-                                                                    </div> -->
 
                                                                     <div class="card-body">
                                                                         <div class="row">
@@ -1601,15 +1545,16 @@ function offHover() {
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                        <div
+                                                                            class="row border-top mt-3 d-flex justify-content-center align-items-center">
                                                                             <div class="col-md-6">
                                                                                 <div class="d-flex gap-2 mt-2">
 
                                                                                     <div class="border border-1 text-center p-1"
-                                                                                        style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 12px;">
+                                                                                        style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
                                                                                         QR667- Boing787</div>
                                                                                     <div class="border border-1 text-center p-1"
-                                                                                        style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 12px;">
+                                                                                        style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
                                                                                         Class: Economy
                                                                                     </div>
                                                                                 </div>
@@ -1621,7 +1566,30 @@ function offHover() {
                                                                                     <img height="35" width="60"
                                                                                         src="../../../../public/uploads/airlines/EK.svg"
                                                                                         alt="">
-                                                                                        <span class="pt-2 fw-bold" style="font-size: 11px;">Emirates</span>
+                                                                                    <span class="pt-2 fw-bold"
+                                                                                        style="font-size: 11px;">Emirates</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div
+                                                                            class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                            <div class="col-md-12">
+                                                                                <div class="chip chip-sm mt-2 mb-0"
+                                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
+                                                                                    <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                                        src="../../../../public/theme/appimages/location.svg"
+                                                                                        alt="">
+
+                                                                                    <span
+                                                                                        class="bluesky-departure-text">Reached
+                                                                                        Destination at <span
+                                                                                            class="desitnation-city">Dubai</span>
+                                                                                        |</span>
+                                                                                    <span
+                                                                                        class="bluesky-departure-airport-text">Dubai
+                                                                                        Internation
+                                                                                        Airport</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -2120,7 +2088,7 @@ function offHover() {
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-">
+                                            <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-10 col-sm-12">
                                                         <div class="row">
@@ -2496,103 +2464,547 @@ function offHover() {
                                                         <div class="tab-content pt-3">
                                                             <div class="tab-pane fade active show" id="primaryhome"
                                                                 role="tabpanel">
-                                                                <div class="card">
-                                                                    <div
-                                                                        class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
-                                                                        <div class="d-flex">
-                                                                            <div class="p-2 flex-grow-1">
-                                                                                <b>
-                                                                                    <img src="../../../../public/theme/appimages/Plane.svg"
-                                                                                        alt="">
-                                                                                </b>
-                                                                                <small><b>Departure</b> from Hazrat
-                                                                                    Shahjalal
-                                                                                    International Airport</small>
-                                                                            </div>
+                                                                <div class="d-flex d-flex-row mb-1">
+                                                                    <div class="p-1 bd-highlight">
+                                                                        <button @click="showRouteDetails(1)"
+                                                                            class="btn btn-sm bluesky-route-btn-primary active-btn px-2 py-1">DAC-DXB</button>
+                                                                    </div>
+                                                                    <div class="p-1 bd-highlight">
+                                                                        <button @click="showRouteDetails(2)"
+                                                                            class="btn btn-sm bluesky-route-btn-outline-primary deactive-btn px-2 py-1">DXB-DAC</button>
+                                                                    </div>
+                                                                </div>
 
-                                                                            <div class="p-2">Duration: 01 hr 45 min
+                                                                <div class="flight-tab-active fadeIn">
+                                                                    <div class="card">
+                                                                        <div
+                                                                            class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
+                                                                            <div class="d-flex">
+                                                                                <div class="p-2 flex-grow-1">
+                                                                                    <b>
+                                                                                        <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                                            alt="">
+                                                                                    </b>
+                                                                                    <small><b><span
+                                                                                                class="bluesky-departure-text">Departure
+                                                                                                From</span></b>
+                                                                                        <b><span
+                                                                                                class="bluesky-departure-airport-text">
+                                                                                                Hazrat Shahjalal
+                                                                                                International Airport
+                                                                                            </span></b>
+                                                                                    </small>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="p-2 bluesky-departure-text fw-bold">
+                                                                                    Flight Time: 01 hr 45 min
+                                                                                </div>
                                                                             </div>
                                                                         </div>
 
-                                                                    </div>
-                                                                    <div class="card-body">
-                                                                        <div class="row">
-                                                                            <div class="col-md-5 border-end">
-                                                                                <div class="d-flex border-right">
-                                                                                    <div class="text-start mt-2">
-                                                                                        <p
-                                                                                            class="p-0 m-0 custom-text-purple">
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-4">
+                                                                                    <div
+                                                                                        class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                                        <div class="text-black-"
+                                                                                            style="color: #0fb3a6;">
                                                                                             <b>DAC</b>
-                                                                                        </p>
-                                                                                        <small
-                                                                                            style="font-size: 13px; color: #5e6878;"><b>10:50
-                                                                                                AM | 19 Jan,
-                                                                                                Thu</b></small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 12px; color: #5e6878;">Terminal:2</small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 12px; color: #5e6878;">Flight
-                                                                                            No:78ER457</small>
-                                                                                        <br>
-                                                                                        <small
-                                                                                            style="font-size: 12px; color: #5e6878;">Class:Economy</small>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 13px;"
+                                                                                                class="text-black"><b>10:30
+                                                                                                    AM |</b></small>
+                                                                                            <span
+                                                                                                style="font-size: 11px;">19
+                                                                                                Jan,2025</span>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                                2</small>
+                                                                                        </div>
                                                                                     </div>
-
+                                                                                </div>
+                                                                                <div class="col-md-4 d-none d-sm-block">
+                                                                                    <img src="../../../../public/theme/appimages/Route.svg"
+                                                                                        alt="">
+                                                                                </div>
+                                                                                <div class="col-md-4 col-4">
+                                                                                    <div
+                                                                                        class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                                        <div class="text-black-"
+                                                                                            style="color: #0fb3a6;">
+                                                                                            <b>CCU</b>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 13px;"
+                                                                                                class="text-black"><b>10:30
+                                                                                                    AM |</b></small>
+                                                                                            <span
+                                                                                                style="font-size: 11px;">19
+                                                                                                Jan,2025</span>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                                3</small>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-md-7">
-                                                                                <div class="row">
-                                                                                    <div class="col-md-7">
-                                                                                        <div
-                                                                                            class="d-flex border-right">
-                                                                                            <div
-                                                                                                class="text-start mt-2">
-                                                                                                <p
-                                                                                                    class="p-0 m-0 custom-text-purple">
-                                                                                                    <b>DXB</b>
-                                                                                                </p>
-                                                                                                <small
-                                                                                                    style="font-size: 13px; color: #5e6878;"><b>11:55
-                                                                                                        AM | 19 Jan,
-                                                                                                        Thu</b></small>
-                                                                                                <br>
-                                                                                                <small
-                                                                                                    style="font-size: 11px; color: #5e6878;">Terminal:3</small>
-                                                                                                <br>
 
-                                                                                            </div>
+                                                                            <div
+                                                                                class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                                <div class="col-md-6">
+                                                                                    <div class="d-flex gap-2 mt-2">
+
+                                                                                        <div class="border border-1 text-center p-1"
+                                                                                            style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
+                                                                                            QR667- Boing787</div>
+                                                                                        <div class="border border-1 text-center p-1"
+                                                                                            style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
+                                                                                            Class: Economy
                                                                                         </div>
                                                                                     </div>
 
-                                                                                    <div class="col-md-5 text-center">
-                                                                                        <img height="60" width="100"
-                                                                                            src="https://logos-world.net/wp-content/uploads/2020/03/Qatar-Airways-Symbol.png"
-                                                                                            alt="">
-                                                                                        <p class="mb-0 pb-0">Qatar
-                                                                                            Airways
-                                                                                        </p>
-                                                                                        <p class="mb-0 pb-0">Boeing 707
-                                                                                        </p>
-                                                                                    </div>
 
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="float-end mt-2">
+                                                                                        <img height="35" width="60"
+                                                                                            src="../../../../public/uploads/airlines/EK.svg"
+                                                                                            alt="">
+                                                                                        <span class="pt-2 fw-bold"
+                                                                                            style="font-size: 11px;">Emirates</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div
+                                                                                class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="chip chip-sm mt-2 mb-0"
+                                                                                        style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
+                                                                                        <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                                            src="../../../../public/theme/appimages/location.svg"
+                                                                                            alt="">
+
+                                                                                        <span
+                                                                                            class="bluesky-departure-text">Layover
+                                                                                            at <span
+                                                                                                class="laover-city">Kolkata</span>
+                                                                                            |</span>
+                                                                                        <span
+                                                                                            class="bluesky-departure-airport-text">Netaji
+                                                                                            Subhas Chandra Bose
+                                                                                            Airport</span>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="row mt-2 p-2 pb-0">
-                                                                            <!-- 8px -->
-                                                                            <div class="chip chip-sm"
-                                                                                style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:8px;">
-                                                                                <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
-                                                                                    src="../../../../public/theme/appimages/location.svg"
-                                                                                    alt="">
+                                                                    </div>
 
-                                                                                Destination : Dubai Internation Airport
+                                                                    <div class="card">
+                                                                        <div
+                                                                            class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
+                                                                            <div class="d-flex">
+                                                                                <div class="p-2 flex-grow-1">
+                                                                                    <b>
+                                                                                        <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                                            alt="">
+                                                                                    </b>
+                                                                                    <small><b><span
+                                                                                                class="bluesky-departure-text">Departure
+                                                                                                From</span></b>
+                                                                                        <b><span
+                                                                                                class="bluesky-departure-airport-text">
+                                                                                                Netaji Subhas Chandra
+                                                                                                Bose Airport
+                                                                                            </span></b>
+                                                                                    </small>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="p-2 bluesky-departure-text fw-bold">
+                                                                                    Flight Time: 01 hr 45 min
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-4">
+                                                                                    <div
+                                                                                        class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                                        <div class="text-black-"
+                                                                                            style="color: #0fb3a6;">
+                                                                                            <b>CCU</b>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 13px;"
+                                                                                                class="text-black"><b>10:30
+                                                                                                    AM |</b></small>
+                                                                                            <span
+                                                                                                style="font-size: 11px;">19
+                                                                                                Jan,2025</span>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                                2</small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 d-none d-sm-block">
+                                                                                    <img src="../../../../public/theme/appimages/Route.svg"
+                                                                                        alt="">
+                                                                                </div>
+                                                                                <div class="col-md-4 col-4">
+                                                                                    <div
+                                                                                        class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                                        <div class="text-black-"
+                                                                                            style="color: #0fb3a6;">
+                                                                                            <b>DXB</b>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 13px;"
+                                                                                                class="text-black"><b>10:30
+                                                                                                    AM |</b></small>
+                                                                                            <span
+                                                                                                style="font-size: 11px;">19
+                                                                                                Jan,2025</span>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                                3</small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div
+                                                                                class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                                <div class="col-md-6">
+                                                                                    <div class="d-flex gap-2 mt-2">
+
+                                                                                        <div class="border border-1 text-center p-1"
+                                                                                            style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
+                                                                                            QR667- Boing787</div>
+                                                                                        <div class="border border-1 text-center p-1"
+                                                                                            style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
+                                                                                            Class: Economy
+                                                                                        </div>
+                                                                                    </div>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="float-end mt-2">
+                                                                                        <img height="35" width="60"
+                                                                                            src="../../../../public/uploads/airlines/EK.svg"
+                                                                                            alt="">
+                                                                                        <span class="pt-2 fw-bold"
+                                                                                            style="font-size: 11px;">Emirates</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div
+                                                                                class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="chip chip-sm mt-2 mb-0"
+                                                                                        style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
+                                                                                        <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                                            src="../../../../public/theme/appimages/location.svg"
+                                                                                            alt="">
+
+                                                                                        <span
+                                                                                            class="bluesky-departure-text">Reached
+                                                                                            Destination at <span
+                                                                                                class="desitnation-city">Dubai</span>
+                                                                                            |</span>
+                                                                                        <span
+                                                                                            class="bluesky-departure-airport-text">Dubai
+                                                                                            Internation
+                                                                                            Airport</span>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
+                                                                <div class="flight-tab-hide d-none fadeIn">
+                                                                    <div class="card">
+                                                                        <div
+                                                                            class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
+                                                                            <div class="d-flex">
+                                                                                <div class="p-2 flex-grow-1">
+                                                                                    <b>
+                                                                                        <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                                            alt="">
+                                                                                    </b>
+                                                                                    <small><b><span
+                                                                                                class="bluesky-departure-text">Departure
+                                                                                                From</span></b>
+                                                                                        <b><span
+                                                                                                class="bluesky-departure-airport-text">
+                                                                                                Dubai Internation Airport
+                                                                                            </span></b>
+                                                                                    </small>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="p-2 bluesky-departure-text fw-bold">
+                                                                                    Flight Time: 01 hr 45 min
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-4">
+                                                                                    <div
+                                                                                        class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                                        <div class="text-black-"
+                                                                                            style="color: #0fb3a6;">
+                                                                                            <b>DXB</b>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 13px;"
+                                                                                                class="text-black"><b>10:30
+                                                                                                    AM |</b></small>
+                                                                                            <span
+                                                                                                style="font-size: 11px;">19
+                                                                                                Jan,2025</span>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                                2</small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 d-none d-sm-block">
+                                                                                    <img src="../../../../public/theme/appimages/Route.svg"
+                                                                                        alt="">
+                                                                                </div>
+                                                                                <div class="col-md-4 col-4">
+                                                                                    <div
+                                                                                        class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                                        <div class="text-black-"
+                                                                                            style="color: #0fb3a6;">
+                                                                                            <b>CCU</b>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 13px;"
+                                                                                                class="text-black"><b>10:30
+                                                                                                    AM |</b></small>
+                                                                                            <span
+                                                                                                style="font-size: 11px;">19
+                                                                                                Jan,2025</span>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                                3</small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div
+                                                                                class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                                <div class="col-md-6">
+                                                                                    <div class="d-flex gap-2 mt-2">
+
+                                                                                        <div class="border border-1 text-center p-1"
+                                                                                            style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
+                                                                                            QR667- Boing787</div>
+                                                                                        <div class="border border-1 text-center p-1"
+                                                                                            style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
+                                                                                            Class: Economy
+                                                                                        </div>
+                                                                                    </div>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="float-end mt-2">
+                                                                                        <img height="35" width="60"
+                                                                                            src="../../../../public/uploads/airlines/EK.svg"
+                                                                                            alt="">
+                                                                                        <span class="pt-2 fw-bold"
+                                                                                            style="font-size: 11px;">Emirates</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div
+                                                                                class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="chip chip-sm mt-2 mb-0"
+                                                                                        style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
+                                                                                        <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                                            src="../../../../public/theme/appimages/location.svg"
+                                                                                            alt="">
+
+                                                                                        <span
+                                                                                            class="bluesky-departure-text">Layover
+                                                                                            at <span
+                                                                                                class="laover-city">Kolkata</span>
+                                                                                            |</span>
+                                                                                        <span
+                                                                                            class="bluesky-departure-airport-text">Netaji
+                                                                                            Subhas Chandra Bose
+                                                                                            Airport</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="card">
+                                                                        <div
+                                                                            class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
+                                                                            <div class="d-flex">
+                                                                                <div class="p-2 flex-grow-1">
+                                                                                    <b>
+                                                                                        <img src="../../../../public/theme/appimages/Plane.svg"
+                                                                                            alt="">
+                                                                                    </b>
+                                                                                    <small><b><span
+                                                                                                class="bluesky-departure-text">Departure
+                                                                                                From</span></b>
+                                                                                        <b><span
+                                                                                                class="bluesky-departure-airport-text">
+                                                                                                Netaji Subhas Chandra
+                                                                                                Bose Airport
+                                                                                            </span></b>
+                                                                                    </small>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="p-2 bluesky-departure-text fw-bold">
+                                                                                    Flight Time: 01 hr 45 min
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="card-body">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 col-4">
+                                                                                    <div
+                                                                                        class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                                        <div class="text-black-"
+                                                                                            style="color: #0fb3a6;">
+                                                                                            <b>CCU</b>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 13px;"
+                                                                                                class="text-black"><b>10:30
+                                                                                                    AM |</b></small>
+                                                                                            <span
+                                                                                                style="font-size: 11px;">19
+                                                                                                Jan,2025</span>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                                2</small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4 d-none d-sm-block">
+                                                                                    <img src="../../../../public/theme/appimages/Route.svg"
+                                                                                        alt="">
+                                                                                </div>
+                                                                                <div class="col-md-4 col-4">
+                                                                                    <div
+                                                                                        class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                                        <div class="text-black-"
+                                                                                            style="color: #0fb3a6;">
+                                                                                            <b>DAC</b>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 13px;"
+                                                                                                class="text-black"><b>10:30
+                                                                                                    AM |</b></small>
+                                                                                            <span
+                                                                                                style="font-size: 11px;">19
+                                                                                                Jan,2025</span>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <small
+                                                                                                style="font-size: 12px; color: #5e6878;">Terminal:
+                                                                                                1</small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div
+                                                                                class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                                <div class="col-md-6">
+                                                                                    <div class="d-flex gap-2 mt-2">
+
+                                                                                        <div class="border border-1 text-center p-1"
+                                                                                            style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
+                                                                                            QR667- Boing787</div>
+                                                                                        <div class="border border-1 text-center p-1"
+                                                                                            style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
+                                                                                            Class: Economy
+                                                                                        </div>
+                                                                                    </div>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="float-end mt-2">
+                                                                                        <img height="35" width="60"
+                                                                                            src="../../../../public/uploads/airlines/EK.svg"
+                                                                                            alt="">
+                                                                                        <span class="pt-2 fw-bold"
+                                                                                            style="font-size: 11px;">Emirates</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div
+                                                                                class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="chip chip-sm mt-2 mb-0"
+                                                                                        style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
+                                                                                        <img style="height: 30px;width: 30px;padding-left: 10px;margin: 0px 0px 0px -16px;"
+                                                                                            src="../../../../public/theme/appimages/location.svg"
+                                                                                            alt="">
+
+                                                                                        <span
+                                                                                            class="bluesky-departure-text">Reached
+                                                                                            Destination at <span
+                                                                                                class="desitnation-city">Dhaka</span>
+                                                                                            |</span>
+                                                                                        <span
+                                                                                            class="bluesky-departure-airport-text">Hazrat Shahjalal International Airport</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
 
                                                             </div>
                                                             <div class="tab-pane fade" id="primaryprofile"
@@ -3251,4 +3663,5 @@ li.menu-item {
     display: inline-block;
     padding: 2px 0 0 3px;
 }
+
 </style>
