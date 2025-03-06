@@ -213,7 +213,7 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
 }
 
 .bluesky-border-primary{
-    border-color: #7944eb !important;
+    border-color: #9368ee !important;
 }
 .custom-text-purple{
     color: #7944eb;
@@ -234,6 +234,7 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
     border-radius: 8px 8px 8px 8px;
 }
 
+
 .bluesky-btn-outline-primary {
     color: #875ae9;
     border-color: #875ae9;
@@ -242,6 +243,44 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
     color: #fff;
     background-color: #875ae9;
     border-color: #875ae9;
+}
+
+.bluesky-route-btn-primary {
+    color: #fff;
+    background-color: #7944eb;
+    border-color: #7944eb;
+    padding: 1px 1px 1px 1px;
+    font-size: 12px;
+}
+.bluesky-route-btn-primary:hover {
+    color: #fff;
+    background-color: #875ae9;
+    border-color: #875ae9;
+}
+
+.bluesky-route-btn-outline-primary{
+    color: #875ae9;
+    border-color: #875ae9;
+    padding: 1px 1px 1px 1px;
+    font-size: 12px;
+}
+
+.bluesky-route-btn-outline-primary:hover {
+    color: #fff;
+    background-color: #875ae9;
+    border-color: #875ae9;
+}
+
+.bluesky-departure-text{
+    color: #7239EA;
+}
+
+.bluesky-departure-airport-text{
+    background: linear-gradient(238.29deg, #1B98E6 6.66%, #8462FF 85.47%);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 
