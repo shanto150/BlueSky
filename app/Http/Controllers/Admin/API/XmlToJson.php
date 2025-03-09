@@ -15,6 +15,7 @@ class XmlToJson {
     private $currency;
     private $airlineNames = [];
     private $airportData = []; // New property for airport data
+    private $aircraftTypes = []; // New property for aircraft types
 
     public function __construct($xmlContent) {
         $this->xml = new SimpleXMLElement($xmlContent);
@@ -42,6 +43,15 @@ class XmlToJson {
                     'airport_name' => $item->Airport_Name,
                     'city_name' => $item->City_Name
                 ]];
+            })
+            ->toArray();
+
+        // Cache aircraft types
+        $this->aircraftTypes = DB::table('aircraft_type_designators')
+            ->select('iata_code', 'model')
+            ->get()
+            ->mapWithKeys(function ($item) {
+                return [$item->iata_code => $item->model];
             })
             ->toArray();
 
@@ -135,6 +145,9 @@ class XmlToJson {
             'city_name' => 'Unknown City'
         ];
 
+        $equipmentCode = (string)$segment['Equipment'];
+        $aircraftName = $this->aircraftTypes[$equipmentCode] ?? 'Unknown Aircraft';
+
         return [
             'carrier_code' => $carrierCode,
             'airline_name' => $airlineInfo['name'],
@@ -160,7 +173,8 @@ class XmlToJson {
             'booking_count' => 0,
             'cabin_class' => '',
             'segmentKey' => '',
-            'equipment' => (string)$segment['Equipment']
+            'equipment' => $equipmentCode,
+            'aircraft_name' => $aircraftName
         ];
     }
 
