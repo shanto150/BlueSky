@@ -1512,11 +1512,13 @@ function showRouteDetails(info) {
                                 <div class="d-flex gap-2">
                                     <div v-if="flight.outbound.refundable" class="border border-1 text-center p-1"
                                         style="background-color: #def1ec; color: #12ce69; font-size: 12px;">
-                                        <i class="fa fa-refresh"></i> Refundable
+                                        <img src="../../../../public/theme/appimages/refund-able.svg" alt="">
+                                        Refundable
                                     </div>
                                     <div v-else class="border border-1 text-center p-1"
                                         style="background-color: #f1dede; color: #ce1212; font-size: 12px;">
-                                        <i class="fa fa-refresh"></i> Non-refundable
+                                        <img src="../../../../public/theme/appimages/Non-Refundable.svg" alt="">
+                                        Non-refundable
                                     </div>
 
                                     <div class="border border-1 text-center p-1"
