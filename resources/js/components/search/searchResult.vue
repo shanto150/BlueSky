@@ -1495,9 +1495,19 @@ function formatDate (dateString) {
                         <div class="card-footer p-0" style="background-color:#f1f4f7;">
                             <div class="float-start p-2">
                                 <div class="d-flex gap-2">
-                                    <div v-if="flight.outbound.refundable" class="border border-1 text-center p-1"
+                                    <!-- <div v-if="flight.outbound.refundable" class="border border-1 text-center p-1"
                                         style="background-color: #def1ec; color: #12ce69; font-size: 12px;">
                                         <i class="fa fa-refresh"></i> Refundable
+                                    </div> -->
+                                    <div v-if="flight.outbound.refundable" class="border border-1 text-center p-1"
+                                        style="background-color: #def1ec; color: #12ce69; font-size: 12px;">
+                                        <img src="../../../../public/theme/appimages/refund-able.svg" alt="">
+                                        Refundable
+                                    </div>
+                                    <div v-else class="border border-1 text-center p-1"
+                                        style="background-color: #f1dede; color: #ce1212; font-size: 12px;">
+                                        <img src="../../../../public/theme/appimages/Non-Refundable.svg" alt="">
+                                        Non-refundable
                                     </div>
 
                                     <div class="border border-1 text-center p-1"
@@ -1595,7 +1605,7 @@ function formatDate (dateString) {
                                                                         </b>
                                                                         <small><b><span
                                                                                     class="bluesky-departure-text">Departure
-                                                                                    From</span></b>
+                                                                                    From </span></b>
                                                                             <b><span
                                                                                     class="bluesky-departure-airport-text">
                                                                                     {{route.Origin_Airport_Name}}
@@ -1662,7 +1672,7 @@ function formatDate (dateString) {
 
                                                                             <div class="border border-1 text-center p-1"
                                                                                 style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
-                                                                                {{ route.flight }}- Boing787</div>
+                                                                                {{ route.flight }}- {{ route.aircraft_name }}</div>
                                                                             <div class="border border-1 text-center p-1"
                                                                                 style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
                                                                                 Class: {{ route.cabin_class}}
@@ -1698,10 +1708,9 @@ function formatDate (dateString) {
                                                                                 <span v-else>Layover </span>
                                                                                 at  <span
                                                                                     class="laover-city">{{ route.Destination_City_Name }}  <span v-if="!route.lastitem">- {{ route.layover_time }}</span></span>
-                                                                                |</span>
-                                                                            <span   class="bluesky-departure-airport-text">Netaji
-                                                                                Subhas Chandra Bose
-                                                                                Airport</span>
+                                                                                | </span>
+                                                                            <span style="font-size: 12px;" class="bluesky-departure-airport-text w-100">
+                                                                                {{route.Destination_Airport_Name}}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
