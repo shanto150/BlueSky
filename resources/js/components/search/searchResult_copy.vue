@@ -261,7 +261,7 @@ function offHover() {
     $("#img").attr('src', 'http://[::1]:5173/public/theme/appimages/s_With_Icon.jpg');
 }
 
-function showRouteDetails(info){
+function showRouteDetails(info) {
     const isActive = info === 2;
     $('.active-btn').toggleClass('bluesky-route-btn-primary', !isActive);
     $('.deactive-btn').toggleClass('bluesky-route-btn-primary', isActive);
@@ -1871,6 +1871,235 @@ function showRouteDetails(info){
                                     </div>
                                 </div>
                                 <!-- ./ end flight details -->
+
+
+                                <!-- Price Details -->
+
+
+                                <div id="flight-package-2" class="accordion-collapse collapse m-0"
+                                    aria-labelledby="flush-headingpackage" data-bs-parent="#accordionFlushExample"
+                                    style="">
+                                    <div class="accordion-body">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="card card-hober">
+                                                            <div class="card-header border-bottom-1">
+                                                                <h5 class="card-title text-center">Economy</h5>
+                                                                <h6 class="text-center">BDT
+                                                                    65000</h6>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <ul style="list-style-type:none;" class="">
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i class="fa fa-refresh icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Flexible to make 2 changes
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-circle-xmark icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Cancellation within 24hrs
+                                                                        </span>
+
+                                                                    </li>
+
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-solid fa-suitcase-rolling icon-color mt-1"></i>
+                                                                        <span class="ms-1">Checked Baggage: 2 pieces, 23
+                                                                            kg each</span>
+
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-suitcase icon-color mt-1"></i>
+                                                                        <span class="ms-1">Checked
+                                                                            Baggage: 2 pieces, 7 kg</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Standard Seat selection
+                                                                            included</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Preferred
+                                                                            Seat without fees</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa fa-utensils icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free meal</span>
+
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-brands fa-youtube icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Multimedia
+                                                                            Support
+                                                                        </span>
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-wifi icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free
+                                                                            Wi-Fi</span>
+
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="card card-hober">
+                                                            <div class="card-header text-black border-bottom-1">
+                                                                <h5 class="card-title text-center">Premium Economy</h5>
+                                                                <h6 class="text-center text-black">BDT 70500</h6>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <ul style="list-style-type:none;" class="">
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i class="fa fa-refresh icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Flexible to make 2 changes
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-circle-xmark icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Cancellation within 24hrs
+                                                                        </span>
+
+                                                                    </li>
+
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-solid fa-suitcase-rolling icon-color mt-1"></i>
+                                                                        <span class="ms-1">Checked Baggage: 2 pieces, 23
+                                                                            kg each</span>
+
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-suitcase icon-color mt-1"></i>
+                                                                        <span class="ms-1">Checked
+                                                                            Baggage: 2 pieces, 7 kg</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Standard Seat selection
+                                                                            included</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Preferred
+                                                                            Seat selection without fees</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa fa-utensils icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free meal</span>
+
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-brands fa-youtube icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Multimedia
+                                                                            Support
+                                                                        </span>
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-wifi icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free
+                                                                            Wi-Fi</span>
+
+                                                                    </li>
+                                                                </ul>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="card card-hober">
+                                                            <div class="card-header text-black border-bottom-1">
+                                                                <h5 class="card-title text-center">First Class</h5>
+                                                                <h6 class="text-center text-black">BDT 90500</h6>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <ul style="list-style-type:none;" class="">
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i class="fa fa-refresh icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Flexible to make 2 changes
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-circle-xmark icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Cancellation within 24hrs
+                                                                        </span>
+
+                                                                    </li>
+
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-solid fa-suitcase-rolling icon-color mt-1"></i>
+                                                                        <span class="ms-1">Checked Baggage: 2 pieces, 23
+                                                                            kg each</span>
+
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-suitcase icon-color mt-1"></i>
+                                                                        <span class="ms-1">Checked
+                                                                            Baggage: 2 pieces, 7 kg</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Standard Seat selection
+                                                                            included</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Preferred
+                                                                            Seat selection without fees</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa fa-utensils icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free meal</span>
+
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-brands fa-youtube icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Multimedia
+                                                                            Support
+                                                                        </span>
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-wifi icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free
+                                                                            Wi-Fi</span>
+
+                                                                    </li>
+                                                                </ul>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ./end Price Details -->
                             </div>
 
 
@@ -2548,7 +2777,8 @@ function showRouteDetails(info){
                                                                                                 From</span></b>
                                                                                         <b><span
                                                                                                 class="bluesky-departure-airport-text">
-                                                                                                Dubai Internation Airport
+                                                                                                Dubai Internation
+                                                                                                Airport
                                                                                             </span></b>
                                                                                     </small>
                                                                                 </div>
@@ -2788,7 +3018,9 @@ function showRouteDetails(info){
                                                                                                 class="desitnation-city">Dhaka</span>
                                                                                             |</span>
                                                                                         <span
-                                                                                            class="bluesky-departure-airport-text">Hazrat Shahjalal International Airport</span>
+                                                                                            class="bluesky-departure-airport-text">Hazrat
+                                                                                            Shahjalal International
+                                                                                            Airport</span>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -3352,7 +3584,10 @@ li.menu-item {
 }
 
 .icon-color {
-    color: #875ae9;
+    /* color: #875ae9; */
+    color: #08a79a;
+    font-size: 15px;
+    padding-right: 3px;
 }
 
 .accordion-button:after {
@@ -3455,5 +3690,4 @@ li.menu-item {
     display: inline-block;
     padding: 2px 0 0 3px;
 }
-
 </style>

@@ -1514,6 +1514,10 @@ function showRouteDetails(info) {
                                         style="background-color: #def1ec; color: #12ce69; font-size: 12px;">
                                         <i class="fa fa-refresh"></i> Refundable
                                     </div>
+                                    <div v-else class="border border-1 text-center p-1"
+                                        style="background-color: #f1dede; color: #ce1212; font-size: 12px;">
+                                        <i class="fa fa-refresh"></i> Non-refundable
+                                    </div>
 
                                     <div class="border border-1 text-center p-1"
                                         style="background-color: #e4e3f6; color: #7944eb; font-size: 12px;">
