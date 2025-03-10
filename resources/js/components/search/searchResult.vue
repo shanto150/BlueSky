@@ -1213,12 +1213,12 @@ function formatDate(dateString) {
                                                                 class="d-flex justify-content-center align-items-center h-100 w-100">
                                                                 <div>
                                                                     <div class="text-black"><b>{{ flight.outbound.origin
-                                                                            }}-{{
+                                                                    }}-{{
                                                                                 flight.outbound.destination }}</b>
                                                                     </div>
                                                                     <div style="font-size: 11px; color: #8327a4">
                                                                         {{ flight.outbound.first_carrier_code }} | {{
-                                                                        flight.outbound.first_airline_name }}
+                                                                            flight.outbound.first_airline_name }}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1232,7 +1232,7 @@ function formatDate(dateString) {
                                                             <div
                                                                 class="d-block justify-content-center align-items-center h-100 w-100">
                                                                 <div class="text-black"><b>{{
-                                                                        flight.outbound.departure_time }}</b>
+                                                                    flight.outbound.departure_time }}</b>
                                                                 </div>
                                                                 <div>
                                                                     <small style="font-size: 12px; color: #5e6878;">
@@ -1249,7 +1249,7 @@ function formatDate(dateString) {
                                                             <div class="d-block">
                                                                 <div> <small class="ps-2"
                                                                         style="font-size: 11px; color: #5e6878;">{{
-                                                                        flight.outbound.total_flight_time }}</small>
+                                                                            flight.outbound.total_flight_time }}</small>
                                                                 </div>
 
 
@@ -1305,7 +1305,7 @@ function formatDate(dateString) {
                                                             <div
                                                                 class="d-block justify-content-center align-items-center h-100 w-100">
                                                                 <div class="text-black"><b>{{
-                                                                        flight.outbound.arrival_time }}</b>
+                                                                    flight.outbound.arrival_time }}</b>
                                                                 </div>
                                                                 <div>
                                                                     <small style="font-size: 12px; color: #5e6878;">
@@ -1331,7 +1331,7 @@ function formatDate(dateString) {
 
                                                     <div class="text-right">
                                                         <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{
-                                                                flight.outbound.totalPrice }}</b></p>
+                                                            flight.outbound.totalPrice }}</b></p>
                                                         <!-- <small style="color: #dbdbdb"><del>
                                                                     BDT 77000</del></small> -->
                                                         <small style="font-size: 10px;">Economy Class</small>
@@ -1339,6 +1339,23 @@ function formatDate(dateString) {
                                                 </button>
                                             </div>
                                         </div>
+                                        <div class="col-12 col-sm-12 col-md-2 d-sm-block d-md-none">
+
+                                            <div class="d-grid">
+                                                <button class="btn btn-sm bluesky-btn-primary" data-bs-toggle="collapse"
+                                                    data-bs-target="#flight-package-2" aria-controls="flight-package-2">
+
+                                                    <div class="text-right">
+                                                        <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{
+                                                                flight.outbound.totalPrice }}</b></p>
+                                                        <!-- <small style="color: #dbdbdb"><del>
+                        BDT 77000</del></small> -->
+                                                        <small style="font-size: 10px;">Economy Class</small>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <!-- outbound end -->
 
@@ -1357,11 +1374,11 @@ function formatDate(dateString) {
                                                                 class="d-flex justify-content-center align-items-center h-100 w-100">
                                                                 <div>
                                                                     <div class="text-black"><b>{{ flight.inbound.origin
-                                                                            }} - {{ flight.inbound.destination }}</b>
+                                                                    }} - {{ flight.inbound.destination }}</b>
                                                                     </div>
                                                                     <div style="font-size: 11px; color: #8327a4">
                                                                         {{ flight.inbound.first_carrier_code }} | {{
-                                                                        flight.inbound.first_airline_name }}
+                                                                            flight.inbound.first_airline_name }}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1375,12 +1392,12 @@ function formatDate(dateString) {
                                                             <div
                                                                 class="d-block justify-content-center align-items-center h-100 w-100">
                                                                 <div class="text-black"><b>{{
-                                                                        flight.inbound.departure_time }}</b>
+                                                                    flight.inbound.departure_time }}</b>
                                                                 </div>
                                                                 <div>
                                                                     <small style="font-size: 12px; color: #5e6878;">{{
                                                                         formatDate(flight.inbound.departure_date)
-                                                                        }}</small>
+                                                                    }}</small>
                                                                 </div>
                                                                 <div>
                                                                     <small
@@ -1392,7 +1409,7 @@ function formatDate(dateString) {
                                                             <div class="d-block">
                                                                 <div> <small class="ps-2"
                                                                         style="font-size: 11px; color: #5e6878;">{{
-                                                                        flight.inbound.total_flight_time }}</small>
+                                                                            flight.inbound.total_flight_time }}</small>
                                                                 </div>
 
 
@@ -1474,7 +1491,7 @@ function formatDate(dateString) {
 
                                                     <div class="text-right">
                                                         <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{
-                                                                flight.outbound.totalPrice }}</b></p>
+                                                            flight.outbound.totalPrice }}</b></p>
                                                         <!-- <small style="color: #dbdbdb"><del>
                                                                     BDT 77000</del></small> -->
                                                         <small style="font-size: 10px;">Economy Class</small>
@@ -1581,13 +1598,13 @@ function formatDate(dateString) {
                                                         <div v-if="flight.outbound" class="p-1 bd-highlight">
                                                             <button @click="showRouteDetails(1)"
                                                                 class="btn btn-sm bluesky-route-btn-primary active-btn px-2 py-1">{{
-                                                                flight.outbound.origin }}-{{ flight.outbound.destination
+                                                                    flight.outbound.origin }}-{{ flight.outbound.destination
                                                                 }}</button>
                                                         </div>
                                                         <div v-if="flight.inbound" class="p-1 bd-highlight">
                                                             <button @click="showRouteDetails(2)"
                                                                 class="btn btn-sm bluesky-route-btn-outline-primary deactive-btn px-2 py-1">{{
-                                                                flight.inbound.origin }}-{{ flight.inbound.destination
+                                                                    flight.inbound.origin }}-{{ flight.inbound.destination
                                                                 }}</button>
                                                         </div>
                                                     </div>
@@ -1633,8 +1650,9 @@ function formatDate(dateString) {
                                                                                     class="text-black"><b>{{
                                                                                         route.departure_time }}
                                                                                         |</b></small>
-                                                                                <span
-                                                                                    style="font-size: 11px;">{{ formatDate(route.departure_date) }}</span>
+                                                                                <span style="font-size: 11px;">{{
+                                                                                    formatDate(route.departure_date)
+                                                                                    }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1661,7 +1679,7 @@ function formatDate(dateString) {
                                                                                         |</b></small>
                                                                                 <span style="font-size: 11px;">{{
                                                                                     formatDate(route.arrival_date)
-                                                                                    }}</span>
+                                                                                }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1681,7 +1699,7 @@ function formatDate(dateString) {
                                                                             <div class="border border-1 text-center p-1"
                                                                                 style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
                                                                                 {{ route.flight }}- {{
-                                                                                route.aircraft_name }}</div>
+                                                                                    route.aircraft_name }}</div>
                                                                             <div class="border border-1 text-center p-1"
                                                                                 style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
                                                                                 Class: {{ route.cabin_class }}
@@ -1697,7 +1715,7 @@ function formatDate(dateString) {
                                                                                 :src="route.logo_path" alt="">
                                                                             <span class="pt-2 ms-2 fw-bold"
                                                                                 style="font-size: 11px;">{{
-                                                                                route.airline_name }}</span>
+                                                                                    route.airline_name }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1719,12 +1737,13 @@ function formatDate(dateString) {
                                                                                 at <span class="laover-city">{{
                                                                                     route.Destination_City_Name }} <span
                                                                                         v-if="!route.lastitem">- {{
-                                                                                        route.layover_time
+                                                                                            route.layover_time
                                                                                         }}</span></span>
                                                                                 | </span>
                                                                             <span style="font-size: 12px;"
                                                                                 class="bluesky-departure-airport-text w-100">
-                                                                                {{ route.Destination_Airport_Name }}</span>
+                                                                                {{ route.Destination_Airport_Name
+                                                                                }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1772,10 +1791,12 @@ function formatDate(dateString) {
                                                                             </div>
                                                                             <div>
                                                                                 <small style="font-size: 13px;"
-                                                                                    class="text-black"><b>{{ returnRoute.departure_time }}
+                                                                                    class="text-black"><b>{{
+                                                                                        returnRoute.departure_time }}
                                                                                         | </b></small>
-                                                                                <span
-                                                                                    style="font-size: 11px;">{{ formatDate(returnRoute.departure_date) }}</span>
+                                                                                <span style="font-size: 11px;">{{
+                                                                                    formatDate(returnRoute.departure_date)
+                                                                                    }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1798,10 +1819,13 @@ function formatDate(dateString) {
                                                                             </div>
                                                                             <div>
                                                                                 <small style="font-size: 13px;"
-                                                                                    class="text-black"><b>{{ returnRoute.arrival_time }}
+                                                                                    class="text-black"><b>{{
+                                                                                        returnRoute.arrival_time }}
                                                                                         |</b></small>
                                                                                 <span style="font-size: 11px;">
-                                                                                    {{ formatDate(returnRoute.arrival_date) }}</span>
+                                                                                    {{
+                                                                                    formatDate(returnRoute.arrival_date)
+                                                                                    }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1821,7 +1845,7 @@ function formatDate(dateString) {
                                                                             <div class="border border-1 text-center p-1"
                                                                                 style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
                                                                                 {{ returnRoute.flight }} - {{
-                                                                                returnRoute.aircraft_name }}</div>
+                                                                                    returnRoute.aircraft_name }}</div>
                                                                             <div class="border border-1 text-center p-1"
                                                                                 style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
                                                                                 Class: {{ returnRoute.cabin_class }}
@@ -1836,7 +1860,7 @@ function formatDate(dateString) {
                                                                                 :src="returnRoute.logo_path" alt="">
                                                                             <span class="pt-2 ms-2 fw-bold"
                                                                                 style="font-size: 11px;">{{
-                                                                                returnRoute.airline_name }}</span>
+                                                                                    returnRoute.airline_name }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1864,7 +1888,8 @@ function formatDate(dateString) {
                                                                                 | </span>
                                                                             <span style="font-size: 12px;"
                                                                                 class="bluesky-departure-airport-text w-100">
-                                                                                {{ returnRoute.Destination_Airport_Name }}</span>
+                                                                                {{ returnRoute.Destination_Airport_Name
+                                                                                }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
