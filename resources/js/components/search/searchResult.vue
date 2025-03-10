@@ -1475,13 +1475,10 @@ function formatDate (dateString) {
                                                         aria-controls="flight-package-2">
 
                                                         <div class="text-right">
-                                                            <p class="p-0 m-0"><b>BDT
-                                                                    65000</b></p>
-                                                            <small style="color: #dbdbdb"><del>
-                                                                    BDT 77000</del></small>
-                                                            <br>
-                                                            <small style="font-size: 10px;">Economy
-                                                                Class</small>
+                                                            <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{ flight.outbound.totalPrice }}</b></p>
+                                                            <!-- <small style="color: #dbdbdb"><del>
+                                                                    BDT 77000</del></small> -->
+                                                            <small style="font-size: 10px;">Economy Class</small>
                                                         </div>
                                                     </button>
                                                 </div>
