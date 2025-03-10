@@ -316,6 +316,19 @@ function formatDate(dateString) {
     });
 };
 
+
+function number_format(nStr) {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1;
+}
+
 </script>
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -549,7 +562,7 @@ function formatDate(dateString) {
                     <div class="row d-sm-block d-md-none mt-2">
 
                         <button class="col-md-12 btn bluesky-btn-outline-primary dropdown-toggle" type="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">2 Passangers</button>
+                            data-bs-toggle="dropdown" aria-expanded="false">1 Passangers</button>
                         <ul class="dropdown-menu p-1" style="width: 300px;">
                             <table class="table table-sm">
                                 <tbody>
@@ -1611,8 +1624,8 @@ function formatDate(dateString) {
                                                     <div v-for="route in flight.outbound.segments"
                                                         class="flight-tab-active fadeIn">
                                                         <div class="card">
-                                                            <div
-                                                                class="card-header accorion-item-title-color m-0 p-0 " style="background-color: #f2f5f7;">
+                                                            <div class="card-header accorion-item-title-color m-0 p-0 "
+                                                                style="background-color: #f2f5f7;">
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
                                                                         <b>
@@ -1630,7 +1643,8 @@ function formatDate(dateString) {
                                                                     </div>
 
                                                                     <div class="p-2 bluesky-departure-text ">
-                                                                        <small><b>Flight Time: {{ route.flightTime1 }}</b></small>
+                                                                        <small><b>Flight Time: {{ route.flightTime1
+                                                                        }}</b></small>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1658,6 +1672,8 @@ function formatDate(dateString) {
                                                                                     style="font-size: 12px; color: #5e6878;">Terminal:
                                                                                     {{ route.originTerminal }}</small>
                                                                             </div>
+
+
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-4 col-4 col-md-4 ">
@@ -1696,12 +1712,14 @@ function formatDate(dateString) {
                                                                         <div class="d-flex gap-2 mt-2">
 
                                                                             <div class="border border-1 text-center p-1"
-                                                                                style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
+                                                                                style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px; white-space: nowrap;">
                                                                                 {{ route.flight }}-{{
                                                                                     route.aircraft_name }}</div>
                                                                             <div class="border border-1 text-center p-1"
-                                                                                style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
-                                                                                {{ route.cabin_class }}
+                                                                                style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px; white-space: nowrap;">
+                                                                                {{ route.cabin_class }} - {{
+                                                                                    route.booking_code }}
+
                                                                             </div>
                                                                         </div>
 
@@ -1732,11 +1750,13 @@ function formatDate(dateString) {
 
                                                                             <!-- section text -->
 
-                                                                            <span   class="bluesky-departure-text">
+                                                                            <span class="bluesky-departure-text">
 
-                                                                                <span style="font-size: 12px;" v-if="route.lastitem">Reached
+                                                                                <span style="font-size: 12px;"
+                                                                                    v-if="route.lastitem">Reached
                                                                                     Destination</span>
-                                                                                <span style="font-size: 12px;" v-else>Layover </span>
+                                                                                <span style="font-size: 12px;"
+                                                                                    v-else>Layover </span>
                                                                                 at <span style="font-size: 12px;">{{
                                                                                     route.Destination_City_Name }} <span
                                                                                         v-if="!route.lastitem">-{{
@@ -1758,8 +1778,8 @@ function formatDate(dateString) {
                                                         v-for="returnRoute in flight.inbound.segments"
                                                         class="flight-tab-hide d-none fadeIn">
                                                         <div class="card">
-                                                            <div
-                                                                class="card-header accorion-item-title-color m-0 p-0" style="background-color: #f2f5f7;">
+                                                            <div class="card-header accorion-item-title-color m-0 p-0"
+                                                                style="background-color: #f2f5f7;">
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
                                                                         <b>
@@ -1778,7 +1798,8 @@ function formatDate(dateString) {
                                                                     </div>
 
                                                                     <div class="p-2 bluesky-departure-text">
-                                                                        <small>Flight Time: {{ returnRoute.flightTime1 }}</small>
+                                                                        <small>Flight Time: {{ returnRoute.flightTime1
+                                                                        }}</small>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1809,9 +1830,10 @@ function formatDate(dateString) {
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-4 col-sm-4col-md-4 d-none d-sm-block">
+                                                                    <div
+                                                                        class="col-4 col-sm-4col-md-4 d-none d-sm-block">
                                                                         <img src="../../../../public/theme/appimages/Route.svg"
-                                                                        alt="" class="details-route-image">
+                                                                            alt="" class="details-route-image">
                                                                     </div>
                                                                     <div class="col-md-4 col-4">
                                                                         <div
@@ -1846,12 +1868,13 @@ function formatDate(dateString) {
                                                                         <div class="d-flex gap-2 mt-2">
 
                                                                             <div class="border border-1 text-center p-1"
-                                                                                style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
+                                                                                style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px; white-space: nowrap;">
                                                                                 {{ returnRoute.flight }}-{{
                                                                                     returnRoute.aircraft_name }}</div>
                                                                             <div class="border border-1 text-center p-1"
-                                                                                style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
-                                                                                {{ returnRoute.cabin_class }}
+                                                                                style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px; white-space: nowrap;">
+                                                                                {{ returnRoute.cabin_class }} - {{
+                                                                                    returnRoute.booking_code }}
                                                                             </div>
                                                                         </div>
 
@@ -1980,19 +2003,34 @@ function formatDate(dateString) {
                                                                     <div class="table-responsive">
                                                                         <table class="table table-sm table-striped">
                                                                             <tbody class="text-start">
-                                                                                <tr>
-                                                                                    <td>Adults: 2x৳30000
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        ৳60000
-                                                                                    </td>
-                                                                                </tr>
 
-                                                                                <tr>
-                                                                                    <td>Childs: 2x৳20000
+                                                                                <tr v-for="itemPrice in flight.outbound.priceBreakdown"
+                                                                                    style="font-size: 10px;">
+                                                                                    <td>{{ itemPrice.type }}: <span
+                                                                                            v-if="itemPrice.type == 'Adult'">{{
+                                                                                                form.ADT }}</span>
+                                                                                        <span
+                                                                                            v-if="itemPrice.type == 'Child'">{{
+                                                                                                form.CNN }}</span>
+                                                                                        <span v-if="itemPrice.type == 'Infant'">{{
+                                                                                            form.INF }}</span>
+                                                                                        x {{
+                                                                                            itemPrice.baseFare }}
                                                                                     </td>
                                                                                     <td>
-                                                                                        ৳40000
+
+                                                                                        <span
+                                                                                            v-if="itemPrice.type == 'Adult'">BDT {{ form.ADT *
+                                                                                            itemPrice.baseFare }}</span>
+                                                                                        <span
+                                                                                            v-if="itemPrice.type == 'Child'">BDT {{ form.CNN *
+                                                                                            itemPrice.baseFare }}</span>
+                                                                                        <span v-if="itemPrice.type == 'Infant'">BDT {{ form.INF *
+                                                                                            itemPrice.baseFare }}</span>
+
+
+
+
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -2005,77 +2043,43 @@ function formatDate(dateString) {
                                                                             TAX
                                                                         </span>
                                                                     </div>
+
                                                                     <div class="table-responsive">
                                                                         <table class="table table-sm table-striped ">
                                                                             <tbody class="text-start">
-                                                                                <tr>
-                                                                                    <td>Adults: 2x৳5000</td>
+                                                                                <tr v-for="itemPrice in flight.outbound.priceBreakdown"
+                                                                                    style="font-size: 10px;">
+                                                                                    <td> {{ itemPrice.type }}:
+                                                                                        <span
+                                                                                            v-if="itemPrice.type == 'Adult'">{{
+                                                                                                form.ADT }}</span>
+                                                                                        <span
+                                                                                            v-if="itemPrice.type == 'Child'"> {{
+                                                                                                form.CNN }}</span>
+                                                                                        <span v-if="itemPrice.type == 'Infant'">{{
+                                                                                            form.INF }}</span>
+                                                                                        x {{ itemPrice.taxes
+                                                                                        }}</td>
                                                                                     <td>
-                                                                                        ৳10000
+                                                                                        <span
+                                                                                            v-if="itemPrice.type == 'Adult'">BDT {{ form.ADT *
+                                                                                            itemPrice.taxes }}</span>
+                                                                                        <span
+                                                                                            v-if="itemPrice.type == 'Child'"> BDT {{ form.CNN *
+                                                                                            itemPrice.taxes }}</span>
+                                                                                        <span v-if="itemPrice.type == 'Infant'">BDT {{ form.INF *
+                                                                                            itemPrice.taxes }}</span>
+
+
                                                                                     </td>
 
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Childs: 2x৳2000</td>
-                                                                                    <td>
-                                                                                        ৳4000
-                                                                                    </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
 
-                                                                    <div
-                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
-                                                                        <span class="custom-text-purple">
-                                                                            AIT
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-sm table-striped ">
-                                                                            <tbody class="text-start">
-                                                                                <tr>
-                                                                                    <td>Adults: 2x৳1275</td>
-                                                                                    <td>
-                                                                                        ৳2550
-                                                                                    </td>
 
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Childs: 2x৳870</td>
-                                                                                    <td>
-                                                                                        ৳1740
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
 
-                                                                    <div
-                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
-                                                                        <span class="custom-text-purple">
-                                                                            Service Charge
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-sm table-striped ">
-                                                                            <tbody class="text-start">
-                                                                                <tr>
-                                                                                    <td>Adults: 2x৳1275</td>
-                                                                                    <td>
-                                                                                        ৳2550
-                                                                                    </td>
-
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Childs: 2x৳870</td>
-                                                                                    <td>
-                                                                                        ৳1740
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2177,7 +2181,8 @@ function formatDate(dateString) {
         height: 70px;
         width: 70px;
     }
-    .mobile-chip{
+
+    .mobile-chip {
         margin-left: 35px;
     }
 }
