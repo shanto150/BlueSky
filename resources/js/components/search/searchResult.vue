@@ -308,7 +308,7 @@ function showRouteDetails(info) {
     $('.flight-tab-active').toggleClass('d-none', isActive);
 }
 
-function formatDate (dateString) {
+function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'short',
@@ -789,23 +789,22 @@ function formatDate (dateString) {
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-clock custom-text-purple">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polyline points="12 6 12 12 16 14"></polyline>
-                                </svg>
+                                <img src="../../../../public/theme/animation/Session_Timer.gif" height="36" width="36"
+                                    alt="">
                                 &nbsp;&nbsp;
-                                <span class="pt-1" style="font-size: 13px;">Book Flight within</span>
+                                <span class="pt-2" style="font-size: 12px; margin-top: 4px;"><b>Book Flight
+                                        within</b></span>
                                 &nbsp; &nbsp;
-                                <div class="dash-lable bg-light-primary custom-text-purple rounded-1">
-                                    <p class="text-black mb-0">30</p>
+                                <div class="dash-lable bg-light-primary custom-text-purple rounded-1"
+                                    style="padding-top: 8px;">
+                                    <p class="text-black mb-0" style="font-weight: 600;">30</p>
                                 </div>
                                 &nbsp;
-                                <div class="ml-1 mr-1">:</div>
+                                <div class="ml-1 mr-1" style="margin-top: 9px;"><b>:</b></div>
                                 &nbsp;
-                                <div class="dash-lable bg-light-primary custom-text-purple rounded-1">
-                                    <p class="text-black mb-0">00</p>
+                                <div class="dash-lable bg-light-primary custom-text-purple rounded-1"
+                                    style="padding-top: 8px;">
+                                    <p class="text-black mb-0" style="font-weight: 600;">00</p>
                                 </div>
                             </div>
                         </div>
@@ -814,13 +813,16 @@ function formatDate (dateString) {
 
                 <div class="col-md-12">
                     <!-- price-range -->
+
                     <div class="accordion" id="price-range">
                         <div class="accordion-item">
                             <p class="accordion-header" id="headingOne">
-                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
-                                    aria-controls="collapseOne">
-                                    Price Range
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                    <span style="float:left;">
+                                        <span style="font-size: 13px;">Price Range</span>
+                                    </span>
                                 </button>
                             </p>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
@@ -829,11 +831,12 @@ function formatDate (dateString) {
                                     <div class="slider-cont">
                                         <CustomMinMaxSlider :min="65" :max="368" v-model:min-value="sliderMin"
                                             v-model:max-value="sliderMax" />
-                                        <p class="text-center mb-0"> <i class="fa fa-bangladeshi-taka-sign"></i> {{
-                                            sliderMin }} - <i class="fa fa-bangladeshi-taka-sign"></i> {{ sliderMax }}
+                                        <p class="text-center mb-0"> BDT {{
+                                            sliderMin }} - BDT {{ sliderMax }}
                                         </p>
                                         <div class="text-center p-0">
-                                            <span class="text-danger">*</span> Price may change based on policy
+                                            <span class="text-danger">*</span> Price may change based on
+                                            policy
                                         </div>
                                     </div>
                                 </div>
@@ -846,10 +849,10 @@ function formatDate (dateString) {
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
                             <h6 class="accordion-header" id="headingSix">
-                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
-                                    aria-controls="collapseSix">
-                                    Flight Schedule
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
+                                    aria-expanded="false" aria-controls="collapseSix">
+                                    <span style="font-size: 13px;">Flight Schedule</span>
                                 </button>
                             </h6>
                             <div id="collapseSix" class="accordion-collapse collapse show" aria-labelledby="headingSix"
@@ -857,84 +860,101 @@ function formatDate (dateString) {
                                 <div class="accordion-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="d-flex gap-2">
+                                            <div class="d-flex gap-2 border p-1">
                                                 <button type="button"
-                                                    class="btn bluesky-btn-primary w-100">Departure</button>
+                                                    class="btn btn-sm bluesky-route-btn-primary w-100">Departure</button>
                                                 <button type="button"
-                                                    class="btn bluesky-btn-outline-primary w-100">Arrival</button>
+                                                    class="btn btn-sm px-0 py-0 btn-sm-size bluesky-btn-outline-primary w-100">Arrival</button>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mt-2">
                                             <div class="d-flex gap-2">
-                                                <div
-                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-sunrise custom-text-purple">
-                                                        <path d="M17 18a5 5 0 0 0-10 0"></path>
-                                                        <line x1="12" y1="2" x2="12" y2="9"></line>
-                                                        <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
-                                                        <line x1="1" y1="18" x2="3" y2="18"></line>
-                                                        <line x1="21" y1="18" x2="23" y2="18"></line>
-                                                        <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
-                                                        <line x1="23" y1="22" x2="1" y2="22"></line>
-                                                        <polyline points="8 6 12 2 16 6"></polyline>
-                                                    </svg>
+                                                <div style="background: linear-gradient(180deg, rgba(135, 160, 174, 0.50) 0%, rgba(208, 200, 187, 0.30) 50%, rgba(254, 191, 84, 0.20) 100%); height: 70px !important; min-width: 55px !important;"
+                                                    class="p-1 border border-1 text-center rounded rounded-1 accorion-item-title-color cursor-pointer">
+
+                                                    <img src="../../../../public/theme/animation/Sun_Rise.gif"
+                                                        style="width: 42px;" alt="">
                                                     <br>
-                                                    <span style="font-size: 8px; font-weight: bold;">00-06 AM</span>
+                                                    <span style="font-size: 8px; font-weight: bold;">00-06
+                                                        AM</span>
                                                 </div>
-                                                <div
-                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-sun custom-text-purple">
-                                                        <circle cx="12" cy="12" r="5"></circle>
-                                                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                                                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                                                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                                                    </svg>
+                                                <div style="background: linear-gradient(180deg, rgba(255, 240.15, 143.65, 0.50) 0%, rgba(221.85, 201.52, 51.76, 0.30) 53%, rgba(187.85, 164.39, 11.90, 0.20) 100%); height: 70px !important; min-width: 55px;"
+                                                    class="p-1 border border-1 text-center rounded rounded-1 accorion-item-title-color cursor-pointer">
+                                                    <img src="../../../../public/theme/animation/Noon.gif"
+                                                        style="width: 42px;" alt="">
                                                     <br>
-                                                    <span style="font-size: 8px; font-weight: bold;">06-12 PM</span>
+                                                    <span style="font-size: 8px; font-weight: bold;">06-12
+                                                        PM</span>
                                                 </div>
 
-                                                <div
-                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-sunset custom-text-purple">
-                                                        <path d="M17 18a5 5 0 0 0-10 0"></path>
-                                                        <line x1="12" y1="9" x2="12" y2="2"></line>
-                                                        <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
-                                                        <line x1="1" y1="18" x2="3" y2="18"></line>
-                                                        <line x1="21" y1="18" x2="23" y2="18"></line>
-                                                        <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
-                                                        <line x1="23" y1="22" x2="1" y2="22"></line>
-                                                        <polyline points="16 5 12 9 8 5"></polyline>
-                                                    </svg>
+                                                <div style="background: linear-gradient(180deg, rgba(40.98, 55.67, 121.12, 0.50) 0%, rgba(110, 87, 100, 0.30) 52%, rgba(230, 141, 91, 0.20) 100%); height: 70px !important; min-width: 55px;"
+                                                    class="p-1 border border-1 text-center rounded rounded-1 accorion-item-title-color cursor-pointer">
+                                                    <img src="../../../../public/theme/animation/Sun_Set.gif"
+                                                        style="width: 32px; margin-bottom: 11px;" alt="">
                                                     <br>
-                                                    <span style="font-size: 8px; font-weight: bold;">12-06 PM</span>
+                                                    <span style="font-size: 8px; font-weight: bold;">12-06
+                                                        PM</span>
                                                 </div>
-                                                <div
-                                                    class="p-1 border border-1 text-center rounded rounded-1 bg-body-secondary cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-moon custom-text-purple">
-                                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z">
-                                                        </path>
-                                                    </svg>
+                                                <div style="background: linear-gradient(182deg, #081627 0%, rgba(0, 66.30, 132.60, 0.40) 55%, rgba(157.25, 227.55, 255, 0.60) 100%); height: 70px !important; min-width: 55px;"
+                                                    class="p-1 border border-1 text-center rounded rounded-1 accorion-item-title-color cursor-pointer">
+                                                    <img src="../../../../public/theme/animation/Night.gif"
+                                                        style="width: 35px; margin-bottom: 8px;" alt="">
+
                                                     <br>
-                                                    <span style="font-size: 8px; font-weight: bold;">06-12 AM</span>
+                                                    <span style="font-size: 8px; font-weight: bold;">06-12
+                                                        AM</span>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- airlines -->
+                    <div class="accordion" id="arilines">
+                        <div class="accordion-item mt-3">
+                            <h6 class="accordion-header" id="headingfour">
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                    aria-expanded="false" aria-controls="collapseFour">
+                                    <span class="" style="font-size: 13px;">Airlines</span>
+                                </button>
+                            </h6>
+                            <div id="collapseFour" class="accordion-collapse collapse show"
+                                aria-labelledby="headingfour" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <div class="d-flex">
+                                            <div class="bd-highlight">Emirates</div>
+                                            <div class="ms-auto bd-highlight total-flight-from">05</div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+
+                                        <div class="d-flex">
+                                            <div class="bd-highlight">Qatar Airways</div>
+                                            <div class="ms-auto bd-highlight total-flight-from">02</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+
+                                        <div class="d-flex">
+                                            <div class="bd-highlight">US-Bangla</div>
+                                            <div class="ms-auto bd-highlight total-flight-from">02</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <div class="d-flex">
+                                            <div class="bd-highlight">Biman Bangladesh</div>
+                                            <div class="ms-auto bd-highlight total-flight-from">02</div>
                                         </div>
                                     </div>
                                 </div>
@@ -946,10 +966,12 @@ function formatDate (dateString) {
                     <div class="accordion" id="stop">
                         <div class="accordion-item mt-3">
                             <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                                    aria-controls="collapseTwo">
-                                    Stop
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+
+                                    <span class="" style="font-size: 13px;">Stop
+                                    </span>
                                 </button>
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
@@ -982,10 +1004,11 @@ function formatDate (dateString) {
                     <div class="accordion" id="refund">
                         <div class="accordion-item mt-3">
                             <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
-                                    aria-controls="collapseThree">
-                                    Refund Availability
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                    aria-expanded="false" aria-controls="collapseThree">
+
+                                    <span style="font-size: 13px;">Refund Availability</span>
                                 </button>
                             </h2>
                             <div id="collapseThree" class="accordion-collapse collapse show"
@@ -1014,57 +1037,16 @@ function formatDate (dateString) {
                         </div>
                     </div>
 
-                    <!-- airlines -->
-                    <div class="accordion" id="arilines">
-                        <div class="accordion-item mt-3">
-                            <h6 class="accordion-header" id="headingfour">
-                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
-                                    aria-controls="collapseFour">
-                                    Airlines
-                                </button>
-                            </h6>
-                            <div id="collapseFour" class="accordion-collapse collapse show"
-                                aria-labelledby="headingfour" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Emirates
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Qatar Airways
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Us-Bangla Airlines
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Biman Bangladesh
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Class -->
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
                             <h6 class="accordion-header" id="headingFive">
-                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
-                                    aria-controls="collapseFive">
-                                    Class
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
+                                    aria-expanded="false" aria-controls="collapseFive">
+
+                                    <span style="font-size: 13px;">Class</span>
+
                                 </button>
                             </h6>
                             <div id="collapseFive" class="accordion-collapse collapse show"
@@ -1104,10 +1086,12 @@ function formatDate (dateString) {
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
                             <h2 class="accordion-header" id="headingSeven">
-                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false"
-                                    aria-controls="collapseSeven">
-                                    Baggage
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven"
+                                    aria-expanded="false" aria-controls="collapseSeven">
+
+                                    <span style="font-size: 13px;">Baggage</span>
+
                                 </button>
                             </h2>
                             <div id="collapseSeven" class="accordion-collapse collapse show"
@@ -1147,10 +1131,12 @@ function formatDate (dateString) {
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
                             <h6 class="accordion-header" id="headingEight">
-                                <button class="accordion-button bg-body-secondary m-0 p-0 px-2 py-1" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false"
-                                    aria-controls="collapseEight">
-                                    Layover
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight"
+                                    aria-expanded="false" aria-controls="collapseEight">
+
+                                    <span style="font-size: 13px;">Layover</span>
+
                                 </button>
                             </h6>
                             <div id="collapseEight" class="accordion-collapse collapse show"
@@ -1206,285 +1192,298 @@ function formatDate (dateString) {
                     <hr>
                 </div>
 
-                <div  v-for="(flight, index) in flights" :key="index" class="col-md-12">
+                <div v-for="(flight, index) in flights" :key="index" class="col-md-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
 
-                                        <!-- outbound start-->
-                                        <div class="row" v-if="flight.outbound">
-                                            <div class="col-md-10 col-sm-12">
-                                                <div class="row">
-                                                    <div class="col-md-4 col-sm-3 p-0">
-                                                        <div class="d-flex flex-row">
-                                                            <div class="p-1">
-                                                                <img :src="flight.outbound.first_logo_path" height="50" width="50">
-                                                            </div>
-                                                            <div class="pt-1 ps-2">
-                                                                <div
-                                                                    class="d-flex justify-content-center align-items-center h-100 w-100">
-                                                                    <div>
-                                                                        <div class="text-black"><b>{{ flight.outbound.origin }}-{{
-                                                                            flight.outbound.destination }}</b>
-                                                                        </div>
-                                                                        <div style="font-size: 11px; color: #8327a4">
-                                                                            {{ flight.outbound.first_carrier_code }} | {{ flight.outbound.first_airline_name }}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                    <!-- outbound start-->
+                                    <div class="row" v-if="flight.outbound">
+                                        <div class="col-md-10 col-sm-12">
+                                            <div class="row">
+                                                <div class="col-md-4 col-sm-3 p-0">
+                                                    <div class="d-flex flex-row">
+                                                        <div class="p-1">
+                                                            <img :src="flight.outbound.first_logo_path" height="50"
+                                                                width="50">
                                                         </div>
-
-                                                    </div>
-                                                    <div class="col-md-8 col-12 border-start border-end">
-                                                        <div class="row p-2">
-                                                            <div class="col-md-4 col-4">
-                                                                <div
-                                                                    class="d-block justify-content-center align-items-center h-100 w-100">
-                                                                    <div class="text-black"><b>{{ flight.outbound.departure_time }}</b>
+                                                        <div class="pt-1 ps-2">
+                                                            <div
+                                                                class="d-flex justify-content-center align-items-center h-100 w-100">
+                                                                <div>
+                                                                    <div class="text-black"><b>{{ flight.outbound.origin
+                                                                            }}-{{
+                                                                                flight.outbound.destination }}</b>
                                                                     </div>
-                                                                    <div>
-                                                                        <small style="font-size: 12px; color: #5e6878;">
-                                                                            {{ formatDate(flight.outbound.departure_date) }}
-                                                                        </small>
-                                                                    </div>
-                                                                    <div>
-                                                                        <small
-                                                                            style="font-size: 12px; color: #5e6878;">Departure</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 col-4">
-                                                                <div class="d-block">
-                                                                    <div> <small class="ps-2"
-                                                                            style="font-size: 11px; color: #5e6878;">{{ flight.outbound.total_flight_time }}</small></div>
-
-
-                                                                    <div class="d-flex">
-                                                                        <div class="text-black">
-                                                                            <img src="../../../../public/theme/appimages/Left_Aligned Line.svg"
-                                                                                alt="">
-                                                                        </div>
-                                                                        <div>
-                                                                            <img style="transform: rotate(45deg)"
-                                                                                src="../../../../public/theme/animation/Route_Aircraft.gif"
-                                                                                alt="" height="23" width="23">
-                                                                        </div>
-                                                                        <div class="text-black">
-                                                                            <img src="../../../../public/theme/appimages/Right_Aligned Line.svg"
-                                                                                alt="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-                                                                    <div class="d-flex ps-2">
-                                                                        <img title="Layover at Kolkata | 2H 25 Min"
-                                                                            src="../../../../public/theme/appimages/Layover.svg"
-                                                                            alt="">
-                                                                        <div class="text-black"
-                                                                            style="transform: skewY(5deg);">
-                                                                            ....
-                                                                        </div>
-                                                                        <img src="../../../../public/theme/appimages/Layover.svg"
-                                                                            alt="">
-                                                                        <div class="text-black"
-                                                                            style="transform: skewY(175deg);">
-                                                                            ....
-                                                                        </div>
-                                                                        <img src="../../../../public/theme/appimages/Layover.svg"
-                                                                            alt="">
-
-                                                                    </div>
-                                                                    <div class="d-flex ps-2">
-                                                                        <span
-                                                                            style="font-size: 7px; color: #5e6878;">CCU</span>
-                                                                        &nbsp; &nbsp; &nbsp;
-                                                                        <span
-                                                                            style="font-size: 7px; color: #5e6878;">DEL</span>
-                                                                        &nbsp; &nbsp;
-                                                                        <span
-                                                                            style="font-size: 7px; color: #5e6878;">DXB</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 col-4">
-                                                                <div
-                                                                    class="d-block justify-content-center align-items-center h-100 w-100">
-                                                                    <div class="text-black"><b>{{ flight.outbound.arrival_time }}</b>
-                                                                    </div>
-                                                                    <div>
-                                                                        <small
-                                                                            style="font-size: 12px; color: #5e6878;"> {{formatDate(flight.outbound.arrival_date) }}</small>
-                                                                    </div>
-                                                                    <div>
-                                                                        <small
-                                                                            style="font-size: 12px; color: #5e6878;">Arrival</small>
+                                                                    <div style="font-size: 11px; color: #8327a4">
+                                                                        {{ flight.outbound.first_carrier_code }} | {{
+                                                                        flight.outbound.first_airline_name }}
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
-                                            </div>
-
-                                            <div class="col-12 col-sm-12 col-md-2 d-none d-md-block">
-
-                                                <div class="d-grid">
-                                                    <button class="btn btn-sm bluesky-btn-primary"
-                                                        data-bs-toggle="collapse" data-bs-target="#flight-package-2"
-                                                        aria-controls="flight-package-2">
-
-                                                        <div class="text-right">
-                                                            <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{ flight.outbound.totalPrice }}</b></p>
-                                                            <!-- <small style="color: #dbdbdb"><del>
-                                                                    BDT 77000</del></small> -->
-                                                            <small style="font-size: 10px;">Economy Class</small>
+                                                <div class="col-md-8 col-12 border-start border-end">
+                                                    <div class="row p-2">
+                                                        <div class="col-md-4 col-4">
+                                                            <div
+                                                                class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                <div class="text-black"><b>{{
+                                                                        flight.outbound.departure_time }}</b>
+                                                                </div>
+                                                                <div>
+                                                                    <small style="font-size: 12px; color: #5e6878;">
+                                                                        {{ formatDate(flight.outbound.departure_date) }}
+                                                                    </small>
+                                                                </div>
+                                                                <div>
+                                                                    <small
+                                                                        style="font-size: 12px; color: #5e6878;">Departure</small>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </button>
+                                                        <div class="col-md-4 col-4">
+                                                            <div class="d-block">
+                                                                <div> <small class="ps-2"
+                                                                        style="font-size: 11px; color: #5e6878;">{{
+                                                                        flight.outbound.total_flight_time }}</small>
+                                                                </div>
+
+
+                                                                <div class="d-flex">
+                                                                    <div class="text-black">
+                                                                        <img src="../../../../public/theme/appimages/Left_Aligned Line.svg"
+                                                                            alt="">
+                                                                    </div>
+                                                                    <div>
+                                                                        <img style="transform: rotate(45deg)"
+                                                                            src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                            alt="" height="23" width="23">
+                                                                    </div>
+                                                                    <div class="text-black">
+                                                                        <img src="../../../../public/theme/appimages/Right_Aligned Line.svg"
+                                                                            alt="">
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                                <div class="d-flex ps-2">
+                                                                    <img title="Layover at Kolkata | 2H 25 Min"
+                                                                        src="../../../../public/theme/appimages/Layover.svg"
+                                                                        alt="">
+                                                                    <div class="text-black"
+                                                                        style="transform: skewY(5deg);">
+                                                                        ....
+                                                                    </div>
+                                                                    <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                        alt="">
+                                                                    <div class="text-black"
+                                                                        style="transform: skewY(175deg);">
+                                                                        ....
+                                                                    </div>
+                                                                    <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                        alt="">
+
+                                                                </div>
+                                                                <div class="d-flex ps-2">
+                                                                    <span
+                                                                        style="font-size: 7px; color: #5e6878;">CCU</span>
+                                                                    &nbsp; &nbsp; &nbsp;
+                                                                    <span
+                                                                        style="font-size: 7px; color: #5e6878;">DEL</span>
+                                                                    &nbsp; &nbsp;
+                                                                    <span
+                                                                        style="font-size: 7px; color: #5e6878;">DXB</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-4">
+                                                            <div
+                                                                class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                <div class="text-black"><b>{{
+                                                                        flight.outbound.arrival_time }}</b>
+                                                                </div>
+                                                                <div>
+                                                                    <small style="font-size: 12px; color: #5e6878;">
+                                                                        {{ formatDate(flight.outbound.arrival_date)
+                                                                        }}</small>
+                                                                </div>
+                                                                <div>
+                                                                    <small
+                                                                        style="font-size: 12px; color: #5e6878;">Arrival</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- outbound end -->
 
-                                        <!-- inbound start -->
-                                        <div class="row" v-if="flight.inbound">
-                                            <div class="col-md-10 col-sm-12 border-top mt-3">
-                                                <div class="row mt-3">
-                                                    <div class="col-md-4 col-sm-3 p-0">
-                                                        <div class="d-flex flex-row">
-                                                            <div class="p-1">
-                                                                <img :src="flight.inbound.first_logo_path"
-                                                                    height="50" width="50">
-                                                            </div>
-                                                            <div class="pt-1 ps-2">
-                                                                <div
-                                                                    class="d-flex justify-content-center align-items-center h-100 w-100">
-                                                                    <div>
-                                                                        <div class="text-black"><b>{{ flight.inbound.origin }} - {{ flight.inbound.destination }}</b>
-                                                                        </div>
-                                                                        <div style="font-size: 11px; color: #8327a4">
-                                                                            {{ flight.inbound.first_carrier_code }} | {{ flight.inbound.first_airline_name }}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-2 d-none d-md-block">
 
-                                                    </div>
-                                                    <div class="col-md-8 col-12 border-start border-end">
-                                                        <div class="row p-2">
-                                                            <div class="col-md-4 col-4">
-                                                                <div
-                                                                    class="d-block justify-content-center align-items-center h-100 w-100">
-                                                                    <div class="text-black"><b>{{ flight.inbound.departure_time }}</b>
-                                                                    </div>
-                                                                    <div>
-                                                                        <small
-                                                                            style="font-size: 12px; color: #5e6878;">{{ formatDate(flight.inbound.departure_date) }}</small>
-                                                                    </div>
-                                                                    <div>
-                                                                        <small
-                                                                            style="font-size: 12px; color: #5e6878;">Departure</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 col-4">
-                                                                <div class="d-block">
-                                                                    <div> <small class="ps-2"
-                                                                            style="font-size: 11px; color: #5e6878;">{{ flight.inbound.total_flight_time }}</small></div>
+                                            <div class="d-grid">
+                                                <button class="btn btn-sm bluesky-btn-primary" data-bs-toggle="collapse"
+                                                    data-bs-target="#flight-package-2" aria-controls="flight-package-2">
 
-
-                                                                    <div class="d-flex">
-                                                                        <div class="text-black">
-                                                                            <img src="../../../../public/theme/appimages/Left_Aligned Line.svg"
-                                                                                alt="">
-                                                                        </div>
-                                                                        <div>
-                                                                            <img style="transform: rotate(225deg)"
-                                                                                src="../../../../public/theme/animation/Route_Aircraft.gif"
-                                                                                alt="" height="23" width="23">
-                                                                        </div>
-                                                                        <div class="text-black">
-                                                                            <img src="../../../../public/theme/appimages/Right_Aligned Line.svg"
-                                                                                alt="">
-                                                                        </div>
-
-
-                                                                    </div>
-
-                                                                    <div class="d-flex ps-2">
-                                                                        <img title="Layover at Kolkata | 2H 25 Min"
-                                                                            src="../../../../public/theme/appimages/Layover.svg"
-                                                                            alt="">
-                                                                        <div class="text-black"
-                                                                            style="transform: skewY(5deg);">
-                                                                            ....
-                                                                        </div>
-                                                                        <img src="../../../../public/theme/appimages/Layover.svg"
-                                                                            alt="">
-                                                                        <div class="text-black"
-                                                                            style="transform: skewY(175deg);">
-                                                                            ....
-                                                                        </div>
-                                                                        <img src="../../../../public/theme/appimages/Layover.svg"
-                                                                            alt="">
-
-                                                                    </div>
-                                                                    <div class="d-flex ps-2">
-                                                                        <span
-                                                                            style="font-size: 7px; color: #5e6878;">CCU</span>
-                                                                        &nbsp; &nbsp; &nbsp;
-                                                                        <span
-                                                                            style="font-size: 7px; color: #5e6878;">DEL</span>
-                                                                        &nbsp; &nbsp;
-                                                                        <span
-                                                                            style="font-size: 7px; color: #5e6878;">DXB</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4 col-4">
-                                                                <div
-                                                                    class="d-block justify-content-center align-items-center h-100 w-100">
-                                                                    <div class="text-black"><b>10:50 AM</b>
-                                                                    </div>
-                                                                    <div>
-                                                                        <small
-                                                                            style="font-size: 12px; color: #5e6878;">03
-                                                                            Jan,
-                                                                            Fri</small>
-                                                                    </div>
-                                                                    <div>
-                                                                        <small
-                                                                            style="font-size: 12px; color: #5e6878;">Departure</small>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 col-sm-12 col-md-2 d-sm-block d-md-none">
-
-                                                <div class="d-grid">
-                                                    <button class="btn btn-sm bluesky-btn-primary"
-                                                        data-bs-toggle="collapse" data-bs-target="#flight-package-2"
-                                                        aria-controls="flight-package-2">
-
-                                                        <div class="text-right">
-                                                            <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{ flight.outbound.totalPrice }}</b></p>
-                                                            <!-- <small style="color: #dbdbdb"><del>
+                                                    <div class="text-right">
+                                                        <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{
+                                                                flight.outbound.totalPrice }}</b></p>
+                                                        <!-- <small style="color: #dbdbdb"><del>
                                                                     BDT 77000</del></small> -->
-                                                            <small style="font-size: 10px;">Economy Class</small>
-                                                        </div>
-                                                    </button>
-                                                </div>
+                                                        <small style="font-size: 10px;">Economy Class</small>
+                                                    </div>
+                                                </button>
                                             </div>
                                         </div>
-                                        <!-- inbound end -->
+                                    </div>
+                                    <!-- outbound end -->
+
+                                    <!-- inbound start -->
+                                    <div class="row" v-if="flight.inbound">
+                                        <div class="col-md-10 col-sm-12 border-top mt-3">
+                                            <div class="row mt-3">
+                                                <div class="col-md-4 col-sm-3 p-0">
+                                                    <div class="d-flex flex-row">
+                                                        <div class="p-1">
+                                                            <img :src="flight.inbound.first_logo_path" height="50"
+                                                                width="50">
+                                                        </div>
+                                                        <div class="pt-1 ps-2">
+                                                            <div
+                                                                class="d-flex justify-content-center align-items-center h-100 w-100">
+                                                                <div>
+                                                                    <div class="text-black"><b>{{ flight.inbound.origin
+                                                                            }} - {{ flight.inbound.destination }}</b>
+                                                                    </div>
+                                                                    <div style="font-size: 11px; color: #8327a4">
+                                                                        {{ flight.inbound.first_carrier_code }} | {{
+                                                                        flight.inbound.first_airline_name }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-8 col-12 border-start border-end">
+                                                    <div class="row p-2">
+                                                        <div class="col-md-4 col-4">
+                                                            <div
+                                                                class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                <div class="text-black"><b>{{
+                                                                        flight.inbound.departure_time }}</b>
+                                                                </div>
+                                                                <div>
+                                                                    <small style="font-size: 12px; color: #5e6878;">{{
+                                                                        formatDate(flight.inbound.departure_date)
+                                                                        }}</small>
+                                                                </div>
+                                                                <div>
+                                                                    <small
+                                                                        style="font-size: 12px; color: #5e6878;">Departure</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-4">
+                                                            <div class="d-block">
+                                                                <div> <small class="ps-2"
+                                                                        style="font-size: 11px; color: #5e6878;">{{
+                                                                        flight.inbound.total_flight_time }}</small>
+                                                                </div>
+
+
+                                                                <div class="d-flex">
+                                                                    <div class="text-black">
+                                                                        <img src="../../../../public/theme/appimages/Left_Aligned Line.svg"
+                                                                            alt="">
+                                                                    </div>
+                                                                    <div>
+                                                                        <img style="transform: rotate(225deg)"
+                                                                            src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                            alt="" height="23" width="23">
+                                                                    </div>
+                                                                    <div class="text-black">
+                                                                        <img src="../../../../public/theme/appimages/Right_Aligned Line.svg"
+                                                                            alt="">
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                                <div class="d-flex ps-2">
+                                                                    <img title="Layover at Kolkata | 2H 25 Min"
+                                                                        src="../../../../public/theme/appimages/Layover.svg"
+                                                                        alt="">
+                                                                    <div class="text-black"
+                                                                        style="transform: skewY(5deg);">
+                                                                        ....
+                                                                    </div>
+                                                                    <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                        alt="">
+                                                                    <div class="text-black"
+                                                                        style="transform: skewY(175deg);">
+                                                                        ....
+                                                                    </div>
+                                                                    <img src="../../../../public/theme/appimages/Layover.svg"
+                                                                        alt="">
+
+                                                                </div>
+                                                                <div class="d-flex ps-2">
+                                                                    <span
+                                                                        style="font-size: 7px; color: #5e6878;">CCU</span>
+                                                                    &nbsp; &nbsp; &nbsp;
+                                                                    <span
+                                                                        style="font-size: 7px; color: #5e6878;">DEL</span>
+                                                                    &nbsp; &nbsp;
+                                                                    <span
+                                                                        style="font-size: 7px; color: #5e6878;">DXB</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-4">
+                                                            <div
+                                                                class="d-block justify-content-center align-items-center h-100 w-100">
+                                                                <div class="text-black"><b>10:50 AM</b>
+                                                                </div>
+                                                                <div>
+                                                                    <small style="font-size: 12px; color: #5e6878;">03
+                                                                        Jan,
+                                                                        Fri</small>
+                                                                </div>
+                                                                <div>
+                                                                    <small
+                                                                        style="font-size: 12px; color: #5e6878;">Departure</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-sm-12 col-md-2 d-sm-block d-md-none">
+
+                                            <div class="d-grid">
+                                                <button class="btn btn-sm bluesky-btn-primary" data-bs-toggle="collapse"
+                                                    data-bs-target="#flight-package-2" aria-controls="flight-package-2">
+
+                                                    <div class="text-right">
+                                                        <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{
+                                                                flight.outbound.totalPrice }}</b></p>
+                                                        <!-- <small style="color: #dbdbdb"><del>
+                                                                    BDT 77000</del></small> -->
+                                                        <small style="font-size: 10px;">Economy Class</small>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- inbound end -->
 
                                 </div>
                             </div>
@@ -1519,8 +1518,7 @@ function formatDate (dateString) {
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="flush-headingOne">
                                                 <a class="accordion-button custom-text-purple collapsed m-0 p-0 px-2 py-2"
-
-                                                :data-bs-target="'#flight-details-' + index"
+                                                    :data-bs-target="'#flight-details-' + index"
                                                     :aria-controls="'flight-details-' + index" data-bs-toggle="collapse"
                                                     aria-expanded="false"
                                                     style=" font-size: 12px; background: #f1f4f7 !important;">
@@ -1535,8 +1533,8 @@ function formatDate (dateString) {
                     </div>
 
                     <!-- flight details2 -->
-                    <div :id="`flight-details-${index}`" class="accordion-collapse collapse m-0" aria-labelledby="flush-headingOne"
-                        data-bs-parent="#accordionFlushExample" style="">
+                    <div :id="`flight-details-${index}`" class="accordion-collapse collapse m-0"
+                        aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" style="">
                         <div class="accordion-body">
                             <div class="card">
                                 <div class="card-body">
@@ -1582,15 +1580,20 @@ function formatDate (dateString) {
                                                     <div class="d-flex d-flex-row mb-1">
                                                         <div v-if="flight.outbound" class="p-1 bd-highlight">
                                                             <button @click="showRouteDetails(1)"
-                                                                class="btn btn-sm bluesky-route-btn-primary active-btn px-2 py-1">{{ flight.outbound.origin }}-{{ flight.outbound.destination }}</button>
+                                                                class="btn btn-sm bluesky-route-btn-primary active-btn px-2 py-1">{{
+                                                                flight.outbound.origin }}-{{ flight.outbound.destination
+                                                                }}</button>
                                                         </div>
                                                         <div v-if="flight.inbound" class="p-1 bd-highlight">
                                                             <button @click="showRouteDetails(2)"
-                                                                class="btn btn-sm bluesky-route-btn-outline-primary deactive-btn px-2 py-1">{{ flight.inbound.origin }}-{{ flight.inbound.destination }}</button>
+                                                                class="btn btn-sm bluesky-route-btn-outline-primary deactive-btn px-2 py-1">{{
+                                                                flight.inbound.origin }}-{{ flight.inbound.destination
+                                                                }}</button>
                                                         </div>
                                                     </div>
 
-                                                    <div v-for="route in flight.outbound.segments" class="flight-tab-active fadeIn">
+                                                    <div v-for="route in flight.outbound.segments"
+                                                        class="flight-tab-active fadeIn">
                                                         <div class="card">
                                                             <div
                                                                 class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
@@ -1605,7 +1608,7 @@ function formatDate (dateString) {
                                                                                     From </span></b>
                                                                             <b><span
                                                                                     class="bluesky-departure-airport-text">
-                                                                                    {{route.Origin_Airport_Name}}
+                                                                                    {{ route.Origin_Airport_Name }}
                                                                                 </span></b>
                                                                         </small>
                                                                     </div>
@@ -1627,8 +1630,11 @@ function formatDate (dateString) {
                                                                             </div>
                                                                             <div>
                                                                                 <small style="font-size: 13px;"
-                                                                                    class="text-black"><b>{{ route.departure_time }} |</b></small>
-                                                                                <span style="font-size: 11px;">{{formatDate(route.departure_date)}}</span>
+                                                                                    class="text-black"><b>{{
+                                                                                        route.departure_time }}
+                                                                                        |</b></small>
+                                                                                <span
+                                                                                    style="font-size: 11px;">{{ formatDate(route.departure_date) }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1650,13 +1656,18 @@ function formatDate (dateString) {
                                                                             </div>
                                                                             <div>
                                                                                 <small style="font-size: 13px;"
-                                                                                    class="text-black"><b>{{ route.arrival_time }} |</b></small>
-                                                                                <span style="font-size: 11px;">{{ formatDate(route.arrival_date) }}</span>
+                                                                                    class="text-black"><b>{{
+                                                                                        route.arrival_time }}
+                                                                                        |</b></small>
+                                                                                <span style="font-size: 11px;">{{
+                                                                                    formatDate(route.arrival_date)
+                                                                                    }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
                                                                                     style="font-size: 12px; color: #5e6878;">Terminal:
-                                                                                    {{ route.destinationTerminal }}</small>
+                                                                                    {{ route.destinationTerminal
+                                                                                    }}</small>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1669,10 +1680,11 @@ function formatDate (dateString) {
 
                                                                             <div class="border border-1 text-center p-1"
                                                                                 style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
-                                                                                {{ route.flight }}- {{ route.aircraft_name }}</div>
+                                                                                {{ route.flight }}- {{
+                                                                                route.aircraft_name }}</div>
                                                                             <div class="border border-1 text-center p-1"
                                                                                 style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
-                                                                                Class: {{ route.cabin_class}}
+                                                                                Class: {{ route.cabin_class }}
                                                                             </div>
                                                                         </div>
 
@@ -1682,10 +1694,10 @@ function formatDate (dateString) {
                                                                         <div class="float-end mt-2">
 
                                                                             <img height="35" width="60"
-                                                                                :src="route.logo_path"
-                                                                                alt="">
+                                                                                :src="route.logo_path" alt="">
                                                                             <span class="pt-2 ms-2 fw-bold"
-                                                                                style="font-size: 11px;">{{ route.airline_name }}</span>
+                                                                                style="font-size: 11px;">{{
+                                                                                route.airline_name }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1701,13 +1713,18 @@ function formatDate (dateString) {
 
                                                                             <span class="bluesky-departure-text">
 
-                                                                                <span v-if="route.lastitem">Reached Destination</span>
+                                                                                <span v-if="route.lastitem">Reached
+                                                                                    Destination</span>
                                                                                 <span v-else>Layover </span>
-                                                                                at  <span
-                                                                                    class="laover-city">{{ route.Destination_City_Name }}  <span v-if="!route.lastitem">- {{ route.layover_time }}</span></span>
+                                                                                at <span class="laover-city">{{
+                                                                                    route.Destination_City_Name }} <span
+                                                                                        v-if="!route.lastitem">- {{
+                                                                                        route.layover_time
+                                                                                        }}</span></span>
                                                                                 | </span>
-                                                                            <span style="font-size: 12px;" class="bluesky-departure-airport-text w-100">
-                                                                                {{route.Destination_Airport_Name}}</span>
+                                                                            <span style="font-size: 12px;"
+                                                                                class="bluesky-departure-airport-text w-100">
+                                                                                {{ route.Destination_Airport_Name }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1715,7 +1732,9 @@ function formatDate (dateString) {
                                                         </div>
                                                     </div>
 
-                                                    <div v-if="flight.inbound" v-for="returnRoute in flight.inbound.segments" class="flight-tab-hide d-none fadeIn">
+                                                    <div v-if="flight.inbound"
+                                                        v-for="returnRoute in flight.inbound.segments"
+                                                        class="flight-tab-hide d-none fadeIn">
                                                         <div class="card">
                                                             <div
                                                                 class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
@@ -1730,7 +1749,8 @@ function formatDate (dateString) {
                                                                                     From </span></b>
                                                                             <b><span
                                                                                     class="bluesky-departure-airport-text">
-                                                                                    {{ returnRoute.Origin_Airport_Name }}
+                                                                                    {{ returnRoute.Origin_Airport_Name
+                                                                                    }}
                                                                                 </span></b>
                                                                         </small>
                                                                     </div>
@@ -1748,17 +1768,20 @@ function formatDate (dateString) {
                                                                             class="d-block justify-content-center align-items-center h-100 w-100">
                                                                             <div class="text-black-"
                                                                                 style="color: #0fb3a6;">
-                                                                                <b>{{ returnRoute.departure_code}}</b>
+                                                                                <b>{{ returnRoute.departure_code }}</b>
                                                                             </div>
                                                                             <div>
                                                                                 <small style="font-size: 13px;"
-                                                                                    class="text-black"><b>{{returnRoute.departure_time}} | </b></small>
-                                                                                <span style="font-size: 11px;">{{formatDate(returnRoute.departure_date)}}</span>
+                                                                                    class="text-black"><b>{{ returnRoute.departure_time }}
+                                                                                        | </b></small>
+                                                                                <span
+                                                                                    style="font-size: 11px;">{{ formatDate(returnRoute.departure_date) }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
                                                                                     style="font-size: 12px; color: #5e6878;">Terminal:
-                                                                                    {{ returnRoute.originTerminal }}</small>
+                                                                                    {{ returnRoute.originTerminal
+                                                                                    }}</small>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1771,18 +1794,20 @@ function formatDate (dateString) {
                                                                             class="d-block justify-content-center align-items-center h-100 w-100">
                                                                             <div class="text-black-"
                                                                                 style="color: #0fb3a6;">
-                                                                                <b>{{ returnRoute.arrival_code}}</b>
+                                                                                <b>{{ returnRoute.arrival_code }}</b>
                                                                             </div>
                                                                             <div>
                                                                                 <small style="font-size: 13px;"
-                                                                                    class="text-black"><b>{{returnRoute.arrival_time}} |</b></small>
+                                                                                    class="text-black"><b>{{ returnRoute.arrival_time }}
+                                                                                        |</b></small>
                                                                                 <span style="font-size: 11px;">
-                                                                                    {{formatDate(returnRoute.arrival_date)}}</span>
+                                                                                    {{ formatDate(returnRoute.arrival_date) }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
                                                                                     style="font-size: 12px; color: #5e6878;">Terminal:
-                                                                                    {{ returnRoute.destinationTerminal }}</small>
+                                                                                    {{ returnRoute.destinationTerminal
+                                                                                    }}</small>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1795,7 +1820,8 @@ function formatDate (dateString) {
 
                                                                             <div class="border border-1 text-center p-1"
                                                                                 style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
-                                                                                {{ returnRoute.flight }} - {{ returnRoute.aircraft_name }}</div>
+                                                                                {{ returnRoute.flight }} - {{
+                                                                                returnRoute.aircraft_name }}</div>
                                                                             <div class="border border-1 text-center p-1"
                                                                                 style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
                                                                                 Class: {{ returnRoute.cabin_class }}
@@ -1807,10 +1833,10 @@ function formatDate (dateString) {
                                                                     <div class="col-md-6">
                                                                         <div class="float-end mt-2">
                                                                             <img height="35" width="60"
-                                                                                :src="returnRoute.logo_path"
-                                                                                alt="">
+                                                                                :src="returnRoute.logo_path" alt="">
                                                                             <span class="pt-2 ms-2 fw-bold"
-                                                                                style="font-size: 11px;">{{ returnRoute.airline_name }}</span>
+                                                                                style="font-size: 11px;">{{
+                                                                                returnRoute.airline_name }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1826,13 +1852,19 @@ function formatDate (dateString) {
 
                                                                             <span class="bluesky-departure-text">
 
-                                                                                <span v-if="returnRoute.lastitem">Reached Destination</span>
+                                                                                <span
+                                                                                    v-if="returnRoute.lastitem">Reached
+                                                                                    Destination</span>
                                                                                 <span v-else>Layover </span>
-                                                                                at  <span
-                                                                                    class="laover-city">{{ returnRoute.Destination_City_Name }}  <span v-if="!returnRoute.lastitem">- {{ returnRoute.layover_time }}</span></span>
+                                                                                at <span class="laover-city">{{
+                                                                                    returnRoute.Destination_City_Name }}
+                                                                                    <span v-if="!returnRoute.lastitem">-
+                                                                                        {{ returnRoute.layover_time
+                                                                                        }}</span></span>
                                                                                 | </span>
-                                                                            <span style="font-size: 12px;" class="bluesky-departure-airport-text w-100">
-                                                                                {{returnRoute.Destination_Airport_Name}}</span>
+                                                                            <span style="font-size: 12px;"
+                                                                                class="bluesky-departure-airport-text w-100">
+                                                                                {{ returnRoute.Destination_Airport_Name }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2111,5 +2143,4 @@ function formatDate (dateString) {
 
 <style>
 /* Leading */
-
 </style>
