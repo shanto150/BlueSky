@@ -1722,25 +1722,29 @@ function formatDate(dateString) {
                                                                 <div
                                                                     class="row border-top mt-3 d-flex justify-content-center align-items-center">
                                                                     <div class="col-md-12">
-                                                                        <div class="chip chip-sm mt-2 mb-0"
+                                                                        <div class="mt-2 mb-0"
                                                                             style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
-                                                                            <img style="height: 25px;width: 25px;margin: 2px 5px 0px -10px;"
+
+                                                                            <!-- section image -->
+                                                                            <img style="height: 20px;width: 20px;margin: 8px 5px 10px 10px;"
                                                                                 src="../../../../public/theme/appimages/Layover_&_Destination.svg"
                                                                                 alt="">
 
-                                                                            <span  class="bluesky-departure-text">
+                                                                            <!-- section text -->
+
+                                                                            <span   class="bluesky-departure-text">
 
                                                                                 <span style="font-size: 12px;" v-if="route.lastitem">Reached
                                                                                     Destination</span>
                                                                                 <span style="font-size: 12px;" v-else>Layover </span>
-                                                                                at <span style="font-size: 12px;" class="laover-city">{{
+                                                                                at <span style="font-size: 12px;">{{
                                                                                     route.Destination_City_Name }} <span
-                                                                                        v-if="!route.lastitem">- {{
+                                                                                        v-if="!route.lastitem">-{{
                                                                                             route.layover_time
                                                                                         }}</span></span>
                                                                                 | </span>
                                                                             <span style="font-size: 12px;"
-                                                                                class="bluesky-departure-airport-text w-100">
+                                                                                class="bluesky-departure-airport-text w-100 ml-3 mobile-chip">
                                                                                 {{ route.Destination_Airport_Name
                                                                                 }}</span>
                                                                         </div>
@@ -1868,7 +1872,7 @@ function formatDate(dateString) {
                                                                     class="row border-top mt-3 d-flex justify-content-center align-items-center">
                                                                     <div class="col-md-12">
                                                                         <div class="chip chip-sm mt-2 mb-0"
-                                                                            style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
+                                                                            style="font-size: 12px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
                                                                             <img style="height: 25px;width: 25px;margin: 2px 5px 0px -10px;"
                                                                                 src="../../../../public/theme/appimages/Layover_&_Destination.svg"
                                                                                 alt="">
@@ -2172,6 +2176,9 @@ function formatDate(dateString) {
     .details-route-image {
         height: 70px;
         width: 70px;
+    }
+    .mobile-chip{
+        margin-left: 35px;
     }
 }
 </style>
