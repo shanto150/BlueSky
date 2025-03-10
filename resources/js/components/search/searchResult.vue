@@ -1612,7 +1612,7 @@ function formatDate(dateString) {
                                                         class="flight-tab-active fadeIn">
                                                         <div class="card">
                                                             <div
-                                                                class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
+                                                                class="card-header accorion-item-title-color m-0 p-0 " style="background-color: #f2f5f7;">
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
                                                                         <b>
@@ -1629,8 +1629,8 @@ function formatDate(dateString) {
                                                                         </small>
                                                                     </div>
 
-                                                                    <div class="p-2 bluesky-departure-text fw-bold">
-                                                                        Flight Time: {{ route.flightTime1 }}
+                                                                    <div class="p-2 bluesky-departure-text ">
+                                                                        <small><b>Flight Time: {{ route.flightTime1 }}</b></small>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1759,7 +1759,7 @@ function formatDate(dateString) {
                                                         class="flight-tab-hide d-none fadeIn">
                                                         <div class="card">
                                                             <div
-                                                                class="card-header accorion-item-title-color m-0 p-0 px-2 py-2">
+                                                                class="card-header accorion-item-title-color m-0 p-0" style="background-color: #f2f5f7;">
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
                                                                         <b>
@@ -1777,8 +1777,8 @@ function formatDate(dateString) {
                                                                         </small>
                                                                     </div>
 
-                                                                    <div class="p-2 bluesky-departure-text fw-bold">
-                                                                        Flight Time: {{ returnRoute.flightTime1 }}
+                                                                    <div class="p-2 bluesky-departure-text">
+                                                                        <small>Flight Time: {{ returnRoute.flightTime1 }}</small>
                                                                     </div>
                                                                 </div>
                                                             </div>
