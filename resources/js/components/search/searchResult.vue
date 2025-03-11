@@ -1767,6 +1767,7 @@ function number_format(nStr) {
                                                                                         }}</span></span>
                                                                                 <span class="vertical-line">|</span>
                                                                             </span>
+                                                                            <br>
                                                                             <span
                                                                                 class="bluesky-departure-airport-text w-100 ml-3 mobile-chip mobile-chips-text">
                                                                                 {{ route.Destination_Airport_Name
