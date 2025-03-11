@@ -1226,7 +1226,7 @@ function number_format(nStr) {
                                                                 class="d-flex justify-content-center align-items-center h-100 w-100">
                                                                 <div>
                                                                     <div class="text-black"><b>{{ flight.outbound.origin
-                                                                            }}-{{
+                                                                    }}-{{
                                                                                 flight.outbound.destination }}</b>
                                                                     </div>
                                                                     <div style="font-size: 11px; color: #8327a4">
@@ -1239,7 +1239,7 @@ function number_format(nStr) {
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-8 col-12 border-start border-end">
+                                                <div class="col-md-8 col-12 border-md-start border-md-end">
                                                     <div class="row p-2">
                                                         <div class="col-md-4 col-4">
                                                             <div
@@ -1352,7 +1352,8 @@ function number_format(nStr) {
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-sm-12 col-md-2 d-sm-block d-md-none">
+
+                                        <div class="col-12 col-sm-12 col-md-2 d-sm-block d-md-none d-none">
 
                                             <div class="d-grid">
                                                 <button class="btn btn-sm bluesky-btn-primary" data-bs-toggle="collapse"
@@ -1386,7 +1387,7 @@ function number_format(nStr) {
                                                                 class="d-flex justify-content-center align-items-center h-100 w-100">
                                                                 <div>
                                                                     <div class="text-black"><b>{{ flight.inbound.origin
-                                                                            }} - {{ flight.inbound.destination }}</b>
+                                                                    }} - {{ flight.inbound.destination }}</b>
                                                                     </div>
                                                                     <div style="font-size: 11px; color: #8327a4">
                                                                         {{ flight.inbound.first_carrier_code }} | {{
@@ -1398,7 +1399,7 @@ function number_format(nStr) {
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-8 col-12 border-start border-end">
+                                                <div class="col-md-8 col-12 border-md-start border-md-end">
                                                     <div class="row p-2">
                                                         <div class="col-md-4 col-4">
                                                             <div
@@ -1409,7 +1410,7 @@ function number_format(nStr) {
                                                                 <div>
                                                                     <small style="font-size: 12px; color: #5e6878;">{{
                                                                         formatDate(flight.inbound.departure_date)
-                                                                        }}</small>
+                                                                    }}</small>
                                                                 </div>
                                                                 <div>
                                                                     <small
@@ -1644,7 +1645,7 @@ function number_format(nStr) {
 
                                                                     <div class="p-2 bluesky-departure-text ">
                                                                         <small><b>Flight Time: {{ route.flightTime1
-                                                                        }}</b></small>
+                                                                                }}</b></small>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1659,13 +1660,14 @@ function number_format(nStr) {
                                                                                 <b>{{ route.departure_code }}</b>
                                                                             </div>
                                                                             <div>
-                                                                                <small style="font-size: 13px;"
+                                                                                <small style="font-size: 11px;"
                                                                                     class="text-black"><b>{{
                                                                                         route.departure_time }}
-                                                                                        |</b></small>
+                                                                                        <span
+                                                                                            class="vertical-line">|</span></b></small>
                                                                                 <span style="font-size: 11px;">{{
                                                                                     formatDate(route.departure_date)
-                                                                                }}</span>
+                                                                                    }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1688,13 +1690,14 @@ function number_format(nStr) {
                                                                                 <b>{{ route.arrival_code }}</b>
                                                                             </div>
                                                                             <div>
-                                                                                <small style="font-size: 13px;"
+                                                                                <small style="font-size: 11px;"
                                                                                     class="text-black"><b>{{
                                                                                         route.arrival_time }}
-                                                                                        |</b></small>
+                                                                                        <span
+                                                                                            class="vertical-line">|</span></b></small>
                                                                                 <span style="font-size: 11px;">{{
                                                                                     formatDate(route.arrival_date)
-                                                                                    }}</span>
+                                                                                }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1762,7 +1765,8 @@ function number_format(nStr) {
                                                                                         v-if="!route.lastitem">-{{
                                                                                             route.layover_time
                                                                                         }}</span></span>
-                                                                                | </span>
+                                                                                <span class="vertical-line">|</span>
+                                                                            </span>
                                                                             <span style="font-size: 12px;"
                                                                                 class="bluesky-departure-airport-text w-100 ml-3 mobile-chip">
                                                                                 {{ route.Destination_Airport_Name
@@ -1799,7 +1803,7 @@ function number_format(nStr) {
 
                                                                     <div class="p-2 bluesky-departure-text">
                                                                         <small>Flight Time: {{ returnRoute.flightTime1
-                                                                        }}</small>
+                                                                            }}</small>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1817,10 +1821,12 @@ function number_format(nStr) {
                                                                                 <small style="font-size: 13px;"
                                                                                     class="text-black"><b>{{
                                                                                         returnRoute.departure_time }}
-                                                                                        | </b></small>
+                                                                                        <span
+                                                                                            class="vertical-line">|</span>
+                                                                                    </b></small>
                                                                                 <span style="font-size: 11px;">{{
                                                                                     formatDate(returnRoute.departure_date)
-                                                                                }}</span>
+                                                                                    }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1846,7 +1852,8 @@ function number_format(nStr) {
                                                                                 <small style="font-size: 13px;"
                                                                                     class="text-black"><b>{{
                                                                                         returnRoute.arrival_time }}
-                                                                                        |</b></small>
+                                                                                        <span
+                                                                                            class="vertical-line">|</span></b></small>
                                                                                 <span style="font-size: 11px;">
                                                                                     {{
                                                                                         formatDate(returnRoute.arrival_date)
@@ -1894,28 +1901,45 @@ function number_format(nStr) {
                                                                 <div
                                                                     class="row border-top mt-3 d-flex justify-content-center align-items-center">
                                                                     <div class="col-md-12">
-                                                                        <div class="chip chip-sm mt-2 mb-0"
-                                                                            style="font-size: 12px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
-                                                                            <img style="height: 25px;width: 25px;margin: 2px 5px 0px -10px;"
-                                                                                src="../../../../public/theme/appimages/Layover_&_Destination.svg"
-                                                                                alt="">
 
-                                                                            <span class="bluesky-departure-text">
+                                                                        <div
+                                                                            class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                            <div class="col-md-12">
+                                                                                <div class="mt-2 mb-0"
+                                                                                    style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
 
-                                                                                <span
-                                                                                    v-if="returnRoute.lastitem">Reached
-                                                                                    Destination</span>
-                                                                                <span v-else>Layover </span>
-                                                                                at <span class="laover-city">{{
-                                                                                    returnRoute.Destination_City_Name }}
-                                                                                    <span v-if="!returnRoute.lastitem">-
-                                                                                        {{ returnRoute.layover_time
-                                                                                        }}</span></span>
-                                                                                | </span>
-                                                                            <span style="font-size: 12px;"
-                                                                                class="bluesky-departure-airport-text w-100">
-                                                                                {{ returnRoute.Destination_Airport_Name
-                                                                                }}</span>
+                                                                                    <!-- section image -->
+                                                                                    <img style="height: 20px;width: 20px;margin: 8px 5px 10px 10px;"
+                                                                                        src="../../../../public/theme/appimages/Layover_&_Destination.svg"
+                                                                                        alt="">
+
+                                                                                    <!-- section text -->
+
+                                                                                    <span
+                                                                                        class="bluesky-departure-text">
+
+                                                                                        <span style="font-size: 12px;"
+                                                                                            v-if="returnRoute.lastitem">Reached
+                                                                                            Destination</span>
+                                                                                        <span style="font-size: 12px;"
+                                                                                            v-else>Layover </span>
+                                                                                        at <span
+                                                                                            style="font-size: 12px;">{{
+                                                                                                returnRoute.Destination_City_Name
+                                                                                            }} <span
+                                                                                                v-if="!returnRoute.lastitem">-{{
+                                                                                                    returnRoute.layover_time
+                                                                                                }}</span></span>
+                                                                                        <span
+                                                                                            class="vertical-line">|</span>
+                                                                                    </span>
+                                                                                    <span style="font-size: 12px;"
+                                                                                        class="bluesky-departure-airport-text w-100 ml-3 mobile-chip text-center">
+                                                                                        {{
+                                                                                            returnRoute.Destination_Airport_Name
+                                                                                        }}</span>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -2012,21 +2036,26 @@ function number_format(nStr) {
                                                                                         <span
                                                                                             v-if="itemPrice.type == 'Child'">{{
                                                                                                 form.CNN }}</span>
-                                                                                        <span v-if="itemPrice.type == 'Infant'">{{
-                                                                                            form.INF }}</span>
+                                                                                        <span
+                                                                                            v-if="itemPrice.type == 'Infant'">{{
+                                                                                                form.INF }}</span>
                                                                                         x {{
                                                                                             itemPrice.baseFare }}
                                                                                     </td>
                                                                                     <td>
 
                                                                                         <span
-                                                                                            v-if="itemPrice.type == 'Adult'">BDT {{ form.ADT *
-                                                                                            itemPrice.baseFare }}</span>
+                                                                                            v-if="itemPrice.type == 'Adult'">BDT
+                                                                                            {{ form.ADT *
+                                                                                                itemPrice.baseFare }}</span>
                                                                                         <span
-                                                                                            v-if="itemPrice.type == 'Child'">BDT {{ form.CNN *
-                                                                                            itemPrice.baseFare }}</span>
-                                                                                        <span v-if="itemPrice.type == 'Infant'">BDT {{ form.INF *
-                                                                                            itemPrice.baseFare }}</span>
+                                                                                            v-if="itemPrice.type == 'Child'">BDT
+                                                                                            {{ form.CNN *
+                                                                                                itemPrice.baseFare }}</span>
+                                                                                        <span
+                                                                                            v-if="itemPrice.type == 'Infant'">BDT
+                                                                                            {{ form.INF *
+                                                                                                itemPrice.baseFare }}</span>
 
 
 
@@ -2054,21 +2083,28 @@ function number_format(nStr) {
                                                                                             v-if="itemPrice.type == 'Adult'">{{
                                                                                                 form.ADT }}</span>
                                                                                         <span
-                                                                                            v-if="itemPrice.type == 'Child'"> {{
+                                                                                            v-if="itemPrice.type == 'Child'">
+                                                                                            {{
                                                                                                 form.CNN }}</span>
-                                                                                        <span v-if="itemPrice.type == 'Infant'">{{
-                                                                                            form.INF }}</span>
+                                                                                        <span
+                                                                                            v-if="itemPrice.type == 'Infant'">{{
+                                                                                                form.INF }}</span>
                                                                                         x {{ itemPrice.taxes
-                                                                                        }}</td>
+                                                                                        }}
+                                                                                    </td>
                                                                                     <td>
                                                                                         <span
-                                                                                            v-if="itemPrice.type == 'Adult'">BDT {{ form.ADT *
-                                                                                            itemPrice.taxes }}</span>
+                                                                                            v-if="itemPrice.type == 'Adult'">BDT
+                                                                                            {{ form.ADT *
+                                                                                                itemPrice.taxes }}</span>
                                                                                         <span
-                                                                                            v-if="itemPrice.type == 'Child'"> BDT {{ form.CNN *
-                                                                                            itemPrice.taxes }}</span>
-                                                                                        <span v-if="itemPrice.type == 'Infant'">BDT {{ form.INF *
-                                                                                            itemPrice.taxes }}</span>
+                                                                                            v-if="itemPrice.type == 'Child'">
+                                                                                            BDT {{ form.CNN *
+                                                                                                itemPrice.taxes }}</span>
+                                                                                        <span
+                                                                                            v-if="itemPrice.type == 'Infant'">BDT
+                                                                                            {{ form.INF *
+                                                                                                itemPrice.taxes }}</span>
 
 
                                                                                     </td>
@@ -2077,9 +2113,6 @@ function number_format(nStr) {
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
-
-
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2176,6 +2209,14 @@ function number_format(nStr) {
 <style>
 /* Leading */
 
+.border-md-start {
+	border-left: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important
+}
+.border-md-end {
+    border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+}
+
+
 @media only screen and (max-width: 600px) {
     .details-route-image {
         height: 70px;
@@ -2184,6 +2225,16 @@ function number_format(nStr) {
 
     .mobile-chip {
         margin-left: 35px;
+    }
+
+    .vertical-line {
+        display: none;
+    }
+    .border-md-start{
+        border-left: none!important;
+    }
+    .border-md-end{
+        border-right: none !important;
     }
 }
 </style>
