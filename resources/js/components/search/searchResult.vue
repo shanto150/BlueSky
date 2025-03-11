@@ -1226,7 +1226,7 @@ function number_format(nStr) {
                                                                 class="d-flex justify-content-center align-items-center h-100 w-100">
                                                                 <div>
                                                                     <div class="text-black"><b>{{ flight.outbound.origin
-                                                                    }}-{{
+                                                                            }}-{{
                                                                                 flight.outbound.destination }}</b>
                                                                     </div>
                                                                     <div style="font-size: 11px; color: #8327a4">
@@ -1338,7 +1338,7 @@ function number_format(nStr) {
                                         <div v-show="form.Way == 1" class="col-12 col-sm-12 col-md-2">
                                             <div class="d-grid">
                                                 <button class="btn btn-sm bluesky-btn-primary" data-bs-toggle="collapse"
-                                                data-bs-target="#flight-package-2" aria-controls="flight-package-2">
+                                                    data-bs-target="#flight-package-2" aria-controls="flight-package-2">
 
                                                     <div class="text-right">
                                                         <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{
@@ -1385,7 +1385,7 @@ function number_format(nStr) {
                                                                 class="d-flex justify-content-center align-items-center h-100 w-100">
                                                                 <div>
                                                                     <div class="text-black"><b>{{ flight.inbound.origin
-                                                                    }} - {{ flight.inbound.destination }}</b>
+                                                                            }} - {{ flight.inbound.destination }}</b>
                                                                     </div>
                                                                     <div style="font-size: 11px; color: #8327a4">
                                                                         {{ flight.inbound.first_carrier_code }} | {{
@@ -1408,7 +1408,7 @@ function number_format(nStr) {
                                                                 <div>
                                                                     <small style="font-size: 12px; color: #5e6878;">{{
                                                                         formatDate(flight.inbound.departure_date)
-                                                                    }}</small>
+                                                                        }}</small>
                                                                 </div>
                                                                 <div>
                                                                     <small
@@ -1641,9 +1641,9 @@ function number_format(nStr) {
                                                                         </small>
                                                                     </div>
 
-                                                                    <div class="p-2 bluesky-departure-text ">
+                                                                    <div class="p-2 bluesky-departure-text flight-time">
                                                                         <small><b>Flight Time: {{ route.flightTime1
-                                                                                }}</b></small>
+                                                                        }}</b></small>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1665,7 +1665,7 @@ function number_format(nStr) {
                                                                                             class="vertical-line">|</span></b></small>
                                                                                 <span style="font-size: 11px;">{{
                                                                                     formatDate(route.departure_date)
-                                                                                    }}</span>
+                                                                                }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1679,6 +1679,9 @@ function number_format(nStr) {
                                                                     <div class="col-sm-4 col-4 col-md-4 ">
                                                                         <img src="../../../../public/theme/appimages/Route.svg"
                                                                             alt="" class="details-route-image">
+                                                                        <span class="flight-time-mobile">{{
+                                                                            route.flightTime1
+                                                                            }}</span>
                                                                     </div>
                                                                     <div class="col-sm-4 col-md-4 col-4">
                                                                         <div
@@ -1695,7 +1698,7 @@ function number_format(nStr) {
                                                                                             class="vertical-line">|</span></b></small>
                                                                                 <span style="font-size: 11px;">{{
                                                                                     formatDate(route.arrival_date)
-                                                                                }}</span>
+                                                                                    }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1751,13 +1754,12 @@ function number_format(nStr) {
 
                                                                             <!-- section text -->
 
-                                                                            <span class="bluesky-departure-text mobile-chips-text">
+                                                                            <span
+                                                                                class="bluesky-departure-text mobile-chips-text">
 
-                                                                                <span
-                                                                                    v-if="route.lastitem">Reached
+                                                                                <span v-if="route.lastitem">Reached
                                                                                     Destination</span>
-                                                                                <span
-                                                                                    v-else>Layover </span>
+                                                                                <span v-else>Layover </span>
                                                                                 at <span>{{
                                                                                     route.Destination_City_Name }} <span
                                                                                         v-if="!route.lastitem">-{{
@@ -1799,9 +1801,9 @@ function number_format(nStr) {
                                                                         </small>
                                                                     </div>
 
-                                                                    <div class="p-2 bluesky-departure-text">
+                                                                    <div class="p-2 bluesky-departure-text flight-time">
                                                                         <small>Flight Time: {{ returnRoute.flightTime1
-                                                                            }}</small>
+                                                                        }}</small>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1824,7 +1826,7 @@ function number_format(nStr) {
                                                                                     </b></small>
                                                                                 <span style="font-size: 11px;">{{
                                                                                     formatDate(returnRoute.departure_date)
-                                                                                    }}</span>
+                                                                                }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1834,11 +1836,14 @@ function number_format(nStr) {
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div
-                                                                        class="col-4 col-sm-4col-md-4 d-none d-sm-block">
+                                                                    <div class="col-sm-4 col-4 col-md-4 ">
                                                                         <img src="../../../../public/theme/appimages/Route.svg"
                                                                             alt="" class="details-route-image">
+                                                                        <span class="flight-time-mobile">{{
+                                                                            returnRoute.flightTime1
+                                                                            }}</span>
                                                                     </div>
+
                                                                     <div class="col-md-4 col-4">
                                                                         <div
                                                                             class="d-block justify-content-center align-items-center h-100 w-100">
@@ -1922,7 +1927,7 @@ function number_format(nStr) {
                                                                                         <span v-else>Layover </span>
                                                                                         at <span>{{
                                                                                             returnRoute.Destination_City_Name
-                                                                                            }} <span
+                                                                                        }} <span
                                                                                                 v-if="!returnRoute.lastitem">-{{
                                                                                                     returnRoute.layover_time
                                                                                                 }}</span></span>
@@ -2217,11 +2222,14 @@ function number_format(nStr) {
     border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
 }
 
-
+.flight-time-mobile {
+        display: none;
+    }
 @media only screen and (max-width: 600px) {
     .details-route-image {
         height: 70px;
         width: 70px;
+        padding-top: 15px;
     }
 
     .mobile-chip {
@@ -2230,6 +2238,15 @@ function number_format(nStr) {
 
     .vertical-line {
         display: none;
+    }
+
+    .flight-time {
+        display: none;
+    }
+
+    .flight-time-mobile {
+        display: block;
+        font-size: 10px;
     }
 
     .border-md-start {
@@ -2244,4 +2261,5 @@ function number_format(nStr) {
         font-size: 10px;
     }
 }
+
 </style>
