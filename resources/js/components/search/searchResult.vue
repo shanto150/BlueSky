@@ -1753,22 +1753,22 @@ function number_format(nStr) {
 
                                                                             <!-- section text -->
 
-                                                                            <span class="bluesky-departure-text">
+                                                                            <span class="bluesky-departure-text mobile-chips-text">
 
-                                                                                <span style="font-size: 12px;"
+                                                                                <span
                                                                                     v-if="route.lastitem">Reached
                                                                                     Destination</span>
-                                                                                <span style="font-size: 12px;"
+                                                                                <span
                                                                                     v-else>Layover </span>
-                                                                                at <span style="font-size: 12px;">{{
+                                                                                at <span>{{
                                                                                     route.Destination_City_Name }} <span
                                                                                         v-if="!route.lastitem">-{{
                                                                                             route.layover_time
                                                                                         }}</span></span>
                                                                                 <span class="vertical-line">|</span>
                                                                             </span>
-                                                                            <span style="font-size: 12px;"
-                                                                                class="bluesky-departure-airport-text w-100 ml-3 mobile-chip">
+                                                                            <span
+                                                                                class="bluesky-departure-airport-text w-100 ml-3 mobile-chip mobile-chips-text">
                                                                                 {{ route.Destination_Airport_Name
                                                                                 }}</span>
                                                                         </div>
@@ -1916,16 +1916,14 @@ function number_format(nStr) {
                                                                                     <!-- section text -->
 
                                                                                     <span
-                                                                                        class="bluesky-departure-text">
+                                                                                        class="bluesky-departure-text mobile-chips-text">
 
-                                                                                        <span style="font-size: 12px;"
+                                                                                        <span
                                                                                             v-if="returnRoute.lastitem">Reached
                                                                                             Destination</span>
-                                                                                        <span style="font-size: 12px;"
-                                                                                            v-else>Layover </span>
-                                                                                        at <span
-                                                                                            style="font-size: 12px;">{{
-                                                                                                returnRoute.Destination_City_Name
+                                                                                        <span v-else>Layover </span>
+                                                                                        at <span>{{
+                                                                                            returnRoute.Destination_City_Name
                                                                                             }} <span
                                                                                                 v-if="!returnRoute.lastitem">-{{
                                                                                                     returnRoute.layover_time
@@ -1933,8 +1931,8 @@ function number_format(nStr) {
                                                                                         <span
                                                                                             class="vertical-line">|</span>
                                                                                     </span>
-                                                                                    <span style="font-size: 12px;"
-                                                                                        class="bluesky-departure-airport-text w-100 ml-3 mobile-chip text-center">
+                                                                                    <span
+                                                                                        class="bluesky-departure-airport-text w-100 ml-3 mobile-chip mobile-chips-text">
                                                                                         {{
                                                                                             returnRoute.Destination_Airport_Name
                                                                                         }}</span>
@@ -2209,9 +2207,14 @@ function number_format(nStr) {
 <style>
 /* Leading */
 
-.border-md-start {
-	border-left: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important
+.mobile-chips-text {
+    font-size: 12px;
 }
+
+.border-md-start {
+    border-left: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important
+}
+
 .border-md-end {
     border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
 }
@@ -2230,11 +2233,17 @@ function number_format(nStr) {
     .vertical-line {
         display: none;
     }
-    .border-md-start{
-        border-left: none!important;
+
+    .border-md-start {
+        border-left: none !important;
     }
-    .border-md-end{
+
+    .border-md-end {
         border-right: none !important;
+    }
+
+    .mobile-chips-text {
+        font-size: 10px;
     }
 }
 </style>
