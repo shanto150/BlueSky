@@ -1335,12 +1335,12 @@ function number_format(nStr) {
                                                 </div>
                                             </div>
                                         </div>
+                                        <div v-show="form.Way == 1" class="col-12 col-sm-12 col-md-2">
 
-                                        <div class="col-12 col-sm-12 col-md-2 d-none d-md-block">
 
                                             <div class="d-grid">
                                                 <button class="btn btn-sm bluesky-btn-primary" data-bs-toggle="collapse"
-                                                    data-bs-target="#flight-package-2" aria-controls="flight-package-2">
+                                                data-bs-target="#flight-package-2" aria-controls="flight-package-2">
 
                                                     <div class="text-right">
                                                         <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{
@@ -1353,7 +1353,7 @@ function number_format(nStr) {
                                             </div>
                                         </div>
 
-                                        <div class="col-12 col-sm-12 col-md-2 d-sm-block d-md-none d-none">
+                                        <div v-show="form.Way == 2" class="col-12 col-sm-12 col-md-2 ">
 
                                             <div class="d-grid">
                                                 <button class="btn btn-sm bluesky-btn-primary" data-bs-toggle="collapse"
