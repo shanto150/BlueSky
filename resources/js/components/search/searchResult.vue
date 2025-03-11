@@ -1336,8 +1336,6 @@ function number_format(nStr) {
                                             </div>
                                         </div>
                                         <div v-show="form.Way == 1" class="col-12 col-sm-12 col-md-2">
-
-
                                             <div class="d-grid">
                                                 <button class="btn btn-sm bluesky-btn-primary" data-bs-toggle="collapse"
                                                 data-bs-target="#flight-package-2" aria-controls="flight-package-2">
