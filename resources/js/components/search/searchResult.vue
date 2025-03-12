@@ -1272,9 +1272,9 @@ function number_format(nStr) {
                                                                             alt="">
                                                                     </div>
                                                                     <div>
-                                                                        <img style="transform: rotate(45deg)"
-                                                                            src="../../../../public/theme/animation/Route_Aircraft.gif"
-                                                                            alt="" height="23" width="23">
+                                                                        <img style="transform: rotate(0deg)"
+                                                                            src="../../../../public/theme/animation/Route_Aircraft.svg"
+                                                                            alt="" height="22" width="22">
                                                                     </div>
                                                                     <div class="text-black">
                                                                         <img src="../../../../public/theme/appimages/Right_Aligned Line.svg"
@@ -1427,12 +1427,12 @@ function number_format(nStr) {
                                                                 <div class="d-flex">
                                                                     <div class="text-black">
                                                                         <img src="../../../../public/theme/appimages/Left_Aligned Line.svg"
-                                                                            alt="">
+                                                                            alt="" style="background: linear-gradient(90deg, #FFF 4.02%, #F4F4F4 40.78%, #787878 117.19%);">
                                                                     </div>
                                                                     <div>
-                                                                        <img style="transform: rotate(225deg)"
-                                                                            src="../../../../public/theme/animation/Route_Aircraft.gif"
-                                                                            alt="" height="23" width="23">
+                                                                        <img style="transform: rotate(180deg)"
+                                                                            src="../../../../public/theme/animation/Route_Aircraft.svg"
+                                                                            alt="" height="22" width="22">
                                                                     </div>
                                                                     <div class="text-black">
                                                                         <img src="../../../../public/theme/appimages/Right_Aligned Line.svg"
