@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin\API;
 
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Admin\API\XmlToJson;
 use App\Http\Controllers\Admin\API\requestxml;
@@ -68,5 +70,31 @@ class APIController extends BaseController {
         return $result;
 
     }
+
+    // public function Lowfaresearch(Request $request) {
+
+    //     try {
+    //         // Read the local XML file
+    //         $xmlContent = file_get_contents(__DIR__ . '/all.xml');
+
+    //         // Create XML to JSON converter
+    //         $converter = new XmlToJson($xmlContent);
+    //         $result = $converter->parse();
+
+    //         // Return JSON response
+    //         return response()->json($result);
+
+    //     } catch (Exception $e) {
+    //         Log::error('Error processing XML:', [
+    //             'error' => $e->getMessage(),
+    //             'trace' => $e->getTraceAsString()
+    //         ]);
+
+    //         return response()->json([
+    //             'error' => 'Error processing request',
+    //             'details' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
 
 }

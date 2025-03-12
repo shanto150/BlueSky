@@ -7,7 +7,8 @@ use SimpleXMLElement;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class XmlToJson {
+class XmlToJson
+{
     private $xml;
     private $segments = [];
     private $fareInfoCache = [];
@@ -17,7 +18,8 @@ class XmlToJson {
     private $airportData = []; // New property for airport data
     private $aircraftTypes = []; // New property for aircraft types
 
-    public function __construct($xmlContent) {
+    public function __construct($xmlContent)
+    {
         $this->xml = new SimpleXMLElement($xmlContent);
         $this->xml->registerXPathNamespace('air', 'http://www.travelport.com/schema/air_v52_0');
         $this->currency = (string)$this->xml->xpath('//air:LowFareSearchRsp/@CurrencyType')[0] ?? 'USD';
@@ -61,7 +63,8 @@ class XmlToJson {
         $this->initializeCache();
     }
 
-    private function initializeCache() {
+    private function initializeCache()
+    {
         $fareInfos = $this->xml->xpath('//air:FareInfo');
         $flightDetails = $this->xml->xpath('//air:FlightDetailsList/air:FlightDetails');
         $segments = $this->xml->xpath('//air:AirSegment');
@@ -78,48 +81,44 @@ class XmlToJson {
         }
     }
 
-    private function cacheFareInfo( $fareInfo ) {
-        $key = ( string )$fareInfo[ 'Key' ];
-        $fareRuleKey = $fareInfo->xpath( './/air:FareRuleKey' )[ 0 ] ?? null;
+    private function cacheFareInfo($fareInfo)
+    {
+        $key = (string)$fareInfo['Key'];
+        $fareRuleKey = $fareInfo->xpath('.//air:FareRuleKey')[0] ?? null;
 
-        $this->fareInfoCache[ $key ] = [
-            'fareBasis' => ( string )$fareInfo[ 'FareBasis' ],
-            'passengerType' => ( string )$fareInfo[ 'PassengerTypeCode' ] ?? 'ADT',
-            'baggage' => $this->parseBaggageInfo( $fareInfo ),
+        $this->fareInfoCache[$key] = [
+            'fareBasis' => (string)$fareInfo['FareBasis'],
+            'passengerType' => (string)$fareInfo['PassengerTypeCode'] ?? 'ADT',
             'fareRuleKey' => [
-                'fareinforef' => ( string )( $fareRuleKey[ 'FareInfoRef' ] ?? null ),
-                'providerCode' => ( string )( $fareRuleKey[ 'ProviderCode' ] ?? '1G' ),
-                'content' => ( string )$fareRuleKey
+                'fareinforef' => (string)($fareRuleKey['FareInfoRef'] ?? null),
+                'providerCode' => (string)($fareRuleKey['ProviderCode'] ?? '1G'),
+                'content' => (string)$fareRuleKey
             ]
         ];
     }
 
-    private function parseBaggageInfo( $fareInfo ) {
-        return [
-            'pieces' => ( int )( $fareInfo->xpath( './/air:NumberOfPieces' )[ 0 ] ?? 0 ),
-            'maxWeight' => ( string )( $fareInfo->xpath( './/air:MaxWeight' )[ 0 ] ?? '' )
+    private function cacheFlightDetail($detail)
+    {
+        $key = (string)$detail['Key'];
+        $this->flightDetailsCache[$key] = [
+            'originTerminal' => (string)$detail['OriginTerminal'],
+            'destinationTerminal' => (string)$detail['DestinationTerminal']
         ];
     }
 
-    private function cacheFlightDetail( $detail ) {
-        $key = ( string )$detail[ 'Key' ];
-        $this->flightDetailsCache[ $key ] = [
-            'originTerminal' => ( string )$detail[ 'OriginTerminal' ],
-            'destinationTerminal' => ( string )$detail[ 'DestinationTerminal' ]
-        ];
+    private function cacheSegment($segment)
+    {
+        $key = (string)$segment['Key'];
+        $flightDetailsKey = (string)($segment->xpath('./air:FlightDetailsRef/@Key')[0] ?? '');
+        $flightDetails = $this->flightDetailsCache[$flightDetailsKey] ?? [];
+
+        $this->segments[$key] = $this->parseSegment($segment, $flightDetails);
     }
 
-    private function cacheSegment( $segment ) {
-        $key = ( string )$segment[ 'Key' ];
-        $flightDetailsKey = ( string )( $segment->xpath( './air:FlightDetailsRef/@Key' )[ 0 ] ?? '' );
-        $flightDetails = $this->flightDetailsCache[ $flightDetailsKey ] ?? [];
-
-        $this->segments[ $key ] = $this->parseSegment( $segment, $flightDetails );
-    }
-
-    private function parseSegment($segment, $flightDetails) {
+    private function parseSegment($segment, $flightDetails)
+    {
         // Helper function to format datetime
-        $formatTime = function($datetime) {
+        $formatTime = function ($datetime) {
             return date('h:i A', strtotime($datetime));
         };
 
@@ -178,37 +177,119 @@ class XmlToJson {
         ];
     }
 
-    private function processPricingSolution( $solution ) {
-        $commonInfo = $this->processCommonInfo( $solution );
-        $segmentOrganizer = $this->processSegments( $solution );
+    private function processPricingSolution($solution)
+    {
+        $commonInfo = $this->processCommonInfo($solution);
+        $segmentOrganizer = $this->processSegments($solution);
 
         return $this->buildJourney(
-            $segmentOrganizer[ 'outbound' ],
-            $segmentOrganizer[ 'inbound' ],
+            $segmentOrganizer['outbound'],
+            $segmentOrganizer['inbound'],
             $commonInfo,
-            $segmentOrganizer[ 'isReturn' ]
+            $segmentOrganizer['isReturn']
         );
     }
 
-    private function processCommonInfo( $solution ) {
+    private function processCommonInfo($solution)
+    {
+        // Get the solution key
+        $solutionKey = (string)$solution['Key'];
+
+        // Get baggage allowance
+        $baggageAllowances = $this->getBaggageAllowances($solution);
+
         $commonInfo = [
-            'key' => ( string )$solution[ 'Key' ],
+            'key' => $solutionKey,
             'totalPrice' => 0,
             'currency' => $this->currency,
-            'refundable' => ( string )( $solution->xpath( './/air:AirPricingInfo/@Refundable' )[ 0 ] ?? 'false' ) === 'true',
-            'pricingMethod' => ( string )( $solution->xpath( './/air:AirPricingInfo/@PricingMethod' )[ 0 ] ) ?? 'Not Found',
-            'priceBreakdown' => $this->calculatePriceBreakdown( $solution ),
-            'penalties' => $this->getPenalties( $solution ),
-            'farerulekey' => $this->getFareRuleKeys( $solution )
+            'refundable' => (string)($solution->xpath('.//air:AirPricingInfo/@Refundable')[0] ?? 'false') === 'true',
+            'pricingMethod' => (string)($solution->xpath('.//air:AirPricingInfo/@PricingMethod')[0]) ?? 'Not Found',
+            'priceBreakdown' => $this->calculatePriceBreakdown($solution),
+            'baggage_allowance' => $baggageAllowances,
+            'penalties' => $this->getPenalties($solution),
+            'farerulekey' => $this->getFareRuleKeys($solution)
         ];
 
         // Calculate total price
-        $commonInfo[ 'totalPrice' ] = array_sum( array_column( $commonInfo[ 'priceBreakdown' ], 'totalPrice' ) );
+        $commonInfo['totalPrice'] = array_sum(array_column($commonInfo['priceBreakdown'], 'totalPrice'));
 
         return $commonInfo;
     }
 
-    private function calculatePriceBreakdown( $solution ) {
+    private function getBaggageAllowances($solution)
+    {
+        $baggageAllowances = [];
+
+        // Get all AirPricingInfo elements for this solution
+        $pricingInfos = $solution->xpath('.//air:AirPricingInfo');
+
+        foreach ($pricingInfos as $pricingInfo) {
+            $fareInfoRef = $pricingInfo->xpath('.//air:FareInfoRef')[0];
+
+            if ($fareInfoRef) {
+                $fareInfoKey = (string)$fareInfoRef['Key'];
+
+                // Find matching FareInfo in FareInfoList using namespace
+                $fareInfo = $this->xml->xpath("//air:FareInfo[@Key='$fareInfoKey']")[0];
+
+                if ($fareInfo) {
+                    $passengerTypeCode = (string)$fareInfo['PassengerTypeCode'];
+                    $passengerType = $this->mapPassengerType($passengerTypeCode);
+
+                    // Skip if already processed this passenger type
+                    if (isset($baggageAllowances[$passengerType])) {
+                        continue;
+                    }
+
+                    // Use xpath with namespace to get BaggageAllowance
+                    $baggageAllowanceNodes = $fareInfo->xpath('.//air:BaggageAllowance');
+                    if (!empty($baggageAllowanceNodes)) {
+                        $baggageAllowance = $baggageAllowanceNodes[0];
+
+                        // Get NumberOfPieces using xpath
+                        $pieces = (int)($baggageAllowance->xpath('.//air:NumberOfPieces')[0] ?? 0);
+
+                        // Get MaxWeight using xpath
+                        $maxWeightNodes = $baggageAllowance->xpath('.//air:MaxWeight');
+                        $maxWeight = '';
+
+                        if (!empty($maxWeightNodes)) {
+                            $maxWeightNode = $maxWeightNodes[0];
+                            $value = (string)($maxWeightNode['Value'] ?? '');
+                            $unit = (string)($maxWeightNode['Unit'] ?? '');
+                            if ($value && $unit) {
+                                $maxWeight = "$value $unit";
+                            }
+                        }
+
+                        Log::debug('Found Baggage Info:', [
+                            'passenger_type' => $passengerType,
+                            'pieces' => $pieces,
+                            'max_weight' => $maxWeight,
+                            'xml' => $baggageAllowance->asXML()
+                        ]);
+
+                        $baggageAllowances[$passengerType] = [
+                            'type' => $passengerType,
+                            'pieces' => $pieces,
+                            'max_weight' => $maxWeight
+                        ];
+                    }
+                }
+            }
+        }
+
+        // Sort baggage allowances
+        $typeOrder = ['Adult' => 1, 'Child' => 2, 'Infant' => 3];
+        uksort($baggageAllowances, function($a, $b) use ($typeOrder) {
+            return ($typeOrder[$a] ?? 999) - ($typeOrder[$b] ?? 999);
+        });
+
+        return array_values($baggageAllowances);
+    }
+
+    private function calculatePriceBreakdown($solution)
+    {
         $priceBreakdown = [];
 
         foreach ($solution->xpath('.//air:AirPricingInfo') as $pricingInfo) {
@@ -238,34 +319,9 @@ class XmlToJson {
         return array_values($priceBreakdown);
     }
 
-    private function calculateFees( $pricingInfo ) {
-        $fees = 0;
-        foreach ( $pricingInfo->xpath( './/air:FareSurcharge/@Amount' ) as $fee ) {
-            $fees += $this->extractNumericValue( ( string )$fee );
-        }
-        return $fees;
-    }
+    private function processSegments($solution)
+    {
 
-    private function updatePriceBreakdown( &$breakdown, $type, $base, $tax, $fees, $total, $count ) {
-        if ( !isset( $breakdown[ $type ] ) ) {
-            $breakdown[ $type ] = [
-                'type' => $type,
-                'baseFare' => $base * $count,
-                'taxes' => $tax * $count,
-                'fees' => $fees * $count,
-                'totalPrice' => $total * $count,
-                'count' => $count
-            ];
-        } else {
-            $breakdown[ $type ][ 'baseFare' ] += $base * $count;
-            $breakdown[ $type ][ 'taxes' ] += $tax * $count;
-            $breakdown[ $type ][ 'fees' ] += $fees * $count;
-            $breakdown[ $type ][ 'totalPrice' ] += $total * $count;
-            $breakdown[ $type ][ 'count' ] += $count;
-        }
-    }
-
-    private function processSegments($solution) {
         $segmentRefs = $solution->xpath('.//air:AirSegmentRef');
         $segmentCount = count($segmentRefs);
         $midPoint = floor($segmentCount / 2);
@@ -347,30 +403,33 @@ class XmlToJson {
         ];
     }
 
-    private function enrichSegment( $segment, $segmentKey, $solution ) {
-        $bookingInfo = $this->findBookingInfo( $solution, $segmentKey );
-        if ( $bookingInfo ) {
-            $segment[ 'booking_code' ] = $bookingInfo[ 'BookingCode' ] ?? '';
-            $segment[ 'booking_count' ] = ( int )( $bookingInfo[ 'BookingCount' ] ?? 0 );
-            $segment[ 'cabin_class' ] = $bookingInfo[ 'CabinClass' ] ?? '';
-            $segment[ 'segmentKey' ] = $segmentKey;
+    private function enrichSegment($segment, $segmentKey, $solution)
+    {
+        $bookingInfo = $this->findBookingInfo($solution, $segmentKey);
+        if ($bookingInfo) {
+            $segment['booking_code'] = $bookingInfo['BookingCode'] ?? '';
+            $segment['booking_count'] = (int)($bookingInfo['BookingCount'] ?? 0);
+            $segment['cabin_class'] = $bookingInfo['CabinClass'] ?? '';
+            $segment['segmentKey'] = $segmentKey;
         }
         return $segment;
     }
 
-    private function buildJourney( $outboundSegments, $inboundSegments, $commonInfo, $isReturn ) {
+    private function buildJourney($outboundSegments, $inboundSegments, $commonInfo, $isReturn)
+    {
         $journey = [
-            'outbound' => $this->buildJourneySection( $outboundSegments, $commonInfo )
+            'outbound' => $this->buildJourneySection($outboundSegments, $commonInfo)
         ];
 
-        if ( $isReturn ) {
-            $journey[ 'inbound' ] = $this->buildJourneySection( $inboundSegments, $commonInfo );
+        if ($isReturn) {
+            $journey['inbound'] = $this->buildJourneySection($inboundSegments, $commonInfo);
         }
 
         return $journey;
     }
 
-    private function buildJourneySection($segments, $commonInfo) {
+    private function buildJourneySection($segments, $commonInfo)
+    {
         if (empty($segments)) return null;
 
         $firstSegment = reset($segments);
@@ -407,6 +466,7 @@ class XmlToJson {
             'city_name' => 'Unknown City'
         ];
 
+
         return array_merge([
             'origin' => $originCode,
             'destination' => $destinationCode,
@@ -424,11 +484,12 @@ class XmlToJson {
             'last_carrier_code' => $lastCarrierCode,
             'last_airline_name' => $lastAirlineInfo['name'],
             'last_logo_path' => $lastAirlineInfo['logo_path'],
-            'total_flight_time' => $this->calculateTotalTravelTime($segments)
+            'total_flight_time' => $this->calculateTotalTravelTime($segments),
         ], $commonInfo, ['segments' => array_values($segments)]);
     }
 
-    private function calculateTotalTravelTime($segments) {
+    private function calculateTotalTravelTime($segments)
+    {
         if (empty($segments)) return '0h 0m';
 
         $totalMinutes = 0;
@@ -449,7 +510,8 @@ class XmlToJson {
         return $this->formatDuration($totalMinutes);
     }
 
-    private function formatDuration($minutes) {
+    private function formatDuration($minutes)
+    {
         $hours = floor($minutes / 60);
         $remainingMinutes = $minutes % 60;
         // Use str_pad to ensure 2 digits for hours and minutes
@@ -458,27 +520,9 @@ class XmlToJson {
         return sprintf('%s hr %s Min', $paddedHours, $paddedMinutes);
     }
 
-    private function calculateRawTravelTime( $segments ) {
-        $totalMinutes = 0;
-        $prevArrivalTime = null;
-
-        foreach ( $segments as $segment ) {
-            $totalMinutes += $segment[ 'flightTime' ];
-            if ( $prevArrivalTime !== null ) {
-                $currentDeparture = strtotime( $segment[ 'departure_date' ] . ' ' . $segment[ 'departure_time' ] );
-                $layoverMinutes = ( $currentDeparture - $prevArrivalTime ) / 60;
-                if ( $layoverMinutes > 0 ) {
-                    $totalMinutes += $layoverMinutes;
-                }
-            }
-            $prevArrivalTime = strtotime( $segment[ 'arrival_date' ] . ' ' . $segment[ 'arrival_time' ] );
-        }
-
-        return $totalMinutes;
-    }
-
     //getPenalties
-    private function getPenalties($solution) {
+    private function getPenalties($solution)
+    {
         $penalties = [
             'change' => ['applies' => 'Anytime', 'amount' => 0],
             'cancel' => ['applies' => 'Anytime', 'amount' => 0]
@@ -498,11 +542,13 @@ class XmlToJson {
         return $penalties;
     }
 
-    private function extractNumericValue( $value ) {
-        return ( float )preg_replace( '/[^0-9.]/', '', ( string )( $value ?? '0' ) );
+    private function extractNumericValue($value)
+    {
+        return (float)preg_replace('/[^0-9.]/', '', (string)($value ?? '0'));
     }
 
-    private function mapPassengerType($code) {
+    private function mapPassengerType($code)
+    {
         static $types = [
             'ADT' => 'Adult',
             'CHD' => 'Child',
@@ -516,11 +562,12 @@ class XmlToJson {
         return $types[strtoupper($code)] ?? $code;
     }
 
-    private function isReturnJourney($segmentRefs) {
+    private function isReturnJourney($segmentRefs)
+    {
         if (count($segmentRefs) <= 1) return false;
 
         $firstSegmentKey = (string)$segmentRefs[0]['Key'];
-        $lastSegmentKey = (string)$segmentRefs[count($segmentRefs)-1]['Key'];
+        $lastSegmentKey = (string)$segmentRefs[count($segmentRefs) - 1]['Key'];
 
         $firstSegment = $this->segments[$firstSegmentKey] ?? null;
         $lastSegment = $this->segments[$lastSegmentKey] ?? null;
@@ -529,7 +576,8 @@ class XmlToJson {
             $firstSegment['departure_code'] === $lastSegment['arrival_code'];
     }
 
-    private function findBookingInfo($solution, $segmentKey) {
+    private function findBookingInfo($solution, $segmentKey)
+    {
         static $bookingInfoCache = [];
 
         if (!isset($bookingInfoCache[$segmentKey])) {
@@ -548,28 +596,29 @@ class XmlToJson {
         return $bookingInfoCache[$segmentKey] ?? null;
     }
 
-    private function getFareRuleKeys( $solution ) {
+    private function getFareRuleKeys($solution)
+    {
         $fareRuleKeys = [];
 
         // Get all FareInfo elements associated with this pricing solution
-        $fareInfoRefs = $solution->xpath( './/air:AirPricingInfo/air:FareInfoRef' );
-        foreach ( $fareInfoRefs as $fareInfoRef ) {
-            $fareInfoKey = ( string )$fareInfoRef[ 'Key' ];
+        $fareInfoRefs = $solution->xpath('.//air:AirPricingInfo/air:FareInfoRef');
+        foreach ($fareInfoRefs as $fareInfoRef) {
+            $fareInfoKey = (string)$fareInfoRef['Key'];
 
             // Find the associated FareInfo element using the Key
-            $fareInfo = $this->xml->xpath( "//air:FareInfo[@Key='$fareInfoKey']" )[ 0 ] ?? null;
-            if ( $fareInfo ) {
-                $origin = ( string )$fareInfo[ 'Origin' ];
-                $destination = ( string )$fareInfo[ 'Destination' ];
+            $fareInfo = $this->xml->xpath("//air:FareInfo[@Key='$fareInfoKey']")[0] ?? null;
+            if ($fareInfo) {
+                $origin = (string)$fareInfo['Origin'];
+                $destination = (string)$fareInfo['Destination'];
                 $routeKey = $origin . '-' . $destination;
 
                 // Get FareRuleKey element
-                $fareRuleKey = $fareInfo->xpath( './/air:FareRuleKey' )[ 0 ] ?? null;
-                if ( $fareRuleKey ) {
-                    $fareRuleKeys[ $routeKey ] = [
-                        'FareInfoRef' => ( string )$fareRuleKey[ 'FareInfoRef' ],
-                        'ProviderCode' => ( string )$fareRuleKey[ 'ProviderCode' ],
-                        'content' => ( string )$fareRuleKey
+                $fareRuleKey = $fareInfo->xpath('.//air:FareRuleKey')[0] ?? null;
+                if ($fareRuleKey) {
+                    $fareRuleKeys[$routeKey] = [
+                        'FareInfoRef' => (string)$fareRuleKey['FareInfoRef'],
+                        'ProviderCode' => (string)$fareRuleKey['ProviderCode'],
+                        'content' => (string)$fareRuleKey
                     ];
                 }
             }
@@ -578,13 +627,12 @@ class XmlToJson {
         return $fareRuleKeys;
     }
 
-    public function parse() {
+    public function parse()
+    {
         $results = [];
-        foreach ( $this->xml->xpath( '//air:AirPricingSolution' ) as $solution ) {
-            $results[] = $this->processPricingSolution( $solution );
+        foreach ($this->xml->xpath('//air:AirPricingSolution') as $solution) {
+            $results[] = $this->processPricingSolution($solution);
         }
         return ['flights' => $results];
     }
-
 }
-
