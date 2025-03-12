@@ -2183,10 +2183,10 @@ function number_format(nStr) {
                                                                                     </td>
 
                                                                                     <td style="font-size: 11px;">
-                                                                                        <b>{{ flight.outbound.segments[0].cabin_class }}</b>
+                                                                                        <b v-if="flight.outbound.segments">{{ flight.outbound.segments[0].cabin_class }}</b>
                                                                                         <br>
-                                                                                        <small v-if="baggage.max_weight">{{ baggage.max_weight }} / Persion</small>
-                                                                                        <small v-if="baggage.pieces">{{ flight.outbound.baggage_allowance[0].pieces }} Pcs / Person</small>
+                                                                                        <small v-if="baggage.max_weight">{{ baggage.max_weight }} / Person</small>
+                                                                                        <small v-else="baggage.pieces">{{ flight.outbound.baggage_allowance[0].pieces }} Pcs / Person</small>
                                                                                     </td>
 
                                                                                 </tr>
