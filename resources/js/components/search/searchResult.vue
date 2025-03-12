@@ -282,7 +282,10 @@ async function Lowfaresearch() {
         authStore.GlobalLoading = true;
         loadging.value = true;
 
+        const startTime = performance.now();
         const response = await axiosInstance.post("Lowfaresearch", form);
+        const endTime = performance.now();
+        ExecutionTime.value = ((endTime - startTime) / 1000).toFixed(2);
 
         flights.value = response.data.flights;
         totalFlights.value = response.data.flights.length;
