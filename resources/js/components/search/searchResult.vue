@@ -1430,7 +1430,7 @@ function number_format(nStr) {
                                                                 <div class="d-flex">
                                                                     <div class="text-black">
                                                                         <img src="../../../../public/theme/appimages/Left_Aligned Line.svg"
-                                                                            alt="" style="background: linear-gradient(90deg, #FFF 4.02%, #F4F4F4 40.78%, #787878 117.19%);">
+                                                                            alt="">
                                                                     </div>
                                                                     <div>
                                                                         <img style="transform: rotate(180deg)"
@@ -2174,44 +2174,23 @@ function number_format(nStr) {
                                                                     <div class="table-responsive">
                                                                         <table class="table table-sm ">
                                                                             <tbody class="text-start">
-                                                                                <tr>
-                                                                                    <td style="font-size: 11px;">
-                                                                                        <b>DAC-CCU</b>
+                                                                                <tr v-for="baggage in flight.outbound.baggage_allowance">
+
+                                                                                    <td style="font-size: 11px;" >
+                                                                                        <b> {{ flight.outbound.origin }} - {{ flight.outbound.destination }}</b>
                                                                                         <br>
-                                                                                        <small>Economy</small>
+                                                                                        <small>{{ baggage.type }}</small>
                                                                                     </td>
 
                                                                                     <td style="font-size: 11px;">
-                                                                                        <b>Cabin</b>
+                                                                                        <b>{{ flight.outbound.segments[0].cabin_class }}</b>
                                                                                         <br>
-                                                                                        <small>10 Kg</small>
-                                                                                    </td>
-                                                                                    <td style="font-size: 11px;">
-                                                                                        <b>Check In</b>
-                                                                                        <br>
-                                                                                        <small>2
-                                                                                            Pieces</small>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td style="font-size: 11px;">
-                                                                                        <b>CCU-BDX</b>
-                                                                                        <br>
-                                                                                        <small>Economy</small>
+                                                                                        <small v-if="baggage.max_weight">{{ baggage.max_weight }} / Persion</small>
+                                                                                        <small v-if="baggage.pieces">{{ flight.outbound.baggage_allowance[0].pieces }} Pcs / Person</small>
                                                                                     </td>
 
-                                                                                    <td style="font-size: 11px;">
-                                                                                        <b>Cabin</b>
-                                                                                        <br>
-                                                                                        <small>10 Kg</small>
-                                                                                    </td>
-                                                                                    <td style="font-size: 11px;">
-                                                                                        <b>Check In</b>
-                                                                                        <br>
-                                                                                        <small>2
-                                                                                            Pieces</small>
-                                                                                    </td>
                                                                                 </tr>
+
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
