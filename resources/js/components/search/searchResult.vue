@@ -2127,53 +2127,19 @@ function number_format(nStr) {
                                                                             <tbody class="text-start">
                                                                                 <tr style="font-size: 10px;">
                                                                                     <td>
-                                                                                        <b>Total Amount</b>
+                                                                                        <b>Gross Fare &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
                                                                                     </td>
                                                                                     <td
                                                                                         v-for="itemPrice, index in flight.outbound.priceBreakdown">
                                                                                         <b>
-                                                                                            <span
-                                                                                                v-if="index + 1 == Object.keys(itemPrice).length - 1">
-
-                                                                                                BDT {{((form.ADT *
-                                                                                                    (flight.outbound.priceBreakdown.find(
-                                                                                                        item => item.type ==
-                                                                                                            "Adult")?.taxes ||
-                                                                                                        0)) +
-                                                                                                    (form.CNN *
-                                                                                                        (flight.outbound.priceBreakdown.find(
-                                                                                                            item =>
-                                                                                                item.type ==
-                                                                                                "Child"
-                                                                                                )?.taxes ||
-                                                                                                0)) +
-                                                                                                (form.INF *
-                                                                                                (flight.outbound.priceBreakdown.find(
-                                                                                                item =>
-                                                                                                item.type ==
-                                                                                                "Infant"
-                                                                                                )?.taxes ||
-                                                                                                0))) + ((form.ADT *
-                                                                                                (flight.outbound.priceBreakdown.find(
-                                                                                                item => item.type ==
-                                                                                                "Adult" )?.baseFare ||
-                                                                                                0)) +
-                                                                                                (form.CNN *
-                                                                                                (flight.outbound.priceBreakdown.find(
-                                                                                                item =>
-                                                                                                item.type ==
-                                                                                                "Child"
-                                                                                                )?.baseFare ||
-                                                                                                0)) +
-                                                                                                (form.INF *
-                                                                                                (flight.outbound.priceBreakdown.find(
-                                                                                                item =>
-                                                                                                item.type ==
-                                                                                                "Infant"
-                                                                                                )?.baseFare ||
-                                                                                                0))) }}
-
-
+                                                                                            <span v-if="index == 0">
+                                                                                                BDT {{
+                                                                                                    ['Adult', 'Child', 'Infant'].reduce((total, type) => {
+                                                                                                        const breakdown = flight.outbound.priceBreakdown.find(item => item.type === type) || {};
+                                                                                                        const count = form[type === 'Adult' ? 'ADT' : type === 'Child' ? 'CNN' : 'INF'];
+                                                                                                        return total + (count * (breakdown.taxes || 0)) + (count * (breakdown.baseFare || 0));
+                                                                                                    }, 0)
+                                                                                                }}
                                                                                             </span>
                                                                                         </b>
 
