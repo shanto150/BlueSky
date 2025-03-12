@@ -262,13 +262,6 @@ class XmlToJson
                             }
                         }
 
-                        Log::debug('Found Baggage Info:', [
-                            'passenger_type' => $passengerType,
-                            'pieces' => $pieces,
-                            'max_weight' => $maxWeight,
-                            'xml' => $baggageAllowance->asXML()
-                        ]);
-
                         $baggageAllowances[$passengerType] = [
                             'type' => $passengerType,
                             'pieces' => $pieces,
