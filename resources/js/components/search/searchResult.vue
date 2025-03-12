@@ -282,7 +282,10 @@ async function Lowfaresearch() {
         authStore.GlobalLoading = true;
         loadging.value = true;
 
+        const startTime = performance.now();
         const response = await axiosInstance.post("Lowfaresearch", form);
+        const endTime = performance.now();
+        ExecutionTime.value = ((endTime - startTime) / 1000).toFixed(2);
 
         flights.value = response.data.flights;
         totalFlights.value = response.data.flights.length;
@@ -1725,21 +1728,21 @@ function formatDate (dateString) {
                                                                 <div class="d-flex">
                                                                     <div class="p-2 flex-grow-1">
                                                                         <b>
-                                                                            <img src="../../../../public/theme/appimages/Plane.svg"
-                                                                                alt="">
+                                                                            <!-- <img :src="returnRoute"
+                                                                                alt=""> -->
                                                                         </b>
                                                                         <small><b><span
                                                                                     class="bluesky-departure-text">Departure
-                                                                                    From</span></b>
+                                                                                    From </span></b>
                                                                             <b><span
                                                                                     class="bluesky-departure-airport-text">
-                                                                                    Dubai Internation Airport
+                                                                                    {{ returnRoute.Origin_Airport_Name }}
                                                                                 </span></b>
                                                                         </small>
                                                                     </div>
 
                                                                     <div class="p-2 bluesky-departure-text fw-bold">
-                                                                        Flight Time: 01 hr 45 min
+                                                                        Flight Time: {{ returnRoute.flightTime1 }}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1751,19 +1754,17 @@ function formatDate (dateString) {
                                                                             class="d-block justify-content-center align-items-center h-100 w-100">
                                                                             <div class="text-black-"
                                                                                 style="color: #0fb3a6;">
-                                                                                <b>DXB</b>
+                                                                                <b>{{ returnRoute.departure_code}}</b>
                                                                             </div>
                                                                             <div>
                                                                                 <small style="font-size: 13px;"
-                                                                                    class="text-black"><b>10:30
-                                                                                        AM |</b></small>
-                                                                                <span style="font-size: 11px;">19
-                                                                                    Jan,2025</span>
+                                                                                    class="text-black"><b>{{returnRoute.departure_time}} | </b></small>
+                                                                                <span style="font-size: 11px;">{{formatDate(returnRoute.departure_date)}}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
                                                                                     style="font-size: 12px; color: #5e6878;">Terminal:
-                                                                                    2</small>
+                                                                                    {{ returnRoute.originTerminal }}</small>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1776,19 +1777,18 @@ function formatDate (dateString) {
                                                                             class="d-block justify-content-center align-items-center h-100 w-100">
                                                                             <div class="text-black-"
                                                                                 style="color: #0fb3a6;">
-                                                                                <b>CCU</b>
+                                                                                <b>{{ returnRoute.arrival_code}}</b>
                                                                             </div>
                                                                             <div>
                                                                                 <small style="font-size: 13px;"
-                                                                                    class="text-black"><b>10:30
-                                                                                        AM |</b></small>
-                                                                                <span style="font-size: 11px;">19
-                                                                                    Jan,2025</span>
+                                                                                    class="text-black"><b>{{returnRoute.arrival_time}} |</b></small>
+                                                                                <span style="font-size: 11px;">
+                                                                                    {{formatDate(returnRoute.arrival_date)}}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
                                                                                     style="font-size: 12px; color: #5e6878;">Terminal:
-                                                                                    3</small>
+                                                                                    {{ returnRoute.destinationTerminal }}</small>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1801,10 +1801,10 @@ function formatDate (dateString) {
 
                                                                             <div class="border border-1 text-center p-1"
                                                                                 style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px;">
-                                                                                QR667- Boing787</div>
+                                                                                {{ returnRoute.flight }} - {{ returnRoute.aircraft_name }}</div>
                                                                             <div class="border border-1 text-center p-1"
                                                                                 style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px;">
-                                                                                Class: Economy
+                                                                                Class: {{ returnRoute.cabin_class }}
                                                                             </div>
                                                                         </div>
 
@@ -1813,10 +1813,10 @@ function formatDate (dateString) {
                                                                     <div class="col-md-6">
                                                                         <div class="float-end mt-2">
                                                                             <img height="35" width="60"
-                                                                                src="../../../../public/uploads/airlines/EK.svg"
+                                                                                :src="returnRoute.logo_path"
                                                                                 alt="">
-                                                                            <span class="pt-2 fw-bold"
-                                                                                style="font-size: 11px;">Emirates</span>
+                                                                            <span class="pt-2 ms-2 fw-bold"
+                                                                                style="font-size: 11px;">{{ returnRoute.airline_name }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1830,14 +1830,15 @@ function formatDate (dateString) {
                                                                                 src="../../../../public/theme/appimages/location.svg"
                                                                                 alt="">
 
-                                                                            <span class="bluesky-departure-text">Layover
-                                                                                at <span
-                                                                                    class="laover-city">Kolkata</span>
-                                                                                |</span>
-                                                                            <span
-                                                                                class="bluesky-departure-airport-text">Netaji
-                                                                                Subhas Chandra Bose
-                                                                                Airport</span>
+                                                                            <span class="bluesky-departure-text">
+
+                                                                                <span v-if="returnRoute.lastitem">Reached Destination</span>
+                                                                                <span v-else>Layover </span>
+                                                                                at  <span
+                                                                                    class="laover-city">{{ returnRoute.Destination_City_Name }}  <span v-if="!returnRoute.lastitem">- {{ returnRoute.layover_time }}</span></span>
+                                                                                | </span>
+                                                                            <span style="font-size: 12px;" class="bluesky-departure-airport-text w-100">
+                                                                                {{returnRoute.Destination_Airport_Name}}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
