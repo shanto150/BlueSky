@@ -1301,7 +1301,7 @@ function showRouteDetails(info) {
                                                                         </div>
                                                                         <div>
                                                                             <img style="transform: rotate(45deg)"
-                                                                                src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                                src="../../../../public/theme/animation/Route_Aircraft.svg"
                                                                                 alt="" height="23" width="23">
                                                                         </div>
                                                                         <div class="text-black">
@@ -2169,7 +2169,7 @@ function showRouteDetails(info) {
                                                                                 </div>
                                                                                 <div>
                                                                                     <img style="transform: rotate(45deg)"
-                                                                                        src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                                        src="../../../../public/theme/animation/Route_Aircraft.svg"
                                                                                         alt="" height="23" width="23">
                                                                                 </div>
                                                                                 <div class="text-black">
@@ -2314,7 +2314,7 @@ function showRouteDetails(info) {
                                                                                 </div>
                                                                                 <div>
                                                                                     <img style="transform: rotate(225deg)"
-                                                                                        src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                                        src="../../../../public/theme/animation/Route_Aircraft.svg"
                                                                                         alt="" height="23" width="23">
                                                                                 </div>
                                                                                 <div class="text-black">
