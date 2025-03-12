@@ -1226,7 +1226,7 @@ function number_format(nStr) {
                                                                 class="d-flex justify-content-center align-items-center h-100 w-100">
                                                                 <div>
                                                                     <div class="text-black"><b>{{ flight.outbound.origin
-                                                                    }}-{{
+                                                                            }}-{{
                                                                                 flight.outbound.destination }}</b>
                                                                     </div>
                                                                     <div style="font-size: 11px; color: #8327a4">
@@ -1385,7 +1385,7 @@ function number_format(nStr) {
                                                                 class="d-flex justify-content-center align-items-center h-100 w-100">
                                                                 <div>
                                                                     <div class="text-black"><b>{{ flight.inbound.origin
-                                                                    }} - {{ flight.inbound.destination }}</b>
+                                                                            }} - {{ flight.inbound.destination }}</b>
                                                                     </div>
                                                                     <div style="font-size: 11px; color: #8327a4">
                                                                         {{ flight.inbound.first_carrier_code }} | {{
@@ -1408,7 +1408,7 @@ function number_format(nStr) {
                                                                 <div>
                                                                     <small style="font-size: 12px; color: #5e6878;">{{
                                                                         formatDate(flight.inbound.departure_date)
-                                                                    }}</small>
+                                                                        }}</small>
                                                                 </div>
                                                                 <div>
                                                                     <small
@@ -1643,7 +1643,7 @@ function number_format(nStr) {
 
                                                                     <div class="p-2 bluesky-departure-text flight-time">
                                                                         <small><b>Flight Time: {{ route.flightTime1
-                                                                                }}</b></small>
+                                                                        }}</b></small>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1665,7 +1665,7 @@ function number_format(nStr) {
                                                                                             class="vertical-line">|</span></b></small>
                                                                                 <span style="font-size: 11px;">{{
                                                                                     formatDate(route.departure_date)
-                                                                                    }}</span>
+                                                                                }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1681,7 +1681,7 @@ function number_format(nStr) {
                                                                             alt="" class="details-route-image">
                                                                         <span class="flight-time-mobile">{{
                                                                             route.flightTime1
-                                                                        }}</span>
+                                                                            }}</span>
                                                                     </div>
                                                                     <div class="col-sm-4 col-md-4 col-4">
                                                                         <div
@@ -1698,7 +1698,7 @@ function number_format(nStr) {
                                                                                             class="vertical-line">|</span></b></small>
                                                                                 <span style="font-size: 11px;">{{
                                                                                     formatDate(route.arrival_date)
-                                                                                }}</span>
+                                                                                    }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1804,7 +1804,7 @@ function number_format(nStr) {
 
                                                                     <div class="p-2 bluesky-departure-text flight-time">
                                                                         <small>Flight Time: {{ returnRoute.flightTime1
-                                                                            }}</small>
+                                                                        }}</small>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1827,7 +1827,7 @@ function number_format(nStr) {
                                                                                     </b></small>
                                                                                 <span style="font-size: 11px;">{{
                                                                                     formatDate(returnRoute.departure_date)
-                                                                                    }}</span>
+                                                                                }}</span>
                                                                             </div>
                                                                             <div>
                                                                                 <small
@@ -1842,7 +1842,7 @@ function number_format(nStr) {
                                                                             alt="" class="details-route-image">
                                                                         <span class="flight-time-mobile">{{
                                                                             returnRoute.flightTime1
-                                                                        }}</span>
+                                                                            }}</span>
                                                                     </div>
 
                                                                     <div class="col-md-4 col-4">
@@ -1928,7 +1928,7 @@ function number_format(nStr) {
                                                                                         <span v-else>Layover </span>
                                                                                         at <span>{{
                                                                                             returnRoute.Destination_City_Name
-                                                                                            }} <span
+                                                                                        }} <span
                                                                                                 v-if="!returnRoute.lastitem">-{{
                                                                                                     returnRoute.layover_time
                                                                                                 }}</span></span>
@@ -2087,8 +2087,7 @@ function number_format(nStr) {
                                                                                                 form.ADT }}</span>
                                                                                         <span
                                                                                             v-if="itemPrice.type == 'Child'">
-                                                                                            {{
-                                                                                                form.CNN }}</span>
+                                                                                            {{ form.CNN }}</span>
                                                                                         <span
                                                                                             v-if="itemPrice.type == 'Infant'">{{
                                                                                                 form.INF }}</span>
@@ -2108,10 +2107,77 @@ function number_format(nStr) {
                                                                                             v-if="itemPrice.type == 'Infant'">BDT
                                                                                             {{ form.INF *
                                                                                                 itemPrice.taxes }}</span>
-
-
                                                                                     </td>
 
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+
+
+                                                                    <!-- <div
+                                                                        class="border fare-summary-bg p-1 rounded-1 mb-1">
+                                                                        <span class="custom-text-purple">
+                                                                            Gross Amount
+                                                                        </span>
+                                                                    </div> -->
+
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-striped ">
+                                                                            <tbody class="text-start">
+                                                                                <tr style="font-size: 10px;">
+                                                                                    <td>
+                                                                                        <b>Total Amount</b>
+                                                                                    </td>
+                                                                                    <td
+                                                                                        v-for="itemPrice, index in flight.outbound.priceBreakdown">
+                                                                                        <b>
+                                                                                            <span
+                                                                                                v-if="index + 1 == Object.keys(itemPrice).length - 1">
+
+                                                                                                BDT {{((form.ADT *
+                                                                                                    (flight.outbound.priceBreakdown.find(
+                                                                                                        item => item.type ==
+                                                                                                            "Adult")?.taxes ||
+                                                                                                        0)) +
+                                                                                                    (form.CNN *
+                                                                                                        (flight.outbound.priceBreakdown.find(
+                                                                                                            item =>
+                                                                                                item.type ==
+                                                                                                "Child"
+                                                                                                )?.taxes ||
+                                                                                                0)) +
+                                                                                                (form.INF *
+                                                                                                (flight.outbound.priceBreakdown.find(
+                                                                                                item =>
+                                                                                                item.type ==
+                                                                                                "Infant"
+                                                                                                )?.taxes ||
+                                                                                                0))) + ((form.ADT *
+                                                                                                (flight.outbound.priceBreakdown.find(
+                                                                                                item => item.type ==
+                                                                                                "Adult" )?.baseFare ||
+                                                                                                0)) +
+                                                                                                (form.CNN *
+                                                                                                (flight.outbound.priceBreakdown.find(
+                                                                                                item =>
+                                                                                                item.type ==
+                                                                                                "Child"
+                                                                                                )?.baseFare ||
+                                                                                                0)) +
+                                                                                                (form.INF *
+                                                                                                (flight.outbound.priceBreakdown.find(
+                                                                                                item =>
+                                                                                                item.type ==
+                                                                                                "Infant"
+                                                                                                )?.baseFare ||
+                                                                                                0))) }}
+
+
+                                                                                            </span>
+                                                                                        </b>
+
+                                                                                    </td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
