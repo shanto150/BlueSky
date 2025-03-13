@@ -147,6 +147,18 @@ class XmlToJson
         $equipmentCode = (string)$segment['Equipment'];
         $aircraftName = $this->aircraftTypes[$equipmentCode] ?? 'Unknown Aircraft';
 
+        // Get codeshare information
+        $codeshareInfo = null;
+        $codeshareNode = $segment->xpath('./air:CodeshareInfo')[0] ?? null;
+        if ($codeshareNode) {
+            $codeshareInfo = [
+                'operating_carrier' => (string)$codeshareNode['OperatingCarrier'],
+                'operating_flight_number' => (string)$codeshareNode['OperatingFlightNumber'],
+                'logo_path' => $this->airlineNames[(string)$codeshareNode['OperatingCarrier']]['logo_path'] ?? '/default-airline-logo.png',
+                'operating_airline_name' => $this->airlineNames[(string)$codeshareNode['OperatingCarrier']]['name'] ?? 'Unknown Airline'
+            ];
+        }
+
         return [
             'carrier_code' => $carrierCode,
             'airline_name' => $airlineInfo['name'],
@@ -173,7 +185,10 @@ class XmlToJson
             'cabin_class' => '',
             'segmentKey' => '',
             'equipment' => $equipmentCode,
-            'aircraft_name' => $aircraftName
+            'aircraft_name' => $aircraftName,
+            // Add codeshare info
+            'is_codeshare' => $codeshareInfo !== null,
+            'codeshare_info' => $codeshareInfo,
         ];
     }
 
