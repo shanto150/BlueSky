@@ -301,14 +301,16 @@ async function Lowfaresearch() {
     }
 }
 
-function showRouteDetails(info) {
+function showRouteDetails(info,index) {
     const isActive = info === 2;
-    $('.active-btn').toggleClass('bluesky-route-btn-primary', !isActive);
-    $('.deactive-btn').toggleClass('bluesky-route-btn-primary', isActive);
-    $('.active-btn').toggleClass('bluesky-route-btn-outline-primary', isActive);
-    $('.deactive-btn').toggleClass('bluesky-route-btn-outline-primary', !isActive);
-    $('.flight-tab-hide').toggleClass('d-none', !isActive);
-    $('.flight-tab-active').toggleClass('d-none', isActive);
+
+    $('#active-btn-'+index).toggleClass('bluesky-route-btn-primary '+index, !isActive);
+    $('#deactive-btn-'+index).toggleClass('bluesky-route-btn-primary '+index, isActive);
+
+    $('#active-btn-'+index).toggleClass('bluesky-route-btn-outline-primary '+index, isActive);
+    $('#deactive-btn-'+index).toggleClass('bluesky-route-btn-outline-primary '+index, !isActive);
+    $('.flight-tab-hide-'+index).toggleClass('d-none', !isActive);
+    $('.flight-tab-active-'+index).toggleClass('d-none', isActive);
 }
 
 function formatDate(dateString) {
@@ -1610,21 +1612,21 @@ function number_format(nStr) {
                                                 <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
                                                     <div class="d-flex d-flex-row mb-1">
                                                         <div v-if="flight.outbound" class="p-1 bd-highlight">
-                                                            <button @click="showRouteDetails(1)"
-                                                                class="btn btn-sm bluesky-route-btn-primary active-btn px-2 py-1">{{
+                                                            <button @click="showRouteDetails(1,index)"
+                                                                :class="`btn btn-sm px-2 py-1 bluesky-route-btn-primary ${index}`" :id="'active-btn-'+index">{{
                                                                     flight.outbound.origin }}-{{ flight.outbound.destination
                                                                 }}</button>
                                                         </div>
                                                         <div v-if="flight.inbound" class="p-1 bd-highlight">
-                                                            <button @click="showRouteDetails(2)"
-                                                                class="btn btn-sm bluesky-route-btn-outline-primary deactive-btn px-2 py-1">{{
+                                                            <button @click="showRouteDetails(2,index)"
+                                                                :class="`btn btn-sm px-2 py-1 bluesky-route-btn-outline-primary ${index}`" :id="'deactive-btn-'+index">{{
                                                                     flight.inbound.origin }}-{{ flight.inbound.destination
                                                                 }}</button>
                                                         </div>
                                                     </div>
 
                                                     <div v-for="route in flight.outbound.segments"
-                                                        class="flight-tab-active fadeIn">
+                                                        :class="`flight-tab-active-${index} fadeIn`">
                                                         <div class="card">
                                                             <div class="card-header accorion-item-title-color m-0 p-0 "
                                                                 style="background-color: #f2f5f7;">
@@ -1784,7 +1786,7 @@ function number_format(nStr) {
 
                                                     <div v-if="flight.inbound"
                                                         v-for="returnRoute in flight.inbound.segments"
-                                                        class="flight-tab-hide d-none fadeIn">
+                                                        :class="`flight-tab-hide-${index} d-none fadeIn`">
                                                         <div class="card">
                                                             <div class="card-header accorion-item-title-color m-0 p-0"
                                                                 style="background-color: #f2f5f7;">
@@ -2013,12 +2015,14 @@ function number_format(nStr) {
                                                         style="background-color: #7944eb !important;">
                                                         <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
                                                             type="button" data-bs-toggle="collapse"
-                                                            data-bs-target="#flush-fare-summary" aria-expanded="false"
-                                                            aria-controls="flush-fare-summary">
+
+                                                            :data-bs-target="'#flush-fare-summary-' + index"
+                                                            aria-expanded="false"
+                                                            :aria-controls="'flush-fare-summary-' + index">
                                                             Fare Summary
                                                         </button>
                                                     </h2>
-                                                    <div id="flush-fare-summary" class="accordion-collapse collapse"
+                                                    <div :id="'flush-fare-summary-' + index" class="accordion-collapse collapse"
                                                         aria-labelledby="flush-headingOne"
                                                         data-bs-parent="#accordionFlushExample" style="">
                                                         <div class="accordion-body">
@@ -2062,8 +2066,6 @@ function number_format(nStr) {
                                                                                             v-if="itemPrice.type == 'Infant'">BDT
                                                                                             {{ form.INF *
                                                                                                 itemPrice.baseFare }}</span>
-
-
 
 
                                                                                     </td>
@@ -2160,12 +2162,14 @@ function number_format(nStr) {
                                                     <h2 class="accordion-header" id="flush-headingTwo">
                                                         <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
                                                             type="button" data-bs-toggle="collapse"
-                                                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                                            aria-controls="flush-collapseTwo">
+                                                            :data-bs-target="'#flush-collapseTwo-' + index" aria-expanded="false"
+                                                            :aria-controls="'flush-collapseTwo-' + index">
                                                             Baggadge Information
                                                         </button>
                                                     </h2>
-                                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
+
+
+                                                    <div  :id="'flush-collapseTwo-' + index" class="accordion-collapse collapse"
                                                         aria-labelledby="flush-headingTwo"
                                                         data-bs-parent="#accordionFlushExample" style="">
                                                         <div class="accordion-body">
@@ -2190,7 +2194,29 @@ function number_format(nStr) {
                                                                                     </td>
 
                                                                                 </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
 
+                                                                    <div v-if="flight.inbound" class="table-responsive">
+                                                                        <table class="table table-sm ">
+                                                                            <tbody>
+                                                                                <tr v-for="baggage in flight.inbound.baggage_allowance">
+
+                                                                                    <td style="font-size: 11px;" >
+                                                                                        <b> {{ flight.inbound.origin }} - {{ flight.inbound.destination }}</b>
+                                                                                        <br>
+                                                                                        <small>{{ baggage.type }}</small>
+                                                                                    </td>
+
+                                                                                    <td style="font-size: 11px;">
+                                                                                        <b v-if="flight.inbound.segments">{{ flight.inbound.segments[0].cabin_class }}</b>
+                                                                                        <br>
+                                                                                        <small v-if="baggage.max_weight">{{ baggage.max_weight }} / Person</small>
+                                                                                        <small v-else="baggage.pieces">{{ flight.inbound.baggage_allowance[0].pieces }} Pcs / Person</small>
+                                                                                    </td>
+
+                                                                                </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
