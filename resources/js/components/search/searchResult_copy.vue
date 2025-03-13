@@ -1300,8 +1300,8 @@ function showRouteDetails(info) {
                                                                                 alt="">
                                                                         </div>
                                                                         <div>
-                                                                            <img style="transform: rotate(45deg)"
-                                                                                src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                            <img style="transform: rotate(0deg)"
+                                                                                src="../../../../public/theme/animation/Route_Aircraft.svg"
                                                                                 alt="" height="23" width="23">
                                                                         </div>
                                                                         <div class="text-black">
@@ -1659,13 +1659,14 @@ function showRouteDetails(info) {
                                                             <div class="accordion-item">
                                                                 <h2 class="accordion-header rounded"
                                                                     id="flush-headingOne"
-                                                                    style="background-color: #7944eb !important;">
+                                                                    >
                                                                     <button
                                                                         class="accordion-button m-0 p-0 px-3 py-2 collapsed"
                                                                         type="button" data-bs-toggle="collapse"
                                                                         data-bs-target="#flush-fare-summary"
                                                                         aria-expanded="false"
-                                                                        aria-controls="flush-fare-summary">
+                                                                        aria-controls="flush-fare-summary"
+                                                                        >
                                                                         Fare Summary
                                                                     </button>
                                                                 </h2>
@@ -1814,46 +1815,34 @@ function showRouteDetails(info) {
                                                                                             <tr>
                                                                                                 <td
                                                                                                     style="font-size: 11px;">
-                                                                                                    <b>DAC-CCU</b>
+                                                                                                    <b>DAC-BDX</b>
                                                                                                     <br>
-                                                                                                    <small>Economy</small>
+                                                                                                    <small>Adult</small>
                                                                                                 </td>
 
                                                                                                 <td
                                                                                                     style="font-size: 11px;">
-                                                                                                    <b>Cabin</b>
+                                                                                                    <b>Economy</b>
                                                                                                     <br>
                                                                                                     <small>10 Kg</small>
                                                                                                 </td>
-                                                                                                <td
-                                                                                                    style="font-size: 11px;">
-                                                                                                    <b>Check In</b>
-                                                                                                    <br>
-                                                                                                    <small>2
-                                                                                                        Pieces</small>
-                                                                                                </td>
+
                                                                                             </tr>
                                                                                             <tr>
                                                                                                 <td
                                                                                                     style="font-size: 11px;">
-                                                                                                    <b>CCU-BDX</b>
+                                                                                                    <b>DAC-BDX</b>
                                                                                                     <br>
-                                                                                                    <small>Economy</small>
+                                                                                                    <small>Child</small>
                                                                                                 </td>
 
                                                                                                 <td
                                                                                                     style="font-size: 11px;">
-                                                                                                    <b>Cabin</b>
+                                                                                                    <b>Economy</b>
                                                                                                     <br>
                                                                                                     <small>10 Kg</small>
                                                                                                 </td>
-                                                                                                <td
-                                                                                                    style="font-size: 11px;">
-                                                                                                    <b>Check In</b>
-                                                                                                    <br>
-                                                                                                    <small>2
-                                                                                                        Pieces</small>
-                                                                                                </td>
+
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
@@ -2168,8 +2157,8 @@ function showRouteDetails(info) {
                                                                                         alt="">
                                                                                 </div>
                                                                                 <div>
-                                                                                    <img style="transform: rotate(45deg)"
-                                                                                        src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                                    <img style="transform: rotate(0deg)"
+                                                                                        src="../../../../public/theme/animation/Route_Aircraft.svg"
                                                                                         alt="" height="23" width="23">
                                                                                 </div>
                                                                                 <div class="text-black">
@@ -2313,8 +2302,8 @@ function showRouteDetails(info) {
                                                                                         alt="">
                                                                                 </div>
                                                                                 <div>
-                                                                                    <img style="transform: rotate(225deg)"
-                                                                                        src="../../../../public/theme/animation/Route_Aircraft.gif"
+                                                                                    <img style="transform: rotate(180deg)"
+                                                                                        src="../../../../public/theme/animation/Route_Aircraft.svg"
                                                                                         alt="" height="23" width="23">
                                                                                 </div>
                                                                                 <div class="text-black">
