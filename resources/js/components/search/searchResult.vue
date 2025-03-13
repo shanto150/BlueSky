@@ -2191,7 +2191,7 @@ function number_format(nStr) {
                                                                                     <td style="font-size: 11px;">
                                                                                         <b v-if="flight.outbound.segments">{{ flight.outbound.segments[0].cabin_class }}</b>
                                                                                         <br>
-                                                                                        <small v-if="baggage.max_weight">{{ (baggage.max_weight).includes('Kilograms') ? (baggage.max_weight).replace('Kilograms','KG') : ''}}/Person</small>
+                                                                                        <small v-if="baggage.max_weight">{{ (baggage.max_weight).includes('Kilograms') ? (baggage.max_weight).replace('Kilograms','Kg') : ''}}/Person</small>
 
                                                                                         <small v-else="baggage.pieces">{{ flight.outbound.baggage_allowance[0].pieces }} Pcs/Person</small>
                                                                                     </td>
@@ -2217,7 +2217,7 @@ function number_format(nStr) {
                                                                                     <td style="font-size: 11px;">
                                                                                         <b v-if="flight.inbound.segments">{{ flight.inbound.segments[0].cabin_class }}</b>
                                                                                         <br>
-                                                                                        <small v-if="baggage.max_weight">{{ (baggage.max_weight).includes('Kilograms') ? (baggage.max_weight).replace('Kilograms','KG') : ''}}/Person</small>
+                                                                                        <small v-if="baggage.max_weight">{{ (baggage.max_weight).includes('Kilograms') ? (baggage.max_weight).replace('Kilograms','Kg') : ''}}/Person</small>
                                                                                         <small v-else="baggage.pieces">{{ flight.inbound.baggage_allowance[0].pieces }} Pcs/Person</small>
                                                                                     </td>
 
