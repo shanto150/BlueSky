@@ -2178,19 +2178,22 @@ function number_format(nStr) {
                                                                     <div class="table-responsive">
                                                                         <table class="table table-sm ">
                                                                             <tbody class="text-start">
-                                                                                <tr v-for="baggage in flight.outbound.baggage_allowance">
+                                                                                <tr v-for="baggage,index in flight.outbound.baggage_allowance">
 
                                                                                     <td style="font-size: 11px;" >
-                                                                                        <b> {{ flight.outbound.origin }} - {{ flight.outbound.destination }}</b>
+                                                                                        <span v-if="index==0">
+                                                                                            <b> {{ flight.outbound.origin }} - {{ flight.outbound.destination }}</b>
                                                                                         <br>
+                                                                                        </span>
                                                                                         <small>{{ baggage.type }}</small>
                                                                                     </td>
 
                                                                                     <td style="font-size: 11px;">
                                                                                         <b v-if="flight.outbound.segments">{{ flight.outbound.segments[0].cabin_class }}</b>
                                                                                         <br>
-                                                                                        <small v-if="baggage.max_weight">{{ baggage.max_weight }} / Person</small>
-                                                                                        <small v-else="baggage.pieces">{{ flight.outbound.baggage_allowance[0].pieces }} Pcs / Person</small>
+                                                                                        <small v-if="baggage.max_weight">{{ (baggage.max_weight).includes('Kilograms') ? (baggage.max_weight).replace('Kilograms','KG') : ''}}/Person</small>
+
+                                                                                        <small v-else="baggage.pieces">{{ flight.outbound.baggage_allowance[0].pieces }} Pcs/Person</small>
                                                                                     </td>
 
                                                                                 </tr>
@@ -2201,19 +2204,21 @@ function number_format(nStr) {
                                                                     <div v-if="flight.inbound" class="table-responsive">
                                                                         <table class="table table-sm ">
                                                                             <tbody>
-                                                                                <tr v-for="baggage in flight.inbound.baggage_allowance">
+                                                                                <tr v-for="baggage,index in flight.inbound.baggage_allowance">
 
                                                                                     <td style="font-size: 11px;" >
-                                                                                        <b> {{ flight.inbound.origin }} - {{ flight.inbound.destination }}</b>
+                                                                                        <span v-if="index==0">
+                                                                                            <b> {{ flight.inbound.origin }} - {{ flight.inbound.destination }}</b>
                                                                                         <br>
+                                                                                        </span>
                                                                                         <small>{{ baggage.type }}</small>
                                                                                     </td>
 
                                                                                     <td style="font-size: 11px;">
                                                                                         <b v-if="flight.inbound.segments">{{ flight.inbound.segments[0].cabin_class }}</b>
                                                                                         <br>
-                                                                                        <small v-if="baggage.max_weight">{{ baggage.max_weight }} / Person</small>
-                                                                                        <small v-else="baggage.pieces">{{ flight.inbound.baggage_allowance[0].pieces }} Pcs / Person</small>
+                                                                                        <small v-if="baggage.max_weight">{{ (baggage.max_weight).includes('Kilograms') ? (baggage.max_weight).replace('Kilograms','KG') : ''}}/Person</small>
+                                                                                        <small v-else="baggage.pieces">{{ flight.inbound.baggage_allowance[0].pieces }} Pcs/Person</small>
                                                                                     </td>
 
                                                                                 </tr>
