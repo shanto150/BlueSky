@@ -1555,7 +1555,7 @@ function number_format(nStr) {
                                                     :aria-controls="'flight-details-' + index" data-bs-toggle="collapse"
                                                     aria-expanded="false"
                                                     style=" font-size: 12px; background: #f1f4f7 !important;">
-                                                    <b>Flight Details</b>
+                                                    <b>Flight Details {{ index }}</b>
                                                 </a>
                                             </h2>
                                         </div>
@@ -1715,8 +1715,7 @@ function number_format(nStr) {
                                                                     </div>
                                                                 </div>
 
-                                                                <div
-                                                                    class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                <div v-if="route.is_codeshare !=true" class="row border-top mt-3 d-flex justify-content-center align-items-center">
                                                                     <div class="col-md-6">
                                                                         <div class="d-flex gap-2 mt-2">
 
@@ -1745,6 +1744,38 @@ function number_format(nStr) {
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
+                                                                <!-- <div v-if="route.is_codeshare ==true" class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                    <div class="col-md-6">
+                                                                        <div class="d-flex gap-2 mt-2">
+
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px; white-space: nowrap;">
+
+                                                                                {{ route.flight }}-{{
+                                                                                    route.aircraft_name }}
+                                                                                    </div>
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px; white-space: nowrap;">
+                                                                                {{ route.cabin_class }} - {{
+                                                                                    route.booking_code }}
+
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="float-end mt-2">
+
+                                                                            <img height="35" width="60"
+                                                                                :src="route.logo_path" alt="">
+                                                                            <span class="pt-2 ms-2 fw-bold"
+                                                                                style="font-size: 11px;">{{
+                                                                                    route.airline_name }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> -->
 
                                                                 <div
                                                                     class="row border-top mt-3 d-flex justify-content-center align-items-center">
