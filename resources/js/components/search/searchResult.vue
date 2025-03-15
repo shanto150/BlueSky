@@ -1736,7 +1736,7 @@ function number_format(nStr) {
                                                                     <div class="col-md-6">
                                                                         <div class="float-end mt-2">
 
-                                                                            <img height="35" width="60"
+                                                                            <img height="60" width="65"
                                                                                 :src="route.logo_path" alt="">
                                                                             <span class="pt-2 ms-2 fw-bold"
                                                                                 style="font-size: 11px;">{{
