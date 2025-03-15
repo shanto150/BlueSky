@@ -128,7 +128,7 @@ class XmlToJson
         $carrierCode = (string)$segment['Carrier'];
         $airlineInfo = $this->airlineNames[$carrierCode] ?? [
             'name' => 'Unknown Airline',
-            'logo_path' => '/default-airline-logo.png'
+            'logo_path' => 'uploads/airlines/default.svg'
         ];
 
         $originCode = (string)$segment['Origin'];
@@ -154,7 +154,7 @@ class XmlToJson
             $codeshareInfo = [
                 'operating_carrier' => (string)$codeshareNode['OperatingCarrier'],
                 'operating_flight_number' => (string)$codeshareNode['OperatingFlightNumber'],
-                'logo_path' => $this->airlineNames[(string)$codeshareNode['OperatingCarrier']]['logo_path'] ?? '/default-airline-logo.png',
+                'logo_path' => $this->airlineNames[(string)$codeshareNode['OperatingCarrier']]['logo_path'] ?? 'uploads/airlines/default.svg',
                 'operating_airline_name' => $this->airlineNames[(string)$codeshareNode['OperatingCarrier']]['name'] ?? 'Unknown Airline'
             ];
         }
@@ -453,11 +453,11 @@ class XmlToJson
 
         $firstAirlineInfo = $this->airlineNames[$firstCarrierCode] ?? [
             'name' => 'Unknown Airline',
-            'logo_path' => '/default-airline-logo.png'
+            'logo_path' => 'uploads/airlines/default.svg'
         ];
         $lastAirlineInfo = $this->airlineNames[$lastCarrierCode] ?? [
             'name' => 'Unknown Airline',
-            'logo_path' => '/default-airline-logo.png'
+            'logo_path' => 'uploads/airlines/default.svg'
         ];
 
         // Get origin and destination airport info
