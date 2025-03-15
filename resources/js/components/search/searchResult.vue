@@ -1524,10 +1524,7 @@ function number_format(nStr) {
                         <div class="card-footer p-0" style="background-color:#f1f4f7;">
                             <div class="float-start p-2">
                                 <div class="d-flex gap-2">
-                                    <!-- <div v-if="flight.outbound.refundable" class="border border-1 text-center p-1"
-                                        style="background-color: #def1ec; color: #12ce69; font-size: 12px;">
-                                        <i class="fa fa-refresh"></i> Refundable
-                                    </div> -->
+
                                     <div v-if="flight.outbound.refundable" class="border border-1 text-center p-1"
                                         style="background-color: #def1ec; color: #12ce69; font-size: 12px;">
                                         <img src="../../../../public/theme/appimages/refund-able.svg" alt="">
@@ -1542,6 +1539,11 @@ function number_format(nStr) {
                                     <div class="border border-1 text-center p-1"
                                         style="background-color: #e4e3f6; color: #7944eb; font-size: 12px;">
                                         <i class="fa-regular fa-seat-airline"></i> Available Seats: 09
+                                    </div>
+
+                                    <div v-if="flight.outbound.segments[0].is_codeshare==true" class="border border-1 text-center p-1"
+                                        style="background-color: #e9745152; color: #972e0f; font-size: 12px;">
+                                        <i class="fa fa-handshake"></i> Codeshare By {{ flight.outbound.segments[0].codeshare_info.operating_airline_name }}
                                     </div>
                                 </div>
                             </div>
