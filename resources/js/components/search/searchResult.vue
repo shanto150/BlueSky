@@ -1055,51 +1055,6 @@ function number_format(nStr) {
                         </div>
                     </div>
 
-                    <!-- Class -->
-                    <div class="accordion" id="class-type">
-                        <div class="accordion-item mt-3">
-                            <h6 class="accordion-header" id="headingFive">
-                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
-                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
-                                    aria-expanded="false" aria-controls="collapseFive">
-
-                                    <span style="font-size: 13px;">Class</span>
-
-                                </button>
-                            </h6>
-                            <div id="collapseFive" class="accordion-collapse collapse show"
-                                aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            First Class
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Business Class
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Premium Economy
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Economy
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Baggage -->
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
@@ -1524,10 +1479,7 @@ function number_format(nStr) {
                         <div class="card-footer p-0" style="background-color:#f1f4f7;">
                             <div class="float-start p-2">
                                 <div class="d-flex gap-2">
-                                    <!-- <div v-if="flight.outbound.refundable" class="border border-1 text-center p-1"
-                                        style="background-color: #def1ec; color: #12ce69; font-size: 12px;">
-                                        <i class="fa fa-refresh"></i> Refundable
-                                    </div> -->
+
                                     <div v-if="flight.outbound.refundable" class="border border-1 text-center p-1"
                                         style="background-color: #def1ec; color: #12ce69; font-size: 12px;">
                                         <img src="../../../../public/theme/appimages/refund-able.svg" alt="">
@@ -1543,6 +1495,11 @@ function number_format(nStr) {
                                         style="background-color: #e4e3f6; color: #7944eb; font-size: 12px;">
                                         <i class="fa-regular fa-seat-airline"></i> Available Seats: 09
                                     </div>
+
+                                    <div v-if="flight.outbound.segments[0].is_codeshare==true" class="border border-1 text-center p-1"
+                                        style="background-color: #e9745152; color: #972e0f; font-size: 12px;">
+                                        <i class="fa fa-handshake"></i> Codeshare By {{ flight.outbound.segments[0].codeshare_info.operating_airline_name }}
+                                    </div>
                                 </div>
                             </div>
                             <div class="float-end me-2">
@@ -1555,7 +1512,7 @@ function number_format(nStr) {
                                                     :aria-controls="'flight-details-' + index" data-bs-toggle="collapse"
                                                     aria-expanded="false"
                                                     style=" font-size: 12px; background: #f1f4f7 !important;">
-                                                    <b>Flight Details</b>
+                                                    <b>Flight Details {{ index }}</b>
                                                 </a>
                                             </h2>
                                         </div>
@@ -1715,8 +1672,7 @@ function number_format(nStr) {
                                                                     </div>
                                                                 </div>
 
-                                                                <div
-                                                                    class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                <div v-if="route.is_codeshare !=true" class="row border-top mt-3 d-flex justify-content-center align-items-center">
                                                                     <div class="col-md-6">
                                                                         <div class="d-flex gap-2 mt-2">
 
@@ -1737,11 +1693,41 @@ function number_format(nStr) {
                                                                     <div class="col-md-6">
                                                                         <div class="float-end mt-2">
 
-                                                                            <img height="35" width="60"
+                                                                            <img height="60" width="65"
                                                                                 :src="route.logo_path" alt="">
                                                                             <span class="pt-2 ms-2 fw-bold"
                                                                                 style="font-size: 11px;">{{
                                                                                     route.airline_name }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div v-if="route.is_codeshare ==true" class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                    <div class="col-md-6">
+                                                                        <div class="d-flex gap-2 mt-2">
+
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px; white-space: nowrap;">
+
+                                                                               {{ route.codeshare_info.operating_carrier }}{{ route.codeshare_info.operating_flight_number }}-{{ route.aircraft_name }}
+                                                                                    </div>
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px; white-space: nowrap;">
+                                                                                {{ route.cabin_class }} - {{
+                                                                                    route.booking_code }}
+
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="float-end mt-2">
+
+                                                                            <img height="60" width="60"
+                                                                                :src="route.codeshare_info.logo_path" alt="">
+                                                                            <span class="pt-2 ms-2 fw-bold"
+                                                                                style="font-size: 11px;">{{ route.codeshare_info.operating_airline_name }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1878,8 +1864,7 @@ function number_format(nStr) {
                                                                     </div>
                                                                 </div>
 
-                                                                <div
-                                                                    class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                <div v-if="returnRoute.is_codeshare!=true" class="row border-top mt-3 d-flex justify-content-center align-items-center">
                                                                     <div class="col-md-6">
                                                                         <div class="d-flex gap-2 mt-2">
 
@@ -1898,7 +1883,7 @@ function number_format(nStr) {
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="float-end mt-2">
-                                                                            <img height="35" width="60"
+                                                                            <img height="60" width="65"
                                                                                 :src="returnRoute.logo_path" alt="">
                                                                             <span class="pt-2 ms-2 fw-bold"
                                                                                 style="font-size: 11px;">{{
@@ -1907,8 +1892,35 @@ function number_format(nStr) {
                                                                     </div>
                                                                 </div>
 
-                                                                <div
-                                                                    class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                <div v-if="returnRoute.is_codeshare==true" class="row border-top mt-3 d-flex justify-content-center align-items-center">
+                                                                    <div class="col-md-6">
+                                                                        <div class="d-flex gap-2 mt-2">
+
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(228, 227, 246); color: rgb(121, 68, 235); font-size: 10px; white-space: nowrap;">
+                                                                                {{ returnRoute.codeshare_info.operating_carrier }}{{ returnRoute.codeshare_info.operating_flight_number }}-{{
+                                                                                    returnRoute.aircraft_name }}</div>
+                                                                            <div class="border border-1 text-center p-1"
+                                                                                style="background-color: rgb(222, 241, 236); color: rgb(18, 206, 105); font-size: 10px; white-space: nowrap;">
+                                                                                {{ returnRoute.cabin_class }} - {{
+                                                                                    returnRoute.booking_code }}
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="float-end mt-2">
+                                                                            <img height="60" width="65"
+                                                                                :src="returnRoute.codeshare_info.logo_path" alt="">
+                                                                            <span class="pt-2 ms-2 fw-bold"
+                                                                                style="font-size: 11px;">{{
+                                                                                    returnRoute.codeshare_info.operating_airline_name }}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row border-top mt-3 d-flex justify-content-center align-items-center">
                                                                     <div class="col-md-12">
 
                                                                         <div
@@ -1917,12 +1929,12 @@ function number_format(nStr) {
                                                                                 <div class="mt-2 mb-0"
                                                                                     style="font-size: 13px !important; color: #7944eb; background-color:#e4e3f6; border-radius:5px;">
 
-                                                                                    <!-- section image -->
+
                                                                                     <img style="height: 20px;width: 20px;margin: 8px 5px 10px 10px;"
                                                                                         src="../../../../public/theme/appimages/Layover_&_Destination.svg"
                                                                                         alt="">
 
-                                                                                    <!-- section text -->
+
 
                                                                                     <span
                                                                                         class="bluesky-departure-text mobile-chips-text">

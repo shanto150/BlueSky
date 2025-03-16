@@ -1083,55 +1083,6 @@ function showRouteDetails(info) {
                                     </div>
                                 </div>
 
-                                <!-- Class -->
-                                <div class="accordion" id="class-type">
-                                    <div class="accordion-item mt-3">
-                                        <h6 class="accordion-header" id="headingFive">
-                                            <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
-                                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
-                                                aria-expanded="false" aria-controls="collapseFive">
-
-                                                <span style="font-size: 13px;">Class</span>
-
-                                            </button>
-                                        </h6>
-                                        <div id="collapseFive" class="accordion-collapse collapse show"
-                                            aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                                            <div class="accordion-body">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        First Class
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        Business Class
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        Premium Economy
-                                                    </label>
-                                                </div>
-
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        Economy
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <!-- Baggage -->
                                 <div class="accordion" id="class-type">
                                     <div class="accordion-item mt-3">
@@ -1658,15 +1609,13 @@ function showRouteDetails(info) {
                                                             id="accordionFlushExample">
                                                             <div class="accordion-item">
                                                                 <h2 class="accordion-header rounded"
-                                                                    id="flush-headingOne"
-                                                                    >
+                                                                    id="flush-headingOne">
                                                                     <button
                                                                         class="accordion-button m-0 p-0 px-3 py-2 collapsed"
                                                                         type="button" data-bs-toggle="collapse"
                                                                         data-bs-target="#flush-fare-summary"
                                                                         aria-expanded="false"
-                                                                        aria-controls="flush-fare-summary"
-                                                                        >
+                                                                        aria-controls="flush-fare-summary">
                                                                         Fare Summary
                                                                     </button>
                                                                 </h2>
@@ -1873,7 +1822,7 @@ function showRouteDetails(info) {
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                        <div class="card card-hober">
+                                                        <div class="card border-eco" style="min-height: 480px; ">
                                                             <div class="card-header border-bottom-1">
                                                                 <h5 class="card-title text-center">Economy</h5>
                                                                 <h6 class="text-center">BDT
@@ -1934,17 +1883,17 @@ function showRouteDetails(info) {
                                                                     <br>
                                                                     <li class="menu-item d-inline-flex"> <i
                                                                             class="fa-solid fa-wifi icon-color mt-1"></i>
-                                                                        <span class="ms-1">Free
-                                                                            Wi-Fi</span>
+                                                                        <span class="ms-1">Free Wi-Fi</span>
 
                                                                     </li>
                                                                 </ul>
+                                                                <button class="btn btn-outline-book w-100">Book</button>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-4">
-                                                        <div class="card card-hober">
+                                                        <div class="card border-primium" style="min-height: 480px; ">
                                                             <div class="card-header text-black border-bottom-1">
                                                                 <h5 class="card-title text-center">Premium Economy</h5>
                                                                 <h6 class="text-center text-black">BDT 70500</h6>
@@ -1985,8 +1934,7 @@ function showRouteDetails(info) {
                                                                     </li>
                                                                     <li class="menu-item d-inline-flex"> <i
                                                                             class="fa-regular fa-seat-airline icon-color mt-1"></i>
-                                                                        <span class="ms-1">Preferred
-                                                                            Seat selection without fees</span>
+                                                                        <span class="ms-1">Preferred Seat without fees</span>
                                                                     </li>
                                                                     <li class="menu-item d-inline-flex"> <i
                                                                             class="fa fa-utensils icon-color mt-1"></i>
@@ -2009,12 +1957,12 @@ function showRouteDetails(info) {
 
                                                                     </li>
                                                                 </ul>
-
+                                                                <button class="btn btn-outline-book w-100">Book</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <div class="card card-hober">
+                                                        <div class="card border-first" style="min-height: 480px; ">
                                                             <div class="card-header text-black border-bottom-1">
                                                                 <h5 class="card-title text-center">First Class</h5>
                                                                 <h6 class="text-center text-black">BDT 90500</h6>
@@ -2055,8 +2003,7 @@ function showRouteDetails(info) {
                                                                     </li>
                                                                     <li class="menu-item d-inline-flex"> <i
                                                                             class="fa-regular fa-seat-airline icon-color mt-1"></i>
-                                                                        <span class="ms-1">Preferred
-                                                                            Seat selection without fees</span>
+                                                                        <span class="ms-1">Preferred Seat without fees</span>
                                                                     </li>
                                                                     <li class="menu-item d-inline-flex"> <i
                                                                             class="fa fa-utensils icon-color mt-1"></i>
@@ -2079,7 +2026,7 @@ function showRouteDetails(info) {
 
                                                                     </li>
                                                                 </ul>
-
+                                                                <button class="btn btn-outline-book w-100">Book</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -3678,5 +3625,23 @@ li.menu-item {
     border-radius: 50%;
     display: inline-block;
     padding: 2px 0 0 3px;
+}
+
+.border-eco {
+    border-image: linear-gradient(231deg, #16B4A1 8.86%, rgba(46, 194, 210, 0.00) 100.22%) 1;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.border-primium {
+    border-image:  linear-gradient(255deg, #3B79F2 6.09%, rgba(128, 163, 255, 0.00) 99.25%) 1;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.border-first {
+    border-image:  linear-gradient(248deg, #964EF1 4%, rgba(174, 26, 198, 0.00) 86.84%) 1;
+    border-width: 2px;
+    border-style: solid;
 }
 </style>

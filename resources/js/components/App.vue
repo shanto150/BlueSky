@@ -258,6 +258,15 @@ const text = computed(() => online.value ? 'Online' : 'Offline')
     border-color: #875ae9;
 }
 
+.btn-outline-book{
+    color: #25b2a7;
+    border-color: #25b2a7;
+}
+.btn-outline-book:hover {
+    color: #fff;
+    background-color: #25b2a7;
+    border-color: #25b2a7;
+}
 .bluesky-route-btn-outline-primary{
     color: #875ae9;
     border-color: #875ae9;
