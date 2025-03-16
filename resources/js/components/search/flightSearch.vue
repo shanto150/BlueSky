@@ -74,7 +74,7 @@ const searchFlights = () => {
     <div class="row">
         <div class="col-12">
             <div class="flight-search-panel">
-                <div class="trip-type">
+                <!-- <div class="trip-type">
                     <input type="radio" id="oneWay" value="oneWay" v-model="tripType">
                     <label for="oneWay">One Way</label>
                     <input type="radio" id="roundTrip" value="roundTrip" v-model="tripType">
@@ -90,13 +90,13 @@ const searchFlights = () => {
 
                     <VueDatePicker v-if="tripType === 'roundTrip'" v-model="returnDate" placeholder="Return Date">
                     </VueDatePicker>
-                </div>
+                </div> -->
 
                 <div class="box">
 
 
                     <section>
-                        <p>date range</p>
+                        <p>Date Range</p>
                         <date-picker v-model:value="value1" :shortcuts="shortcutsRange" type="date" range
                             placeholder="Select date range"></date-picker>
                     </section>
