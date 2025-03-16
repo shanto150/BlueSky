@@ -1055,51 +1055,6 @@ function number_format(nStr) {
                         </div>
                     </div>
 
-                    <!-- Class -->
-                    <div class="accordion" id="class-type">
-                        <div class="accordion-item mt-3">
-                            <h6 class="accordion-header" id="headingFive">
-                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
-                                    type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive"
-                                    aria-expanded="false" aria-controls="collapseFive">
-
-                                    <span style="font-size: 13px;">Class</span>
-
-                                </button>
-                            </h6>
-                            <div id="collapseFive" class="accordion-collapse collapse show"
-                                aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            First Class
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Business Class
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Premium Economy
-                                        </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Economy
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Baggage -->
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
