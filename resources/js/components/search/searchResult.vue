@@ -1262,15 +1262,12 @@ function number_format(nStr) {
                                                                         alt="">
 
                                                                 </div>
-                                                                <div class="d-flex ps-2">
-                                                                    <span
-                                                                        style="font-size: 7px; color: #5e6878;">CCU</span>
-                                                                    &nbsp; &nbsp; &nbsp;
-                                                                    <span
-                                                                        style="font-size: 7px; color: #5e6878;">DEL</span>
+                                                                <div class="d-flex ps-2" v-for="stop,index in flight.outbound.connections.stops">
+                                                                    <span style="font-size: 7px; color: #5e6878;">{{ stop.airport_code }}</span>
+                                                                    <!-- &nbsp; &nbsp; &nbsp;
+                                                                    <span style="font-size: 7px; color: #5e6878;">{{ stop.airport_code }}</span>
                                                                     &nbsp; &nbsp;
-                                                                    <span
-                                                                        style="font-size: 7px; color: #5e6878;">DXB</span>
+                                                                    <span style="font-size: 7px; color: #5e6878;">{{ stop.airport_code }}</span> -->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1402,10 +1399,12 @@ function number_format(nStr) {
 
                                                                 </div>
 
-                                                                <div class="d-flex ps-2">
-                                                                    <img title="Layover at Kolkata | 2H 25 Min"
+                                                                <!-- <div class="d-flex ps-2">
+
+                                                                    <img  title="Layover at Kolkata | 2H 25 Min"
                                                                         src="../../../../public/theme/appimages/Layover.svg"
                                                                         alt="">
+
                                                                     <div class="text-black"
                                                                         style="transform: skewY(5deg);">
                                                                         ....
@@ -1419,16 +1418,20 @@ function number_format(nStr) {
                                                                     <img src="../../../../public/theme/appimages/Layover.svg"
                                                                         alt="">
 
+                                                                </div> -->
+                                                                <div class="d-inline-flex" v-for="stop,index in flight.inbound.connections.stops">
+                                                                    <img  title="{{ stop.airport_name }} | 2H 25 Min"
+                                                                        src="../../../../public/theme/appimages/Layover.svg"
+                                                                        alt="">
+                                                                    <div class="text-black" >
+                                                                        ....
+                                                                    </div>
+
                                                                 </div>
                                                                 <div class="d-flex ps-2">
-                                                                    <span
-                                                                        style="font-size: 7px; color: #5e6878;">CCU</span>
-                                                                    &nbsp; &nbsp; &nbsp;
-                                                                    <span
-                                                                        style="font-size: 7px; color: #5e6878;">DEL</span>
-                                                                    &nbsp; &nbsp;
-                                                                    <span
-                                                                        style="font-size: 7px; color: #5e6878;">DXB</span>
+
+                                                                    <span v-for="stop,index in flight.inbound.connections.stops"
+                                                                        style="font-size: 7px; color: #5e6878;">{{ stop.airport_code }} &nbsp; &nbsp; &nbsp;</span>
                                                                 </div>
                                                             </div>
                                                         </div>
