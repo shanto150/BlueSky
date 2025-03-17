@@ -16,6 +16,7 @@ const flightSearch = () => import('./components/search/flightSearch.vue')
 const searchResult = () => import('./components/search/searchResult.vue')
 const backupsearchResult = () => import('./components/search/searchResult_copy.vue')
 const bookingList = () => import('./components/admin/booking/index.vue')
+const bookingCreate = () => import('./components/admin/booking/create.vue')
 // agent
 const AgentList = () => import('./components/admin/agent/index.vue')
 const agentDetails = () => import('./components/admin/agent/agentDetails.vue')
@@ -103,6 +104,7 @@ const routes = [
 
     //booking
     { path: '/flight-booking-list', component: bookingList, name: 'bookingList', meta: { auth: true } },
+    { path: '/flight-booking', component: bookingCreate, name: 'bookingCreate', meta: { auth: true } },
 
 
     // agent

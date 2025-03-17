@@ -1887,7 +1887,8 @@ function showRouteDetails(info) {
 
                                                                     </li>
                                                                 </ul>
-                                                                <button class="btn btn-outline-book w-100">Book</button>
+                                                                <!-- <button >Book</button> -->
+                                                                <router-link class="btn btn-outline-book w-100" :to="{ name: 'bookingCreate' }">Book</router-link>
                                                             </div>
                                                         </div>
                                                     </div>

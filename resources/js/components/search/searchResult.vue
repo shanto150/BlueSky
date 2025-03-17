@@ -1497,8 +1497,9 @@ function number_format(nStr) {
                                     </div>
 
                                     <div v-if="flight.outbound.segments[0].is_codeshare==true" class="border border-1 text-center p-1"
-                                        style="background-color: #e9745152; color: #972e0f; font-size: 12px;">
-                                        <i class="fa fa-handshake"></i> Codeshare By {{ flight.outbound.segments[0].codeshare_info.operating_airline_name }}
+                                        style="background-color: #E8EFF4 ; color: #127EB8; font-size: 12px;">
+                                         <img src="../../../../public/theme/appimages/codeshare.svg" alt="">
+                                         Codeshare By {{ flight.outbound.segments[0].codeshare_info.operating_airline_name }}
                                     </div>
                                 </div>
                             </div>
