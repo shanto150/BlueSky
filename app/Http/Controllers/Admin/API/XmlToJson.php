@@ -213,6 +213,9 @@ class XmlToJson
         // Get baggage allowance
         $baggageAllowances = $this->getBaggageAllowances($solution);
 
+        // Process connections first
+        $connections = $this->processConnectionInfo($solution);
+
         $commonInfo = [
             'key' => $solutionKey,
             'totalPrice' => 0,
@@ -222,13 +225,72 @@ class XmlToJson
             'priceBreakdown' => $this->calculatePriceBreakdown($solution),
             'baggage_allowance' => $baggageAllowances,
             'penalties' => $this->getPenalties($solution),
-            'farerulekey' => $this->getFareRuleKeys($solution)
+            'farerulekey' => $this->getFareRuleKeys($solution),
+            'connections' => $connections // Add connections directly
         ];
 
         // Calculate total price
         $commonInfo['totalPrice'] = array_sum(array_column($commonInfo['priceBreakdown'], 'totalPrice'));
 
         return $commonInfo;
+    }
+
+    private function processConnectionInfo($solution, $isInbound = false)
+    {
+        $segmentRefs = $solution->xpath('.//air:AirSegmentRef');
+        $segmentCount = count($segmentRefs);
+        $midPoint = floor($segmentCount / 2);
+        $isReturn = $this->isReturnJourney($segmentRefs);
+
+        $currentSegments = [];
+        $stops = [];
+
+        // Collect segments
+        foreach ($segmentRefs as $index => $segmentRef) {
+            $segmentKey = (string)$segmentRef['Key'];
+            if (!isset($this->segments[$segmentKey])) continue;
+            $currentSegments[] = $this->segments[$segmentKey];
+        }
+
+        // Process either outbound or inbound segments based on $isInbound parameter
+        if ($isReturn) {
+            $segments = $isInbound
+                ? array_slice($currentSegments, $midPoint)
+                : array_slice($currentSegments, 0, $midPoint);
+        } else {
+            $segments = $currentSegments;
+        }
+
+        // Process connections between segments
+        for ($i = 0; $i < count($segments) - 1; $i++) {
+            $currentSegment = $segments[$i];
+            $nextSegment = $segments[$i + 1];
+
+            // Check if this is really a connection (same journey direction)
+            if ($currentSegment['arrival_code'] === $nextSegment['departure_code']) {
+                $connectionCode = $currentSegment['arrival_code'];
+                $connectionInfo = $this->airportData[$connectionCode] ?? [
+                    'airport_name' => 'Unknown Airport',
+                    'city_name' => 'Unknown City'
+                ];
+
+                $currentArrival = strtotime($currentSegment['arrival_date'] . ' ' . $currentSegment['arrival_time']);
+                $nextDeparture = strtotime($nextSegment['departure_date'] . ' ' . $nextSegment['departure_time']);
+
+                $layoverMinutes = ($nextDeparture - $currentArrival) / 60;
+
+                $stops[] = [
+                    'airport_code' => $connectionCode,
+                    'airport_name' => $connectionInfo['airport_name'],
+                    'city_name' => $connectionInfo['city_name'],
+                    'layover_time' => $this->formatDuration($layoverMinutes)
+                ];
+            }
+        }
+
+        return [
+            'stops' => $stops
+        ];
     }
 
     private function getBaggageAllowances($solution)
@@ -426,11 +488,28 @@ class XmlToJson
     private function buildJourney($outboundSegments, $inboundSegments, $commonInfo, $isReturn)
     {
         $journey = [
-            'outbound' => $this->buildJourneySection($outboundSegments, $commonInfo)
+            'outbound' => array_merge(
+                $this->buildJourneySection($outboundSegments, $commonInfo),
+                ['connections' => [
+                    'count' => 0,
+                    'stops' => []
+                ]] // Default empty connections
+            )
         ];
 
-        if ($isReturn) {
-            $journey['inbound'] = $this->buildJourneySection($inboundSegments, $commonInfo);
+        // Get the solution from the commonInfo
+        $solutionKey = $commonInfo['key'];
+        $solution = $this->xml->xpath("//air:AirPricingSolution[@Key='$solutionKey']")[0] ?? null;
+
+        if ($solution) {
+            $journey['outbound']['connections'] = $this->processConnectionInfo($solution, false);
+
+            if ($isReturn) {
+                $journey['inbound'] = array_merge(
+                    $this->buildJourneySection($inboundSegments, $commonInfo),
+                    ['connections' => $this->processConnectionInfo($solution, true)]
+                );
+            }
         }
 
         return $journey;
