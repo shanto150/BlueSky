@@ -10,11 +10,14 @@ import { useAuthStore } from '../../../stores/authStore';
 const authStore = useAuthStore();
 import { ref, reactive, onMounted, render } from "vue";
 
-function travelerDetails(){
+function travelerDetails() {
     $("#addones-service").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Addons_Services_Inactive.svg');
     $("#travelerDetails").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Traveler_Details.svg');
     $("#coupon-offers").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Coupon_Offers_Inactive.svg');
     $("#review-payment").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Review_Payment_Inactive.svg');
+
+    $("#traveller-details").removeClass("d-none");
+    $("#addones-sevice-details").addClass("d-none");
 
 }
 function addonesSevice() {
@@ -23,6 +26,8 @@ function addonesSevice() {
     $("#coupon-offers").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Coupon_Offers_Inactive.svg');
     $("#review-payment").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Review_Payment_Inactive.svg');
 
+    $("#addones-sevice-details").removeClass("d-none");
+    $("#traveller-details").addClass("d-none");
 }
 
 function couponOffers() {
@@ -32,7 +37,7 @@ function couponOffers() {
     $("#review-payment").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Review_Payment_Inactive.svg');
 }
 
-function reviewPayment(){
+function reviewPayment() {
     $("#travelerDetails").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Traveler_Details_Inactive.svg');
     $("#addones-service").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Addons_Services_Inactive.svg');
     $("#coupon-offers").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Coupon_Offers_Inactive.svg');
@@ -71,7 +76,7 @@ function reviewPayment(){
                                 <div class="bd-highlight pe-1">
                                     <b><span style="font-size: 15px;">DAC-DXB</span></b>
                                 </div>
-                                <span><b>|</b></span>
+                                <span style="margin-top: 1px;"><b>|</b></span>
                                 <div class="bd-highlight ps-1">
                                     <b><span style="font-size: 15px;">DXB-DAC</span></b>
                                 </div>
@@ -119,7 +124,7 @@ function reviewPayment(){
                         </div>
                     </div>
                     <div class="col-md-5">
-                        <div class="d-flex flex-row bd-highlight ">
+                        <div class="d-flex flex-row bd-highlight">
                             <div class="pe-1 bd-highlight w-100">
                                 <div class="card">
                                     <div class="card-body" style="background-color: #f6f2ff;">
@@ -158,21 +163,22 @@ function reviewPayment(){
                             <div class="col-md-12">
                                 <div class="d-flex flex-row bd-highlight mb-3">
                                     <div class="bd-highlight">
-                                        <img @click="travelerDetails" id="travelerDetails" src="../../../../../public/theme/Booking_Steps/Traveler_Details.svg"
-                                            alt="">
+                                        <img style="cursor:pointer" @click="travelerDetails" id="travelerDetails"
+                                            src="../../../../../public/theme/Booking_Steps/Traveler_Details.svg" alt="">
                                     </div>
-                                    <div @click="addonesSevice" class="bd-highlight" >
-                                        <img class="addones-service-inactive" id="addones-service"
+                                    <div @click="addonesSevice" class="bd-highlight">
+                                        <img style="cursor:pointer" class="addones-service-inactive"
+                                            id="addones-service"
                                             src="../../../../../public/theme/Booking_Steps/Addons_Services_Inactive.svg"
                                             alt="">
                                     </div>
                                     <div @click="couponOffers" class="bd-highlight">
-                                        <img class="coupon-offers-inactive" id="coupon-offers"
+                                        <img style="cursor:pointer" class="coupon-offers-inactive" id="coupon-offers"
                                             src="../../../../../public/theme/Booking_Steps/Coupon_Offers_Inactive.svg"
                                             alt="">
                                     </div>
                                     <div @click="reviewPayment" class="bd-highlight">
-                                        <img class="review-payment-inactive" id="review-payment"
+                                        <img style="cursor:pointer" class="review-payment-inactive" id="review-payment"
                                             src="../../../../../public/theme/Booking_Steps/Review_Payment_Inactive.svg"
                                             alt="">
                                     </div>
@@ -180,7 +186,8 @@ function reviewPayment(){
                             </div>
 
                             <div class="col-md-12">
-                                <div class="card traveller-details">
+                                <!-- traveller details -->
+                                <div class="card fadeIn" id="traveller-details">
                                     <div class="card-body">
                                         <div class="accordion" id="accordionExample">
                                             <div class="accordion-item">
@@ -188,22 +195,46 @@ function reviewPayment(){
                                                     <button class="accordion-button collapsed" type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                                         aria-expanded="false" aria-controls="collapseOne">
-                                                        <i class="fa fa-user"></i> &nbsp; Traveller 1: Adult
+
+                                                        <img src="../../../../../public/theme/Booking_Steps/traveller_icon.svg"
+                                                            alt="">
+                                                        <span class="pt-1 ps-1">Traveller 1: Adult</span>
+
+                                                        <div style="margin-left: 20px;"
+                                                            class="badge rounded-pill text-success bg-light-success p-1 px-4">
+                                                            Primary Contact</div>
                                                     </button>
                                                 </h2>
                                                 <div id="collapseOne" class="accordion-collapse collapse"
                                                     aria-labelledby="headingOne" data-bs-parent="#accordionExample"
                                                     style="">
-                                                    <div class="accordion-body"> <strong>This is the first item's
-                                                            accordion body.</strong> It is hidden by default, until the
-                                                        collapse plugin adds the appropriate classes that we use to
-                                                        style each element. These classes control the overall
-                                                        appearance, as well as the showing and hiding via CSS
-                                                        transitions. You can modify any of this with custom CSS or
-                                                        overriding our default variables. It's also worth noting that
-                                                        just about any HTML can go within the
-                                                        <code>.accordion-body</code>, though the transition does limit
-                                                        overflow.
+                                                    <div class="accordion-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="mt-2 mb-0 p-2"
+                                                                    style="font-size: 13px !important; background-color: rgba(255, 250, 238, 1); border-radius: 5px;">
+                                                                    <span
+                                                                        class="bluesky-departure-text mobile-chips-text">
+                                                                        <i style="color: rgba(240, 180, 27, 1);"
+                                                                            class="fa fa-info-circle"></i>
+                                                                        <span
+                                                                            style="font-size: 12px; color: rgba(119, 95, 35, 1); ">
+                                                                            Please fill-up all the information below as
+                                                                            same as given in your passport, to avoid
+                                                                            complications at immigration
+                                                                            proccess.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12 col-lg-12 mt-3">
+                                                                <label for="name" class="form-label">Existing
+                                                                    Traveller</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Search with name, phone, email, password">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -212,21 +243,17 @@ function reviewPayment(){
                                                     <button class="accordion-button collapsed" type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                                         aria-expanded="false" aria-controls="collapseTwo">
-                                                        <i class="fa fa-user"></i> &nbsp; Traveller 2: Adult
+                                                        <img src="../../../../../public/theme/Booking_Steps/traveller_icon.svg"
+                                                            alt="">
+                                                        <span class="pt-1 ps-1">Traveller 2: Adult</span>
+
+
                                                     </button>
                                                 </h2>
                                                 <div id="collapseTwo" class="accordion-collapse collapse"
                                                     aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body"> <strong>This is the second item's
-                                                            accordion body.</strong> It is hidden by default, until the
-                                                        collapse plugin adds the appropriate classes that we use to
-                                                        style each element. These classes control the overall
-                                                        appearance, as well as the showing and hiding via CSS
-                                                        transitions. You can modify any of this with custom CSS or
-                                                        overriding our default variables. It's also worth noting that
-                                                        just about any HTML can go within the
-                                                        <code>.accordion-body</code>, though the transition does limit
-                                                        overflow.
+                                                    <div class="accordion-body">
+                                                        test
                                                     </div>
                                                 </div>
                                             </div>
@@ -235,22 +262,168 @@ function reviewPayment(){
                                                     <button class="accordion-button collapsed" type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                                         aria-expanded="false" aria-controls="collapseThree">
-                                                        <i class="fa fa-user"></i> &nbsp; Traveller 3: Adult
+                                                        <img src="../../../../../public/theme/Booking_Steps/traveller_icon.svg"
+                                                            alt="">
+                                                        <span class="pt-1 ps-1">Traveller 3: Adult</span>
                                                     </button>
                                                 </h2>
                                                 <div id="collapseThree" class="accordion-collapse collapse"
                                                     aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body"> <strong>This is the third item's
-                                                            accordion body.</strong> It is hidden by default, until the
-                                                        collapse plugin adds the appropriate classes that we use to
-                                                        style each element. These classes control the overall
-                                                        appearance, as well as the showing and hiding via CSS
-                                                        transitions. You can modify any of this with custom CSS or
-                                                        overriding our default variables. It's also worth noting that
-                                                        just about any HTML can go within the
-                                                        <code>.accordion-body</code>, though the transition does limit
-                                                        overflow.
+                                                    <div class="accordion-body"> test
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end of traveller details -->
+
+
+                                <!-- add on services -->
+                                <div class="card d-none fadeIn" id="addones-sevice-details">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header p-0 m-0">
+                                                        <h5 class="ps-2 pt-1">Hello</h5>
+                                                    </div>
+                                                    <div class="card-body">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header p-0 m-0">
+                                                        <h5 class="ps-2 pt-1">Hello</h5>
+                                                    </div>
+                                                    <div class="card-body">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- end of add on services -->
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="background-color: rgb(244, 244, 255);">
+                        <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header rounded" id="flush-headingOne"><button
+                                        class="accordion-button m-0 p-0 px-3 py-2 collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#flush-fare-summary"
+                                        aria-expanded="false" aria-controls="flush-fare-summary"> Fare Summary </button>
+                                </h2>
+                                <div id="flush-fare-summary" class="accordion-collapse collapse"
+                                    aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="border fare-summary-bg p-1 rounded-1 mb-1"><span
+                                                        class="custom-text-purple"> Base Fare </span></div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-sm table-striped">
+                                                        <tbody class="text-start">
+                                                            <tr>
+                                                                <td>Adults: 2x৳30000 </td>
+                                                                <td> ৳60000 </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Childs: 2x৳20000 </td>
+                                                                <td> ৳40000 </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="border fare-summary-bg p-1 rounded-1 mb-1"><span
+                                                        class="custom-text-purple"> TAX </span></div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-sm table-striped">
+                                                        <tbody class="text-start">
+                                                            <tr>
+                                                                <td>Adults: 2x৳5000</td>
+                                                                <td> ৳10000 </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Childs: 2x৳2000</td>
+                                                                <td> ৳4000 </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="border fare-summary-bg p-1 rounded-1 mb-1"><span
+                                                        class="custom-text-purple"> AIT </span></div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-sm table-striped">
+                                                        <tbody class="text-start">
+                                                            <tr>
+                                                                <td>Adults: 2x৳1275</td>
+                                                                <td> ৳2550 </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Childs: 2x৳870</td>
+                                                                <td> ৳1740 </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="border fare-summary-bg p-1 rounded-1 mb-1"><span
+                                                        class="custom-text-purple"> Service Charge </span></div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-sm table-striped">
+                                                        <tbody class="text-start">
+                                                            <tr>
+                                                                <td>Adults: 2x৳1275</td>
+                                                                <td> ৳2550 </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Childs: 2x৳870</td>
+                                                                <td> ৳1740 </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item mt-2">
+                                <h2 class="accordion-header" id="flush-headingTwo"><button
+                                        class="accordion-button m-0 p-0 px-3 py-2 collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
+                                        aria-expanded="false" aria-controls="flush-collapseTwo"> Baggadge Information
+                                    </button></h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                    aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-sm">
+                                                        <tbody class="text-start">
+                                                            <tr>
+                                                                <td style="font-size: 11px;">
+                                                                    <b>DAC-BDX</b><br><small>Adult</small></td>
+                                                                <td style="font-size: 11px;"><b>Economy</b><br><small>10
+                                                                        Kg</small></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="font-size: 11px;">
+                                                                    <b>DAC-BDX</b><br><small>Child</small></td>
+                                                                <td style="font-size: 11px;"><b>Economy</b><br><small>10
+                                                                        Kg</small></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -259,7 +432,6 @@ function reviewPayment(){
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3"></div>
                 </div>
             </div>
         </div>
@@ -275,21 +447,21 @@ function reviewPayment(){
 
 .addones-service-inactive {
     position: absolute;
-    left: 210px;
+    left: 208px;
     top: 16px;
     z-index: 16;
 }
 
 .coupon-offers-inactive {
     position: absolute;
-    left: 421px;
+    left: 422px;
     top: 16px;
     z-index: 16;
 }
 
 .review-payment-inactive {
     position: absolute;
-    left: 631px;
+    left: 633px;
     top: 16px;
     z-index: 16;
 }
