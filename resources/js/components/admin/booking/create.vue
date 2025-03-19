@@ -208,7 +208,7 @@ function reviewPayment() {
                                                 <div id="collapseOne" class="accordion-collapse collapse"
                                                     aria-labelledby="headingOne" data-bs-parent="#accordionExample"
                                                     style="">
-                                                    <div class="accordion-body">
+                                                    <div class="accordion-body" style="background-color: rgba(248, 252, 255, 1);">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="mt-2 mb-0 p-2"
@@ -234,6 +234,151 @@ function reviewPayment() {
                                                                     id="name" name="name"
                                                                     placeholder="Search with name, phone, email, password">
                                                             </div>
+
+                                                            <div class="col-12 col-sm-12 col-md-12 mt-3">
+                                                                <div class="text-center"
+                                                                    style="color: rgba(161, 171, 183, 1);font-size: 10px;">
+                                                                    Or fill up the information below</div>
+                                                            </div>
+                                                            <div class="col-12 col-sm-12 col-md-12 mt-3">
+                                                                <div class="row bd-highlight mb-3">
+                                                                    <div class="col-md-2 bd-highlight pe-3">
+                                                                        <label for="name"
+                                                                            class="form-label">Title</label>
+                                                                        <select
+                                                                            class="form-select form-control form-select-sm">
+
+                                                                            <option value="1">Mr.</option>
+                                                                            <option value="1">Miss.</option>
+                                                                            <option value="2">Mrs.</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-4  pe-3">
+                                                                        <label for="name" class="form-label">First Name
+                                                                            (Given Name)</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm"
+                                                                            id="name" name="name"
+                                                                            placeholder="Enter First Name">
+                                                                    </div>
+                                                                    <div class="col-md-6  pe-3">
+                                                                        <label for="name" class="form-label">Last Name
+                                                                            (Sur Name)</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm"
+                                                                            id="name" name="name"
+                                                                            placeholder="Enter Last Name">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Date of
+                                                                    Birth</label>
+                                                                <input type="date" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Date of Birth">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Gender</label>
+                                                                <select class="form-select form-control form-select-sm">
+
+                                                                    <option value="1">Male</option>
+                                                                    <option value="2">Female</option>
+                                                                    <option value="3">Others</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Nationality</label>
+                                                                <select class="form-select form-select-sm">
+
+                                                                    <option value="1">Bangladeshi</option>
+                                                                    <option value="2">American</option>
+                                                                    <option value="3">Pakistani</option>
+                                                                    <option value="4">Indian</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Frequent Flyer
+                                                                    Number</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Flyer Number">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Passport
+                                                                    Number</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Passport Number">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Expiry Date</label>
+                                                                <input type="date" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Date of Birth">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Passport Image (Max
+                                                                    2MB)</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="file" class="form-control"
+                                                                        id="inputGroupFile02">
+                                                                    <label class="input-group-text"
+                                                                        for="inputGroupFile02">Upload</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Visa Image (Max
+                                                                    2MB)</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="file" class="form-control"
+                                                                        id="inputGroupFile02">
+                                                                    <label class="input-group-text"
+                                                                        for="inputGroupFile02">Upload</label>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+
+                                                            <!-- part 2 -->
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-1">
+                                                                <label for="name" class="form-label">Email</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name" placeholder="Enter Email">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-1">
+                                                                <label for="name" class="form-label">Phone</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name" placeholder="Enter Phone">
+                                                            </div>
+
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Meal Type</label>
+                                                                <select class="form-select form-select-sm">
+                                                                    <option value="">Choose One...</option>
+                                                                    <option value="1">Veg</option>
+                                                                    <option value="2">Non Veg</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Wheel Chair Needed
+                                                                    ?</label>
+                                                                <select class="form-select form-select-sm">
+                                                                    <option value="">Choose One...</option>
+                                                                    <option value="1">Yes</option>
+                                                                    <option value="2">No</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-3">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="flexCheckChecked" checked="">
+                                                                    <label class="form-check-label"
+                                                                        for="flexCheckChecked">Select as Primary
+                                                                        Contact</label>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -246,14 +391,182 @@ function reviewPayment() {
                                                         <img src="../../../../../public/theme/Booking_Steps/traveller_icon.svg"
                                                             alt="">
                                                         <span class="pt-1 ps-1">Traveller 2: Adult</span>
-
-
                                                     </button>
                                                 </h2>
                                                 <div id="collapseTwo" class="accordion-collapse collapse"
                                                     aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        test
+                                                    <div class="accordion-body" style="background-color: rgba(248, 252, 255, 1);">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="mt-2 mb-0 p-2"
+                                                                    style="font-size: 13px !important; background-color: rgba(255, 250, 238, 1); border-radius: 5px;">
+                                                                    <span
+                                                                        class="bluesky-departure-text mobile-chips-text">
+                                                                        <i style="color: rgba(240, 180, 27, 1);"
+                                                                            class="fa fa-info-circle"></i>
+                                                                        <span
+                                                                            style="font-size: 12px; color: rgba(119, 95, 35, 1); ">
+                                                                            Please fill-up all the information below as
+                                                                            same as given in your passport, to avoid
+                                                                            complications at immigration
+                                                                            proccess.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12 col-lg-12 mt-3">
+                                                                <label for="name" class="form-label">Existing
+                                                                    Traveller</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Search with name, phone, email, password">
+                                                            </div>
+
+                                                            <div class="col-12 col-sm-12 col-md-12 mt-3">
+                                                                <div class="text-center"
+                                                                    style="color: rgba(161, 171, 183, 1);font-size: 10px;">
+                                                                    Or fill up the information below</div>
+                                                            </div>
+                                                            <div class="col-12 col-sm-12 col-md-12 mt-3">
+                                                                <div class="row bd-highlight mb-3">
+                                                                    <div class="col-md-2 bd-highlight pe-3">
+                                                                        <label for="name"
+                                                                            class="form-label">Title</label>
+                                                                        <select
+                                                                            class="form-select form-control form-select-sm">
+
+                                                                            <option value="1">Mr.</option>
+                                                                            <option value="1">Miss.</option>
+                                                                            <option value="2">Mrs.</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-4  pe-3">
+                                                                        <label for="name" class="form-label">First Name
+                                                                            (Given Name)</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm"
+                                                                            id="name" name="name"
+                                                                            placeholder="Enter First Name">
+                                                                    </div>
+                                                                    <div class="col-md-6  pe-3">
+                                                                        <label for="name" class="form-label">Last Name
+                                                                            (Sur Name)</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm"
+                                                                            id="name" name="name"
+                                                                            placeholder="Enter Last Name">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Date of
+                                                                    Birth</label>
+                                                                <input type="date" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Date of Birth">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Gender</label>
+                                                                <select class="form-select form-control form-select-sm">
+
+                                                                    <option value="1">Male</option>
+                                                                    <option value="2">Female</option>
+                                                                    <option value="3">Others</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Nationality</label>
+                                                                <select class="form-select form-select-sm">
+
+                                                                    <option value="1">Bangladeshi</option>
+                                                                    <option value="2">American</option>
+                                                                    <option value="3">Pakistani</option>
+                                                                    <option value="4">Indian</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Frequent Flyer
+                                                                    Number</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Flyer Number">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Passport
+                                                                    Number</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Passport Number">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Expiry Date</label>
+                                                                <input type="date" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Date of Birth">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Passport Image (Max
+                                                                    2MB)</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="file" class="form-control"
+                                                                        id="inputGroupFile02">
+                                                                    <label class="input-group-text"
+                                                                        for="inputGroupFile02">Upload</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Visa Image (Max
+                                                                    2MB)</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="file" class="form-control"
+                                                                        id="inputGroupFile02">
+                                                                    <label class="input-group-text"
+                                                                        for="inputGroupFile02">Upload</label>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+
+                                                            <!-- part 2 -->
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-1">
+                                                                <label for="name" class="form-label">Email</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name" placeholder="Enter Email">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-1">
+                                                                <label for="name" class="form-label">Phone</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name" placeholder="Enter Phone">
+                                                            </div>
+
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Meal Type</label>
+                                                                <select class="form-select form-select-sm">
+                                                                    <option value="">Choose One...</option>
+                                                                    <option value="1">Veg</option>
+                                                                    <option value="2">Non Veg</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Wheel Chair Needed
+                                                                    ?</label>
+                                                                <select class="form-select form-select-sm">
+                                                                    <option value="">Choose One...</option>
+                                                                    <option value="1">Yes</option>
+                                                                    <option value="2">No</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-3">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="" id="flexCheckChecked">
+                                                                    <label class="form-check-label"
+                                                                        for="flexCheckChecked">Select as Primary
+                                                                        Contact</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -262,14 +575,182 @@ function reviewPayment() {
                                                     <button class="accordion-button collapsed" type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                                         aria-expanded="false" aria-controls="collapseThree">
-                                                        <img src="../../../../../public/theme/Booking_Steps/traveller_icon.svg"
-                                                            alt="">
-                                                        <span class="pt-1 ps-1">Traveller 3: Adult</span>
+                                                        <i class="fa-solid fa-child-reaching" style="color: #7239ea;"></i>
+                                                        <span class="pt-1 ps-1">Traveller 3: Children</span>
                                                     </button>
                                                 </h2>
                                                 <div id="collapseThree" class="accordion-collapse collapse"
                                                     aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body"> test
+                                                    <div class="accordion-body" style="background-color: rgba(248, 252, 255, 1);">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="mt-2 mb-0 p-2"
+                                                                    style="font-size: 13px !important; background-color: rgba(255, 250, 238, 1); border-radius: 5px;">
+                                                                    <span
+                                                                        class="bluesky-departure-text mobile-chips-text">
+                                                                        <i style="color: rgba(240, 180, 27, 1);"
+                                                                            class="fa fa-info-circle"></i>
+                                                                        <span
+                                                                            style="font-size: 12px; color: rgba(119, 95, 35, 1); ">
+                                                                            Please fill-up all the information below as
+                                                                            same as given in your passport, to avoid
+                                                                            complications at immigration
+                                                                            proccess.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12 col-lg-12 mt-3">
+                                                                <label for="name" class="form-label">Existing
+                                                                    Traveller</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Search with name, phone, email, password">
+                                                            </div>
+
+                                                            <div class="col-12 col-sm-12 col-md-12 mt-3">
+                                                                <div class="text-center"
+                                                                    style="color: rgba(161, 171, 183, 1);font-size: 10px;">
+                                                                    Or fill up the information below</div>
+                                                            </div>
+                                                            <div class="col-12 col-sm-12 col-md-12 mt-3">
+                                                                <div class="row bd-highlight mb-3">
+                                                                    <div class="col-md-2 bd-highlight pe-3">
+                                                                        <label for="name"
+                                                                            class="form-label">Title</label>
+                                                                        <select
+                                                                            class="form-select form-control form-select-sm">
+
+                                                                            <option value="1">Mr.</option>
+                                                                            <option value="1">Miss.</option>
+                                                                            <option value="2">Mrs.</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-4  pe-3">
+                                                                        <label for="name" class="form-label">First Name
+                                                                            (Given Name)</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm"
+                                                                            id="name" name="name"
+                                                                            placeholder="Enter First Name">
+                                                                    </div>
+                                                                    <div class="col-md-6  pe-3">
+                                                                        <label for="name" class="form-label">Last Name
+                                                                            (Sur Name)</label>
+                                                                        <input type="text"
+                                                                            class="form-control form-control-sm"
+                                                                            id="name" name="name"
+                                                                            placeholder="Enter Last Name">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-5 col-sm-5 col-md-5 mt-2">
+                                                                <label for="name" class="form-label">Date of
+                                                                    Birth</label>
+                                                                <input type="date" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Date of Birth">
+                                                            </div>
+                                                            <div class="col-1 col-sm-1 col-md-1 mt-2">
+                                                                <label for="name" class="form-label">Age</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                            id="name" name="name"
+                                                                            placeholder="Age">
+                                                            </div>
+
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Gender</label>
+                                                                <select class="form-select form-control form-select-sm">
+
+                                                                    <option value="1">Male</option>
+                                                                    <option value="2">Female</option>
+                                                                    <option value="3">Others</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Nationality</label>
+                                                                <select class="form-select form-select-sm">
+
+                                                                    <option value="1">Bangladeshi</option>
+                                                                    <option value="2">American</option>
+                                                                    <option value="3">Pakistani</option>
+                                                                    <option value="4">Indian</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Frequent Flyer
+                                                                    Number</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Flyer Number">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Passport
+                                                                    Number</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Passport Number">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Expiry Date</label>
+                                                                <input type="date" class="form-control form-control-sm"
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Date of Birth">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Passport Image (Max
+                                                                    2MB)</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="file" class="form-control"
+                                                                        id="inputGroupFile02">
+                                                                    <label class="input-group-text"
+                                                                        for="inputGroupFile02">Upload</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Visa Image (Max
+                                                                    2MB)</label>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="file" class="form-control"
+                                                                        id="inputGroupFile02">
+                                                                    <label class="input-group-text"
+                                                                        for="inputGroupFile02">Upload</label>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+
+                                                            <!-- part 2 -->
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-1">
+                                                                <label for="name" class="form-label">Email</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name" placeholder="Enter Email">
+                                                            </div>
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-1">
+                                                                <label for="name" class="form-label">Phone</label>
+                                                                <input type="text" class="form-control form-control-sm"
+                                                                    id="name" name="name" placeholder="Enter Phone">
+                                                            </div>
+
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Meal Type</label>
+                                                                <select class="form-select form-select-sm">
+                                                                    <option value="">Choose One...</option>
+                                                                    <option value="1">Veg</option>
+                                                                    <option value="2">Non Veg</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-6 col-sm-6 col-md-6 mt-2">
+                                                                <label for="name" class="form-label">Wheel Chair Needed
+                                                                    ?</label>
+                                                                <select class="form-select form-select-sm">
+                                                                    <option value="">Choose One...</option>
+                                                                    <option value="1">Yes</option>
+                                                                    <option value="2">No</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -285,18 +766,10 @@ function reviewPayment() {
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="card">
-                                                    <div class="card-header p-0 m-0">
-                                                        <h5 class="ps-2 pt-1">Hello</h5>
-                                                    </div>
-                                                    <div class="card-body">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header p-0 m-0">
-                                                        <h5 class="ps-2 pt-1">Hello</h5>
+                                                    <div class="card-header p-2 m-0">
+                                                        <span style="font-size: 16px;">
+                                                            <i class="fa fa-suitcase" style="color: #7239ea;"></i> Ancillary Services
+                                                        </span>
                                                     </div>
                                                     <div class="card-body">
 
@@ -412,13 +885,15 @@ function reviewPayment() {
                                                         <tbody class="text-start">
                                                             <tr>
                                                                 <td style="font-size: 11px;">
-                                                                    <b>DAC-BDX</b><br><small>Adult</small></td>
+                                                                    <b>DAC-BDX</b><br><small>Adult</small>
+                                                                </td>
                                                                 <td style="font-size: 11px;"><b>Economy</b><br><small>10
                                                                         Kg</small></td>
                                                             </tr>
                                                             <tr>
                                                                 <td style="font-size: 11px;">
-                                                                    <b>DAC-BDX</b><br><small>Child</small></td>
+                                                                    <b>DAC-BDX</b><br><small>Child</small>
+                                                                </td>
                                                                 <td style="font-size: 11px;"><b>Economy</b><br><small>10
                                                                         Kg</small></td>
                                                             </tr>
