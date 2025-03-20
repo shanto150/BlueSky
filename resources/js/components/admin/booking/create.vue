@@ -18,6 +18,8 @@ function travelerDetails() {
 
     $("#traveller-details").removeClass("d-none");
     $("#addones-sevice-details").addClass("d-none");
+    $("#coupon-offer-details").addClass("d-none");
+    $("#review-payment-details").addClass("d-none");
 
 }
 function addonesSevice() {
@@ -28,6 +30,9 @@ function addonesSevice() {
 
     $("#addones-sevice-details").removeClass("d-none");
     $("#traveller-details").addClass("d-none");
+    $("#coupon-offer-details").addClass("d-none");
+    $("#review-payment-details").addClass("d-none");
+
 }
 
 function couponOffers() {
@@ -35,6 +40,12 @@ function couponOffers() {
     $("#coupon-offers").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Coupon_Offers.svg');
     $("#travelerDetails").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Traveler_Details_Inactive.svg');
     $("#review-payment").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Review_Payment_Inactive.svg');
+
+    $("#coupon-offer-details").removeClass("d-none");
+    $("#addones-sevice-details").addClass("d-none");
+    $("#traveller-details").addClass("d-none");
+    $("#review-payment-details").addClass("d-none");
+
 }
 
 function reviewPayment() {
@@ -42,6 +53,11 @@ function reviewPayment() {
     $("#addones-service").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Addons_Services_Inactive.svg');
     $("#coupon-offers").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Coupon_Offers_Inactive.svg');
     $("#review-payment").attr('src', 'http://[::1]:5173/public/theme/Booking_Steps/Review_Payment.svg');
+
+    $("#review-payment-details").removeClass("d-none");
+    $("#coupon-offer-details").addClass("d-none");
+    $("#addones-sevice-details").addClass("d-none");
+    $("#traveller-details").addClass("d-none");
 }
 </script>
 <template>
@@ -208,7 +224,8 @@ function reviewPayment() {
                                                 <div id="collapseOne" class="accordion-collapse collapse"
                                                     aria-labelledby="headingOne" data-bs-parent="#accordionExample"
                                                     style="">
-                                                    <div class="accordion-body" style="background-color: rgba(248, 252, 255, 1);">
+                                                    <div class="accordion-body"
+                                                        style="background-color: rgba(248, 252, 255, 1);">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="mt-2 mb-0 p-2"
@@ -395,7 +412,8 @@ function reviewPayment() {
                                                 </h2>
                                                 <div id="collapseTwo" class="accordion-collapse collapse"
                                                     aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body" style="background-color: rgba(248, 252, 255, 1);">
+                                                    <div class="accordion-body"
+                                                        style="background-color: rgba(248, 252, 255, 1);">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="mt-2 mb-0 p-2"
@@ -575,13 +593,15 @@ function reviewPayment() {
                                                     <button class="accordion-button collapsed" type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                                         aria-expanded="false" aria-controls="collapseThree">
-                                                        <i class="fa-solid fa-child-reaching" style="color: #7239ea;"></i>
+                                                        <i class="fa-solid fa-child-reaching"
+                                                            style="color: #7239ea;"></i>
                                                         <span class="pt-1 ps-1">Traveller 3: Children</span>
                                                     </button>
                                                 </h2>
                                                 <div id="collapseThree" class="accordion-collapse collapse"
                                                     aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body" style="background-color: rgba(248, 252, 255, 1);">
+                                                    <div class="accordion-body"
+                                                        style="background-color: rgba(248, 252, 255, 1);">
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="mt-2 mb-0 p-2"
@@ -655,8 +675,7 @@ function reviewPayment() {
                                                             <div class="col-1 col-sm-1 col-md-1 mt-2">
                                                                 <label for="name" class="form-label">Age</label>
                                                                 <input type="text" class="form-control form-control-sm"
-                                                                            id="name" name="name"
-                                                                            placeholder="Age">
+                                                                    id="name" name="name" placeholder="Age">
                                                             </div>
 
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
@@ -765,22 +784,312 @@ function reviewPayment() {
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="card">
+                                                <div class="card" style="background-color:rgba(248, 252, 255, 1);">
                                                     <div class="card-header p-2 m-0">
                                                         <span style="font-size: 16px;">
-                                                            <i class="fa fa-suitcase" style="color: #7239ea;"></i> Ancillary Services
+                                                            <i class="fa fa-suitcase" style="color: #7239ea;"></i>
+                                                            Ancillary Services
                                                         </span>
                                                     </div>
                                                     <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="card"
+                                                                    style="background-color: rgba(255, 255, 255, 1);">
+                                                                    <div class="row">
+                                                                        <div class="col-md-9">
+                                                                            <div
+                                                                                class="d-flex flex-column bd-highlight m-2">
+                                                                                <div class="bd-highlight">
+                                                                                    <span class="p-2">Extra
+                                                                                        Baggage</span>
+                                                                                </div>
+                                                                                <div class="bd-highlight">
+                                                                                    <span class="p-2"
+                                                                                        style="font-size: 11px;">Carry
+                                                                                        extra 1
+                                                                                        piece baggage and +10 kgs extra
+                                                                                        in cabin.</span>
 
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div
+                                                                                class="d-flex flex-row justify-content-center align-items-center mt-3">
+                                                                                <div class=" bd-highlight">
+                                                                                    <span class="p-2"
+                                                                                        style="font-size: 13px;"><b>BDT
+                                                                                            3000</b></span>
+                                                                                </div>
+                                                                                <div class=" bd-highlight">
+                                                                                    <button
+                                                                                        class="w3-button w3-tiny w3-blue-sky-purple w3-round">+ADD</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="card"
+                                                                    style="background-color: rgba(255, 255, 255, 1);">
+                                                                    <div class="row">
+                                                                        <div class="col-md-9">
+                                                                            <div
+                                                                                class="d-flex flex-column bd-highlight m-2">
+                                                                                <div class="bd-highlight">
+                                                                                    <span class="p-2">Priority
+                                                                                        Boarding</span>
+                                                                                </div>
+                                                                                <div class="bd-highlight">
+                                                                                    <span class="p-2"
+                                                                                        style="font-size: 11px;">Board
+                                                                                        the plane before general
+                                                                                        boarding and get attention
+                                                                                        fast</span>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div
+                                                                                class="d-flex flex-row justify-content-center align-items-center mt-3">
+                                                                                <div class=" bd-highlight">
+                                                                                    <span class="p-2"
+                                                                                        style="font-size: 13px;"><b>BDT
+                                                                                            1000</b></span>
+                                                                                </div>
+                                                                                <div class=" bd-highlight">
+                                                                                    <button
+                                                                                        class="w3-button w3-tiny w3-blue-sky-purple w3-round">Added</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="card"
+                                                                    style="background-color: rgba(255, 255, 255, 1);">
+                                                                    <div class="row">
+                                                                        <div class="col-md-9">
+                                                                            <div
+                                                                                class="d-flex flex-column bd-highlight m-2">
+                                                                                <div class="bd-highlight">
+                                                                                    <span class="p-2">Inflight
+                                                                                        Wi-Fi</span>
+                                                                                </div>
+                                                                                <div class="bd-highlight">
+                                                                                    <span class="p-2"
+                                                                                        style="font-size: 11px;">Get a
+                                                                                        high speed wifi connection to
+                                                                                        browse smoothly</span>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div
+                                                                                class="d-flex flex-row justify-content-center align-items-center mt-3">
+                                                                                <div class=" bd-highlight">
+                                                                                    <span class="p-2"
+                                                                                        style="font-size: 13px;"><b>BDT
+                                                                                            1000</b></span>
+                                                                                </div>
+                                                                                <div class=" bd-highlight">
+                                                                                    <button
+                                                                                        class="w3-button w3-tiny w3-blue-sky-purple w3-round">Added</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- end of add on services -->
+
+                                <!-- coupon offers -->
+                                <div class="card d-none fadeIn" id="coupon-offer-details">
+                                    <div class="card-header">
+                                        <span style="font-size: 16px;">
+                                            <i class="fa-solid fa-ticket-perforated" style="color: #7239ea;"></i>
+                                            Coupon
+                                        </span>
+                                    </div>
+                                    <div class="card-body" style="min-height: 400px;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="d-flex flex-row bd-highlight">
+                                                    <div class="p-2 bd-highlight w-100">
+                                                        <input type="text" class="form-control" id="name" name="name"
+                                                            placeholder="Enter Coupon Code">
+                                                    </div>
+                                                    <div class="p-2 bd-highlight">
+                                                        <button
+                                                            class="w3-button w3-blue-sky-purple w3-round w3-medium">Apply</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end coupon offers -->
+
+                                <!--review payment details -->
+                                <div class="card d-none fadeIn" id="review-payment-details">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <span style="font-size: 16px;">
+                                                        <i class="fa-solid fa-ticket-perforated"
+                                                            style="color: #7239ea;"></i>
+                                                        Review
+                                                    </span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="accordion" id="accordionExample">
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header" id="headingOne">
+                                                                <button class="accordion-button collapsed" type="button"
+                                                                    data-bs-toggle="collapse"
+                                                                    data-bs-target="#collapseOne" aria-expanded="false"
+                                                                    aria-controls="collapseOne">
+
+                                                                    <img src="../../../../../public/theme/Booking_Steps/traveller_icon.svg"
+                                                                        alt="">
+                                                                    <span class="pt-1 ps-1">Traveller 1: Adult</span>
+
+                                                                    <div style="margin-left: 20px;"
+                                                                        class="badge rounded-pill text-success bg-light-success p-1 px-4">
+                                                                        Primary Contact</div>
+                                                                </button>
+                                                            </h2>
+                                                            <div id="collapseOne" class="accordion-collapse collapse"
+                                                                aria-labelledby="headingOne"
+                                                                data-bs-parent="#accordionExample" style="">
+                                                                <div class="accordion-body"
+                                                                    style="background-color: rgba(248, 252, 255, 1);">
+                                                                    <div class="row">
+                                                                        <table class="table table-bordered border-primary text-center">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td><span>First Name:</span> <br> Atiqur </td>
+                                                                                    <td><span>Last Name:</span> <br> Rahman</td>
+
+                                                                                    <td><span>Date Of Birth:</span> <br> 18 Aug 1995</td>
+                                                                                    <td><span>Gender:</span> <br> Male</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td><span>Email:</span> <br> atiq@xyz.com </td>
+                                                                                    <td><span>Phone:</span> <br> 0171xxxxxx</td>
+
+                                                                                    <td><span>Nationality:</span> <br> Bangladeshi</td>
+                                                                                    <td><span>Passport Number:</span> <br> BD9255ddd21</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td><span>Expiry Date:</span> <br> 18 Aug 2027 </td>
+                                                                                    <td><span>Seat Preference:</span> <br> Window</td>
+
+                                                                                    <td><span>Meal Preference:</span> <br> Muslim Meal</td>
+                                                                                    <td><span>Wheel Chair:</span> <br> No</td>
+                                                                                </tr>
+                                                                            </tbody>
+
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-3 border border-black me-2">
+                                                                            <span style="font-size: 12px;">Atiqur_rahman_passport.jpg</span>
+                                                                            <img class="pl-0 p-2" height="80" width="100" src="../../../../../public/theme/appimages/bd_pass.jpg" alt="">
+                                                                        </div>
+                                                                        <div class="col-md-3 border border-black me-2">
+                                                                            <span style="font-size: 12px;">visa_image.jpg</span>
+                                                                            <img class="pl-0 p-2" height="80" width="100" src="../../../../../public/theme/appimages/visa_images.jpg" alt="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header" id="headingTwo">
+                                                                <button class="accordion-button collapsed" type="button"
+                                                                    data-bs-toggle="collapse"
+                                                                    data-bs-target="#collapseTwo" aria-expanded="false"
+                                                                    aria-controls="collapseTwo">
+                                                                    <img src="../../../../../public/theme/Booking_Steps/traveller_icon.svg"
+                                                                        alt="">
+                                                                    <span class="pt-1 ps-1">Traveller 2: Adult</span>
+                                                                </button>
+                                                            </h2>
+                                                            <div id="collapseTwo" class="accordion-collapse collapse"
+                                                                aria-labelledby="headingTwo"
+                                                                data-bs-parent="#accordionExample">
+                                                                <div class="accordion-body"
+                                                                    style="background-color: rgba(248, 252, 255, 1);">
+                                                                    <div class="row">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header" id="headingThree">
+                                                                <button class="accordion-button collapsed" type="button"
+                                                                    data-bs-toggle="collapse"
+                                                                    data-bs-target="#collapseThree"
+                                                                    aria-expanded="false" aria-controls="collapseThree">
+                                                                    <i class="fa-solid fa-child-reaching"
+                                                                        style="color: #7239ea;"></i>
+                                                                    <span class="pt-1 ps-1">Traveller 3: Children</span>
+                                                                </button>
+                                                            </h2>
+                                                            <div id="collapseThree" class="accordion-collapse collapse"
+                                                                aria-labelledby="headingThree"
+                                                                data-bs-parent="#accordionExample">
+                                                                <div class="accordion-body"
+                                                                    style="background-color: rgba(248, 252, 255, 1);">
+                                                                    <div class="row">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <span style="font-size: 16px;">
+                                                        <i class="fa-solid fa-ticket-perforated"
+                                                            style="color: #7239ea;"></i>
+                                                        Payment
+                                                    </span>
+                                                </div>
+                                                <div class="card-body">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end review payment details -->
 
 
                             </div>
@@ -792,7 +1101,8 @@ function reviewPayment() {
                                 <h2 class="accordion-header rounded" id="flush-headingOne"><button
                                         class="accordion-button m-0 p-0 px-3 py-2 collapsed" type="button"
                                         data-bs-toggle="collapse" data-bs-target="#flush-fare-summary"
-                                        aria-expanded="false" aria-controls="flush-fare-summary"> Fare Summary </button>
+                                        aria-expanded="false" aria-controls="flush-fare-summary"> Fare Summary
+                                    </button>
                                 </h2>
                                 <div id="flush-fare-summary" class="accordion-collapse collapse"
                                     aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -873,7 +1183,8 @@ function reviewPayment() {
                                 <h2 class="accordion-header" id="flush-headingTwo"><button
                                         class="accordion-button m-0 p-0 px-3 py-2 collapsed" type="button"
                                         data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
-                                        aria-expanded="false" aria-controls="flush-collapseTwo"> Baggadge Information
+                                        aria-expanded="false" aria-controls="flush-collapseTwo"> Baggadge
+                                        Information
                                     </button></h2>
                                 <div id="flush-collapseTwo" class="accordion-collapse collapse"
                                     aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
@@ -887,15 +1198,19 @@ function reviewPayment() {
                                                                 <td style="font-size: 11px;">
                                                                     <b>DAC-BDX</b><br><small>Adult</small>
                                                                 </td>
-                                                                <td style="font-size: 11px;"><b>Economy</b><br><small>10
-                                                                        Kg</small></td>
+                                                                <td style="font-size: 11px;">
+                                                                    <b>Economy</b><br><small>10
+                                                                        Kg</small>
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td style="font-size: 11px;">
                                                                     <b>DAC-BDX</b><br><small>Child</small>
                                                                 </td>
-                                                                <td style="font-size: 11px;"><b>Economy</b><br><small>10
-                                                                        Kg</small></td>
+                                                                <td style="font-size: 11px;">
+                                                                    <b>Economy</b><br><small>10
+                                                                        Kg</small>
+                                                                </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -939,5 +1254,10 @@ function reviewPayment() {
     left: 633px;
     top: 16px;
     z-index: 16;
+}
+
+.w3-blue-sky-purple {
+    color: #fff !important;
+    background-color: #7239ea;
 }
 </style>
