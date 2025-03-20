@@ -988,21 +988,18 @@ function reviewPayment() {
                                                                                 <tr>
                                                                                     <td><span>First Name:</span> <br> Atiqur </td>
                                                                                     <td><span>Last Name:</span> <br> Rahman</td>
-
                                                                                     <td><span>Date Of Birth:</span> <br> 18 Aug 1995</td>
                                                                                     <td><span>Gender:</span> <br> Male</td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td><span>Email:</span> <br> atiq@xyz.com </td>
                                                                                     <td><span>Phone:</span> <br> 0171xxxxxx</td>
-
                                                                                     <td><span>Nationality:</span> <br> Bangladeshi</td>
                                                                                     <td><span>Passport Number:</span> <br> BD9255ddd21</td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td><span>Expiry Date:</span> <br> 18 Aug 2027 </td>
                                                                                     <td><span>Seat Preference:</span> <br> Window</td>
-
                                                                                     <td><span>Meal Preference:</span> <br> Muslim Meal</td>
                                                                                     <td><span>Wheel Chair:</span> <br> No</td>
                                                                                 </tr>
