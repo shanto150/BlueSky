@@ -352,7 +352,7 @@
                 </air:AirSegment>
             </air:AirSegmentList>
             <air:FareInfoList>
-            
+
                 <air:FareInfo Key="OpBiNVSqWDKAD6PXNAAAAA==" FareBasis="UK2YXSDC" PassengerTypeCode="ADT" Origin="DAC" Destination="JFK" EffectiveDate="2025-03-11T12:06:00.000+06:00" DepartureDate="2025-03-21" Amount="BDT43193" NegotiatedFare="false" NotValidBefore="2025-03-22" NotValidAfter="2025-03-22">
                     <air:FareSurcharge Key="OpBiNVSqWDKAb6PXNAAAAA==" Type="Weekend Surcharge" Amount="NUC30.00"/>
                     <air:BaggageAllowance>

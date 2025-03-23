@@ -16,6 +16,7 @@ const authStore = useAuthStore();
 
 
 const airports = ref([]); // All airports
+const fareRulesData = ref([]); // All fareRulesData
 const initialLoadLimit = 20; // Limit for init
 const showOriginList = ref(false);
 const showDestinationList = ref(false);
@@ -24,6 +25,7 @@ const filteredDestinationAirports = ref([]);
 
 const totalFlights = ref(0);
 const loadging = ref(false);
+const fareRuleloading = ref(false);
 const fdate = ref();
 const sliderMin = ref(150);
 const sliderMax = ref(180);
@@ -36,6 +38,15 @@ const isRanges = ref();
 
 const isRounded = 'oneway';
 const tdate = ref();
+
+function toggleRule(ruleName) {
+    // If clicking the same rule again, keep it open
+    if (fareRulesData.value === ruleName) {
+        fareRulesData.value = null;  // Close current rule if clicked again
+    } else {
+        fareRulesData.value = ruleName;  // Open new rule
+    }
+}
 
 onMounted(() => {
     form.Way = 1;
@@ -332,6 +343,14 @@ function number_format(nStr) {
         x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
     return x1;
+}
+
+async function fareRuleClick(param) {
+    fareRuleloading.value = true;
+    const response = await axiosInstance.post("farerules", param);
+    fareRulesData.value = response.data;
+    fareRuleloading.value = false;
+    console.log(response.data);
 }
 
 </script>
@@ -1514,8 +1533,9 @@ function number_format(nStr) {
                                                         </div>
                                                     </a>
                                                 </li>
+                                                <!-- flight.outbound.farerulekey -->
                                                 <li class="nav-item" role="presentation">
-                                                    <a class="nav-link" data-bs-toggle="tab" :href="`#primaryprofile-${index}`"
+                                                    <a class="nav-link" @click="fareRuleClick( flight.outbound.farerulekey )" data-bs-toggle="tab" :href="`#primaryprofile-${index}`"
                                                         role="tab" aria-selected="false" tabindex="-1">
                                                         <div class="d-flex align-items-center">
                                                             <div class="tab-icon"><i
@@ -1942,22 +1962,64 @@ function number_format(nStr) {
                                                 </div>
                                                 <div class="tab-pane fade" :id="`primaryprofile-${index}`" role="tabpanel">
                                                     <div class="row">
-                                                        <div class="col-md-12">
-
-                                                            <p class="text-start fw-bold">PENALTIES/GENERAL
-                                                            </p>
-                                                            <span>
-                                                                1. Reissue/Refund minimum penalty amount
-                                                                before
-                                                                departure 0 BDT 2. Reissue/Refund maximum
-                                                                penalty amount
-                                                                before departure 5999 BDT
-                                                                3. Reissue/Refund maximum penalty amount for
-
-                                                            </span>
+                                                        <div class="col-md-12" v-show="fareRuleloading">
+                                                            <div class="text-center">
+                                                                <img class="border w3-circle" height="70" src="../../../../public/theme/appimages/pp.gif" alt="">
+                                                                <p class="mt-2">Loading fare rules...</p>
+                                                            </div>
                                                         </div>
 
+                                                        <div v-for="(segment, segmentKey) in fareRulesData.data" :key="segmentKey" class="segment-container">
+                                                            <h3 class="segment-title">{{ segmentKey }}</h3>
+
+                                                            <div class="rules-accordion">
+                                                                <div v-for="(rule, ruleName) in segment.rules" :key="`${segmentKey}-${ruleName}`"
+                                                                    class="rule-item"
+                                                                    :class="{ 'active': selectedRule === ruleName }">
+                                                                    <div class="rule-header" @click="toggleRule(ruleName)">
+                                                                        <div class="d-flex justify-content-between w-100 align-items-center">
+                                                                            <span class="rule-category">{{ ruleName }}</span>
+                                                                            <i class="fa" :class="[selectedRule === ruleName ? 'fa-chevron-up' : 'fa-chevron-down']"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="rule-content" :class="{ 'show': selectedRule === ruleName }">
+                                                                        {{ rule.content }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
+
+                                                    <!-- <div class="row" id="fareRule" v-show="!fareRuleloading">
+                                                            <div class="col-md-12">
+                                                                <div class="fare-rules-container">
+                                                                    <div v-for="(segment, segmentKey) in fareRulesData.data"
+                                                                        :key="segmentKey" class="segment-container">
+                                                                        <h3 class="segment-title">{{ segmentKey }}</h3>
+
+                                                                        <div class="rules-accordion">
+                                                                            <div v-for="(rule, ruleName) in segment.rules"
+                                                                                :key="ruleName" class="rule-item"
+                                                                                :class="{ 'active': selectedRule === ruleName }">
+                                                                                <div class="rule-header"
+                                                                                    @click="toggleRule(ruleName)">
+                                                                                    <span class="rule-category">{{
+                                                                                        ruleName }}</span>
+                                                                                    <i class="fas"
+                                                                                        :class="selectedRule === ruleName ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                                                                </div>
+                                                                                <div class="rule-content"
+                                                                                    :class="{ 'show': selectedRule === ruleName }">
+                                                                                    {{ rule.content }}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    </div> -->
+
+
                                                 </div>
                                                 <div class="tab-pane fade" :id="`primarycontact-${index}`" role="tabpanel">
                                                     <div class="row">
@@ -2301,5 +2363,90 @@ function number_format(nStr) {
     .mobile-chips-text {
         font-size: 10px;
     }
+}
+</style>
+
+<style scoped>
+.fare-rules-container {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.segment-title {
+    color: #2c3e50;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #3498db;
+}
+
+.rule-item {
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.rule-header {
+    padding: 15px;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.rule-header:hover {
+    background: #e9ecef;
+}
+
+.rule-category {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.rule-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+.rule-content.show {
+    max-height: 1000px; /* Increased to handle longer content */
+    padding: 15px;
+    background: #fff;
+}
+
+.active {
+    border-color: #3498db;
+}
+
+/* Improve scrollbar styling */
+.rules-accordion {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.rules-accordion::-webkit-scrollbar {
+    width: 6px;
+}
+
+.rules-accordion::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.rules-accordion::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 3px;
+}
+
+/* Animation classes */
+.fadeIn {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 </style>
