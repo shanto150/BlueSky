@@ -1536,7 +1536,7 @@ function number_format(nStr) {
                                         <div class="col-md-8">
                                             <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
                                                 <li class="nav-item" role="presentation">
-                                                    <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome"
+                                                    <a class="nav-link active" data-bs-toggle="tab" :href="`#primaryhome-${index}`"
                                                         role="tab" aria-selected="true">
                                                         <div class="d-flex align-items-center">
                                                             <div class="tab-icon"><i
@@ -1547,7 +1547,7 @@ function number_format(nStr) {
                                                     </a>
                                                 </li>
                                                 <li class="nav-item" role="presentation">
-                                                    <a class="nav-link" data-bs-toggle="tab" href="#primaryprofile"
+                                                    <a class="nav-link" data-bs-toggle="tab" :href="`#primaryprofile-${index}`"
                                                         role="tab" aria-selected="false" tabindex="-1">
                                                         <div class="d-flex align-items-center">
                                                             <div class="tab-icon"><i
@@ -1558,7 +1558,7 @@ function number_format(nStr) {
                                                     </a>
                                                 </li>
                                                 <li class="nav-item" role="presentation">
-                                                    <a class="nav-link" data-bs-toggle="tab" href="#primarycontact"
+                                                    <a class="nav-link" data-bs-toggle="tab" :href="`#primarycontact-${index}`"
                                                         role="tab" aria-selected="false" tabindex="-1">
                                                         <div class="d-flex align-items-center">
                                                             <div class="tab-icon"><i
@@ -1570,7 +1570,7 @@ function number_format(nStr) {
                                                 </li>
                                             </ul>
                                             <div class="tab-content pt-3">
-                                                <div class="tab-pane fade active show" id="primaryhome" role="tabpanel">
+                                                <div class="tab-pane fade active show" :id="`primaryhome-${index}`" role="tabpanel">
                                                     <div class="d-flex d-flex-row mb-1">
                                                         <div v-if="flight.outbound" class="p-1 bd-highlight">
                                                             <button @click="showRouteDetails(1,index)"
@@ -1972,7 +1972,7 @@ function number_format(nStr) {
                                                     </div>
 
                                                 </div>
-                                                <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
+                                                <div class="tab-pane fade" :id="`primaryprofile-${index}`" role="tabpanel">
                                                     <div class="row">
                                                         <div class="col-md-12">
 
@@ -1991,7 +1991,7 @@ function number_format(nStr) {
 
                                                     </div>
                                                 </div>
-                                                <div class="tab-pane fade" id="primarycontact" role="tabpanel">
+                                                <div class="tab-pane fade" :id="`primarycontact-${index}`" role="tabpanel">
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <p class="text-start fw-bold">Max Stay</p>
