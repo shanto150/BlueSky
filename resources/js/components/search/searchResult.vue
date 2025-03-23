@@ -1516,7 +1516,7 @@ function number_format(nStr) {
                                                     :aria-controls="'flight-details-' + index" data-bs-toggle="collapse"
                                                     aria-expanded="false"
                                                     style=" font-size: 12px; background: #f1f4f7 !important;">
-                                                    <b>Flight Details {{ index }}</b>
+                                                    <b>Flight Details</b>
                                                 </a>
                                             </h2>
                                         </div>
