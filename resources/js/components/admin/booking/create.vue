@@ -1008,11 +1008,11 @@ function reviewPayment() {
                                                                         </table>
                                                                     </div>
                                                                     <div class="row">
-                                                                        <div class="col-md-3 border border-black me-2">
+                                                                        <div class="col-md-3 border me-2">
                                                                             <span style="font-size: 12px;">Atiqur_rahman_passport.jpg</span>
                                                                             <img class="pl-0 p-2" height="80" width="100" src="../../../../../public/theme/appimages/bd_pass.jpg" alt="">
                                                                         </div>
-                                                                        <div class="col-md-3 border border-black me-2">
+                                                                        <div class="col-md-3 border me-2">
                                                                             <span style="font-size: 12px;">visa_image.jpg</span>
                                                                             <img class="pl-0 p-2" height="80" width="100" src="../../../../../public/theme/appimages/visa_images.jpg" alt="">
                                                                         </div>
