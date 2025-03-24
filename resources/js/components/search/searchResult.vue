@@ -2032,7 +2032,7 @@ async function fareRuleClick(param) {
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header rounded" id="flush-headingOne"
                                                         style="background-color: #7944eb !important;">
-                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed d-flex justify-content-between w-100 align-items-center"
                                                             type="button" data-bs-toggle="collapse"
 
                                                             :data-bs-target="'#flush-fare-summary-' + index"
@@ -2179,7 +2179,7 @@ async function fareRuleClick(param) {
                                                 </div>
                                                 <div class="accordion-item mt-2">
                                                     <h2 class="accordion-header" id="flush-headingTwo">
-                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed d-flex justify-content-between w-100 align-items-center"
                                                             type="button" data-bs-toggle="collapse"
                                                             :data-bs-target="'#flush-collapseTwo-' + index" aria-expanded="false"
                                                             :aria-controls="'flush-collapseTwo-' + index">
