@@ -1250,7 +1250,7 @@ function number_format(nStr) {
                                                                             <img  :title="`Layover at ${ stop.city_name } | ${ stop.layover_time }\n${ stop.airport_name }`"
                                                                                 src="../../../../public/theme/appimages/Layover.svg"  alt="">
                                                                         </div>
-                                                                        <div class="bd-highlight text-black" v-if="iter != flight.outbound.connections.stops.length -1">
+                                                                        <div class="bd-highlight text-black" v-if="iter != (flight.outbound.connections.stops.length -1)">
                                                                             ....
                                                                         </div>
                                                                     </div>
