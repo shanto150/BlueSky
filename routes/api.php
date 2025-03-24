@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\API\APIController;
@@ -140,6 +142,7 @@ Route::middleware(['auth:api'])->group(function () {
 
     //Internal API
     Route::post('/Lowfaresearch', [APIController::class, 'Lowfaresearch']);
+    Route::post('/farerules', [APIController::class, 'getFareRules']);
 
 });
 Route::get('airports', [AreaController::class, 'airports']);
