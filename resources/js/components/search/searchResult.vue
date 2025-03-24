@@ -347,8 +347,11 @@ function number_format(nStr) {
 }
 
 async function fareRuleClick(param) {
+    $(".segment-container").hide();
     fareRuleloading.value = true;
     const response = await axiosInstance.post("farerules", param);
+    $(".segment-container").show();
+
     fareRulesData.value = response.data;
     fareRuleloading.value = false;
     console.log(response.data);
@@ -1978,8 +1981,8 @@ async function fareRuleClick(param) {
                                                                     <div class="accordion-item" v-for="(rule, ruleName) in segment.rules">
                                                                         <h2 class="accordion-header" id="headingOne">
                                                                             <button class="d-flex justify-content-between w-100 align-items-center accordion-button collapsed accorion-item-title-color m-0 p-0 px-2 py-2" type="button" data-bs-toggle="collapse" :data-bs-target="`#${ruleName}_${index}_${iterm}`" aria-expanded="false" :aria-controls="`${ruleName}_${index}_${iterm}`">
-
-                                                                                {{ ruleName=="CATEGORY_0" ?"General":  ruleName}}
+                                                                                <!-- {{ ruleName.replace(/_/g, ' ') }} -->
+                                                                                {{ ruleName=="CATEGORY_0" ?"General":  ruleName.replace(/_/g, ' ')}}
                                                                             </button>
                                                                         </h2>
                                                                         <div :id="`${ruleName}_${index}_${iterm}`" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
