@@ -308,7 +308,6 @@ function reviewPayment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Nationality</label>
                                                                 <select class="form-select form-select-sm">
-
                                                                     <option value="1">Bangladeshi</option>
                                                                     <option value="2">American</option>
                                                                     <option value="3">Pakistani</option>
