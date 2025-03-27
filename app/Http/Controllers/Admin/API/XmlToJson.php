@@ -17,6 +17,7 @@ class XmlToJson
     private $airlineNames = [];
     private $airportData = []; // New property for airport data
     private $aircraftTypes = []; // New property for aircraft types
+    private $brandCache = []; // Add this new property at the top of the class
 
     public function __construct($xmlContent)
     {
@@ -487,21 +488,21 @@ class XmlToJson
 
     private function buildJourney($outboundSegments, $inboundSegments, $commonInfo, $isReturn)
     {
-        $journey = [
-            'outbound' => array_merge(
-                $this->buildJourneySection($outboundSegments, $commonInfo),
-                ['connections' => [
-                    'count' => 0,
-                    'stops' => []
-                ]] // Default empty connections
-            )
-        ];
-
-        // Get the solution from the commonInfo
         $solutionKey = $commonInfo['key'];
         $solution = $this->xml->xpath("//air:AirPricingSolution[@Key='$solutionKey']")[0] ?? null;
 
+        $journey = [
+            'brand' => [],
+            'all_segments' => [], // Add this new section
+            'outbound' => array_merge(
+                $this->buildJourneySection($outboundSegments, $commonInfo),
+                ['connections' => ['count' => 0, 'stops' => []]]
+            )
+        ];
+
         if ($solution) {
+            $journey['brand'] = $this->cacheBrands($solution);
+            $journey['all_segments'] = $this->getAllSegmentsRaw($solution);
             $journey['outbound']['connections'] = $this->processConnectionInfo($solution, false);
 
             if ($isReturn) {
@@ -721,5 +722,118 @@ class XmlToJson
             $results[] = $this->processPricingSolution($solution);
         }
         return ['flights' => $results];
+    }
+
+    // Modify the cacheBrands method
+    private function cacheBrands($solution)
+    {
+        $brands = [];
+        $usedCarriers = [];
+
+        // First get all carriers used in this journey
+        $segments = $solution->xpath('.//air:AirSegmentRef');
+        foreach ($segments as $segmentRef) {
+            $segmentKey = (string)$segmentRef['Key'];
+            if (isset($this->segments[$segmentKey])) {
+                $carrierCode = $this->segments[$segmentKey]['carrier_code'];
+                $usedCarriers[$carrierCode] = true;
+            }
+        }
+
+        // Get brands from BrandList
+        $brandList = $this->xml->xpath('//air:BrandList/air:Brand');
+        if (empty($brandList)) {
+            $brandList = $solution->xpath('.//air:Brand');
+        }
+
+        foreach ($brandList as $brand) {
+            $attributes = $brand->attributes();
+            $carrier = (string)($attributes['Carrier'] ?? '');
+
+            // Only include brands for carriers used in this journey
+            if (!isset($usedCarriers[$carrier])) {
+                continue;
+            }
+
+            $brandData = [
+                'brand_id' => (string)($attributes['BrandID'] ?? ''),
+                'name' => (string)($attributes['Name'] ?? ''),
+                'carrier' => $carrier,
+                'upSellMessage' => (string)($attributes['UpSell'] ?? ''),
+                'brand_reference' => (string)($attributes['BrandReference'] ?? ''),
+                'program_code' => (string)($attributes['ProgramCode'] ?? ''),
+                'program_name' => (string)($attributes['ProgramName'] ?? ''),
+                'program_description' => (string)($attributes['ProgramDescription'] ?? ''),
+                'MarketingAgent' => (string)($attributes['MarketingAgent'] ?? ''),
+                'services' => []
+            ];
+
+            // Get services for this brand
+            $services = $brand->xpath('.//air:OptionalServices/air:Service | .//air:Services/air:Service');
+            foreach ($services as $service) {
+                $serviceAttributes = $service->attributes();
+                $brandData['services'][] = [
+                    'name' => (string)($serviceAttributes['Name'] ?? ''),
+                    'description' => (string)($serviceAttributes['Description'] ?? ''),
+                    'included' => (string)($serviceAttributes['ServiceStatus'] ?? '') === 'Included',
+                    'service_id' => (string)($serviceAttributes['ServiceId'] ?? ''),
+                    'service_type' => (string)($serviceAttributes['ServiceType'] ?? '')
+                ];
+            }
+
+            if (!empty($brandData['brand_id'])) {
+                $brands[] = $brandData;
+            }
+        }
+
+        return $brands;
+    }
+
+    // Add this helper method
+    private function getBrandServices($brand)
+    {
+        $services = [];
+        foreach ($brand->xpath('.//air:Service') as $service) {
+            $services[] = [
+                'name' => (string)$service['Name'],
+                'description' => (string)($service['Description'] ?? ''),
+                'included' => (string)($service['ServiceStatus'] ?? '') === 'Included'
+            ];
+        }
+        return $services;
+    }
+
+    private function getAllSegmentsRaw($solution)
+    {
+        $allSegments = [];
+        $segmentRefs = $solution->xpath('.//air:AirSegmentRef');
+
+        foreach ($segmentRefs as $segmentRef) {
+            $segmentKey = (string)$segmentRef['Key'];
+            $segment = $this->xml->xpath("//air:AirSegment[@Key='$segmentKey']")[0] ?? null;
+
+            if ($segment) {
+                $attributes = $segment->attributes();
+
+                // Get all attributes directly
+                $segmentData = [];
+                foreach ($attributes as $key => $value) {
+                    $segmentData[$key] = (string)$value;
+                }
+
+                // Add codeshare info if exists
+                $codeshareInfo = $segment->xpath('./air:CodeshareInfo')[0] ?? null;
+                if ($codeshareInfo) {
+                    $codeshareAttributes = $codeshareInfo->attributes();
+                    foreach ($codeshareAttributes as $key => $value) {
+                        $segmentData[$key] = (string)$value;
+                    }
+                }
+
+                $allSegments[] = $segmentData;
+            }
+        }
+
+        return $allSegments;
     }
 }
