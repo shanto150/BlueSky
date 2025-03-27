@@ -1306,7 +1306,7 @@ async function fareRuleClick(param) {
                                         <div v-show="form.Way == 1" class="col-12 col-sm-12 col-md-2">
                                             <div class="d-grid">
                                                 <button class="btn btn-sm bluesky-btn-primary" data-bs-toggle="collapse"
-                                                    data-bs-target="#flight-package-2" aria-controls="flight-package-2">
+                                                    :data-bs-target="`#flight-package-${index}`" :aria-controls="`flight-package-${index}`">
 
                                                     <div class="text-right">
                                                         <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{
@@ -2259,6 +2259,304 @@ async function fareRuleClick(param) {
                         </div>
                     </div>
                     <!-- ./ end flight details2 -->
+
+
+                    <!-- Price Details -->
+
+
+                    <div :id="`flight-package-${index}`" class="accordion-collapse collapse m-0"
+                                    aria-labelledby="flush-headingpackage" data-bs-parent="#accordionFlushExample"
+                                    style="">
+                                    <div class="accordion-body">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+
+                                                    <div class="col-md-4" v-if="flight.brand.length > 0" v-for="fbrand,itere in flight.brand">
+                                                        <div :class="`card ${ itere%2==0 ? 'border-eco' : 'border-primium' }`" style="min-height: 460px; ">
+                                                            <div class="card-header border-bottom-1">
+                                                                <h5 class="card-title text-center" style="font-size: 15px;">{{ fbrand.name }}</h5>
+                                                                <h6 class="text-center">BDT 0</h6>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <ul style="list-style-type:none;" class="">
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i class="fa fa-refresh icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Flexible to make 2 changes
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-circle-xmark icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Cancellation within 24hrs
+                                                                        </span>
+
+                                                                    </li>
+
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-solid fa-suitcase-rolling icon-color mt-1"></i>
+                                                                        <span class="ms-1">Baggage: 2 pieces, 23
+                                                                            kg each</span>
+
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-suitcase icon-color mt-1"></i>
+                                                                        <span class="ms-1">Baggage: 2 pieces, 7 kg</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Standard Seat selection
+                                                                            included</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Preferred
+                                                                            Seat without fees</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa fa-utensils icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free meal</span>
+
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-brands fa-youtube icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Multimedia
+                                                                            Support
+                                                                        </span>
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-wifi icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free Wi-Fi</span>
+
+                                                                    </li>
+                                                                </ul>
+                                                                <!-- <button >Book</button> -->
+                                                                <router-link class="btn btn-outline-book w-100" :to="{ name: 'bookingCreate' }">Book</router-link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4" v-else >
+                                                        <div class="card border-eco" style="min-height: 480px; ">
+                                                            <div class="card-header border-bottom-1">
+                                                                <h5 class="card-title text-center" style="font-size: 15px;">Ecomony Class</h5>
+                                                                <!-- <h6 class="text-center">BDT
+                                                                    000</h6> -->
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <ul style="list-style-type:none;" class="">
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i class="fa fa-refresh icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Flexible to make 2 changes
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-circle-xmark icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Cancellation within 24hrs
+                                                                        </span>
+
+                                                                    </li>
+
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-solid fa-suitcase-rolling icon-color mt-1"></i>
+                                                                        <span class="ms-1">Checked Baggage: 2 pieces, 23
+                                                                            kg each</span>
+
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-suitcase icon-color mt-1"></i>
+                                                                        <span class="ms-1">Checked
+                                                                            Baggage: 2 pieces, 7 kg</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Standard Seat selection
+                                                                            included</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Preferred
+                                                                            Seat without fees</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa fa-utensils icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free meal</span>
+
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-brands fa-youtube icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Multimedia
+                                                                            Support
+                                                                        </span>
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-wifi icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free Wi-Fi</span>
+
+                                                                    </li>
+                                                                </ul>
+                                                                <!-- <button >Book</button> -->
+                                                                <router-link class="btn btn-outline-book w-100" :to="{ name: 'bookingCreate' }">Book</router-link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <div class="col-md-4">
+                                                        <div class="card border-primium" style="min-height: 480px; ">
+                                                            <div class="card-header text-black border-bottom-1">
+                                                                <h5 class="card-title text-center">Premium Economy</h5>
+                                                                <h6 class="text-center text-black">BDT 70500</h6>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <ul style="list-style-type:none;" class="">
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i class="fa fa-refresh icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Flexible to make 2 changes
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-circle-xmark icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Cancellation within 24hrs
+                                                                        </span>
+
+                                                                    </li>
+
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-solid fa-suitcase-rolling icon-color mt-1"></i>
+                                                                        <span class="ms-1">Checked Baggage: 2 pieces, 23
+                                                                            kg each</span>
+
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-suitcase icon-color mt-1"></i>
+                                                                        <span class="ms-1">Checked
+                                                                            Baggage: 2 pieces, 7 kg</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Standard Seat selection
+                                                                            included</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Preferred Seat without fees</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa fa-utensils icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free meal</span>
+
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-brands fa-youtube icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Multimedia
+                                                                            Support
+                                                                        </span>
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-wifi icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free
+                                                                            Wi-Fi</span>
+
+                                                                    </li>
+                                                                </ul>
+                                                                <button class="btn btn-outline-book w-100">Book</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="card border-first" style="min-height: 480px; ">
+                                                            <div class="card-header text-black border-bottom-1">
+                                                                <h5 class="card-title text-center">First Class</h5>
+                                                                <h6 class="text-center text-black">BDT 90500</h6>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <ul style="list-style-type:none;" class="">
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i class="fa fa-refresh icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Flexible to make 2 changes
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-circle-xmark icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Cancellation within 24hrs
+                                                                        </span>
+
+                                                                    </li>
+
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-solid fa-suitcase-rolling icon-color mt-1"></i>
+                                                                        <span class="ms-1">Checked Baggage: 2 pieces, 23
+                                                                            kg each</span>
+
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-suitcase icon-color mt-1"></i>
+                                                                        <span class="ms-1">Checked
+                                                                            Baggage: 2 pieces, 7 kg</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex">
+                                                                        <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Standard Seat selection
+                                                                            included</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-regular fa-seat-airline icon-color mt-1"></i>
+                                                                        <span class="ms-1">Preferred Seat without fees</span>
+                                                                    </li>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa fa-utensils icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free meal</span>
+
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-brands fa-youtube icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            Multimedia
+                                                                            Support
+                                                                        </span>
+                                                                    </li>
+                                                                    <br>
+                                                                    <li class="menu-item d-inline-flex"> <i
+                                                                            class="fa-solid fa-wifi icon-color mt-1"></i>
+                                                                        <span class="ms-1">Free
+                                                                            Wi-Fi</span>
+
+                                                                    </li>
+                                                                </ul>
+                                                                <button class="btn btn-outline-book w-100">Book</button>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ./end Price Details -->
                 </div>
 
             </div>
@@ -2423,6 +2721,25 @@ async function fareRuleClick(param) {
 .accorion-item-title-color {
     background: linear-gradient(249deg, #E9F6FF 0%, #F1EDFF 100%);
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.01);
+}
+
+.border-eco {
+    border-image: linear-gradient(231deg, #16B4A1 8.86%, rgba(46, 194, 210, 0.00) 100.22%) 1;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.border-primium {
+    border-image:  linear-gradient(255deg, #3B79F2 6.09%, rgba(128, 163, 255, 0.00) 99.25%) 1;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.icon-color {
+    /* color: #875ae9; */
+    color: #08a79a;
+    font-size: 15px;
+    padding-right: 3px;
 }
 
 @keyframes fadeIn {
