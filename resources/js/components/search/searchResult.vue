@@ -275,7 +275,6 @@ function clearDestination() {
 }
 
 function onHover() {
-
     $("#s_image").attr('src', 'http://[::1]:5173/public/theme/appimages/s_Hover_State.jpg');
 }
 

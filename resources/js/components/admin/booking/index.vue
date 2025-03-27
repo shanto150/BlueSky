@@ -373,7 +373,7 @@ async function getListValues() {
                 </router-link>
                 &nbsp;
                 <router-link :to="{ name: 'CreateAgency' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i> Manual Booking & Ticketing
+                    <i class="fa fa-circle-plus"></i> Manual Ticketing
                 </router-link>
 
             </div>
