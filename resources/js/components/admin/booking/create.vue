@@ -308,7 +308,6 @@ function reviewPayment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Nationality</label>
                                                                 <select class="form-select form-select-sm">
-
                                                                     <option value="1">Bangladeshi</option>
                                                                     <option value="2">American</option>
                                                                     <option value="3">Pakistani</option>
@@ -775,6 +774,13 @@ function reviewPayment() {
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="card-footer">
+                                        <div class="d-block">
+                                            <!-- <button @click="addAddOnServices()" class="w3-button w3-dark-gray w3-round w3-medium float-left">Back</button> -->
+                                            <button type="button" @click="addonesSevice"
+                                                class="w3-button w3-blue-sky-purple w3-round w3-medium float-end">Continue</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- end of traveller details -->
 
@@ -917,6 +923,13 @@ function reviewPayment() {
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="card-footer">
+                                        <div class="d-block">
+                                            <button @click="travelerDetails" class="w3-button w3-dark-gray w3-round w3-medium float-left">Back</button>
+                                            <button type="button" @click="couponOffers"
+                                                class="w3-button w3-blue-sky-purple w3-round w3-medium float-end">Continue</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- end of add on services -->
 
@@ -928,7 +941,7 @@ function reviewPayment() {
                                             Coupon
                                         </span>
                                     </div>
-                                    <div class="card-body" style="min-height: 400px;">
+                                    <div class="card-body" style="min-height: 280px;">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="d-flex flex-row bd-highlight">
@@ -942,6 +955,12 @@ function reviewPayment() {
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="d-block">
+                                            <button @click="couponOffers" class="w3-button w3-dark-gray w3-round w3-medium float-left">Back</button>
+                                            <button type="button" @click="reviewPayment" class="w3-button w3-blue-sky-purple w3-round w3-medium float-end">Continue</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1080,15 +1099,48 @@ function reviewPayment() {
                                                     </span>
                                                 </div>
                                                 <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-7">
+                                                            <div class="d-flex flex-column bd-highlight mb-3">
+                                                                <div class="bd-highlight">Payment From</div>
+                                                                <div class="pt-2 bd-highlight">
+                                                                    <button class="w3-btn w3-white w3-border  bluesky-border-primary w3-round"> <i class="fa-solid fa-wallet" style="color:#7239ea;"></i> <span class="fw-bold" style="color:#7239ea;">Main Balanace</span></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <table class="table table-sm table-borderless text-center">
+                                                                <tr>
+                                                                    <td class="fw-bold p-2">Current Balance</td>
+                                                                    <td class="fw-bold p-2">BDT 234500</td>
+                                                                </tr>
 
+                                                                <tr>
+                                                                    <td class="fw-bold p-2">Deducted</td>
+                                                                    <td class="fw-bold p-2">- BDT 34500</td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="fw-bold p-2">Available</td>
+                                                                    <td class="fw-bold p-2">BDT 200000</td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="card-footer">
+                                        <div class="d-block">
+                                            <button @click="couponOffers" class="w3-button w3-dark-gray w3-round w3-medium float-left">Back</button>
+                                            <button type="button"
+                                                class="w3-button w3-blue-sky-purple w3-round w3-medium float-end">Confirm Booking</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- end review payment details -->
-
-
                             </div>
                         </div>
                     </div>

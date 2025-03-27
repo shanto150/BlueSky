@@ -40,6 +40,7 @@ const isRounded = 'oneway';
 const tdate = ref();
 
 function toggleRule(ruleName) {
+
     // If clicking the same rule again, keep it open
     if (fareRulesData.value === ruleName) {
         fareRulesData.value = null;  // Close current rule if clicked again
@@ -274,7 +275,6 @@ function clearDestination() {
 }
 
 function onHover() {
-
     $("#s_image").attr('src', 'http://[::1]:5173/public/theme/appimages/s_Hover_State.jpg');
 }
 
@@ -346,8 +346,11 @@ function number_format(nStr) {
 }
 
 async function fareRuleClick(param) {
+    $(".segment-container").hide();
     fareRuleloading.value = true;
     const response = await axiosInstance.post("farerules", param);
+    $(".segment-container").show();
+
     fareRulesData.value = response.data;
     fareRuleloading.value = false;
     console.log(response.data);
@@ -854,7 +857,7 @@ async function fareRuleClick(param) {
                     <div class="accordion" id="price-range">
                         <div class="accordion-item">
                             <p class="accordion-header" id="headingOne">
-                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2 d-flex justify-content-between w-100 align-items-center"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                     aria-expanded="true" aria-controls="collapseOne">
                                     <span style="float:left;">
@@ -886,7 +889,7 @@ async function fareRuleClick(param) {
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
                             <h6 class="accordion-header" id="headingSix">
-                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2 d-flex justify-content-between w-100 align-items-center"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix"
                                     aria-expanded="false" aria-controls="collapseSix">
                                     <span style="font-size: 13px;">Flight Schedule</span>
@@ -953,7 +956,7 @@ async function fareRuleClick(param) {
                     <div class="accordion" id="arilines">
                         <div class="accordion-item mt-3">
                             <h6 class="accordion-header" id="headingfour">
-                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2 d-flex justify-content-between w-100 align-items-center"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour"
                                     aria-expanded="false" aria-controls="collapseFour">
                                     <span class="" style="font-size: 13px;">Airlines</span>
@@ -1003,7 +1006,7 @@ async function fareRuleClick(param) {
                     <div class="accordion" id="stop">
                         <div class="accordion-item mt-3">
                             <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2 d-flex justify-content-between w-100 align-items-center"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                     aria-expanded="false" aria-controls="collapseTwo">
 
@@ -1041,7 +1044,7 @@ async function fareRuleClick(param) {
                     <div class="accordion" id="refund">
                         <div class="accordion-item mt-3">
                             <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2 d-flex justify-content-between w-100 align-items-center"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                     aria-expanded="false" aria-controls="collapseThree">
 
@@ -1078,7 +1081,7 @@ async function fareRuleClick(param) {
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
                             <h2 class="accordion-header" id="headingSeven">
-                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2 d-flex justify-content-between w-100 align-items-center"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven"
                                     aria-expanded="false" aria-controls="collapseSeven">
 
@@ -1123,7 +1126,7 @@ async function fareRuleClick(param) {
                     <div class="accordion" id="class-type">
                         <div class="accordion-item mt-3">
                             <h6 class="accordion-header" id="headingEight">
-                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2"
+                                <button class="accordion-button accorion-item-title-color m-0 p-0 px-2 py-2 d-flex justify-content-between w-100 align-items-center"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight"
                                     aria-expanded="false" aria-controls="collapseEight">
 
@@ -1269,7 +1272,7 @@ async function fareRuleClick(param) {
                                                                             <img  :title="`Layover at ${ stop.city_name } | ${ stop.layover_time }\n${ stop.airport_name }`"
                                                                                 src="../../../../public/theme/appimages/Layover.svg"  alt="">
                                                                         </div>
-                                                                        <div class="bd-highlight text-black" v-if="iter != flight.outbound.connections.stops.length -1">
+                                                                        <div class="bd-highlight text-black" v-if="iter != (flight.outbound.connections.stops.length -1)">
                                                                             ....
                                                                         </div>
                                                                     </div>
@@ -1969,57 +1972,29 @@ async function fareRuleClick(param) {
                                                             </div>
                                                         </div>
 
-                                                        <div v-for="(segment, segmentKey) in fareRulesData.data" :key="segmentKey" class="segment-container">
+                                                        <div v-for="(segment, segmentKey, iterm) in fareRulesData.data" :key="segmentKey" class="segment-container">
                                                             <h3 class="segment-title">{{ segmentKey }}</h3>
 
-                                                            <div class="rules-accordion">
-                                                                <div v-for="(rule, ruleName) in segment.rules" :key="`${segmentKey}-${ruleName}`"
-                                                                    class="rule-item"
-                                                                    :class="{ 'active': selectedRule === ruleName }">
-                                                                    <div class="rule-header" @click="toggleRule(ruleName)">
-                                                                        <div class="d-flex justify-content-between w-100 align-items-center">
-                                                                            <span class="rule-category">{{ ruleName }}</span>
-                                                                            <i class="fa" :class="[selectedRule === ruleName ? 'fa-chevron-up' : 'fa-chevron-down']"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="rule-content" :class="{ 'show': selectedRule === ruleName }">
-                                                                        {{ rule.content }}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
-                                                    <!-- <div class="row" id="fareRule" v-show="!fareRuleloading">
-                                                            <div class="col-md-12">
-                                                                <div class="fare-rules-container">
-                                                                    <div v-for="(segment, segmentKey) in fareRulesData.data"
-                                                                        :key="segmentKey" class="segment-container">
-                                                                        <h3 class="segment-title">{{ segmentKey }}</h3>
-
-                                                                        <div class="rules-accordion">
-                                                                            <div v-for="(rule, ruleName) in segment.rules"
-                                                                                :key="ruleName" class="rule-item"
-                                                                                :class="{ 'active': selectedRule === ruleName }">
-                                                                                <div class="rule-header"
-                                                                                    @click="toggleRule(ruleName)">
-                                                                                    <span class="rule-category">{{
-                                                                                        ruleName }}</span>
-                                                                                    <i class="fas"
-                                                                                        :class="selectedRule === ruleName ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                                                                                </div>
-                                                                                <div class="rule-content"
-                                                                                    :class="{ 'show': selectedRule === ruleName }">
-                                                                                    {{ rule.content }}
-                                                                                </div>
+                                                                <div class="accordion" id="accordionExample">
+                                                                    <div class="accordion-item" v-for="(rule, ruleName) in segment.rules">
+                                                                        <h2 class="accordion-header" id="headingOne">
+                                                                            <button class="d-flex justify-content-between w-100 align-items-center accordion-button collapsed accorion-item-title-color m-0 p-0 px-2 py-2" type="button" data-bs-toggle="collapse" :data-bs-target="`#${ruleName}_${index}_${iterm}`" aria-expanded="false" :aria-controls="`${ruleName}_${index}_${iterm}`">
+                                                                                <!-- {{ ruleName.replace(/_/g, ' ') }} -->
+                                                                                {{ ruleName=="CATEGORY_0" ?"General":  ruleName.replace(/_/g, ' ')}}
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div :id="`${ruleName}_${index}_${iterm}`" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body">
+                                                                                <span class="text-capitalize-">
+                                                                                    {{ rule.content.charAt(0).toUpperCase() + rule.content.slice(1).toLowerCase() }}</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
+
                                                                 </div>
                                                             </div>
-                                                    </div> -->
-
-
+                                                    </div>
                                                 </div>
                                                 <div class="tab-pane fade" :id="`primarycontact-${index}`" role="tabpanel">
                                                     <div class="row">
@@ -2059,7 +2034,7 @@ async function fareRuleClick(param) {
                                                 <div class="accordion-item">
                                                     <h2 class="accordion-header rounded" id="flush-headingOne"
                                                         style="background-color: #7944eb !important;">
-                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed d-flex justify-content-between w-100 align-items-center"
                                                             type="button" data-bs-toggle="collapse"
 
                                                             :data-bs-target="'#flush-fare-summary-' + index"
@@ -2206,7 +2181,7 @@ async function fareRuleClick(param) {
                                                 </div>
                                                 <div class="accordion-item mt-2">
                                                     <h2 class="accordion-header" id="flush-headingTwo">
-                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed"
+                                                        <button class="accordion-button m-0 p-0 px-3 py-2 collapsed d-flex justify-content-between w-100 align-items-center"
                                                             type="button" data-bs-toggle="collapse"
                                                             :data-bs-target="'#flush-collapseTwo-' + index" aria-expanded="false"
                                                             :aria-controls="'flush-collapseTwo-' + index">
@@ -2443,6 +2418,11 @@ async function fareRuleClick(param) {
 /* Animation classes */
 .fadeIn {
     animation: fadeIn 0.3s ease-in-out;
+}
+
+.accorion-item-title-color {
+    background: linear-gradient(249deg, #E9F6FF 0%, #F1EDFF 100%);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.01);
 }
 
 @keyframes fadeIn {
