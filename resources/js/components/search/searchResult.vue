@@ -2421,6 +2421,11 @@ async function fareRuleClick(param) {
     animation: fadeIn 0.3s ease-in-out;
 }
 
+.accorion-item-title-color {
+    background: linear-gradient(249deg, #E9F6FF 0%, #F1EDFF 100%);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.01);
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
