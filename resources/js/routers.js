@@ -15,8 +15,13 @@ const ForcePassChange = () => import('./components/auth/forcePasswordChange.vue'
 const flightSearch = () => import('./components/search/flightSearch.vue')
 const searchResult = () => import('./components/search/searchResult.vue')
 const backupsearchResult = () => import('./components/search/searchResult_copy.vue')
+
+// booking
 const bookingList = () => import('./components/admin/booking/index.vue')
 const bookingCreate = () => import('./components/admin/booking/create.vue')
+
+// ticketing
+const manualticketing = () => import('./components/admin/ticketing/manual_ticketing.vue')
 // agent
 const AgentList = () => import('./components/admin/agent/index.vue')
 const agentDetails = () => import('./components/admin/agent/agentDetails.vue')
@@ -106,6 +111,8 @@ const routes = [
     { path: '/flight-booking-list', component: bookingList, name: 'bookingList', meta: { auth: true } },
     { path: '/flight-booking', component: bookingCreate, name: 'bookingCreate', meta: { auth: true } },
 
+    //ticketing
+    { path: '/manual-ticketing', component: manualticketing, name: 'manualticketing', meta: { auth: true } },
 
     // agent
     { path: '/agent-list', component: AgentList, name: 'AgentList', meta: { auth: true } },

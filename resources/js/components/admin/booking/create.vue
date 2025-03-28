@@ -70,8 +70,11 @@ function reviewPayment() {
                     <li class="breadcrumb-item">
                         <router-link :to="{ name: 'Home' }">Dashboard</router-link>
                     </li>
-                    <li class="breadcrumb-item" aria-current="page">Flight Management</li>
-                    <li class="breadcrumb-item active" aria-current="page">Search</li>
+
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <router-link :to="{ name: 'searchResult' }">Search</router-link>
+
+                    </li>
                     <li class="breadcrumb-item active" aria-current="page">Traveller Info</li>
                 </ol>
             </nav>
