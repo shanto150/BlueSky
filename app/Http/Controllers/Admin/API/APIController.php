@@ -77,11 +77,16 @@ class APIController extends BaseController
 
         try {
             // Read the local XML file
+
             $xmlContent = file_get_contents(__DIR__ . '/all.xml');
 
             // Create XML to JSON converter
+            $startTime = microtime(true);
             $converter = new XmlToJson($xmlContent);
             $result = $converter->parse();
+            $endTime = microtime(true);
+            $executionTime = ($endTime - $startTime);
+            Log::info("XML to Json: " . $executionTime . " seconds");
 
             // Return JSON response
             return response()->json($result);
