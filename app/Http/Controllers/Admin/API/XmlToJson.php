@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\API;
 use Exception;
 use SimpleXMLElement;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class XmlToJson
 {
@@ -740,11 +739,22 @@ class XmlToJson
             }
         }
 
+        // Get brand pricing from AirPricingInfo
+        $brandPrices = [];
+        $pricingInfos = $solution->xpath('.//air:AirPricingInfo');
+        foreach ($pricingInfos as $pricingInfo) {
+            $brandRef = (string)($pricingInfo['Brand'] ?? '');
+            if ($brandRef) {
+                $brandPrices[$brandRef] = [
+                    'total_price' => (string)($pricingInfo['TotalPrice'] ?? ''),
+                    'base_price' => (string)($pricingInfo['BasePrice'] ?? ''),
+                    'taxes' => (string)($pricingInfo['Taxes'] ?? '')
+                ];
+            }
+        }
+
         // Get brands from BrandList
         $brandList = $this->xml->xpath('//air:BrandList/air:Brand');
-        if (empty($brandList)) {
-            $brandList = $solution->xpath('.//air:Brand');
-        }
 
         foreach ($brandList as $brand) {
             $attributes = $brand->attributes();
@@ -755,31 +765,53 @@ class XmlToJson
                 continue;
             }
 
-            $brandData = [
-                'brand_id' => (string)($attributes['BrandID'] ?? ''),
-                'name' => (string)($attributes['Name'] ?? ''),
-                'carrier' => $carrier,
-                'upSellMessage' => (string)($attributes['UpSell'] ?? ''),
-                'brand_reference' => (string)($attributes['BrandReference'] ?? ''),
-                'program_code' => (string)($attributes['ProgramCode'] ?? ''),
-                'program_name' => (string)($attributes['ProgramName'] ?? ''),
-                'program_description' => (string)($attributes['ProgramDescription'] ?? ''),
-                'MarketingAgent' => (string)($attributes['MarketingAgent'] ?? ''),
-                'services' => []
+            // Get brand ID and price info
+            $brandId = (string)($attributes['BrandID'] ?? '');
+            $pricing = $brandPrices[$brandId] ?? [
+                'total_price' => '',
+                'base_price' => '',
+                'taxes' => ''
             ];
 
-            // Get services for this brand
-            $services = $brand->xpath('.//air:OptionalServices/air:Service | .//air:Services/air:Service');
-            foreach ($services as $service) {
-                $serviceAttributes = $service->attributes();
-                $brandData['services'][] = [
-                    'name' => (string)($serviceAttributes['Name'] ?? ''),
-                    'description' => (string)($serviceAttributes['Description'] ?? ''),
-                    'included' => (string)($serviceAttributes['ServiceStatus'] ?? '') === 'Included',
-                    'service_id' => (string)($serviceAttributes['ServiceId'] ?? ''),
-                    'service_type' => (string)($serviceAttributes['ServiceType'] ?? '')
-                ];
+            // Get text elements for marketing content
+            $textElements = $brand->xpath('.//air:Text');
+            $texts = [];
+            foreach ($textElements as $text) {
+                $type = (string)$text['Type'];
+                $content = trim((string)$text);
+                $texts[$type] = $content;
             }
+
+            // Build services array from MarketingAgent text
+            $services = [];
+            if (isset($texts['MarketingAgent'])) {
+                $serviceLines = explode("\n", $texts['MarketingAgent']);
+                foreach ($serviceLines as $line) {
+                    $line = trim($line);
+                    if (strpos($line, '•') === 0 || strpos($line, '-') === 0) {
+                        $service = trim(ltrim($line, '•- '));
+                        if (!empty($service)) {
+                            $services[] = [
+                                'name' => $service,
+                                'included' => true
+                            ];
+                        }
+                    }
+                }
+            }
+
+            $brandData = [
+                'brand_id' => $brandId,
+                'name' => (string)($attributes['Name'] ?? ''),
+                'carrier' => $carrier,
+                'upSellMessage' => $texts['Upsell'] ?? '',
+                'services' => $services,
+                'price' => [
+                    'total' => $pricing['total_price'],
+                    'base' => $pricing['base_price'],
+                    'taxes' => $pricing['taxes']
+                ]
+            ];
 
             if (!empty($brandData['brand_id'])) {
                 $brands[] = $brandData;
@@ -787,20 +819,6 @@ class XmlToJson
         }
 
         return $brands;
-    }
-
-    // Add this helper method
-    private function getBrandServices($brand)
-    {
-        $services = [];
-        foreach ($brand->xpath('.//air:Service') as $service) {
-            $services[] = [
-                'name' => (string)$service['Name'],
-                'description' => (string)($service['Description'] ?? ''),
-                'included' => (string)($service['ServiceStatus'] ?? '') === 'Included'
-            ];
-        }
-        return $services;
     }
 
     private function getAllSegmentsRaw($solution)
