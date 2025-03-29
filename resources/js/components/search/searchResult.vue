@@ -2280,7 +2280,13 @@ async function fareRuleClick(param) {
                                                             </div>
                                                             <div class="card-body">
                                                                 <ul style="list-style-type:none;" class="">
-                                                                    <li class="menu-item d-inline-flex">
+                                                                    <li class="menu-item d-inline-flex" v-for="service in fbrand.services">
+                                                                        <i class="fa fa-refresh icon-color mt-1"></i>
+                                                                        <span class="ms-1">
+                                                                            {{ service.name }}
+                                                                        </span>
+                                                                    </li>
+                                                                    <!-- <li class="menu-item d-inline-flex">
                                                                         <i class="fa fa-refresh icon-color mt-1"></i>
                                                                         <span class="ms-1">
                                                                             Flexible to make 2 changes
@@ -2334,7 +2340,7 @@ async function fareRuleClick(param) {
                                                                             class="fa-solid fa-wifi icon-color mt-1"></i>
                                                                         <span class="ms-1">Free Wi-Fi</span>
 
-                                                                    </li>
+                                                                    </li> -->
                                                                 </ul>
                                                                 <!-- <button >Book</button> -->
                                                                 <router-link class="btn btn-outline-book w-100" :to="{ name: 'bookingCreate' }">Book</router-link>
