@@ -250,7 +250,7 @@ function reviewPayment() {
                                                             <div class="col-12 col-lg-12 mt-3">
                                                                 <label for="name" class="form-label">Existing
                                                                     Traveller</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Search with name, phone, email, password">
                                                             </div>
@@ -277,7 +277,7 @@ function reviewPayment() {
                                                                         <label for="name" class="form-label">First Name
                                                                             (Given Name)</label>
                                                                         <input type="text"
-                                                                            class="form-control form-control-sm"
+                                                                            class="form-control "
                                                                             id="name" name="name"
                                                                             placeholder="Enter First Name">
                                                                     </div>
@@ -285,7 +285,7 @@ function reviewPayment() {
                                                                         <label for="name" class="form-label">Last Name
                                                                             (Sur Name)</label>
                                                                         <input type="text"
-                                                                            class="form-control form-control-sm"
+                                                                            class="form-control "
                                                                             id="name" name="name"
                                                                             placeholder="Enter Last Name">
                                                                     </div>
@@ -295,7 +295,7 @@ function reviewPayment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Date of
                                                                     Birth</label>
-                                                                <input type="date" class="form-control form-control-sm"
+                                                                <input type="date" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Enter Date of Birth">
                                                             </div>
@@ -320,20 +320,20 @@ function reviewPayment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Frequent Flyer
                                                                     Number</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Enter Flyer Number">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Passport
                                                                     Number</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Enter Passport Number">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Expiry Date</label>
-                                                                <input type="date" class="form-control form-control-sm"
+                                                                <input type="date" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Enter Date of Birth">
                                                             </div>
@@ -362,12 +362,12 @@ function reviewPayment() {
                                                             <!-- part 2 -->
                                                             <div class="col-6 col-sm-6 col-md-6 mt-1">
                                                                 <label for="name" class="form-label">Email</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name" placeholder="Enter Email">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-1">
                                                                 <label for="name" class="form-label">Phone</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name" placeholder="Enter Phone">
                                                             </div>
 
@@ -437,7 +437,7 @@ function reviewPayment() {
                                                             <div class="col-12 col-lg-12 mt-3">
                                                                 <label for="name" class="form-label">Existing
                                                                     Traveller</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Search with name, phone, email, password">
                                                             </div>
@@ -464,7 +464,7 @@ function reviewPayment() {
                                                                         <label for="name" class="form-label">First Name
                                                                             (Given Name)</label>
                                                                         <input type="text"
-                                                                            class="form-control form-control-sm"
+                                                                            class="form-control "
                                                                             id="name" name="name"
                                                                             placeholder="Enter First Name">
                                                                     </div>
@@ -472,7 +472,7 @@ function reviewPayment() {
                                                                         <label for="name" class="form-label">Last Name
                                                                             (Sur Name)</label>
                                                                         <input type="text"
-                                                                            class="form-control form-control-sm"
+                                                                            class="form-control "
                                                                             id="name" name="name"
                                                                             placeholder="Enter Last Name">
                                                                     </div>
@@ -482,7 +482,7 @@ function reviewPayment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Date of
                                                                     Birth</label>
-                                                                <input type="date" class="form-control form-control-sm"
+                                                                <input type="date" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Enter Date of Birth">
                                                             </div>
@@ -508,20 +508,20 @@ function reviewPayment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Frequent Flyer
                                                                     Number</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Enter Flyer Number">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Passport
                                                                     Number</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Enter Passport Number">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Expiry Date</label>
-                                                                <input type="date" class="form-control form-control-sm"
+                                                                <input type="date" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Enter Date of Birth">
                                                             </div>
@@ -550,12 +550,12 @@ function reviewPayment() {
                                                             <!-- part 2 -->
                                                             <div class="col-6 col-sm-6 col-md-6 mt-1">
                                                                 <label for="name" class="form-label">Email</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name" placeholder="Enter Email">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-1">
                                                                 <label for="name" class="form-label">Phone</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name" placeholder="Enter Phone">
                                                             </div>
 
@@ -625,7 +625,7 @@ function reviewPayment() {
                                                             <div class="col-12 col-lg-12 mt-3">
                                                                 <label for="name" class="form-label">Existing
                                                                     Traveller</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Search with name, phone, email, password">
                                                             </div>
@@ -652,7 +652,7 @@ function reviewPayment() {
                                                                         <label for="name" class="form-label">First Name
                                                                             (Given Name)</label>
                                                                         <input type="text"
-                                                                            class="form-control form-control-sm"
+                                                                            class="form-control "
                                                                             id="name" name="name"
                                                                             placeholder="Enter First Name">
                                                                     </div>
@@ -660,7 +660,7 @@ function reviewPayment() {
                                                                         <label for="name" class="form-label">Last Name
                                                                             (Sur Name)</label>
                                                                         <input type="text"
-                                                                            class="form-control form-control-sm"
+                                                                            class="form-control "
                                                                             id="name" name="name"
                                                                             placeholder="Enter Last Name">
                                                                     </div>
@@ -670,13 +670,13 @@ function reviewPayment() {
                                                             <div class="col-5 col-sm-5 col-md-5 mt-2">
                                                                 <label for="name" class="form-label">Date of
                                                                     Birth</label>
-                                                                <input type="date" class="form-control form-control-sm"
+                                                                <input type="date" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Enter Date of Birth">
                                                             </div>
                                                             <div class="col-1 col-sm-1 col-md-1 mt-2">
                                                                 <label for="name" class="form-label">Age</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name" placeholder="Age">
                                                             </div>
 
@@ -702,20 +702,20 @@ function reviewPayment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Frequent Flyer
                                                                     Number</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Enter Flyer Number">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Passport
                                                                     Number</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Enter Passport Number">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Expiry Date</label>
-                                                                <input type="date" class="form-control form-control-sm"
+                                                                <input type="date" class="form-control "
                                                                     id="name" name="name"
                                                                     placeholder="Enter Date of Birth">
                                                             </div>
@@ -744,12 +744,12 @@ function reviewPayment() {
                                                             <!-- part 2 -->
                                                             <div class="col-6 col-sm-6 col-md-6 mt-1">
                                                                 <label for="name" class="form-label">Email</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name" placeholder="Enter Email">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-1">
                                                                 <label for="name" class="form-label">Phone</label>
-                                                                <input type="text" class="form-control form-control-sm"
+                                                                <input type="text" class="form-control "
                                                                     id="name" name="name" placeholder="Enter Phone">
                                                             </div>
 
