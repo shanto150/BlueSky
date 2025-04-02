@@ -306,58 +306,57 @@ function addSegment() {
 
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                        <label for="gds_pnr"
-                                                                            class="form-label"><b>GDS PNR</b></label>
-                                                                        <input type="input" class="form-control "
-                                                                            id="gds_pnr" name="gds_pnr"
-                                                                            placeholder="Enter PNR">
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label for="date_time"
-                                                                            class="form-label"><b>Issue Date</b></label>
-                                                                        <input type="datetime-local"
-                                                                            class="form-control " id="date_time"
-                                                                            name="date_time"
-                                                                            placeholder="Select Date & Time">
-                                                                    </div>
+                                                                    <label for="gds_pnr" class="form-label"><b>GDS
+                                                                            PNR</b></label>
+                                                                    <input type="input" class="form-control "
+                                                                        id="gds_pnr" name="gds_pnr"
+                                                                        placeholder="Enter PNR">
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label for="date_time" class="form-label"><b>Issue
+                                                                            Date</b></label>
+                                                                    <input type="datetime-local" class="form-control "
+                                                                        id="date_time" name="date_time"
+                                                                        placeholder="Select Date & Time">
+                                                                </div>
 
-                                                                    <div class="col-md-6 mt-2">
-                                                                        <label for="class"
-                                                                            class="form-label"><b>Agency</b></label>
-                                                                        <select class="form-select form-control"
-                                                                            id="class" name="class">
-                                                                            <option value="1">Agent 1</option>
-                                                                            <option value="2">Agent 2</option>
-                                                                        </select>
-                                                                    </div>
+                                                                <div class="col-md-6 mt-2">
+                                                                    <label for="class"
+                                                                        class="form-label"><b>Agency</b></label>
+                                                                    <select class="form-select form-control" id="class"
+                                                                        name="class">
+                                                                        <option value="1">Agent 1</option>
+                                                                        <option value="2">Agent 2</option>
+                                                                    </select>
+                                                                </div>
 
-                                                                    <div class="col-md-2 mt-2">
-                                                                        <label for="class"
-                                                                            class="form-label"><b>Adult</b></label>
-                                                                        <select class="form-select form-control"
-                                                                            id="class" name="class">
-                                                                            <option value="1">1</option>
-                                                                            <option value="2">2</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-2 mt-2">
-                                                                        <label for="class"
-                                                                            class="form-label"><b>Child</b></label>
-                                                                        <select class="form-select form-control"
-                                                                            id="class" name="class">
-                                                                            <option value="1">1</option>
-                                                                            <option value="2">2</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-2 mt-2">
-                                                                        <label for="class"
-                                                                            class="form-label"><b>Infant</b></label>
-                                                                        <select class="form-select form-control"
-                                                                            id="class" name="class">
-                                                                            <option value="1">1</option>
-                                                                            <option value="2">2</option>
-                                                                        </select>
-                                                                    </div>
+                                                                <div class="col-md-2 mt-2">
+                                                                    <label for="class"
+                                                                        class="form-label"><b>Adult</b></label>
+                                                                    <select class="form-select form-control" id="class"
+                                                                        name="class">
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-2 mt-2">
+                                                                    <label for="class"
+                                                                        class="form-label"><b>Child</b></label>
+                                                                    <select class="form-select form-control" id="class"
+                                                                        name="class">
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-2 mt-2">
+                                                                    <label for="class"
+                                                                        class="form-label"><b>Infant</b></label>
+                                                                    <select class="form-select form-control" id="class"
+                                                                        name="class">
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                    </select>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -422,8 +421,8 @@ function addSegment() {
                                                             <div class="col-12 col-lg-12 mt-3">
                                                                 <label for="name" class="form-label">Existing
                                                                     Traveller</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name"
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name"
                                                                     placeholder="Search with name, phone, email, password">
                                                             </div>
 
@@ -448,16 +447,14 @@ function addSegment() {
                                                                     <div class="col-md-4  pe-3">
                                                                         <label for="name" class="form-label">First Name
                                                                             (Given Name)</label>
-                                                                        <input type="text"
-                                                                            class="form-control "
+                                                                        <input type="text" class="form-control "
                                                                             id="name" name="name"
                                                                             placeholder="Enter First Name">
                                                                     </div>
                                                                     <div class="col-md-6  pe-3">
                                                                         <label for="name" class="form-label">Last Name
                                                                             (Sur Name)</label>
-                                                                        <input type="text"
-                                                                            class="form-control "
+                                                                        <input type="text" class="form-control "
                                                                             id="name" name="name"
                                                                             placeholder="Enter Last Name">
                                                                     </div>
@@ -467,9 +464,8 @@ function addSegment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Date of
                                                                     Birth</label>
-                                                                <input type="date" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Date of Birth">
+                                                                <input type="date" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Date of Birth">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Gender</label>
@@ -492,27 +488,24 @@ function addSegment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Frequent Flyer
                                                                     Number</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Flyer Number">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Flyer Number">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Passport
                                                                     Number</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Passport Number">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Passport Number">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Expiry Date</label>
-                                                                <input type="date" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Date of Birth">
+                                                                <input type="date" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Date of Birth">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Passport Image (Max
                                                                     2MB)</label>
-                                                                <div class="input-group mb-3">
+                                                                <div class="input-group mb-3 input-group-sm">
                                                                     <input type="file" class="form-control"
                                                                         id="inputGroupFile02">
                                                                     <label class="input-group-text"
@@ -522,7 +515,7 @@ function addSegment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Visa Image (Max
                                                                     2MB)</label>
-                                                                <div class="input-group mb-3">
+                                                                <div class="input-group mb-3 input-group-sm">
                                                                     <input type="file" class="form-control"
                                                                         id="inputGroupFile02">
                                                                     <label class="input-group-text"
@@ -534,13 +527,13 @@ function addSegment() {
                                                             <!-- part 2 -->
                                                             <div class="col-6 col-sm-6 col-md-6 mt-1">
                                                                 <label for="name" class="form-label">Email</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name" placeholder="Enter Email">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Email">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-1">
                                                                 <label for="name" class="form-label">Phone</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name" placeholder="Enter Phone">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Phone">
                                                             </div>
 
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
@@ -609,8 +602,8 @@ function addSegment() {
                                                             <div class="col-12 col-lg-12 mt-3">
                                                                 <label for="name" class="form-label">Existing
                                                                     Traveller</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name"
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name"
                                                                     placeholder="Search with name, phone, email, password">
                                                             </div>
 
@@ -635,16 +628,14 @@ function addSegment() {
                                                                     <div class="col-md-4  pe-3">
                                                                         <label for="name" class="form-label">First Name
                                                                             (Given Name)</label>
-                                                                        <input type="text"
-                                                                            class="form-control "
+                                                                        <input type="text" class="form-control "
                                                                             id="name" name="name"
                                                                             placeholder="Enter First Name">
                                                                     </div>
                                                                     <div class="col-md-6  pe-3">
                                                                         <label for="name" class="form-label">Last Name
                                                                             (Sur Name)</label>
-                                                                        <input type="text"
-                                                                            class="form-control "
+                                                                        <input type="text" class="form-control "
                                                                             id="name" name="name"
                                                                             placeholder="Enter Last Name">
                                                                     </div>
@@ -654,9 +645,8 @@ function addSegment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Date of
                                                                     Birth</label>
-                                                                <input type="date" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Date of Birth">
+                                                                <input type="date" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Date of Birth">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Gender</label>
@@ -680,27 +670,24 @@ function addSegment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Frequent Flyer
                                                                     Number</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Flyer Number">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Flyer Number">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Passport
                                                                     Number</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Passport Number">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Passport Number">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Expiry Date</label>
-                                                                <input type="date" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Date of Birth">
+                                                                <input type="date" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Date of Birth">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Passport Image (Max
                                                                     2MB)</label>
-                                                                <div class="input-group mb-3">
+                                                                <div class="input-group mb-3 input-group-sm">
                                                                     <input type="file" class="form-control"
                                                                         id="inputGroupFile02">
                                                                     <label class="input-group-text"
@@ -710,7 +697,7 @@ function addSegment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Visa Image (Max
                                                                     2MB)</label>
-                                                                <div class="input-group mb-3">
+                                                                <div class="input-group mb-3 input-group-sm">
                                                                     <input type="file" class="form-control"
                                                                         id="inputGroupFile02">
                                                                     <label class="input-group-text"
@@ -722,13 +709,13 @@ function addSegment() {
                                                             <!-- part 2 -->
                                                             <div class="col-6 col-sm-6 col-md-6 mt-1">
                                                                 <label for="name" class="form-label">Email</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name" placeholder="Enter Email">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Email">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-1">
                                                                 <label for="name" class="form-label">Phone</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name" placeholder="Enter Phone">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Phone">
                                                             </div>
 
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
@@ -797,8 +784,8 @@ function addSegment() {
                                                             <div class="col-12 col-lg-12 mt-3">
                                                                 <label for="name" class="form-label">Existing
                                                                     Traveller</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name"
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name"
                                                                     placeholder="Search with name, phone, email, password">
                                                             </div>
 
@@ -823,16 +810,14 @@ function addSegment() {
                                                                     <div class="col-md-4  pe-3">
                                                                         <label for="name" class="form-label">First Name
                                                                             (Given Name)</label>
-                                                                        <input type="text"
-                                                                            class="form-control "
+                                                                        <input type="text" class="form-control "
                                                                             id="name" name="name"
                                                                             placeholder="Enter First Name">
                                                                     </div>
                                                                     <div class="col-md-6  pe-3">
                                                                         <label for="name" class="form-label">Last Name
                                                                             (Sur Name)</label>
-                                                                        <input type="text"
-                                                                            class="form-control "
+                                                                        <input type="text" class="form-control "
                                                                             id="name" name="name"
                                                                             placeholder="Enter Last Name">
                                                                     </div>
@@ -842,14 +827,13 @@ function addSegment() {
                                                             <div class="col-5 col-sm-5 col-md-5 mt-2">
                                                                 <label for="name" class="form-label">Date of
                                                                     Birth</label>
-                                                                <input type="date" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Date of Birth">
+                                                                <input type="date" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Date of Birth">
                                                             </div>
                                                             <div class="col-1 col-sm-1 col-md-1 mt-2">
                                                                 <label for="name" class="form-label">Age</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name" placeholder="Age">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Age">
                                                             </div>
 
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
@@ -874,27 +858,24 @@ function addSegment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Frequent Flyer
                                                                     Number</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Flyer Number">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Flyer Number">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Passport
                                                                     Number</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Passport Number">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Passport Number">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Expiry Date</label>
-                                                                <input type="date" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Date of Birth">
+                                                                <input type="date" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Date of Birth">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Passport Image (Max
                                                                     2MB)</label>
-                                                                <div class="input-group mb-3">
+                                                                <div class="input-group mb-3 input-group-sm">
                                                                     <input type="file" class="form-control"
                                                                         id="inputGroupFile02">
                                                                     <label class="input-group-text"
@@ -904,7 +885,7 @@ function addSegment() {
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
                                                                 <label for="name" class="form-label">Visa Image (Max
                                                                     2MB)</label>
-                                                                <div class="input-group mb-3">
+                                                                <div class="input-group mb-3 input-group-sm">
                                                                     <input type="file" class="form-control"
                                                                         id="inputGroupFile02">
                                                                     <label class="input-group-text"
@@ -916,13 +897,13 @@ function addSegment() {
                                                             <!-- part 2 -->
                                                             <div class="col-6 col-sm-6 col-md-6 mt-1">
                                                                 <label for="name" class="form-label">Email</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name" placeholder="Enter Email">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Email">
                                                             </div>
                                                             <div class="col-6 col-sm-6 col-md-6 mt-1">
                                                                 <label for="name" class="form-label">Phone</label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name" placeholder="Enter Phone">
+                                                                <input type="text" class="form-control " id="name"
+                                                                    name="name" placeholder="Enter Phone">
                                                             </div>
 
                                                             <div class="col-6 col-sm-6 col-md-6 mt-2">
@@ -969,7 +950,183 @@ function addSegment() {
                                     </div>
                                     <div class="card-body" style="min-height: 280px;">
                                         <div class="row">
-                                            Fare & payment
+                                            <div class="col-md-4">
+                                                <div class="ribbon">Adult</div>
+                                                <div class="card ribbon-c">
+                                                    <div class="card-body">
+                                                        <!-- Passenger Input Group -->
+                                                        <div class="input-group mb-3 input-group-sm">
+                                                            <span class="input-group-text passenger-count"
+                                                                id="passenger-addon">
+                                                                <span class="me-2">2x</span>
+                                                                <i class="bi bi-person-fill"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Base Fare" aria-label="Base Fare">
+
+                                                        </div>
+                                                        <div class="input-group mb-3 input-group-sm">
+                                                            <span class="input-group-text passenger-count"
+                                                                id="passenger-addon">
+                                                                <span class="me-2">2x</span>
+                                                                <i class="bi bi-person-fill"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="TAX" aria-label="TAX">
+
+                                                        </div>
+                                                        <div class="input-group mb-3 input-group-sm">
+                                                            <span class="input-group-text passenger-count"
+                                                                id="passenger-addon">
+                                                                <span class="me-2">2x</span>
+                                                                <i class="bi bi-person-fill"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="AIT" aria-label="AIT">
+
+                                                        </div>
+                                                        <span class="ps-1">Total : </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="ribbon">Child</div>
+                                                <div class="card ribbon-c">
+                                                    <div class="card-body">
+                                                        <!-- Input Group -->
+                                                        <div class="input-group mb-3 input-group-sm">
+                                                            <span class="input-group-text passenger-count"
+                                                                id="passenger-addon">
+                                                                <span class="me-2">2x</span>
+                                                                <i class="bi bi-person-fill"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Base Fare" aria-label="Base Fare">
+
+                                                        </div>
+                                                        <div class="input-group mb-3 input-group-sm">
+                                                            <span class="input-group-text passenger-count"
+                                                                id="passenger-addon">
+                                                                <span class="me-2">2x</span>
+                                                                <i class="bi bi-person-fill"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="TAX" aria-label="TAX">
+
+                                                        </div>
+                                                        <div class="input-group mb-3 input-group-sm">
+                                                            <span class="input-group-text passenger-count"
+                                                                id="passenger-addon">
+                                                                <span class="me-2">2x</span>
+                                                                <i class="bi bi-person-fill"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="AIT" aria-label="AIT">
+
+                                                        </div>
+                                                        <span class="ps-1">Total : </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="ribbon">Infant</div>
+                                                <div class="card ribbon-c">
+                                                    <div class="card-body">
+                                                        <div class="input-group mb-3 input-group-sm">
+                                                            <span class="input-group-text passenger-count"
+                                                                id="passenger-addon">
+                                                                <span class="me-2">2x</span>
+                                                                <i class="bi bi-person-fill"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Base Fare" aria-label="Base Fare">
+
+                                                        </div>
+                                                        <div class="input-group mb-3 input-group-sm">
+                                                            <span class="input-group-text passenger-count"
+                                                                id="passenger-addon">
+                                                                <span class="me-2">2x</span>
+                                                                <i class="bi bi-person-fill"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="TAX" aria-label="TAX">
+
+                                                        </div>
+                                                        <div class="input-group mb-3 input-group-sm">
+                                                            <span class="input-group-text passenger-count"
+                                                                id="passenger-addon">
+                                                                <span class="me-2">2x</span>
+                                                                <i class="bi bi-person-fill"></i>
+                                                            </span>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="AIT" aria-label="AIT">
+
+                                                        </div>
+
+                                                        <span class="ps-1">Total : </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mt-3">
+                                                <label for="name" class="form-label"><b>Service Charge (+)</b></label>
+                                                                <input type="text" class="form-control "
+                                                                    id="name" name="name"
+                                                                    placeholder="Enter Service Charge ">
+                                            </div>
+                                            <div class="col-md-6 mt-3">
+                                                <label for="name" class="form-label"><b>Total</b></label>
+                                                                <input type="text" class="form-control "
+                                                                    id="total" name="total"
+                                                                    placeholder="Total" readonly>
+                                            </div>
+                                            <div class="col-md-6 mt-3">
+                                                <label for="name" class="form-label"><b>Discount</b></label>
+                                                <div class="input-group">
+
+                                                    <input type="text" class="form-control "
+                                                        id="discount" name="discount"
+                                                        placeholder="Total" readonly>
+                                                        <select class="form-select" id="total-type">
+                                                        <option value="percentage">(%) Percentage</option>
+                                                        <option value="flat">Flat</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mt-3">
+                                                <label for="name" class="form-label"><b>Total Payable</b></label>
+                                                                <input type="text" class="form-control "
+                                                                    id="total_paybable" name="total_paybable"
+                                                                    placeholder="Total Paybable" readonly>
+                                            </div>
+                                            <div class="col-md-8 mt-3">
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <span class="text-bold"><b>Refund Status</b></span>
+                                                    <div class="form-check pt-1">
+                                                        <input class="form-check-input" type="radio" name="refund_status"
+                                                            id="type">
+                                                        <label class="form-check-label" for="type">
+                                                            Non-refundable
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check pt-1">
+                                                        <input class="form-check-input" type="radio" name="refund_status"
+                                                            id="type">
+                                                        <label class="form-check-label" for="type">
+                                                            Partial Refundable
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check pt-1">
+                                                        <input class="form-check-input" type="radio" name="refund_status"
+                                                            id="type">
+                                                        <label class="form-check-label" for="type">
+                                                            Refundable
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card-footer">
@@ -1053,5 +1210,23 @@ function addSegment() {
 .w3-blue-sky-purple {
     color: #fff !important;
     background-color: #7239ea;
+}
+
+.card .ribbon-c {
+    position: relative;
+    overflow: hidden;
+    top: 18px;
+}
+
+.ribbon {
+    position: absolute;
+    background: #7239ea;
+    color: white;
+    padding: 5px 30px;
+    font-size: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    z-index: 100;
 }
 </style>
