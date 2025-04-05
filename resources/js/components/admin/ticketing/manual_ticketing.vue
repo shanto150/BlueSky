@@ -971,8 +971,8 @@ function addSegment() {
                                                                 <span class="me-2">2x</span>
                                                                 <i class="bi bi-person-fill"></i>
                                                             </span>
-                                                            <input type="text" class="form-control"
-                                                                placeholder="TAX" aria-label="TAX">
+                                                            <input type="text" class="form-control" placeholder="TAX"
+                                                                aria-label="TAX">
 
                                                         </div>
                                                         <div class="input-group mb-3 input-group-sm">
@@ -981,8 +981,8 @@ function addSegment() {
                                                                 <span class="me-2">2x</span>
                                                                 <i class="bi bi-person-fill"></i>
                                                             </span>
-                                                            <input type="text" class="form-control"
-                                                                placeholder="AIT" aria-label="AIT">
+                                                            <input type="text" class="form-control" placeholder="AIT"
+                                                                aria-label="AIT">
 
                                                         </div>
                                                         <span class="ps-1">Total : </span>
@@ -1011,8 +1011,8 @@ function addSegment() {
                                                                 <span class="me-2">2x</span>
                                                                 <i class="bi bi-person-fill"></i>
                                                             </span>
-                                                            <input type="text" class="form-control"
-                                                                placeholder="TAX" aria-label="TAX">
+                                                            <input type="text" class="form-control" placeholder="TAX"
+                                                                aria-label="TAX">
 
                                                         </div>
                                                         <div class="input-group mb-3 input-group-sm">
@@ -1021,8 +1021,8 @@ function addSegment() {
                                                                 <span class="me-2">2x</span>
                                                                 <i class="bi bi-person-fill"></i>
                                                             </span>
-                                                            <input type="text" class="form-control"
-                                                                placeholder="AIT" aria-label="AIT">
+                                                            <input type="text" class="form-control" placeholder="AIT"
+                                                                aria-label="AIT">
 
                                                         </div>
                                                         <span class="ps-1">Total : </span>
@@ -1050,8 +1050,8 @@ function addSegment() {
                                                                 <span class="me-2">2x</span>
                                                                 <i class="bi bi-person-fill"></i>
                                                             </span>
-                                                            <input type="text" class="form-control"
-                                                                placeholder="TAX" aria-label="TAX">
+                                                            <input type="text" class="form-control" placeholder="TAX"
+                                                                aria-label="TAX">
 
                                                         </div>
                                                         <div class="input-group mb-3 input-group-sm">
@@ -1060,8 +1060,8 @@ function addSegment() {
                                                                 <span class="me-2">2x</span>
                                                                 <i class="bi bi-person-fill"></i>
                                                             </span>
-                                                            <input type="text" class="form-control"
-                                                                placeholder="AIT" aria-label="AIT">
+                                                            <input type="text" class="form-control" placeholder="AIT"
+                                                                aria-label="AIT">
 
                                                         </div>
 
@@ -1072,24 +1072,21 @@ function addSegment() {
 
                                             <div class="col-md-6 mt-3">
                                                 <label for="name" class="form-label"><b>Service Charge (+)</b></label>
-                                                                <input type="text" class="form-control "
-                                                                    id="name" name="name"
-                                                                    placeholder="Enter Service Charge ">
+                                                <input type="text" class="form-control " id="name" name="name"
+                                                    placeholder="Enter Service Charge ">
                                             </div>
                                             <div class="col-md-6 mt-3">
                                                 <label for="name" class="form-label"><b>Total</b></label>
-                                                                <input type="text" class="form-control "
-                                                                    id="total" name="total"
-                                                                    placeholder="Total" readonly>
+                                                <input type="text" class="form-control " id="total" name="total"
+                                                    placeholder="Total" readonly>
                                             </div>
                                             <div class="col-md-6 mt-3">
                                                 <label for="name" class="form-label"><b>Discount</b></label>
                                                 <div class="input-group">
 
-                                                    <input type="text" class="form-control "
-                                                        id="discount" name="discount"
-                                                        placeholder="Total" readonly>
-                                                        <select class="form-select" id="total-type">
+                                                    <input type="text" class="form-control " id="discount"
+                                                        name="discount" placeholder="Total" readonly>
+                                                    <select class="form-select" id="total-type">
                                                         <option value="percentage">(%) Percentage</option>
                                                         <option value="flat">Flat</option>
                                                     </select>
@@ -1097,30 +1094,29 @@ function addSegment() {
                                             </div>
                                             <div class="col-md-6 mt-3">
                                                 <label for="name" class="form-label"><b>Total Payable</b></label>
-                                                                <input type="text" class="form-control "
-                                                                    id="total_paybable" name="total_paybable"
-                                                                    placeholder="Total Paybable" readonly>
+                                                <input type="text" class="form-control " id="total_paybable"
+                                                    name="total_paybable" placeholder="Total Paybable" readonly>
                                             </div>
                                             <div class="col-md-8 mt-3">
                                                 <div class="d-flex align-items-center gap-3">
                                                     <span class="text-bold"><b>Refund Status</b></span>
                                                     <div class="form-check pt-1">
-                                                        <input class="form-check-input" type="radio" name="refund_status"
-                                                            id="type">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="refund_status" id="type">
                                                         <label class="form-check-label" for="type">
                                                             Non-refundable
                                                         </label>
                                                     </div>
                                                     <div class="form-check pt-1">
-                                                        <input class="form-check-input" type="radio" name="refund_status"
-                                                            id="type">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="refund_status" id="type">
                                                         <label class="form-check-label" for="type">
                                                             Partial Refundable
                                                         </label>
                                                     </div>
                                                     <div class="form-check pt-1">
-                                                        <input class="form-check-input" type="radio" name="refund_status"
-                                                            id="type">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="refund_status" id="type">
                                                         <label class="form-check-label" for="type">
                                                             Refundable
                                                         </label>
@@ -1145,15 +1141,334 @@ function addSegment() {
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="card">
-                                                <div class="card-header">
-                                                    <span style="font-size: 16px;">
-                                                        <i class="fa-solid fa-ticket-perforated"
-                                                            style="color: #7239ea;"></i>
-                                                        Review
-                                                    </span>
-                                                </div>
+
                                                 <div class="card-body">
-                                                    review and confirm
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="d-flex ">
+                                                                        <img src="../../../../../public/uploads/agents/agency_img/02022025-1738483880.png"
+                                                                            height="60" width="60"
+                                                                            class="border border-1 rounded rounded-2"
+                                                                            alt="Profile Picture">
+                                                                    </div>
+                                                                    <div class="mt-2">
+                                                                        <p class="text-secondary">Agency: ABC Travels
+                                                                            Ltd.</p>
+                                                                        <p class="text-secondary">GDS PNR: GHTR78</p>
+                                                                        <p class="text-secondary">Issue
+                                                                            Date:`03-July-2025</p>
+                                                                        <p class="text-secondary">Adult: 02 | Child: 01
+                                                                            | Infant: 01</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-9">
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <h5 class="m-0 p-0"
+                                                                        style="border-left:5px solid #7239ea;"> &nbsp;
+                                                                        Payment Information </h5>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <table class="table table-border table-sm table-responsive">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Departure:</b></label>
+                                                                                    <p class="m-0">DHAKA | 20-Feb-2025,14:05</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Arrival:</b></label>
+                                                                                    <p class="m-0">DHAKA | 20-March-2025,14:05</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Airline:</b></label>
+                                                                                    <p class="m-0">Qatar Airways</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Class:
+                                                                                        </b></label>
+                                                                                    <p class="m-0">Economy(Y)</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Flight
+                                                                                            No:</b></label>
+                                                                                    <p class="m-0">QR8567</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+
+                                                                    <h5 class="m-0 p-0"> <i class="fa fa-user" style="color:#7239ea;"></i>
+                                                                       Traveler 1: Adult  </h5>
+                                                                       <table class="table table-border table-sm table-responsive mt-2">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Full Name:</b></label>
+                                                                                    <p class="m-0">Mr. Md. Abu Syed</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Gender:</b></label>
+                                                                                    <p class="m-0">Male</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Nationality:</b></label>
+                                                                                    <p class="m-0">Bangladeshi</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Date of Birth:
+                                                                                        </b></label>
+                                                                                    <p class="m-0">02-Jan-1993</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Phone:</b></label>
+                                                                                    <p class="m-0">+88010000000</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Email:</b></label>
+                                                                                    <p class="m-0">syed@info.com</p>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Passport No:</b></label>
+                                                                                    <p class="m-0">BD64585152GTY89</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Expiry Date:</b></label>
+                                                                                    <p class="m-0">22-May-2028</p>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Airline PNR:</b></label>
+                                                                                    <p class="m-0">QWR45T</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>GDS PNR:</b></label>
+                                                                                    <p class="m-0">FCC56H</p>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Ticket No:</b></label>
+                                                                                    <p class="m-0">03587566</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Check-in Baggage:</b></label>
+                                                                                    <p class="m-0">2 Piece</p>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Cabin Baggage:</b></label>
+                                                                                    <p class="m-0">2KG</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Meal Type:</b></label>
+                                                                                    <p class="m-0">Vegitarian</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Wheel Chair:</b></label>
+                                                                                    <p class="m-0">Yes</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                    <h5 class="m-0 p-0"> <i class="fa-solid fa-child-reaching" style="color:#7239ea;"></i>
+                                                                       Traveler 2: Child  </h5>
+                                                                       <table class="table table-border table-sm table-responsive mt-2">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Full Name:</b></label>
+                                                                                    <p class="m-0">Mr. Md. Abu Syed</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Gender:</b></label>
+                                                                                    <p class="m-0">Male</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Nationality:</b></label>
+                                                                                    <p class="m-0">Bangladeshi</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%"><label
+                                                                                        for=""><b>Date of Birth:
+                                                                                        </b></label>
+                                                                                    <p class="m-0">02-Jan-1993</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Phone:</b></label>
+                                                                                    <p class="m-0">+88010000000</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Email:</b></label>
+                                                                                    <p class="m-0">syed@info.com</p>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Passport No:</b></label>
+                                                                                    <p class="m-0">BD64585152GTY89</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Expiry Date:</b></label>
+                                                                                    <p class="m-0">22-May-2028</p>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Airline PNR:</b></label>
+                                                                                    <p class="m-0">QWR45T</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>GDS PNR:</b></label>
+                                                                                    <p class="m-0">FCC56H</p>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Ticket No:</b></label>
+                                                                                    <p class="m-0">03587566</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Check-in Baggage:</b></label>
+                                                                                    <p class="m-0">2 Piece</p>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Cabin Baggage:</b></label>
+                                                                                    <p class="m-0">2KG</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Meal Type:</b></label>
+                                                                                    <p class="m-0">Vegitarian</p>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="m-0 pl-2" width="50%">
+                                                                                    <label for=""><b>Wheel Chair:</b></label>
+                                                                                    <p class="m-0">Yes</p>
+                                                                                </td>
+                                                                                <td class="m-0 pl-2" width="50%">
+
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                    <h5 class="m-0 p-0"
+                                                                        style="border-left:5px solid #7239ea;"> &nbsp;
+                                                                        Fare Info</h5>
+                                                                        <table class="table table-border table-sm table-responsive mt-2 ">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td class="m-0 pl-2" width="50%"><label
+                                                                                            for=""><b>Adult <i class="fa fa-info-circle" style="color: #7239ea;"></i></b></label>
+
+                                                                                    </td>
+                                                                                    <td class="m-0 pl-2" width="50%">
+                                                                                        <p class="m-0 text-center"> <b>BDT 123321</b></p>
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                                <tr>
+                                                                                    <td class="m-0 pl-2" width="50%"><label
+                                                                                            for=""><b>Child <i class="fa fa-info-circle" style="color: #7239ea;"></i></b></label>
+
+                                                                                    </td>
+                                                                                    <td class="m-0 pl-2" width="50%">
+                                                                                        <p class="m-0 text-center"> <b>BDT 45788</b></p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="m-0 pl-2" width="50%"><label
+                                                                                            for=""><b>Infant <i class="fa fa-info-circle" style="color: #7239ea;"></i></b></label>
+
+                                                                                    </td>
+                                                                                    <td class="m-0 pl-2" width="50%">
+                                                                                        <p class="m-0 text-center"> <b>BDT 33234</b></p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="m-0 pl-2" width="50%"><label
+                                                                                            for=""><b>Service Charge </b></label>
+
+                                                                                    </td>
+                                                                                    <td class="m-0 pl-2" width="50%">
+                                                                                        <p class="m-0 text-center"> <b>BDT 3000</b></p>
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                                <tr>
+                                                                                    <td class="m-0 pl-2" width="50%"><label
+                                                                                            for=""><b>Sub Total </b></label>
+
+                                                                                    </td>
+                                                                                    <td class="m-0 pl-2" width="50%">
+                                                                                        <p class="m-0 text-center"> <b>BDT 205645</b></p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="m-0 pl-2 text-danger" width="50%"><label
+                                                                                            for=""><b>Discount </b></label>
+
+                                                                                    </td>
+                                                                                    <td class="m-0 pl-2 text-danger" width="50%">
+                                                                                        <p class="m-0 text-center"> <b>- 10%</b></p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td class="m-0 pl-2 " width="50%"><label
+                                                                                            for=""><b>Total Payable </b></label>
+
+                                                                                    </td>
+                                                                                    <td class="m-0 pl-2 " width="50%">
+                                                                                        <p class="m-0 text-center"> <b> BDT 185081</b></p>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1164,8 +1479,8 @@ function addSegment() {
                                             <button @click="couponOffers"
                                                 class="w3-button w3-dark-gray w3-round w3-medium float-left">Back</button>
                                             <button type="button"
-                                                class="w3-button w3-blue-sky-purple w3-round w3-medium float-end">Confirm
-                                                Booking</button>
+                                                class="w3-button w3-blue-sky-purple w3-round w3-medium float-end">Create
+                                                </button>
                                         </div>
                                     </div>
                                 </div>
