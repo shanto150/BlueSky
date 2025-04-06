@@ -755,7 +755,6 @@ class XmlToJson
                             if (!isset($brandTotals[$brandId])) {
                                 $brandTotals[$brandId] = [
                                     'faresByType' => [],
-                                    'passengerCounts' => [],
                                     'fareBasis' => (string)($fareInfo['FareBasis'] ?? ''),
                                     'upSellBrandId' => (string)($brandElement['UpSellBrandID'] ?? ''),
                                     'brandTier' => $brandTier
@@ -815,7 +814,6 @@ class XmlToJson
                     $tierAdjustment = 1.0;
             }
 
-            $adjustedPrice = $basePrice * $tierAdjustment;
 
             // Calculate proportional amounts for each passenger type
             $totalPriceForBrand = 0;
@@ -825,7 +823,6 @@ class XmlToJson
             foreach ($priceBreakdown as $breakdown) {
                 $paxType = $breakdown['type'];
                 if (isset($brandData['faresByType'][$paxType])) {
-                    $paxCount = $brandData['faresByType'][$paxType]['count'];
                     $paxRatio = $brandData['faresByType'][$paxType]['amount'] / $basePrice;
 
                     $baseFareForBrand += $breakdown['baseFare'] * $paxRatio * $tierAdjustment;
