@@ -33,6 +33,7 @@ const CreateAgency = () => import('./components/admin/agent/create.vue')
 // deposit management
 const depositList = () => import('./components/admin/deposite/index.vue')
 const depoDetails = () => import('./components/admin/deposite/depoDetails.vue')
+const CreateDeposit = () => import('./components/admin/deposite/CreateDeposit.vue')
 
 
 // user management
@@ -125,6 +126,7 @@ const routes = [
     //deposit
     { path: '/agent-deposit-list', component: depositList, name: 'depositList', meta: { auth: true } },
     { path: '/agent-deposit-details', component: depoDetails, name: 'depoDetails', meta: { auth: true } },
+    { path: '/new-deposit-request', component: CreateDeposit, name: 'CreateDeposit', meta: { auth: true } },
 
     //user
     { path: '/all-user-list', component: UserList, name: 'UserList', meta: { auth: true } },
