@@ -324,6 +324,7 @@ function showRouteDetails(info,index) {
     $('.flight-tab-active-'+index).toggleClass('d-none', isActive);
 }
 
+
 function formatDate(dateString) {
     return new Date(dateString).toLocaleDateString('en-US', {
         day: 'numeric',
@@ -1309,8 +1310,24 @@ async function fareRuleClick(param) {
                                                     :data-bs-target="`#flight-package-${index}`" :aria-controls="`flight-package-${index}`">
 
                                                     <div class="text-right">
-                                                        <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{
-                                                            flight.outbound.totalPrice }}</b></p>
+                                                        <p class="p-0 m-0">
+                                                            <b>
+                                                                <span v-for="itemPrice, index in flight.outbound.priceBreakdown">
+                                                                    <b>
+                                                                        <span v-if="index == 0" class="total_fare_summation">
+                                                                            BDT {{
+                                                                                ['Adult', 'Child', 'Infant'].reduce((total, type) => {
+                                                                                    const breakdown = flight.outbound.priceBreakdown.find(item => item.type === type) || {};
+                                                                                    const count = form[type === 'Adult' ? 'ADT' : type === 'Child' ? 'CNN' : 'INF'];
+                                                                                    return total + (count * (breakdown.taxes || 0)) + (count * (breakdown.baseFare || 0));
+                                                                                }, 0)
+                                                                            }}
+                                                                        </span>
+                                                                    </b>
+                                                                </span>
+                                                                <!-- {{ flight.outbound.currency }} {{flight.outbound.totalPrice }} -->
+                                                            </b>
+                                                            </p>
                                                         <!-- <small style="color: #dbdbdb"><del>
                                                                     BDT 77000</del></small> -->
                                                         <small style="font-size: 10px;">Economy Class</small>
@@ -1326,8 +1343,21 @@ async function fareRuleClick(param) {
                                                 :data-bs-target="`#flight-package-${index}`" :aria-controls="`flight-package-${index}`">
 
                                                     <div class="text-right">
-                                                        <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{
-                                                            flight.outbound.totalPrice }}</b></p>
+                                                        <p class="p-0 m-0">
+                                                            <span v-for="itemPrice, index in flight.outbound.priceBreakdown">
+                                                                    <b>
+                                                                        <span v-if="index == 0" class="total_fare_summation">
+                                                                            BDT {{
+                                                                                ['Adult', 'Child', 'Infant'].reduce((total, type) => {
+                                                                                    const breakdown = flight.outbound.priceBreakdown.find(item => item.type === type) || {};
+                                                                                    const count = form[type === 'Adult' ? 'ADT' : type === 'Child' ? 'CNN' : 'INF'];
+                                                                                    return total + (count * (breakdown.taxes || 0)) + (count * (breakdown.baseFare || 0));
+                                                                                }, 0)
+                                                                            }}
+                                                                        </span>
+                                                                    </b>
+                                                                </span>
+                                                        </p>
 
                                                         <small style="font-size: 10px;">Economy Class</small>
                                                     </div>
@@ -2155,10 +2185,9 @@ async function fareRuleClick(param) {
                                                                                     <td>
                                                                                         <b>Gross Fare &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
                                                                                     </td>
-                                                                                    <td
-                                                                                        v-for="itemPrice, index in flight.outbound.priceBreakdown">
+                                                                                    <td v-for="itemPrice, index in flight.outbound.priceBreakdown">
                                                                                         <b>
-                                                                                            <span v-if="index == 0">
+                                                                                            <span v-if="index == 0" class="total_fare_summation">
                                                                                                 BDT {{
                                                                                                     ['Adult', 'Child', 'Infant'].reduce((total, type) => {
                                                                                                         const breakdown = flight.outbound.priceBreakdown.find(item => item.type === type) || {};
