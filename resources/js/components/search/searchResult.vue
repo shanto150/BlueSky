@@ -258,15 +258,31 @@ function filterDestinationAirports(searchText) {
 }
 
 function onOriginFocus() {
-    showOriginList.value = true;
-    if (!filteredOriginAirports.value.length) {
-        filteredOriginAirports.value = airports.value.slice(0, initialLoadLimit);
-    }
+    $('#oFrom').addClass('fly-out');
+    $('#oCityAirport').addClass('fly-out');
+    setTimeout(() => {
+        $('#origin_id').val('');
+        form.from = '';
+        form.fromInput = '';
+        selectedOriginDetails.value = null;
+        showOriginList.value = true;
+        if (!filteredOriginAirports.value.length) {
+            filteredOriginAirports.value = airports.value.slice(0, initialLoadLimit);
+        }
+    }, 300);
 }
 
 function onDestinationFocus() {
-    showDestinationList.value = true;
-    filteredDestinationAirports.value = airports.value.slice(0, initialLoadLimit);
+    $('#dFrom').addClass('fly-out');
+    $('#dCityAirport').addClass('fly-out');
+    setTimeout(() => {
+        $('#destination_id').val('');
+        form.to = '';
+        form.toInput = '';
+        selectedDestinationDetails.value = null;
+        showDestinationList.value = true;
+        filteredDestinationAirports.value = airports.value.slice(0, initialLoadLimit);
+    }, 300);
 }
 
 function selectOrigin(airport) {
@@ -286,6 +302,7 @@ function selectDestination(airport) {
 }
 
 function clearOrigin() {
+    $('#origin_id').attr('placeholder', 'From');
     form.from = "";
     form.fromInput = "";
     selectedOriginDetails.value = null;
@@ -293,6 +310,7 @@ function clearOrigin() {
 }
 
 function clearDestination() {
+    $('#destination_id').attr('placeholder', 'To');
     form.to = "";
     form.toInput = "";
     selectedDestinationDetails.value = null;
@@ -756,11 +774,18 @@ function swapLocations() {
                                 <div class="col-md-6">
                                     <div class="location-input-wrapper">
                                         <div v-if="form.from && selectedOriginDetails" class="selected-location">
-                                            <div class="location-code">{{ form.from }}</div>
-                                            <div class="location-details">{{ selectedOriginDetails.text }}, {{ selectedOriginDetails.city }}</div>
+
+                                            <div class="hstack align-items-center">
+                                                <div id="oFrom" class="font-12 fw-bold pe-2 fly-in" style="color: rgb(62, 73, 87);">{{ form.from }}</div>
+                                                <div id="oCityAirport" class="flex-grow-1 border-start ps-2 fly-in">
+                                                    <div class="font-11 fw-bold fcolor">{{ selectedOriginDetails.city }}</div>
+                                                    <div class="text-muted font-10">{{ selectedOriginDetails.text }}</div>
+                                                </div>
+                                            </div>
+
                                         </div>
-                                        <input id="origin_id" v-model="form.fromInput" name="origin_name"class="form-control origin_name"
-                                        :class="{ 'has-value': form.from && !showOriginList }"
+                                        <input id="origin_id" v-model="form.fromInput" name="origin_name" class="form-control origin_name"
+                                        :class="{ 'has-value': form.from && !showOriginList}"
                                         @input="filterOriginAirports($event.target.value)"
                                         @focus="onOriginFocus" placeholder="From" autocomplete="off" />
                                         <span v-if="form.from" @click="clearOrigin" class="clear-icon">✖</span>
@@ -788,8 +813,15 @@ function swapLocations() {
                                 <div class="col-md-6">
                                     <div class="location-input-wrapper">
                                         <div v-if="form.to && selectedDestinationDetails" class="selected-location">
-                                            <div class="location-code">{{ form.to }}</div>
-                                            <div class="location-details">{{ selectedDestinationDetails.text }}, {{ selectedDestinationDetails.city }}</div>
+
+                                            <div class="hstack align-items-center">
+                                                <div id="dFrom" class="font-12 fw-bold pe-2 fly-in" style="color: rgb(62, 73, 87);">{{ form.to }}</div>
+                                                <div id="dCityAirport" class="flex-grow-1 border-start ps-2 fly-in">
+                                                    <div class="font-11 fw-bold fcolor fly-in">{{ selectedDestinationDetails.city }}</div>
+                                                    <div class="text-muted font-10 fly-in">{{ selectedDestinationDetails.text }}</div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <input id="destination_id"
                                             v-model="form.toInput"
@@ -2796,4 +2828,35 @@ function swapLocations() {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+.fly-in {
+    animation: flyIn 0.5s ease-out;
+}
+
+@keyframes flyIn {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.fly-out {
+    animation: flyOut 0.5s ease-in;
+}
+
+@keyframes flyOut {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+}
+
 </style>
