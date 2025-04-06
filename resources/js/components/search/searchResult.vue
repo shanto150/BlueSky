@@ -1323,7 +1323,7 @@ async function fareRuleClick(param) {
 
                                             <div class="d-grid">
                                                 <button class="btn btn-sm bluesky-btn-primary" data-bs-toggle="collapse"
-                                                    data-bs-target="#flight-package-2" aria-controls="flight-package-2">
+                                                :data-bs-target="`#flight-package-${index}`" :aria-controls="`flight-package-${index}`">
 
                                                     <div class="text-right">
                                                         <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{
@@ -1451,7 +1451,7 @@ async function fareRuleClick(param) {
 
                                             <div class="d-grid">
                                                 <button class="btn btn-sm bluesky-btn-primary" data-bs-toggle="collapse"
-                                                    data-bs-target="#flight-package-2" aria-controls="flight-package-2">
+                                                    :data-bs-target="`flight-package-${index}`" :aria-controls="`flight-package-${index}`">
 
                                                     <div class="text-right">
                                                         <p class="p-0 m-0"><b> {{ flight.outbound.currency }} {{
@@ -2276,13 +2276,14 @@ async function fareRuleClick(param) {
                                                         <div :class="`card ${ itere%2==0 ? 'border-eco' : 'border-primium' }`" style="min-height: 460px; ">
                                                             <div class="card-header border-bottom-1">
                                                                 <h5 class="card-title text-center" style="font-size: 15px;">{{ fbrand.name }}</h5>
-                                                                <h6 class="text-center">BDT 0</h6>
+                                                                <h6 class="text-center"> {{ fbrand.price.total }}</h6>
                                                             </div>
                                                             <div class="card-body">
                                                                 <ul style="list-style-type:none;" class="">
                                                                     <li class="menu-item d-inline-flex" v-for="service in fbrand.services">
                                                                         <i class="fa fa-refresh icon-color mt-1"></i>
                                                                         <span class="ms-1">
+
                                                                             {{ service.name }}
                                                                         </span>
                                                                     </li>

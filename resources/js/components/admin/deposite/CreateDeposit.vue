@@ -326,13 +326,385 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="cheque_tab" role="tabpanel">
-                            test 4
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="m-0 p-0" style="border-left: 5px solid rgb(114, 57, 234);">
+                                                &nbsp; Payment Information</h5>
+                                        </div>
+                                        <form id="">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <label for="input1" class="form-label">Payment Account</label>
+                                                        <select id="payment_acc" name="payment_acc"
+                                                            class="form-control form-control-sm">
+                                                            <option selected="" value="">Choose...</option>
+                                                            <option value="Bank">Bank</option>
+                                                            <option value="MFS">MFS</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-4 mt-2">
+                                                        <label for="input1" class="form-label">Request Amount</label>
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="requested_amount" name="requested_amount"
+                                                            placeholder="Enter Routing Number">
+                                                    </div>
+                                                    <div class="col-md-3 mt-2">
+                                                        <label for="input1" class="form-label">
+                                                            Charge</label>
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="service_charge" name="service_charge"
+                                                            placeholder="Enter Service Charge">
+                                                    </div>
+                                                    <div class="col-md-3 mt-2">
+                                                        <label for="input1" class="form-label">
+                                                            Total Amount</label>
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="total_amount" name="total_amount"
+                                                            placeholder="Enter Service Charge">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="m-0 p-0" style="border-left: 5px solid rgb(114, 57, 234);">
+                                                &nbsp; Cheque/DD Information</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="input1" class="form-label">
+                                                        Issued Bank & MFS</label>
+                                                    <select name="issued_bank" id="" class="form-control">
+                                                        <option value="">Select Issued Bank</option>
+                                                        <option value="1">AB Bank</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mt-2">
+                                                    <label for="input1" class="form-label">
+                                                        Referece Number</label>
+                                                    <input type="input" class="form-control form-control-sm"
+                                                        id="reference_num" name="reference_num"
+                                                        placeholder="Enter Reference Number">
+                                                </div>
+                                                <div class="col-md-6 mt-2">
+                                                    <label for="input1" class="form-label">
+                                                        Referece file</label>
+                                                    <input type="file" class="form-control form-control-sm"
+                                                        id="reference_file" name="reference_file"
+                                                        placeholder="Enter ">
+                                                </div>
+
+                                                <div class="col-md-6 mt-2">
+                                                    <label for="input1" class="form-label">
+                                                        Referece file</label>
+                                                    <input type="file" class="form-control form-control-sm"
+                                                        id="reference_file" name="reference_file"
+                                                        placeholder="Enter Service Charge">
+                                                </div>
+
+                                                <div class="col-md-6 mt-2">
+                                                    <label for="input1" class="form-label">
+                                                        Remarks</label>
+
+                                                    <textarea class="form-control form-control-sm" id="remarks"
+                                                        name="remarks" rows="3"></textarea>
+
+                                                </div>
+                                                <div class="col-md-6 mt-3">
+
+                                                    <div class="d-flex align-items-center "><img
+                                                            src="../../../../../public/theme/appimages/rqf.png"
+                                                            height="60" width="60"
+                                                            class="border border-1 rounded rounded-2"
+                                                            alt="Profile Picture">
+                                                        <div class="flex-grow-1 ms-3">
+                                                            <p class="mb-0"><i
+                                                                    class="btn-outline-success rounded-circle fa fa-circle-check"></i>
+                                                                Uploaded successfully.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="d-flex ">
+                                        <button class="btn btn-sm btn-info px-4 ms-2 justify-content-start">Cancel</button>
+                                        <button class="btn btn-sm btn-info px-4 ms-2 justify-content-end">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="bank_transfer_tab" role="tabpanel">
-                            test 5
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="m-0 p-0" style="border-left: 5px solid rgb(114, 57, 234);">
+                                                &nbsp; Payment Information</h5>
+                                        </div>
+                                        <form id="">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <label for="input1" class="form-label">Payment Account</label>
+                                                        <select id="payment_acc" name="payment_acc"
+                                                            class="form-control form-control-sm">
+                                                            <option selected="" value="">Choose...</option>
+                                                            <option value="Bank">Bank</option>
+                                                            <option value="MFS">MFS</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-4 mt-2">
+                                                        <label for="input1" class="form-label">Request Amount</label>
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="requested_amount" name="requested_amount"
+                                                            placeholder="Enter Routing Number">
+                                                    </div>
+                                                    <div class="col-md-3 mt-2">
+                                                        <label for="input1" class="form-label">
+                                                            Charge</label>
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="service_charge" name="service_charge"
+                                                            placeholder="Enter Service Charge">
+                                                    </div>
+                                                    <div class="col-md-3 mt-2">
+                                                        <label for="input1" class="form-label">
+                                                            Total Amount</label>
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="total_amount" name="total_amount"
+                                                            placeholder="Enter Service Charge">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="m-0 p-0" style="border-left: 5px solid rgb(114, 57, 234);">
+                                                &nbsp; Bank Transfer Information</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="input1" class="form-label">
+                                                        Issued Bank & MFS</label>
+                                                    <select name="issued_bank" id="" class="form-control">
+                                                        <option value="">Select Issued Bank</option>
+                                                        <option value="1">AB Bank</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mt-2">
+                                                    <label for="input1" class="form-label">
+                                                        Referece Number</label>
+                                                    <input type="input" class="form-control form-control-sm"
+                                                        id="reference_num" name="reference_num"
+                                                        placeholder="Enter Reference Number">
+                                                </div>
+                                                <div class="col-md-6 mt-2">
+                                                    <label for="input1" class="form-label">
+                                                        Referece file</label>
+                                                    <input type="file" class="form-control form-control-sm"
+                                                        id="reference_file" name="reference_file"
+                                                        placeholder="Enter ">
+                                                </div>
+
+                                                <div class="col-md-6 mt-2">
+                                                    <label for="input1" class="form-label">
+                                                        Referece file</label>
+                                                    <input type="file" class="form-control form-control-sm"
+                                                        id="reference_file" name="reference_file"
+                                                        placeholder="Enter Service Charge">
+                                                </div>
+
+                                                <div class="col-md-6 mt-2">
+                                                    <label for="input1" class="form-label">
+                                                        Remarks</label>
+
+                                                    <textarea class="form-control form-control-sm" id="remarks"
+                                                        name="remarks" rows="3"></textarea>
+
+                                                </div>
+                                                <div class="col-md-6 mt-3">
+
+                                                    <div class="d-flex align-items-center "><img
+                                                            src="../../../../../public/theme/appimages/rqf.png"
+                                                            height="60" width="60"
+                                                            class="border border-1 rounded rounded-2"
+                                                            alt="Profile Picture">
+                                                        <div class="flex-grow-1 ms-3">
+                                                            <p class="mb-0"><i
+                                                                    class="btn-outline-success rounded-circle fa fa-circle-check"></i>
+                                                                Uploaded successfully.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="d-flex ">
+                                        <button class="btn btn-sm btn-info px-4 ms-2 justify-content-start">Cancel</button>
+                                        <button class="btn btn-sm btn-info px-4 ms-2 justify-content-end">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="credit_req_tab" role="tabpanel">
-                            test 6
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="m-0 p-0" style="border-left: 5px solid rgb(114, 57, 234);">
+                                                &nbsp; Payment Information</h5>
+                                        </div>
+                                        <form id="">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <label for="input1" class="form-label">Payment Account</label>
+                                                        <select id="payment_acc" name="payment_acc"
+                                                            class="form-control form-control-sm">
+                                                            <option selected="" value="">Choose...</option>
+                                                            <option value="Bank">Bank</option>
+                                                            <option value="MFS">MFS</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-4 mt-2">
+                                                        <label for="input1" class="form-label">Request Amount</label>
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="requested_amount" name="requested_amount"
+                                                            placeholder="Enter Routing Number">
+                                                    </div>
+                                                    <div class="col-md-3 mt-2">
+                                                        <label for="input1" class="form-label">
+                                                            Charge</label>
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="service_charge" name="service_charge"
+                                                            placeholder="Enter Service Charge">
+                                                    </div>
+                                                    <div class="col-md-3 mt-2">
+                                                        <label for="input1" class="form-label">
+                                                            Total Amount</label>
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="total_amount" name="total_amount"
+                                                            placeholder="Enter Service Charge">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="m-0 p-0" style="border-left: 5px solid rgb(114, 57, 234);">
+                                                &nbsp; Credit Request Information</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="input1" class="form-label">
+                                                        Issued Bank & MFS</label>
+                                                    <select name="issued_bank" id="" class="form-control">
+                                                        <option value="">Select Issued Bank</option>
+                                                        <option value="1">AB Bank</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mt-2">
+                                                    <label for="input1" class="form-label">
+                                                        Referece Number</label>
+                                                    <input type="input" class="form-control form-control-sm"
+                                                        id="reference_num" name="reference_num"
+                                                        placeholder="Enter Reference Number">
+                                                </div>
+                                                <div class="col-md-6 mt-2">
+                                                    <label for="input1" class="form-label">
+                                                        Referece file</label>
+                                                    <input type="file" class="form-control form-control-sm"
+                                                        id="reference_file" name="reference_file"
+                                                        placeholder="Enter ">
+                                                </div>
+
+                                                <div class="col-md-6 mt-2">
+                                                    <label for="input1" class="form-label">
+                                                        Referece file</label>
+                                                    <input type="file" class="form-control form-control-sm"
+                                                        id="reference_file" name="reference_file"
+                                                        placeholder="Enter Service Charge">
+                                                </div>
+
+                                                <div class="col-md-6 mt-2">
+                                                    <label for="input1" class="form-label">
+                                                        Remarks</label>
+
+                                                    <textarea class="form-control form-control-sm" id="remarks"
+                                                        name="remarks" rows="3"></textarea>
+
+                                                </div>
+                                                <div class="col-md-6 mt-3">
+
+                                                    <div class="d-flex align-items-center "><img
+                                                            src="../../../../../public/theme/appimages/rqf.png"
+                                                            height="60" width="60"
+                                                            class="border border-1 rounded rounded-2"
+                                                            alt="Profile Picture">
+                                                        <div class="flex-grow-1 ms-3">
+                                                            <p class="mb-0"><i
+                                                                    class="btn-outline-success rounded-circle fa fa-circle-check"></i>
+                                                                Uploaded successfully.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="d-flex ">
+                                        <button class="btn btn-sm btn-info px-4 ms-2 justify-content-start">Cancel</button>
+                                        <button class="btn btn-sm btn-info px-4 ms-2 justify-content-end">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
