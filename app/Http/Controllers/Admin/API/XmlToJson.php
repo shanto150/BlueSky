@@ -439,7 +439,7 @@ class XmlToJson
 
         // Process inbound segments if it's a return journey
         if ($isReturn) {
-            for ($i = 0; $i < count($inboundSegments) - 1; $i++) {
+            for ($i = 0; $i< count($inboundSegments) - 1; $i++) {
                 $currentSegment = $inboundSegments[$i];
                 $nextSegment = $inboundSegments[$i + 1];
 
@@ -723,57 +723,84 @@ class XmlToJson
         return ['flights' => $results];
     }
 
-    // Modify the cacheBrands method
     private function cacheBrands($solution)
     {
         $brands = [];
-        $usedCarriers = [];
+        $brandPrices = [];
 
-        // First get all carriers used in this journey
-        $segments = $solution->xpath('.//air:AirSegmentRef');
-        foreach ($segments as $segmentRef) {
-            $segmentKey = (string)$segmentRef['Key'];
-            if (isset($this->segments[$segmentKey])) {
-                $carrierCode = $this->segments[$segmentKey]['carrier_code'];
-                $usedCarriers[$carrierCode] = true;
+        // Get total solution price first
+        $totalSolutionPrice = (float)preg_replace('/[^0-9.]/', '', (string)($solution['TotalPrice'] ?? '0'));
+        $totalSolutionBase = (float)preg_replace('/[^0-9.]/', '', (string)($solution['BasePrice'] ?? '0'));
+        $totalSolutionTaxes = (float)preg_replace('/[^0-9.]/', '', (string)($solution['Taxes'] ?? '0'));
+
+        // Currency should be taken from the XML rather than hardcoded
+        $currency = $this->currency; // Use the class property instead of hardcoding 'BDT'
+
+        // First get pricing info from AirPricingInfo elements
+        $pricingInfos = $solution->xpath('.//air:AirPricingInfo');
+
+        // Track total brand base fare for better ratio calculation
+        $totalBrandBaseFare = 0;
+        $brandBaseFares = [];
+
+        foreach ($pricingInfos as $pricingInfo) {
+            $fareInfoRefs = $pricingInfo->xpath('.//air:FareInfoRef');
+            foreach ($fareInfoRefs as $fareInfoRef) {
+                $fareInfoKey = (string)$fareInfoRef['Key'];
+
+                // Find corresponding FareInfo
+                $fareInfo = $this->xml->xpath("//air:FareInfo[@Key='$fareInfoKey']")[0] ?? null;
+                if ($fareInfo) {
+                    $brandElement = $fareInfo->xpath('.//air:Brand')[0] ?? null;
+                    if ($brandElement) {
+                        $brandId = (string)($brandElement['BrandID'] ?? '');
+                        if ($brandId) {
+                            // Get the proportion of total fare this brand represents
+                            $brandBaseFare = (float)preg_replace('/[^0-9.]/', '', (string)($fareInfo['Amount'] ?? '0'));
+
+                            // Accumulate base fare by brand ID
+                            if (!isset($brandBaseFares[$brandId])) {
+                                $brandBaseFares[$brandId] = 0;
+                            }
+                            $brandBaseFares[$brandId] += $brandBaseFare;
+                            $totalBrandBaseFare += $brandBaseFare;
+
+                            // Store fare info for later processing
+                            if (!isset($brandPrices[$brandId])) {
+                                $brandPrices[$brandId] = [
+                                    'fareBasis' => (string)($fareInfo['FareBasis'] ?? ''),
+                                    'upSellBrandId' => (string)($brandElement['UpSellBrandID'] ?? '')
+                                ];
+                            }
+                        }
+                    }
+                }
             }
         }
 
-        // Get brand pricing from AirPricingInfo
-        $brandPrices = [];
-        $pricingInfos = $solution->xpath('.//air:AirPricingInfo');
-        foreach ($pricingInfos as $pricingInfo) {
-            $brandRef = (string)($pricingInfo['Brand'] ?? '');
-            if ($brandRef) {
-                $brandPrices[$brandRef] = [
-                    'total_price' => (string)($pricingInfo['TotalPrice'] ?? ''),
-                    'base_price' => (string)($pricingInfo['BasePrice'] ?? ''),
-                    'taxes' => (string)($pricingInfo['Taxes'] ?? '')
-                ];
-            }
+        // Now calculate prices with better ratios
+        foreach ($brandBaseFares as $brandId => $baseFare) {
+            // Use a ratio based on all fares for this brand
+            $ratio = ($totalBrandBaseFare > 0) ? ($baseFare / $totalBrandBaseFare) : 0;
+
+            $brandPrices[$brandId]['total_price'] = $currency . number_format($totalSolutionPrice * $ratio, 2);
+            $brandPrices[$brandId]['base_price'] = $currency . number_format($totalSolutionBase * $ratio, 2);
+            $brandPrices[$brandId]['taxes'] = $currency . number_format($totalSolutionTaxes * $ratio, 2);
         }
 
         // Get brands from BrandList
-        $brandList = $this->xml->xpath('//air:BrandList/air:Brand');
+        $brandList = $solution->xpath('.//air:Brand | //air:BrandList/air:Brand');
 
         foreach ($brandList as $brand) {
             $attributes = $brand->attributes();
-            $carrier = (string)($attributes['Carrier'] ?? '');
+            $brandId = (string)($attributes['BrandID'] ?? '');
 
-            // Only include brands for carriers used in this journey
-            if (!isset($usedCarriers[$carrier])) {
+            // Only process brands that have price information for this solution
+            if (!isset($brandPrices[$brandId])) {
                 continue;
             }
 
-            // Get brand ID and price info
-            $brandId = (string)($attributes['BrandID'] ?? '');
-            $pricing = $brandPrices[$brandId] ?? [
-                'total_price' => '',
-                'base_price' => '',
-                'taxes' => ''
-            ];
-
-            // Get text elements for marketing content
+            // Get text elements
             $textElements = $brand->xpath('.//air:Text');
             $texts = [];
             foreach ($textElements as $text) {
@@ -782,7 +809,7 @@ class XmlToJson
                 $texts[$type] = $content;
             }
 
-            // Build services array from MarketingAgent text
+            // Build services array
             $services = [];
             if (isset($texts['MarketingAgent'])) {
                 $serviceLines = explode("\n", $texts['MarketingAgent']);
@@ -800,22 +827,23 @@ class XmlToJson
                 }
             }
 
+            $priceInfo = $brandPrices[$brandId];
             $brandData = [
                 'brand_id' => $brandId,
                 'name' => (string)($attributes['Name'] ?? ''),
-                'carrier' => $carrier,
+                'carrier' => (string)($attributes['Carrier'] ?? ''),
                 'upSellMessage' => $texts['Upsell'] ?? '',
                 'services' => $services,
                 'price' => [
-                    'total' => $pricing['total_price'],
-                    'base' => $pricing['base_price'],
-                    'taxes' => $pricing['taxes']
-                ]
+                    'total' => $priceInfo['total_price'],
+                    'base' => $priceInfo['base_price'],
+                    'taxes' => $priceInfo['taxes']
+                ],
+                'upSellBrandId' => $priceInfo['upSellBrandId'],
+                'fareBasis' => $priceInfo['fareBasis']
             ];
 
-            if (!empty($brandData['brand_id'])) {
-                $brands[] = $brandData;
-            }
+            $brands[] = $brandData;
         }
 
         return $brands;
