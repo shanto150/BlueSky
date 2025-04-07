@@ -2893,7 +2893,7 @@ function swapLocations() {
 }
 
 .fly-out {
-    animation: flyOut 0.5s ease-in;
+    animation: flyOut 0.4s ease-in;
 }
 
 @keyframes flyOut {
