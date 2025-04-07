@@ -16,7 +16,7 @@
         <div class="ms-auto">
             <div class="btn-group">
                 <router-link :to="{ name: 'CreateDeposit' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i> New Deposit Request
+                    <i class="fa fa-circle-plus"></i>  Deposit Request
                 </router-link>
 
             </div>

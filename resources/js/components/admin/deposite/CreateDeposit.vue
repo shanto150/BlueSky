@@ -699,9 +699,12 @@
 
                             <div class="row">
                                 <div class="col-md-9">
-                                    <div class="d-flex ">
-                                        <button class="btn btn-sm btn-info px-4 ms-2 justify-content-start">Cancel</button>
-                                        <button class="btn btn-sm btn-info px-4 ms-2 justify-content-end">Submit</button>
+                                    <div class="d-flex align-content-start">
+                                        <button class="btn btn-sm btn-danger px-4 ms-2">Cancel</button>
+                                    </div>
+                                    <div class="d-flex align-content-end">
+
+                                        <button class="btn btn-sm btn-info px-4 ms-2">Submit</button>
                                     </div>
                                 </div>
                             </div>
