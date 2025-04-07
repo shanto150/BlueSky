@@ -39,6 +39,23 @@ const isRanges = ref();
 const isRounded = 'oneway';
 const tdate = ref();
 
+const form = reactive({
+    Way: '',
+    from: '',
+    fromInput: '',
+    to: '',
+    toInput: '',
+    dep_date: '',
+    arrival_date: '',
+    ADT: 1,
+    CNN: '',
+    KID: '',
+    INF: ''
+});
+
+const selectedOriginDetails = ref(null);
+const selectedDestinationDetails = ref(null);
+
 function toggleRule(ruleName) {
 
     // If clicking the same rule again, keep it open
@@ -128,8 +145,6 @@ const formats = (fdates) => {
     form.dep_date = date;
     return date;
 }
-
-const form = reactive({ Way: '', from: '', to: "", dep_date: '', arrival_date: '', ADT: 1, CNN: '', KID: '', INF: '' });
 
 function tourTypeChange(type) {
 
@@ -243,34 +258,62 @@ function filterDestinationAirports(searchText) {
 }
 
 function onOriginFocus() {
-    showOriginList.value = true;
-    if (!filteredOriginAirports.value.length) {
-        filteredOriginAirports.value = airports.value.slice(0, initialLoadLimit);
-    }
+    $('#oFrom').addClass('fly-out');
+    $('#oCityAirport').addClass('fly-out');
+    setTimeout(() => {
+        $('#origin_id').val('');
+        form.from = '';
+        form.fromInput = '';
+        selectedOriginDetails.value = null;
+        showOriginList.value = true;
+        if (!filteredOriginAirports.value.length) {
+            filteredOriginAirports.value = airports.value.slice(0, initialLoadLimit);
+        }
+    }, 300);
 }
 
 function onDestinationFocus() {
-    showDestinationList.value = true;
-    filteredDestinationAirports.value = airports.value.slice(0, initialLoadLimit);
+    $('#dFrom').addClass('fly-out');
+    $('#dCityAirport').addClass('fly-out');
+    setTimeout(() => {
+        $('#destination_id').val('');
+        form.to = '';
+        form.toInput = '';
+        selectedDestinationDetails.value = null;
+        showDestinationList.value = true;
+        filteredDestinationAirports.value = airports.value.slice(0, initialLoadLimit);
+    }, 300);
 }
 
 function selectOrigin(airport) {
+    $('#origin_id').attr('placeholder', '');
     form.from = airport.id;
+    form.fromInput = '';
+    selectedOriginDetails.value = airport;
     showOriginList.value = false;
 }
 
 function selectDestination(airport) {
+    $('#destination_id').attr('placeholder', '');
     form.to = airport.id;
+    form.toInput = '';
+    selectedDestinationDetails.value = airport;
     showDestinationList.value = false;
 }
 
 function clearOrigin() {
+    $('#origin_id').attr('placeholder', 'From');
     form.from = "";
+    form.fromInput = "";
+    selectedOriginDetails.value = null;
     showOriginList.value = false;
 }
 
 function clearDestination() {
+    $('#destination_id').attr('placeholder', 'To');
     form.to = "";
+    form.toInput = "";
+    selectedDestinationDetails.value = null;
     showDestinationList.value = false;
 }
 
@@ -355,6 +398,14 @@ async function fareRuleClick(param) {
     fareRulesData.value = response.data;
     fareRuleloading.value = false;
     console.log(response.data);
+}
+
+function swapLocations() {
+    [form.from, form.to] = [form.to, form.from];
+    [form.fromInput, form.toInput] = [form.toInput, form.fromInput];
+    [selectedOriginDetails.value, selectedDestinationDetails.value] = [selectedDestinationDetails.value, selectedOriginDetails.value];
+    [showOriginList.value, showDestinationList.value] = [showDestinationList.value, showOriginList.value];
+    [filteredOriginAirports.value, filteredDestinationAirports.value] = [filteredDestinationAirports.value, filteredOriginAirports.value];
 }
 
 </script>
@@ -718,104 +769,131 @@ async function fareRuleClick(param) {
                     </div>
                     <!-- end in small screen -->
 
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="row position-relative">
+                                <div class="col-md-6">
+                                    <div class="location-input-wrapper">
+                                        <div v-if="form.from && selectedOriginDetails" class="selected-location">
 
-                    <div class="row mt-2">
+                                            <div class="hstack align-items-center">
+                                                <div id="oFrom" class="font-12 fw-bold pe-2 fly-in" style="color: rgb(62, 73, 87);">{{ form.from }}</div>
+                                                <div id="oCityAirport" class="flex-grow-1 border-start ps-2 fly-in">
+                                                    <div class="font-11 fw-bold fcolor">{{ selectedOriginDetails.city }}</div>
+                                                    <div class="text-muted font-10">{{ selectedOriginDetails.text }}</div>
+                                                </div>
+                                            </div>
 
-                        <div class="col-md-3 position-relative">
-                            <input id="origin_id" v-model="form.from" name="origin_name"
-                                class="form-control origin_name placeholder-font-size"
-                                @input="filterOriginAirports($event.target.value)" @focus="onOriginFocus"
-                                placeholder="City,Airport" autocomplete="off" />
-                            <span v-if="form.from" @click="clearOrigin" class="clear-icon">✖</span>
-                            <div v-if="showOriginList" id="origin_results"
-                                class="position-absolute w-100 mt-2 bg-white border rounded shadow-sm"
-                                style="z-index: 1000; animation: fadeIn 0.5s ease-in-out">
-                                <div class="arrow"></div>
-                                <SimpleBar style="max-height: 300px" class="search-results-simplebar">
-                                    <div v-for="airport in filteredOriginAirports" :key="airport.id"
-                                        class="p-2 cursor-pointer hover:bg-gray-100" @click="selectOrigin(airport)">
-                                        <div class="hstack align-items-center gap-1">
-                                            <div style="width: 50px"
-                                                class="d-flex align-items-center justify-content-center">
-                                                <h6 class="fw-bolder">{{ airport.id }}</h6>
-                                            </div>
-                                            <div class="flex-grow-1 border-start p-2">
-                                                <div class="font-12">{{ airport.text }}</div>
-                                                <div class="small text-muted">{{ airport.city }}</div>
-                                            </div>
+                                        </div>
+                                        <input id="origin_id" v-model="form.fromInput" name="origin_name" class="form-control origin_name"
+                                        :class="{ 'has-value': form.from && !showOriginList}"
+                                        @input="filterOriginAirports($event.target.value)"
+                                        @focus="onOriginFocus" placeholder="From" autocomplete="off" />
+                                        <span v-if="form.from" @click="clearOrigin" class="clear-icon">✖</span>
+                                        <div v-if="showOriginList" id="origin_results" class="position-absolute w-100 mt-2" style="z-index: 1000; animation: fadeIn 0.3s ease-in-out">
+                                            <SimpleBar style="max-height: 300px" class="search-results-simplebar">
+                                                <div v-for="airport in filteredOriginAirports" :key="airport.id" class="cursor-pointer border-bottom border-light" @click="selectOrigin(airport)">
+                                                    <div class="hstack align-items-center">
+                                                        <div class="font-12 fw-bold pe-2" style="color: rgb(62, 73, 87);">{{ airport.id }}</div>
+                                                        <div class="flex-grow-1 border-start ps-2">
+                                                            <div class="font-11 fw-bold fcolor">{{ airport.city }}</div>
+                                                            <div class="text-muted font-10">{{ airport.text }}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div v-if="filteredOriginAirports.length === 0" class="p-3 text-center text-muted">
+                                                    No matching airports found
+                                                </div>
+                                            </SimpleBar>
                                         </div>
                                     </div>
-                                    <div v-if="filteredOriginAirports.length === 0" class="p-2 text-center text-muted">
-                                        No matching airports found
-                                    </div>
-                                </SimpleBar>
-                            </div>
-                        </div>
+                                </div>
+                                    <div class="swap-icon-wrapper" @click="swapLocations">
+                                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="location-input-wrapper">
+                                        <div v-if="form.to && selectedDestinationDetails" class="selected-location">
 
-                        <div class="col-md-3 position-relative">
-                            <input autocomplete="off" id="destination_id" v-model="form.to" name="destination_name"
-                                class="form-control  destination_name placeholder-font-size"
-                                @input="filterDestinationAirports($event.target.value)" @click="onDestinationFocus"
-                                @focus="onDestinationFocus" placeholder="City,Airport" />
-                            <span v-if="form.to" @click="clearDestination" class="clear-icon">✖</span>
-                            <div v-if="showDestinationList" id="destination_results"
-                                class="position-absolute w-100 mt-2 bg-white border border-info bg-info rounded shadow-sm"
-                                style="z-index: 1000; animation: fadeIn 0.5s ease-in-out">
-                                <div class="arrow"></div>
-                                <SimpleBar style="max-height: 300px" class="search-results-simplebar">
-                                    <div v-for="airport in filteredDestinationAirports" :key="airport.id"
-                                        class="p-2 cursor-pointer hover:bg-gray-100"
-                                        @click="selectDestination(airport)">
-                                        <div class="hstack align-items-center gap-1">
-                                            <div style="width: 50px"
-                                                class="d-flex align-items-center justify-content-center">
-                                                <h6 class="fw-bolder">{{ airport.id }}</h6>
+                                            <div class="hstack align-items-center">
+                                                <div id="dFrom" class="font-12 fw-bold pe-2 fly-in" style="color: rgb(62, 73, 87);">{{ form.to }}</div>
+                                                <div id="dCityAirport" class="flex-grow-1 border-start ps-2 fly-in">
+                                                    <div class="font-11 fw-bold fcolor fly-in">{{ selectedDestinationDetails.city }}</div>
+                                                    <div class="text-muted font-10 fly-in">{{ selectedDestinationDetails.text }}</div>
+                                                </div>
                                             </div>
-                                            <div class="flex-grow-1 border-start p-2">
-                                                <div class="font-12">{{ airport.text }}</div>
-                                                <div class="small text-muted">{{ airport.city }}</div>
-                                            </div>
+
                                         </div>
+                                        <input id="destination_id"
+                                            v-model="form.toInput"
+                                            name="destination_name"
+                                            class="form-control destination_name"
+                                            :class="{ 'has-value': form.to && !showDestinationList }"
+                                            @input="filterDestinationAirports($event.target.value)"
+                                            @focus="onDestinationFocus"
+                                            placeholder="To"
+                                            autocomplete="off" />
+                                        <span v-if="form.to" @click="clearDestination" class="clear-icon">✖</span>
+
+                                        <div v-if="showDestinationList" id="destination_results"
+                                            class="position-absolute w-100 mt-2"
+                                            style="z-index: 1000; animation: fadeIn 0.3s ease-in-out">
+                                            <SimpleBar style="max-height: 300px" class="search-results-simplebar">
+                                                <div v-for="airport in filteredDestinationAirports" :key="airport.id" class="cursor-pointer"
+                                                    @click="selectDestination(airport)">
+                                                    <div class="hstack align-items-center">
+
+                                                        <div class="font-12 fw-bold pe-2" style="color: rgb(62, 73, 87);">{{ airport.id }}</div>
+                                                        <div class="flex-grow-1 border-start ps-2">
+                                                            <div class="font-11 fw-bold fcolor">{{ airport.city }}</div>
+                                                            <div class="text-muted font-10">{{ airport.text }}</div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div v-if="filteredDestinationAirports.length === 0" class="p-3 text-center text-muted">
+                                                    No matching airports found
+                                                </div>
+                                            </SimpleBar>
+                                        </div>
+
                                     </div>
-                                    <div v-if="filteredDestinationAirports.length === 0"
-                                        class="p-2 text-center text-muted">
-                                        No matching airports found
-                                    </div>
-                                </SimpleBar>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-4 mt-2 mt-md-0" v-if="isRounded == 'oneway'">
+                                    <VueDatePicker class="dateChange" id="fromdateVal" v-model="fdate" placeholder="Select Date"
+                                        :enable-time-picker="false" :format="format" :auto-apply="isAutoApply"
+                                        :multi-calendars="isMultiCalendar" :range="isRanges"></VueDatePicker>
 
-                        <div class="col-md-2 mt-2 mt-md-0" v-if="isRounded == 'oneway'">
-                            <VueDatePicker class="dateChange" id="fromdateVal" v-model="fdate" placeholder="Select Date"
-                                :enable-time-picker="false" :format="format" :auto-apply="isAutoApply"
-                                :multi-calendars="isMultiCalendar" :range="isRanges"></VueDatePicker>
+                                </div>
+                                <div class="col-md-4 mt-2 mt-md-0" v-if="isRounded == 'round'">
+                                    <VueDatePicker class="dateChange" id="fromdateVal" v-model="fdate" placeholder="Select Date"
+                                        :enable-time-picker="false" :format="formats" :auto-apply="isAutoApply"
+                                        :multi-calendars="isMultiCalendar" :range="isRanges"></VueDatePicker>
+                                </div>
 
-                        </div>
-                        <div class="col-md-2 mt-2 mt-md-0" v-if="isRounded == 'round'">
-                            <VueDatePicker class="dateChange" id="fromdateVal" v-model="fdate" placeholder="Select Date"
-                                :enable-time-picker="false" :format="formats" :auto-apply="isAutoApply"
-                                :multi-calendars="isMultiCalendar" :range="isRanges"></VueDatePicker>
-
-                        </div>
-
-
-                        <div class="col-md-2 d-none mt-2 mt-md-0" id="toDateChange">
-                            <VueDatePicker v-model="tdate" id="todateVal" placeholder="Select Date"
-                                :enable-time-picker="false">
-                            </VueDatePicker>
-                        </div>
-
-                        <div class="col-md-1 mt-2 mt-md-0">
-                            <!-- <router-link> -->
-                            <img @click="Lowfaresearch()"
-                                src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt=""
-                                class="d-sm-block d-md-none" style="width: 100%;" id="img">
-                            <img @click="Lowfaresearch()" src="../../../../public/theme/appimages/s_With_Icon.jpg"
-                                alt="" style="width: 53px; cursor:pointer" @mouseover="onHover();"
-                                @mouseout="offHover();" id="s_image" class="d-none d-md-block">
-                            <!-- </router-link> -->
+                                <div class="col-md-2 d-none mt-2 mt-md-0" id="toDateChange">
+                                    <VueDatePicker v-model="tdate" id="todateVal" placeholder="Select Date"
+                                        :enable-time-picker="false">
+                                    </VueDatePicker>
+                                </div>
+                                <div class="col-md-1 mt-2 mt-md-0">
+                                    <!-- <router-link> -->
+                                    <img @click="Lowfaresearch()"
+                                        src="../../../../public/theme/appimages/Mobile_Button With_Icon.jpg" alt=""
+                                        class="d-sm-block d-md-none" style="width: 100%;" id="img">
+                                    <img @click="Lowfaresearch()" src="../../../../public/theme/appimages/s_With_Icon.jpg"
+                                        alt="" style="width: 53px; cursor:pointer" @mouseover="onHover();"
+                                        @mouseout="offHover();" id="s_image" class="d-none d-md-block">
+                                    <!-- </router-link> -->
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -2624,6 +2702,10 @@ async function fareRuleClick(param) {
 <style>
 /* Leading */
 
+.fcolor{
+    color: rgb(62, 73, 87);
+}
+
 .mobile-chips-text {
     font-size: 12px;
 }
@@ -2794,4 +2876,35 @@ async function fareRuleClick(param) {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+.fly-in {
+    animation: flyIn 0.5s ease-out;
+}
+
+@keyframes flyIn {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.fly-out {
+    animation: flyOut 0.5s ease-in;
+}
+
+@keyframes flyOut {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+}
+
 </style>
