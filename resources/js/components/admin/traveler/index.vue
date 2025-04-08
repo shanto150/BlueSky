@@ -292,14 +292,14 @@ async function update() {
                 </ol>
             </nav>
         </div>
-        <!-- <div class="ms-auto">
+        <div class="ms-auto">
             <div class="btn-group">
-                <router-link :to="{ name: 'CreateUser' }" class="btn btn-primary btn-sm">
-                    <i class="fa fa-circle-plus"></i> User
+                <router-link :to="{ name: 'CreateTraveller' }" class="btn btn-primary btn-sm">
+                    <i class="fa fa-circle-plus"></i> Traveller
                 </router-link>
 
             </div>
-        </div> -->
+        </div>
     </div>
 
     <div class="row">

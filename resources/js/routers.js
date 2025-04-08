@@ -86,6 +86,7 @@ const airlinesEdit = () => import('./components/admin/settings/airlines/edit.vue
 
 // traveler management
 const TravelerList = () => import('./components/admin/traveler/index.vue')
+const CreateTraveller = () => import('./components/admin/traveler/create.vue')
 const TravelerView = () => import('./components/admin/traveler/view.vue')
 
 const routes = [
@@ -179,6 +180,7 @@ const routes = [
 
     //traveler
     { path: '/all-traveler-list', component: TravelerList, name: 'TravelerList', meta: { auth: true } },
+    { path: '/create-traveler', component: CreateTraveller, name: 'CreateTraveller', meta: { auth: true } },
     { path: '/view-traveler/', component: TravelerView, name: 'TravelerView', meta: { auth: true } },
 ]
 
