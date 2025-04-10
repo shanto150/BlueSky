@@ -1,3 +1,14 @@
+<script setup>
+import { useRouter } from 'vue-router';
+const router = useRouter();
+import { useAuthStore } from '../../../stores/authStore';
+const authStore = useAuthStore();
+import axiosInstance from "../../../axiosInstance";
+import { ref, reactive, onMounted, render } from "vue";
+// const form = reactive({ des_name: "", useEmail: authStore.email });
+
+</script>
+
 <template>
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3"> Traveller Management</div>
@@ -166,6 +177,11 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="d-flex">
+                            <button type="submit" class="btn btn-primary ">Back</button>
+                            <button type="submit" class="btn btn-primary ms-auto bd-highligh">Save</button>
                         </div>
                     </div>
                 </div>
